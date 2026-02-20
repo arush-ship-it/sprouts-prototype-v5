@@ -10,8 +10,10 @@ import {
   LayoutDashboard,
   FolderOpen,
   PlusCircle,
-  Terminal } from
-"lucide-react";
+  Terminal,
+  Settings as SettingsIcon,
+  Bell as BellIcon,
+} from "lucide-react";
 import {
   Select,
   SelectContent,
