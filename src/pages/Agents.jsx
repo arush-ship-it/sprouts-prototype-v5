@@ -397,7 +397,7 @@ export default function Agents() {
 
       {/* Agent Details Drawer */}
       <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-        <SheetContent side="right" className="w-[820px] p-0 overflow-y-auto">
+        <SheetContent side="right" className="w-[80vw] p-0 overflow-y-auto">
           {selectedAgent && (
             <div className="h-full flex flex-col">
               {/* Header */}

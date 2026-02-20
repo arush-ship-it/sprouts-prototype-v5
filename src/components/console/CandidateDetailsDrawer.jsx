@@ -118,7 +118,7 @@ export default function CandidateDetailsDrawer({ candidate, isOpen, onClose }) {
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent side="right" className="w-[80%] p-0 overflow-y-auto">
+      <SheetContent side="right" className="w-[80vw] p-0 overflow-y-auto">
         <div className="h-full flex flex-col">
           {/* Header */}
           <div className="p-6 border-b border-gray-200 bg-white sticky top-0 z-10">
