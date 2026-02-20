@@ -3,7 +3,7 @@ import SidebarNav from "@/components/console/SidebarNav";
 
 export default function Layout({ children, currentPageName }) {
   // Pages that should show sidebar
-  const sidebarPages = ["Console", "Talent", "Activity", "Evaluation", "Inbox", "JobDetails"];
+  const sidebarPages = ["Console", "Talent", "Agents", "Inbox", "JobDetails"];
   const showSidebar = sidebarPages.includes(currentPageName);
 
   return (

@@ -22,8 +22,7 @@ import {
 
 const mainLinks = [
   { label: "Talent", icon: Users, active: false, page: "Console" },
-  { label: "Activity", icon: Activity, active: false, page: "Activity" },
-  { label: "Evaluation Criteria", icon: SlidersHorizontal, active: false, page: "Evaluation" },
+  { label: "Agents", icon: Activity, active: false, page: "Agents" },
   { label: "Inbox", icon: Inbox, active: false, page: "Inbox" },
   { label: "Job Details", icon: FileText, active: false, page: "JobDetails" },
 ];
