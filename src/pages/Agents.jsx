@@ -316,11 +316,7 @@ export default function Agents() {
               <Plus className="w-3.5 h-3.5 mr-1.5" />
               Add New Agent
             </Button>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="flex items-center justify-end gap-3 mb-6">
+            {/* Filters */}
           <Select value={filterStage} onValueChange={setFilterStage}>
             <SelectTrigger className="w-[180px] h-8 text-[12px]">
               <SelectValue placeholder="All Stages" />
