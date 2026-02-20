@@ -126,15 +126,15 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
         <div className={`mb-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 transition-all duration-300 ${
           isSourcingExpanded ? "p-5" : "p-4"
         }`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-2.5 flex-1">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <div className="flex-1">
-                <h3 className="text-[13px] font-semibold text-gray-900">AI Sourcing Assistant</h3>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-[13px] font-semibold text-gray-900 mb-2">AI Sourcing Assistant</h3>
                 {!isSourcingExpanded && (
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex gap-2">
                     <Textarea
                       value={sourcingInput}
                       onChange={(e) => setSourcingInput(e.target.value)}
@@ -152,7 +152,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             <Button
               variant="ghost"
               size="sm"
-              className="h-7"
+              className="h-7 shrink-0"
               onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}
             >
               {isSourcingExpanded ? (
