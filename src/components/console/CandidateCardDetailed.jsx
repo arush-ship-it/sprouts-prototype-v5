@@ -20,7 +20,10 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
       : "text-gray-500 bg-gray-50";
 
   return (
-    <div className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300">
+    <div 
+      onClick={onClick}
+      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
+    >
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="flex items-start gap-3">
