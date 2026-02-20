@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 const mainLinks = [
-  { label: "Talent", icon: Users, active: false, page: "Talent" },
+  { label: "Talent", icon: Users, active: false, page: "Console" },
   { label: "Activity", icon: Activity, active: false, page: "Activity" },
   { label: "Evaluation Criteria", icon: SlidersHorizontal, active: false, page: "Evaluation" },
   { label: "Inbox", icon: Inbox, active: false, page: "Inbox" },
