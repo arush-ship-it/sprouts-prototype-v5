@@ -320,7 +320,7 @@ export default function Agents() {
         </div>
 
         {/* Filters */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center justify-end gap-3 mb-6">
           <Select value={filterStage} onValueChange={setFilterStage}>
             <SelectTrigger className="w-[180px] h-8 text-[12px]">
               <SelectValue placeholder="All Stages" />

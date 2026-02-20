@@ -105,8 +105,35 @@ export default function SidebarNav({ activePage = "Console" }) {
         </nav>
       </div>
 
-      {/* Bottom: Icon-only nav */}
+      {/* User Info Section */}
       <div className="border-t border-white/[0.06] pt-5 mt-6">
+        <div className="flex items-center justify-between px-3 mb-5">
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-xs font-semibold">
+              JD
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-medium text-white truncate">John Doe</p>
+              <p className="text-[10px] text-gray-400 truncate">john@company.com</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-1">
+            <Link
+              to={createPageUrl("Settings")}
+              className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/[0.05] transition-colors"
+            >
+              <SettingsIcon className="w-4 h-4" />
+            </Link>
+            <button className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/[0.05] transition-colors relative">
+              <BellIcon className="w-4 h-4" />
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom: Icon-only nav */}
+      <div className="pt-3">
         <div className="flex items-center justify-around">
           {bottomLinks.map((link) =>
           <Link
