@@ -313,23 +313,80 @@ export default function TalentPool() {
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto">
         <div className="p-8">
-          <div className="mb-6">
-            <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
-              Talent Pool
-            </h1>
-            <p className="text-[13px] text-gray-500">
-              {candidates.length} candidates found
-            </p>
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
+                Talent Pool
+              </h1>
+              <p className="text-[13px] text-gray-500">
+                {candidates.length} candidates available
+                {selectedCandidates.length > 0 && ` · ${selectedCandidates.length} selected`}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={selectAll}
+                className="text-[12px]"
+              >
+                {selectedCandidates.length === candidates.length ? "Deselect All" : "Select All"}
+              </Button>
+              {selectedCandidates.length > 0 && (
+                <Button 
+                  size="sm"
+                  onClick={() => setShowApplyModal(true)}
+                  className="text-[12px] bg-indigo-600 hover:bg-indigo-700"
+                >
+                  Apply to Job ({selectedCandidates.length})
+                </Button>
+              )}
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-5">
             {candidates.map((candidate) => (
-              <CandidatePoolCard key={candidate.id} candidate={candidate} />
+              <CandidatePoolCard 
+                key={candidate.id} 
+                candidate={candidate}
+                isSelected={selectedCandidates.includes(candidate.id)}
+                onSelect={toggleCandidate}
+              />
             ))}
           </div>
         </div>
       </div>
       </div>
+
+      {/* Apply to Job Modal */}
+      {showApplyModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+            <h3 className="text-[18px] font-semibold text-gray-900 mb-2">Apply Candidates to Job</h3>
+            <p className="text-[13px] text-gray-600 mb-6">
+              You're about to add {selectedCandidates.length} candidate{selectedCandidates.length > 1 ? 's' : ''} to the job pipeline.
+            </p>
+            <div className="flex items-center gap-3">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowApplyModal(false)}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={() => {
+                  setShowApplyModal(false);
+                  setSelectedCandidates([]);
+                }}
+                className="flex-1 bg-indigo-600 hover:bg-indigo-700"
+              >
+                Confirm
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
