@@ -123,7 +123,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     <div className="px-8 pt-5 pb-8">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" && (
-        <div className={`mb-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 transition-all duration-300 ${
+        <div className={`mb-5 rounded-xl border border-indigo-200 bg-white transition-all duration-300 ${
           isSourcingExpanded ? "p-5" : "p-4"
         }`}>
           <div className="flex items-start justify-between">
