@@ -60,76 +60,11 @@ const candidates = [
     availability: "1 month notice",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
   },
-  {
-    id: 6,
-    name: "James Wilson",
-    title: "Frontend Developer",
-    location: "Portland, OR",
-    experience: "5 years",
-    skills: ["React", "TypeScript", "CSS", "Next.js"],
-    education: "BS Computer Science - Stanford",
-    availability: "Available",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 7,
-    name: "Rachel Green",
-    title: "UX Researcher",
-    location: "Chicago, IL",
-    experience: "4 years",
-    skills: ["User Testing", "Analytics", "Wireframing", "Prototyping"],
-    education: "MA Human-Computer Interaction - Carnegie Mellon",
-    availability: "Available",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 8,
-    name: "Alex Turner",
-    title: "Backend Engineer",
-    location: "Denver, CO",
-    experience: "7 years",
-    skills: ["Java", "Spring Boot", "PostgreSQL", "Microservices"],
-    education: "MS Software Engineering - Georgia Tech",
-    availability: "2 weeks notice",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 9,
-    name: "Nina Patel",
-    title: "Product Manager",
-    location: "San Diego, CA",
-    experience: "6 years",
-    skills: ["Roadmapping", "Agile", "Stakeholder Management", "Analytics"],
-    education: "MBA - Harvard Business School",
-    availability: "Available",
-    avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 10,
-    name: "Chris Evans",
-    title: "Mobile Developer",
-    location: "Miami, FL",
-    experience: "5 years",
-    skills: ["React Native", "Swift", "Kotlin", "Firebase"],
-    education: "BS Computer Engineering - MIT",
-    availability: "1 month notice",
-    avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop&crop=face",
-  },
 ];
 
-function CandidatePoolCard({ candidate, isSelected, onSelect }) {
+function CandidatePoolCard({ candidate }) {
   return (
-    <div 
-      onClick={(e) => {
-        e.stopPropagation();
-        onSelect(candidate.id);
-      }}
-      className={`p-5 rounded-xl bg-white border-2 transition-all cursor-pointer group ${
-        isSelected 
-          ? "border-indigo-500 bg-indigo-50 shadow-md" 
-          : "border-gray-200 hover:shadow-md hover:border-gray-300"
-      }`}
-    >
+    <div className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-all cursor-pointer group">
       <div className="flex items-start gap-4 mb-4">
         <img
           src={candidate.avatar}
@@ -207,8 +142,6 @@ export default function TalentPool() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [selectedCandidates, setSelectedCandidates] = useState([]);
-  const [showApplyModal, setShowApplyModal] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -225,20 +158,6 @@ export default function TalentPool() {
         },
       ]);
     }, 500);
-  };
-
-  const toggleCandidate = (id) => {
-    setSelectedCandidates(prev => 
-      prev.includes(id) ? prev.filter(cId => cId !== id) : [...prev, id]
-    );
-  };
-
-  const selectAll = () => {
-    if (selectedCandidates.length === candidates.length) {
-      setSelectedCandidates([]);
-    } else {
-      setSelectedCandidates(candidates.map(c => c.id));
-    }
   };
 
   return (
@@ -313,80 +232,23 @@ export default function TalentPool() {
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto">
         <div className="p-8">
-          <div className="mb-6 flex items-center justify-between">
-            <div>
-              <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
-                Talent Pool
-              </h1>
-              <p className="text-[13px] text-gray-500">
-                {candidates.length} candidates available
-                {selectedCandidates.length > 0 && ` · ${selectedCandidates.length} selected`}
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={selectAll}
-                className="text-[12px]"
-              >
-                {selectedCandidates.length === candidates.length ? "Deselect All" : "Select All"}
-              </Button>
-              {selectedCandidates.length > 0 && (
-                <Button 
-                  size="sm"
-                  onClick={() => setShowApplyModal(true)}
-                  className="text-[12px] bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Apply to Job ({selectedCandidates.length})
-                </Button>
-              )}
-            </div>
+          <div className="mb-6">
+            <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
+              Talent Pool
+            </h1>
+            <p className="text-[13px] text-gray-500">
+              {candidates.length} candidates found
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-4">
             {candidates.map((candidate) => (
-              <CandidatePoolCard 
-                key={candidate.id} 
-                candidate={candidate}
-                isSelected={selectedCandidates.includes(candidate.id)}
-                onSelect={toggleCandidate}
-              />
+              <CandidatePoolCard key={candidate.id} candidate={candidate} />
             ))}
           </div>
         </div>
       </div>
       </div>
-
-      {/* Apply to Job Modal */}
-      {showApplyModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-[18px] font-semibold text-gray-900 mb-2">Apply Candidates to Job</h3>
-            <p className="text-[13px] text-gray-600 mb-6">
-              You're about to add {selectedCandidates.length} candidate{selectedCandidates.length > 1 ? 's' : ''} to the job pipeline.
-            </p>
-            <div className="flex items-center gap-3">
-              <Button 
-                variant="outline" 
-                onClick={() => setShowApplyModal(false)}
-                className="flex-1"
-              >
-                Cancel
-              </Button>
-              <Button 
-                onClick={() => {
-                  setShowApplyModal(false);
-                  setSelectedCandidates([]);
-                }}
-                className="flex-1 bg-indigo-600 hover:bg-indigo-700"
-              >
-                Confirm
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

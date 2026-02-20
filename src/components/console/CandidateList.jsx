@@ -120,98 +120,96 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   };
 
   return (
-    <div className="px-8 pt-5 pb-8 h-full flex flex-col">
+    <div className="px-8 pt-5 pb-8">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" && (
-        <div className={`mb-5 rounded-2xl border-2 border-indigo-300 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 shadow-lg transition-all duration-300 ${
-          isSourcingExpanded ? "flex-1 flex flex-col p-6" : "p-5"
+        <div className={`mb-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 transition-all duration-300 ${
+          isSourcingExpanded ? "p-5" : "p-4"
         }`}>
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center gap-3 flex-1">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center shrink-0 shadow-md">
-                <Sparkles className="w-5 h-5 text-white" />
+          <div className="flex items-start justify-between">
+            <div className="flex items-center gap-2.5 flex-1">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-[15px] font-bold text-gray-900 mb-0.5">
-                  ✨ AI Sourcing Assistant
+                <h3 className="text-[13px] font-semibold text-gray-900">
+                  {isSourcingExpanded ? "AI Sourcing Assistant" : "AI Sourcing - Click to Expand"}
                 </h3>
-                <p className="text-[12px] text-gray-600">
-                  {isSourcingExpanded 
-                    ? "Chat with AI to discover perfect candidates for your role" 
-                    : "Click to expand and let AI find candidates for you"}
-                </p>
+                {!isSourcingExpanded && (
+                  <p className="text-[11px] text-gray-600 mt-0.5">Ask AI to find candidates for you</p>
+                )}
               </div>
             </div>
             <Button
               variant="ghost"
               size="sm"
-              className="h-8 w-8 p-0 hover:bg-white/50 shrink-0"
+              className="h-7"
               onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}
             >
               {isSourcingExpanded ? (
-                <Minimize2 className="w-4 h-4" />
+                <Minimize2 className="w-3.5 h-3.5" />
               ) : (
-                <Maximize2 className="w-4 h-4" />
+                <Maximize2 className="w-3.5 h-3.5" />
               )}
             </Button>
           </div>
           
           {isSourcingExpanded && (
-            <div className="flex-1 flex flex-col min-h-0">
+            <div className="mt-4 space-y-4">
               {/* Sub Tabs */}
-              <div className="flex gap-2 border-b-2 border-indigo-200 mb-4">
+              <div className="flex gap-2 border-b border-indigo-200">
                 <button
                   onClick={() => setSourcingTab("ai")}
-                  className={`px-5 py-2.5 text-[13px] font-semibold transition-all rounded-t-lg ${
+                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
                     sourcingTab === "ai"
-                      ? "text-indigo-700 bg-white border-t-2 border-x-2 border-indigo-500 -mb-0.5"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-white/40"
+                      ? "text-indigo-700 border-b-2 border-indigo-600"
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
-                  💬 Talk to AI
+                  Talk to AI
                 </button>
                 <button
                   onClick={() => setSourcingTab("manual")}
-                  className={`px-5 py-2.5 text-[13px] font-semibold transition-all rounded-t-lg ${
+                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
                     sourcingTab === "manual"
-                      ? "text-indigo-700 bg-white border-t-2 border-x-2 border-indigo-500 -mb-0.5"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-white/40"
+                      ? "text-indigo-700 border-b-2 border-indigo-600"
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
-                  🔍 Manual Sourcing
+                  Manual Sourcing
                 </button>
               </div>
 
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" && (
-                <div className="flex-1 flex flex-col min-h-0 bg-white rounded-xl p-4 border-2 border-indigo-200 shadow-inner">
-                  <div className="flex-1 overflow-y-auto space-y-3 mb-4">
-                    <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
-                      <p className="text-[12px] text-gray-800">
-                        <span className="font-bold text-indigo-600">🤖 AI:</span> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
+                <div className="space-y-3">
+                  <div className="space-y-2 max-h-[300px] overflow-y-auto">
+                    <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
+                      <p className="text-[11px] text-gray-700">
+                        <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
                       </p>
                     </div>
-                    <div className="p-4 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 ml-12">
-                      <p className="text-[12px] text-gray-800">
-                        <span className="font-bold text-purple-600">👤 You:</span> Find me 10 senior product designers in San Francisco
+                    <div className="p-3 rounded-lg bg-indigo-100/60 border border-indigo-200 ml-12">
+                      <p className="text-[11px] text-gray-700">
+                        <strong>You:</strong> Find me 10 senior product designers in San Francisco
                       </p>
                     </div>
-                    <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
-                      <p className="text-[12px] text-gray-800">
-                        <span className="font-bold text-indigo-600">🤖 AI:</span> I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?
+                    <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
+                      <p className="text-[11px] text-gray-700">
+                        <strong>AI:</strong> I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-2 pt-3 border-t-2 border-indigo-100">
+                  <div className="flex gap-2">
                     <Textarea
                       value={sourcingInput}
                       onChange={(e) => setSourcingInput(e.target.value)}
-                      placeholder="✨ Ask AI to find candidates... (e.g., 'Find designers with 5+ years experience')"
-                      className="resize-none text-[13px] bg-white border-indigo-200"
+                      placeholder="Type your message..."
+                      className="resize-none text-[12px] bg-white"
                       rows={2}
                     />
-                    <Button size="icon" className="shrink-0 h-full w-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
-                      <Send className="w-4 h-4" />
+                    <Button size="icon" className="shrink-0 h-9 w-9">
+                      <Send className="w-3.5 h-3.5" />
                     </Button>
                   </div>
                 </div>
@@ -355,7 +353,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               key={candidate.id} 
               candidate={candidate} 
               isPipeline={isPipeline}
-              onNameClick={() => handleCandidateClick(candidate)}
+              onClick={() => handleCandidateClick(candidate)}
             />
           ))}
         </div>

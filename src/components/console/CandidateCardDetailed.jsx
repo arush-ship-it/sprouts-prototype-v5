@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function CandidateCardDetailed({ candidate, isPipeline = false, onClick, onNameClick }) {
+export default function CandidateCardDetailed({ candidate, isPipeline = false, onClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedStage, setSelectedStage] = useState(candidate.stage || "screening");
   
@@ -21,7 +21,8 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
 
   return (
     <div 
-      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300"
+      onClick={onClick}
+      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
     >
       {/* Header */}
       <div className="flex items-start justify-between">
@@ -33,13 +34,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
           />
           <div>
             <div className="flex items-center gap-2">
-              <h3 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onNameClick?.();
-                }}
-                className="text-[15px] font-semibold text-gray-900 hover:text-indigo-600 cursor-pointer underline decoration-transparent hover:decoration-indigo-600 transition-all"
-              >
+              <h3 className="text-[15px] font-semibold text-gray-900">
                 {candidate.name}
               </h3>
               <span className={`px-2 py-0.5 text-[11px] font-bold rounded-md ${scoreColor}`}>
@@ -152,19 +147,17 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
             </>
           ) : (
             <>
-              <Button 
-                size="sm" 
-                className="h-7 text-[11px] bg-indigo-600 hover:bg-indigo-700 text-white"
-              >
-                Convert
-              </Button>
               <Button size="sm" variant="outline" className="h-7 text-[11px]">
                 <ThumbsUp className="w-3 h-3 mr-1" />
-                Approve
+                Shortlist
               </Button>
               <Button size="sm" variant="outline" className="h-7 text-[11px]">
                 <ThumbsDown className="w-3 h-3 mr-1" />
                 Reject
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]">
+                <StickyNote className="w-3 h-3 mr-1" />
+                Note
               </Button>
             </>
           )}
