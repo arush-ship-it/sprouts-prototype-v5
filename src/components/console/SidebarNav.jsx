@@ -51,9 +51,9 @@ export default function SidebarNav({ activePage = "Console" }) {
       {/* Top: Brand + Job Selector + Main Links */}
       <div className="flex-1 overflow-y-auto">
         <div className="flex items-center gap-2.5 px-3 mb-6">
-          
-
-
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+            <Terminal className="w-4 h-4 text-white" />
+          </div>
           <span className="text-gray-900 font-semibold text-[15px] tracking-tight">Sprouts AI
 
           </span>
@@ -86,13 +86,13 @@ export default function SidebarNav({ activePage = "Console" }) {
           {mainLinks.map((link) =>
           <Link
             key={link.label}
-            to={createPageUrl(link.page)} className="bg-slate-100 text-indigo-900 px-3 py-2.5 font-medium rounded-lg flex items-center gap-3 transition-all duration-200 group">
-
-
-
-
-
-
+            to={createPageUrl(link.page)}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group
+                ${
+            activePage === link.page ?
+            "bg-indigo-100 text-indigo-900" :
+            "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`
+            }>
 
               <link.icon
               className={`w-[18px] h-[18px] transition-colors ${
