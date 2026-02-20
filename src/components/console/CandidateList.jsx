@@ -358,7 +358,12 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       {viewMode === "card" && (
         <div className="flex flex-col gap-3">
           {candidates.map((candidate) => (
-            <CandidateCardDetailed key={candidate.id} candidate={candidate} isPipeline={isPipeline} />
+            <CandidateCardDetailed 
+              key={candidate.id} 
+              candidate={candidate} 
+              isPipeline={isPipeline}
+              onClick={() => handleCandidateClick(candidate)}
+            />
           ))}
         </div>
       )}
