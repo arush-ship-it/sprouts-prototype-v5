@@ -12,8 +12,8 @@ import {
   PlusCircle,
   Terminal,
   Settings as SettingsIcon,
-  Bell as BellIcon,
-} from "lucide-react";
+  Bell as BellIcon } from
+"lucide-react";
 import {
   Select,
   SelectContent,
@@ -47,7 +47,7 @@ export default function SidebarNav({ activePage = "Console" }) {
   const [selectedJob, setSelectedJob] = useState("1");
 
   return (
-    <aside className="w-[260px] min-h-screen bg-gray-50 flex flex-col justify-between py-6 px-4 shrink-0 border-r border-gray-200">
+    <aside className="bg-[#ededed] px-4 py-6 w-[260px] min-h-screen flex flex-col justify-between shrink-0 border-r border-gray-200">
       {/* Top: Brand + Job Selector + Main Links */}
       <div>
         <div className="flex items-center gap-2.5 px-3 mb-6">
@@ -122,8 +122,8 @@ export default function SidebarNav({ activePage = "Console" }) {
           <div className="flex items-center gap-1">
             <Link
               to={createPageUrl("Settings")}
-              className="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-            >
+              className="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors">
+
               <SettingsIcon className="w-4 h-4" />
             </Link>
             <button className="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors relative">
