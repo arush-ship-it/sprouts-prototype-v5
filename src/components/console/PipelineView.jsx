@@ -91,7 +91,7 @@ export default function PipelineView() {
           className="flex-shrink-0 w-[280px] flex flex-col gap-3">
 
             {/* Stage Header */}
-            <div className="bg-[#fafafa] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-blue-200 flex items-center justify-between">
+            <div className="bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-blue-200 flex items-center justify-between">
 
 
               <div className="flex items-center gap-2">
