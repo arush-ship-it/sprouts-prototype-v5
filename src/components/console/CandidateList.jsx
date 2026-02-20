@@ -126,26 +126,17 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
         <div className={`mb-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 transition-all duration-300 ${
           isSourcingExpanded ? "p-5" : "p-4"
         }`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+          <div className="flex items-start justify-between">
+            <div className="flex items-center gap-2.5 flex-1">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <div className="flex-1">
-                <h3 className="text-[13px] font-semibold text-gray-900">AI Sourcing Assistant</h3>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-[13px] font-semibold text-gray-900">
+                  {isSourcingExpanded ? "AI Sourcing Assistant" : "AI Sourcing - Click to Expand"}
+                </h3>
                 {!isSourcingExpanded && (
-                  <div className="flex gap-2 mt-2">
-                    <Textarea
-                      value={sourcingInput}
-                      onChange={(e) => setSourcingInput(e.target.value)}
-                      placeholder="E.g., Find 10 senior designers in SF with Figma experience..."
-                      className="resize-none text-[12px] bg-white flex-1"
-                      rows={1}
-                    />
-                    <Button size="icon" className="shrink-0 h-9 w-9">
-                      <Send className="w-3.5 h-3.5" />
-                    </Button>
-                  </div>
+                  <p className="text-[11px] text-gray-600 mt-0.5">Ask AI to find candidates for you</p>
                 )}
               </div>
             </div>
