@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function CandidateCardDetailed({ candidate, isPipeline = false, onClick }) {
+export default function CandidateCardDetailed({ candidate, isPipeline = false, onClick, onNameClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedStage, setSelectedStage] = useState(candidate.stage || "screening");
   
@@ -21,8 +21,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
 
   return (
     <div 
-      onClick={onClick}
-      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
+      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300"
     >
       {/* Header */}
       <div className="flex items-start justify-between">
@@ -34,7 +33,13 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
           />
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-[15px] font-semibold text-gray-900">
+              <h3 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onNameClick?.();
+                }}
+                className="text-[15px] font-semibold text-gray-900 hover:text-indigo-600 cursor-pointer underline decoration-transparent hover:decoration-indigo-600 transition-all"
+              >
                 {candidate.name}
               </h3>
               <span className={`px-2 py-0.5 text-[11px] font-bold rounded-md ${scoreColor}`}>

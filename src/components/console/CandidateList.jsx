@@ -157,61 +157,61 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           </div>
           
           {isSourcingExpanded && (
-            <div className="mt-4 space-y-4">
+            <div className="flex-1 flex flex-col min-h-0">
               {/* Sub Tabs */}
-              <div className="flex gap-2 border-b border-indigo-200">
+              <div className="flex gap-2 border-b-2 border-indigo-200 mb-4">
                 <button
                   onClick={() => setSourcingTab("ai")}
-                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
+                  className={`px-5 py-2.5 text-[13px] font-semibold transition-all rounded-t-lg ${
                     sourcingTab === "ai"
-                      ? "text-indigo-700 border-b-2 border-indigo-600"
-                      : "text-gray-600 hover:text-gray-900"
+                      ? "text-indigo-700 bg-white border-t-2 border-x-2 border-indigo-500 -mb-0.5"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-white/40"
                   }`}
                 >
-                  Talk to AI
+                  💬 Talk to AI
                 </button>
                 <button
                   onClick={() => setSourcingTab("manual")}
-                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
+                  className={`px-5 py-2.5 text-[13px] font-semibold transition-all rounded-t-lg ${
                     sourcingTab === "manual"
-                      ? "text-indigo-700 border-b-2 border-indigo-600"
-                      : "text-gray-600 hover:text-gray-900"
+                      ? "text-indigo-700 bg-white border-t-2 border-x-2 border-indigo-500 -mb-0.5"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-white/40"
                   }`}
                 >
-                  Manual Sourcing
+                  🔍 Manual Sourcing
                 </button>
               </div>
 
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" && (
-                <div className="space-y-3">
-                  <div className="space-y-2 max-h-[300px] overflow-y-auto">
-                    <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
-                      <p className="text-[11px] text-gray-700">
-                        <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
+                <div className="flex-1 flex flex-col min-h-0 bg-white rounded-xl p-4 border-2 border-indigo-200 shadow-inner">
+                  <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+                    <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
+                      <p className="text-[12px] text-gray-800">
+                        <span className="font-bold text-indigo-600">🤖 AI:</span> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
                       </p>
                     </div>
-                    <div className="p-3 rounded-lg bg-indigo-100/60 border border-indigo-200 ml-12">
-                      <p className="text-[11px] text-gray-700">
-                        <strong>You:</strong> Find me 10 senior product designers in San Francisco
+                    <div className="p-4 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 ml-12">
+                      <p className="text-[12px] text-gray-800">
+                        <span className="font-bold text-purple-600">👤 You:</span> Find me 10 senior product designers in San Francisco
                       </p>
                     </div>
-                    <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
-                      <p className="text-[11px] text-gray-700">
-                        <strong>AI:</strong> I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?
+                    <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
+                      <p className="text-[12px] text-gray-800">
+                        <span className="font-bold text-indigo-600">🤖 AI:</span> I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 pt-3 border-t-2 border-indigo-100">
                     <Textarea
                       value={sourcingInput}
                       onChange={(e) => setSourcingInput(e.target.value)}
-                      placeholder="Type your message..."
-                      className="resize-none text-[12px] bg-white"
+                      placeholder="✨ Ask AI to find candidates... (e.g., 'Find designers with 5+ years experience')"
+                      className="resize-none text-[13px] bg-white border-indigo-200"
                       rows={2}
                     />
-                    <Button size="icon" className="shrink-0 h-9 w-9">
-                      <Send className="w-3.5 h-3.5" />
+                    <Button size="icon" className="shrink-0 h-full w-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
+                      <Send className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
