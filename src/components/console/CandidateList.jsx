@@ -93,7 +93,7 @@ const pipelineCandidates = [
   },
 ];
 
-export default function CandidateList({ activeTab }) {
+export default function CandidateList({ activeTab, viewMode = "card" }) {
   const candidates =
     activeTab === "review" ? reviewCandidates : pipelineCandidates;
 
@@ -115,12 +115,74 @@ export default function CandidateList({ activeTab }) {
         </button>
       </div>
 
-      {/* List */}
-      <div className="flex flex-col gap-3">
-        {candidates.map((candidate) => (
-          <CandidateCardDetailed key={candidate.id} candidate={candidate} />
-        ))}
-      </div>
+      {/* Card/List/Table View */}
+      {viewMode === "card" && (
+        <div className="flex flex-col gap-3">
+          {candidates.map((candidate) => (
+            <CandidateCardDetailed key={candidate.id} candidate={candidate} />
+          ))}
+        </div>
+      )}
+
+      {viewMode === "list" && (
+        <div className="flex flex-col gap-2">
+          {candidates.map((candidate) => (
+            <div key={candidate.id} className="flex items-center justify-between px-4 py-3 rounded-lg bg-white border border-gray-200 hover:shadow-sm transition-all">
+              <div className="flex items-center gap-3">
+                <img src={candidate.avatar} alt={candidate.name} className="w-9 h-9 rounded-full" />
+                <div>
+                  <p className="text-[13px] font-semibold text-gray-900">{candidate.name}</p>
+                  <p className="text-[11px] text-gray-500">{candidate.title} @ {candidate.company}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-[11px] text-gray-500">{candidate.experience}</span>
+                <span className="text-[11px] text-gray-500">{candidate.skillsMatch}</span>
+                <span className="px-2 py-1 text-[11px] font-bold rounded-md bg-emerald-50 text-emerald-600">{candidate.score}%</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {viewMode === "table" && (
+        <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-gray-600 uppercase tracking-wider">Candidate</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-gray-600 uppercase tracking-wider">Stage</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-gray-600 uppercase tracking-wider">Experience</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-gray-600 uppercase tracking-wider">Skills</th>
+                <th className="px-4 py-3 text-left text-[11px] font-semibold text-gray-600 uppercase tracking-wider">Score</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {candidates.map((candidate) => (
+                <tr key={candidate.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <img src={candidate.avatar} alt={candidate.name} className="w-8 h-8 rounded-full" />
+                      <div>
+                        <p className="text-[12px] font-semibold text-gray-900">{candidate.name}</p>
+                        <p className="text-[11px] text-gray-500">{candidate.title}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className="px-2 py-1 text-[10px] font-semibold rounded-full bg-violet-50 text-violet-600 uppercase">{candidate.stage}</span>
+                  </td>
+                  <td className="px-4 py-3 text-[12px] text-gray-600">{candidate.experience}</td>
+                  <td className="px-4 py-3 text-[12px] text-gray-600">{candidate.skillsMatch}</td>
+                  <td className="px-4 py-3">
+                    <span className="px-2 py-1 text-[11px] font-bold rounded-md bg-emerald-50 text-emerald-600">{candidate.score}%</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

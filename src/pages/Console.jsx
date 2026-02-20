@@ -6,15 +6,32 @@ import PipelineView from "@/components/console/PipelineView";
 
 export default function Console() {
   const [activeTab, setActiveTab] = useState("review");
+  const [viewMode, setViewMode] = useState(activeTab === "pipeline" ? "pipeline" : "card");
+
+  // Update view mode when tab changes
+  const handleTabChange = (newTab) => {
+    setActiveTab(newTab);
+    // Set default view for each tab
+    setViewMode(newTab === "pipeline" ? "pipeline" : "card");
+  };
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
       <JobHeader />
-      <SubTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      <SubTabs 
+        activeTab={activeTab} 
+        setActiveTab={handleTabChange}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+      />
       {activeTab === "review" ? (
-        <CandidateList activeTab={activeTab} />
+        <CandidateList activeTab={activeTab} viewMode={viewMode} />
       ) : (
-        <PipelineView />
+        viewMode === "pipeline" ? (
+          <PipelineView />
+        ) : (
+          <CandidateList activeTab={activeTab} viewMode={viewMode} />
+        )
       )}
     </div>
   );

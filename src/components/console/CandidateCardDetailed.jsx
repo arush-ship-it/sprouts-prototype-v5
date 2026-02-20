@@ -1,14 +1,18 @@
-import React from "react";
-import { CheckCircle2, XCircle, ExternalLink, Mail, MessageSquare, Phone, Linkedin } from "lucide-react";
+import React, { useState } from "react";
+import { CheckCircle2, XCircle, ExternalLink, Mail, MessageSquare, Phone, Linkedin, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown, StickyNote, Briefcase, GraduationCap, Award, Target } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function CandidateCardDetailed({ candidate }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
   const scoreColor =
     candidate.score >= 75
       ? "text-emerald-600 bg-emerald-50"
       : "text-gray-500 bg-gray-50";
 
   return (
-    <div className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer">
+    <div className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="flex items-start gap-3">
@@ -91,14 +95,151 @@ export default function CandidateCardDetailed({ candidate }) {
         </div>
       </div>
 
-      {/* Sequence */}
-      <div className="flex items-center gap-2 text-[12px]">
-        <span className="text-gray-500">Sequence:</span>
-        <span className="text-blue-600 font-medium">
-          {candidate.sequence}
-        </span>
-        <ExternalLink className="w-3 h-3 text-blue-400" />
+      {/* Sequence & Actions */}
+      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+        <div className="flex items-center gap-2 text-[12px]">
+          <span className="text-gray-500">Sequence:</span>
+          <span className="text-blue-600 font-medium">
+            {candidate.sequence}
+          </span>
+          <ExternalLink className="w-3 h-3 text-blue-400" />
+        </div>
+        <div className="flex items-center gap-2">
+          <Button size="sm" variant="outline" className="h-7 text-[11px]">
+            <ThumbsUp className="w-3 h-3 mr-1" />
+            Shortlist
+          </Button>
+          <Button size="sm" variant="outline" className="h-7 text-[11px]">
+            <ThumbsDown className="w-3 h-3 mr-1" />
+            Reject
+          </Button>
+          <Button size="sm" variant="outline" className="h-7 text-[11px]">
+            <StickyNote className="w-3 h-3 mr-1" />
+            Note
+          </Button>
+          <Button 
+            size="sm" 
+            variant="ghost" 
+            className="h-7 text-[11px]"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </Button>
+        </div>
       </div>
+
+      {/* Expanded View */}
+      {isExpanded && (
+        <div className="pt-4 border-t border-gray-100 space-y-4">
+          {/* AI Fit Analysis */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100">
+            <div className="flex items-center gap-2 mb-3">
+              <Target className="w-4 h-4 text-indigo-600" />
+              <h4 className="text-[13px] font-semibold text-gray-900">AI Fit Analysis</h4>
+            </div>
+            <p className="text-[12px] text-gray-700 leading-relaxed mb-3">
+              {candidate.name} is a strong match for this role with {candidate.score}% overall fit. Their experience at {candidate.company} demonstrates expertise in product design and user-centered approaches. Skills alignment is excellent with {candidate.skillsMatch}, particularly in Figma, design systems, and prototyping.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="secondary" className="text-[10px]">Design Leadership</Badge>
+              <Badge variant="secondary" className="text-[10px]">User Research</Badge>
+              <Badge variant="secondary" className="text-[10px]">Team Collaboration</Badge>
+            </div>
+          </div>
+
+          {/* 2x2 Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* Skills Fit */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Award className="w-4 h-4 text-indigo-600" />
+                <h4 className="text-[13px] font-semibold text-gray-900">Skills Fit</h4>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Figma</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Design Systems</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">User Research</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Prototyping</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">React (Basic)</span>
+                  <XCircle className="w-3.5 h-3.5 text-red-400" />
+                </div>
+              </div>
+            </div>
+
+            {/* Work Experience */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Briefcase className="w-4 h-4 text-violet-600" />
+                <h4 className="text-[13px] font-semibold text-gray-900">Work Experience</h4>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-[12px] font-semibold text-gray-900">{candidate.title}</p>
+                  <p className="text-[11px] text-gray-500">{candidate.company} • 2022 - Present</p>
+                </div>
+                <div>
+                  <p className="text-[12px] font-semibold text-gray-900">Product Designer</p>
+                  <p className="text-[11px] text-gray-500">Adobe • 2020 - 2022</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Education */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <div className="flex items-center gap-2 mb-3">
+                <GraduationCap className="w-4 h-4 text-emerald-600" />
+                <h4 className="text-[13px] font-semibold text-gray-900">Education</h4>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-[12px] font-semibold text-gray-900">{candidate.degree}</p>
+                  <p className="text-[11px] text-gray-500">{candidate.university}</p>
+                  <p className="text-[11px] text-gray-400">2016 - 2020</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Attribute Match */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Target className="w-4 h-4 text-orange-600" />
+                <h4 className="text-[13px] font-semibold text-gray-900">Attribute Match</h4>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Location</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Experience Level</span>
+                  <XCircle className="w-3.5 h-3.5 text-red-400" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Industry</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gray-600">Team Size</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

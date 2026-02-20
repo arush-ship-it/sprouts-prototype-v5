@@ -50,12 +50,12 @@
 import Activity from './pages/Activity';
 import Console from './pages/Console';
 import CreateJob from './pages/CreateJob';
+import CreatePipeline from './pages/CreatePipeline';
 import Dashboard from './pages/Dashboard';
+import Evaluation from './pages/Evaluation';
 import Inbox from './pages/Inbox';
 import JobDetails from './pages/JobDetails';
 import TalentPool from './pages/TalentPool';
-import CreatePipeline from './pages/CreatePipeline';
-import Evaluation from './pages/Evaluation';
 import __Layout from './Layout.jsx';
 
 
@@ -63,12 +63,12 @@ export const PAGES = {
     "Activity": Activity,
     "Console": Console,
     "CreateJob": CreateJob,
+    "CreatePipeline": CreatePipeline,
     "Dashboard": Dashboard,
+    "Evaluation": Evaluation,
     "Inbox": Inbox,
     "JobDetails": JobDetails,
     "TalentPool": TalentPool,
-    "CreatePipeline": CreatePipeline,
-    "Evaluation": Evaluation,
 }
 
 export const pagesConfig = {
