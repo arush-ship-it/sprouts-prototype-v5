@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import {
@@ -12,6 +12,13 @@ import {
   PlusCircle,
   Terminal,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const mainLinks = [
   { label: "Talent", icon: Users, active: false, page: "Console" },
@@ -28,18 +35,50 @@ const bottomLinks = [
   { label: "Console", icon: Terminal, page: "Console" },
 ];
 
+const jobs = [
+  { id: 1, title: "Senior Product Designer", status: "Active" },
+  { id: 2, title: "Frontend Engineer", status: "Active" },
+  { id: 3, title: "Product Manager", status: "Active" },
+  { id: 4, title: "Data Scientist", status: "Draft" },
+];
+
 export default function SidebarNav({ activePage = "Console" }) {
+  const [selectedJob, setSelectedJob] = useState("1");
+
   return (
     <aside className="w-[260px] min-h-screen bg-[#0F1117] flex flex-col justify-between py-6 px-4 shrink-0">
-      {/* Top: Brand + Main Links */}
+      {/* Top: Brand + Job Selector + Main Links */}
       <div>
-        <div className="flex items-center gap-2.5 px-3 mb-10">
+        <div className="flex items-center gap-2.5 px-3 mb-6">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
             <Terminal className="w-4 h-4 text-white" />
           </div>
           <span className="text-white font-semibold text-[15px] tracking-tight">
             RecruitAI
           </span>
+        </div>
+
+        {/* Job Selector */}
+        <div className="px-3 mb-6">
+          <Select value={selectedJob} onValueChange={setSelectedJob}>
+            <SelectTrigger className="w-full h-9 bg-white/5 border-white/10 text-white text-[12px] hover:bg-white/10">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {jobs.map((job) => (
+                <SelectItem key={job.id} value={job.id.toString()} className="text-[12px]">
+                  <div className="flex items-center justify-between w-full gap-2">
+                    <span className="truncate">{job.title}</span>
+                    <span className={`px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider rounded ${
+                      job.status === "Active" ? "bg-emerald-500/20 text-emerald-400" : "bg-gray-500/20 text-gray-400"
+                    }`}>
+                      {job.status}
+                    </span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <nav className="flex flex-col gap-1">
