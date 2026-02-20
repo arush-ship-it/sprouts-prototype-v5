@@ -3,7 +3,7 @@ import JobHeader from "@/components/console/JobHeader";
 import SubTabs from "@/components/console/SubTabs";
 import CandidateList from "@/components/console/CandidateList";
 import PipelineView from "@/components/console/PipelineView";
-import PipelineBuilderModal from "@/components/console/PipelineBuilderModal";
+import SimplePipelineBuilder from "@/components/console/SimplePipelineBuilder";
 import ActivityApprovalModal from "@/components/console/ActivityApprovalModal";
 import JobSidePanel from "@/components/console/JobSidePanel";
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,7 @@ export default function Console() {
         )
       )}
 
-      <PipelineBuilderModal
+      <SimplePipelineBuilder
         isOpen={isPipelineBuilderOpen}
         onClose={() => setIsPipelineBuilderOpen(false)}
       />

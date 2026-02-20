@@ -152,17 +152,19 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
             </>
           ) : (
             <>
+              <Button 
+                size="sm" 
+                className="h-7 text-[11px] bg-indigo-600 hover:bg-indigo-700 text-white"
+              >
+                Convert
+              </Button>
               <Button size="sm" variant="outline" className="h-7 text-[11px]">
                 <ThumbsUp className="w-3 h-3 mr-1" />
-                Shortlist
+                Approve
               </Button>
               <Button size="sm" variant="outline" className="h-7 text-[11px]">
                 <ThumbsDown className="w-3 h-3 mr-1" />
                 Reject
-              </Button>
-              <Button size="sm" variant="outline" className="h-7 text-[11px]">
-                <StickyNote className="w-3 h-3 mr-1" />
-                Note
               </Button>
             </>
           )}
