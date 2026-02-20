@@ -355,7 +355,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               key={candidate.id} 
               candidate={candidate} 
               isPipeline={isPipeline}
-              onClick={() => handleCandidateClick(candidate)}
+              onNameClick={() => handleCandidateClick(candidate)}
             />
           ))}
         </div>
