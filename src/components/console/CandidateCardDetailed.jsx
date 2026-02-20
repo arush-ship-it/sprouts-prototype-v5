@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function CandidateCardDetailed({ candidate, isPipeline = false }) {
+export default function CandidateCardDetailed({ candidate, isPipeline = false, onClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedStage, setSelectedStage] = useState(candidate.stage || "screening");
   

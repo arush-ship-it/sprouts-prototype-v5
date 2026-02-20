@@ -427,6 +427,13 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           </table>
         </div>
       )}
+
+      {/* Candidate Details Drawer */}
+      <CandidateDetailsDrawer
+        candidate={selectedCandidate}
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      />
     </div>
   );
 }
