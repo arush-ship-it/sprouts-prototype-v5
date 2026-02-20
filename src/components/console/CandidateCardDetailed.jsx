@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { CheckCircle2, XCircle, ExternalLink, Mail, MessageSquare, Phone, Linkedin, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown, StickyNote, Briefcase, GraduationCap, Award, Target } from "lucide-react";
+import { CheckCircle2, XCircle, ExternalLink, Mail, MessageSquare, Phone, Linkedin, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown, StickyNote, Briefcase, GraduationCap, Award, Target, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export default function CandidateCardDetailed({ candidate }) {
+export default function CandidateCardDetailed({ candidate, isPipeline = false }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedStage, setSelectedStage] = useState(candidate.stage || "screening");
   
   const scoreColor =
     candidate.score >= 75
@@ -105,18 +113,51 @@ export default function CandidateCardDetailed({ candidate }) {
           <ExternalLink className="w-3 h-3 text-blue-400" />
         </div>
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" className="h-7 text-[11px]">
-            <ThumbsUp className="w-3 h-3 mr-1" />
-            Shortlist
-          </Button>
-          <Button size="sm" variant="outline" className="h-7 text-[11px]">
-            <ThumbsDown className="w-3 h-3 mr-1" />
-            Reject
-          </Button>
-          <Button size="sm" variant="outline" className="h-7 text-[11px]">
-            <StickyNote className="w-3 h-3 mr-1" />
-            Note
-          </Button>
+          {isPipeline ? (
+            <>
+              <Select value={selectedStage} onValueChange={setSelectedStage}>
+                <SelectTrigger className="h-7 w-[140px] text-[11px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="screening" className="text-[11px]">Screening</SelectItem>
+                  <SelectItem value="assessment" className="text-[11px]">Assessment</SelectItem>
+                  <SelectItem value="interview" className="text-[11px]">Interview</SelectItem>
+                  <SelectItem value="final" className="text-[11px]">Final Round</SelectItem>
+                  <SelectItem value="offer" className="text-[11px]">Offer</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button size="sm" variant="outline" className="h-7 w-7 p-0">
+                <ThumbsUp className="w-3 h-3" />
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 w-7 p-0">
+                <ThumbsDown className="w-3 h-3" />
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]">
+                <StickyNote className="w-3 h-3 mr-1" />
+                Note
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]">
+                <Calendar className="w-3 h-3 mr-1" />
+                Schedule
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]">
+                <ThumbsUp className="w-3 h-3 mr-1" />
+                Shortlist
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]">
+                <ThumbsDown className="w-3 h-3 mr-1" />
+                Reject
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]">
+                <StickyNote className="w-3 h-3 mr-1" />
+                Note
+              </Button>
+            </>
+          )}
           <Button 
             size="sm" 
             variant="ghost" 

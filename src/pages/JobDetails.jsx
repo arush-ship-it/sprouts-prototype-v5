@@ -15,7 +15,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import {
   BarChart,
   Bar,
@@ -81,17 +84,17 @@ const activityLog = [
 ];
 
 export default function JobDetails() {
-  const [isEditing, setIsEditing] = useState(false);
-  const [description, setDescription] = useState(jobData.description);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
+  const [editedJob, setEditedJob] = useState({ ...jobData });
 
   const handleSave = () => {
-    setIsEditing(false);
+    setIsEditDialogOpen(false);
   };
 
   const handleCancel = () => {
-    setDescription(jobData.description);
-    setIsEditing(false);
+    setEditedJob({ ...jobData });
+    setIsEditDialogOpen(false);
   };
 
   return (
@@ -202,39 +205,19 @@ export default function JobDetails() {
               <h3 className="text-[16px] font-semibold text-gray-900">
                 Job Description
               </h3>
-              {!isEditing && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsEditing(true)}
-                  className="h-8"
-                >
-                  <Edit2 className="w-3.5 h-3.5 mr-1.5" />
-                  Edit
-                </Button>
-              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsEditDialogOpen(true)}
+                className="h-8"
+              >
+                <Edit2 className="w-3.5 h-3.5 mr-1.5" />
+                Edit
+              </Button>
             </div>
-            {isEditing ? (
-              <div>
-                <Textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="min-h-[120px] text-[13px] mb-3"
-                />
-                <div className="flex gap-2">
-                  <Button size="sm" onClick={handleSave}>
-                    Save Changes
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={handleCancel}>
-                    Cancel
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <p className="text-[13px] text-gray-600 leading-relaxed">
-                {description}
-              </p>
-            )}
+            <p className="text-[13px] text-gray-600 leading-relaxed">
+              {editedJob.description}
+            </p>
           </div>
 
           <div className="p-6 rounded-xl bg-white border border-gray-200">
@@ -242,7 +225,7 @@ export default function JobDetails() {
               Requirements
             </h3>
             <ul className="space-y-2">
-              {jobData.requirements.map((req, idx) => (
+              {editedJob.requirements.map((req, idx) => (
                 <li
                   key={idx}
                   className="text-[13px] text-gray-600 flex items-start gap-2"
@@ -294,6 +277,93 @@ export default function JobDetails() {
           </div>
         </Collapsible>
       </div>
+
+      {/* Edit Job Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Edit Job Details</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="title">Job Title</Label>
+                <Input
+                  id="title"
+                  value={editedJob.title}
+                  onChange={(e) => setEditedJob({ ...editedJob, title: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="department">Department</Label>
+                <Input
+                  id="department"
+                  value={editedJob.department}
+                  onChange={(e) => setEditedJob({ ...editedJob, department: e.target.value })}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="location">Location</Label>
+                <Input
+                  id="location"
+                  value={editedJob.location}
+                  onChange={(e) => setEditedJob({ ...editedJob, location: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="type">Job Type</Label>
+                <Input
+                  id="type"
+                  value={editedJob.type}
+                  onChange={(e) => setEditedJob({ ...editedJob, type: e.target.value })}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="salary">Salary Range</Label>
+              <Input
+                id="salary"
+                value={editedJob.salary}
+                onChange={(e) => setEditedJob({ ...editedJob, salary: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="description">Job Description</Label>
+              <Textarea
+                id="description"
+                value={editedJob.description}
+                onChange={(e) => setEditedJob({ ...editedJob, description: e.target.value })}
+                className="min-h-[120px]"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Requirements</Label>
+              {editedJob.requirements.map((req, idx) => (
+                <Input
+                  key={idx}
+                  value={req}
+                  onChange={(e) => {
+                    const newReqs = [...editedJob.requirements];
+                    newReqs[idx] = e.target.value;
+                    setEditedJob({ ...editedJob, requirements: newReqs });
+                  }}
+                  className="mb-2"
+                />
+              ))}
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button onClick={handleSave}>
+              Save Changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

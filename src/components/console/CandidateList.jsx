@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search, SlidersHorizontal, Sparkles, Maximize2, Minimize2, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const reviewCandidates = [
   {
@@ -96,9 +98,68 @@ const pipelineCandidates = [
 export default function CandidateList({ activeTab, viewMode = "card" }) {
   const candidates =
     activeTab === "review" ? reviewCandidates : pipelineCandidates;
+  const [isSourcingExpanded, setIsSourcingExpanded] = useState(false);
+  const [sourcingInput, setSourcingInput] = useState("");
+
+  const isPipeline = activeTab === "pipeline";
 
   return (
     <div className="px-8 pt-5 pb-8">
+      {/* Sourcing Card - Only show in Review tab */}
+      {activeTab === "review" && (
+        <div className={`mb-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 transition-all duration-300 ${
+          isSourcingExpanded ? "p-5" : "p-4"
+        }`}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <h3 className="text-[13px] font-semibold text-gray-900">AI Sourcing Assistant</h3>
+                {!isSourcingExpanded && (
+                  <p className="text-[11px] text-gray-500">Find and screen candidates automatically</p>
+                )}
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-7"
+              onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}
+            >
+              {isSourcingExpanded ? (
+                <Minimize2 className="w-3.5 h-3.5" />
+              ) : (
+                <Maximize2 className="w-3.5 h-3.5" />
+              )}
+            </Button>
+          </div>
+          
+          {isSourcingExpanded && (
+            <div className="mt-4 space-y-3">
+              <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
+                <p className="text-[11px] text-gray-700">
+                  <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Textarea
+                  value={sourcingInput}
+                  onChange={(e) => setSourcingInput(e.target.value)}
+                  placeholder="E.g., Find 10 senior designers in SF with Figma experience..."
+                  className="resize-none text-[12px] bg-white"
+                  rows={2}
+                />
+                <Button size="icon" className="shrink-0 h-9 w-9">
+                  <Send className="w-3.5 h-3.5" />
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Search / Filter bar */}
       <div className="flex items-center gap-3 mb-5">
         <div className="relative flex-1">
@@ -119,7 +180,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       {viewMode === "card" && (
         <div className="flex flex-col gap-3">
           {candidates.map((candidate) => (
-            <CandidateCardDetailed key={candidate.id} candidate={candidate} />
+            <CandidateCardDetailed key={candidate.id} candidate={candidate} isPipeline={isPipeline} />
           ))}
         </div>
       )}
