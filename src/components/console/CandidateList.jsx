@@ -120,36 +120,38 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   };
 
   return (
-    <div className="px-8 pt-5 pb-8">
+    <div className="px-8 pt-5 pb-8 h-full flex flex-col">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" && (
-        <div className={`mb-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-violet-50 transition-all duration-300 ${
-          isSourcingExpanded ? "p-5" : "p-4"
+        <div className={`mb-5 rounded-2xl border-2 border-indigo-300 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 shadow-lg transition-all duration-300 ${
+          isSourcingExpanded ? "flex-1 flex flex-col p-6" : "p-5"
         }`}>
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-2.5 flex-1">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-white" />
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center gap-3 flex-1">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center shrink-0 shadow-md">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-[13px] font-semibold text-gray-900">
-                  {isSourcingExpanded ? "AI Sourcing Assistant" : "AI Sourcing - Click to Expand"}
+                <h3 className="text-[15px] font-bold text-gray-900 mb-0.5">
+                  ✨ AI Sourcing Assistant
                 </h3>
-                {!isSourcingExpanded && (
-                  <p className="text-[11px] text-gray-600 mt-0.5">Ask AI to find candidates for you</p>
-                )}
+                <p className="text-[12px] text-gray-600">
+                  {isSourcingExpanded 
+                    ? "Chat with AI to discover perfect candidates for your role" 
+                    : "Click to expand and let AI find candidates for you"}
+                </p>
               </div>
             </div>
             <Button
               variant="ghost"
               size="sm"
-              className="h-7"
+              className="h-8 w-8 p-0 hover:bg-white/50 shrink-0"
               onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}
             >
               {isSourcingExpanded ? (
-                <Minimize2 className="w-3.5 h-3.5" />
+                <Minimize2 className="w-4 h-4" />
               ) : (
-                <Maximize2 className="w-3.5 h-3.5" />
+                <Maximize2 className="w-4 h-4" />
               )}
             </Button>
           </div>
