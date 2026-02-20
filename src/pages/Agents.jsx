@@ -242,10 +242,7 @@ function AgentCard({ agent, onToggle, onClick }) {
         </div>
         <Switch 
           checked={agent.isActive} 
-          onCheckedChange={(e) => {
-            e.stopPropagation();
-            onToggle(agent.id);
-          }}
+          onCheckedChange={() => onToggle(agent.id)}
           onClick={(e) => e.stopPropagation()}
         />
       </div>
