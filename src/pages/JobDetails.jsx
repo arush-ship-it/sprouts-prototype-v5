@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MapPin,
   Briefcase,
@@ -8,7 +8,14 @@ import {
   TrendingUp,
   Eye,
   UserPlus,
+  Edit2,
+  ChevronDown,
+  ChevronUp,
+  Activity,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   BarChart,
   Bar,
@@ -64,7 +71,29 @@ const applicationTrend = [
   { date: "Feb 20", count: 32 },
 ];
 
+const activityLog = [
+  { time: "2 hours ago", action: "Pipeline automation moved 3 candidates to Interview stage", user: "AI Agent" },
+  { time: "5 hours ago", action: "Job posting updated", user: "Sarah Chen" },
+  { time: "1 day ago", action: "15 new applications received", user: "System" },
+  { time: "1 day ago", action: "Assessment template updated", user: "Mike Roberts" },
+  { time: "2 days ago", action: "Job posted to LinkedIn", user: "System" },
+  { time: "2 days ago", action: "Job created", user: "Sarah Chen" },
+];
+
 export default function JobDetails() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [description, setDescription] = useState(jobData.description);
+  const [isActivityOpen, setIsActivityOpen] = useState(false);
+
+  const handleSave = () => {
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setDescription(jobData.description);
+    setIsEditing(false);
+  };
+
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
       <div className="px-8 pt-8 pb-8">
@@ -167,14 +196,45 @@ export default function JobDetails() {
         </div>
 
         {/* Job Details */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6 mb-6">
           <div className="p-6 rounded-xl bg-white border border-gray-200">
-            <h3 className="text-[16px] font-semibold text-gray-900 mb-3">
-              Job Description
-            </h3>
-            <p className="text-[13px] text-gray-600 leading-relaxed">
-              {jobData.description}
-            </p>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-[16px] font-semibold text-gray-900">
+                Job Description
+              </h3>
+              {!isEditing && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsEditing(true)}
+                  className="h-8"
+                >
+                  <Edit2 className="w-3.5 h-3.5 mr-1.5" />
+                  Edit
+                </Button>
+              )}
+            </div>
+            {isEditing ? (
+              <div>
+                <Textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="min-h-[120px] text-[13px] mb-3"
+                />
+                <div className="flex gap-2">
+                  <Button size="sm" onClick={handleSave}>
+                    Save Changes
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={handleCancel}>
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <p className="text-[13px] text-gray-600 leading-relaxed">
+                {description}
+              </p>
+            )}
           </div>
 
           <div className="p-6 rounded-xl bg-white border border-gray-200">
@@ -194,6 +254,45 @@ export default function JobDetails() {
             </ul>
           </div>
         </div>
+
+        {/* Activity Log (Collapsible) */}
+        <Collapsible open={isActivityOpen} onOpenChange={setIsActivityOpen}>
+          <div className="p-4 rounded-xl bg-white border border-gray-200">
+            <CollapsibleTrigger className="flex items-center justify-between w-full group">
+              <div className="flex items-center gap-2">
+                <Activity className="w-4 h-4 text-gray-400" />
+                <h3 className="text-[14px] font-semibold text-gray-900">
+                  System Activity Log
+                </h3>
+                <span className="text-[11px] text-gray-400">
+                  ({activityLog.length} events)
+                </span>
+              </div>
+              {isActivityOpen ? (
+                <ChevronUp className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+              )}
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-4">
+              <div className="space-y-2">
+                {activityLog.map((log, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
+                    <div className="flex-1">
+                      <p className="text-[12px] text-gray-900">{log.action}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-[10px] text-gray-400">{log.time}</span>
+                        <span className="text-[10px] text-gray-400">•</span>
+                        <span className="text-[10px] text-gray-500">{log.user}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CollapsibleContent>
+          </div>
+        </Collapsible>
       </div>
     </div>
   );

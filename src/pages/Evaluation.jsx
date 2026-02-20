@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FileText,
   Video,
@@ -318,10 +318,18 @@ function AIInterviewCard({ interview }) {
 }
 
 export default function Evaluation() {
+  const [activeTab, setActiveTab] = useState("assessments");
+
+  const tabs = [
+    { key: "assessments", label: "Assessments", count: assessments.length, icon: FileText },
+    { key: "ai-interviews", label: "AI Interviews", count: aiInterviews.length, icon: Brain },
+    { key: "live-interviews", label: "Live Interviews", count: interviews.length, icon: Video },
+  ];
+
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
       <div className="px-8 pt-8 pb-8">
-        <div className="mb-8">
+        <div className="mb-6">
           <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
             Evaluation Criteria
           </h1>
@@ -330,40 +338,61 @@ export default function Evaluation() {
           </p>
         </div>
 
-        {/* Assessments */}
-        <div className="mb-8">
-          <h2 className="text-[16px] font-semibold text-gray-900 mb-4">
-            Assessments
-          </h2>
-          <div className="grid gap-4">
-            {assessments.map((assessment) => (
-              <AssessmentCard key={assessment.id} assessment={assessment} />
+        {/* Tabs */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 p-1 bg-gray-100/70 rounded-xl w-fit">
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`relative px-5 py-2.5 rounded-lg text-[13px] font-semibold transition-all duration-300 flex items-center gap-2
+                  ${
+                    activeTab === tab.key
+                      ? "bg-white text-gray-900 shadow-sm"
+                      : "text-gray-400 hover:text-gray-600"
+                  }`}
+              >
+                <tab.icon className="w-4 h-4" />
+                {tab.label}
+                <span
+                  className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md transition-colors ${
+                    activeTab === tab.key
+                      ? "bg-indigo-50 text-indigo-600"
+                      : "bg-gray-200/60 text-gray-400"
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              </button>
             ))}
           </div>
         </div>
 
-        {/* AI Interviews */}
-        <div className="mb-8">
-          <h2 className="text-[16px] font-semibold text-gray-900 mb-4">
-            AI Screening Interviews
-          </h2>
-          <div className="grid gap-4">
-            {aiInterviews.map((interview) => (
-              <AIInterviewCard key={interview.id} interview={interview} />
-            ))}
-          </div>
-        </div>
-
-        {/* Live Interviews */}
+        {/* Content */}
         <div>
-          <h2 className="text-[16px] font-semibold text-gray-900 mb-4">
-            Live Interviews
-          </h2>
-          <div className="grid gap-4">
-            {interviews.map((interview) => (
-              <InterviewCard key={interview.id} interview={interview} />
-            ))}
-          </div>
+          {activeTab === "assessments" && (
+            <div className="grid gap-4">
+              {assessments.map((assessment) => (
+                <AssessmentCard key={assessment.id} assessment={assessment} />
+              ))}
+            </div>
+          )}
+
+          {activeTab === "ai-interviews" && (
+            <div className="grid gap-4">
+              {aiInterviews.map((interview) => (
+                <AIInterviewCard key={interview.id} interview={interview} />
+              ))}
+            </div>
+          )}
+
+          {activeTab === "live-interviews" && (
+            <div className="grid gap-4">
+              {interviews.map((interview) => (
+                <InterviewCard key={interview.id} interview={interview} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

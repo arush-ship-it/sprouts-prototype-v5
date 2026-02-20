@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CheckCircle2,
   Bot,
@@ -8,8 +8,15 @@ import {
   Eye,
   Check,
   X,
+  Maximize2,
+  ChevronRight,
+  FileText,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 
 const approvals = [
   {
@@ -34,10 +41,20 @@ const agents = [
   {
     id: 1,
     name: "Resume Screening Agent",
-    status: "active",
-    description: "Processing 12 new applications",
-    progress: 75,
+    status: "pending_approval",
+    description: "Screened 12 candidates - awaiting approval",
+    progress: 100,
     lastActivity: "2 minutes ago",
+    decisionLog: [
+      { time: "10:45 AM", action: "Analyzed resume for Maya Johnson", result: "Qualified - Strong match" },
+      { time: "10:42 AM", action: "Analyzed resume for Alex Chen", result: "Qualified - Moderate match" },
+      { time: "10:38 AM", action: "Analyzed resume for Sarah Mitchell", result: "Not qualified - Missing key skills" },
+    ],
+    candidatesPushed: [
+      { id: 1, name: "Maya Johnson", decision: "Move to Interview", score: 92 },
+      { id: 2, name: "Alex Chen", decision: "Move to Assessment", score: 78 },
+      { id: 3, name: "Marcus Rashford", decision: "Move to Interview", score: 88 },
+    ],
   },
   {
     id: 2,
@@ -46,6 +63,11 @@ const agents = [
     description: "Sending follow-up emails to 8 candidates",
     progress: 50,
     lastActivity: "5 minutes ago",
+    decisionLog: [
+      { time: "11:20 AM", action: "Sent follow-up to John Doe", result: "Email delivered" },
+      { time: "11:15 AM", action: "Sent interview reminder to Jane Smith", result: "Email opened" },
+    ],
+    candidatesPushed: [],
   },
   {
     id: 3,
@@ -54,14 +76,28 @@ const agents = [
     description: "Matched 23 candidates to job requirements",
     progress: 100,
     lastActivity: "1 hour ago",
+    decisionLog: [
+      { time: "9:30 AM", action: "Completed skill analysis batch", result: "23 profiles matched" },
+      { time: "9:15 AM", action: "Started skill matching process", result: "Processing..." },
+    ],
+    candidatesPushed: [],
   },
   {
     id: 4,
-    name: "Interview Scheduler Agent",
-    status: "idle",
-    description: "Waiting for candidate responses",
-    progress: 0,
-    lastActivity: "3 hours ago",
+    name: "Pipeline Movement Agent",
+    status: "pending_approval",
+    description: "5 candidates ready to advance - needs approval",
+    progress: 100,
+    lastActivity: "15 minutes ago",
+    decisionLog: [
+      { time: "11:05 AM", action: "Evaluated assessment scores", result: "5 candidates passed threshold" },
+      { time: "11:00 AM", action: "Started pipeline review", result: "Analyzing candidates" },
+    ],
+    candidatesPushed: [
+      { id: 4, name: "James Park", decision: "Move to Final Round", score: 95 },
+      { id: 5, name: "Priya Sharma", decision: "Move to Final Round", score: 91 },
+      { id: 6, name: "Daniel Wright", decision: "Move to Interview", score: 84 },
+    ],
   },
 ];
 
@@ -137,12 +173,15 @@ function ApprovalCard({ approval }) {
   );
 }
 
-function AgentCard({ agent }) {
+function AgentCard({ agent, onViewDetails }) {
   const statusColors = {
     active: "text-emerald-600 bg-emerald-50 border-emerald-200",
     completed: "text-blue-600 bg-blue-50 border-blue-200",
     idle: "text-gray-500 bg-gray-50 border-gray-200",
+    pending_approval: "text-orange-600 bg-orange-50 border-orange-200",
   };
+
+  const needsApproval = agent.status === "pending_approval";
 
   return (
     <div className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all">
@@ -151,7 +190,7 @@ function AgentCard({ agent }) {
           <div className="w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
             <Bot className="w-5 h-5 text-indigo-600" />
           </div>
-          <div>
+          <div className="flex-1">
             <h3 className="text-[14px] font-semibold text-gray-900 mb-1">
               {agent.name}
             </h3>
@@ -163,10 +202,10 @@ function AgentCard({ agent }) {
             statusColors[agent.status]
           }`}
         >
-          {agent.status}
+          {agent.status.replace("_", " ")}
         </span>
       </div>
-      <div className="mb-2">
+      <div className="mb-3">
         <div className="flex justify-between text-[11px] text-gray-500 mb-1.5">
           <span>Progress</span>
           <span>{agent.progress}%</span>
@@ -178,10 +217,30 @@ function AgentCard({ agent }) {
           />
         </div>
       </div>
-      <p className="text-[11px] text-gray-400 flex items-center gap-1.5">
-        <Clock className="w-3 h-3" />
-        Last activity: {agent.lastActivity}
-      </p>
+      <div className="flex items-center justify-between">
+        <p className="text-[11px] text-gray-400 flex items-center gap-1.5">
+          <Clock className="w-3 h-3" />
+          Last activity: {agent.lastActivity}
+        </p>
+        <Button
+          variant={needsApproval ? "default" : "outline"}
+          size="sm"
+          onClick={() => onViewDetails(agent)}
+          className="h-7 text-[11px]"
+        >
+          {needsApproval ? (
+            <>
+              <AlertCircle className="w-3 h-3 mr-1" />
+              Review
+            </>
+          ) : (
+            <>
+              <Maximize2 className="w-3 h-3 mr-1" />
+              Details
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 }
@@ -243,6 +302,24 @@ function AutomationCard({ automation }) {
 }
 
 export default function Activity() {
+  const [selectedAgent, setSelectedAgent] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleViewDetails = (agent) => {
+    setSelectedAgent(agent);
+    setIsDialogOpen(true);
+  };
+
+  const handleApprove = () => {
+    setIsDialogOpen(false);
+    setSelectedAgent(null);
+  };
+
+  const handleReject = () => {
+    setIsDialogOpen(false);
+    setSelectedAgent(null);
+  };
+
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
       <div className="px-8 pt-8 pb-8">
@@ -267,7 +344,7 @@ export default function Activity() {
           </div>
           <div className="grid gap-4">
             {agents.map((agent) => (
-              <AgentCard key={agent.id} agent={agent} />
+              <AgentCard key={agent.id} agent={agent} onViewDetails={handleViewDetails} />
             ))}
           </div>
         </div>
@@ -306,6 +383,86 @@ export default function Activity() {
           </div>
         </div>
       </div>
+
+      {/* Agent Details Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-3xl max-h-[85vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center">
+                <Bot className="w-5 h-5 text-indigo-600" />
+              </div>
+              <div>
+                <div className="text-[16px] font-semibold">{selectedAgent?.name}</div>
+                <div className="text-[12px] text-gray-500 font-normal">{selectedAgent?.description}</div>
+              </div>
+            </DialogTitle>
+          </DialogHeader>
+
+          <ScrollArea className="max-h-[calc(85vh-180px)] pr-4">
+            <div className="space-y-6">
+              {/* Decision Log */}
+              <div>
+                <h3 className="text-[14px] font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Decision Log
+                </h3>
+                <div className="space-y-2">
+                  {selectedAgent?.decisionLog.map((log, idx) => (
+                    <div key={idx} className="p-3 rounded-lg bg-gray-50 border border-gray-200">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[11px] text-gray-500">{log.time}</span>
+                        <ChevronRight className="w-3 h-3 text-gray-400" />
+                      </div>
+                      <p className="text-[12px] text-gray-700 font-medium mb-0.5">{log.action}</p>
+                      <p className="text-[11px] text-gray-600">{log.result}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Candidates Pushed */}
+              {selectedAgent?.candidatesPushed.length > 0 && (
+                <div>
+                  <h3 className="text-[14px] font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    Candidates Requiring Approval ({selectedAgent.candidatesPushed.length})
+                  </h3>
+                  <div className="space-y-3">
+                    {selectedAgent.candidatesPushed.map((candidate) => (
+                      <div key={candidate.id} className="p-4 rounded-lg bg-white border border-gray-200">
+                        <div className="flex items-center justify-between mb-2">
+                          <div>
+                            <h4 className="text-[13px] font-semibold text-gray-900">{candidate.name}</h4>
+                            <p className="text-[11px] text-gray-500">{candidate.decision}</p>
+                          </div>
+                          <Badge variant="secondary" className="text-[11px]">
+                            Score: {candidate.score}
+                          </Badge>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+
+          {/* Action Buttons */}
+          {selectedAgent?.status === "pending_approval" && selectedAgent?.candidatesPushed.length > 0 && (
+            <div className="flex gap-3 pt-4 border-t">
+              <Button onClick={handleApprove} className="flex-1">
+                <Check className="w-4 h-4 mr-2" />
+                Approve All Decisions
+              </Button>
+              <Button onClick={handleReject} variant="outline" className="flex-1">
+                <X className="w-4 h-4 mr-2" />
+                Reject & Review
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
