@@ -9,7 +9,7 @@ export default function Layout({ children, currentPageName }) {
   return (
     <div className="flex min-h-screen bg-[#FAFAFA]">
       {showSidebar && <SidebarNav activePage={currentPageName} />}
-      <main className="flex-1 overflow-auto">{children}</main>
+      <main className={`flex-1 overflow-auto ${showSidebar ? 'ml-[260px]' : ''}`}>{children}</main>
     </div>
   );
 }
