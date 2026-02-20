@@ -371,7 +371,7 @@ export default function Agents() {
         </div>
 
         {/* Agents Grid */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(820px, 1fr))' }}>
           {filteredAgents.map((agent) => (
             <AgentCard 
               key={agent.id} 
