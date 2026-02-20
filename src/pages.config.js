@@ -48,6 +48,8 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import Activity from './pages/Activity';
+import Agents from './pages/Agents';
+import Console from './pages/Console';
 import CreateJob from './pages/CreateJob';
 import CreatePipeline from './pages/CreatePipeline';
 import Dashboard from './pages/Dashboard';
@@ -55,14 +57,14 @@ import Evaluation from './pages/Evaluation';
 import Inbox from './pages/Inbox';
 import JobDetails from './pages/JobDetails';
 import Settings from './pages/Settings';
-import Console from './pages/Console';
 import TalentPool from './pages/TalentPool';
-import Agents from './pages/Agents';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Activity": Activity,
+    "Agents": Agents,
+    "Console": Console,
     "CreateJob": CreateJob,
     "CreatePipeline": CreatePipeline,
     "Dashboard": Dashboard,
@@ -70,9 +72,7 @@ export const PAGES = {
     "Inbox": Inbox,
     "JobDetails": JobDetails,
     "Settings": Settings,
-    "Console": Console,
     "TalentPool": TalentPool,
-    "Agents": Agents,
 }
 
 export const pagesConfig = {
