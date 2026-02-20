@@ -1,7 +1,9 @@
 import React from "react";
-import { MapPin, Clock, Briefcase, MoreHorizontal } from "lucide-react";
+import { MapPin, Clock, Briefcase, MoreHorizontal, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-export default function JobHeader() {
+export default function JobHeader({ onActivityApprovalClick }) {
   return (
     <div className="px-8 pt-8 pb-0">
       <div className="flex items-start justify-between">
@@ -29,9 +31,23 @@ export default function JobHeader() {
             </span>
           </div>
         </div>
-        <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400">
-          <MoreHorizontal className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={onActivityApprovalClick}
+            variant="outline"
+            size="sm"
+            className="h-8 text-[12px] border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700"
+          >
+            <AlertCircle className="w-3.5 h-3.5 mr-1.5" />
+            Activity Approval
+            <Badge className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-[10px] bg-orange-600">
+              2
+            </Badge>
+          </Button>
+          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400">
+            <MoreHorizontal className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </div>
   );

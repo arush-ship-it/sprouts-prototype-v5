@@ -24,30 +24,13 @@ export default function Console() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
-      <JobHeader />
-      <div className="relative">
-        <SubTabs 
-          activeTab={activeTab} 
-          setActiveTab={handleTabChange}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-        />
-        {/* Activity Approval Button */}
-        <div className="absolute top-0 right-8 h-full flex items-center">
-          <Button
-            onClick={() => setIsActivityApprovalOpen(true)}
-            variant="outline"
-            size="sm"
-            className="h-8 text-[12px] border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700"
-          >
-            <AlertCircle className="w-3.5 h-3.5 mr-1.5" />
-            Activity Approval
-            <Badge className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-[10px] bg-orange-600">
-              2
-            </Badge>
-          </Button>
-        </div>
-      </div>
+      <JobHeader onActivityApprovalClick={() => setIsActivityApprovalOpen(true)} />
+      <SubTabs 
+        activeTab={activeTab} 
+        setActiveTab={handleTabChange}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+      />
       
       {/* Pipeline Builder Button - Only show in Pipeline tab */}
       {activeTab === "pipeline" && (
