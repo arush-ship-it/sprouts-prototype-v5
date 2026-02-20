@@ -197,122 +197,129 @@ export default function CandidateDetailsDrawer({ candidate, isOpen, onClose }) {
               </TabsList>
 
               {/* Overview Tab */}
-              <TabsContent value="overview" className="space-y-6">
-                {/* Experience History */}
-                <div className="bg-white rounded-xl p-5 border border-gray-200">
-                  <h3 className="text-[15px] font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <Briefcase className="w-4 h-4 text-indigo-600" />
-                    Experience History
-                  </h3>
-                  <div className="space-y-4">
-                    {experiences.map((exp, idx) => (
-                      <div key={idx} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
-                        <h4 className="text-[13px] font-semibold text-gray-900 mb-1">
-                          {exp.title}
-                        </h4>
-                        <p className="text-[12px] text-gray-600 mb-1">{exp.company}</p>
-                        <p className="text-[11px] text-gray-500 mb-2">{exp.duration}</p>
-                        <p className="text-[11px] text-gray-600">{exp.description}</p>
-                      </div>
-                    ))}
+              <TabsContent value="overview">
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Left Column - Resume */}
+                  <div className="space-y-6">
+                    <div className="bg-white rounded-xl p-5 border border-gray-200 sticky top-0">
+                      <h3 className="text-[15px] font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        <FileText className="w-4 h-4 text-indigo-600" />
+                        Resume
+                      </h3>
+                      <Button variant="outline" size="sm" className="w-full">
+                        <ExternalLink className="w-3.5 h-3.5 mr-2" />
+                        View Full Resume
+                      </Button>
+                    </div>
                   </div>
-                </div>
 
-                {/* Education History */}
-                <div className="bg-white rounded-xl p-5 border border-gray-200">
-                  <h3 className="text-[15px] font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4 text-indigo-600" />
-                    Education History
-                  </h3>
-                  <div className="space-y-3">
-                    {education.map((edu, idx) => (
-                      <div key={idx} className="pb-3 border-b border-gray-100 last:border-0 last:pb-0">
-                        <h4 className="text-[13px] font-semibold text-gray-900 mb-1">
-                          {edu.degree}
-                        </h4>
-                        <p className="text-[12px] text-gray-600">{edu.university}</p>
-                        <p className="text-[11px] text-gray-500">{edu.year}</p>
+                  {/* Right Column - Other Details */}
+                  <div className="space-y-6">
+                    {/* Experience History */}
+                    <div className="bg-white rounded-xl p-5 border border-gray-200">
+                      <h3 className="text-[15px] font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Briefcase className="w-4 h-4 text-indigo-600" />
+                        Experience History
+                      </h3>
+                      <div className="space-y-4">
+                        {experiences.map((exp, idx) => (
+                          <div key={idx} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+                            <h4 className="text-[13px] font-semibold text-gray-900 mb-1">
+                              {exp.title}
+                            </h4>
+                            <p className="text-[12px] text-gray-600 mb-1">{exp.company}</p>
+                            <p className="text-[11px] text-gray-500 mb-2">{exp.duration}</p>
+                            <p className="text-[11px] text-gray-600">{exp.description}</p>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                {/* Skill Match */}
-                <div className="bg-white rounded-xl p-5 border border-gray-200">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-[15px] font-semibold text-gray-900 flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4 text-emerald-600" />
-                      Skill Match to Job Description
-                    </h3>
-                    <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200">
-                      {candidate.skillsMatch}
-                    </Badge>
-                  </div>
-                  <Progress value={skillMatchPercentage} className="h-2 mb-4" />
-                  <div className="grid grid-cols-2 gap-2">
-                    {skills.map((skill, idx) => (
-                      <div
-                        key={idx}
-                        className={`flex items-center gap-2 p-2 rounded-lg text-[11px] ${
-                          skill.match
-                            ? "bg-emerald-50 text-emerald-700"
-                            : "bg-gray-50 text-gray-500"
-                        }`}
-                      >
-                        {skill.match ? (
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                        ) : (
-                          <XCircle className="w-3.5 h-3.5" />
-                        )}
-                        {skill.name}
+                    {/* Education History */}
+                    <div className="bg-white rounded-xl p-5 border border-gray-200">
+                      <h3 className="text-[15px] font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <GraduationCap className="w-4 h-4 text-indigo-600" />
+                        Education History
+                      </h3>
+                      <div className="space-y-3">
+                        {education.map((edu, idx) => (
+                          <div key={idx} className="pb-3 border-b border-gray-100 last:border-0 last:pb-0">
+                            <h4 className="text-[13px] font-semibold text-gray-900 mb-1">
+                              {edu.degree}
+                            </h4>
+                            <p className="text-[12px] text-gray-600">{edu.university}</p>
+                            <p className="text-[11px] text-gray-500">{edu.year}</p>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
 
-                {/* Attribute Match */}
-                <div className="bg-white rounded-xl p-5 border border-gray-200">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-[15px] font-semibold text-gray-900 flex items-center gap-2">
-                      <Target className="w-4 h-4 text-indigo-600" />
-                      Attribute Match
-                    </h3>
-                    <Badge className="bg-indigo-50 text-indigo-700 border-indigo-200">
-                      {candidate.attributesMatch}
-                    </Badge>
-                  </div>
-                  <Progress value={attributeMatchPercentage} className="h-2 mb-4" />
-                  <div className="space-y-2">
-                    {attributes.map((attr, idx) => (
-                      <div
-                        key={idx}
-                        className={`flex items-center gap-2 p-2 rounded-lg text-[11px] ${
-                          attr.match
-                            ? "bg-indigo-50 text-indigo-700"
-                            : "bg-gray-50 text-gray-500"
-                        }`}
-                      >
-                        {attr.match ? (
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                        ) : (
-                          <XCircle className="w-3.5 h-3.5" />
-                        )}
-                        {attr.name}
+                    {/* Skill Match */}
+                    <div className="bg-white rounded-xl p-5 border border-gray-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-[15px] font-semibold text-gray-900 flex items-center gap-2">
+                          <TrendingUp className="w-4 h-4 text-emerald-600" />
+                          Skill Match to Job Description
+                        </h3>
+                        <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200">
+                          {candidate.skillsMatch}
+                        </Badge>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                      <Progress value={skillMatchPercentage} className="h-2 mb-4" />
+                      <div className="grid grid-cols-2 gap-2">
+                        {skills.map((skill, idx) => (
+                          <div
+                            key={idx}
+                            className={`flex items-center gap-2 p-2 rounded-lg text-[11px] ${
+                              skill.match
+                                ? "bg-emerald-50 text-emerald-700"
+                                : "bg-gray-50 text-gray-500"
+                            }`}
+                          >
+                            {skill.match ? (
+                              <CheckCircle2 className="w-3.5 h-3.5" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5" />
+                            )}
+                            {skill.name}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Resume */}
-                <div className="bg-white rounded-xl p-5 border border-gray-200">
-                  <h3 className="text-[15px] font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-indigo-600" />
-                    Resume
-                  </h3>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <ExternalLink className="w-3.5 h-3.5 mr-2" />
-                    View Full Resume
-                  </Button>
+                    {/* Attribute Match */}
+                    <div className="bg-white rounded-xl p-5 border border-gray-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-[15px] font-semibold text-gray-900 flex items-center gap-2">
+                          <Target className="w-4 h-4 text-indigo-600" />
+                          Attribute Match
+                        </h3>
+                        <Badge className="bg-indigo-50 text-indigo-700 border-indigo-200">
+                          {candidate.attributesMatch}
+                        </Badge>
+                      </div>
+                      <Progress value={attributeMatchPercentage} className="h-2 mb-4" />
+                      <div className="space-y-2">
+                        {attributes.map((attr, idx) => (
+                          <div
+                            key={idx}
+                            className={`flex items-center gap-2 p-2 rounded-lg text-[11px] ${
+                              attr.match
+                                ? "bg-indigo-50 text-indigo-700"
+                                : "bg-gray-50 text-gray-500"
+                            }`}
+                          >
+                            {attr.match ? (
+                              <CheckCircle2 className="w-3.5 h-3.5" />
+                            ) : (
+                              <XCircle className="w-3.5 h-3.5" />
+                            )}
+                            {attr.name}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
 
