@@ -47,14 +47,14 @@ export default function SidebarNav({ activePage = "Console" }) {
   const [selectedJob, setSelectedJob] = useState("1");
 
   return (
-    <aside className="w-[260px] min-h-screen bg-[#0F1117] flex flex-col justify-between py-6 px-4 shrink-0">
+    <aside className="w-[260px] min-h-screen bg-gray-50 flex flex-col justify-between py-6 px-4 shrink-0 border-r border-gray-200">
       {/* Top: Brand + Job Selector + Main Links */}
       <div>
         <div className="flex items-center gap-2.5 px-3 mb-6">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
             <Terminal className="w-4 h-4 text-white" />
           </div>
-          <span className="text-white font-semibold text-[15px] tracking-tight">Sprouts AI
+          <span className="text-gray-900 font-semibold text-[15px] tracking-tight">Sprouts AI
 
           </span>
         </div>
@@ -62,7 +62,7 @@ export default function SidebarNav({ activePage = "Console" }) {
         {/* Job Selector */}
         <div className="px-3 mb-6">
           <Select value={selectedJob} onValueChange={setSelectedJob}>
-            <SelectTrigger className="w-full h-9 bg-white/5 border-white/10 text-white text-[12px] hover:bg-white/10">
+            <SelectTrigger className="w-full h-9 bg-white border-gray-200 text-gray-900 text-[12px] hover:bg-gray-100">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -90,15 +90,15 @@ export default function SidebarNav({ activePage = "Console" }) {
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group
                 ${
             activePage === link.page ?
-            "bg-white/10 text-white" :
-            "text-gray-400 hover:text-white hover:bg-white/[0.05]"}`
+            "bg-indigo-100 text-indigo-900" :
+            "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`
             }>
 
               <link.icon
               className={`w-[18px] h-[18px] transition-colors ${
               activePage === link.page ?
-              "text-indigo-400" :
-              "text-gray-500 group-hover:text-gray-300"}`
+              "text-indigo-600" :
+              "text-gray-500 group-hover:text-gray-700"}`
               } />
 
               {link.label}
@@ -108,25 +108,25 @@ export default function SidebarNav({ activePage = "Console" }) {
       </div>
 
       {/* User Info Section */}
-      <div className="border-t border-white/[0.06] pt-5 mt-6">
+      <div className="border-t border-gray-200 pt-5 mt-6">
         <div className="flex items-center justify-between px-3 mb-5">
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-xs font-semibold">
               JD
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-white truncate">John Doe</p>
-              <p className="text-[10px] text-gray-400 truncate">john@company.com</p>
+              <p className="text-xs font-medium text-gray-900 truncate">John Doe</p>
+              <p className="text-[10px] text-gray-500 truncate">john@company.com</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
             <Link
               to={createPageUrl("Settings")}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/[0.05] transition-colors"
+              className="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors"
             >
               <SettingsIcon className="w-4 h-4" />
             </Link>
-            <button className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/[0.05] transition-colors relative">
+            <button className="p-1.5 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-colors relative">
               <BellIcon className="w-4 h-4" />
               <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
             </button>
@@ -144,12 +144,12 @@ export default function SidebarNav({ activePage = "Console" }) {
             className={`relative flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all duration-200 group
                 ${
             activePage === link.page ?
-            "text-indigo-400" :
-            "text-gray-500 hover:text-gray-300"}`
+            "text-indigo-600" :
+            "text-gray-500 hover:text-gray-900"}`
             }>
 
               {activePage === link.page &&
-            <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-400" />
+            <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-600" />
             }
               <link.icon className="w-5 h-5" />
               <span className="text-[10px] font-medium tracking-wide">
