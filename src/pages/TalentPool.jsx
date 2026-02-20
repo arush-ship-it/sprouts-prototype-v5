@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import TabSwitcher from "@/components/shared/TabSwitcher";
 
 const candidates = [
   {
@@ -160,7 +161,13 @@ export default function TalentPool() {
   };
 
   return (
-    <div className="flex h-screen bg-[#FAFAFA]">
+    <div className="flex flex-col h-screen bg-[#FAFAFA]">
+      {/* Top Navigation */}
+      <div className="px-6 py-4 bg-[#FAFAFA] border-b border-gray-200">
+        <TabSwitcher activePage="TalentPool" />
+      </div>
+      
+      <div className="flex flex-1 overflow-hidden">
       {/* Left Panel - AI Chat */}
       <div className="w-[420px] border-r border-gray-200 bg-white flex flex-col">
         <div className="p-6 border-b border-gray-200">
@@ -240,6 +247,7 @@ export default function TalentPool() {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

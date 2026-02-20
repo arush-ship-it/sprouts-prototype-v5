@@ -5,14 +5,27 @@ import {
   TrendingUp,
   Mail,
   CheckSquare,
-  ChevronLeft,
-  ChevronRight,
   Briefcase,
-  Calendar,
-  BarChart3,
-  PieChart,
+  Send,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import TabSwitcher from "@/components/shared/TabSwitcher";
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart as RechartsPieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const analyticsCards = [
   {
@@ -143,86 +156,143 @@ const activities = [
   },
 ];
 
+const pipelineFunnelData = [
+  { stage: "Applied", count: 342 },
+  { stage: "Screening", count: 156 },
+  { stage: "Assessment", count: 89 },
+  { stage: "Interview", count: 45 },
+  { stage: "Offer", count: 12 },
+];
+
+const monthlyData = [
+  { month: "Jan", jd: 18, resumes: 120 },
+  { month: "Feb", jd: 23, resumes: 156 },
+  { month: "Mar", jd: 21, resumes: 142 },
+  { month: "Apr", jd: 19, resumes: 134 },
+];
+
+const sourceData = [
+  { name: "Direct", value: 45, color: "#6366f1" },
+  { name: "LinkedIn", value: 35, color: "#8b5cf6" },
+  { name: "Referral", value: 12, color: "#ec4899" },
+  { name: "Others", value: 8, color: "#f59e0b" },
+];
+
 export default function Dashboard() {
-  const [currentCard, setCurrentCard] = useState(0);
+  const [chatMessages, setChatMessages] = useState([
+    {
+      role: "assistant",
+      content: "Hi! I'm your analytics assistant. Ask me anything about your recruitment data.",
+    },
+  ]);
+  const [chatInput, setChatInput] = useState("");
 
-  const nextCard = () => {
-    setCurrentCard((prev) => (prev + 1) % analyticsCards.length);
+  const handleSendChat = () => {
+    if (!chatInput.trim()) return;
+    setChatMessages([...chatMessages, { role: "user", content: chatInput }]);
+    setChatInput("");
+    setTimeout(() => {
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Based on the data, your top performing source is direct applications at 45%. Your conversion rate from screening to interview is around 29%.",
+        },
+      ]);
+    }, 500);
   };
-
-  const prevCard = () => {
-    setCurrentCard((prev) =>
-      prev === 0 ? analyticsCards.length - 1 : prev - 1
-    );
-  };
-
-  const visibleCards = [
-    analyticsCards[currentCard],
-    analyticsCards[(currentCard + 1) % analyticsCards.length],
-    analyticsCards[(currentCard + 2) % analyticsCards.length],
-  ];
 
   return (
-    <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
-      <div className="px-8 pt-8 pb-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-[28px] font-bold text-gray-900 mb-2">
-            Hiring Dashboard
-          </h1>
-          <p className="text-[14px] text-gray-500">
-            Overview of all recruitment activities
-          </p>
-        </div>
+    <div className="flex flex-col h-screen bg-[#FAFAFA]">
+      {/* Top Navigation */}
+      <div className="px-6 py-4 bg-[#FAFAFA] border-b border-gray-200">
+        <TabSwitcher activePage="Dashboard" />
+      </div>
 
-        {/* Analytics Carousel */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[18px] font-semibold text-gray-900">
-              Key Metrics
-            </h2>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8"
-                onClick={prevCard}
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8"
-                onClick={nextCard}
-              >
-                <ChevronRight className="w-4 h-4" />
-              </Button>
+      <div className="flex flex-1 overflow-hidden">
+        {/* Main Content */}
+        <div className="flex-1 overflow-y-auto px-8 pt-6 pb-8">
+          {/* Header */}
+          <div className="mb-6">
+            <h1 className="text-[28px] font-bold text-gray-900 mb-2">
+              Hiring Dashboard
+            </h1>
+            <p className="text-[14px] text-gray-500">
+              Overview of all recruitment activities
+            </p>
+          </div>
+
+          {/* Data Visualizations */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            {/* Pipeline Funnel */}
+            <div className="p-5 rounded-xl bg-white border border-gray-200">
+              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                Pipeline Funnel
+              </h3>
+              <ResponsiveContainer width="100%" height={180}>
+                <BarChart data={pipelineFunnelData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="stage" tick={{ fontSize: 10 }} />
+                  <YAxis tick={{ fontSize: 10 }} />
+                  <Tooltip />
+                  <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Monthly Trends */}
+            <div className="p-5 rounded-xl bg-white border border-gray-200">
+              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                Monthly Processing
+              </h3>
+              <ResponsiveContainer width="100%" height={180}>
+                <LineChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                  <YAxis tick={{ fontSize: 10 }} />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="jd" stroke="#8b5cf6" strokeWidth={2} />
+                  <Line type="monotone" dataKey="resumes" stroke="#10b981" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Source Breakdown */}
+            <div className="p-5 rounded-xl bg-white border border-gray-200">
+              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                Application Sources
+              </h3>
+              <ResponsiveContainer width="100%" height={180}>
+                <RechartsPieChart>
+                  <Pie
+                    data={sourceData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={40}
+                    outerRadius={70}
+                    paddingAngle={2}
+                    dataKey="value"
+                  >
+                    {sourceData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RechartsPieChart>
+              </ResponsiveContainer>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {sourceData.map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                    <span className="text-[10px] text-gray-600">{item.name} {item.value}%</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            {visibleCards.map((card) => (
-              <div
-                key={card.id}
-                className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-all"
-              >
-                <div className={`w-10 h-10 rounded-lg ${card.bg} flex items-center justify-center mb-4`}>
-                  <card.icon className={`w-5 h-5 ${card.color}`} />
-                </div>
-                <h3 className="text-[13px] text-gray-500 font-medium mb-1">
-                  {card.title}
-                </h3>
-                <p className="text-[32px] font-bold text-gray-900 mb-1">
-                  {card.value}
-                </p>
-                <p className="text-[12px] text-gray-400">{card.subtitle}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* All Jobs */}
-        <div className="mb-6">
+          {/* All Jobs */}
+          <div className="mb-6">
           <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
             All Jobs
           </h2>
@@ -265,8 +335,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Grid: Messages & Activity */}
-        <div className="grid grid-cols-2 gap-6">
+          {/* Grid: Messages & Activity */}
+          <div className="grid grid-cols-2 gap-6">
           {/* All Messages */}
           <div>
             <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
@@ -326,6 +396,66 @@ export default function Dashboard() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+          </div>
+        </div>
+
+        {/* Analytics Chat Panel */}
+        <div className="w-[380px] border-l border-gray-200 bg-white flex flex-col">
+          <div className="p-5 border-b border-gray-200">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <h3 className="text-[14px] font-semibold text-gray-900">
+                  Analytics Assistant
+                </h3>
+                <p className="text-[11px] text-gray-500">Ask about your data</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-5 space-y-3">
+            {chatMessages.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`flex ${
+                  msg.role === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                <div
+                  className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
+                    msg.role === "user"
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-100 text-gray-900"
+                  }`}
+                >
+                  {msg.content}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-4 border-t border-gray-200">
+            <div className="flex gap-2">
+              <Textarea
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendChat();
+                  }
+                }}
+                placeholder="Ask about metrics..."
+                className="resize-none text-[12px]"
+                rows={2}
+              />
+              <Button onClick={handleSendChat} size="icon" className="shrink-0 h-9 w-9">
+                <Send className="w-3.5 h-3.5" />
+              </Button>
             </div>
           </div>
         </div>
