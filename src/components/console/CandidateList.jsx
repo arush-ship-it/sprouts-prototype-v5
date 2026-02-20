@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
 import { Search, SlidersHorizontal, Sparkles, Maximize2, Minimize2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 
 const reviewCandidates = [
@@ -100,6 +101,13 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     activeTab === "review" ? reviewCandidates : pipelineCandidates;
   const [isSourcingExpanded, setIsSourcingExpanded] = useState(false);
   const [sourcingInput, setSourcingInput] = useState("");
+  const [sourcingTab, setSourcingTab] = useState("ai");
+  const [jobTitles, setJobTitles] = useState(["Product Designer", "UX Designer"]);
+  const [companies, setCompanies] = useState(["Google", "Meta"]);
+  const [industries, setIndustries] = useState(["Technology", "SaaS"]);
+  const [skills, setSkills] = useState(["Figma", "Sketch", "Design Systems"]);
+  const [degrees, setDegrees] = useState(["Bachelor in Design", "Master in HCI"]);
+  const [universities, setUniversities] = useState(["Stanford", "MIT"]);
 
   const isPipeline = activeTab === "pipeline";
 
@@ -115,10 +123,21 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <div>
+              <div className="flex-1">
                 <h3 className="text-[13px] font-semibold text-gray-900">AI Sourcing Assistant</h3>
                 {!isSourcingExpanded && (
-                  <p className="text-[11px] text-gray-500">Find and screen candidates automatically</p>
+                  <div className="flex gap-2 mt-2">
+                    <Textarea
+                      value={sourcingInput}
+                      onChange={(e) => setSourcingInput(e.target.value)}
+                      placeholder="E.g., Find 10 senior designers in SF with Figma experience..."
+                      className="resize-none text-[12px] bg-white flex-1"
+                      rows={1}
+                    />
+                    <Button size="icon" className="shrink-0 h-9 w-9">
+                      <Send className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
                 )}
               </div>
             </div>
@@ -137,24 +156,175 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           </div>
           
           {isSourcingExpanded && (
-            <div className="mt-4 space-y-3">
-              <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
-                <p className="text-[11px] text-gray-700">
-                  <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
-                </p>
+            <div className="mt-4 space-y-4">
+              {/* Sub Tabs */}
+              <div className="flex gap-2 border-b border-indigo-200">
+                <button
+                  onClick={() => setSourcingTab("ai")}
+                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
+                    sourcingTab === "ai"
+                      ? "text-indigo-700 border-b-2 border-indigo-600"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  Talk to AI
+                </button>
+                <button
+                  onClick={() => setSourcingTab("manual")}
+                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
+                    sourcingTab === "manual"
+                      ? "text-indigo-700 border-b-2 border-indigo-600"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  Manual Sourcing
+                </button>
               </div>
-              <div className="flex gap-2">
-                <Textarea
-                  value={sourcingInput}
-                  onChange={(e) => setSourcingInput(e.target.value)}
-                  placeholder="E.g., Find 10 senior designers in SF with Figma experience..."
-                  className="resize-none text-[12px] bg-white"
-                  rows={2}
-                />
-                <Button size="icon" className="shrink-0 h-9 w-9">
-                  <Send className="w-3.5 h-3.5" />
-                </Button>
-              </div>
+
+              {/* Talk to AI Tab */}
+              {sourcingTab === "ai" && (
+                <div className="space-y-3">
+                  <div className="space-y-2 max-h-[300px] overflow-y-auto">
+                    <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
+                      <p className="text-[11px] text-gray-700">
+                        <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
+                      </p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-indigo-100/60 border border-indigo-200 ml-12">
+                      <p className="text-[11px] text-gray-700">
+                        <strong>You:</strong> Find me 10 senior product designers in San Francisco
+                      </p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
+                      <p className="text-[11px] text-gray-700">
+                        <strong>AI:</strong> I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Textarea
+                      value={sourcingInput}
+                      onChange={(e) => setSourcingInput(e.target.value)}
+                      placeholder="Type your message..."
+                      className="resize-none text-[12px] bg-white"
+                      rows={2}
+                    />
+                    <Button size="icon" className="shrink-0 h-9 w-9">
+                      <Send className="w-3.5 h-3.5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Manual Sourcing Tab */}
+              {sourcingTab === "manual" && (
+                <div className="space-y-4 max-h-[400px] overflow-y-auto">
+                  {/* Experience */}
+                  <div className="p-4 rounded-lg bg-white border border-indigo-100">
+                    <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Experience</h4>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <label className="text-[11px] font-medium text-gray-700">Similar Job Titles</label>
+                          <Button variant="ghost" size="sm" className="h-6 text-[10px] text-indigo-600">
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            AI Generate
+                          </Button>
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {jobTitles.map((title, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
+                              {title}
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Companies</label>
+                        <div className="flex flex-wrap gap-1.5">
+                          {companies.map((company, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
+                              {company}
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Industries</label>
+                        <div className="flex flex-wrap gap-1.5">
+                          {industries.map((industry, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
+                              {industry}
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skills */}
+                  <div className="p-4 rounded-lg bg-white border border-indigo-100">
+                    <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Similar Skills</h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {skills.map((skill, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700">
+                          {skill}
+                        </Badge>
+                      ))}
+                      <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
+                    </div>
+                  </div>
+
+                  {/* Education */}
+                  <div className="p-4 rounded-lg bg-white border border-indigo-100">
+                    <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Education</h4>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Degrees</label>
+                        <div className="flex flex-wrap gap-1.5">
+                          {degrees.map((degree, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">
+                              {degree}
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Universities</label>
+                        <div className="flex flex-wrap gap-1.5">
+                          {universities.map((uni, idx) => (
+                            <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">
+                              {uni}
+                            </Badge>
+                          ))}
+                          <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Other Attributes */}
+                  <div className="p-4 rounded-lg bg-white border border-indigo-100">
+                    <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Other Attributes</h4>
+                    <Button variant="outline" size="sm" className="h-7 text-[11px]">
+                      + Add Custom Attribute
+                    </Button>
+                  </div>
+
+                  <Button className="w-full">
+                    Start Sourcing
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>
