@@ -242,7 +242,10 @@ function AgentCard({ agent, onToggle, onClick }) {
         </div>
         <Switch 
           checked={agent.isActive} 
-          onCheckedChange={() => onToggle(agent.id)}
+          onCheckedChange={(e) => {
+            e.stopPropagation();
+            onToggle(agent.id);
+          }}
           onClick={(e) => e.stopPropagation()}
         />
       </div>
@@ -317,7 +320,7 @@ export default function Agents() {
         </div>
 
         {/* Filters */}
-        <div className="flex items-center justify-end gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-6">
           <Select value={filterStage} onValueChange={setFilterStage}>
             <SelectTrigger className="w-[180px] h-8 text-[12px]">
               <SelectValue placeholder="All Stages" />
@@ -371,7 +374,7 @@ export default function Agents() {
         </div>
 
         {/* Agents Grid */}
-        <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(820px, 1fr))' }}>
+        <div className="grid grid-cols-2 gap-4">
           {filteredAgents.map((agent) => (
             <AgentCard 
               key={agent.id} 

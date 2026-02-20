@@ -4,15 +4,14 @@ import { createPageUrl } from "@/utils";
 import {
   Users,
   Activity,
+  SlidersHorizontal,
   Inbox,
   FileText,
   LayoutDashboard,
   FolderOpen,
   PlusCircle,
-  Terminal,
-  Settings,
-  Bell,
-} from "lucide-react";
+  Terminal } from
+"lucide-react";
 import {
   Select,
   SelectContent,
@@ -106,33 +105,8 @@ export default function SidebarNav({ activePage = "Console" }) {
         </nav>
       </div>
 
-      {/* User Section */}
-      <div className="border-t border-white/[0.06] pt-4 mt-6">
-        <div className="px-3 mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-2.5 flex-1 min-w-0">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-[13px] font-semibold shrink-0">
-              JD
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[12px] font-medium text-white truncate">John Doe</p>
-              <p className="text-[10px] text-gray-400 truncate">john@company.com</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Link
-              to={createPageUrl("Settings")}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/[0.05] transition-colors"
-            >
-              <Settings className="w-4 h-4" />
-            </Link>
-            <button className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/[0.05] transition-colors relative">
-              <Bell className="w-4 h-4" />
-              <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-            </button>
-          </div>
-        </div>
-
-        {/* Bottom: Icon-only nav */}
+      {/* Bottom: Icon-only nav */}
+      <div className="border-t border-white/[0.06] pt-5 mt-6">
         <div className="flex items-center justify-around">
           {bottomLinks.map((link) =>
           <Link
@@ -156,6 +130,6 @@ export default function SidebarNav({ activePage = "Console" }) {
           )}
         </div>
       </div>
-    </aside>
-  );
+    </aside>);
+
 }
