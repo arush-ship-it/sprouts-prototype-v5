@@ -152,9 +152,9 @@ export default function SidebarNav({ activePage = "Console" }) {
             <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-600" />
             }
               <link.icon className="w-5 h-5" />
-              <span className="text-[10px] font-medium tracking-wide">
-                {link.label}
-              </span>
+              
+
+
             </Link>
           )}
         </div>
