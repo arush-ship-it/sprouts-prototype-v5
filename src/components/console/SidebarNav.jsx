@@ -47,9 +47,9 @@ export default function SidebarNav({ activePage = "Console" }) {
   const [selectedJob, setSelectedJob] = useState("1");
 
   return (
-    <aside className="bg-[#ededed] px-4 py-6 w-[260px] min-h-screen flex flex-col justify-between shrink-0 border-r border-gray-200">
+    <aside className="bg-[#ededed] px-4 py-6 w-[260px] h-screen flex flex-col fixed left-0 top-0 shrink-0 border-r border-gray-200 overflow-hidden">
       {/* Top: Brand + Job Selector + Main Links */}
-      <div>
+      <div className="flex-1 overflow-y-auto">
         <div className="flex items-center gap-2.5 px-3 mb-6">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
             <Terminal className="w-4 h-4 text-white" />
