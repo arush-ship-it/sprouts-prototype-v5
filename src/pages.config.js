@@ -50,6 +50,10 @@
 import Console from './pages/Console';
 import Inbox from './pages/Inbox';
 import JobDetails from './pages/JobDetails';
+import CreateJob from './pages/CreateJob';
+import Dashboard from './pages/Dashboard';
+import TalentPool from './pages/TalentPool';
+import Activity from './pages/Activity';
 import __Layout from './Layout.jsx';
 
 
@@ -57,6 +61,10 @@ export const PAGES = {
     "Console": Console,
     "Inbox": Inbox,
     "JobDetails": JobDetails,
+    "CreateJob": CreateJob,
+    "Dashboard": Dashboard,
+    "TalentPool": TalentPool,
+    "Activity": Activity,
 }
 
 export const pagesConfig = {
