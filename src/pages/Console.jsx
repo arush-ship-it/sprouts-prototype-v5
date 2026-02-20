@@ -4,13 +4,16 @@ import SubTabs from "@/components/console/SubTabs";
 import CandidateList from "@/components/console/CandidateList";
 import PipelineView from "@/components/console/PipelineView";
 import PipelineBuilderModal from "@/components/console/PipelineBuilderModal";
+import ActivityApprovalModal from "@/components/console/ActivityApprovalModal";
 import { Button } from "@/components/ui/button";
-import { Workflow } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Workflow, AlertCircle } from "lucide-react";
 
 export default function Console() {
   const [activeTab, setActiveTab] = useState("review");
   const [viewMode, setViewMode] = useState(activeTab === "pipeline" ? "pipeline" : "card");
   const [isPipelineBuilderOpen, setIsPipelineBuilderOpen] = useState(false);
+  const [isActivityApprovalOpen, setIsActivityApprovalOpen] = useState(false);
 
   // Update view mode when tab changes
   const handleTabChange = (newTab) => {
@@ -22,12 +25,29 @@ export default function Console() {
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
       <JobHeader />
-      <SubTabs 
-        activeTab={activeTab} 
-        setActiveTab={handleTabChange}
-        viewMode={viewMode}
-        setViewMode={setViewMode}
-      />
+      <div className="relative">
+        <SubTabs 
+          activeTab={activeTab} 
+          setActiveTab={handleTabChange}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+        />
+        {/* Activity Approval Button */}
+        <div className="absolute top-0 right-8 h-full flex items-center">
+          <Button
+            onClick={() => setIsActivityApprovalOpen(true)}
+            variant="outline"
+            size="sm"
+            className="h-8 text-[12px] border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700"
+          >
+            <AlertCircle className="w-3.5 h-3.5 mr-1.5" />
+            Activity Approval
+            <Badge className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-[10px] bg-orange-600">
+              2
+            </Badge>
+          </Button>
+        </div>
+      </div>
       
       {/* Pipeline Builder Button - Only show in Pipeline tab */}
       {activeTab === "pipeline" && (
@@ -56,6 +76,10 @@ export default function Console() {
       <PipelineBuilderModal
         isOpen={isPipelineBuilderOpen}
         onClose={() => setIsPipelineBuilderOpen(false)}
+      />
+      <ActivityApprovalModal
+        isOpen={isActivityApprovalOpen}
+        onClose={() => setIsActivityApprovalOpen(false)}
       />
     </div>
   );
