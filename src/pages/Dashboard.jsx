@@ -9,6 +9,8 @@ import {
   Send,
   Sparkles,
   PieChart,
+  Minimize2,
+  Maximize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -180,6 +182,7 @@ const sourceData = [
 ];
 
 export default function Dashboard() {
+  const [isChatMinimized, setIsChatMinimized] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     {
       role: "assistant",
@@ -223,12 +226,33 @@ export default function Dashboard() {
             </p>
           </div>
 
+          {/* Key Metrics Grid */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            {analyticsCards.map((card) => (
+              <div
+                key={card.id}
+                className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-all"
+              >
+                <div className={`w-10 h-10 rounded-lg ${card.bg} flex items-center justify-center mb-4`}>
+                  <card.icon className={`w-5 h-5 ${card.color}`} />
+                </div>
+                <h3 className="text-[13px] text-gray-500 font-medium mb-1">
+                  {card.title}
+                </h3>
+                <p className="text-[32px] font-bold text-gray-900 mb-1">
+                  {card.value}
+                </p>
+                <p className="text-[12px] text-gray-400">{card.subtitle}</p>
+              </div>
+            ))}
+          </div>
+
           {/* Data Visualizations */}
           <div className="grid grid-cols-3 gap-4 mb-6">
             {/* Pipeline Funnel */}
             <div className="p-5 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Pipeline Funnel
+                Candidates in Pipeline Funnel
               </h3>
               <ResponsiveContainer width="100%" height={180}>
                 <BarChart data={pipelineFunnelData}>
@@ -244,7 +268,7 @@ export default function Dashboard() {
             {/* Monthly Trends */}
             <div className="p-5 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Monthly Processing
+                JD & Resume Processing/Month
               </h3>
               <ResponsiveContainer width="100%" height={180}>
                 <LineChart data={monthlyData}>
@@ -252,8 +276,8 @@ export default function Dashboard() {
                   <XAxis dataKey="month" tick={{ fontSize: 10 }} />
                   <YAxis tick={{ fontSize: 10 }} />
                   <Tooltip />
-                  <Line type="monotone" dataKey="jd" stroke="#8b5cf6" strokeWidth={2} />
-                  <Line type="monotone" dataKey="resumes" stroke="#10b981" strokeWidth={2} />
+                  <Line type="monotone" dataKey="jd" stroke="#8b5cf6" strokeWidth={2} name="JD" />
+                  <Line type="monotone" dataKey="resumes" stroke="#10b981" strokeWidth={2} name="Resumes" />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -261,7 +285,7 @@ export default function Dashboard() {
             {/* Source Breakdown */}
             <div className="p-5 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Application Sources
+                Application Source Breakdown
               </h3>
               <ResponsiveContainer width="100%" height={180}>
                 <RechartsPieChart>
@@ -403,62 +427,91 @@ export default function Dashboard() {
         </div>
 
         {/* Analytics Chat Panel */}
-        <div className="w-[380px] border-l border-gray-200 bg-white flex flex-col">
-          <div className="p-5 border-b border-gray-200">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <h3 className="text-[14px] font-semibold text-gray-900">
-                  Analytics Assistant
-                </h3>
-                <p className="text-[11px] text-gray-500">Ask about your data</p>
-              </div>
-            </div>
+        <div
+          className={`border-l border-gray-200 bg-white flex flex-col transition-all duration-300 ${
+            isChatMinimized ? "w-[60px]" : "w-[380px]"
+          }`}
+        >
+          <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            {!isChatMinimized ? (
+              <>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-[14px] font-semibold text-gray-900">
+                      Analytics Assistant
+                    </h3>
+                    <p className="text-[11px] text-gray-500">Ask about your data</p>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 shrink-0"
+                  onClick={() => setIsChatMinimized(true)}
+                >
+                  <Minimize2 className="w-4 h-4" />
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 mx-auto"
+                onClick={() => setIsChatMinimized(false)}
+              >
+                <Maximize2 className="w-4 h-4" />
+              </Button>
+            )}
           </div>
 
-          <div className="flex-1 overflow-y-auto p-5 space-y-3">
-            {chatMessages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex ${
-                  msg.role === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div
-                  className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
-                    msg.role === "user"
-                      ? "bg-indigo-600 text-white"
-                      : "bg-gray-100 text-gray-900"
-                  }`}
-                >
-                  {msg.content}
+          {!isChatMinimized && (
+            <>
+              <div className="flex-1 overflow-y-auto p-5 space-y-3">
+                {chatMessages.map((msg, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex ${
+                      msg.role === "user" ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
+                        msg.role === "user"
+                          ? "bg-indigo-600 text-white"
+                          : "bg-gray-100 text-gray-900"
+                      }`}
+                    >
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 border-t border-gray-200">
+                <div className="flex gap-2">
+                  <Textarea
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSendChat();
+                      }
+                    }}
+                    placeholder="Ask about metrics..."
+                    className="resize-none text-[12px]"
+                    rows={2}
+                  />
+                  <Button onClick={handleSendChat} size="icon" className="shrink-0 h-9 w-9">
+                    <Send className="w-3.5 h-3.5" />
+                  </Button>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex gap-2">
-              <Textarea
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSendChat();
-                  }
-                }}
-                placeholder="Ask about metrics..."
-                className="resize-none text-[12px]"
-                rows={2}
-              />
-              <Button onClick={handleSendChat} size="icon" className="shrink-0 h-9 w-9">
-                <Send className="w-3.5 h-3.5" />
-              </Button>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>

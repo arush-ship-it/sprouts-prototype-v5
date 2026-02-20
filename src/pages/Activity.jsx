@@ -248,11 +248,28 @@ export default function Activity() {
       <div className="px-8 pt-8 pb-8">
         <div className="mb-8">
           <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
-            Activity & Approvals
+            Activity & AI Agents
           </h1>
           <p className="text-[13px] text-gray-500">
-            Monitor agents, review automations, and approve pending actions
+            Monitor AI agents and their automated tasks
           </p>
+        </div>
+
+        {/* AI Agents Section */}
+        <div className="mb-8">
+          <div className="mb-4">
+            <h2 className="text-[18px] font-semibold text-gray-900">
+              Active AI Agents
+            </h2>
+            <p className="text-[12px] text-gray-500 mt-1">
+              Real-time monitoring of automated recruitment tasks
+            </p>
+          </div>
+          <div className="grid gap-4">
+            {agents.map((agent) => (
+              <AgentCard key={agent.id} agent={agent} />
+            ))}
+          </div>
         </div>
 
         {/* Pending Approvals */}
