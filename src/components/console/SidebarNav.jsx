@@ -4,14 +4,15 @@ import { createPageUrl } from "@/utils";
 import {
   Users,
   Activity,
-  SlidersHorizontal,
   Inbox,
   FileText,
   LayoutDashboard,
   FolderOpen,
   PlusCircle,
-  Terminal } from
-"lucide-react";
+  Terminal,
+  Settings,
+  Bell,
+} from "lucide-react";
 import {
   Select,
   SelectContent,
