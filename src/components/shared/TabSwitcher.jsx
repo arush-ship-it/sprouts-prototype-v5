@@ -12,7 +12,7 @@ const tabs = [
 
 export default function TabSwitcher({ activePage }) {
   return (
-    <div className="flex items-center justify-end gap-1 p-1.5 rounded-xl">
+    <div className="flex items-center justify-center gap-1 p-1.5 rounded-xl">
       {tabs.map((tab) => (
         <Link
           key={tab.page}
