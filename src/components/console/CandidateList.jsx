@@ -1,5 +1,5 @@
 import React from "react";
-import CandidateCard from "./CandidateCard";
+import CandidateCardDetailed from "./CandidateCardDetailed";
 import { Search, SlidersHorizontal } from "lucide-react";
 
 const reviewCandidates = [
@@ -8,19 +8,29 @@ const reviewCandidates = [
     name: "Maya Johnson",
     title: "Lead Product Designer",
     company: "Stripe",
-    score: 94,
-    stage: "Interview",
-    starred: true,
+    degree: "Msc Computer Engineering",
+    university: "University Of California, Berkley",
+    location: "San Francisco, California, United States",
+    experience: "4 years",
+    skillsMatch: "20/23 match",
+    attributesMatch: "5/6 match",
+    score: 78,
+    sequence: "Warm Outreach, Active",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 2,
-    name: "Alex Chen",
-    title: "Sr. UX Designer",
-    company: "Figma",
-    score: 91,
-    stage: "Screening",
-    starred: false,
+    name: "Marcus Rashford",
+    title: "Job Title",
+    company: "Company",
+    degree: "Degree Name",
+    university: "University",
+    location: "San Francisco, California, United States",
+    experience: "4 years",
+    skillsMatch: "20/23 match",
+    attributesMatch: "5/6 match",
+    score: 78,
+    sequence: "Warm Outreach, Active",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
   },
   {
@@ -28,30 +38,15 @@ const reviewCandidates = [
     name: "Sarah Mitchell",
     title: "Product Designer",
     company: "Airbnb",
-    score: 87,
-    stage: "Interview",
-    starred: true,
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 4,
-    name: "James Park",
-    title: "Design Lead",
-    company: "Notion",
+    degree: "Bsc Computer Engineering",
+    university: "Stanford University",
+    location: "New York, NY, United States",
+    experience: "6 years",
+    skillsMatch: "18/23 match",
+    attributesMatch: "4/6 match",
     score: 82,
-    stage: "Assessment",
-    starred: false,
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 5,
-    name: "Priya Sharma",
-    title: "Sr. Product Designer",
-    company: "Spotify",
-    score: 78,
-    stage: "Screening",
-    starred: false,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
+    sequence: "Cold Outreach, Active",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
   },
 ];
 
@@ -121,9 +116,9 @@ export default function CandidateList({ activeTab }) {
       </div>
 
       {/* List */}
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3">
         {candidates.map((candidate) => (
-          <CandidateCard key={candidate.id} candidate={candidate} />
+          <CandidateCardDetailed key={candidate.id} candidate={candidate} />
         ))}
       </div>
     </div>

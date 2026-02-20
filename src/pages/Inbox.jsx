@@ -1,0 +1,194 @@
+import React, { useState } from "react";
+import { Mail, Send, Clock, CheckCheck, Plus, Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+
+const activities = [
+  {
+    id: 1,
+    type: "email_sent",
+    candidate: "Maya Johnson",
+    subject: "Interview Invitation - Senior Product Designer",
+    timestamp: "2 hours ago",
+    status: "delivered",
+  },
+  {
+    id: 2,
+    type: "sequence_started",
+    candidate: "Marcus Rashford",
+    subject: "Warm Outreach Sequence Started",
+    timestamp: "5 hours ago",
+    status: "active",
+  },
+  {
+    id: 3,
+    type: "email_opened",
+    candidate: "Sarah Mitchell",
+    subject: "Re: Your Application - Senior Product Designer",
+    timestamp: "1 day ago",
+    status: "opened",
+  },
+  {
+    id: 4,
+    type: "email_replied",
+    candidate: "Alex Chen",
+    subject: "Re: Next Steps in Interview Process",
+    timestamp: "1 day ago",
+    status: "replied",
+  },
+  {
+    id: 5,
+    type: "sequence_completed",
+    candidate: "James Park",
+    subject: "Follow-up Sequence Completed",
+    timestamp: "2 days ago",
+    status: "completed",
+  },
+];
+
+function ActivityItem({ activity }) {
+  const getIcon = () => {
+    switch (activity.type) {
+      case "email_sent":
+        return <Send className="w-4 h-4 text-blue-600" />;
+      case "email_opened":
+        return <Mail className="w-4 h-4 text-violet-600" />;
+      case "email_replied":
+        return <CheckCheck className="w-4 h-4 text-emerald-600" />;
+      case "sequence_started":
+      case "sequence_completed":
+        return <Clock className="w-4 h-4 text-orange-600" />;
+      default:
+        return <Mail className="w-4 h-4 text-gray-600" />;
+    }
+  };
+
+  const getStatusColor = () => {
+    switch (activity.status) {
+      case "delivered":
+        return "bg-blue-50 text-blue-700 border-blue-200";
+      case "opened":
+        return "bg-violet-50 text-violet-700 border-violet-200";
+      case "replied":
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "active":
+      case "completed":
+        return "bg-orange-50 text-orange-700 border-orange-200";
+      default:
+        return "bg-gray-50 text-gray-700 border-gray-200";
+    }
+  };
+
+  return (
+    <div className="flex items-start gap-4 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+      <div className="p-2.5 rounded-lg bg-gray-50">{getIcon()}</div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <p className="text-[14px] font-semibold text-gray-900">
+            {activity.candidate}
+          </p>
+          <span className="text-[11px] text-gray-400 whitespace-nowrap">
+            {activity.timestamp}
+          </span>
+        </div>
+        <p className="text-[13px] text-gray-600 mb-2">{activity.subject}</p>
+        <span
+          className={`inline-block px-2 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${getStatusColor()}`}
+        >
+          {activity.status}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export default function Inbox() {
+  const [isComposeOpen, setIsComposeOpen] = useState(false);
+  const [isSequenceOpen, setIsSequenceOpen] = useState(false);
+
+  return (
+    <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
+      <div className="px-8 pt-8 pb-6">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-[22px] font-semibold text-gray-900 tracking-tight">
+              Inbox
+            </h1>
+            <p className="text-[13px] text-gray-400 mt-1">
+              All communications and sequences
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm">
+              <Filter className="w-3.5 h-3.5 mr-1.5" />
+              Filters
+            </Button>
+            <Dialog open={isSequenceOpen} onOpenChange={setIsSequenceOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Plus className="w-3.5 h-3.5 mr-1.5" />
+                  New Sequence
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create New Sequence</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 pt-4">
+                  <Input placeholder="Sequence Name" />
+                  <Textarea
+                    placeholder="Sequence description..."
+                    className="min-h-[100px]"
+                  />
+                  <Button className="w-full">Create Sequence</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Dialog open={isComposeOpen} onOpenChange={setIsComposeOpen}>
+              <DialogTrigger asChild>
+                <Button size="sm">
+                  <Send className="w-3.5 h-3.5 mr-1.5" />
+                  Compose Email
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Compose Email</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 pt-4">
+                  <Input placeholder="To: candidate@example.com" />
+                  <Input placeholder="Subject" />
+                  <Textarea
+                    placeholder="Write your message..."
+                    className="min-h-[200px]"
+                  />
+                  <div className="flex gap-2">
+                    <Button className="flex-1">Send</Button>
+                    <Button variant="outline" className="flex-1">
+                      Save Draft
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+
+        {/* Activity List */}
+        <div className="flex flex-col gap-3">
+          {activities.map((activity) => (
+            <ActivityItem key={activity.id} activity={activity} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

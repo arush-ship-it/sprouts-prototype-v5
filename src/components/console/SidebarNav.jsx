@@ -14,11 +14,11 @@ import {
 } from "lucide-react";
 
 const mainLinks = [
-  { label: "Talent", icon: Users, active: false },
-  { label: "Activity", icon: Activity, active: false },
-  { label: "Evaluation Criteria", icon: SlidersHorizontal, active: false },
-  { label: "Inbox", icon: Inbox, active: false },
-  { label: "Job Details", icon: FileText, active: false },
+  { label: "Talent", icon: Users, active: false, page: "Talent" },
+  { label: "Activity", icon: Activity, active: false, page: "Activity" },
+  { label: "Evaluation Criteria", icon: SlidersHorizontal, active: false, page: "Evaluation" },
+  { label: "Inbox", icon: Inbox, active: false, page: "Inbox" },
+  { label: "Job Details", icon: FileText, active: false, page: "JobDetails" },
 ];
 
 const bottomLinks = [
@@ -28,7 +28,7 @@ const bottomLinks = [
   { label: "Console", icon: Terminal, active: true },
 ];
 
-export default function SidebarNav() {
+export default function SidebarNav({ activePage = "Console" }) {
   return (
     <aside className="w-[260px] min-h-screen bg-[#0F1117] flex flex-col justify-between py-6 px-4 shrink-0">
       {/* Top: Brand + Main Links */}
@@ -44,24 +44,25 @@ export default function SidebarNav() {
 
         <nav className="flex flex-col gap-1">
           {mainLinks.map((link) => (
-            <button
+            <Link
               key={link.label}
+              to={createPageUrl(link.page)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group
                 ${
-                  link.active
+                  activePage === link.page
                     ? "bg-white/10 text-white"
                     : "text-gray-400 hover:text-white hover:bg-white/[0.05]"
                 }`}
             >
               <link.icon
                 className={`w-[18px] h-[18px] transition-colors ${
-                  link.active
+                  activePage === link.page
                     ? "text-indigo-400"
                     : "text-gray-500 group-hover:text-gray-300"
                 }`}
               />
               {link.label}
-            </button>
+            </Link>
           ))}
         </nav>
       </div>
@@ -74,12 +75,12 @@ export default function SidebarNav() {
               key={link.label}
               className={`relative flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all duration-200 group
                 ${
-                  link.active
+                  activePage === link.label
                     ? "text-indigo-400"
                     : "text-gray-500 hover:text-gray-300"
                 }`}
             >
-              {link.active && (
+              {activePage === link.label && (
                 <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-400" />
               )}
               <link.icon className="w-5 h-5" />
