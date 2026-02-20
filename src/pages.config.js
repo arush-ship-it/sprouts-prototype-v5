@@ -47,24 +47,26 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
+import Activity from './pages/Activity';
 import Console from './pages/Console';
-import Inbox from './pages/Inbox';
-import JobDetails from './pages/JobDetails';
 import CreateJob from './pages/CreateJob';
 import Dashboard from './pages/Dashboard';
+import Inbox from './pages/Inbox';
+import JobDetails from './pages/JobDetails';
 import TalentPool from './pages/TalentPool';
-import Activity from './pages/Activity';
+import CreatePipeline from './pages/CreatePipeline';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
+    "Activity": Activity,
     "Console": Console,
-    "Inbox": Inbox,
-    "JobDetails": JobDetails,
     "CreateJob": CreateJob,
     "Dashboard": Dashboard,
+    "Inbox": Inbox,
+    "JobDetails": JobDetails,
     "TalentPool": TalentPool,
-    "Activity": Activity,
+    "CreatePipeline": CreatePipeline,
 }
 
 export const pagesConfig = {
