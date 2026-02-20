@@ -135,7 +135,7 @@ export default function SidebarNav({ activePage = "Console" }) {
       </div>
 
       {/* Bottom: Icon-only nav */}
-      <div className="pt-3">
+      <div className="pt-3 flex-shrink-0">
         <div className="flex items-center justify-around">
           {bottomLinks.map((link) =>
           <Link
