@@ -47,8 +47,16 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
+import Console from './pages/Console';
+import __Layout from './Layout.jsx';
 
-export const pagesConfig = {
-	Pages: {}
+
+export const PAGES = {
+    "Console": Console,
 }
 
+export const pagesConfig = {
+    mainPage: "Console",
+    Pages: PAGES,
+    Layout: __Layout,
+};
