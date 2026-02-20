@@ -53,7 +53,7 @@ export default function SidebarNav({ activePage = "Console" }) {
             <Terminal className="w-4 h-4 text-white" />
           </div>
           <span className="text-white font-semibold text-[15px] tracking-tight">
-            RecruitAI
+            SproutsAI
           </span>
         </div>
 
