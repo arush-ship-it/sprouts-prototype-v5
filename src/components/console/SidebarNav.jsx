@@ -22,10 +22,10 @@ const mainLinks = [
 ];
 
 const bottomLinks = [
-  { label: "Dashboard", icon: LayoutDashboard, active: false },
-  { label: "Talent Pool", icon: FolderOpen, active: false },
-  { label: "Create Job", icon: PlusCircle, active: false },
-  { label: "Console", icon: Terminal, active: true },
+  { label: "Dashboard", icon: LayoutDashboard, page: "Dashboard" },
+  { label: "Talent Pool", icon: FolderOpen, page: "TalentPool" },
+  { label: "Create Job", icon: PlusCircle, page: "CreateJob" },
+  { label: "Console", icon: Terminal, page: "Console" },
 ];
 
 export default function SidebarNav({ activePage = "Console" }) {
@@ -71,23 +71,24 @@ export default function SidebarNav({ activePage = "Console" }) {
       <div className="border-t border-white/[0.06] pt-5 mt-6">
         <div className="flex items-center justify-around">
           {bottomLinks.map((link) => (
-            <button
+            <Link
               key={link.label}
+              to={createPageUrl(link.page)}
               className={`relative flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all duration-200 group
                 ${
-                  activePage === link.label
+                  activePage === link.page
                     ? "text-indigo-400"
                     : "text-gray-500 hover:text-gray-300"
                 }`}
             >
-              {activePage === link.label && (
+              {activePage === link.page && (
                 <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-400" />
               )}
               <link.icon className="w-5 h-5" />
               <span className="text-[10px] font-medium tracking-wide">
                 {link.label}
               </span>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
