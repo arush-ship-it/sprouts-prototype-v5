@@ -272,38 +272,36 @@ export default function Activity() {
           </div>
         </div>
 
-        {/* Pending Approvals */}
+        {/* Recent Automated Actions */}
         <div className="mb-8">
-          <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
-            Pending Approvals
-          </h2>
-          <div className="space-y-3">
-            {approvals.map((approval) => (
-              <ApprovalCard key={approval.id} approval={approval} />
-            ))}
+          <div className="mb-4">
+            <h2 className="text-[18px] font-semibold text-gray-900">
+              Recent Automated Actions
+            </h2>
+            <p className="text-[12px] text-gray-500 mt-1">
+              Actions taken by AI agents requiring review
+            </p>
           </div>
-        </div>
-
-        {/* Active Agents */}
-        <div className="mb-8">
-          <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
-            Active Agents
-          </h2>
-          <div className="grid grid-cols-2 gap-4">
-            {agents.map((agent) => (
-              <AgentCard key={agent.id} agent={agent} />
-            ))}
-          </div>
-        </div>
-
-        {/* Pipeline Automations */}
-        <div>
-          <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
-            Automated Pipeline Movements
-          </h2>
           <div className="space-y-3">
             {automations.map((automation) => (
               <AutomationCard key={automation.id} automation={automation} />
+            ))}
+          </div>
+        </div>
+
+        {/* Pending Approvals */}
+        <div>
+          <div className="mb-4">
+            <h2 className="text-[18px] font-semibold text-gray-900">
+              Pending Approvals
+            </h2>
+            <p className="text-[12px] text-gray-500 mt-1">
+              Critical decisions requiring your approval
+            </p>
+          </div>
+          <div className="space-y-3">
+            {approvals.map((approval) => (
+              <ApprovalCard key={approval.id} approval={approval} />
             ))}
           </div>
         </div>
