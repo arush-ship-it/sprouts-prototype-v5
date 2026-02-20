@@ -1,7 +1,7 @@
 import React from "react";
 import { Star, MoreHorizontal } from "lucide-react";
 
-export default function CandidateCard({ candidate }) {
+export default function CandidateCard({ candidate, onClick }) {
   const scoreColor =
     candidate.score >= 90
       ? "text-emerald-600 bg-emerald-50 border-emerald-100"
@@ -10,7 +10,10 @@ export default function CandidateCard({ candidate }) {
       : "text-gray-500 bg-gray-50 border-gray-200";
 
   return (
-    <div className="group flex items-center gap-5 px-5 py-4 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer">
+    <div 
+      onClick={onClick}
+      className="group flex items-center gap-5 px-5 py-4 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer"
+    >
       {/* Avatar */}
       <div className="relative shrink-0">
         <img

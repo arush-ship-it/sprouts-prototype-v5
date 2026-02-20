@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
+import CandidateDetailsDrawer from "./CandidateDetailsDrawer";
 import { Search, SlidersHorizontal, Sparkles, Maximize2, Minimize2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -108,8 +109,15 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [skills, setSkills] = useState(["Figma", "Sketch", "Design Systems"]);
   const [degrees, setDegrees] = useState(["Bachelor in Design", "Master in HCI"]);
   const [universities, setUniversities] = useState(["Stanford", "MIT"]);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const isPipeline = activeTab === "pipeline";
+
+  const handleCandidateClick = (candidate) => {
+    setSelectedCandidate(candidate);
+    setIsDrawerOpen(true);
+  };
 
   return (
     <div className="px-8 pt-5 pb-8">
