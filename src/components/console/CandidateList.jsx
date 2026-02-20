@@ -356,7 +356,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
       {/* Card/List/Table View */}
       {viewMode === "card" && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 max-w-[820px]">
           {candidates.map((candidate) => (
             <CandidateCardDetailed 
               key={candidate.id} 
