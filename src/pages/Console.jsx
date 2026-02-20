@@ -34,11 +34,11 @@ export default function Console() {
       
       {/* Pipeline Builder Button - Only show in Pipeline tab */}
       {activeTab === "pipeline" && (
-        <div className="px-8 pt-5 pb-3">
+        <div className="px-8 pt-5 pb-3 flex justify-end">
           <Button
             onClick={() => setIsPipelineBuilderOpen(true)}
             size="sm"
-            className="h-8 text-[12px] bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700"
+            className="h-8 text-[12px] bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"
           >
             <Workflow className="w-3.5 h-3.5 mr-1.5" />
             Build Pipeline
