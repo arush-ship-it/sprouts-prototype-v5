@@ -201,8 +201,8 @@ function AgentCard({ agent, onToggle, onClick }) {
   return (
     <div className="rounded-2xl bg-white border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
       {/* Large Icon Area */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 pt-4 pb-6 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
-        <Icon className="w-20 h-20 text-indigo-500 stroke-[1.2] drop-shadow-md" />
+      <div className="bg-[#f8ff94] pt-4 pb-6 px-4 from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
+        <Icon className="text-slate-800 lucide lucide-file-check w-20 h-20 stroke-[1.2] drop-shadow-md" />
       </div>
 
       {/* Content */}
@@ -235,16 +235,16 @@ function AgentCard({ agent, onToggle, onClick }) {
 
         {/* Button */}
         <div className="flex justify-end">
-          <Button 
+          <Button
             onClick={onClick}
-            className="bg-[#4A5568] hover:bg-[#2D3748] text-white h-10 text-[13px] font-medium px-6"
-          >
+            className="bg-[#4A5568] hover:bg-[#2D3748] text-white h-10 text-[13px] font-medium px-6">
+
             Setup & Deploy
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 
 }
 
