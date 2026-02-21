@@ -16,28 +16,28 @@ export default function JobHeader({ onActivityApprovalClick }) {
               Active
             </span>
           </div>
-          <div className="flex items-center gap-5 mt-2.5 text-[13px] text-gray-400 font-medium">
-            <span className="flex items-center gap-1.5">
-              <Briefcase className="w-3.5 h-3.5" />
-              Design
-            </span>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5" />
-              San Francisco, CA
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
-              Posted 5 days ago
-            </span>
-          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
         <div className="flex items-center gap-2">
           <Button
             onClick={onActivityApprovalClick}
             variant="outline"
             size="sm"
-            className="h-8 text-[12px] border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700"
-          >
+            className="h-8 text-[12px] border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700">
+
             <AlertCircle className="w-3.5 h-3.5 mr-1.5" />
             Activity Approval
             <Badge className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-[10px] bg-orange-600">
@@ -49,6 +49,6 @@ export default function JobHeader({ onActivityApprovalClick }) {
           </button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
