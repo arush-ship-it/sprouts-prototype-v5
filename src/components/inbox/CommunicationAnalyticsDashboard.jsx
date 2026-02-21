@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronUp, ChevronDown, TrendingUp, TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
@@ -6,6 +6,11 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 export default function CommunicationAnalyticsDashboard() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [timeFilter, setTimeFilter] = useState("7days");
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsExpanded(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Mock data
   const metrics = [
