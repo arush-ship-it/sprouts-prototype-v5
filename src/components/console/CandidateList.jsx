@@ -183,7 +183,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" && (
                 <div className="space-y-3">
-                  <div className="space-y-2 max-h-[300px] overflow-y-auto">
+                  <div className="space-y-2 max-h-[400px] overflow-y-auto">
                     <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
                       <p className="text-[11px] text-gray-700">
                         <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
