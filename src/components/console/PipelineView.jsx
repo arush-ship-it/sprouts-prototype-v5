@@ -7,6 +7,7 @@ const stages = [
   name: "Screening",
   count: 18,
   color: "bg-blue-50 border-blue-200 text-blue-700",
+  agents: ["Outreach Agent", "Screening Bot", "Resume Parser"],
   candidates: [
   { name: "Alex Chen", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face", score: 91 },
   { name: "Priya Sharma", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face", score: 78 },
@@ -27,6 +28,7 @@ const stages = [
   name: "Assessment",
   count: 5,
   color: "bg-violet-50 border-violet-200 text-violet-700",
+  agents: ["Assessment Engine", "Skills Evaluator"],
   candidates: [
   { name: "James Park", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face", score: 82 }]
 
@@ -36,6 +38,7 @@ const stages = [
   name: "Interview",
   count: 4,
   color: "bg-amber-50 border-amber-200 text-amber-700",
+  agents: ["Interview Scheduler", "Feedback Collector"],
   candidates: [
   { name: "Maya Johnson", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face", score: 94 },
   { name: "Sarah Mitchell", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face", score: 87 },
@@ -47,6 +50,7 @@ const stages = [
   name: "Technical",
   count: 3,
   color: "bg-orange-50 border-orange-200 text-orange-700",
+  agents: ["Code Challenge", "Technical Interviewer"],
   candidates: [
   { name: "Marcus Rivera", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face", score: 89 }]
 
@@ -56,6 +60,7 @@ const stages = [
   name: "Final Round",
   count: 2,
   color: "bg-pink-50 border-pink-200 text-pink-700",
+  agents: ["Executive Interviewer"],
   candidates: [
   { name: "Lena Kim", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face", score: 92 }]
 
@@ -65,6 +70,7 @@ const stages = [
   name: "Offer",
   count: 1,
   color: "bg-emerald-50 border-emerald-200 text-emerald-700",
+  agents: ["Offer Manager"],
   candidates: [
   { name: "Daniel Wright", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face", score: 96 }]
 
