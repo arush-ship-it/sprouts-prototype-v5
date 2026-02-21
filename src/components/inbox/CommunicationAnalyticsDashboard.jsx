@@ -251,8 +251,44 @@ export default function CommunicationAnalyticsDashboard() {
               </div>
             </div>
 
-            {/* Bottom Row: Trend Chart */}
-            
+          </div>
+
+          {/* Action Required */}
+          <div>
+            <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
+              Action Required
+            </h3>
+            <div className="grid grid-cols-3 gap-3">
+              {actionRequired.map((item, idx) =>
+              <div key={idx} className={`p-4 rounded-lg border border-gray-200 ${item.color}`}>
+                <p className="text-[11px] font-medium mb-1">{item.label}</p>
+                <p className="text-[20px] font-bold">{item.count}</p>
+              </div>
+              )}
+            </div>
+          </div>
+
+          {/* 7-Day Trend Chart */}
+          <div>
+            <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
+              7-Day Trend
+            </h3>
+            <div className="h-[240px] bg-white border border-gray-200 rounded-lg p-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={sequenceTrendData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="day" tick={{ fontSize: 11 }} />
+                  <YAxis tick={{ fontSize: 11 }} />
+                  <Tooltip contentStyle={{ borderRadius: "8px", fontSize: "11px" }} />
+                  <Legend wrapperStyle={{ fontSize: "11px" }} />
+                  <Bar dataKey="active" fill="#10b981" name="Active" />
+                  <Bar dataKey="completed" fill="#6366f1" name="Completed" />
+                  <Bar dataKey="paused" fill="#f59e0b" name="Paused" />
+                  <Bar dataKey="errors" fill="#ef4444" name="Errors" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
 
 
 
