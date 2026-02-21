@@ -94,15 +94,14 @@ const approvals = [
 ];
 
 export default function ActivityApprovalModal({ isOpen, onClose }) {
-  const [step, setStep] = useState(1);
   const [selectedApproval, setSelectedApproval] = useState(null);
+  const [viewMode, setViewMode] = useState("review"); // "review", "list", "cards"
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
   const [decisions, setDecisions] = useState({});
 
   const handleSelectApproval = (approval) => {
     setSelectedApproval(approval);
     setCurrentCandidateIndex(0);
-    setStep(2);
   };
 
   const handleDecision = (candidateId, decision) => {
@@ -124,7 +123,6 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
   const handleComplete = () => {
     // Process decisions
     onClose();
-    setStep(1);
     setSelectedApproval(null);
     setDecisions({});
   };
