@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronUp, ChevronDown, TrendingUp, TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 export default function CommunicationAnalyticsDashboard() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -78,6 +78,16 @@ export default function CommunicationAnalyticsDashboard() {
     errors: 2,
     candidatesInSequences: 47
   };
+
+  const sequenceTrendData = [
+    { day: "Mon", active: 8, completed: 3, paused: 1, errors: 0 },
+    { day: "Tue", active: 10, completed: 5, paused: 2, errors: 1 },
+    { day: "Wed", active: 12, completed: 8, paused: 2, errors: 1 },
+    { day: "Thu", active: 11, completed: 12, paused: 3, errors: 1 },
+    { day: "Fri", active: 12, completed: 18, paused: 4, errors: 1 },
+    { day: "Sat", active: 12, completed: 25, paused: 4, errors: 2 },
+    { day: "Sun", active: 12, completed: 28, paused: 5, errors: 2 },
+  ];
 
   const actionRequired = [
   { label: "Candidates Awaiting Reply", count: 15, color: "bg-amber-50 text-amber-700" },
@@ -173,15 +183,15 @@ export default function CommunicationAnalyticsDashboard() {
           </div>
 
           {/* Sequence Overview */}
-          <div className="grid grid-cols-3 gap-6">
-            {/* Left: Status Cards */}
-            <div className="col-span-2">
+          <div className="space-y-4">
+            {/* Top Row: Status Cards */}
+            <div>
               <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
                 Sequence Overview
               </h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-5 gap-3">
                 <div className="p-4 rounded-lg bg-emerald-50 border-2 border-emerald-200">
-                  <p className="text-[11px] text-emerald-700 font-medium mb-1">Active Sequences</p>
+                  <p className="text-[11px] text-emerald-700 font-medium mb-1">Active</p>
                   <p className="text-[24px] font-bold text-emerald-700">{sequenceOverview.active}</p>
                 </div>
                 <div className="p-4 rounded-lg bg-indigo-50 border-2 border-indigo-200">
@@ -193,22 +203,46 @@ export default function CommunicationAnalyticsDashboard() {
                   <p className="text-[24px] font-bold text-amber-700">{sequenceOverview.paused}</p>
                 </div>
                 <div className="p-4 rounded-lg bg-red-50 border-2 border-red-200">
-                  <p className="text-[11px] text-red-700 font-medium mb-1">With Errors</p>
+                  <p className="text-[11px] text-red-700 font-medium mb-1">Errors</p>
                   <p className="text-[24px] font-bold text-red-700">{sequenceOverview.errors}</p>
                 </div>
-              </div>
-              <div className="mt-3 p-4 rounded-lg bg-gray-50 border border-gray-200">
-                <p className="text-[11px] text-gray-600 font-medium mb-1">Candidates in Sequences</p>
-                <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
+                <div className="p-4 rounded-lg bg-gray-50 border-2 border-gray-200">
+                  <p className="text-[11px] text-gray-600 font-medium mb-1">In Sequences</p>
+                  <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
+                </div>
               </div>
             </div>
+
+            {/* Bottom Row: Chart + Donut */}
+            <div className="grid grid-cols-3 gap-6">
+              {/* Trend Chart */}
+              <div className="col-span-2">
+                <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
+                  7-Day Trend
+                </h3>
+                <div className="h-[240px] bg-gray-50 rounded-lg p-4">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={sequenceTrendData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis dataKey="day" tick={{ fontSize: 11 }} />
+                      <YAxis tick={{ fontSize: 11 }} />
+                      <Tooltip contentStyle={{ borderRadius: "8px", fontSize: "11px" }} />
+                      <Legend wrapperStyle={{ fontSize: "11px" }} />
+                      <Bar dataKey="active" fill="#10b981" name="Active" />
+                      <Bar dataKey="completed" fill="#6366f1" name="Completed" />
+                      <Bar dataKey="paused" fill="#f59e0b" name="Paused" />
+                      <Bar dataKey="errors" fill="#ef4444" name="Errors" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
 
             {/* Right: Donut Chart */}
             <div>
               <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-                Status Distribution
+                Current Distribution
               </h3>
-              <div className="h-[220px] flex items-center justify-center">
+              <div className="h-[240px] flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -237,7 +271,8 @@ export default function CommunicationAnalyticsDashboard() {
               )}
               </div>
             </div>
-          </div>
+            </div>
+            </div>
 
           {/* Action Required */}
           <div>
