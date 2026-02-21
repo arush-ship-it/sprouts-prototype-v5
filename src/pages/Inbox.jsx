@@ -88,22 +88,20 @@ function ActivityItem({ activity }) {
   };
 
   return (
-    <div className="flex items-start gap-4 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
-      <div className="p-2.5 rounded-lg bg-gray-50">{getIcon()}</div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-start justify-between gap-2 mb-1">
-          <p className="text-[14px] font-semibold text-gray-900">
-            {activity.candidate}
-          </p>
-          <span className="text-[11px] text-gray-400 whitespace-nowrap">
-            {activity.timestamp}
-          </span>
-        </div>
-        <p className="text-[13px] text-gray-600 mb-2">{activity.subject}</p>
+    <div className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+      <div className="p-2 rounded-lg bg-gray-50">{getIcon()}</div>
+      <div className="flex-1 min-w-0 flex items-center gap-4">
+        <p className="text-[13px] font-semibold text-gray-900 min-w-[140px]">
+          {activity.candidate}
+        </p>
+        <p className="text-[12px] text-gray-600 flex-1 truncate">{activity.subject}</p>
         <span
-          className={`inline-block px-2 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${getStatusColor()}`}
+          className={`inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${getStatusColor()}`}
         >
           {activity.status}
+        </span>
+        <span className="text-[11px] text-gray-400 whitespace-nowrap min-w-[80px] text-right">
+          {activity.timestamp}
         </span>
       </div>
     </div>
