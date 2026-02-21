@@ -3,6 +3,8 @@ import { Send, Sparkles, Briefcase, MapPin, DollarSign, Clock, Bell, Settings, U
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import TabSwitcher from "@/components/shared/TabSwitcher";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 
 export default function CreateJob() {
   const [messages, setMessages] = useState([
