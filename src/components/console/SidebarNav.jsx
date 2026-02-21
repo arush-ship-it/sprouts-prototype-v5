@@ -111,7 +111,7 @@ export default function SidebarNav({ activePage = "Console" }) {
       <div className="border-t border-gray-200 pt-5 mt-auto flex-shrink-0">
         <div className="flex items-center justify-between px-3 mb-5">
           <div className="flex items-center gap-2 flex-1 min-w-0">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-xs font-semibold">
+            <div className="bg-slate-50 text-slate-500 text-xs font-semibold rounded-full w-8 h-8 from-indigo-400 to-violet-500 flex items-center justify-center">
               JD
             </div>
             <div className="flex-1 min-w-0">
