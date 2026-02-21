@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star } from "lucide-react";
+import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import TabSwitcher from "@/components/shared/TabSwitcher";
@@ -142,6 +142,7 @@ export default function TalentPool() {
     },
   ]);
   const [input, setInput] = useState("");
+  const [isMaximized, setIsMaximized] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -169,15 +170,25 @@ export default function TalentPool() {
       
       <div className="flex flex-1 overflow-hidden">
       {/* Left Panel - AI Chat */}
-      <div className="w-[420px] border-r border-gray-200 bg-white flex flex-col">
+      <div className={`${isMaximized ? 'w-1/2' : 'w-[420px]'} border-r border-gray-200 bg-white flex flex-col transition-all`}>
         <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-white" />
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-white" />
+              </div>
+              <h2 className="text-[16px] font-semibold text-gray-900">
+                AI Talent Finder
+              </h2>
             </div>
-            <h2 className="text-[16px] font-semibold text-gray-900">
-              AI Talent Finder
-            </h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8"
+              onClick={() => setIsMaximized(!isMaximized)}
+            >
+              {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            </Button>
           </div>
           <p className="text-[12px] text-gray-500">
             Describe your ideal candidate and I'll search the talent pool
