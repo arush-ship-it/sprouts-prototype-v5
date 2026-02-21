@@ -196,52 +196,43 @@ const allAgents = [
 // Agent Card Component
 function AgentCard({ agent, onToggle, onClick }) {
   const Icon = agent.icon;
-  const isOperations = agent.type === "operations";
+  
+  // Solid pastel colors for each agent
+  const cardColors = [
+    "bg-[#FFD1DC]", // Soft pink
+    "bg-[#B4E7FF]", // Sky blue
+    "bg-[#C9F4AA]", // Lime green
+    "bg-[#FFE4B5]", // Peach
+    "bg-[#E0BBE4]", // Lavender
+    "bg-[#FFD4A3]", // Apricot
+    "bg-[#B2E2F2]", // Aqua
+    "bg-[#FFDAB9]", // Light coral
+  ];
+  
+  const colorIndex = (agent.id - 1) % cardColors.length;
+  const bgColor = cardColors[colorIndex];
 
   return (
-    <div className="rounded-2xl bg-white border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
-      {/* Large Icon Area */}
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 pt-4 pb-6 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
-        <Icon className="w-20 h-20 text-indigo-500 stroke-[1.2] drop-shadow-md" />
+    <div 
+      onClick={onClick}
+      className={`${bgColor} rounded-[32px] aspect-square flex flex-col cursor-pointer hover:opacity-90 transition-opacity p-6`}
+    >
+      {/* Title - Top Left */}
+      <h3 className="text-[15px] font-bold text-black mb-auto">
+        {agent.name}
+      </h3>
+      
+      {/* Icon - Center */}
+      <div className="flex items-center justify-center flex-1">
+        <Icon className="w-24 h-24 text-black stroke-[2.5]" />
       </div>
-
-      {/* Content */}
-      <div className="p-5">
-        <h3 className="text-[15px] font-semibold text-gray-900 mb-1">
-          {agent.name}
-        </h3>
-        
-        {/* Status Badge */}
-        <div className="flex items-center gap-1.5 mb-3">
-          <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
-          <span className="text-[12px] text-emerald-600 font-medium capitalize">{agent.status}</span>
-        </div>
-
-        <p className="text-[12px] text-gray-600 mb-4 line-clamp-2 min-h-[36px]">
-          {agent.description}
-        </p>
-
-        {/* Metrics */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div>
-            <p className="text-[11px] text-gray-500 mb-1">Total processed</p>
-            <p className="text-[20px] font-semibold text-gray-900">{agent.totalProcessed}</p>
-          </div>
-          <div>
-            <p className="text-[11px] text-gray-500 mb-1">Accuracy</p>
-            <p className="text-[20px] font-semibold text-gray-900">{agent.accuracy}</p>
-          </div>
-        </div>
-
-        {/* Button */}
-        <div className="flex justify-end">
-          <Button 
-            onClick={onClick}
-            className="bg-[#4A5568] hover:bg-[#2D3748] text-white h-10 text-[13px] font-medium px-6"
-          >
-            Setup & Deploy
-          </Button>
-        </div>
+      
+      {/* Status Indicator - Bottom */}
+      <div className="flex items-center gap-2 mt-auto">
+        <div className={`w-2.5 h-2.5 rounded-full ${agent.status === "active" ? "bg-black" : "bg-black/30"}`} />
+        <span className="text-[11px] text-black/70 font-semibold uppercase tracking-wide">
+          {agent.status}
+        </span>
       </div>
     </div>
   );
@@ -279,10 +270,10 @@ export default function Agents() {
   });
 
   return (
-    <div className="flex-1 min-h-screen bg-[#FAFAFA]">
+    <div className="flex-1 min-h-screen bg-black">
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-[22px] font-semibold text-gray-900">Agents</h1>
+          <h1 className="text-[22px] font-semibold text-white">Agents</h1>
           <div className="flex items-center gap-3">
             
 
@@ -359,7 +350,7 @@ export default function Agents() {
         </div>
 
         {/* Agents Grid */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-6">
           {filteredAgents.map((agent) =>
           <AgentCard
             key={agent.id}
@@ -372,8 +363,8 @@ export default function Agents() {
 
         {filteredAgents.length === 0 &&
         <div className="text-center py-12">
-            <Bot className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-            <p className="text-[14px] text-gray-500">No agents found matching your filters</p>
+            <Bot className="w-12 h-12 text-white/30 mx-auto mb-3" />
+            <p className="text-[14px] text-white/70">No agents found matching your filters</p>
           </div>
         }
       </div>
