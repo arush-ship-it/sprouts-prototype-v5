@@ -184,94 +184,111 @@ export default function CommunicationAnalyticsDashboard() {
 
           {/* Sequence Overview */}
           <div className="space-y-4">
-            {/* Top Row: Status Cards */}
-            <div>
-              <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-                Sequence Overview
-              </h3>
-              <div className="grid grid-cols-5 gap-3">
-                <div className="p-4 rounded-lg bg-emerald-50 border-2 border-emerald-200">
-                  <p className="text-[11px] text-emerald-700 font-medium mb-1">Active</p>
-                  <p className="text-[24px] font-bold text-emerald-700">{sequenceOverview.active}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-indigo-50 border-2 border-indigo-200">
-                  <p className="text-[11px] text-indigo-700 font-medium mb-1">Completed</p>
-                  <p className="text-[24px] font-bold text-indigo-700">{sequenceOverview.completed}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-amber-50 border-2 border-amber-200">
-                  <p className="text-[11px] text-amber-700 font-medium mb-1">Paused</p>
-                  <p className="text-[24px] font-bold text-amber-700">{sequenceOverview.paused}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-red-50 border-2 border-red-200">
-                  <p className="text-[11px] text-red-700 font-medium mb-1">Errors</p>
-                  <p className="text-[24px] font-bold text-red-700">{sequenceOverview.errors}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-gray-50 border-2 border-gray-200">
-                  <p className="text-[11px] text-gray-600 font-medium mb-1">In Sequences</p>
-                  <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
+            {/* Top Row: Status Cards + Donut Chart Side by Side */}
+            <div className="grid grid-cols-5 gap-6">
+              {/* Left: Status Cards (40%) */}
+              <div className="col-span-2">
+                <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
+                  Sequence Overview
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-4 rounded-lg bg-emerald-50 border-2 border-emerald-200">
+                    <p className="text-[11px] text-emerald-700 font-medium mb-1">Active</p>
+                    <p className="text-[24px] font-bold text-emerald-700">{sequenceOverview.active}</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-indigo-50 border-2 border-indigo-200">
+                    <p className="text-[11px] text-indigo-700 font-medium mb-1">Completed</p>
+                    <p className="text-[24px] font-bold text-indigo-700">{sequenceOverview.completed}</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-amber-50 border-2 border-amber-200">
+                    <p className="text-[11px] text-amber-700 font-medium mb-1">Paused</p>
+                    <p className="text-[24px] font-bold text-amber-700">{sequenceOverview.paused}</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-red-50 border-2 border-red-200">
+                    <p className="text-[11px] text-red-700 font-medium mb-1">Errors</p>
+                    <p className="text-[24px] font-bold text-red-700">{sequenceOverview.errors}</p>
+                  </div>
+                  <div className="col-span-2 p-4 rounded-lg bg-gray-50 border-2 border-gray-200">
+                    <p className="text-[11px] text-gray-600 font-medium mb-1">In Sequences</p>
+                    <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Bottom Row: Chart + Donut */}
-            <div className="grid grid-cols-2 gap-6">
-              {/* Trend Chart */}
-              
+              {/* Right: Donut Chart (60%) */}
+              <div className="col-span-3">
+                <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
+                  Current Distribution
+                </h3>
+                <div className="h-[240px] flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={sequenceData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={40}
+                        outerRadius={70}
+                        paddingAngle={2}
+                        dataKey="value">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {/* Right: Donut Chart */}
-            <div>
-              <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-                Current Distribution
-              </h3>
-              <div className="h-[240px] flex items-center justify-center">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={sequenceData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={40}
-                      outerRadius={70}
-                      paddingAngle={2}
-                      dataKey="value">
-
-                      {sequenceData.map((entry, idx) =>
-                      <Cell key={`cell-${idx}`} fill={entry.fill} />
-                      )}
-                    </Pie>
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="flex flex-col gap-1.5 mt-2 text-[11px]">
-                {sequenceData.map((item, idx) =>
-                <div key={idx} className="flex items-center gap-2">
+                        {sequenceData.map((entry, idx) =>
+                        <Cell key={`cell-${idx}`} fill={entry.fill} />
+                        )}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="flex flex-col gap-1.5 mt-2 text-[11px]">
+                  {sequenceData.map((item, idx) =>
+                  <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.fill }}></div>
                     <span className="text-gray-600">{item.name}</span>
                     <span className="font-semibold text-gray-900 ml-auto">{item.value}</span>
                   </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
+
+            {/* Bottom Row: Trend Chart */}
+            <div>
+              <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
+                7-Day Trend
+              </h3>
+              <div className="h-[240px] bg-gray-50 rounded-lg p-4">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={sequenceTrendData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="day" tick={{ fontSize: 11 }} />
+                    <YAxis tick={{ fontSize: 11 }} />
+                    <Tooltip contentStyle={{ borderRadius: "8px", fontSize: "11px" }} />
+                    <Legend wrapperStyle={{ fontSize: "11px" }} />
+                    <Bar dataKey="active" fill="#10b981" name="Active" />
+                    <Bar dataKey="completed" fill="#6366f1" name="Completed" />
+                    <Bar dataKey="paused" fill="#f59e0b" name="Paused" />
+                    <Bar dataKey="errors" fill="#ef4444" name="Errors" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
           {/* Action Required */}
