@@ -340,9 +340,9 @@ export default function Agents() {
         }>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shrink-0">
-                <BarChart3 className="w-5 h-5 text-white" />
-              </div>
+              
+
+
               <div className="flex-1 min-w-0">
                 <h3 className="text-[15px] font-semibold text-gray-900">
                   {isAnalyticsExpanded ? "Analytics Dashboard" : "Analytics Dashboard - Click to Expand"}
