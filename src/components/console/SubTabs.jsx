@@ -58,14 +58,14 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
               variant="ghost"
               size="sm"
               onClick={() => setViewMode(view.key)}
-              className={`h-8 px-3 text-[12px] ${
+              title={view.label}
+              className={`h-8 w-8 p-0 text-[12px] ${
                 viewMode === view.key
                   ? "bg-white shadow-sm text-gray-900"
                   : "text-gray-400 hover:text-gray-600"
               }`}
             >
-              <view.icon className="w-3.5 h-3.5 mr-1.5" />
-              {view.label}
+              <view.icon className="w-3.5 h-3.5" />
             </Button>
           ))}
         </div>
