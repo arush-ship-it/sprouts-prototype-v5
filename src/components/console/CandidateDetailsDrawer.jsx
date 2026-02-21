@@ -202,13 +202,79 @@ export default function CandidateDetailsDrawer({ candidate, isOpen, onClose }) {
                   {/* Left Column - Resume */}
                   <div className="space-y-6">
                     <div className="bg-white rounded-xl p-5 border border-gray-200 sticky top-0">
-                      <h3 className="text-[15px] font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <h3 className="text-[15px] font-semibold text-gray-900 mb-4 flex items-center gap-2">
                         <FileText className="w-4 h-4 text-indigo-600" />
                         Resume
                       </h3>
+                      
+                      {/* Resume Content */}
+                      <div className="space-y-4 mb-4">
+                        {/* Summary */}
+                        <div>
+                          <h4 className="text-[12px] font-semibold text-gray-900 mb-2">Professional Summary</h4>
+                          <p className="text-[11px] text-gray-600 leading-relaxed">
+                            Creative and strategic product designer with 6+ years of experience crafting 
+                            intuitive user experiences for high-growth tech companies. Proven track record 
+                            in leading design teams and shipping products used by millions of users.
+                          </p>
+                        </div>
+
+                        {/* Key Skills */}
+                        <div>
+                          <h4 className="text-[12px] font-semibold text-gray-900 mb-2">Key Skills</h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {["Figma", "Sketch", "Design Systems", "Prototyping", "User Research", "Adobe Creative Suite", 
+                              "Wireframing", "A/B Testing"].map((skill, idx) => (
+                              <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-[10px]">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Experience Highlights */}
+                        <div>
+                          <h4 className="text-[12px] font-semibold text-gray-900 mb-2">Experience Highlights</h4>
+                          <div className="space-y-2">
+                            <div className="text-[11px]">
+                              <p className="font-medium text-gray-900">Lead Product Designer • Stripe</p>
+                              <p className="text-gray-500 text-[10px] mb-1">2022 - Present</p>
+                              <ul className="list-disc list-inside text-gray-600 space-y-0.5">
+                                <li>Led design for payment infrastructure products</li>
+                                <li>Managed team of 4 designers</li>
+                                <li>Increased user satisfaction by 32%</li>
+                              </ul>
+                            </div>
+                            <div className="text-[11px]">
+                              <p className="font-medium text-gray-900">Senior Product Designer • Airbnb</p>
+                              <p className="text-gray-500 text-[10px] mb-1">2020 - 2022</p>
+                              <ul className="list-disc list-inside text-gray-600 space-y-0.5">
+                                <li>Designed core booking experience</li>
+                                <li>Improved search functionality</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Education */}
+                        <div>
+                          <h4 className="text-[12px] font-semibold text-gray-900 mb-2">Education</h4>
+                          <div className="space-y-1.5 text-[11px]">
+                            <div>
+                              <p className="font-medium text-gray-900">MSc Computer Engineering</p>
+                              <p className="text-gray-600">UC Berkeley • 2018-2020</p>
+                            </div>
+                            <div>
+                              <p className="font-medium text-gray-900">BSc Computer Science</p>
+                              <p className="text-gray-600">Stanford University • 2014-2018</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <Button variant="outline" size="sm" className="w-full">
                         <ExternalLink className="w-3.5 h-3.5 mr-2" />
-                        View Full Resume
+                        View Full Resume PDF
                       </Button>
                     </div>
                   </div>
