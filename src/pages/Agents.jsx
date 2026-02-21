@@ -234,12 +234,14 @@ function AgentCard({ agent, onToggle, onClick }) {
         </div>
 
         {/* Button */}
-        <Button 
-          onClick={onClick}
-          className="w-full bg-[#4A5568] hover:bg-[#2D3748] text-white h-10 text-[13px] font-medium"
-        >
-          Setup & Deploy
-        </Button>
+        <div className="flex justify-end">
+          <Button 
+            onClick={onClick}
+            className="bg-[#4A5568] hover:bg-[#2D3748] text-white h-10 text-[13px] font-medium px-6"
+          >
+            Setup & Deploy
+          </Button>
+        </div>
       </div>
     </div>
   );
