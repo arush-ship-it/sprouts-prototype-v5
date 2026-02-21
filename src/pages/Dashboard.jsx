@@ -250,7 +250,7 @@ export default function Dashboard() {
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
                 Candidates in Pipeline Funnel
               </h3>
-              <ResponsiveContainer width="100%" height={180}>
+              <ResponsiveContainer width="100%" height={160}>
                 <BarChart data={pipelineFunnelData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis dataKey="stage" tick={{ fontSize: 10 }} />
@@ -266,7 +266,7 @@ export default function Dashboard() {
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
                 JD & Resume Processing/Month
               </h3>
-              <ResponsiveContainer width="100%" height={180}>
+              <ResponsiveContainer width="100%" height={160}>
                 <LineChart data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis dataKey="month" tick={{ fontSize: 10 }} />
@@ -283,7 +283,7 @@ export default function Dashboard() {
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
                 Application Source Breakdown
               </h3>
-              <ResponsiveContainer width="100%" height={180}>
+              <ResponsiveContainer width="100%" height={160}>
                 <RechartsPieChart>
                   <Pie
                     data={sourceData}
