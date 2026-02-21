@@ -239,6 +239,11 @@ export default function JobDetails() {
           </div>
         </div>
 
+        {/* Hiring Team Section */}
+        <div className="mb-6">
+          <HiringTeam />
+        </div>
+
         {/* Activity Log (Collapsible) */}
         <Collapsible open={isActivityOpen} onOpenChange={setIsActivityOpen}>
           <div className="p-4 rounded-xl bg-white border border-gray-200">
