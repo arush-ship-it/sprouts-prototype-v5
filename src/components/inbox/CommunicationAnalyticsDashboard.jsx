@@ -19,7 +19,7 @@ export default function CommunicationAnalyticsDashboard() {
     value: 142,
     trend: 12,
     positive: true,
-    color: "bg-blue-50 border-blue-200",
+    color: "bg-white border-gray-200",
     textColor: "text-blue-700"
   },
   {
@@ -27,7 +27,7 @@ export default function CommunicationAnalyticsDashboard() {
     value: 58,
     trend: 5,
     positive: true,
-    color: "bg-indigo-50 border-indigo-200",
+    color: "bg-white border-gray-200",
     textColor: "text-indigo-700"
   },
   {
@@ -35,7 +35,7 @@ export default function CommunicationAnalyticsDashboard() {
     value: 24,
     trend: -3,
     positive: false,
-    color: "bg-amber-50 border-amber-200",
+    color: "bg-white border-gray-200",
     textColor: "text-amber-700"
   },
   {
@@ -43,7 +43,7 @@ export default function CommunicationAnalyticsDashboard() {
     value: 8,
     trend: 2,
     positive: true,
-    color: "bg-violet-50 border-violet-200",
+    color: "bg-white border-gray-200",
     textColor: "text-violet-700"
   },
   {
@@ -51,7 +51,7 @@ export default function CommunicationAnalyticsDashboard() {
     value: 3,
     trend: -1,
     positive: true,
-    color: "bg-red-50 border-red-200",
+    color: "bg-white border-gray-200",
     textColor: "text-red-700"
   },
   {
@@ -59,7 +59,7 @@ export default function CommunicationAnalyticsDashboard() {
     value: "68%",
     trend: 8,
     positive: true,
-    color: "bg-emerald-50 border-emerald-200",
+    color: "bg-white border-gray-200",
     textColor: "text-emerald-700"
   }];
 
