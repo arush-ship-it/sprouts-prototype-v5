@@ -64,9 +64,11 @@ export default function CreateJob() {
             <Button variant="ghost" size="icon" className="h-9 w-9">
               <Bell className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Settings className="w-4 h-4" />
-            </Button>
+            <Link to={createPageUrl("Settings")}>
+              <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </Link>
             <Button variant="ghost" className="h-9 gap-2">
               <User className="w-4 h-4" />
               <span className="text-[13px] font-medium">John Doe</span>
