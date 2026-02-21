@@ -20,7 +20,7 @@ export default function TabSwitcher({ activePage }) {
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-medium transition-all
             ${
               activePage === tab.page
-                ? "bg-indigo-600 text-white shadow-sm"
+                ? "bg-gray-300 text-black shadow-sm"
                 : "text-gray-600 hover:bg-gray-50"
             }`}
         >
