@@ -7,324 +7,324 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 
 const reviewCandidates = [
-  {
-    id: 1,
-    name: "Maya Johnson",
-    title: "Lead Product Designer",
-    company: "Stripe",
-    degree: "Msc Computer Engineering",
-    university: "University Of California, Berkley",
-    location: "San Francisco, California, United States",
-    experience: "4 years",
-    skillsMatch: "20/23 match",
-    attributesMatch: "5/6 match",
-    score: 78,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 2,
-    name: "Marcus Rashford",
-    title: "Job Title",
-    company: "Company",
-    degree: "Degree Name",
-    university: "University",
-    location: "San Francisco, California, United States",
-    experience: "4 years",
-    skillsMatch: "20/23 match",
-    attributesMatch: "5/6 match",
-    score: 78,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 3,
-    name: "Sarah Mitchell",
-    title: "Product Designer",
-    company: "Airbnb",
-    degree: "Bsc Computer Engineering",
-    university: "Stanford University",
-    location: "New York, NY, United States",
-    experience: "6 years",
-    skillsMatch: "18/23 match",
-    attributesMatch: "4/6 match",
-    score: 82,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 4,
-    name: "Alex Thompson",
-    title: "Senior UX Designer",
-    company: "Adobe",
-    degree: "BA in Visual Design",
-    university: "Rhode Island School of Design",
-    location: "Seattle, Washington, United States",
-    experience: "7 years",
-    skillsMatch: "21/23 match",
-    attributesMatch: "6/6 match",
-    score: 91,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 5,
-    name: "Emily Rodriguez",
-    title: "Product Designer",
-    company: "Figma",
-    degree: "Msc in HCI",
-    university: "Carnegie Mellon University",
-    location: "San Francisco, California, United States",
-    experience: "5 years",
-    skillsMatch: "22/23 match",
-    attributesMatch: "5/6 match",
-    score: 88,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 6,
-    name: "David Park",
-    title: "Design Lead",
-    company: "Shopify",
-    degree: "BA in Graphic Design",
-    university: "Parsons School of Design",
-    location: "Toronto, Ontario, Canada",
-    experience: "8 years",
-    skillsMatch: "19/23 match",
-    attributesMatch: "5/6 match",
-    score: 85,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 7,
-    name: "Jessica Liu",
-    title: "Senior Product Designer",
-    company: "Twitter",
-    degree: "Msc Computer Science",
-    university: "MIT",
-    location: "San Francisco, California, United States",
-    experience: "6 years",
-    skillsMatch: "20/23 match",
-    attributesMatch: "4/6 match",
-    score: 83,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 8,
-    name: "Michael Chen",
-    title: "UX/UI Designer",
-    company: "Uber",
-    degree: "BA in Design",
-    university: "Art Center College of Design",
-    location: "San Francisco, California, United States",
-    experience: "4 years",
-    skillsMatch: "18/23 match",
-    attributesMatch: "5/6 match",
-    score: 79,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 9,
-    name: "Sophie Anderson",
-    title: "Product Designer",
-    company: "Notion",
-    degree: "Msc in Design",
-    university: "Royal College of Art",
-    location: "London, United Kingdom",
-    experience: "5 years",
-    skillsMatch: "21/23 match",
-    attributesMatch: "6/6 match",
-    score: 90,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 10,
-    name: "Ryan Davis",
-    title: "Lead Designer",
-    company: "Dropbox",
-    degree: "BA in Interactive Design",
-    university: "NYU",
-    location: "New York, NY, United States",
-    experience: "9 years",
-    skillsMatch: "19/23 match",
-    attributesMatch: "5/6 match",
-    score: 86,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 11,
-    name: "Olivia Martinez",
-    title: "Senior Product Designer",
-    company: "Spotify",
-    degree: "Msc in Digital Design",
-    university: "University of Washington",
-    location: "Stockholm, Sweden",
-    experience: "7 years",
-    skillsMatch: "22/23 match",
-    attributesMatch: "6/6 match",
-    score: 92,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 12,
-    name: "Lucas Brown",
-    title: "Product Designer",
-    company: "Pinterest",
-    degree: "BA in Design",
-    university: "California College of the Arts",
-    location: "San Francisco, California, United States",
-    experience: "4 years",
-    skillsMatch: "17/23 match",
-    attributesMatch: "4/6 match",
-    score: 76,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 13,
-    name: "Isabella Garcia",
-    title: "UX Designer",
-    company: "LinkedIn",
-    degree: "Msc in User Experience",
-    university: "Georgia Tech",
-    location: "Mountain View, California, United States",
-    experience: "5 years",
-    skillsMatch: "20/23 match",
-    attributesMatch: "5/6 match",
-    score: 84,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 14,
-    name: "Noah Wilson",
-    title: "Lead Product Designer",
-    company: "Slack",
-    degree: "BA in Communication Design",
-    university: "Pratt Institute",
-    location: "San Francisco, California, United States",
-    experience: "8 years",
-    skillsMatch: "21/23 match",
-    attributesMatch: "6/6 match",
-    score: 89,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 15,
-    name: "Ava Taylor",
-    title: "Product Designer",
-    company: "Asana",
-    degree: "Msc in Design Thinking",
-    university: "Stanford University",
-    location: "San Francisco, California, United States",
-    experience: "6 years",
-    skillsMatch: "19/23 match",
-    attributesMatch: "5/6 match",
-    score: 81,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 16,
-    name: "Ethan Robinson",
-    title: "Senior UX Designer",
-    company: "Salesforce",
-    degree: "BA in Visual Communication",
-    university: "Columbia University",
-    location: "San Francisco, California, United States",
-    experience: "7 years",
-    skillsMatch: "18/23 match",
-    attributesMatch: "4/6 match",
-    score: 80,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 17,
-    name: "Mia White",
-    title: "Product Designer",
-    company: "Square",
-    degree: "Msc in Interaction Design",
-    university: "University of Michigan",
-    location: "San Francisco, California, United States",
-    experience: "5 years",
-    skillsMatch: "20/23 match",
-    attributesMatch: "5/6 match",
-    score: 87,
-    sequence: "Cold Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 18,
-    name: "James Lee",
-    title: "Design Lead",
-    company: "Zoom",
-    degree: "BA in Digital Media",
-    university: "University of Southern California",
-    location: "San Jose, California, United States",
-    experience: "8 years",
-    skillsMatch: "19/23 match",
-    attributesMatch: "5/6 match",
-    score: 83,
-    sequence: "Warm Outreach, Active",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
-  },
-];
+{
+  id: 1,
+  name: "Maya Johnson",
+  title: "Lead Product Designer",
+  company: "Stripe",
+  degree: "Msc Computer Engineering",
+  university: "University Of California, Berkley",
+  location: "San Francisco, California, United States",
+  experience: "4 years",
+  skillsMatch: "20/23 match",
+  attributesMatch: "5/6 match",
+  score: 78,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 2,
+  name: "Marcus Rashford",
+  title: "Job Title",
+  company: "Company",
+  degree: "Degree Name",
+  university: "University",
+  location: "San Francisco, California, United States",
+  experience: "4 years",
+  skillsMatch: "20/23 match",
+  attributesMatch: "5/6 match",
+  score: 78,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 3,
+  name: "Sarah Mitchell",
+  title: "Product Designer",
+  company: "Airbnb",
+  degree: "Bsc Computer Engineering",
+  university: "Stanford University",
+  location: "New York, NY, United States",
+  experience: "6 years",
+  skillsMatch: "18/23 match",
+  attributesMatch: "4/6 match",
+  score: 82,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 4,
+  name: "Alex Thompson",
+  title: "Senior UX Designer",
+  company: "Adobe",
+  degree: "BA in Visual Design",
+  university: "Rhode Island School of Design",
+  location: "Seattle, Washington, United States",
+  experience: "7 years",
+  skillsMatch: "21/23 match",
+  attributesMatch: "6/6 match",
+  score: 91,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 5,
+  name: "Emily Rodriguez",
+  title: "Product Designer",
+  company: "Figma",
+  degree: "Msc in HCI",
+  university: "Carnegie Mellon University",
+  location: "San Francisco, California, United States",
+  experience: "5 years",
+  skillsMatch: "22/23 match",
+  attributesMatch: "5/6 match",
+  score: 88,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 6,
+  name: "David Park",
+  title: "Design Lead",
+  company: "Shopify",
+  degree: "BA in Graphic Design",
+  university: "Parsons School of Design",
+  location: "Toronto, Ontario, Canada",
+  experience: "8 years",
+  skillsMatch: "19/23 match",
+  attributesMatch: "5/6 match",
+  score: 85,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 7,
+  name: "Jessica Liu",
+  title: "Senior Product Designer",
+  company: "Twitter",
+  degree: "Msc Computer Science",
+  university: "MIT",
+  location: "San Francisco, California, United States",
+  experience: "6 years",
+  skillsMatch: "20/23 match",
+  attributesMatch: "4/6 match",
+  score: 83,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 8,
+  name: "Michael Chen",
+  title: "UX/UI Designer",
+  company: "Uber",
+  degree: "BA in Design",
+  university: "Art Center College of Design",
+  location: "San Francisco, California, United States",
+  experience: "4 years",
+  skillsMatch: "18/23 match",
+  attributesMatch: "5/6 match",
+  score: 79,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 9,
+  name: "Sophie Anderson",
+  title: "Product Designer",
+  company: "Notion",
+  degree: "Msc in Design",
+  university: "Royal College of Art",
+  location: "London, United Kingdom",
+  experience: "5 years",
+  skillsMatch: "21/23 match",
+  attributesMatch: "6/6 match",
+  score: 90,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 10,
+  name: "Ryan Davis",
+  title: "Lead Designer",
+  company: "Dropbox",
+  degree: "BA in Interactive Design",
+  university: "NYU",
+  location: "New York, NY, United States",
+  experience: "9 years",
+  skillsMatch: "19/23 match",
+  attributesMatch: "5/6 match",
+  score: 86,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 11,
+  name: "Olivia Martinez",
+  title: "Senior Product Designer",
+  company: "Spotify",
+  degree: "Msc in Digital Design",
+  university: "University of Washington",
+  location: "Stockholm, Sweden",
+  experience: "7 years",
+  skillsMatch: "22/23 match",
+  attributesMatch: "6/6 match",
+  score: 92,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 12,
+  name: "Lucas Brown",
+  title: "Product Designer",
+  company: "Pinterest",
+  degree: "BA in Design",
+  university: "California College of the Arts",
+  location: "San Francisco, California, United States",
+  experience: "4 years",
+  skillsMatch: "17/23 match",
+  attributesMatch: "4/6 match",
+  score: 76,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 13,
+  name: "Isabella Garcia",
+  title: "UX Designer",
+  company: "LinkedIn",
+  degree: "Msc in User Experience",
+  university: "Georgia Tech",
+  location: "Mountain View, California, United States",
+  experience: "5 years",
+  skillsMatch: "20/23 match",
+  attributesMatch: "5/6 match",
+  score: 84,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 14,
+  name: "Noah Wilson",
+  title: "Lead Product Designer",
+  company: "Slack",
+  degree: "BA in Communication Design",
+  university: "Pratt Institute",
+  location: "San Francisco, California, United States",
+  experience: "8 years",
+  skillsMatch: "21/23 match",
+  attributesMatch: "6/6 match",
+  score: 89,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 15,
+  name: "Ava Taylor",
+  title: "Product Designer",
+  company: "Asana",
+  degree: "Msc in Design Thinking",
+  university: "Stanford University",
+  location: "San Francisco, California, United States",
+  experience: "6 years",
+  skillsMatch: "19/23 match",
+  attributesMatch: "5/6 match",
+  score: 81,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 16,
+  name: "Ethan Robinson",
+  title: "Senior UX Designer",
+  company: "Salesforce",
+  degree: "BA in Visual Communication",
+  university: "Columbia University",
+  location: "San Francisco, California, United States",
+  experience: "7 years",
+  skillsMatch: "18/23 match",
+  attributesMatch: "4/6 match",
+  score: 80,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 17,
+  name: "Mia White",
+  title: "Product Designer",
+  company: "Square",
+  degree: "Msc in Interaction Design",
+  university: "University of Michigan",
+  location: "San Francisco, California, United States",
+  experience: "5 years",
+  skillsMatch: "20/23 match",
+  attributesMatch: "5/6 match",
+  score: 87,
+  sequence: "Cold Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 18,
+  name: "James Lee",
+  title: "Design Lead",
+  company: "Zoom",
+  degree: "BA in Digital Media",
+  university: "University of Southern California",
+  location: "San Jose, California, United States",
+  experience: "8 years",
+  skillsMatch: "19/23 match",
+  attributesMatch: "5/6 match",
+  score: 83,
+  sequence: "Warm Outreach, Active",
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+}];
+
 
 const pipelineCandidates = [
-  {
-    id: 6,
-    name: "Daniel Wright",
-    title: "UX Lead",
-    company: "Meta",
-    score: 96,
-    stage: "Offer",
-    starred: true,
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 7,
-    name: "Lena Kim",
-    title: "Product Designer II",
-    company: "Google",
-    score: 92,
-    stage: "Final Round",
-    starred: true,
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 8,
-    name: "Marcus Rivera",
-    title: "Sr. Designer",
-    company: "Apple",
-    score: 89,
-    stage: "Technical",
-    starred: false,
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
-  },
-  {
-    id: 9,
-    name: "Emma Collins",
-    title: "Design Manager",
-    company: "Netflix",
-    score: 85,
-    stage: "Interview",
-    starred: false,
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
-  },
-];
+{
+  id: 6,
+  name: "Daniel Wright",
+  title: "UX Lead",
+  company: "Meta",
+  score: 96,
+  stage: "Offer",
+  starred: true,
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 7,
+  name: "Lena Kim",
+  title: "Product Designer II",
+  company: "Google",
+  score: 92,
+  stage: "Final Round",
+  starred: true,
+  avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 8,
+  name: "Marcus Rivera",
+  title: "Sr. Designer",
+  company: "Apple",
+  score: 89,
+  stage: "Technical",
+  starred: false,
+  avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face"
+},
+{
+  id: 9,
+  name: "Emma Collins",
+  title: "Design Manager",
+  company: "Netflix",
+  score: 85,
+  stage: "Interview",
+  starred: false,
+  avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face"
+}];
+
 
 export default function CandidateList({ activeTab, viewMode = "card" }) {
   const candidates =
-    activeTab === "review" ? reviewCandidates : pipelineCandidates;
+  activeTab === "review" ? reviewCandidates : pipelineCandidates;
   const [isSourcingExpanded, setIsSourcingExpanded] = useState(false);
   const [sourcingInput, setSourcingInput] = useState("");
   const [sourcingTab, setSourcingTab] = useState("ai");
@@ -347,67 +347,67 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   return (
     <div className="px-8 pt-5 pb-8">
       {/* Sourcing Card - Only show in Review tab */}
-      {activeTab === "review" && (
-        <div className={`mb-5 rounded-xl border border-indigo-200 bg-white transition-all duration-300 ${
-          isSourcingExpanded ? "p-5" : "p-4"
-        }`}>
+      {activeTab === "review" &&
+      <div className={`mb-5 rounded-xl border border-indigo-200 bg-white transition-all duration-300 ${
+      isSourcingExpanded ? "p-5" : "p-4"}`
+      }>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2.5 flex-1">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
+              <div className="bg-slate-400 rounded-lg w-8 h-8 from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-[13px] font-semibold text-gray-900">
                   {isSourcingExpanded ? "AI Sourcing Assistant" : "AI Sourcing - Click to Expand"}
                 </h3>
-                {!isSourcingExpanded && (
-                  <p className="text-[11px] text-gray-600 mt-0.5">Ask AI to find candidates for you</p>
-                )}
+                {!isSourcingExpanded &&
+              <p className="text-[11px] text-gray-600 mt-0.5">Source the right fit for your job</p>
+              }
               </div>
             </div>
             <Button
-              variant="ghost"
-              size="sm"
-              className="h-7"
-              onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}
-            >
-              {isSourcingExpanded ? (
-                <Minimize2 className="w-3.5 h-3.5" />
-              ) : (
-                <Maximize2 className="w-3.5 h-3.5" />
-              )}
+            variant="ghost"
+            size="sm"
+            className="h-7"
+            onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}>
+
+              {isSourcingExpanded ?
+            <Minimize2 className="w-3.5 h-3.5" /> :
+
+            <Maximize2 className="w-3.5 h-3.5" />
+            }
             </Button>
           </div>
           
-          {isSourcingExpanded && (
-            <div className="mt-4 space-y-4">
+          {isSourcingExpanded &&
+        <div className="mt-4 space-y-4">
               {/* Sub Tabs */}
               <div className="flex gap-2 border-b border-indigo-200">
                 <button
-                  onClick={() => setSourcingTab("ai")}
-                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
-                    sourcingTab === "ai"
-                      ? "text-indigo-700 border-b-2 border-indigo-600"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
+              onClick={() => setSourcingTab("ai")}
+              className={`px-4 py-2 text-[12px] font-medium transition-colors ${
+              sourcingTab === "ai" ?
+              "text-indigo-700 border-b-2 border-indigo-600" :
+              "text-gray-600 hover:text-gray-900"}`
+              }>
+
                   Talk to AI
                 </button>
                 <button
-                  onClick={() => setSourcingTab("manual")}
-                  className={`px-4 py-2 text-[12px] font-medium transition-colors ${
-                    sourcingTab === "manual"
-                      ? "text-indigo-700 border-b-2 border-indigo-600"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
+              onClick={() => setSourcingTab("manual")}
+              className={`px-4 py-2 text-[12px] font-medium transition-colors ${
+              sourcingTab === "manual" ?
+              "text-indigo-700 border-b-2 border-indigo-600" :
+              "text-gray-600 hover:text-gray-900"}`
+              }>
+
                   Manual Sourcing
                 </button>
               </div>
 
               {/* Talk to AI Tab */}
-              {sourcingTab === "ai" && (
-                <div className="space-y-3">
+              {sourcingTab === "ai" &&
+          <div className="space-y-3">
                   <div className="space-y-2 max-h-[400px] overflow-y-auto">
                     <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
                       <p className="text-[11px] text-gray-700">
@@ -427,22 +427,22 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                   </div>
                   <div className="flex gap-2">
                     <Textarea
-                      value={sourcingInput}
-                      onChange={(e) => setSourcingInput(e.target.value)}
-                      placeholder="Type your message..."
-                      className="resize-none text-[12px] bg-white"
-                      rows={2}
-                    />
+                value={sourcingInput}
+                onChange={(e) => setSourcingInput(e.target.value)}
+                placeholder="Type your message..."
+                className="resize-none text-[12px] bg-white"
+                rows={2} />
+
                     <Button size="icon" className="shrink-0 h-9 w-9">
                       <Send className="w-3.5 h-3.5" />
                     </Button>
                   </div>
                 </div>
-              )}
+          }
 
               {/* Manual Sourcing Tab */}
-              {sourcingTab === "manual" && (
-                <div className="space-y-4 max-h-[400px] overflow-y-auto">
+              {sourcingTab === "manual" &&
+          <div className="space-y-4 max-h-[400px] overflow-y-auto">
                   {/* Experience */}
                   <div className="p-4 rounded-lg bg-white border border-indigo-100">
                     <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Experience</h4>
@@ -457,11 +457,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                           </Button>
                         </div>
                         <div className="flex flex-wrap gap-1.5">
-                          {jobTitles.map((title, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
+                          {jobTitles.map((title, idx) =>
+                    <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
                               {title}
                             </Badge>
-                          ))}
+                    )}
                           <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
                         </div>
                       </div>
@@ -469,11 +469,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       <div>
                         <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Companies</label>
                         <div className="flex flex-wrap gap-1.5">
-                          {companies.map((company, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
+                          {companies.map((company, idx) =>
+                    <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
                               {company}
                             </Badge>
-                          ))}
+                    )}
                           <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
                         </div>
                       </div>
@@ -481,11 +481,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       <div>
                         <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Industries</label>
                         <div className="flex flex-wrap gap-1.5">
-                          {industries.map((industry, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
+                          {industries.map((industry, idx) =>
+                    <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">
                               {industry}
                             </Badge>
-                          ))}
+                    )}
                           <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
                         </div>
                       </div>
@@ -496,11 +496,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                   <div className="p-4 rounded-lg bg-white border border-indigo-100">
                     <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Similar Skills</h4>
                     <div className="flex flex-wrap gap-1.5">
-                      {skills.map((skill, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700">
+                      {skills.map((skill, idx) =>
+                <Badge key={idx} variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700">
                           {skill}
                         </Badge>
-                      ))}
+                )}
                       <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
                     </div>
                   </div>
@@ -513,11 +513,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       <div>
                         <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Degrees</label>
                         <div className="flex flex-wrap gap-1.5">
-                          {degrees.map((degree, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">
+                          {degrees.map((degree, idx) =>
+                    <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">
                               {degree}
                             </Badge>
-                          ))}
+                    )}
                           <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
                         </div>
                       </div>
@@ -525,11 +525,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       <div>
                         <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Universities</label>
                         <div className="flex flex-wrap gap-1.5">
-                          {universities.map((uni, idx) => (
-                            <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">
+                          {universities.map((uni, idx) =>
+                    <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">
                               {uni}
                             </Badge>
-                          ))}
+                    )}
                           <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
                         </div>
                       </div>
@@ -548,11 +548,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     Start Sourcing
                   </Button>
                 </div>
-              )}
+          }
             </div>
-          )}
+        }
         </div>
-      )}
+      }
 
       {/* Search / Filter bar */}
       <div className="flex items-center gap-3 mb-5">
@@ -561,8 +561,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           <input
             type="text"
             placeholder="Search candidates..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 text-[13px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
-          />
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 text-[13px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all" />
+
         </div>
         <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 text-[13px] font-medium text-gray-500 hover:bg-gray-100 transition-colors">
           <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -571,23 +571,23 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       </div>
 
       {/* Card/List/Table View */}
-      {viewMode === "card" && (
-        <div className="flex flex-col gap-3">
-          {candidates.map((candidate) => (
-            <CandidateCardDetailed 
-              key={candidate.id} 
-              candidate={candidate} 
-              isPipeline={isPipeline}
-              onClick={() => handleCandidateClick(candidate)}
-            />
-          ))}
-        </div>
-      )}
+      {viewMode === "card" &&
+      <div className="flex flex-col gap-3">
+          {candidates.map((candidate) =>
+        <CandidateCardDetailed
+          key={candidate.id}
+          candidate={candidate}
+          isPipeline={isPipeline}
+          onClick={() => handleCandidateClick(candidate)} />
 
-      {viewMode === "list" && (
-        <div className="flex flex-col gap-2">
-          {candidates.map((candidate) => (
-            <div key={candidate.id} className="flex items-center justify-between px-4 py-3 rounded-lg bg-white border border-gray-200 hover:shadow-sm transition-all">
+        )}
+        </div>
+      }
+
+      {viewMode === "list" &&
+      <div className="flex flex-col gap-2">
+          {candidates.map((candidate) =>
+        <div key={candidate.id} className="flex items-center justify-between px-4 py-3 rounded-lg bg-white border border-gray-200 hover:shadow-sm transition-all">
               <div className="flex items-center gap-3">
                 <img src={candidate.avatar} alt={candidate.name} className="w-9 h-9 rounded-full" />
                 <div>
@@ -601,12 +601,12 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 <span className="px-2 py-1 text-[11px] font-bold rounded-md bg-emerald-50 text-emerald-600">{candidate.score}%</span>
               </div>
             </div>
-          ))}
+        )}
         </div>
-      )}
+      }
 
-      {viewMode === "table" && (
-        <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
+      {viewMode === "table" &&
+      <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
@@ -618,8 +618,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {candidates.map((candidate) => (
-                <tr key={candidate.id} className="hover:bg-gray-50 transition-colors">
+              {candidates.map((candidate) =>
+            <tr key={candidate.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <img src={candidate.avatar} alt={candidate.name} className="w-8 h-8 rounded-full" />
@@ -638,18 +638,18 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     <span className="px-2 py-1 text-[11px] font-bold rounded-md bg-emerald-50 text-emerald-600">{candidate.score}%</span>
                   </td>
                 </tr>
-              ))}
+            )}
             </tbody>
           </table>
         </div>
-      )}
+      }
 
       {/* Candidate Details Drawer */}
       <CandidateDetailsDrawer
         candidate={selectedCandidate}
         isOpen={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-      />
-    </div>
-  );
+        onClose={() => setIsDrawerOpen(false)} />
+
+    </div>);
+
 }
