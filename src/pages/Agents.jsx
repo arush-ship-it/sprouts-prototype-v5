@@ -267,7 +267,7 @@ export default function Agents() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsAnalyticsExpanded(false);
-    }, 1300);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
