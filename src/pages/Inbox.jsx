@@ -52,6 +52,62 @@ const activities = [
     timestamp: "2 days ago",
     status: "completed",
   },
+  {
+    id: 6,
+    type: "email_sent",
+    candidate: "Emma Williams",
+    subject: "Technical Assessment Details",
+    timestamp: "2 days ago",
+    status: "delivered",
+  },
+  {
+    id: 7,
+    type: "email_opened",
+    candidate: "David Brown",
+    subject: "Re: Interview Schedule Confirmation",
+    timestamp: "3 days ago",
+    status: "opened",
+  },
+  {
+    id: 8,
+    type: "email_replied",
+    candidate: "Lisa Anderson",
+    subject: "Re: Second Round Interview",
+    timestamp: "3 days ago",
+    status: "replied",
+  },
+  {
+    id: 9,
+    type: "sequence_started",
+    candidate: "Michael Taylor",
+    subject: "Welcome to Our Hiring Process",
+    timestamp: "4 days ago",
+    status: "active",
+  },
+  {
+    id: 10,
+    type: "email_sent",
+    candidate: "Jennifer Martinez",
+    subject: "Application Received - UX Designer",
+    timestamp: "4 days ago",
+    status: "delivered",
+  },
+  {
+    id: 11,
+    type: "email_opened",
+    candidate: "Robert Garcia",
+    subject: "Re: Portfolio Review Feedback",
+    timestamp: "5 days ago",
+    status: "opened",
+  },
+  {
+    id: 12,
+    type: "sequence_completed",
+    candidate: "Jessica Lee",
+    subject: "Onboarding Sequence Completed",
+    timestamp: "5 days ago",
+    status: "completed",
+  },
 ];
 
 function ActivityItem({ activity }) {
@@ -181,7 +237,7 @@ export default function Inbox() {
         </div>
 
         {/* Activity List */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2.5">
           {activities.map((activity) => (
             <ActivityItem key={activity.id} activity={activity} />
           ))}
