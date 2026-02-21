@@ -285,6 +285,51 @@ export default function PipelineBuilderModal({ isOpen, onClose }) {
                   ))}
                 </div>
               </div>
+
+              {/* Agent Library */}
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-[13px] font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                    <Bot className="w-4 h-4 text-indigo-600" />
+                    Operations Agents
+                  </h4>
+                  <div className="space-y-2">
+                    {operationsAgents.map(agent => (
+                      <div
+                        key={agent.id}
+                        className="p-3 rounded-lg border border-gray-200 bg-white hover:border-indigo-300 transition-all cursor-move"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <agent.icon className="w-3.5 h-3.5 text-indigo-600" />
+                          <span className="text-[12px] font-semibold text-gray-900">{agent.name}</span>
+                        </div>
+                        <p className="text-[10px] text-gray-500">{agent.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-[13px] font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-600" />
+                    Evaluation Agents
+                  </h4>
+                  <div className="space-y-2">
+                    {evaluationAgents.map(agent => (
+                      <div
+                        key={agent.id}
+                        className="p-3 rounded-lg border border-gray-200 bg-white hover:border-emerald-300 transition-all cursor-move"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <agent.icon className="w-3.5 h-3.5 text-emerald-600" />
+                          <span className="text-[12px] font-semibold text-gray-900">{agent.name}</span>
+                        </div>
+                        <p className="text-[10px] text-gray-500">{agent.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center justify-end gap-2 pt-4 border-t border-gray-200">
