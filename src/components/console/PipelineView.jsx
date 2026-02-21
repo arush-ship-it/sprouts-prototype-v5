@@ -94,6 +94,8 @@ function CandidatePipelineCard({ candidate }) {
 }
 
 export default function PipelineView() {
+  const [expandedStageId, setExpandedStageId] = useState(null);
+
   return (
     <div className="px-8 pt-5 pb-8">
       <div className="flex gap-4 overflow-x-auto pb-4">
@@ -102,18 +104,23 @@ export default function PipelineView() {
           key={stage.id}
           className="flex-shrink-0 w-[280px] flex flex-col gap-3">
 
-            {/* Stage Header */}
-            <div className="bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-blue-200 flex items-center justify-between">
-
-
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4" />
-                <span className="text-[13px] font-bold">{stage.name}</span>
-              </div>
+          {/* Stage Header */}
+          <div className="bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-blue-200 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              <span className="text-[13px] font-bold">{stage.name}</span>
+            </div>
+            <div className="flex items-center gap-2">
               <span className="text-[12px] font-bold px-2 py-0.5 rounded-md bg-white/60">
                 {stage.count}
               </span>
+              <button
+                onClick={() => setExpandedStageId(stage.id)}
+                className="p-1 hover:bg-gray-100 rounded transition-colors">
+                <Maximize2 className="w-4 h-4 text-gray-600" />
+              </button>
             </div>
+          </div>
 
             {/* Candidates */}
             <div className="flex flex-col gap-2">
