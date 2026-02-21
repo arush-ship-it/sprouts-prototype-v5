@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, Maximize2, Minimize2 } from "lucide-react";
+import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, Maximize2, Minimize2, Bell, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -166,7 +166,21 @@ export default function TalentPool() {
     <div className="flex flex-col h-screen bg-[#FAFAFA]">
       {/* Top Navigation */}
       <div className="px-6 py-4 bg-[#FAFAFA] border-b border-gray-200">
-        <TabSwitcher activePage="TalentPool" />
+        <div className="flex items-center justify-between">
+          <TabSwitcher activePage="TalentPool" />
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Bell className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Settings className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" className="h-9 gap-2">
+              <User className="w-4 h-4" />
+              <span className="text-[13px] font-medium">John Doe</span>
+            </Button>
+          </div>
+        </div>
       </div>
       
       <div className="flex flex-1 overflow-hidden">
