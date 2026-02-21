@@ -201,8 +201,8 @@ function AgentCard({ agent, onToggle, onClick }) {
   return (
     <div className="rounded-2xl bg-white border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
       {/* Large Icon Area */}
-      <div className="bg-[#E8E6F5] px-6 pt-8 pb-6 flex items-center justify-center">
-        <Icon className="w-20 h-20 text-[#6B63C5] stroke-[1.5]" />
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-6 pt-8 pb-6 flex items-center justify-center">
+        <Icon className="w-20 h-20 text-indigo-500 stroke-[1.2] drop-shadow-md" />
       </div>
 
       {/* Content */}
