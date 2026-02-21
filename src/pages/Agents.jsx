@@ -241,7 +241,7 @@ function AgentCard({ agent, onToggle, onClick }) {
         {/* Button */}
         <div className="flex justify-end">
           <Button
-            onClick={onClick} className="bg-slate-50 text-blue-600 px-6 py-2 font-medium opacity-100 rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-[#2D3748] h-10">
+            onClick={onClick} className="bg-[#2563EB] text-white px-6 py-2 font-medium opacity-100 rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-[#1d4ed8] h-10">
 
 
             Setup & Deploy
