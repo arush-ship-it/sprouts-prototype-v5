@@ -103,7 +103,7 @@ export default function PipelineBuilderModal({ isOpen, onClose }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-5xl max-h-[153vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl">Build Your Pipeline</DialogTitle>
         </DialogHeader>
