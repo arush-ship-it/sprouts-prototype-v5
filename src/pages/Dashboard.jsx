@@ -182,7 +182,7 @@ const sourceData = [
 ];
 
 export default function Dashboard() {
-  const [isChatMinimized, setIsChatMinimized] = useState(false);
+  const [isChatMinimized, setIsChatMinimized] = useState(true);
   const [chatMessages, setChatMessages] = useState([
     {
       role: "assistant",
