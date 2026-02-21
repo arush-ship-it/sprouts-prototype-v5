@@ -222,52 +222,7 @@ export default function PipelineBuilderModal({ isOpen, onClose }) {
               <p className="text-[12px] text-gray-500">Drag and drop agents into pipeline stages to automate your hiring process</p>
             </div>
 
-            <div className="grid grid-cols-[280px_1fr] gap-6">
-              {/* Agent Library */}
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-[13px] font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                    <Bot className="w-4 h-4 text-indigo-600" />
-                    Operations Agents
-                  </h4>
-                  <div className="space-y-2">
-                    {operationsAgents.map(agent => (
-                      <div
-                        key={agent.id}
-                        className="p-3 rounded-lg border border-gray-200 bg-white hover:border-indigo-300 transition-all cursor-move"
-                      >
-                        <div className="flex items-center gap-2 mb-1">
-                          <agent.icon className="w-3.5 h-3.5 text-indigo-600" />
-                          <span className="text-[12px] font-semibold text-gray-900">{agent.name}</span>
-                        </div>
-                        <p className="text-[10px] text-gray-500">{agent.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-[13px] font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600" />
-                    Evaluation Agents
-                  </h4>
-                  <div className="space-y-2">
-                    {evaluationAgents.map(agent => (
-                      <div
-                        key={agent.id}
-                        className="p-3 rounded-lg border border-gray-200 bg-white hover:border-emerald-300 transition-all cursor-move"
-                      >
-                        <div className="flex items-center gap-2 mb-1">
-                          <agent.icon className="w-3.5 h-3.5 text-emerald-600" />
-                          <span className="text-[12px] font-semibold text-gray-900">{agent.name}</span>
-                        </div>
-                        <p className="text-[10px] text-gray-500">{agent.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
+            <div className="grid grid-cols-[1fr_280px] gap-6">
               {/* Pipeline Visualization */}
               <div className="p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white border border-gray-200">
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-4">Pipeline Stages</h4>
