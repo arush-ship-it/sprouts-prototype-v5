@@ -327,10 +327,6 @@ export default function CommunicationAnalyticsDashboard() {
 
             </div>
 
-          {/* Action Required */}
-          <div>
-            
-
 
             
 
