@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Bot,
   Clock,
@@ -263,6 +263,14 @@ export default function Agents() {
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isAnalyticsExpanded, setIsAnalyticsExpanded] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAnalyticsExpanded(false);
+    }, 1300);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleToggle = (agentId) => {
     setAgents((prev) =>
