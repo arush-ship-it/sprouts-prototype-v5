@@ -526,58 +526,58 @@ export default function Agents() {
         </div>
 
         {/* Filters */}
-        <div className="flex items-center justify-end gap-3 mb-6">
-          <Select value={filterStage} onValueChange={setFilterStage}>
-            <SelectTrigger className="w-[180px] h-8 text-[12px]">
-              <SelectValue placeholder="All Stages" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Stages</SelectItem>
-              <SelectItem value="Application Review">Application Review</SelectItem>
-              <SelectItem value="Screening">Screening</SelectItem>
-              <SelectItem value="Technical Assessment">Technical Assessment</SelectItem>
-              <SelectItem value="Interview">Interview</SelectItem>
-              <SelectItem value="All Stages">All Stages</SelectItem>
-            </SelectContent>
-          </Select>
+        
 
-          <Select value={filterType} onValueChange={setFilterType}>
-            <SelectTrigger className="w-[180px] h-8 text-[12px]">
-              <SelectValue placeholder="All Types" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="operations">Operations</SelectItem>
-              <SelectItem value="evaluation">Evaluation</SelectItem>
-            </SelectContent>
-          </Select>
 
-          <Select value={filterStatus} onValueChange={setFilterStatus}>
-            <SelectTrigger className="w-[180px] h-8 text-[12px]">
-              <SelectValue placeholder="All Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="idle">Idle</SelectItem>
-            </SelectContent>
-          </Select>
 
-          {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") &&
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 text-[11px]"
-            onClick={() => {
-              setFilterStage("all");
-              setFilterType("all");
-              setFilterStatus("all");
-            }}>
 
-              Clear Filters
-            </Button>
-          }
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {/* Agents Grid */}
         <div className="grid grid-cols-3 gap-4">
