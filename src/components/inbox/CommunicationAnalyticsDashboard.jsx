@@ -289,8 +289,11 @@ export default function CommunicationAnalyticsDashboard() {
               </ResponsiveContainer>
             </div>
           </div>
-
-
+        </div>
+      }
+    </div>
+  );
+}
 
 
 
