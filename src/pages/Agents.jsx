@@ -199,67 +199,50 @@ function AgentCard({ agent, onToggle, onClick }) {
   const isOperations = agent.type === "operations";
 
   return (
-    <div
-      onClick={onClick}
-      className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer">
-
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-start gap-3 flex-1">
-          <div
-            className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
-            isOperations ? "bg-indigo-100" : "bg-emerald-100"}`
-            }>
-
-            <Icon
-              className={`w-5 h-5 ${
-              isOperations ? "text-indigo-600" : "text-emerald-600"}`
-              } />
-
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-[14px] font-semibold text-gray-900 mb-1">
-              {agent.name}
-            </h3>
-            <p className="text-[11px] text-gray-600 line-clamp-2 mb-2">
-              {agent.description}
-            </p>
-            <div className="flex items-center gap-2">
-              <Badge
-                variant="secondary"
-                className={`text-[9px] ${
-                isOperations ?
-                "bg-indigo-50 text-indigo-700" :
-                "bg-emerald-50 text-emerald-700"}`
-                }>
-
-                {agent.type}
-              </Badge>
-              <Badge variant="outline" className="text-[9px]">
-                {agent.stage}
-              </Badge>
-            </div>
-          </div>
-        </div>
-        <Switch
-          checked={agent.isActive}
-          onCheckedChange={(e) => {
-            e.stopPropagation();
-            onToggle(agent.id);
-          }}
-          onClick={(e) => e.stopPropagation()} />
-
+    <div className="rounded-2xl bg-white border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
+      {/* Large Icon Area */}
+      <div className="bg-[#E8E6F5] px-6 pt-8 pb-6 flex items-center justify-center">
+        <Icon className="w-20 h-20 text-[#6B63C5] stroke-[1.5]" />
       </div>
-      <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
-        <div className="flex items-center gap-1.5">
+
+      {/* Content */}
+      <div className="p-5">
+        <h3 className="text-[15px] font-semibold text-gray-900 mb-1">
+          {agent.name}
+        </h3>
+        
+        {/* Status Badge */}
+        <div className="flex items-center gap-1.5 mb-3">
           <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
-          <span className="text-[11px] text-gray-500 capitalize">{agent.status}</span>
+          <span className="text-[12px] text-emerald-600 font-medium capitalize">{agent.status}</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] text-gray-400">
-          <Clock className="w-3 h-3" />
-          {agent.lastActivity}
+
+        <p className="text-[12px] text-gray-600 mb-4 line-clamp-2 min-h-[36px]">
+          {agent.description}
+        </p>
+
+        {/* Metrics */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div>
+            <p className="text-[11px] text-gray-500 mb-1">Total processed</p>
+            <p className="text-[20px] font-semibold text-gray-900">{agent.totalProcessed}</p>
+          </div>
+          <div>
+            <p className="text-[11px] text-gray-500 mb-1">Accuracy</p>
+            <p className="text-[20px] font-semibold text-gray-900">{agent.accuracy}</p>
+          </div>
         </div>
+
+        {/* Button */}
+        <Button 
+          onClick={onClick}
+          className="w-full bg-[#4A5568] hover:bg-[#2D3748] text-white h-10 text-[13px] font-medium"
+        >
+          Setup & Deploy
+        </Button>
       </div>
-    </div>);
+    </div>
+  );
 
 }
 
