@@ -131,15 +131,15 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle>Activity Approvals</DialogTitle>
         </DialogHeader>
 
-        {/* Step 1: Select Agent Approval */}
-        {step === 1 && (
-          <div className="space-y-4">
-            <p className="text-[13px] text-gray-500">
+        {!selectedApproval ? (
+          // Agent List Only
+          <div className="flex-1 overflow-y-auto">
+            <p className="text-[13px] text-gray-500 mb-4">
               Select an agent approval to review candidates
             </p>
             <div className="space-y-3">
@@ -174,146 +174,383 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
               ))}
             </div>
           </div>
-        )}
-
-        {/* Step 2: Review Candidates Carousel */}
-        {step === 2 && selectedApproval && currentCandidate && (
-          <div className="space-y-4">
-            {/* Progress */}
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-[14px] font-semibold text-gray-900">
-                  {selectedApproval.agentName}
-                </h3>
-                <p className="text-[12px] text-gray-500">
-                  Candidate {currentCandidateIndex + 1} of {selectedApproval.candidates.length}
-                </p>
-              </div>
-              <Button variant="outline" size="sm" onClick={() => setStep(1)}>
-                Back to List
-              </Button>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="flex gap-1">
-              {selectedApproval.candidates.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-1 flex-1 rounded-full ${
-                    idx <= currentCandidateIndex ? "bg-indigo-600" : "bg-gray-200"
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Candidate Card */}
-            <div className="p-6 rounded-xl bg-gradient-to-br from-white to-gray-50 border border-gray-200">
-              <div className="flex items-start gap-4 mb-4">
-                <Avatar className="w-16 h-16">
-                  <AvatarFallback className="bg-indigo-100 text-indigo-700 text-[18px] font-semibold">
-                    {currentCandidate.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <h3 className="text-[18px] font-semibold text-gray-900">
-                    {currentCandidate.name}
-                  </h3>
-                  <p className="text-[14px] text-gray-600 mb-2">{currentCandidate.title}</p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="text-[11px]">
-                      <MapPin className="w-3 h-3 mr-1" />
-                      {currentCandidate.location}
-                    </Badge>
-                    <Badge variant="secondary" className="text-[11px]">
-                      <Briefcase className="w-3 h-3 mr-1" />
-                      {currentCandidate.experience}
-                    </Badge>
-                    <Badge variant="secondary" className="text-[11px]">
-                      <GraduationCap className="w-3 h-3 mr-1" />
-                      {currentCandidate.education}
-                    </Badge>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-[24px] font-bold text-indigo-600">
-                    {currentCandidate.score}
-                  </div>
-                  <p className="text-[11px] text-gray-500">AI Score</p>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <h4 className="text-[13px] font-semibold text-gray-900 mb-2">Skills</h4>
-                <div className="flex flex-wrap gap-1.5">
-                  {currentCandidate.skills.map((skill, idx) => (
-                    <Badge key={idx} className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-3 rounded-lg bg-indigo-50 border border-indigo-100">
-                <p className="text-[12px] text-gray-700">
-                  <strong className="text-indigo-700">AI Reasoning:</strong> {currentCandidate.reason}
-                </p>
-              </div>
-
-              {/* Decision */}
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-[13px] font-semibold text-gray-900 mb-3">Your Decision:</p>
-                <div className="flex gap-3">
-                  <Button
-                    onClick={() => handleDecision(currentCandidate.id, "approve")}
-                    className={`flex-1 h-12 ${
-                      decisions[currentCandidate.id] === "approve"
-                        ? "bg-emerald-600 hover:bg-emerald-700"
-                        : "bg-gray-100 text-gray-700 hover:bg-emerald-50"
-                    }`}
-                  >
-                    <ThumbsUp className="w-4 h-4 mr-2" />
-                    Approve
-                  </Button>
-                  <Button
-                    onClick={() => handleDecision(currentCandidate.id, "reject")}
-                    className={`flex-1 h-12 ${
-                      decisions[currentCandidate.id] === "reject"
-                        ? "bg-red-600 hover:bg-red-700"
-                        : "bg-gray-100 text-gray-700 hover:bg-red-50"
-                    }`}
-                  >
-                    <ThumbsDown className="w-4 h-4 mr-2" />
-                    Reject
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+        ) : (
+          // Two Column Layout
+          <div className="flex-1 overflow-hidden flex gap-4">
+            {/* Left Column: Agent List */}
+            <div className="w-96 overflow-y-auto">
               <Button
                 variant="outline"
-                onClick={handlePrevious}
-                disabled={currentCandidateIndex === 0}
+                size="sm"
+                onClick={() => setSelectedApproval(null)}
+                className="mb-4"
               >
-                <ChevronLeft className="w-4 h-4 mr-1" />
-                Previous
+                ← Back
               </Button>
-              {currentCandidateIndex < selectedApproval.candidates.length - 1 ? (
-                <Button onClick={handleNext}>
-                  Next
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              ) : (
-                <Button onClick={handleComplete}>Complete Review</Button>
-              )}
+              <div className="space-y-3">
+                {approvals.map((approval) => (
+                  <button
+                    key={approval.id}
+                    onClick={() => handleSelectApproval(approval)}
+                    className={`w-full p-3 rounded-lg text-left transition-all border-2 ${
+                      selectedApproval.id === approval.id
+                        ? "border-indigo-500 bg-indigo-50"
+                        : "border-gray-200 bg-white hover:border-indigo-200"
+                    }`}
+                  >
+                    <div className="flex items-start gap-2">
+                      <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center shrink-0">
+                        <Bot className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-[13px] font-semibold text-gray-900 truncate">
+                          {approval.agentName}
+                        </h3>
+                        <p className="text-[11px] text-gray-600 mt-0.5">
+                          {approval.description}
+                        </p>
+                        <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200 mt-1.5 text-[10px]">
+                          {approval.candidates.length} candidates
+                        </Badge>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column: Candidate View */}
+            <div className="flex-1 flex flex-col overflow-hidden border-l border-gray-200 pl-4">
+              {/* Header with View Mode Toggles */}
+              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
+                <div>
+                  <h3 className="text-[14px] font-semibold text-gray-900">
+                    {selectedApproval.agentName}
+                  </h3>
+                  <p className="text-[12px] text-gray-500">
+                    {selectedApproval.candidates.length} candidates to review
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant={viewMode === "review" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("review")}
+                    className="h-8"
+                  >
+                    Review Mode
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                    className="h-8"
+                  >
+                    Table Mode
+                  </Button>
+                  <Button
+                    variant={viewMode === "cards" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setViewMode("cards")}
+                    className="h-8"
+                  >
+                    Cards
+                  </Button>
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="flex-1 overflow-y-auto">
+                {viewMode === "review" && currentCandidate && (
+                  <ReviewModeContent
+                    candidate={currentCandidate}
+                    index={currentCandidateIndex}
+                    total={selectedApproval.candidates.length}
+                    decisions={decisions}
+                    onDecision={handleDecision}
+                    onNext={handleNext}
+                    onPrevious={handlePrevious}
+                    onComplete={handleComplete}
+                  />
+                )}
+
+                {viewMode === "list" && (
+                  <ListModeContent
+                    candidates={selectedApproval.candidates}
+                    decisions={decisions}
+                    onDecision={handleDecision}
+                    onComplete={handleComplete}
+                  />
+                )}
+
+                {viewMode === "cards" && (
+                  <CardsModeContent
+                    candidates={selectedApproval.candidates}
+                    decisions={decisions}
+                    onDecision={handleDecision}
+                    onComplete={handleComplete}
+                  />
+                )}
+              </div>
             </div>
           </div>
         )}
       </DialogContent>
     </Dialog>
+  );
+}
+
+function ReviewModeContent({
+  candidate,
+  index,
+  total,
+  decisions,
+  onDecision,
+  onNext,
+  onPrevious,
+  onComplete,
+}) {
+  return (
+    <div className="space-y-4">
+      {/* Progress Bar */}
+      <div className="flex gap-1">
+        {Array.from({ length: total }).map((_, idx) => (
+          <div
+            key={idx}
+            className={`h-1 flex-1 rounded-full ${
+              idx <= index ? "bg-indigo-600" : "bg-gray-200"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Candidate Card */}
+      <div className="p-6 rounded-xl bg-gradient-to-br from-white to-gray-50 border border-gray-200">
+        <div className="flex items-start gap-4 mb-4">
+          <Avatar className="w-16 h-16">
+            <AvatarFallback className="bg-indigo-100 text-indigo-700 text-[18px] font-semibold">
+              {candidate.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1">
+            <div className="flex items-start justify-between mb-2">
+              <div>
+                <h3 className="text-[18px] font-semibold text-gray-900">
+                  {candidate.name}
+                </h3>
+                <p className="text-[14px] text-gray-600">{candidate.title}</p>
+              </div>
+              <div className="text-right">
+                <div className="text-[24px] font-bold text-indigo-600">
+                  {candidate.score}
+                </div>
+                <p className="text-[11px] text-gray-500">AI Score</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-2">
+              <Badge variant="secondary" className="text-[11px]">
+                <MapPin className="w-3 h-3 mr-1" />
+                {candidate.location}
+              </Badge>
+              <Badge variant="secondary" className="text-[11px]">
+                <Briefcase className="w-3 h-3 mr-1" />
+                {candidate.experience}
+              </Badge>
+              <Badge variant="secondary" className="text-[11px]">
+                <GraduationCap className="w-3 h-3 mr-1" />
+                {candidate.education}
+              </Badge>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h4 className="text-[13px] font-semibold text-gray-900 mb-2">Skills</h4>
+          <div className="flex flex-wrap gap-1.5">
+            {candidate.skills.map((skill, idx) => (
+              <Badge key={idx} className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200">
+                {skill}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-3 rounded-lg bg-indigo-50 border border-indigo-100">
+          <p className="text-[12px] text-gray-700">
+            <strong className="text-indigo-700">AI Reasoning:</strong> {candidate.reason}
+          </p>
+        </div>
+
+        {/* Decision */}
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <p className="text-[13px] font-semibold text-gray-900 mb-3">Your Decision:</p>
+          <div className="flex gap-3">
+            <Button
+              onClick={() => onDecision(candidate.id, "approve")}
+              className={`flex-1 h-12 ${
+                decisions[candidate.id] === "approve"
+                  ? "bg-emerald-600 hover:bg-emerald-700"
+                  : "bg-gray-100 text-gray-700 hover:bg-emerald-50"
+              }`}
+            >
+              <ThumbsUp className="w-4 h-4 mr-2" />
+              Approve
+            </Button>
+            <Button
+              onClick={() => onDecision(candidate.id, "reject")}
+              className={`flex-1 h-12 ${
+                decisions[candidate.id] === "reject"
+                  ? "bg-red-600 hover:bg-red-700"
+                  : "bg-gray-100 text-gray-700 hover:bg-red-50"
+              }`}
+            >
+              <ThumbsDown className="w-4 h-4 mr-2" />
+              Reject
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+        <Button variant="outline" onClick={onPrevious} disabled={index === 0}>
+          <ChevronLeft className="w-4 h-4 mr-1" />
+          Previous
+        </Button>
+        {index < total - 1 ? (
+          <Button onClick={onNext}>
+            Next
+            <ChevronRight className="w-4 h-4 ml-1" />
+          </Button>
+        ) : (
+          <Button onClick={onComplete}>Complete Review</Button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
+  return (
+    <div className="space-y-4">
+      <div className="rounded-lg border border-gray-200 overflow-hidden">
+        <table className="w-full text-[13px]">
+          <thead className="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
+              <th className="px-4 py-2 text-left font-semibold text-gray-700">Title</th>
+              <th className="px-4 py-2 text-left font-semibold text-gray-700">Experience</th>
+              <th className="px-4 py-2 text-left font-semibold text-gray-700">Score</th>
+              <th className="px-4 py-2 text-left font-semibold text-gray-700">Decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            {candidates.map((candidate, idx) => (
+              <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
+                <td className="px-4 py-3">{candidate.name}</td>
+                <td className="px-4 py-3 text-gray-600">{candidate.title}</td>
+                <td className="px-4 py-3 text-gray-600">{candidate.experience}</td>
+                <td className="px-4 py-3">
+                  <Badge className="bg-indigo-100 text-indigo-700">
+                    {candidate.score}
+                  </Badge>
+                </td>
+                <td className="px-4 py-3">
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant={
+                        decisions[candidate.id] === "approve" ? "default" : "outline"
+                      }
+                      className="h-7 text-[11px] px-2"
+                      onClick={() => onDecision(candidate.id, "approve")}
+                    >
+                      Approve
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={
+                        decisions[candidate.id] === "reject" ? "destructive" : "outline"
+                      }
+                      className="h-7 text-[11px] px-2"
+                      onClick={() => onDecision(candidate.id, "reject")}
+                    >
+                      Reject
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Button onClick={onComplete} className="w-full">
+        Complete Review
+      </Button>
+    </div>
+  );
+}
+
+function CardsModeContent({ candidates, decisions, onDecision, onComplete }) {
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        {candidates.map((candidate, idx) => (
+          <div key={idx} className="p-4 rounded-lg border border-gray-200 bg-white hover:shadow-sm transition-all">
+            <div className="flex items-start gap-3 mb-3">
+              <Avatar className="w-12 h-12">
+                <AvatarFallback className="bg-indigo-100 text-indigo-700 text-[14px] font-semibold">
+                  {candidate.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <h4 className="text-[13px] font-semibold text-gray-900 truncate">
+                  {candidate.name}
+                </h4>
+                <p className="text-[11px] text-gray-600 truncate">{candidate.title}</p>
+              </div>
+              <div className="text-right">
+                <div className="text-[16px] font-bold text-indigo-600">
+                  {candidate.score}
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant={
+                  decisions[candidate.id] === "approve" ? "default" : "outline"
+                }
+                className="flex-1 h-8 text-[11px]"
+                onClick={() => onDecision(candidate.id, "approve")}
+              >
+                <ThumbsUp className="w-3 h-3 mr-1" />
+                Approve
+              </Button>
+              <Button
+                size="sm"
+                variant={
+                  decisions[candidate.id] === "reject" ? "destructive" : "outline"
+                }
+                className="flex-1 h-8 text-[11px]"
+                onClick={() => onDecision(candidate.id, "reject")}
+              >
+                <ThumbsDown className="w-3 h-3 mr-1" />
+                Reject
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Button onClick={onComplete} className="w-full">
+        Complete Review
+      </Button>
+    </div>
   );
 }
