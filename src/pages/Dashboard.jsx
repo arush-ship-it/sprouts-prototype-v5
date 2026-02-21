@@ -244,9 +244,9 @@ export default function Dashboard() {
           </div>
 
           {/* Data Visualizations */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-3 gap-3 mb-6">
             {/* Pipeline Funnel */}
-            <div className="p-5 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
                 Candidates in Pipeline Funnel
               </h3>
@@ -262,7 +262,7 @@ export default function Dashboard() {
             </div>
 
             {/* Monthly Trends */}
-            <div className="p-5 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
                 JD & Resume Processing/Month
               </h3>
@@ -279,7 +279,7 @@ export default function Dashboard() {
             </div>
 
             {/* Source Breakdown */}
-            <div className="p-5 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
                 Application Source Breakdown
               </h3>
