@@ -224,54 +224,54 @@ export default function CommunicationAnalyticsDashboard() {
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
-                        data={sequenceData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={40}
-                        outerRadius={70}
-                        paddingAngle={2}
-                        dataKey="value">
+                      data={sequenceData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                      paddingAngle={2}
+                      dataKey="value">
 
                         {sequenceData.map((entry, idx) =>
-                        <Cell key={`cell-${idx}`} fill={entry.fill} />
-                        )}
+                      <Cell key={`cell-${idx}`} fill={entry.fill} />
+                      )}
                       </Pie>
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
                 <div className="flex flex-col gap-1.5 mt-2 text-[11px]">
                   {sequenceData.map((item, idx) =>
-                  <div key={idx} className="flex items-center gap-2">
+                <div key={idx} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.fill }}></div>
                     <span className="text-gray-600">{item.name}</span>
                     <span className="font-semibold text-gray-900 ml-auto">{item.value}</span>
                   </div>
-                  )}
+                )}
                 </div>
               </div>
             </div>
 
             {/* Bottom Row: Trend Chart */}
-            <div>
-              <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-                7-Day Trend
-              </h3>
-              <div className="h-[240px] bg-gray-50 rounded-lg p-4">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={sequenceTrendData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                    <XAxis dataKey="day" tick={{ fontSize: 11 }} />
-                    <YAxis tick={{ fontSize: 11 }} />
-                    <Tooltip contentStyle={{ borderRadius: "8px", fontSize: "11px" }} />
-                    <Legend wrapperStyle={{ fontSize: "11px" }} />
-                    <Bar dataKey="active" fill="#10b981" name="Active" />
-                    <Bar dataKey="completed" fill="#6366f1" name="Completed" />
-                    <Bar dataKey="paused" fill="#f59e0b" name="Paused" />
-                    <Bar dataKey="errors" fill="#ef4444" name="Errors" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
