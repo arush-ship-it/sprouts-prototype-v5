@@ -214,9 +214,9 @@ export default function CommunicationAnalyticsDashboard() {
             </div>
 
             {/* Bottom Row: Chart + Donut */}
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 gap-6">
               {/* Trend Chart */}
-              <div className="col-span-2">
+              <div>
                 <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
                   7-Day Trend
                 </h3>
