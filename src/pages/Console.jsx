@@ -5,7 +5,6 @@ import CandidateList from "@/components/console/CandidateList";
 import PipelineView from "@/components/console/PipelineView";
 import PipelineBuilderModal from "@/components/console/PipelineBuilderModal";
 import ActivityApprovalModal from "@/components/console/ActivityApprovalModal";
-import AITalentFinderPanel from "@/components/console/AITalentFinderPanel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Workflow, AlertCircle } from "lucide-react";
@@ -24,12 +23,7 @@ export default function Console() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#FAFAFA]">
-      {/* Left Panel - AI Talent Finder */}
-      <AITalentFinderPanel />
-      
-      {/* Main Content Area */}
-      <div className="flex-1 overflow-auto">
+    <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
         <JobHeader onActivityApprovalClick={() => setIsActivityApprovalOpen(true)} />
         <SubTabs 
           activeTab={activeTab} 
@@ -70,7 +64,6 @@ export default function Console() {
           isOpen={isActivityApprovalOpen}
           onClose={() => setIsActivityApprovalOpen(false)}
         />
-      </div>
     </div>
   );
 }

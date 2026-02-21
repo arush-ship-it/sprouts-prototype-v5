@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TabSwitcher from "@/components/shared/TabSwitcher";
+import AITalentFinderPanel from "@/components/console/AITalentFinderPanel";
 
 const candidates = [
   {
@@ -294,93 +295,8 @@ export default function TalentPool() {
       </div>
       
       <div className="flex flex-1 overflow-hidden">
-      {/* Left Panel */}
-      <div className={`${isMaximized ? 'w-1/2' : 'w-[420px]'} border-r border-gray-200 bg-white flex flex-col transition-all`}>
-        <Tabs defaultValue="ai" className="flex-1 flex flex-col">
-          <div className="px-6 pt-4 border-b border-gray-200">
-            <div className="flex items-center justify-between mb-3">
-              <TabsList>
-                <TabsTrigger value="ai">Talk to AI</TabsTrigger>
-                <TabsTrigger value="manual">Source Manually</TabsTrigger>
-              </TabsList>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-                onClick={() => setIsMaximized(!isMaximized)}
-              >
-                {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-              </Button>
-            </div>
-          </div>
-
-          <TabsContent value="ai" className="flex-1 flex flex-col mt-0">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
-                </div>
-                <h2 className="text-[16px] font-semibold text-gray-900">
-                  AI Talent Finder
-                </h2>
-              </div>
-              <p className="text-[12px] text-gray-500">
-                Describe your ideal candidate and I'll search the talent pool
-              </p>
-            </div>
-
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {messages.map((msg, idx) => (
-                <div
-                  key={idx}
-                  className={`flex ${
-                    msg.role === "user" ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  <div
-                    className={`max-w-[85%] px-4 py-3 rounded-2xl text-[13px] ${
-                      msg.role === "user"
-                        ? "bg-emerald-600 text-white"
-                        : "bg-gray-100 text-gray-900"
-                    }`}
-                  >
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Input */}
-            <div className="p-4 border-t border-gray-200">
-              <div className="flex gap-2">
-                <Textarea
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSend();
-                    }
-                  }}
-                  placeholder="e.g., I need a senior React developer with 5+ years experience..."
-                  className="resize-none text-[13px]"
-                  rows={3}
-                />
-                <Button onClick={handleSend} size="icon" className="shrink-0">
-                  <Send className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="manual" className="flex-1 flex items-center justify-center mt-0">
-            <div className="text-center p-8">
-              <p className="text-[14px] text-gray-500">Source candidates manually</p>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+      {/* Left Panel - AI Talent Finder */}
+      <AITalentFinderPanel />
 
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto">
