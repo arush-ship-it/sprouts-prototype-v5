@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, Sparkles, Briefcase, MapPin, DollarSign, Clock } from "lucide-react";
+import { Send, Sparkles, Briefcase, MapPin, DollarSign, Clock, Bell, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import TabSwitcher from "@/components/shared/TabSwitcher";
@@ -56,7 +56,21 @@ export default function CreateJob() {
     <div className="flex flex-col h-screen bg-[#FAFAFA]">
       {/* Top Navigation */}
       <div className="px-6 py-4 bg-[#FAFAFA] border-b border-gray-200">
-        <TabSwitcher activePage="CreateJob" />
+        <div className="flex items-center justify-between">
+          <TabSwitcher activePage="CreateJob" />
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Bell className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Settings className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" className="h-9 gap-2">
+              <User className="w-4 h-4" />
+              <span className="text-[13px] font-medium">John Doe</span>
+            </Button>
+          </div>
+        </div>
       </div>
       
       <div className="flex flex-1 overflow-hidden">
