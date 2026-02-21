@@ -294,35 +294,3 @@ export default function CommunicationAnalyticsDashboard() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-            </div>
-
-
-            
-
-
-
-
-
-
-
-
-
-
-          </div>
-        </div>
-      }
-    </div>);
-
-}
