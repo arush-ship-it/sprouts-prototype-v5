@@ -287,15 +287,15 @@ export default function Agents() {
   // Calculate analytics data
   const totalProcessed = agents.reduce((sum, agent) => sum + agent.totalProcessed, 0);
   const avgAccuracy = (agents.reduce((sum, agent) => sum + parseFloat(agent.accuracy), 0) / agents.length).toFixed(1);
-  const activeAgents = agents.filter(a => a.status === "active").length;
+  const activeAgents = agents.filter((a) => a.status === "active").length;
 
   // Trends data (mock weekly data)
   const trendData = [
-    { week: "Week 1", processed: 320, accuracy: 91 },
-    { week: "Week 2", processed: 450, accuracy: 92 },
-    { week: "Week 3", processed: 580, accuracy: 93 },
-    { week: "Week 4", processed: 710, accuracy: 94 },
-  ];
+  { week: "Week 1", processed: 320, accuracy: 91 },
+  { week: "Week 2", processed: 450, accuracy: 92 },
+  { week: "Week 3", processed: 580, accuracy: 93 },
+  { week: "Week 4", processed: 710, accuracy: 94 }];
+
 
   // Top and bottom performers
   const sortedByAccuracy = [...agents].sort((a, b) => parseFloat(b.accuracy) - parseFloat(a.accuracy));
@@ -304,9 +304,9 @@ export default function Agents() {
 
   // Agent type distribution
   const typeDistribution = [
-    { name: "Evaluation", value: agents.filter(a => a.type === "evaluation").length, color: "#10b981" },
-    { name: "Operations", value: agents.filter(a => a.type === "operations").length, color: "#6366f1" },
-  ];
+  { name: "Evaluation", value: agents.filter((a) => a.type === "evaluation").length, color: "#10b981" },
+  { name: "Operations", value: agents.filter((a) => a.type === "operations").length, color: "#6366f1" }];
+
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
@@ -336,8 +336,8 @@ export default function Agents() {
 
         {/* Analytics Dashboard */}
         <div className={`mb-6 rounded-xl border border-gray-200 bg-white transition-all duration-300 ${
-          isAnalyticsExpanded ? "p-6" : "p-4"
-        }`}>
+        isAnalyticsExpanded ? "p-6" : "p-4"}`
+        }>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shrink-0">
@@ -347,27 +347,27 @@ export default function Agents() {
                 <h3 className="text-[15px] font-semibold text-gray-900">
                   {isAnalyticsExpanded ? "Analytics Dashboard" : "Analytics Dashboard - Click to Expand"}
                 </h3>
-                {!isAnalyticsExpanded && (
-                  <p className="text-[12px] text-gray-600 mt-0.5">View agent performance insights</p>
-                )}
+                {!isAnalyticsExpanded &&
+                <p className="text-[12px] text-gray-600 mt-0.5">View agent performance insights</p>
+                }
               </div>
             </div>
             <Button
               variant="ghost"
               size="sm"
               className="h-8"
-              onClick={() => setIsAnalyticsExpanded(!isAnalyticsExpanded)}
-            >
-              {isAnalyticsExpanded ? (
-                <Minimize2 className="w-4 h-4" />
-              ) : (
-                <Maximize2 className="w-4 h-4" />
-              )}
+              onClick={() => setIsAnalyticsExpanded(!isAnalyticsExpanded)}>
+
+              {isAnalyticsExpanded ?
+              <Minimize2 className="w-4 h-4" /> :
+
+              <Maximize2 className="w-4 h-4" />
+              }
             </Button>
           </div>
 
-          {isAnalyticsExpanded && (
-            <div className="mt-6 space-y-6">
+          {isAnalyticsExpanded &&
+          <div className="mt-6 space-y-6">
               {/* Overall Metrics */}
               <div>
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Overall Performance</h4>
@@ -396,7 +396,7 @@ export default function Agents() {
                       <p className="text-[11px] font-medium text-blue-700">Active Agents</p>
                     </div>
                     <p className="text-[28px] font-bold text-blue-900">{activeAgents}/{agents.length}</p>
-                    <p className="text-[10px] text-blue-600 mt-1">{((activeAgents/agents.length)*100).toFixed(0)}% deployment rate</p>
+                    <p className="text-[10px] text-blue-600 mt-1">{(activeAgents / agents.length * 100).toFixed(0)}% deployment rate</p>
                   </div>
 
                   <div className="p-4 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100">
@@ -435,28 +435,28 @@ export default function Agents() {
                   <ResponsiveContainer width="100%" height={200}>
                     <PieChart>
                       <Pie
-                        data={typeDistribution}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={50}
-                        outerRadius={80}
-                        paddingAngle={5}
-                        dataKey="value"
-                      >
-                        {typeDistribution.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
+                      data={typeDistribution}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={80}
+                      paddingAngle={5}
+                      dataKey="value">
+
+                        {typeDistribution.map((entry, index) =>
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                      )}
                       </Pie>
                       <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
                     </PieChart>
                   </ResponsiveContainer>
                   <div className="flex items-center justify-center gap-4 mt-2">
-                    {typeDistribution.map((item) => (
-                      <div key={item.name} className="flex items-center gap-2">
+                    {typeDistribution.map((item) =>
+                  <div key={item.name} className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
                         <span className="text-[11px] text-gray-600">{item.name}: {item.value}</span>
                       </div>
-                    ))}
+                  )}
                   </div>
                 </div>
               </div>
@@ -464,57 +464,57 @@ export default function Agents() {
               {/* Top and Under Performers */}
               <div className="grid grid-cols-2 gap-4">
                 {/* Top Performers */}
-                <div className="p-5 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100">
-                  <div className="flex items-center gap-2 mb-4">
-                    <TrendingUp className="w-4 h-4 text-emerald-600" />
-                    <h4 className="text-[13px] font-semibold text-emerald-900">Top Performers</h4>
-                  </div>
-                  <div className="space-y-3">
-                    {topPerformers.map((agent, idx) => (
-                      <div key={agent.id} className="flex items-center gap-3 p-3 rounded-lg bg-white border border-emerald-200">
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-[11px] font-bold">
-                          {idx + 1}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[12px] font-semibold text-gray-900 truncate">{agent.name}</p>
-                          <p className="text-[10px] text-gray-600">{agent.totalProcessed} processed</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-[14px] font-bold text-emerald-600">{agent.accuracy}</p>
-                          <p className="text-[9px] text-emerald-600">accuracy</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 {/* Under Performers */}
-                <div className="p-5 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100">
-                  <div className="flex items-center gap-2 mb-4">
-                    <TrendingDown className="w-4 h-4 text-amber-600" />
-                    <h4 className="text-[13px] font-semibold text-amber-900">Needs Attention</h4>
-                  </div>
-                  <div className="space-y-3">
-                    {underPerformers.map((agent, idx) => (
-                      <div key={agent.id} className="flex items-center gap-3 p-3 rounded-lg bg-white border border-amber-200">
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-[11px] font-bold">
-                          {idx + 1}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[12px] font-semibold text-gray-900 truncate">{agent.name}</p>
-                          <p className="text-[10px] text-gray-600">{agent.totalProcessed} processed</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-[14px] font-bold text-amber-600">{agent.accuracy}</p>
-                          <p className="text-[9px] text-amber-600">accuracy</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               </div>
             </div>
-          )}
+          }
         </div>
 
         {/* Filters */}
