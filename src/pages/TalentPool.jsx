@@ -168,7 +168,7 @@ export default function TalentPool() {
       <div className="px-6 py-4 bg-[#FAFAFA] border-b border-gray-200">
         <div className="flex items-center justify-between">
           <TabSwitcher activePage="TalentPool" />
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" className="h-9 w-9">
               <Bell className="w-4 h-4" />
             </Button>
