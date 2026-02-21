@@ -124,13 +124,44 @@ export default function PipelineView() {
 
             {/* Candidates */}
             <div className="flex flex-col gap-2">
-              {stage.candidates.map((candidate, idx) =>
+              {stage.candidates.slice(0, 3).map((candidate, idx) =>
             <CandidatePipelineCard key={idx} candidate={candidate} />
             )}
+              {stage.candidates.length > 3 &&
+              <div className="text-[11px] text-gray-500 px-3 py-2">
+                +{stage.candidates.length - 3} more
+              </div>
+              }
             </div>
-          </div>
-        )}
-      </div>
-    </div>);
+            </div>
+            )}
+            </div>
+
+            {/* Expanded Stage Modal */}
+            <Dialog open={expandedStageId !== null} onOpenChange={() => setExpandedStageId(null)}>
+            <DialogContent className="max-w-2xl">
+            {expandedStageId && stages.find(s => s.id === expandedStageId) &&
+            (() => {
+              const stage = stages.find(s => s.id === expandedStageId);
+              return (
+                <>
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2">
+                      <Users className="w-5 h-5" />
+                      {stage.name} - All Candidates ({stage.candidates.length})
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="grid grid-cols-2 gap-3 max-h-[60vh] overflow-y-auto">
+                    {stage.candidates.map((candidate, idx) =>
+                    <CandidatePipelineCard key={idx} candidate={candidate} />
+                    )}
+                  </div>
+                </>
+              );
+            })()
+            }
+            </DialogContent>
+            </Dialog>
+            </div>);
 
 }
