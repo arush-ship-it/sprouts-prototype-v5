@@ -46,7 +46,7 @@ export default function AITalentFinderPanel() {
   });
 
   return (
-    <div className="bg-white mx-3 my-3 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col h-screen">
+    <div className="bg-white mx-2 my-2 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col h-screen">
       {/* Top Tabs */}
       <div className="border-b border-gray-200 px-5 pt-5 pb-3">
         <div className="flex items-center justify-between mb-4">
@@ -76,7 +76,7 @@ export default function AITalentFinderPanel() {
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <RefreshCw className="w-4 h-4 text-gray-500" />
             </Button>
-            <Button size="sm" className="h-8 px-4 text-[12px]">
+            <Button size="sm" className="bg-slate-100 text-slate-600 px-4 font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
               Save
             </Button>
           </div>
@@ -107,17 +107,17 @@ export default function AITalentFinderPanel() {
 
       {/* AI Powered Filters Section */}
       <div className="flex-1 overflow-y-auto">
-        <div className="px-5 py-4 border-b border-gray-100">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-[15px] font-semibold text-gray-900">
-              AI Powered Filters
-            </h3>
-            <Sparkles className="w-4 h-4 text-amber-500" />
-          </div>
-          <p className="text-[12px] text-gray-500">
-            Chat with us to find the perfect fit your job
-          </p>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
 
         {/* Conversation Area */}
         <div className="px-5 py-4 space-y-4">
