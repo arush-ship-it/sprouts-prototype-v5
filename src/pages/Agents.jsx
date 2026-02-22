@@ -206,7 +206,7 @@ function AgentCard({ agent, onToggle, onClick }) {
   return (
     <div className="bg-white rounded-3xl border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
       {/* Large Icon Area */}
-      <div className="bg-[#f2f2f2] pt-14 pb-20 px-4 rounded-t-2xl from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
+      <div className="bg-[#f2f2f2] pt-14 pb-20 px-4 rounded-3xl from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
         
       </div>
 
@@ -241,7 +241,7 @@ function AgentCard({ agent, onToggle, onClick }) {
         {/* Buttons */}
         <div className="flex flex-col gap-2">
           <Button
-            onClick={onClick} className="flex-1 bg-[#2563EB] text-white px-6 py-2 font-medium opacity-100 rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-[#1d4ed8] h-10">
+            onClick={onClick} className="bg-slate-50 text-blue-600 px-6 py-2 text-sm font-medium opacity-100 rounded-md flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-[#1d4ed8] h-10">
             Setup & Deploy
           </Button>
           <Button
