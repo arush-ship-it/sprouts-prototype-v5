@@ -10,43 +10,43 @@ export default function AITalentFinderPanel() {
   const [inputMessage, setInputMessage] = useState("");
 
   const [conversation, setConversation] = useState([
-    {
-      role: "ai",
-      content: "Perfect ! all the filters have been applied, and are visible in the above panel. What other filters can SproutsAI help you with?",
-      categories: ["Skills", "Education", "Experience", "Attributes"]
-    }
-  ]);
+  {
+    role: "ai",
+    content: "Perfect ! all the filters have been applied, and are visible in the above panel. What other filters can SproutsAI help you with?",
+    categories: ["Skills", "Education", "Experience", "Attributes"]
+  }]
+  );
 
   const [appliedFilters] = useState({
     skills: ["Java", "Python"],
     education: {
       degree: "Masters (34)",
       institutions: [
-        { name: "Harvard (2)", checked: true },
-        { name: "Brown University (8)", checked: true },
-        { name: "Cornell University (3)", checked: true },
-        { name: "MIT (1)", checked: true },
-        { name: "Caltech (11)", checked: true },
-        { name: "Stanford University (6)", checked: true },
-        { name: "Ucla (5)", checked: true },
-        { name: "USC (8)", checked: true }
-      ]
+      { name: "Harvard (2)", checked: true },
+      { name: "Brown University (8)", checked: true },
+      { name: "Cornell University (3)", checked: true },
+      { name: "MIT (1)", checked: true },
+      { name: "Caltech (11)", checked: true },
+      { name: "Stanford University (6)", checked: true },
+      { name: "Ucla (5)", checked: true },
+      { name: "USC (8)", checked: true }]
+
     },
     jobTitles: {
       primary: "Software Engineer (34)",
       similar: ["Lead Engineer (2)", "Full Stack Engineer (8)", "Principal Engineer (3)"]
     },
     attributes: [
-      { name: "Stability", checked: true },
-      { name: "Career Growth", checked: true },
-      { name: "Startup Experience", checked: true },
-      { name: "Open To A New Role", checked: false },
-      { name: "Seniority Filter", checked: false }
-    ]
+    { name: "Stability", checked: true },
+    { name: "Career Growth", checked: true },
+    { name: "Startup Experience", checked: true },
+    { name: "Open To A New Role", checked: false },
+    { name: "Seniority Filter", checked: false }]
+
   });
 
   return (
-    <div className="w-[420px] border-r border-gray-200 bg-white flex flex-col h-screen">
+    <div className="bg-white mx-3 my-3 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col h-screen">
       {/* Top Tabs */}
       <div className="border-b border-gray-200 px-5 pt-5 pb-3">
         <div className="flex items-center justify-between mb-4">
@@ -54,21 +54,21 @@ export default function AITalentFinderPanel() {
             <button
               onClick={() => setActiveMode("ai")}
               className={`px-4 py-2 text-[13px] font-semibold transition-colors ${
-                activeMode === "ai"
-                  ? "text-gray-900"
-                  : "text-gray-400 hover:text-gray-600"
-              }`}
-            >
+              activeMode === "ai" ?
+              "text-gray-900" :
+              "text-gray-400 hover:text-gray-600"}`
+              }>
+
               Create With Ai
             </button>
             <button
               onClick={() => setActiveMode("manual")}
               className={`px-4 py-2 text-[13px] font-semibold transition-colors ${
-                activeMode === "manual"
-                  ? "text-gray-900"
-                  : "text-gray-400 hover:text-gray-600"
-              }`}
-            >
+              activeMode === "manual" ?
+              "text-gray-900" :
+              "text-gray-400 hover:text-gray-600"}`
+              }>
+
               Edit Manually
             </button>
           </div>
@@ -85,8 +85,8 @@ export default function AITalentFinderPanel() {
         {/* Active Filters Section */}
         <div
           className="rounded-xl border border-gray-200 bg-gray-50 p-4 cursor-pointer hover:bg-gray-100 transition-colors"
-          onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}
-        >
+          onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
+
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-[14px] font-semibold text-gray-900">
@@ -96,11 +96,11 @@ export default function AITalentFinderPanel() {
                 Last Updated 14:08 12/08/25
               </p>
             </div>
-            {isFiltersExpanded ? (
-              <ChevronUp className="w-4 h-4 text-gray-400" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-gray-400" />
-            )}
+            {isFiltersExpanded ?
+            <ChevronUp className="w-4 h-4 text-gray-400" /> :
+
+            <ChevronDown className="w-4 h-4 text-gray-400" />
+            }
           </div>
         </div>
       </div>
@@ -147,11 +147,11 @@ export default function AITalentFinderPanel() {
               <div className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Skills</h4>
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {appliedFilters.skills.map((skill, idx) => (
-                    <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
+                  {appliedFilters.skills.map((skill, idx) =>
+                  <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
                       ✓ {skill}
                     </Badge>
-                  ))}
+                  )}
                 </div>
                 <div className="flex flex-wrap gap-2 mb-2">
                   <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
@@ -241,12 +241,12 @@ export default function AITalentFinderPanel() {
               
               <div className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
                 <div className="space-y-3 mb-4">
-                  {appliedFilters.attributes.map((attr, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
+                  {appliedFilters.attributes.map((attr, idx) =>
+                  <div key={idx} className="flex items-center gap-2">
                       <Checkbox checked={attr.checked} className="rounded" />
                       <label className="text-[13px] text-gray-900">{attr.name}</label>
                     </div>
-                  ))}
+                  )}
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   <Button variant="outline" size="sm" className="h-7 text-[11px] gap-1">
@@ -332,20 +332,20 @@ export default function AITalentFinderPanel() {
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-2">Top Institution</h4>
                 <p className="text-[12px] text-gray-600 mb-3">Ivy League Universities (Preset)</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {appliedFilters.education.institutions.slice(0, 4).map((uni, idx) => (
-                    <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
+                  {appliedFilters.education.institutions.slice(0, 4).map((uni, idx) =>
+                  <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
                       ✓ {uni.name}
                     </Badge>
-                  ))}
+                  )}
                 </div>
 
                 <p className="text-[12px] text-gray-600 mb-3">Top Westcoast Universities (Preset)</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {appliedFilters.education.institutions.slice(4, 8).map((uni, idx) => (
-                    <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
+                  {appliedFilters.education.institutions.slice(4, 8).map((uni, idx) =>
+                  <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
                       ✓ {uni.name}
                     </Badge>
-                  ))}
+                  )}
                 </div>
 
                 <Button variant="outline" size="sm" className="h-7 text-[11px] mb-4">
@@ -463,11 +463,11 @@ export default function AITalentFinderPanel() {
 
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Similar Job Title</h4>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {appliedFilters.jobTitles.similar.map((title, idx) => (
-                    <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
+                  {appliedFilters.jobTitles.similar.map((title, idx) =>
+                  <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
                       ✓ {title}
                     </Badge>
-                  ))}
+                  )}
                 </div>
 
                 <div className="flex gap-2 mb-4">
@@ -497,13 +497,13 @@ export default function AITalentFinderPanel() {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             placeholder="Let SproutsAI assist you"
-            className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
-          />
+            className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
+
           <Button size="icon" className="h-10 w-10 shrink-0 bg-blue-500 hover:bg-blue-600">
             <Send className="w-4 h-4" />
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
