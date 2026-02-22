@@ -79,7 +79,7 @@ export default function CreateJob() {
       
       <div className="flex flex-1 overflow-hidden">
       {/* Left Panel - AI Chat */}
-      <div className="bg-white mx-3 my-3 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
+      <div className="bg-white mx-2 my-2 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-2.5 mb-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
