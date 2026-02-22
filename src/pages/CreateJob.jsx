@@ -82,7 +82,7 @@ export default function CreateJob() {
       <div className="bg-white mx-2 my-2 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+            <div className="bg-slate-400 rounded-3xl w-8 h-8 from-violet-500 to-purple-600 flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <h2 className="text-[16px] font-semibold text-gray-900">
@@ -146,7 +146,7 @@ export default function CreateJob() {
             <h1 className="text-[24px] font-semibold text-gray-900">
               Job Preview
             </h1>
-            <Button>
+            <Button className="bg-blue-600 text-primary-foreground px-4 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-9">
               <Sparkles className="w-4 h-4 mr-2" />
               Publish Job
             </Button>
