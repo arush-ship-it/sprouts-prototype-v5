@@ -13,8 +13,8 @@ import {
   Maximize2,
   Bell,
   Settings,
-  User,
-} from "lucide-react";
+  User } from
+"lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import TabSwitcher from "@/components/shared/TabSwitcher";
@@ -30,168 +30,168 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+  ResponsiveContainer } from
+"recharts";
 
 const analyticsCards = [
-  {
-    id: 1,
-    title: "Applicants per Job Posting",
-    value: "45.2",
-    subtitle: "Average per posting",
-    icon: Users,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-  },
-  {
-    id: 2,
-    title: "JD Processed This Month",
-    value: "23",
-    subtitle: "+12% from last month",
-    icon: FileText,
-    color: "text-violet-600",
-    bg: "bg-violet-50",
-  },
-  {
-    id: 3,
-    title: "Candidates in Pipeline",
-    value: "342",
-    subtitle: "Across all jobs",
-    icon: TrendingUp,
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
-  },
-  {
-    id: 4,
-    title: "New Applications",
-    value: "28",
-    subtitle: "To be reviewed",
-    icon: CheckSquare,
-    color: "text-orange-600",
-    bg: "bg-orange-50",
-  },
-  {
-    id: 5,
-    title: "Resumes Processed This Month",
-    value: "156",
-    subtitle: "+18% from last month",
-    icon: FileText,
-    color: "text-pink-600",
-    bg: "bg-pink-50",
-  },
-  {
-    id: 6,
-    title: "Application Source Breakdown",
-    value: "Direct: 45%",
-    subtitle: "LinkedIn: 35%, Others: 20%",
-    icon: PieChart,
-    color: "text-amber-600",
-    bg: "bg-amber-50",
-  },
-];
+{
+  id: 1,
+  title: "Applicants per Job Posting",
+  value: "45.2",
+  subtitle: "Average per posting",
+  icon: Users,
+  color: "text-blue-600",
+  bg: "bg-blue-50"
+},
+{
+  id: 2,
+  title: "JD Processed This Month",
+  value: "23",
+  subtitle: "+12% from last month",
+  icon: FileText,
+  color: "text-violet-600",
+  bg: "bg-violet-50"
+},
+{
+  id: 3,
+  title: "Candidates in Pipeline",
+  value: "342",
+  subtitle: "Across all jobs",
+  icon: TrendingUp,
+  color: "text-emerald-600",
+  bg: "bg-emerald-50"
+},
+{
+  id: 4,
+  title: "New Applications",
+  value: "28",
+  subtitle: "To be reviewed",
+  icon: CheckSquare,
+  color: "text-orange-600",
+  bg: "bg-orange-50"
+},
+{
+  id: 5,
+  title: "Resumes Processed This Month",
+  value: "156",
+  subtitle: "+18% from last month",
+  icon: FileText,
+  color: "text-pink-600",
+  bg: "bg-pink-50"
+},
+{
+  id: 6,
+  title: "Application Source Breakdown",
+  value: "Direct: 45%",
+  subtitle: "LinkedIn: 35%, Others: 20%",
+  icon: PieChart,
+  color: "text-amber-600",
+  bg: "bg-amber-50"
+}];
+
 
 const jobs = [
-  {
-    id: 1,
-    title: "Senior Product Designer",
-    department: "Design",
-    applicants: 156,
-    inPipeline: 34,
-    status: "Active",
-  },
-  {
-    id: 2,
-    title: "Frontend Engineer",
-    department: "Engineering",
-    applicants: 203,
-    inPipeline: 45,
-    status: "Active",
-  },
-  {
-    id: 3,
-    title: "Product Manager",
-    department: "Product",
-    applicants: 89,
-    inPipeline: 12,
-    status: "Active",
-  },
-];
+{
+  id: 1,
+  title: "Senior Product Designer",
+  department: "Design",
+  applicants: 156,
+  inPipeline: 34,
+  status: "Active"
+},
+{
+  id: 2,
+  title: "Frontend Engineer",
+  department: "Engineering",
+  applicants: 203,
+  inPipeline: 45,
+  status: "Active"
+},
+{
+  id: 3,
+  title: "Product Manager",
+  department: "Product",
+  applicants: 89,
+  inPipeline: 12,
+  status: "Active"
+}];
+
 
 const messages = [
-  {
-    id: 1,
-    candidate: "Maya Johnson",
-    subject: "Interview Follow-up",
-    time: "2 hours ago",
-    unread: true,
-  },
-  {
-    id: 2,
-    candidate: "Alex Chen",
-    subject: "Application Status Inquiry",
-    time: "5 hours ago",
-    unread: true,
-  },
-  {
-    id: 3,
-    candidate: "Sarah Mitchell",
-    subject: "Thank You Note",
-    time: "1 day ago",
-    unread: false,
-  },
-];
+{
+  id: 1,
+  candidate: "Maya Johnson",
+  subject: "Interview Follow-up",
+  time: "2 hours ago",
+  unread: true
+},
+{
+  id: 2,
+  candidate: "Alex Chen",
+  subject: "Application Status Inquiry",
+  time: "5 hours ago",
+  unread: true
+},
+{
+  id: 3,
+  candidate: "Sarah Mitchell",
+  subject: "Thank You Note",
+  time: "1 day ago",
+  unread: false
+}];
+
 
 const activities = [
-  {
-    id: 1,
-    type: "approval",
-    description: "3 candidates moved to interview stage",
-    time: "1 hour ago",
-  },
-  {
-    id: 2,
-    type: "agent",
-    description: "Resume screening completed for 12 applicants",
-    time: "3 hours ago",
-  },
-  {
-    id: 3,
-    type: "automation",
-    description: "5 candidates auto-qualified for screening",
-    time: "5 hours ago",
-  },
-];
+{
+  id: 1,
+  type: "approval",
+  description: "3 candidates moved to interview stage",
+  time: "1 hour ago"
+},
+{
+  id: 2,
+  type: "agent",
+  description: "Resume screening completed for 12 applicants",
+  time: "3 hours ago"
+},
+{
+  id: 3,
+  type: "automation",
+  description: "5 candidates auto-qualified for screening",
+  time: "5 hours ago"
+}];
+
 
 const pipelineFunnelData = [
-  { stage: "Applied", count: 342 },
-  { stage: "Screening", count: 156 },
-  { stage: "Assessment", count: 89 },
-  { stage: "Interview", count: 45 },
-  { stage: "Offer", count: 12 },
-];
+{ stage: "Applied", count: 342 },
+{ stage: "Screening", count: 156 },
+{ stage: "Assessment", count: 89 },
+{ stage: "Interview", count: 45 },
+{ stage: "Offer", count: 12 }];
+
 
 const monthlyData = [
-  { month: "Jan", jd: 18, resumes: 120 },
-  { month: "Feb", jd: 23, resumes: 156 },
-  { month: "Mar", jd: 21, resumes: 142 },
-  { month: "Apr", jd: 19, resumes: 134 },
-];
+{ month: "Jan", jd: 18, resumes: 120 },
+{ month: "Feb", jd: 23, resumes: 156 },
+{ month: "Mar", jd: 21, resumes: 142 },
+{ month: "Apr", jd: 19, resumes: 134 }];
+
 
 const sourceData = [
-  { name: "Direct", value: 45, color: "#6366f1" },
-  { name: "LinkedIn", value: 35, color: "#8b5cf6" },
-  { name: "Referral", value: 12, color: "#ec4899" },
-  { name: "Others", value: 8, color: "#f59e0b" },
-];
+{ name: "Direct", value: 45, color: "#6366f1" },
+{ name: "LinkedIn", value: 35, color: "#8b5cf6" },
+{ name: "Referral", value: 12, color: "#ec4899" },
+{ name: "Others", value: 8, color: "#f59e0b" }];
+
 
 export default function Dashboard() {
   const [isChatMinimized, setIsChatMinimized] = useState(true);
   const [chatMessages, setChatMessages] = useState([
-    {
-      role: "assistant",
-      content: "Hi! I'm your analytics assistant. Ask me anything about your recruitment data.",
-    },
-  ]);
+  {
+    role: "assistant",
+    content: "Hi! I'm your analytics assistant. Ask me anything about your recruitment data."
+  }]
+  );
   const [chatInput, setChatInput] = useState("");
 
   const handleSendChat = () => {
@@ -200,12 +200,12 @@ export default function Dashboard() {
     setChatInput("");
     setTimeout(() => {
       setChatMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Based on the data, your top performing source is direct applications at 45%. Your conversion rate from screening to interview is around 29%.",
-        },
-      ]);
+      ...prev,
+      {
+        role: "assistant",
+        content: "Based on the data, your top performing source is direct applications at 45%. Your conversion rate from screening to interview is around 29%."
+      }]
+      );
     }, 500);
   };
 
@@ -292,33 +292,33 @@ export default function Dashboard() {
                     innerRadius={40}
                     outerRadius={70}
                     paddingAngle={2}
-                    dataKey="value"
-                  >
-                    {sourceData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
+                    dataKey="value">
+
+                    {sourceData.map((entry, index) =>
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    )}
                   </Pie>
                   <Tooltip />
                 </RechartsPieChart>
               </ResponsiveContainer>
               <div className="flex flex-wrap gap-2 mt-3">
-                {sourceData.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-1.5">
+                {sourceData.map((item, idx) =>
+                <div key={idx} className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
                     <span className="text-[10px] text-gray-600">{item.name} {item.value}%</span>
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
 
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-3 gap-4 mb-6">
-            {analyticsCards.map((card) => (
-              <div
-                key={card.id}
-                className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-all"
-              >
+            {analyticsCards.map((card) =>
+            <div
+              key={card.id}
+              className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-all">
+
                 <div className={`w-10 h-10 rounded-lg ${card.bg} flex items-center justify-center mb-4`}>
                   <card.icon className={`w-5 h-5 ${card.color}`} />
                 </div>
@@ -330,7 +330,7 @@ export default function Dashboard() {
                 </p>
                 <p className="text-[12px] text-gray-400">{card.subtitle}</p>
               </div>
-            ))}
+            )}
           </div>
 
           {/* All Jobs */}
@@ -339,11 +339,11 @@ export default function Dashboard() {
             All Jobs
           </h2>
           <div className="space-y-3">
-            {jobs.map((job) => (
+            {jobs.map((job) =>
               <div
                 key={job.id}
-                className="flex items-center justify-between p-5 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer"
-              >
+                className="flex items-center justify-between p-5 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center">
                     <Briefcase className="w-5 h-5 text-indigo-600" />
@@ -373,7 +373,7 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-            ))}
+              )}
           </div>
         </div>
 
@@ -385,11 +385,11 @@ export default function Dashboard() {
               Recent Messages
             </h2>
             <div className="space-y-2">
-              {messages.map((msg) => (
+              {messages.map((msg) =>
                 <div
                   key={msg.id}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer"
-                >
+                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-violet-500 flex items-center justify-center shrink-0">
                     <Mail className="w-4 h-4 text-white" />
                   </div>
@@ -405,12 +405,12 @@ export default function Dashboard() {
                     <p className="text-[12px] text-gray-600 truncate">
                       {msg.subject}
                     </p>
-                    {msg.unread && (
-                      <span className="inline-block w-2 h-2 rounded-full bg-indigo-600 mt-1" />
-                    )}
+                    {msg.unread &&
+                    <span className="inline-block w-2 h-2 rounded-full bg-indigo-600 mt-1" />
+                    }
                   </div>
                 </div>
-              ))}
+                )}
             </div>
           </div>
 
@@ -420,11 +420,11 @@ export default function Dashboard() {
               Recent Activity
             </h2>
             <div className="space-y-2">
-              {activities.map((activity) => (
+              {activities.map((activity) =>
                 <div
                   key={activity.id}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all"
-                >
+                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all">
+
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shrink-0">
                     <CheckSquare className="w-4 h-4 text-white" />
                   </div>
@@ -437,21 +437,21 @@ export default function Dashboard() {
                     </span>
                   </div>
                 </div>
-              ))}
+                )}
             </div>
           </div>
           </div>
         </div>
 
         {/* Analytics Chat Panel */}
-        <div
-          className={`border-l border-gray-200 bg-white flex flex-col transition-all duration-300 ${
-            isChatMinimized ? "w-[60px]" : "w-[380px]"
-          }`}
-        >
+        <div className="bg-white mx-3 my-3 rounded-2xl border-l border-gray-200 flex flex-col transition-all duration-300 w-[380px]">
+
+
+
+
           <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-            {!isChatMinimized ? (
-              <>
+            {!isChatMinimized ?
+            <>
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-white" />
@@ -464,73 +464,73 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 shrink-0"
-                  onClick={() => setIsChatMinimized(true)}
-                >
-                  <Minimize2 className="w-4 h-4" />
-                </Button>
-              </>
-            ) : (
-              <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 mx-auto"
-                onClick={() => setIsChatMinimized(false)}
-              >
+                className="h-8 w-8 shrink-0"
+                onClick={() => setIsChatMinimized(true)}>
+
+                  <Minimize2 className="w-4 h-4" />
+                </Button>
+              </> :
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 mx-auto"
+              onClick={() => setIsChatMinimized(false)}>
+
                 <Maximize2 className="w-4 h-4" />
               </Button>
-            )}
+            }
           </div>
 
-          {!isChatMinimized && (
-            <>
+          {!isChatMinimized &&
+          <>
               <div className="flex-1 overflow-y-auto p-5 space-y-3">
-                {chatMessages.map((msg, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex ${
-                      msg.role === "user" ? "justify-end" : "justify-start"
-                    }`}
-                  >
+                {chatMessages.map((msg, idx) =>
+              <div
+                key={idx}
+                className={`flex ${
+                msg.role === "user" ? "justify-end" : "justify-start"}`
+                }>
+
                     <div
-                      className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
-                        msg.role === "user"
-                          ? "bg-indigo-600 text-white"
-                          : "bg-gray-100 text-gray-900"
-                      }`}
-                    >
+                  className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
+                  msg.role === "user" ?
+                  "bg-indigo-600 text-white" :
+                  "bg-gray-100 text-gray-900"}`
+                  }>
+
                       {msg.content}
                     </div>
                   </div>
-                ))}
+              )}
               </div>
 
               <div className="p-4 border-t border-gray-200">
                 <div className="flex gap-2">
                   <Textarea
-                    value={chatInput}
-                    onChange={(e) => setChatInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSendChat();
-                      }
-                    }}
-                    placeholder="Ask about metrics..."
-                    className="resize-none text-[12px]"
-                    rows={2}
-                  />
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendChat();
+                    }
+                  }}
+                  placeholder="Ask about metrics..."
+                  className="resize-none text-[12px]"
+                  rows={2} />
+
                   <Button onClick={handleSendChat} size="icon" className="shrink-0 h-9 w-9">
                     <Send className="w-3.5 h-3.5" />
                   </Button>
                 </div>
               </div>
             </>
-          )}
+          }
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
