@@ -209,7 +209,7 @@ function AgentCard({ agent, onToggle, onClick }) {
       <div className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pt-12 pb-12 px-6 flex items-center justify-center">
         {/* Sparkle accent */}
         <div className="absolute top-4 right-4">
-          <Sparkles className="w-4 h-4 text-indigo-400" />
+          
         </div>
         
         {/* Icon Container */}
@@ -240,11 +240,11 @@ function AgentCard({ agent, onToggle, onClick }) {
         <div className="grid grid-cols-2 gap-6 mb-8">
           <div>
             <p className="text-[12px] text-gray-500 font-medium mb-2">Total Processed</p>
-            <p className="text-[28px] font-bold text-gray-900">{agent.totalProcessed}</p>
+            <p className="text-gray-900 text-xl font-bold">{agent.totalProcessed}</p>
           </div>
           <div>
             <p className="text-[12px] text-gray-500 font-medium mb-2">Accuracy</p>
-            <p className="text-[28px] font-bold text-gray-900">{agent.accuracy}</p>
+            <p className="text-gray-900 text-xl font-bold">{agent.accuracy}</p>
           </div>
         </div>
 
