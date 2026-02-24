@@ -192,23 +192,23 @@ export default function CommunicationAnalyticsDashboard() {
                   Sequence Overview
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-4 rounded-lg bg-emerald-50 border-2 border-emerald-200">
+                  <div className="bg-slate-50 p-4 rounded-lg border-2 border-emerald-200">
                     <p className="text-[11px] text-emerald-700 font-medium mb-1">Active</p>
                     <p className="text-[24px] font-bold text-emerald-700">{sequenceOverview.active}</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-indigo-50 border-2 border-indigo-200">
+                  <div className="bg-slate-50 p-4 rounded-lg border-2 border-indigo-200">
                     <p className="text-[11px] text-indigo-700 font-medium mb-1">Completed</p>
                     <p className="text-[24px] font-bold text-indigo-700">{sequenceOverview.completed}</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-amber-50 border-2 border-amber-200">
+                  <div className="bg-slate-50 p-4 rounded-lg border-2 border-amber-200">
                     <p className="text-[11px] text-amber-700 font-medium mb-1">Paused</p>
                     <p className="text-[24px] font-bold text-amber-700">{sequenceOverview.paused}</p>
                   </div>
-                  <div className="p-4 rounded-lg bg-red-50 border-2 border-red-200">
+                  <div className="bg-slate-50 p-4 rounded-lg border-2 border-red-200">
                     <p className="text-[11px] text-red-700 font-medium mb-1">Errors</p>
                     <p className="text-[24px] font-bold text-red-700">{sequenceOverview.errors}</p>
                   </div>
-                  <div className="col-span-2 p-4 rounded-lg bg-gray-50 border-2 border-gray-200">
+                  <div className="bg-slate-50 p-4 rounded-lg col-span-2 border-2 border-gray-200">
                     <p className="text-[11px] text-gray-600 font-medium mb-1">In Sequences</p>
                     <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
                   </div>
