@@ -263,8 +263,8 @@ function AgentCard({ agent, onToggle, onClick }) {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // Main Component
@@ -394,7 +394,7 @@ export default function Agents() {
               <div>
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Overall Performance</h4>
                 <div className="grid grid-cols-4 gap-4">
-                  <div className="p-4 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100">
+                  <div className="bg-[#ffffff] p-4 rounded-lg from-emerald-50 to-teal-50 border border-emerald-100">
                     <div className="flex items-center gap-2 mb-2">
                       <Zap className="w-4 h-4 text-emerald-600" />
                       <p className="text-[11px] font-medium text-emerald-700">Total Processed</p>
@@ -403,7 +403,7 @@ export default function Agents() {
                     <p className="text-[10px] text-emerald-600 mt-1">+12% from last month</p>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100">
+                  <div className="bg-[#ffffff] p-4 rounded-lg from-indigo-50 to-purple-50 border border-indigo-100">
                     <div className="flex items-center gap-2 mb-2">
                       <TrendingUp className="w-4 h-4 text-indigo-600" />
                       <p className="text-[11px] font-medium text-indigo-700">Avg Accuracy</p>
@@ -412,7 +412,7 @@ export default function Agents() {
                     <p className="text-[10px] text-indigo-600 mt-1">+2.3% from last month</p>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100">
+                  <div className="bg-[#ffffff] p-4 rounded-lg from-blue-50 to-cyan-50 border border-blue-100">
                     <div className="flex items-center gap-2 mb-2">
                       <Activity className="w-4 h-4 text-blue-600" />
                       <p className="text-[11px] font-medium text-blue-700">Active Agents</p>
@@ -421,7 +421,7 @@ export default function Agents() {
                     <p className="text-[10px] text-blue-600 mt-1">{(activeAgents / agents.length * 100).toFixed(0)}% deployment rate</p>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100">
+                  <div className="bg-[#ffffff] p-4 rounded-lg from-amber-50 to-orange-50 border border-amber-100">
                     <div className="flex items-center gap-2 mb-2">
                       <Clock className="w-4 h-4 text-amber-600" />
                       <p className="text-[11px] font-medium text-amber-700">Avg Processing Time</p>
