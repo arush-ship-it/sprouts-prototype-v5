@@ -366,7 +366,7 @@ export default function Agents() {
 
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-[15px] font-semibold text-gray-900">
+                <h3 className="text-gray-900 text-sm font-semibold">
                   {isAnalyticsExpanded ? "Analytics Dashboard" : "Analytics Dashboard - Click to Expand"}
                 </h3>
                 {!isAnalyticsExpanded &&
