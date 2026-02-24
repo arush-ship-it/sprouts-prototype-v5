@@ -186,13 +186,13 @@ export default function CreateJob() {
                     handleSend();
                   }
                 }}
-                placeholder="Describe the role, requirements, or make changes..."
-                className="resize-none text-[13px] pr-12"
+                placeholder="Describe the role, requirements, or make changes..." className="bg-transparent text-[13px] pr-12 px-3 py-2 rounded-2xl flex min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
+
                 rows={3} />
-              <Button 
-                onClick={handleSend} 
-                size="icon" 
-                className="absolute right-2 bottom-2 h-8 w-8">
+              <Button
+                onClick={handleSend}
+                size="icon" className="bg-primary text-primary-foreground text-sm font-medium rounded-[20px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
+
                 <Send className="w-4 h-4" />
               </Button>
             </div>
