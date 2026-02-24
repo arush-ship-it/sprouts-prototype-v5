@@ -427,12 +427,12 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                   </div>
                   <div className="relative">
                     <Textarea
-                      value={sourcingInput}
-                      onChange={(e) => setSourcingInput(e.target.value)}
-                      placeholder="Type your message..."
-                      className="resize-none text-[12px] bg-white pr-12"
-                      rows={2} />
-                    <Button size="icon" className="absolute right-2 bottom-2 h-8 w-8">
+                value={sourcingInput}
+                onChange={(e) => setSourcingInput(e.target.value)}
+                placeholder="Type your message..." className="bg-white text-[12px] pr-12 px-3 py-2 rounded-2xl flex min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
+
+                rows={2} />
+                    <Button size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[28px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
                       <Send className="w-3.5 h-3.5" />
                     </Button>
                   </div>
