@@ -555,20 +555,20 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       }
 
       {/* Search / Filter bar */}
-      <div className="flex items-center gap-3 mb-5">
-        <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
-          <input
-            type="text"
-            placeholder="Search candidates..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 text-[13px] text-gray-700 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all" />
+      
 
-        </div>
-        <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-100 text-[13px] font-medium text-gray-500 hover:bg-gray-100 transition-colors">
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          Filters
-        </button>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
       {/* Card/List/Table View */}
       {viewMode === "card" &&
