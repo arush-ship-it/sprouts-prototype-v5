@@ -18,7 +18,8 @@ import {
   Minimize2,
   Maximize2,
   TrendingDown,
-  Zap } from
+  Zap,
+  Sparkles } from
 "lucide-react";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import { Button } from "@/components/ui/button";
@@ -201,60 +202,69 @@ const allAgents = [
 // Agent Card Component
 function AgentCard({ agent, onToggle, onClick }) {
   const Icon = agent.icon;
-  const isOperations = agent.type === "operations";
 
   return (
-    <div className="bg-white rounded-3xl border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
-      {/* Large Icon Area */}
-      <div className="bg-[#f2f2f2] pt-14 pb-20 px-4 rounded-3xl from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
+    <div className="bg-[#FAFAFA] rounded-[24px] shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden">
+      {/* Hero Section with Gradient */}
+      <div className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pt-12 pb-12 px-6 flex items-center justify-center">
+        {/* Sparkle accent */}
+        <div className="absolute top-4 right-4">
+          <Sparkles className="w-4 h-4 text-indigo-400" />
+        </div>
         
+        {/* Icon Container */}
+        <div className="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center">
+          <Icon className="w-9 h-9 text-blue-600" strokeWidth={1.5} />
+        </div>
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h3 className="text-[15px] font-semibold text-gray-900 mb-1">
+      <div className="px-8 py-8">
+        {/* Title */}
+        <h3 className="text-[18px] font-bold text-gray-900 mb-2">
           {agent.name}
         </h3>
         
-        {/* Status Badge */}
-        <div className="flex items-center gap-1.5 mb-3">
+        {/* Status */}
+        <div className="flex items-center gap-2 mb-4">
           <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
-          <span className="text-[12px] text-emerald-600 font-medium capitalize">{agent.status}</span>
+          <span className="text-[13px] text-gray-600 font-medium capitalize">{agent.status}</span>
         </div>
 
-        <p className="text-[12px] text-gray-600 mb-4 line-clamp-2 min-h-[36px]">
+        {/* Description */}
+        <p className="text-[14px] text-gray-600 leading-relaxed mb-6 min-h-[42px]">
           {agent.description}
         </p>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
+        {/* Metrics - Two Column */}
+        <div className="grid grid-cols-2 gap-6 mb-8">
           <div>
-            <p className="text-[11px] text-gray-500 mb-1">Total processed</p>
-            <p className="text-[20px] font-semibold text-gray-900">{agent.totalProcessed}</p>
+            <p className="text-[12px] text-gray-500 font-medium mb-2">Total Processed</p>
+            <p className="text-[28px] font-bold text-gray-900">{agent.totalProcessed}</p>
           </div>
           <div>
-            <p className="text-[11px] text-gray-500 mb-1">Accuracy</p>
-            <p className="text-[20px] font-semibold text-gray-900">{agent.accuracy}</p>
+            <p className="text-[12px] text-gray-500 font-medium mb-2">Accuracy</p>
+            <p className="text-[28px] font-bold text-gray-900">{agent.accuracy}</p>
           </div>
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-2">
+        <div className="flex gap-3">
           <Button
-            onClick={onClick} className="bg-gray-50 text-blue-600 px-6 py-2 text-sm font-medium opacity-100 rounded-md flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-[#1d4ed8] h-10">
+            onClick={onClick}
+            className="flex-1 h-12 bg-blue-600 hover:bg-blue-700 text-white text-[14px] font-semibold rounded-full shadow-sm transition-all duration-200">
             Setup & Deploy
           </Button>
           <Button
             onClick={onClick}
-            variant="secondary"
-            className="flex-1 h-10">
+            variant="ghost"
+            className="flex-1 h-12 bg-gray-100 hover:bg-gray-200 text-blue-600 text-[14px] font-semibold rounded-full transition-all duration-200">
             View Details
           </Button>
         </div>
       </div>
-    </div>);
-
-
+    </div>
+  );
 }
 
 // Main Component
