@@ -18,7 +18,8 @@ import {
   Minimize2,
   Maximize2,
   TrendingDown,
-  Zap } from
+  Zap,
+  Sparkles } from
 "lucide-react";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import { Button } from "@/components/ui/button";
@@ -201,13 +202,33 @@ const allAgents = [
 // Agent Card Component
 function AgentCard({ agent, onToggle, onClick }) {
   const Icon = agent.icon;
-  const isOperations = agent.type === "operations";
+  
+  // Gradient variations
+  const gradients = [
+    "bg-gradient-to-br from-blue-100 via-blue-50 to-indigo-100",
+    "bg-gradient-to-br from-purple-100 via-pink-50 to-purple-50",
+    "bg-gradient-to-br from-teal-100 via-emerald-50 to-cyan-100",
+    "bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100",
+    "bg-gradient-to-br from-cyan-100 via-teal-50 to-emerald-100",
+    "bg-gradient-to-br from-violet-100 via-purple-50 to-fuchsia-100",
+    "bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100",
+    "bg-gradient-to-br from-emerald-100 via-teal-50 to-cyan-100"
+  ];
+  
+  const gradientClass = gradients[agent.id % gradients.length];
 
   return (
-    <div className="bg-white rounded-3xl border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all overflow-hidden">
-      {/* Large Icon Area */}
-      <div className="bg-[#f2f2f2] pt-14 pb-20 px-4 rounded-3xl from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center border-t-[16px] border-l-[16px] border-r-[16px] border-white">
-        
+    <div className="bg-white rounded-2xl border border-gray-200 hover:shadow-xl hover:border-gray-300 transition-all overflow-hidden">
+      {/* Gradient Background with Icon */}
+      <div className={`relative pt-12 pb-16 px-4 ${gradientClass} flex items-center justify-center`}>
+        <div className="relative">
+          <div className="w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center">
+            <Icon className="w-9 h-9 text-indigo-600" />
+          </div>
+          <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center">
+            <Sparkles className="w-3.5 h-3.5 text-white" />
+          </div>
+        </div>
       </div>
 
       {/* Content */}
@@ -219,7 +240,9 @@ function AgentCard({ agent, onToggle, onClick }) {
         {/* Status Badge */}
         <div className="flex items-center gap-1.5 mb-3">
           <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
-          <span className="text-[12px] text-emerald-600 font-medium capitalize">{agent.status}</span>
+          <span className={`text-[12px] font-medium capitalize ${agent.status === "active" ? "text-emerald-600" : "text-gray-500"}`}>
+            {agent.status}
+          </span>
         </div>
 
         <p className="text-[12px] text-gray-600 mb-4 line-clamp-2 min-h-[36px]">
@@ -239,22 +262,22 @@ function AgentCard({ agent, onToggle, onClick }) {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-3">
           <Button
-            onClick={onClick} className="bg-gray-50 text-blue-600 px-6 py-2 text-sm font-medium opacity-100 rounded-md flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-[#1d4ed8] h-10">
+            onClick={onClick}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white flex-1 h-10 rounded-lg">
             Setup & Deploy
           </Button>
           <Button
             onClick={onClick}
-            variant="secondary"
-            className="flex-1 h-10">
+            variant="ghost"
+            className="text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50">
             View Details
           </Button>
         </div>
       </div>
-    </div>);
-
-
+    </div>
+  );
 }
 
 // Main Component
