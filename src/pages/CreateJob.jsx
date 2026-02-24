@@ -135,11 +135,11 @@ export default function CreateJob() {
                     }>{step.label}</p>
                     </div>
                   </div>
-                  {idx < steps.length - 1 &&
-                <div className={`flex-1 h-0.5 mx-1 ${
-                currentStep > step.number ? "bg-emerald-500" : "bg-gray-200"}`
-                } />
-                }
+                  
+
+
+
+
                 </React.Fragment>
               )}
             </div>
