@@ -382,7 +382,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           {isSourcingExpanded &&
         <div className="mt-4 space-y-4">
               {/* Sub Tabs */}
-              <div className="inline-flex p-1 bg-gray-100 rounded-full">
+              <div className="inline-flex p-1 bg-gray-100 rounded-full mx-auto">
                 <button
                   onClick={() => setSourcingTab("ai")}
                   className={`px-4 py-2 text-[12px] font-semibold rounded-full transition-all ${
