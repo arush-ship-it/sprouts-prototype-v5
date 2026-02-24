@@ -212,7 +212,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col h-screen bg-[#FAFAFA]">
       {/* Top Navigation */}
-      <div className="px-6 py-4 bg-[#FAFAFA] border-b border-gray-200">
+      <div className="px-6 py-2.5 bg-[#FAFAFA] border-b border-gray-200">
         <div className="flex items-center justify-between">
           <TabSwitcher activePage="Dashboard" />
           <div className="flex items-center gap-2">
