@@ -176,7 +176,7 @@ export default function CreateJob() {
 
           {/* Input */}
           <div className="p-4 border-t border-gray-200">
-            <div className="flex gap-2">
+            <div className="relative">
               <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -187,10 +187,12 @@ export default function CreateJob() {
                   }
                 }}
                 placeholder="Describe the role, requirements, or make changes..."
-                className="resize-none text-[13px]"
+                className="resize-none text-[13px] pr-12"
                 rows={3} />
-
-              <Button onClick={handleSend} size="icon" className="shrink-0">
+              <Button 
+                onClick={handleSend} 
+                size="icon" 
+                className="absolute right-2 bottom-2 h-8 w-8">
                 <Send className="w-4 h-4" />
               </Button>
             </div>
