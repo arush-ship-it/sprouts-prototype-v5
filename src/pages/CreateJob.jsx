@@ -191,7 +191,7 @@ export default function CreateJob() {
                 rows={3} />
               <Button
                 onClick={handleSend}
-                size="icon" className="bg-primary text-primary-foreground text-sm font-medium rounded-[20px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
+                size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[20px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
 
                 <Send className="w-4 h-4" />
               </Button>
