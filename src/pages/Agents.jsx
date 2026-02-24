@@ -232,7 +232,7 @@ function AgentCard({ agent, onToggle, onClick }) {
         </div>
 
         {/* Description */}
-        <p className="text-[14px] text-gray-600 leading-relaxed mb-6 min-h-[42px]">
+        <p className="text-gray-500 mb-6 leading-relaxed min-h-[42px]">
           {agent.description}
         </p>
 
