@@ -108,46 +108,42 @@ export default function CreateJob() {
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="px-6 py-6 bg-white border-b border-gray-200">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between">
-            {steps.map((step, idx) => (
-              <React.Fragment key={step.number}>
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    currentStep > step.number ? "bg-emerald-500" :
-                    currentStep === step.number ? "bg-indigo-600" : "bg-gray-200"
-                  }`}>
-                    {currentStep > step.number ? (
-                      <CheckCircle2 className="w-5 h-5 text-white" />
-                    ) : (
-                      <span className={`text-[14px] font-semibold ${
-                        currentStep === step.number ? "text-white" : "text-gray-500"
-                      }`}>{step.number}</span>
-                    )}
-                  </div>
-                  <div>
-                    <p className={`text-[13px] font-semibold ${
-                      currentStep >= step.number ? "text-gray-900" : "text-gray-400"
-                    }`}>{step.label}</p>
-                    <p className="text-[11px] text-gray-500">{step.description}</p>
-                  </div>
-                </div>
-                {idx < steps.length - 1 && (
-                  <div className={`flex-1 h-0.5 mx-4 ${
-                    currentStep > step.number ? "bg-emerald-500" : "bg-gray-200"
-                  }`} />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </div>
-      
       <div className="flex flex-1 overflow-hidden">
         {/* Left Panel - AI Chat */}
-        <div className="bg-white mx-2 my-2 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
+        <div className="bg-white mx-2 my-2 px-1 rounded-2xl w-[520px] border-r border-gray-200 flex flex-col">
+          {/* Progress Bar - Integrated into left panel */}
+          <div className="px-6 py-4 border-b border-gray-200">
+            <div className="flex items-center justify-between gap-2">
+              {steps.map((step, idx) => (
+                <React.Fragment key={step.number}>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
+                      currentStep > step.number ? "bg-emerald-500" :
+                      currentStep === step.number ? "bg-indigo-600" : "bg-gray-200"
+                    }`}>
+                      {currentStep > step.number ? (
+                        <CheckCircle2 className="w-4 h-4 text-white" />
+                      ) : (
+                        <span className={`text-[12px] font-semibold ${
+                          currentStep === step.number ? "text-white" : "text-gray-500"
+                        }`}>{step.number}</span>
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <p className={`text-[11px] font-semibold truncate ${
+                        currentStep >= step.number ? "text-gray-900" : "text-gray-400"
+                      }`}>{step.label}</p>
+                    </div>
+                  </div>
+                  {idx < steps.length - 1 && (
+                    <div className={`flex-1 h-0.5 mx-1 ${
+                      currentStep > step.number ? "bg-emerald-500" : "bg-gray-200"
+                    }`} />
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
           <div className="p-6 border-b border-gray-200">
             <div className="flex items-center gap-2.5 mb-2">
               <div className="bg-slate-400 rounded-3xl w-8 h-8 flex items-center justify-center">
