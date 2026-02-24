@@ -425,15 +425,14 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="relative">
                     <Textarea
-                value={sourcingInput}
-                onChange={(e) => setSourcingInput(e.target.value)}
-                placeholder="Type your message..."
-                className="resize-none text-[12px] bg-white"
-                rows={2} />
-
-                    <Button size="icon" className="shrink-0 h-9 w-9">
+                      value={sourcingInput}
+                      onChange={(e) => setSourcingInput(e.target.value)}
+                      placeholder="Type your message..."
+                      className="resize-none text-[12px] bg-white pr-12"
+                      rows={2} />
+                    <Button size="icon" className="absolute right-2 bottom-2 h-8 w-8">
                       <Send className="w-3.5 h-3.5" />
                     </Button>
                   </div>
