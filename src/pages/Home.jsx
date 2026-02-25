@@ -193,9 +193,9 @@ export default function Home() {
             <h2 className="text-[18px] font-bold text-gray-900 mb-6">All Jobs</h2>
             <div className="space-y-4">
               {jobs.map((job) =>
-              <div key={job.id} className="bg-[#ffffff] p-4 rounded-lg flex items-center justify-between">
+              <div key={job.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div className="flex items-center gap-4">
-                    <div className="bg-slate-100 rounded-lg w-10 h-10 flex items-center justify-center">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                       <Briefcase className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
@@ -218,7 +218,7 @@ export default function Home() {
                       {job.status}
                     </div>
                     <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
-                      
+                      <ExternalLink className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
                     </Link>
                   </div>
                 </div>
@@ -232,7 +232,7 @@ export default function Home() {
             <div className="space-y-4">
               {recentActivity.map((activity) =>
               <div key={activity.id} className="flex items-start gap-4">
-                  <div className="bg-slate-200 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-sky-400 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-[14px] font-bold">✓</span>
                   </div>
                   <div className="flex-1">
