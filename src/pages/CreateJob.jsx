@@ -110,7 +110,7 @@ export default function CreateJob() {
 
       <div className="flex flex-1 overflow-hidden flex-col">
         {/* Header */}
-        <div className="px-8 py-4 border-b border-gray-200 bg-white">
+        <div className="bg-slate-50 px-8 py-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
             <Link to={createPageUrl("Home")}>
               <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
@@ -126,24 +126,24 @@ export default function CreateJob() {
           <div className="px-6 py-4 border-b border-gray-200">
             <div className="flex items-center justify-between gap-2">
               {steps.map((step, idx) =>
-              <React.Fragment key={step.number}>
+                <React.Fragment key={step.number}>
                   <div className="flex items-center gap-2">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                  currentStep > step.number ? "bg-emerald-500" :
-                  currentStep === step.number ? "bg-indigo-600" : "bg-gray-200"}`
-                  }>
+                    currentStep > step.number ? "bg-emerald-500" :
+                    currentStep === step.number ? "bg-indigo-600" : "bg-gray-200"}`
+                    }>
                       {currentStep > step.number ?
-                    <CheckCircle2 className="w-4 h-4 text-white" /> :
+                      <CheckCircle2 className="w-4 h-4 text-white" /> :
 
-                    <span className={`text-[12px] font-semibold ${
-                    currentStep === step.number ? "text-white" : "text-gray-500"}`
-                    }>{step.number}</span>
-                    }
+                      <span className={`text-[12px] font-semibold ${
+                      currentStep === step.number ? "text-white" : "text-gray-500"}`
+                      }>{step.number}</span>
+                      }
                     </div>
                     <div className="min-w-0">
                       <p className={`text-[11px] font-semibold truncate ${
-                    currentStep >= step.number ? "text-gray-900" : "text-gray-400"}`
-                    }>{step.label}</p>
+                      currentStep >= step.number ? "text-gray-900" : "text-gray-400"}`
+                      }>{step.label}</p>
                     </div>
                   </div>
                   
@@ -152,7 +152,7 @@ export default function CreateJob() {
 
 
                 </React.Fragment>
-              )}
+                )}
             </div>
           </div>
           <div className="p-6 border-b border-gray-200">
@@ -172,37 +172,37 @@ export default function CreateJob() {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages.map((msg, idx) =>
-            <div
-              key={idx}
-              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div
+                key={idx}
+                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div
-                className={`max-w-[85%] px-4 py-3 rounded-2xl text-[13px] ${
-                msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`
-                }>
+                  className={`max-w-[85%] px-4 py-3 rounded-2xl text-[13px] ${
+                  msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`
+                  }>
                   {msg.content}
                 </div>
               </div>
-            )}
+              )}
           </div>
 
           {/* Input */}
           <div className="p-4 border-t border-gray-200">
             <div className="relative">
               <Textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSend();
-                  }
-                }}
-                placeholder="Describe the role, requirements, or make changes..." className="bg-transparent text-[13px] pr-12 px-3 py-2 rounded-2xl flex min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSend();
+                    }
+                  }}
+                  placeholder="Describe the role, requirements, or make changes..." className="bg-transparent text-[13px] pr-12 px-3 py-2 rounded-2xl flex min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
 
-                rows={3} />
+                  rows={3} />
               <Button
-                onClick={handleSend}
-                size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[20px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
+                  onClick={handleSend}
+                  size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[20px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
 
                 <Send className="w-4 h-4" />
               </Button>
@@ -223,7 +223,7 @@ export default function CreateJob() {
             
             {/* Step 1: AI Generation - Preview */}
             {currentStep === 1 &&
-            <div className="space-y-6 max-w-6xl mx-auto">
+              <div className="space-y-6 max-w-6xl mx-auto">
                 <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
                   <div className="mb-6 pb-6 border-b border-gray-200">
                     <h2 className="text-[28px] font-bold text-gray-900 mb-3">{generatedJob.title}</h2>
@@ -256,11 +256,11 @@ export default function CreateJob() {
                     <h3 className="text-[18px] font-semibold text-gray-900 mb-3">Requirements</h3>
                     <ul className="space-y-2">
                       {generatedJob.requirements.map((req, idx) =>
-                    <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
+                      <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
                           <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0" />
                           {req}
                         </li>
-                    )}
+                      )}
                     </ul>
                   </div>
 
@@ -268,11 +268,11 @@ export default function CreateJob() {
                     <h3 className="text-[18px] font-semibold text-gray-900 mb-3">Responsibilities</h3>
                     <ul className="space-y-2">
                       {generatedJob.responsibilities.map((resp, idx) =>
-                    <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
+                      <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
                           <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0" />
                           {resp}
                         </li>
-                    )}
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -283,11 +283,11 @@ export default function CreateJob() {
                   </Button>
                 </div>
               </div>
-            }
+              }
 
             {/* Step 2: Job Details */}
             {currentStep === 2 &&
-            <div className="space-y-6 max-w-6xl mx-auto">
+              <div className="space-y-6 max-w-6xl mx-auto">
               <div>
                 <h2 className="text-[20px] font-semibold text-gray-900 mb-2">Job Details</h2>
                 <p className="text-[13px] text-gray-500">Fill in the company and job information</p>
@@ -298,20 +298,20 @@ export default function CreateJob() {
                   <div className="space-y-2">
                     <Label htmlFor="companyName" className="text-[13px] font-medium">Company Name</Label>
                     <Input
-                      id="companyName"
-                      value={jobDetails.companyName}
-                      onChange={(e) => setJobDetails({ ...jobDetails, companyName: e.target.value })}
-                      placeholder="Enter company name" />
+                        id="companyName"
+                        value={jobDetails.companyName}
+                        onChange={(e) => setJobDetails({ ...jobDetails, companyName: e.target.value })}
+                        placeholder="Enter company name" />
 
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="jobTitle" className="text-[13px] font-medium">Job Title <span className="text-red-500">*</span></Label>
                     <Input
-                      id="jobTitle"
-                      value={jobDetails.jobTitle}
-                      onChange={(e) => setJobDetails({ ...jobDetails, jobTitle: e.target.value })}
-                      placeholder="Enter job title" />
+                        id="jobTitle"
+                        value={jobDetails.jobTitle}
+                        onChange={(e) => setJobDetails({ ...jobDetails, jobTitle: e.target.value })}
+                        placeholder="Enter job title" />
 
                   </div>
 
@@ -347,61 +347,61 @@ export default function CreateJob() {
                   <div className="space-y-2">
                     <Label htmlFor="department" className="text-[13px] font-medium">Department</Label>
                     <Input
-                      id="department"
-                      value={jobDetails.department}
-                      onChange={(e) => setJobDetails({ ...jobDetails, department: e.target.value })}
-                      placeholder="e.g. Engineering, Design" />
+                        id="department"
+                        value={jobDetails.department}
+                        onChange={(e) => setJobDetails({ ...jobDetails, department: e.target.value })}
+                        placeholder="e.g. Engineering, Design" />
 
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="location" className="text-[13px] font-medium">Location</Label>
                     <Input
-                      id="location"
-                      value={jobDetails.location}
-                      onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })}
-                      placeholder="e.g. San Francisco, CA" />
+                        id="location"
+                        value={jobDetails.location}
+                        onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })}
+                        placeholder="e.g. San Francisco, CA" />
 
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="internalJobTitle" className="text-[13px] font-medium">Internal Job Title</Label>
                     <Input
-                      id="internalJobTitle"
-                      value={jobDetails.internalJobTitle}
-                      onChange={(e) => setJobDetails({ ...jobDetails, internalJobTitle: e.target.value })}
-                      placeholder="Internal reference" />
+                        id="internalJobTitle"
+                        value={jobDetails.internalJobTitle}
+                        onChange={(e) => setJobDetails({ ...jobDetails, internalJobTitle: e.target.value })}
+                        placeholder="Internal reference" />
 
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="headcount" className="text-[13px] font-medium">Headcount</Label>
                     <Input
-                      id="headcount"
-                      type="number"
-                      value={jobDetails.headcount}
-                      onChange={(e) => setJobDetails({ ...jobDetails, headcount: e.target.value })}
-                      placeholder="Number of positions" />
+                        id="headcount"
+                        type="number"
+                        value={jobDetails.headcount}
+                        onChange={(e) => setJobDetails({ ...jobDetails, headcount: e.target.value })}
+                        placeholder="Number of positions" />
 
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="jobGrade" className="text-[13px] font-medium">Job Grade</Label>
                     <Input
-                      id="jobGrade"
-                      value={jobDetails.jobGrade}
-                      onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })}
-                      placeholder="e.g. L4, Senior" />
+                        id="jobGrade"
+                        value={jobDetails.jobGrade}
+                        onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })}
+                        placeholder="e.g. L4, Senior" />
 
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="salary" className="text-[13px] font-medium">Salary Range</Label>
                     <Input
-                      id="salary"
-                      value={jobDetails.salary}
-                      onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })}
-                      placeholder="e.g. $120k - $180k" />
+                        id="salary"
+                        value={jobDetails.salary}
+                        onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })}
+                        placeholder="e.g. $120k - $180k" />
 
                   </div>
                 </div>
@@ -409,22 +409,22 @@ export default function CreateJob() {
                 <div className="space-y-2">
                   <Label htmlFor="benefits" className="text-[13px] font-medium">Benefits</Label>
                   <Textarea
-                    id="benefits"
-                    value={jobDetails.benefits}
-                    onChange={(e) => setJobDetails({ ...jobDetails, benefits: e.target.value })}
-                    placeholder="Describe benefits and perks..."
-                    rows={3} />
+                      id="benefits"
+                      value={jobDetails.benefits}
+                      onChange={(e) => setJobDetails({ ...jobDetails, benefits: e.target.value })}
+                      placeholder="Describe benefits and perks..."
+                      rows={3} />
 
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="screeningQuestions" className="text-[13px] font-medium">Screening Questions</Label>
                   <Textarea
-                    id="screeningQuestions"
-                    value={jobDetails.screeningQuestions}
-                    onChange={(e) => setJobDetails({ ...jobDetails, screeningQuestions: e.target.value })}
-                    placeholder="Add questions for candidates..."
-                    rows={3} />
+                      id="screeningQuestions"
+                      value={jobDetails.screeningQuestions}
+                      onChange={(e) => setJobDetails({ ...jobDetails, screeningQuestions: e.target.value })}
+                      placeholder="Add questions for candidates..."
+                      rows={3} />
 
                 </div>
               </div>
@@ -438,11 +438,11 @@ export default function CreateJob() {
                 </Button>
               </div>
             </div>
-            }
+              }
 
             {/* Step 3: Publish */}
             {currentStep === 3 &&
-            <div className="space-y-6 max-w-6xl mx-auto">
+              <div className="space-y-6 max-w-6xl mx-auto">
               <div>
                 <h2 className="text-[20px] font-semibold text-gray-900 mb-2">Publish Job</h2>
                 <p className="text-[13px] text-gray-500">Choose where and how to publish your job</p>
@@ -453,22 +453,22 @@ export default function CreateJob() {
                   <Label className="text-[13px] font-medium">Visibility</Label>
                   <div className="flex gap-3">
                     <button
-                      onClick={() => setPublishSettings({ ...publishSettings, visibility: "public" })}
-                      className={`flex-1 p-4 rounded-xl border-2 transition-all ${
-                      publishSettings.visibility === "public" ?
-                      "border-indigo-600 bg-indigo-50" :
-                      "border-gray-200 hover:border-gray-300"}`
-                      }>
+                        onClick={() => setPublishSettings({ ...publishSettings, visibility: "public" })}
+                        className={`flex-1 p-4 rounded-xl border-2 transition-all ${
+                        publishSettings.visibility === "public" ?
+                        "border-indigo-600 bg-indigo-50" :
+                        "border-gray-200 hover:border-gray-300"}`
+                        }>
                       <p className="font-semibold text-[14px] text-gray-900 mb-1">Public</p>
                       <p className="text-[12px] text-gray-500">Visible to everyone</p>
                     </button>
                     <button
-                      onClick={() => setPublishSettings({ ...publishSettings, visibility: "private" })}
-                      className={`flex-1 p-4 rounded-xl border-2 transition-all ${
-                      publishSettings.visibility === "private" ?
-                      "border-indigo-600 bg-indigo-50" :
-                      "border-gray-200 hover:border-gray-300"}`
-                      }>
+                        onClick={() => setPublishSettings({ ...publishSettings, visibility: "private" })}
+                        className={`flex-1 p-4 rounded-xl border-2 transition-all ${
+                        publishSettings.visibility === "private" ?
+                        "border-indigo-600 bg-indigo-50" :
+                        "border-gray-200 hover:border-gray-300"}`
+                        }>
                       <p className="font-semibold text-[14px] text-gray-900 mb-1">Private</p>
                       <p className="text-[12px] text-gray-500">Only visible to invited candidates</p>
                     </button>
@@ -495,22 +495,22 @@ export default function CreateJob() {
                   <Label className="text-[13px] font-medium">Post to Platforms</Label>
                   <div className="grid grid-cols-2 gap-3">
                     {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((platform) =>
-                    <button
-                      key={platform}
-                      onClick={() => {
-                        const platforms = publishSettings.platforms.includes(platform) ?
-                        publishSettings.platforms.filter((p) => p !== platform) :
-                        [...publishSettings.platforms, platform];
-                        setPublishSettings({ ...publishSettings, platforms });
-                      }}
-                      className={`p-4 rounded-xl border-2 text-left transition-all ${
-                      publishSettings.platforms.includes(platform) ?
-                      "border-indigo-600 bg-indigo-50" :
-                      "border-gray-200 hover:border-gray-300"}`
-                      }>
+                      <button
+                        key={platform}
+                        onClick={() => {
+                          const platforms = publishSettings.platforms.includes(platform) ?
+                          publishSettings.platforms.filter((p) => p !== platform) :
+                          [...publishSettings.platforms, platform];
+                          setPublishSettings({ ...publishSettings, platforms });
+                        }}
+                        className={`p-4 rounded-xl border-2 text-left transition-all ${
+                        publishSettings.platforms.includes(platform) ?
+                        "border-indigo-600 bg-indigo-50" :
+                        "border-gray-200 hover:border-gray-300"}`
+                        }>
                         <p className="font-semibold text-[14px] text-gray-900">{platform}</p>
                       </button>
-                    )}
+                      )}
                   </div>
                 </div>
               </div>
@@ -525,7 +525,7 @@ export default function CreateJob() {
                 </Button>
               </div>
             </div>
-            }
+              }
 
           </div>
         </div>
