@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { LayoutDashboard, FolderOpen, PlusCircle, Terminal } from "lucide-react";
+import { LayoutDashboard, FolderOpen, PlusCircle, Terminal, Home } from "lucide-react";
 
 const tabs = [
+  { label: "Home", icon: Home, page: "Home" },
   { label: "Dashboard", icon: LayoutDashboard, page: "Dashboard" },
   { label: "Talent Pool", icon: FolderOpen, page: "TalentPool" },
   { label: "Create Job", icon: PlusCircle, page: "CreateJob" },
