@@ -13,7 +13,8 @@ import {
   BarChart3,
   Briefcase,
   PlusCircle,
-  UserSquare2 } from
+  UserSquare2,
+  ExternalLink } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import TabSwitcher from "@/components/shared/TabSwitcher";
