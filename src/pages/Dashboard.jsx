@@ -245,18 +245,18 @@ export default function Dashboard() {
                 </Link>
                 <h1 className="text-[28px] font-bold text-gray-900">Analytics Dashboard</h1>
               </div>
-              <Button 
+              <Button
                 onClick={() => setIsChatMinimized(false)}
-                variant="outline" 
-                size="sm" 
-                className="gap-2"
-              >
+                variant="outline"
+                size="sm"
+                className="gap-2">
+
                 <Sparkles className="w-4 h-4" />
                 Deep Dive with AI
               </Button>
             </div>
-            <p className="text-[14px] text-gray-500">
-              Overview of all recruitment activities
+            <p className="text-gray-500 px-8 text-sm">Overview of all recruitment activities
+
             </p>
           </div>
 
