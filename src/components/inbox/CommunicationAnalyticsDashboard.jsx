@@ -6,6 +6,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, 
 export default function CommunicationAnalyticsDashboard() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [timeFilter, setTimeFilter] = useState("7days");
+  const [isBreakdownExpanded, setIsBreakdownExpanded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsExpanded(false), 3000);
@@ -15,12 +16,14 @@ export default function CommunicationAnalyticsDashboard() {
   // Mock data
   const metrics = [
   {
-    label: "Emails Sent",
+    label: "Total Sent",
     value: 142,
+    replyRate: "68%",
     trend: 12,
     positive: true,
     color: "bg-white border-gray-200",
-    textColor: "text-blue-700"
+    textColor: "text-blue-700",
+    hasBreakdown: true
   },
   {
     label: "Pending Replies",
@@ -38,6 +41,12 @@ export default function CommunicationAnalyticsDashboard() {
     color: "bg-white border-gray-200",
     textColor: "text-violet-700"
   }];
+
+  const breakdownData = [
+    { label: "Emails Sent", value: 58 },
+    { label: "Messages Sent", value: 42 },
+    { label: "Sequences Sent", value: 42 }
+  ];
 
 
   const sequenceData = [
@@ -135,13 +144,26 @@ export default function CommunicationAnalyticsDashboard() {
               {metrics.map((metric, idx) =>
             <div
               key={idx}
-              className={`p-4 rounded-lg border-2 cursor-pointer hover:shadow-sm transition-all ${metric.color}`}>
+              className={`p-4 rounded-lg border-2 transition-all ${metric.color} ${metric.hasBreakdown ? 'cursor-pointer hover:shadow-sm' : ''}`}
+              onClick={metric.hasBreakdown ? () => setIsBreakdownExpanded(!isBreakdownExpanded) : undefined}>
 
-                  <p className="text-[11px] text-gray-600 mb-2 font-medium">{metric.label}</p>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-[11px] text-gray-600 font-medium">{metric.label}</p>
+                    {metric.hasBreakdown && (
+                      isBreakdownExpanded ? 
+                        <ChevronUp className="w-3.5 h-3.5 text-gray-500" /> : 
+                        <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+                    )}
+                  </div>
                   <div className="flex items-end justify-between">
-                    <span className={`text-[20px] font-bold ${metric.textColor}`}>
-                      {metric.value}
-                    </span>
+                    <div>
+                      <span className={`text-[20px] font-bold ${metric.textColor}`}>
+                        {metric.value}
+                      </span>
+                      {metric.replyRate && (
+                        <p className="text-[11px] text-gray-500 mt-1">Reply Rate: {metric.replyRate}</p>
+                      )}
+                    </div>
                     <div className="flex items-center gap-0.5">
                       {metric.positive ?
                   <TrendingUp className={`w-3 h-3 ${metric.textColor}`} /> :
@@ -156,6 +178,21 @@ export default function CommunicationAnalyticsDashboard() {
                 </div>
             )}
             </div>
+
+            {/* Breakdown Section */}
+            {isBreakdownExpanded && (
+              <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h4 className="text-[11px] font-semibold text-gray-600 uppercase tracking-wider mb-3">Breakdown</h4>
+                <div className="grid grid-cols-3 gap-3">
+                  {breakdownData.map((item, idx) => (
+                    <div key={idx} className="bg-white p-3 rounded-lg border border-gray-200">
+                      <p className="text-[10px] text-gray-500 mb-1">{item.label}</p>
+                      <p className="text-[18px] font-bold text-gray-900">{item.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sequence Overview */}
