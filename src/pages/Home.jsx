@@ -134,9 +134,9 @@ export default function Home() {
             <h1 className="text-slate-700 text-3xl font-semibold">Hello Arush, Welcome Back!
 
             </h1>
-            <Bell className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+            <Bell className="text-gray-700 lucide lucide-bell w-5 h-5 cursor-pointer hover:text-gray-600" />
             <Link to={createPageUrl("Settings")}>
-              <Settings className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+              <Settings className="text-gray-700 lucide lucide-settings w-5 h-5 cursor-pointer hover:text-gray-600" />
             </Link>
           </div>
           <div className="my-1 flex items-center gap-2">
