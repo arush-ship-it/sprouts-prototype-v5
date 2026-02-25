@@ -137,30 +137,30 @@ export default function SidebarNav({ activePage = "Console" }) {
       </div>
 
       {/* Bottom: Icon-only nav */}
-      <div className="pt-3 flex-shrink-0">
-        <div className="flex items-center justify-around">
-          {bottomLinks.map((link) =>
-          <Link
-            key={link.label}
-            to={createPageUrl(link.page)}
-            className={`relative flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all duration-200 group
-                ${
-            activePage === link.page ?
-            "text-indigo-600" :
-            "text-gray-500 hover:text-gray-900"}`
-            }>
-
-              {activePage === link.page &&
-            <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-indigo-600" />
-            }
-              <link.icon className="w-5 h-5" />
-              
+      
 
 
-            </Link>
-          )}
-        </div>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </aside>);
 
 }
