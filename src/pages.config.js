@@ -58,6 +58,7 @@ import Inbox from './pages/Inbox';
 import JobDetails from './pages/JobDetails';
 import Settings from './pages/Settings';
 import TalentPool from './pages/TalentPool';
+import Home from './pages/Home';
 import __Layout from './Layout.jsx';
 
 
@@ -73,6 +74,7 @@ export const PAGES = {
     "JobDetails": JobDetails,
     "Settings": Settings,
     "TalentPool": TalentPool,
+    "Home": Home,
 }
 
 export const pagesConfig = {
