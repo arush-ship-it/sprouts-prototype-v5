@@ -11,7 +11,9 @@ import {
   Edit2,
   ChevronDown,
   ChevronUp,
-  Activity } from
+  Activity,
+  Target,
+  CheckCircle2 } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -82,6 +84,23 @@ const activityLog = [
 { time: "1 day ago", action: "Assessment template updated", user: "Mike Roberts" },
 { time: "2 days ago", action: "Job posted to LinkedIn", user: "System" },
 { time: "2 days ago", action: "Job created", user: "Sarah Chen" }];
+
+const idealPersona = {
+  overview: "A creative problem-solver with a passion for user-centered design and a track record of shipping impactful products at scale.",
+  traits: [
+    { label: "Experience Level", value: "Senior (5-8 years)" },
+    { label: "Design Philosophy", value: "User-first, data-informed" },
+    { label: "Work Style", value: "Collaborative, iterative" },
+    { label: "Technical Skills", value: "Figma, design systems, prototyping" }
+  ],
+  strengths: [
+    "Strong visual and interaction design skills",
+    "Proven ability to conduct user research and translate insights into design decisions",
+    "Experience working in fast-paced, agile environments",
+    "Excellent communication and stakeholder management skills"
+  ],
+  cultureFit: "Someone who thrives in a collaborative environment, values feedback, and is passionate about creating beautiful, functional products that solve real user problems."
+};
 
 
 export default function JobDetails() {
@@ -236,6 +255,56 @@ export default function JobDetails() {
                 </li>
               )}
             </ul>
+          </div>
+        </div>
+
+        {/* Ideal Persona Section */}
+        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Target className="w-5 h-5 text-indigo-600" />
+            <h3 className="text-[16px] font-semibold text-gray-900">
+              Ideal Persona
+            </h3>
+          </div>
+          
+          <p className="text-[13px] text-gray-600 leading-relaxed mb-6 pb-6 border-b border-gray-100">
+            {idealPersona.overview}
+          </p>
+
+          <div className="grid grid-cols-2 gap-6 mb-6 pb-6 border-b border-gray-100">
+            {idealPersona.traits.map((trait, idx) => (
+              <div key={idx}>
+                <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                  {trait.label}
+                </p>
+                <p className="text-[13px] text-gray-900 font-medium">
+                  {trait.value}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mb-6 pb-6 border-b border-gray-100">
+            <h4 className="text-[13px] font-semibold text-gray-900 mb-3">
+              Key Strengths
+            </h4>
+            <ul className="space-y-2">
+              {idealPersona.strengths.map((strength, idx) => (
+                <li key={idx} className="text-[13px] text-gray-600 flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-0.5 shrink-0" />
+                  {strength}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[13px] font-semibold text-gray-900 mb-2">
+              Culture Fit
+            </h4>
+            <p className="text-[13px] text-gray-600 leading-relaxed">
+              {idealPersona.cultureFit}
+            </p>
           </div>
         </div>
 
