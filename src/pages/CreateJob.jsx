@@ -203,12 +203,12 @@ export default function CreateJob() {
         <div className="flex-1 overflow-y-auto">
           <div className="w-full px-8 py-8">
             {/* Header with Back Button */}
-            <div className="flex items-center gap-2 mb-6">
-              <Link to={createPageUrl("Home")}>
-                <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
-              </Link>
-              <h1 className="text-[24px] font-semibold text-gray-900">Create Job</h1>
-            </div>
+            
+
+
+
+
+
             
             {/* Step 1: AI Generation - Preview */}
             {currentStep === 1 &&
