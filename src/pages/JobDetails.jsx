@@ -11,8 +11,8 @@ import {
   Edit2,
   ChevronDown,
   ChevronUp,
-  Activity,
-} from "lucide-react";
+  Activity } from
+"lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -29,8 +29,8 @@ import {
   Tooltip,
   ResponsiveContainer,
   LineChart,
-  Line,
-} from "recharts";
+  Line } from
+"recharts";
 
 const jobData = {
   title: "Senior Product Designer",
@@ -41,48 +41,48 @@ const jobData = {
   postedDate: "Feb 15, 2026",
   status: "Active",
   description:
-    "We're looking for a talented Senior Product Designer to join our team and help shape the future of our products. You'll work closely with cross-functional teams to create intuitive, user-centered designs.",
+  "We're looking for a talented Senior Product Designer to join our team and help shape the future of our products. You'll work closely with cross-functional teams to create intuitive, user-centered designs.",
   requirements: [
-    "5+ years of product design experience",
-    "Strong portfolio showcasing UX/UI work",
-    "Proficiency in Figma and design systems",
-    "Experience with user research and testing",
-  ],
+  "5+ years of product design experience",
+  "Strong portfolio showcasing UX/UI work",
+  "Proficiency in Figma and design systems",
+  "Experience with user research and testing"]
+
 };
 
 const stats = [
-  { label: "Total Applicants", value: "156", icon: Users, color: "text-blue-600" },
-  { label: "In Pipeline", value: "34", icon: TrendingUp, color: "text-violet-600" },
-  { label: "In Review", value: "12", icon: Eye, color: "text-orange-600" },
-  { label: "Interviews", value: "8", icon: UserPlus, color: "text-emerald-600" },
-];
+{ label: "Total Applicants", value: "156", icon: Users, color: "text-blue-600" },
+{ label: "In Pipeline", value: "34", icon: TrendingUp, color: "text-violet-600" },
+{ label: "In Review", value: "12", icon: Eye, color: "text-orange-600" },
+{ label: "Interviews", value: "8", icon: UserPlus, color: "text-emerald-600" }];
+
 
 const pipelineData = [
-  { stage: "Applied", count: 156 },
-  { stage: "Screening", count: 45 },
-  { stage: "Assessment", count: 28 },
-  { stage: "Interview", count: 15 },
-  { stage: "Final", count: 8 },
-  { stage: "Offer", count: 3 },
-];
+{ stage: "Applied", count: 156 },
+{ stage: "Screening", count: 45 },
+{ stage: "Assessment", count: 28 },
+{ stage: "Interview", count: 15 },
+{ stage: "Final", count: 8 },
+{ stage: "Offer", count: 3 }];
+
 
 const applicationTrend = [
-  { date: "Feb 15", count: 12 },
-  { date: "Feb 16", count: 18 },
-  { date: "Feb 17", count: 25 },
-  { date: "Feb 18", count: 31 },
-  { date: "Feb 19", count: 38 },
-  { date: "Feb 20", count: 32 },
-];
+{ date: "Feb 15", count: 12 },
+{ date: "Feb 16", count: 18 },
+{ date: "Feb 17", count: 25 },
+{ date: "Feb 18", count: 31 },
+{ date: "Feb 19", count: 38 },
+{ date: "Feb 20", count: 32 }];
+
 
 const activityLog = [
-  { time: "2 hours ago", action: "Pipeline automation moved 3 candidates to Interview stage", user: "AI Agent" },
-  { time: "5 hours ago", action: "Job posting updated", user: "Sarah Chen" },
-  { time: "1 day ago", action: "15 new applications received", user: "System" },
-  { time: "1 day ago", action: "Assessment template updated", user: "Mike Roberts" },
-  { time: "2 days ago", action: "Job posted to LinkedIn", user: "System" },
-  { time: "2 days ago", action: "Job created", user: "Sarah Chen" },
-];
+{ time: "2 hours ago", action: "Pipeline automation moved 3 candidates to Interview stage", user: "AI Agent" },
+{ time: "5 hours ago", action: "Job posting updated", user: "Sarah Chen" },
+{ time: "1 day ago", action: "15 new applications received", user: "System" },
+{ time: "1 day ago", action: "Assessment template updated", user: "Mike Roberts" },
+{ time: "2 days ago", action: "Job posted to LinkedIn", user: "System" },
+{ time: "2 days ago", action: "Job created", user: "Sarah Chen" }];
+
 
 export default function JobDetails() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -134,22 +134,22 @@ export default function JobDetails() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <stat.icon className={`w-5 h-5 ${stat.color}`} />
-              </div>
-              <p className="text-[28px] font-bold text-gray-900">{stat.value}</p>
-              <p className="text-[12px] text-gray-400 font-medium">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div className="grid grid-cols-2 gap-6 mb-8">
           {/* Pipeline Funnel */}
@@ -163,8 +163,8 @@ export default function JobDetails() {
                 <XAxis
                   dataKey="stage"
                   tick={{ fontSize: 11 }}
-                  stroke="#999"
-                />
+                  stroke="#999" />
+
                 <YAxis tick={{ fontSize: 11 }} stroke="#999" />
                 <Tooltip />
                 <Bar dataKey="count" fill="#6366f1" radius={[8, 8, 0, 0]} />
@@ -183,8 +183,8 @@ export default function JobDetails() {
                 <XAxis
                   dataKey="date"
                   tick={{ fontSize: 11 }}
-                  stroke="#999"
-                />
+                  stroke="#999" />
+
                 <YAxis tick={{ fontSize: 11 }} stroke="#999" />
                 <Tooltip />
                 <Line
@@ -192,8 +192,8 @@ export default function JobDetails() {
                   dataKey="count"
                   stroke="#10b981"
                   strokeWidth={3}
-                  dot={{ r: 4 }}
-                />
+                  dot={{ r: 4 }} />
+
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -210,8 +210,8 @@ export default function JobDetails() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsEditDialogOpen(true)}
-                className="h-8"
-              >
+                className="h-8">
+
                 <Edit2 className="w-3.5 h-3.5 mr-1.5" />
                 Edit
               </Button>
@@ -226,15 +226,15 @@ export default function JobDetails() {
               Requirements
             </h3>
             <ul className="space-y-2">
-              {editedJob.requirements.map((req, idx) => (
-                <li
-                  key={idx}
-                  className="text-[13px] text-gray-600 flex items-start gap-2"
-                >
+              {editedJob.requirements.map((req, idx) =>
+              <li
+                key={idx}
+                className="text-[13px] text-gray-600 flex items-start gap-2">
+
                   <span className="text-emerald-600 mt-1">•</span>
                   {req}
                 </li>
-              ))}
+              )}
             </ul>
           </div>
         </div>
@@ -257,16 +257,16 @@ export default function JobDetails() {
                   ({activityLog.length} events)
                 </span>
               </div>
-              {isActivityOpen ? (
-                <ChevronUp className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
-              )}
+              {isActivityOpen ?
+              <ChevronUp className="w-4 h-4 text-gray-400 group-hover:text-gray-600" /> :
+
+              <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+              }
             </CollapsibleTrigger>
             <CollapsibleContent className="mt-4">
               <div className="space-y-2">
-                {activityLog.map((log, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
+                {activityLog.map((log, idx) =>
+                <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
                     <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
                     <div className="flex-1">
                       <p className="text-[12px] text-gray-900">{log.action}</p>
@@ -277,7 +277,7 @@ export default function JobDetails() {
                       </div>
                     </div>
                   </div>
-                ))}
+                )}
               </div>
             </CollapsibleContent>
           </div>
@@ -297,16 +297,16 @@ export default function JobDetails() {
                 <Input
                   id="title"
                   value={editedJob.title}
-                  onChange={(e) => setEditedJob({ ...editedJob, title: e.target.value })}
-                />
+                  onChange={(e) => setEditedJob({ ...editedJob, title: e.target.value })} />
+
               </div>
               <div className="space-y-2">
                 <Label htmlFor="department">Department</Label>
                 <Input
                   id="department"
                   value={editedJob.department}
-                  onChange={(e) => setEditedJob({ ...editedJob, department: e.target.value })}
-                />
+                  onChange={(e) => setEditedJob({ ...editedJob, department: e.target.value })} />
+
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -315,16 +315,16 @@ export default function JobDetails() {
                 <Input
                   id="location"
                   value={editedJob.location}
-                  onChange={(e) => setEditedJob({ ...editedJob, location: e.target.value })}
-                />
+                  onChange={(e) => setEditedJob({ ...editedJob, location: e.target.value })} />
+
               </div>
               <div className="space-y-2">
                 <Label htmlFor="type">Job Type</Label>
                 <Input
                   id="type"
                   value={editedJob.type}
-                  onChange={(e) => setEditedJob({ ...editedJob, type: e.target.value })}
-                />
+                  onChange={(e) => setEditedJob({ ...editedJob, type: e.target.value })} />
+
               </div>
             </div>
             <div className="space-y-2">
@@ -332,8 +332,8 @@ export default function JobDetails() {
               <Input
                 id="salary"
                 value={editedJob.salary}
-                onChange={(e) => setEditedJob({ ...editedJob, salary: e.target.value })}
-              />
+                onChange={(e) => setEditedJob({ ...editedJob, salary: e.target.value })} />
+
             </div>
             <div className="space-y-2">
               <Label htmlFor="description">Job Description</Label>
@@ -341,23 +341,23 @@ export default function JobDetails() {
                 id="description"
                 value={editedJob.description}
                 onChange={(e) => setEditedJob({ ...editedJob, description: e.target.value })}
-                className="min-h-[120px]"
-              />
+                className="min-h-[120px]" />
+
             </div>
             <div className="space-y-2">
               <Label>Requirements</Label>
-              {editedJob.requirements.map((req, idx) => (
-                <Input
-                  key={idx}
-                  value={req}
-                  onChange={(e) => {
-                    const newReqs = [...editedJob.requirements];
-                    newReqs[idx] = e.target.value;
-                    setEditedJob({ ...editedJob, requirements: newReqs });
-                  }}
-                  className="mb-2"
-                />
-              ))}
+              {editedJob.requirements.map((req, idx) =>
+              <Input
+                key={idx}
+                value={req}
+                onChange={(e) => {
+                  const newReqs = [...editedJob.requirements];
+                  newReqs[idx] = e.target.value;
+                  setEditedJob({ ...editedJob, requirements: newReqs });
+                }}
+                className="mb-2" />
+
+              )}
             </div>
           </div>
           <DialogFooter>
@@ -370,6 +370,6 @@ export default function JobDetails() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
-  );
+    </div>);
+
 }
