@@ -141,8 +141,8 @@ export default function Home() {
           </div>
           <div className="my-1 flex items-center gap-2">
             <Link to={createPageUrl("Dashboard")}>
-              <Button variant="ghost" size="default" className="gap-2">
-                <BarChart3 className="w-5 h-5" />
+              <Button variant="outline" size="sm" className="gap-2">
+                <BarChart3 className="w-4 h-4" />
                 Analytics
               </Button>
             </Link>
