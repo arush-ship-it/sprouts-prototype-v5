@@ -372,9 +372,9 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}>
 
               {isSourcingExpanded ?
-            <Minimize2 className="w-3.5 h-3.5" /> :
+            <ChevronUp className="w-3.5 h-3.5" /> :
 
-            <Maximize2 className="w-3.5 h-3.5" />
+            <ChevronDown className="w-3.5 h-3.5" />
             }
             </Button>
           </div>
