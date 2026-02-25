@@ -354,8 +354,8 @@ export default function Dashboard() {
                     data={sourceData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={40}
-                    outerRadius={70}
+                    innerRadius={60}
+                    outerRadius={105}
                     paddingAngle={2}
                     dataKey="value">
 
