@@ -215,23 +215,23 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col h-screen bg-[#FAFAFA]">
       {/* Top Navigation */}
-      <div className="px-6 py-2.5 bg-[#FAFAFA] border-b border-gray-200">
-        <div className="flex items-center justify-between">
-          <TabSwitcher activePage="Dashboard" />
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Bell className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="icon" className="h-9 w-9">
-              <Settings className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" className="h-9 gap-2">
-              <User className="w-4 h-4" />
-              <span className="text-[13px] font-medium">John Doe</span>
-            </Button>
-          </div>
-        </div>
-      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <div className="flex flex-1 overflow-hidden">
         {/* Main Content */}
