@@ -236,7 +236,12 @@ export default function Inbox() {
             </Dialog>
           </div>
         </div>
+      </div>
 
+      {/* Analytics Dashboard */}
+      <CommunicationAnalyticsDashboard />
+
+      <div className="px-8 pb-6">
         {/* Activity List */}
         <div className="flex flex-col gap-2.5">
           {activities.map((activity) => (
