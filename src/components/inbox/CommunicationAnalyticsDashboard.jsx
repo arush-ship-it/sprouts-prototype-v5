@@ -81,7 +81,7 @@ export default function CommunicationAnalyticsDashboard() {
 
 
   return (
-    <div className="bg-white mx-8 mt-6 border-b border-gray-200">
+    <div className="bg-white mx-8 my-5 border-b border-gray-200">
       {/* Header */}
       <div className="px-3 py-4 rounded-xl flex items-center justify-between">
         <div className="flex items-center gap-3">
