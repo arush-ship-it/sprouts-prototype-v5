@@ -23,14 +23,6 @@ export default function CommunicationAnalyticsDashboard() {
     textColor: "text-blue-700"
   },
   {
-    label: "Messages Sent",
-    value: 58,
-    trend: 5,
-    positive: true,
-    color: "bg-white border-gray-200",
-    textColor: "text-indigo-700"
-  },
-  {
     label: "Pending Replies",
     value: 24,
     trend: -3,
@@ -45,22 +37,6 @@ export default function CommunicationAnalyticsDashboard() {
     positive: true,
     color: "bg-white border-gray-200",
     textColor: "text-violet-700"
-  },
-  {
-    label: "Failed Deliveries",
-    value: 3,
-    trend: -1,
-    positive: true,
-    color: "bg-white border-gray-200",
-    textColor: "text-red-700"
-  },
-  {
-    label: "Reply Rate",
-    value: "68%",
-    trend: 8,
-    positive: true,
-    color: "bg-white border-gray-200",
-    textColor: "text-emerald-700"
   }];
 
 
@@ -155,7 +131,7 @@ export default function CommunicationAnalyticsDashboard() {
             <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
               Key Metrics
             </h3>
-            <div className="grid grid-cols-6 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {metrics.map((metric, idx) =>
             <div
               key={idx}
