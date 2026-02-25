@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import { motion } from "framer-motion";
 import {
   Users,
   FileText,
@@ -202,6 +203,23 @@ const sourceData = [
 { name: "Referral", value: 12, color: "#ec4899" },
 { name: "Others", value: 8, color: "#f59e0b" }];
 
+// Custom Tooltip Component
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white/90 backdrop-blur-xl border border-gray-200/50 rounded-xl px-4 py-3 shadow-2xl">
+        <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wide mb-1">{label}</p>
+        {payload.map((entry, index) => (
+          <p key={index} className="text-[14px] font-semibold" style={{ color: entry.color }}>
+            {entry.name}: {entry.value}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
+
 
 export default function Dashboard() {
   const [isChatMinimized, setIsChatMinimized] = useState(true);
@@ -277,120 +295,328 @@ export default function Dashboard() {
           </div>
 
           {/* Data Visualizations */}
-          <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="grid grid-cols-3 gap-5 mb-8">
             {/* Pipeline Funnel */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Candidates in Pipeline Funnel
-              </h3>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={pipelineFunnelData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="stage" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0 }}
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Pipeline Funnel</p>
+                    <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                      342
+                    </h3>
+                    <p className="text-[12px] text-gray-500 mt-1">Total candidates</p>
+                  </div>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={pipelineFunnelData}>
+                    <defs>
+                      <linearGradient id="pipelineGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#6366f1" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.6} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+                    <XAxis 
+                      dataKey="stage" 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
+                    />
+                    <YAxis 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(99, 102, 241, 0.05)' }} />
+                    <Bar 
+                      dataKey="count" 
+                      fill="url(#pipelineGradient)" 
+                      radius={[8, 8, 0, 0]}
+                      maxBarSize={50}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </motion.div>
 
             {/* New Applications */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                New Applications (To Be Reviewed)
-              </h3>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={newApplicationsData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="week" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#f97316" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)] transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">New Applications</p>
+                    <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                      28
+                    </h3>
+                    <p className="text-[12px] text-gray-500 mt-1">To be reviewed</p>
+                  </div>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={newApplicationsData}>
+                    <defs>
+                      <linearGradient id="applicationsGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#f97316" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="#fb923c" stopOpacity={0.6} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+                    <XAxis 
+                      dataKey="week" 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
+                    />
+                    <YAxis 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(249, 115, 22, 0.05)' }} />
+                    <Bar 
+                      dataKey="count" 
+                      fill="url(#applicationsGradient)" 
+                      radius={[8, 8, 0, 0]}
+                      maxBarSize={50}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </motion.div>
 
             {/* Resumes Processed */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Resumes Processed Per Month
-              </h3>
-              <ResponsiveContainer width="100%" height={240}>
-                <LineChart data={resumesProcessedData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="count" stroke="#ec4899" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(236,72,153,0.12)] transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Resumes Processed</p>
+                    <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                      156
+                    </h3>
+                    <p className="text-[12px] text-gray-500 mt-1">+18% from last month</p>
+                  </div>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart data={resumesProcessedData}>
+                    <defs>
+                      <linearGradient id="resumesGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ec4899" stopOpacity={0.8} />
+                        <stop offset="100%" stopColor="#f472b6" stopOpacity={0.2} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+                    <XAxis 
+                      dataKey="month" 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
+                    />
+                    <YAxis 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Line 
+                      type="monotone" 
+                      dataKey="count" 
+                      stroke="#ec4899" 
+                      strokeWidth={3}
+                      dot={{ fill: '#ec4899', strokeWidth: 2, r: 5, stroke: '#fff' }}
+                      activeDot={{ r: 7, fill: '#ec4899', stroke: '#fff', strokeWidth: 2 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </motion.div>
 
             {/* Monthly Trends */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                JD & Resume Processing/Month
-              </h3>
-              <ResponsiveContainer width="100%" height={240}>
-                <LineChart data={monthlyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="jd" stroke="#8b5cf6" strokeWidth={2} name="JD" />
-                  <Line type="monotone" dataKey="resumes" stroke="#10b981" strokeWidth={2} name="Resumes" />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(139,92,246,0.12)] transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Monthly Processing</p>
+                    <div className="flex items-baseline gap-3">
+                      <div>
+                        <h3 className="text-[28px] font-bold bg-gradient-to-br from-violet-600 to-violet-400 bg-clip-text text-transparent">
+                          23
+                        </h3>
+                        <p className="text-[10px] text-gray-500">JDs</p>
+                      </div>
+                      <div>
+                        <h3 className="text-[28px] font-bold bg-gradient-to-br from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+                          156
+                        </h3>
+                        <p className="text-[10px] text-gray-500">Resumes</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart data={monthlyData}>
+                    <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+                    <XAxis 
+                      dataKey="month" 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
+                    />
+                    <YAxis 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Line 
+                      type="monotone" 
+                      dataKey="jd" 
+                      stroke="#8b5cf6" 
+                      strokeWidth={3}
+                      name="JD"
+                      dot={{ fill: '#8b5cf6', strokeWidth: 2, r: 5, stroke: '#fff' }}
+                      activeDot={{ r: 7, fill: '#8b5cf6', stroke: '#fff', strokeWidth: 2 }}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="resumes" 
+                      stroke="#10b981" 
+                      strokeWidth={3}
+                      name="Resumes"
+                      dot={{ fill: '#10b981', strokeWidth: 2, r: 5, stroke: '#fff' }}
+                      activeDot={{ r: 7, fill: '#10b981', stroke: '#fff', strokeWidth: 2 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </motion.div>
 
             {/* Source Breakdown */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Application Source Breakdown
-              </h3>
-              <ResponsiveContainer width="100%" height={240}>
-                <RechartsPieChart>
-                  <Pie
-                    data={sourceData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={105}
-                    paddingAngle={2}
-                    dataKey="value">
-
-                    {sourceData.map((entry, index) =>
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                    )}
-                  </Pie>
-                  <Tooltip />
-                </RechartsPieChart>
-              </ResponsiveContainer>
-              <div className="flex flex-wrap gap-2 mt-3">
-                {sourceData.map((item, idx) =>
-                <div key={idx} className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-[10px] text-gray-600">{item.name} {item.value}%</span>
-                  </div>
-                )}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-violet-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="mb-6">
+                  <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Source Breakdown</p>
+                  <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                    45%
+                  </h3>
+                  <p className="text-[12px] text-gray-500 mt-1">Direct applications</p>
+                </div>
+                <ResponsiveContainer width="100%" height={160}>
+                  <RechartsPieChart>
+                    <defs>
+                      {sourceData.map((entry, index) => (
+                        <linearGradient key={index} id={`sourceGradient${index}`} x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor={entry.color} stopOpacity={0.9} />
+                          <stop offset="100%" stopColor={entry.color} stopOpacity={0.6} />
+                        </linearGradient>
+                      ))}
+                    </defs>
+                    <Pie
+                      data={sourceData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={75}
+                      paddingAngle={3}
+                      dataKey="value">
+                      {sourceData.map((entry, index) =>
+                      <Cell key={`cell-${index}`} fill={`url(#sourceGradient${index})`} stroke="#fff" strokeWidth={2} />
+                      )}
+                    </Pie>
+                    <Tooltip content={<CustomTooltip />} />
+                  </RechartsPieChart>
+                </ResponsiveContainer>
+                <div className="flex flex-wrap gap-3 mt-4">
+                  {sourceData.map((item, idx) =>
+                  <div key={idx} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-gray-50 to-gray-100/50 border border-gray-200/50">
+                      <div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: item.color }} />
+                      <span className="text-[11px] font-medium text-gray-700">{item.name}</span>
+                      <span className="text-[11px] font-bold" style={{ color: item.color }}>{item.value}%</span>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Applicants per Job Posting */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Applicants per Job Posting
-              </h3>
-              <ResponsiveContainer width="100%" height={240}>
-                <BarChart data={applicantsPerJobData} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis type="number" tick={{ fontSize: 10 }} />
-                  <YAxis dataKey="job" type="category" tick={{ fontSize: 10 }} width={80} />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(59,130,246,0.12)] transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="mb-6">
+                  <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Applicants per Job</p>
+                  <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                    203
+                  </h3>
+                  <p className="text-[12px] text-gray-500 mt-1">Frontend Engineer (highest)</p>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={applicantsPerJobData} layout="vertical">
+                    <defs>
+                      <linearGradient id="jobsGradient" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="#06b6d4" stopOpacity={0.6} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} horizontal={false} />
+                    <XAxis 
+                      type="number" 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      tickLine={false}
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
+                    />
+                    <YAxis 
+                      dataKey="job" 
+                      type="category" 
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      width={100}
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }} />
+                    <Bar 
+                      dataKey="count" 
+                      fill="url(#jobsGradient)" 
+                      radius={[0, 8, 8, 0]}
+                      maxBarSize={30}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </motion.div>
           </div>
 
           {/* Key Metrics Grid */}
