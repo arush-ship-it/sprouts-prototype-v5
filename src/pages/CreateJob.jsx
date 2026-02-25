@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, Sparkles, Briefcase, MapPin, DollarSign, Clock, Bell, Settings, User, CheckCircle2, Circle } from "lucide-react";
+import { Send, Sparkles, Briefcase, MapPin, DollarSign, Clock, Bell, Settings, User, CheckCircle2, Circle, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -202,6 +202,13 @@ export default function CreateJob() {
         {/* Right Panel - Step Content */}
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-4xl mx-auto p-8">
+            {/* Header with Back Button */}
+            <div className="flex items-center gap-2 mb-6">
+              <Link to={createPageUrl("Home")}>
+                <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+              </Link>
+              <h1 className="text-[24px] font-semibold text-gray-900">Create Job</h1>
+            </div>
             
             {/* Step 1: AI Generation - Preview */}
             {currentStep === 1 &&
