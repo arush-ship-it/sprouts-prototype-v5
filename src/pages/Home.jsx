@@ -176,8 +176,8 @@ export default function Home() {
                   <stat.icon className={`w-5 h-5 ${stat.iconColor}`} />
                 </div>
               </div>
-              <p className="text-[13px] text-gray-500 mb-2">{stat.title}</p>
-              <h3 className="text-[32px] font-bold text-gray-900 mb-1">{stat.value}</h3>
+              <p className="text-gray-500 mb-2 text-xs">{stat.title}</p>
+              <h3 className="text-gray-900 mb-1 text-2xl font-bold">{stat.value}</h3>
               <p className="text-[12px] text-gray-400">{stat.subtitle}</p>
             </div>
           )}
