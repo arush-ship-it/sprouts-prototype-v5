@@ -235,8 +235,8 @@ export default function Dashboard() {
         <div className="flex-1 overflow-y-auto px-8 pt-6 pb-8">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-[28px] font-bold text-gray-900 mb-2">
-              Hiring Dashboard
+            <h1 className="text-[28px] font-bold text-gray-900 mb-2">Analytics Dashboard
+
             </h1>
             <p className="text-[14px] text-gray-500">
               Overview of all recruitment activities
@@ -445,8 +445,8 @@ export default function Dashboard() {
 
         {/* Analytics Chat Panel */}
         <div className={`bg-white mx-2 my-2 rounded-2xl border-l border-gray-200 flex flex-col transition-all duration-300 ${
-          isChatMinimized ? "w-[60px]" : "w-[380px]"
-        }`}>
+        isChatMinimized ? "w-[60px]" : "w-[380px]"}`
+        }>
 
 
 
