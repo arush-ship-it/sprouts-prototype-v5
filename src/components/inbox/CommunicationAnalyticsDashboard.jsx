@@ -43,10 +43,10 @@ export default function CommunicationAnalyticsDashboard() {
   }];
 
   const breakdownData = [
-    { label: "Emails Sent", value: 58 },
-    { label: "Messages Sent", value: 42 },
-    { label: "Sequences Sent", value: 42 }
-  ];
+  { label: "Emails Sent", value: 58 },
+  { label: "Messages Sent", value: 42 },
+  { label: "Sequences Sent", value: 42 }];
+
 
 
   const sequenceData = [
@@ -150,19 +150,19 @@ export default function CommunicationAnalyticsDashboard() {
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-[11px] text-gray-600 font-medium">{metric.label}</p>
                     {metric.hasBreakdown && (
-                      isBreakdownExpanded ? 
-                        <ChevronUp className="w-3.5 h-3.5 text-gray-500" /> : 
-                        <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
-                    )}
+                isBreakdownExpanded ?
+                <ChevronUp className="w-3.5 h-3.5 text-gray-500" /> :
+                <ChevronDown className="w-3.5 h-3.5 text-gray-500" />)
+                }
                   </div>
                   <div className="flex items-end justify-between">
                     <div>
-                      <span className={`text-[20px] font-bold ${metric.textColor}`}>
+                      <span className="text-blue-700 text-3xl font-bold">
                         {metric.value}
                       </span>
-                      {metric.replyRate && (
-                        <p className="text-[11px] text-gray-500 mt-1">Reply Rate: {metric.replyRate}</p>
-                      )}
+                      {metric.replyRate &&
+                  <p className="text-[11px] text-gray-500 mt-1">Reply Rate: {metric.replyRate}</p>
+                  }
                     </div>
                     <div className="flex items-center gap-0.5">
                       {metric.positive ?
@@ -180,19 +180,19 @@ export default function CommunicationAnalyticsDashboard() {
             </div>
 
             {/* Breakdown Section */}
-            {isBreakdownExpanded && (
-              <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            {isBreakdownExpanded &&
+          <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
                 <h4 className="text-[11px] font-semibold text-gray-600 uppercase tracking-wider mb-3">Breakdown</h4>
                 <div className="grid grid-cols-3 gap-3">
-                  {breakdownData.map((item, idx) => (
-                    <div key={idx} className="bg-white p-3 rounded-lg border border-gray-200">
+                  {breakdownData.map((item, idx) =>
+              <div key={idx} className="bg-white p-3 rounded-lg border border-gray-200">
                       <p className="text-[10px] text-gray-500 mb-1">{item.label}</p>
                       <p className="text-[18px] font-bold text-gray-900">{item.value}</p>
                     </div>
-                  ))}
+              )}
                 </div>
               </div>
-            )}
+          }
           </div>
 
           {/* Sequence Overview */}
