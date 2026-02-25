@@ -215,6 +215,9 @@ export default function Home() {
                     <div className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
                       {job.status}
                     </div>
+                    <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
+                      <ExternalLink className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+                    </Link>
                   </div>
                 </div>
               )}
