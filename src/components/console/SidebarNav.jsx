@@ -54,7 +54,7 @@ export default function SidebarNav({ activePage = "Console" }) {
           
 
 
-          <span className="text-gray-900 font-semibold text-[15px] tracking-tight">Sprouts AI . Workspace
+          <span className="text-gray-900 font-semibold text-[15px] tracking-tight">Sprouts AI
 
           </span>
         </div>
