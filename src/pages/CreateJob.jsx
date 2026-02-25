@@ -115,7 +115,7 @@ export default function CreateJob() {
             <Link to={createPageUrl("Home")}>
               <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
             </Link>
-            <h1 className="text-[24px] font-semibold text-gray-900">Create Job</h1>
+            <h1 className="text-gray-700 text-2xl font-semibold">Create Job</h1>
           </div>
         </div>
         
