@@ -110,7 +110,7 @@ export default function CreateJob() {
 
       <div className="flex flex-1 overflow-hidden flex-col">
         {/* Header */}
-        <div className="bg-slate-50 px-8 py-4 border-b border-gray-200">
+        <div className="bg-slate-50 px-8 py-4">
           <div className="flex items-center gap-2">
             <Link to={createPageUrl("Home")}>
               <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
