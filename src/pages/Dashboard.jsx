@@ -384,69 +384,69 @@ export default function Dashboard() {
         </div>
 
           {/* Grid: Messages & Activity */}
-          <div className="grid grid-cols-2 gap-6">
-          {/* All Messages */}
-          <div>
-            <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
-              Recent Messages
-            </h2>
-            <div className="space-y-2">
-              {messages.map((msg) =>
-                <div
-                  key={msg.id}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+          
 
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-violet-500 flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <p className="text-[13px] font-semibold text-gray-900">
-                        {msg.candidate}
-                      </p>
-                      <span className="text-[11px] text-gray-400 whitespace-nowrap">
-                        {msg.time}
-                      </span>
-                    </div>
-                    <p className="text-[12px] text-gray-600 truncate">
-                      {msg.subject}
-                    </p>
-                    {msg.unread &&
-                    <span className="inline-block w-2 h-2 rounded-full bg-indigo-600 mt-1" />
-                    }
-                  </div>
-                </div>
-                )}
-            </div>
-          </div>
 
-          {/* All Tasks/Activity */}
-          <div>
-            <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
-              Recent Activity
-            </h2>
-            <div className="space-y-2">
-              {activities.map((activity) =>
-                <div
-                  key={activity.id}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all">
 
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shrink-0">
-                    <CheckSquare className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[13px] text-gray-900 mb-1">
-                      {activity.description}
-                    </p>
-                    <span className="text-[11px] text-gray-400">
-                      {activity.time}
-                    </span>
-                  </div>
-                </div>
-                )}
-            </div>
-          </div>
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
         {/* Analytics Chat Panel */}
