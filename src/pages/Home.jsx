@@ -199,7 +199,9 @@ export default function Home() {
                       <Briefcase className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="text-[15px] font-semibold text-gray-900">{job.title}</h3>
+                      <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
+                        <h3 className="text-[15px] font-semibold text-gray-900 cursor-pointer hover:text-blue-600">{job.title}</h3>
+                      </Link>
                       <p className="text-[12px] text-gray-500">{job.department}</p>
                     </div>
                   </div>
