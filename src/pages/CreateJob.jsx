@@ -431,7 +431,7 @@ export default function CreateJob() {
 
             {/* Step 3: Publish */}
             {currentStep === 3 &&
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-6xl mx-auto">
               <div>
                 <h2 className="text-[20px] font-semibold text-gray-900 mb-2">Publish Job</h2>
                 <p className="text-[13px] text-gray-500">Choose where and how to publish your job</p>
