@@ -171,7 +171,7 @@ export default function Inbox() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
-      <div className="px-8 pt-8 pb-6">
+      <div className="px-8 pt-5 pb-4">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-[22px] font-semibold text-gray-900 tracking-tight">
