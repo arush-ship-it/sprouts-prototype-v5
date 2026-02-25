@@ -107,6 +107,8 @@ export default function JobDetails() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
   const [editedJob, setEditedJob] = useState({ ...jobData });
+  const [isEditPersonaOpen, setIsEditPersonaOpen] = useState(false);
+  const [editedPersona, setEditedPersona] = useState({ ...idealPersona });
 
   const handleSave = () => {
     setIsEditDialogOpen(false);
@@ -115,6 +117,15 @@ export default function JobDetails() {
   const handleCancel = () => {
     setEditedJob({ ...jobData });
     setIsEditDialogOpen(false);
+  };
+
+  const handleSavePersona = () => {
+    setIsEditPersonaOpen(false);
+  };
+
+  const handleCancelPersona = () => {
+    setEditedPersona({ ...idealPersona });
+    setIsEditPersonaOpen(false);
   };
 
   return (
@@ -254,11 +265,21 @@ export default function JobDetails() {
 
         {/* Ideal Persona Section */}
         <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Target className="w-5 h-5 text-indigo-600" />
-            <h3 className="text-[16px] font-semibold text-gray-900">
-              Ideal Persona
-            </h3>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Target className="w-5 h-5 text-indigo-600" />
+              <h3 className="text-[16px] font-semibold text-gray-900">
+                Ideal Persona
+              </h3>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsEditPersonaOpen(true)}
+              className="h-8">
+              <Edit2 className="w-3.5 h-3.5 mr-1.5" />
+              Edit
+            </Button>
           </div>
           
           <p className="text-[13px] text-gray-600 leading-relaxed mb-6 pb-6 border-b border-gray-100">
@@ -428,6 +449,81 @@ export default function JobDetails() {
               Cancel
             </Button>
             <Button onClick={handleSave}>
+              Save Changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Persona Dialog */}
+      <Dialog open={isEditPersonaOpen} onOpenChange={setIsEditPersonaOpen}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Edit Ideal Persona</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="overview">Overview</Label>
+              <Textarea
+                id="overview"
+                value={editedPersona.overview}
+                onChange={(e) => setEditedPersona({ ...editedPersona, overview: e.target.value })}
+                className="min-h-[80px]" />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Key Traits</Label>
+              {editedPersona.traits.map((trait, idx) => (
+                <div key={idx} className="grid grid-cols-2 gap-2">
+                  <Input
+                    placeholder="Label"
+                    value={trait.label}
+                    onChange={(e) => {
+                      const newTraits = [...editedPersona.traits];
+                      newTraits[idx] = { ...newTraits[idx], label: e.target.value };
+                      setEditedPersona({ ...editedPersona, traits: newTraits });
+                    }} />
+                  <Input
+                    placeholder="Value"
+                    value={trait.value}
+                    onChange={(e) => {
+                      const newTraits = [...editedPersona.traits];
+                      newTraits[idx] = { ...newTraits[idx], value: e.target.value };
+                      setEditedPersona({ ...editedPersona, traits: newTraits });
+                    }} />
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-2">
+              <Label>Key Strengths</Label>
+              {editedPersona.strengths.map((strength, idx) => (
+                <Input
+                  key={idx}
+                  value={strength}
+                  onChange={(e) => {
+                    const newStrengths = [...editedPersona.strengths];
+                    newStrengths[idx] = e.target.value;
+                    setEditedPersona({ ...editedPersona, strengths: newStrengths });
+                  }}
+                  className="mb-2" />
+              ))}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="cultureFit">Culture Fit</Label>
+              <Textarea
+                id="cultureFit"
+                value={editedPersona.cultureFit}
+                onChange={(e) => setEditedPersona({ ...editedPersona, cultureFit: e.target.value })}
+                className="min-h-[80px]" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancelPersona}>
+              Cancel
+            </Button>
+            <Button onClick={handleSavePersona}>
               Save Changes
             </Button>
           </DialogFooter>
