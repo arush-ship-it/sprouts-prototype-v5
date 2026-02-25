@@ -86,9 +86,9 @@ export default function CommunicationAnalyticsDashboard() {
       <div className="px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h2 className="text-[15px] font-semibold text-gray-900">Communication Health</h2>
-          <span className="text-[12px] text-gray-500 bg-gray-100 px-2 py-1 rounded-md">
-            {timeFilter === "7days" ? "Last 7 days" : timeFilter === "30days" ? "Last 30 days" : "Custom"}
-          </span>
+          
+
+
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-0.5">
