@@ -340,48 +340,48 @@ export default function Dashboard() {
           </div>
 
           {/* All Jobs */}
-          <div className="mb-6">
-          <h2 className="text-[18px] font-semibold text-gray-900 mb-4">
-            All Jobs
-          </h2>
-          <div className="space-y-3">
-            {jobs.map((job) =>
-              <div
-                key={job.id}
-                className="flex items-center justify-between p-5 rounded-xl bg-white border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+          
 
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center">
-                    <Briefcase className="w-5 h-5 text-indigo-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-[14px] font-semibold text-gray-900">
-                      {job.title}
-                    </h3>
-                    <p className="text-[12px] text-gray-400">{job.department}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6">
-                  <div className="text-center">
-                    <p className="text-[20px] font-bold text-gray-900">
-                      {job.applicants}
-                    </p>
-                    <p className="text-[11px] text-gray-400">Applicants</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-[20px] font-bold text-indigo-600">
-                      {job.inPipeline}
-                    </p>
-                    <p className="text-[11px] text-gray-400">In Pipeline</p>
-                  </div>
-                  <span className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
-                    {job.status}
-                  </span>
-                </div>
-              </div>
-              )}
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           {/* Grid: Messages & Activity */}
           
