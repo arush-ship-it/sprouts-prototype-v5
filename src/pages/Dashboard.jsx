@@ -196,6 +196,7 @@ export default function Dashboard() {
   }]
   );
   const [chatInput, setChatInput] = useState("");
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleSendChat = () => {
     if (!chatInput.trim()) return;
@@ -211,6 +212,13 @@ export default function Dashboard() {
       );
     }, 500);
   };
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % 3);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="flex flex-col h-screen bg-[#FAFAFA]">
@@ -249,71 +257,91 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Data Visualizations */}
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            {/* Pipeline Funnel */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Candidates in Pipeline Funnel
-              </h3>
-              <ResponsiveContainer width="100%" height={160}>
-                <BarChart data={pipelineFunnelData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="stage" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+          {/* Data Visualizations Carousel */}
+          <div className="mb-6">
+            <div className="p-4 rounded-xl bg-white border border-gray-200 relative overflow-hidden">
+              {/* Pipeline Funnel - Slide 0 */}
+              {currentSlide === 0 && (
+                <div>
+                  <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                    Candidates in Pipeline Funnel
+                  </h3>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <BarChart data={pipelineFunnelData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                      <XAxis dataKey="stage" tick={{ fontSize: 10 }} />
+                      <YAxis tick={{ fontSize: 10 }} />
+                      <Tooltip />
+                      <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
 
-            {/* Monthly Trends */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                JD & Resume Processing/Month
-              </h3>
-              <ResponsiveContainer width="100%" height={160}>
-                <LineChart data={monthlyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                  <YAxis tick={{ fontSize: 10 }} />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="jd" stroke="#8b5cf6" strokeWidth={2} name="JD" />
-                  <Line type="monotone" dataKey="resumes" stroke="#10b981" strokeWidth={2} name="Resumes" />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+              {/* Monthly Trends - Slide 1 */}
+              {currentSlide === 1 && (
+                <div>
+                  <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                    JD & Resume Processing/Month
+                  </h3>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <LineChart data={monthlyData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                      <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                      <YAxis tick={{ fontSize: 10 }} />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="jd" stroke="#8b5cf6" strokeWidth={2} name="JD" />
+                      <Line type="monotone" dataKey="resumes" stroke="#10b981" strokeWidth={2} name="Resumes" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
 
-            {/* Source Breakdown */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
-              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
-                Application Source Breakdown
-              </h3>
-              <ResponsiveContainer width="100%" height={160}>
-                <RechartsPieChart>
-                  <Pie
-                    data={sourceData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={40}
-                    outerRadius={70}
-                    paddingAngle={2}
-                    dataKey="value">
-
-                    {sourceData.map((entry, index) =>
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+              {/* Source Breakdown - Slide 2 */}
+              {currentSlide === 2 && (
+                <div>
+                  <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                    Application Source Breakdown
+                  </h3>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <RechartsPieChart>
+                      <Pie
+                        data={sourceData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={50}
+                        outerRadius={85}
+                        paddingAngle={2}
+                        dataKey="value">
+                        {sourceData.map((entry, index) =>
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        )}
+                      </Pie>
+                      <Tooltip />
+                    </RechartsPieChart>
+                  </ResponsiveContainer>
+                  <div className="flex flex-wrap gap-3 mt-4 justify-center">
+                    {sourceData.map((item, idx) =>
+                      <div key={idx} className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                        <span className="text-[11px] text-gray-600">{item.name} {item.value}%</span>
+                      </div>
                     )}
-                  </Pie>
-                  <Tooltip />
-                </RechartsPieChart>
-              </ResponsiveContainer>
-              <div className="flex flex-wrap gap-2 mt-3">
-                {sourceData.map((item, idx) =>
-                <div key={idx} className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-[10px] text-gray-600">{item.name} {item.value}%</span>
                   </div>
-                )}
+                </div>
+              )}
+
+              {/* Slide Indicators */}
+              <div className="flex justify-center gap-1.5 mt-4">
+                {[0, 1, 2].map((idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      currentSlide === idx ? 'w-6 bg-indigo-600' : 'w-1.5 bg-gray-300'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </div>
