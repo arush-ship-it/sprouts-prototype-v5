@@ -81,9 +81,9 @@ export default function CommunicationAnalyticsDashboard() {
 
 
   return (
-    <div className="bg-white border-b border-gray-200">
+    <div className="bg-white mx-8 border-b border-gray-200">
       {/* Header */}
-      <div className="mx-8 py-4 flex items-center justify-between">
+      <div className="px-3 py-4 rounded-xl flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h2 className="text-[15px] font-semibold text-gray-900">Communication Health</h2>
           
