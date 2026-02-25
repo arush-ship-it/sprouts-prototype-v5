@@ -135,7 +135,9 @@ export default function Home() {
               Hello <span className="text-blue-500 font-semibold">Arush</span>, welcome back!
             </h1>
             <Bell className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
-            <Settings className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+            <Link to={createPageUrl("Settings")}>
+              <Settings className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+            </Link>
           </div>
           <div className="my-1 flex items-center gap-2">
             <Link to={createPageUrl("Dashboard")}>
