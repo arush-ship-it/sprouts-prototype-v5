@@ -171,14 +171,16 @@ export default function Home() {
         <div className="grid grid-cols-3 gap-4 mb-8">
           {stats.map((stat, index) =>
           <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-              <div className="flex items-start gap-3 mb-4">
-                <div className={`p-2 rounded-lg ${stat.iconBg}`}>
+              <div className="flex items-start gap-3">
+                <div className={`p-2 rounded-lg ${stat.iconBg} flex-shrink-0`}>
                   <stat.icon className={`w-5 h-5 ${stat.iconColor}`} />
                 </div>
+                <div className="flex-1">
+                  <p className="text-gray-500 mb-1 text-xs">{stat.title}</p>
+                  <h3 className="text-gray-900 mb-1 text-2xl font-bold">{stat.value}</h3>
+                  <p className="text-[12px] text-gray-400">{stat.subtitle}</p>
+                </div>
               </div>
-              <p className="text-gray-500 mb-2 text-xs">{stat.title}</p>
-              <h3 className="text-gray-900 mb-1 text-2xl font-bold">{stat.value}</h3>
-              <p className="text-[12px] text-gray-400">{stat.subtitle}</p>
             </div>
           )}
         </div>
