@@ -394,25 +394,25 @@ export default function Dashboard() {
           </div>
 
           {/* Key Metrics Grid */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            {analyticsCards.map((card) =>
-            <div
-              key={card.id}
-              className="p-5 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-all">
+          
 
-                <div className={`w-10 h-10 rounded-lg ${card.bg} flex items-center justify-center mb-4`}>
-                  <card.icon className={`w-5 h-5 ${card.color}`} />
-                </div>
-                <h3 className="text-[13px] text-gray-500 font-medium mb-1">
-                  {card.title}
-                </h3>
-                <p className="text-[32px] font-bold text-gray-900 mb-1">
-                  {card.value}
-                </p>
-                <p className="text-[12px] text-gray-400">{card.subtitle}</p>
-              </div>
-            )}
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           {/* All Jobs */}
           
