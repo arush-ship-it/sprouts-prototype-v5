@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 import {
   Users,
   FileText,
@@ -13,7 +15,8 @@ import {
   Maximize2,
   Bell,
   Settings,
-  User } from
+  User,
+  ChevronLeft } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -235,9 +238,12 @@ export default function Dashboard() {
         <div className="flex-1 overflow-y-auto px-8 pt-6 pb-8">
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-[28px] font-bold text-gray-900 mb-2">Analytics Dashboard
-
-            </h1>
+            <div className="flex items-center gap-2 mb-2">
+              <Link to={createPageUrl("Home")}>
+                <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+              </Link>
+              <h1 className="text-[28px] font-bold text-gray-900">Analytics Dashboard</h1>
+            </div>
             <p className="text-[14px] text-gray-500">
               Overview of all recruitment activities
             </p>
