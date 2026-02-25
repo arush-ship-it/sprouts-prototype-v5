@@ -144,7 +144,7 @@ export default function CommunicationAnalyticsDashboard() {
               {metrics.map((metric, idx) =>
             <div
               key={idx}
-              className={`p-4 rounded-lg border-2 transition-all ${metric.color} ${metric.hasBreakdown ? 'cursor-pointer hover:shadow-sm' : ''}`}
+              className={`p-4 rounded-lg transition-all ${metric.color} ${metric.hasBreakdown ? 'cursor-pointer hover:shadow-sm' : ''}`}
               onClick={metric.hasBreakdown ? () => setIsBreakdownExpanded(!isBreakdownExpanded) : undefined}>
 
                   <div className="flex items-center justify-between mb-2">
