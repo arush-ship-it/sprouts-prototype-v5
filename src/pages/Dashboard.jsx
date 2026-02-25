@@ -209,13 +209,13 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="bg-white/90 backdrop-blur-xl border border-gray-200/50 rounded-xl px-4 py-3 shadow-2xl">
         <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wide mb-1">{label}</p>
-        {payload.map((entry, index) => (
-          <p key={index} className="text-[14px] font-semibold" style={{ color: entry.color }}>
+        {payload.map((entry, index) =>
+        <p key={index} className="text-[14px] font-semibold" style={{ color: entry.color }}>
             {entry.name}: {entry.value}
           </p>
-        ))}
-      </div>
-    );
+        )}
+      </div>);
+
   }
   return null;
 };
@@ -277,7 +277,7 @@ export default function Dashboard() {
                 <Link to={createPageUrl("Home")}>
                   <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
                 </Link>
-                <h1 className="text-[28px] font-bold text-gray-900">Analytics Dashboard</h1>
+                <h1 className="text-gray-700 text-2xl font-semibold">Analytics Dashboard</h1>
               </div>
               <Button
                 onClick={() => setIsChatMinimized(false)}
@@ -297,12 +297,12 @@ export default function Dashboard() {
           {/* Data Visualizations */}
           <div className="grid grid-cols-3 gap-5 mb-8">
             {/* Pipeline Funnel */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0 }}
-              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden"
-            >
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden">
+
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
@@ -323,36 +323,36 @@ export default function Dashboard() {
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
-                    <XAxis 
-                      dataKey="stage" 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                    <XAxis
+                      dataKey="stage"
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
-                    />
-                    <YAxis 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }} />
+
+                    <YAxis
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={false}
-                    />
+                      axisLine={false} />
+
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(99, 102, 241, 0.05)' }} />
-                    <Bar 
-                      dataKey="count" 
-                      fill="url(#pipelineGradient)" 
+                    <Bar
+                      dataKey="count"
+                      fill="url(#pipelineGradient)"
                       radius={[8, 8, 0, 0]}
-                      maxBarSize={50}
-                    />
+                      maxBarSize={50} />
+
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </motion.div>
 
             {/* New Applications */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)] transition-all duration-500 overflow-hidden"
-            >
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(249,115,22,0.12)] transition-all duration-500 overflow-hidden">
+
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
@@ -373,36 +373,36 @@ export default function Dashboard() {
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
-                    <XAxis 
-                      dataKey="week" 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                    <XAxis
+                      dataKey="week"
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
-                    />
-                    <YAxis 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }} />
+
+                    <YAxis
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={false}
-                    />
+                      axisLine={false} />
+
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(249, 115, 22, 0.05)' }} />
-                    <Bar 
-                      dataKey="count" 
-                      fill="url(#applicationsGradient)" 
+                    <Bar
+                      dataKey="count"
+                      fill="url(#applicationsGradient)"
                       radius={[8, 8, 0, 0]}
-                      maxBarSize={50}
-                    />
+                      maxBarSize={50} />
+
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </motion.div>
 
             {/* Resumes Processed */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(236,72,153,0.12)] transition-all duration-500 overflow-hidden"
-            >
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(236,72,153,0.12)] transition-all duration-500 overflow-hidden">
+
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
@@ -423,38 +423,38 @@ export default function Dashboard() {
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
-                    <XAxis 
-                      dataKey="month" 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                    <XAxis
+                      dataKey="month"
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
-                    />
-                    <YAxis 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }} />
+
+                    <YAxis
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={false}
-                    />
+                      axisLine={false} />
+
                     <Tooltip content={<CustomTooltip />} />
-                    <Line 
-                      type="monotone" 
-                      dataKey="count" 
-                      stroke="#ec4899" 
+                    <Line
+                      type="monotone"
+                      dataKey="count"
+                      stroke="#ec4899"
                       strokeWidth={3}
                       dot={{ fill: '#ec4899', strokeWidth: 2, r: 5, stroke: '#fff' }}
-                      activeDot={{ r: 7, fill: '#ec4899', stroke: '#fff', strokeWidth: 2 }}
-                    />
+                      activeDot={{ r: 7, fill: '#ec4899', stroke: '#fff', strokeWidth: 2 }} />
+
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </motion.div>
 
             {/* Monthly Trends */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(139,92,246,0.12)] transition-all duration-500 overflow-hidden"
-            >
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(139,92,246,0.12)] transition-all duration-500 overflow-hidden">
+
               <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
@@ -479,48 +479,48 @@ export default function Dashboard() {
                 <ResponsiveContainer width="100%" height={200}>
                   <LineChart data={monthlyData}>
                     <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
-                    <XAxis 
-                      dataKey="month" 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                    <XAxis
+                      dataKey="month"
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
-                    />
-                    <YAxis 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }} />
+
+                    <YAxis
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={false}
-                    />
+                      axisLine={false} />
+
                     <Tooltip content={<CustomTooltip />} />
-                    <Line 
-                      type="monotone" 
-                      dataKey="jd" 
-                      stroke="#8b5cf6" 
+                    <Line
+                      type="monotone"
+                      dataKey="jd"
+                      stroke="#8b5cf6"
                       strokeWidth={3}
                       name="JD"
                       dot={{ fill: '#8b5cf6', strokeWidth: 2, r: 5, stroke: '#fff' }}
-                      activeDot={{ r: 7, fill: '#8b5cf6', stroke: '#fff', strokeWidth: 2 }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="resumes" 
-                      stroke="#10b981" 
+                      activeDot={{ r: 7, fill: '#8b5cf6', stroke: '#fff', strokeWidth: 2 }} />
+
+                    <Line
+                      type="monotone"
+                      dataKey="resumes"
+                      stroke="#10b981"
                       strokeWidth={3}
                       name="Resumes"
                       dot={{ fill: '#10b981', strokeWidth: 2, r: 5, stroke: '#fff' }}
-                      activeDot={{ r: 7, fill: '#10b981', stroke: '#fff', strokeWidth: 2 }}
-                    />
+                      activeDot={{ r: 7, fill: '#10b981', stroke: '#fff', strokeWidth: 2 }} />
+
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </motion.div>
 
             {/* Source Breakdown */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden"
-            >
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden">
+
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-violet-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="mb-6">
@@ -533,12 +533,12 @@ export default function Dashboard() {
                 <ResponsiveContainer width="100%" height={160}>
                   <RechartsPieChart>
                     <defs>
-                      {sourceData.map((entry, index) => (
-                        <linearGradient key={index} id={`sourceGradient${index}`} x1="0" y1="0" x2="0" y2="1">
+                      {sourceData.map((entry, index) =>
+                      <linearGradient key={index} id={`sourceGradient${index}`} x1="0" y1="0" x2="0" y2="1">
                           <stop offset="0%" stopColor={entry.color} stopOpacity={0.9} />
                           <stop offset="100%" stopColor={entry.color} stopOpacity={0.6} />
                         </linearGradient>
-                      ))}
+                      )}
                     </defs>
                     <Pie
                       data={sourceData}
@@ -568,12 +568,12 @@ export default function Dashboard() {
             </motion.div>
 
             {/* Applicants per Job Posting */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(59,130,246,0.12)] transition-all duration-500 overflow-hidden"
-            >
+              className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(59,130,246,0.12)] transition-all duration-500 overflow-hidden">
+
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="mb-6">
@@ -592,27 +592,27 @@ export default function Dashboard() {
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} horizontal={false} />
-                    <XAxis 
-                      type="number" 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                    <XAxis
+                      type="number"
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       tickLine={false}
-                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }}
-                    />
-                    <YAxis 
-                      dataKey="job" 
-                      type="category" 
-                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }} 
+                      axisLine={{ stroke: '#e2e8f0', strokeWidth: 1 }} />
+
+                    <YAxis
+                      dataKey="job"
+                      type="category"
+                      tick={{ fontSize: 11, fill: '#64748b', fontWeight: 500 }}
                       width={100}
                       tickLine={false}
-                      axisLine={false}
-                    />
+                      axisLine={false} />
+
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }} />
-                    <Bar 
-                      dataKey="count" 
-                      fill="url(#jobsGradient)" 
+                    <Bar
+                      dataKey="count"
+                      fill="url(#jobsGradient)"
                       radius={[0, 8, 8, 0]}
-                      maxBarSize={30}
-                    />
+                      maxBarSize={30} />
+
                   </BarChart>
                 </ResponsiveContainer>
               </div>
