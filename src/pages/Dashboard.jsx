@@ -172,12 +172,23 @@ const pipelineFunnelData = [
 { stage: "Interview", count: 45 },
 { stage: "Offer", count: 12 }];
 
+const newApplicationsData = [
+{ week: "W1", count: 45 },
+{ week: "W2", count: 62 },
+{ week: "W3", count: 38 },
+{ week: "W4", count: 28 }];
 
 const monthlyData = [
 { month: "Jan", jd: 18, resumes: 120 },
 { month: "Feb", jd: 23, resumes: 156 },
 { month: "Mar", jd: 21, resumes: 142 },
 { month: "Apr", jd: 19, resumes: 134 }];
+
+const resumesProcessedData = [
+{ month: "Jan", count: 120 },
+{ month: "Feb", count: 156 },
+{ month: "Mar", count: 142 },
+{ month: "Apr", count: 134 }];
 
 
 const sourceData = [
