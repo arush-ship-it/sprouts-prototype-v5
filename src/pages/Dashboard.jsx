@@ -238,11 +238,22 @@ export default function Dashboard() {
         <div className="flex-1 overflow-y-auto px-8 pt-6 pb-8">
           {/* Header */}
           <div className="mb-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Link to={createPageUrl("Home")}>
-                <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
-              </Link>
-              <h1 className="text-[28px] font-bold text-gray-900">Analytics Dashboard</h1>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Link to={createPageUrl("Home")}>
+                  <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+                </Link>
+                <h1 className="text-[28px] font-bold text-gray-900">Analytics Dashboard</h1>
+              </div>
+              <Button 
+                onClick={() => setIsChatMinimized(false)}
+                variant="outline" 
+                size="sm" 
+                className="gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                Deep Dive with AI
+              </Button>
             </div>
             <p className="text-[14px] text-gray-500">
               Overview of all recruitment activities
