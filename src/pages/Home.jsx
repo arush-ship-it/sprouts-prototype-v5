@@ -193,7 +193,7 @@ export default function Home() {
             <h2 className="text-[18px] font-bold text-gray-900 mb-6">All Jobs</h2>
             <div className="space-y-4">
               {jobs.map((job) =>
-              <div key={job.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={job.id} className="bg-[#fcfcfc] p-4 rounded-lg flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="bg-slate-50 rounded-lg w-10 h-10 flex items-center justify-center">
                       <Briefcase className="w-5 h-5 text-blue-600" />
