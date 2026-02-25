@@ -219,43 +219,37 @@ export default function JobDetails() {
         </div>
 
         {/* Job Details */}
-        <div className="grid grid-cols-2 gap-6 mb-6">
-          <div className="p-6 rounded-xl bg-white border border-gray-200">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-[16px] font-semibold text-gray-900">
-                Job Description
-              </h3>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsEditDialogOpen(true)}
-                className="h-8">
-
-                <Edit2 className="w-3.5 h-3.5 mr-1.5" />
-                Edit
-              </Button>
-            </div>
-            <p className="text-[13px] text-gray-600 leading-relaxed">
-              {editedJob.description}
-            </p>
-          </div>
-
-          <div className="p-6 rounded-xl bg-white border border-gray-200">
-            <h3 className="text-[16px] font-semibold text-gray-900 mb-3">
-              Requirements
+        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-[16px] font-semibold text-gray-900">
+              Job Description
             </h3>
-            <ul className="space-y-2">
-              {editedJob.requirements.map((req, idx) =>
-              <li
-                key={idx}
-                className="text-[13px] text-gray-600 flex items-start gap-2">
-
-                  <span className="text-emerald-600 mt-1">•</span>
-                  {req}
-                </li>
-              )}
-            </ul>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsEditDialogOpen(true)}
+              className="h-8">
+              <Edit2 className="w-3.5 h-3.5 mr-1.5" />
+              Edit
+            </Button>
           </div>
+          <p className="text-[13px] text-gray-600 leading-relaxed mb-6 pb-6 border-b border-gray-100">
+            {editedJob.description}
+          </p>
+          
+          <h3 className="text-[16px] font-semibold text-gray-900 mb-3">
+            Requirements
+          </h3>
+          <ul className="space-y-2">
+            {editedJob.requirements.map((req, idx) =>
+            <li
+              key={idx}
+              className="text-[13px] text-gray-600 flex items-start gap-2">
+                <span className="text-emerald-600 mt-1">•</span>
+                {req}
+              </li>
+            )}
+          </ul>
         </div>
 
         {/* Ideal Persona Section */}
