@@ -218,7 +218,7 @@ export default function Home() {
                       {job.status}
                     </div>
                     <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
-                      <ExternalLink className="w-5 h-5 text-gray-400 cursor-pointer hover:text-gray-600" />
+                      
                     </Link>
                   </div>
                 </div>
