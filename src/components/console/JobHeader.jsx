@@ -15,8 +15,8 @@ export default function JobHeader({ onActivityApprovalClick }) {
             <span className="px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
               Active
             </span>
+            <p className="text-[12px] text-gray-500">456 candidates</p>
           </div>
-          <p className="text-[12px] text-gray-500">456 candidates</p>
 
 
 
