@@ -82,59 +82,59 @@ export default function CommunicationAnalyticsDashboard() {
 
   return (
     <div className="bg-white mx-8 border-b border-gray-200">
+      {/* Header */}
+      <div className="px-3 py-4 rounded-xl flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h2 className="text-[15px] font-semibold text-gray-900">Communication Health</h2>
+          
+
+
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-0.5">
+            <Button
+              variant={timeFilter === "7days" ? "default" : "ghost"}
+              size="sm"
+              className="h-7 text-[11px] px-2"
+              onClick={() => setTimeFilter("7days")}>
+
+              7 days
+            </Button>
+            <Button
+              variant={timeFilter === "30days" ? "default" : "ghost"}
+              size="sm"
+              className="h-7 text-[11px] px-2"
+              onClick={() => setTimeFilter("30days")}>
+
+              30 days
+            </Button>
+            <Button
+              variant={timeFilter === "custom" ? "default" : "ghost"}
+              size="sm"
+              className="h-7 text-[11px] px-2"
+              onClick={() => setTimeFilter("custom")}>
+
+              Custom
+            </Button>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            onClick={() => setIsExpanded(!isExpanded)}>
+
+            {isExpanded ?
+            <ChevronUp className="w-4 h-4" /> :
+
+            <ChevronDown className="w-4 h-4" />
+            }
+          </Button>
+        </div>
+      </div>
+
       {/* Expanded Content */}
       {isExpanded &&
       <div className="px-8 pb-6 space-y-6">
-          {/* Header */}
-          <div className="px-3 py-4 rounded-xl flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <h2 className="text-[15px] font-semibold text-gray-900">Communication Health</h2>
-              
-
-
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-0.5">
-                <Button
-                  variant={timeFilter === "7days" ? "default" : "ghost"}
-                  size="sm"
-                  className="h-7 text-[11px] px-2"
-                  onClick={() => setTimeFilter("7days")}>
-
-                  7 days
-                </Button>
-                <Button
-                  variant={timeFilter === "30days" ? "default" : "ghost"}
-                  size="sm"
-                  className="h-7 text-[11px] px-2"
-                  onClick={() => setTimeFilter("30days")}>
-
-                  30 days
-                </Button>
-                <Button
-                  variant={timeFilter === "custom" ? "default" : "ghost"}
-                  size="sm"
-                  className="h-7 text-[11px] px-2"
-                  onClick={() => setTimeFilter("custom")}>
-
-                  Custom
-                </Button>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-                onClick={() => setIsExpanded(!isExpanded)}>
-
-                {isExpanded ?
-                <ChevronUp className="w-4 h-4" /> :
-
-                <ChevronDown className="w-4 h-4" />
-                }
-              </Button>
-            </div>
-          </div>
-
           {/* KPI Cards */}
           <div>
             <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
