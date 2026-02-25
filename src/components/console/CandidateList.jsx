@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
 import CandidateDetailsDrawer from "./CandidateDetailsDrawer";
-import { Search, SlidersHorizontal, Sparkles, Maximize2, Minimize2, Send } from "lucide-react";
+import { Search, SlidersHorizontal, Sparkles, ChevronDown, ChevronUp, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
