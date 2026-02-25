@@ -121,7 +121,7 @@ export default function CreateJob() {
         
         <div className="flex flex-1 overflow-hidden">
         {/* Left Panel - AI Chat */}
-        <div className="bg-white mx-2 mt-24 mb-2 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
+        <div className="bg-white px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
           {/* Progress Bar - Integrated into left panel */}
           <div className="px-6 py-4 border-b border-gray-200">
             <div className="flex items-center justify-between gap-2">
