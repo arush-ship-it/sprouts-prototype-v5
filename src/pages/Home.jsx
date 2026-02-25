@@ -232,7 +232,7 @@ export default function Home() {
             <div className="space-y-4">
               {recentActivity.map((activity) =>
               <div key={activity.id} className="flex items-start gap-4">
-                  <div className="bg-sky-400 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-slate-200 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-[14px] font-bold">✓</span>
                   </div>
                   <div className="flex-1">
