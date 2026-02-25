@@ -144,10 +144,12 @@ export default function Home() {
                 Analytics
               </Button>
             </Link>
-            <Button variant="outline" size="sm" className="gap-2">
-              <Briefcase className="w-4 h-4" />
-              Workspace
-            </Button>
+            <Link to={createPageUrl("Console")}>
+              <Button variant="outline" size="sm" className="gap-2">
+                <Briefcase className="w-4 h-4" />
+                Console
+              </Button>
+            </Link>
             <Link to={createPageUrl("CreateJob")}>
               <Button variant="outline" size="sm" className="gap-2">
                 <PlusCircle className="w-4 h-4" />
