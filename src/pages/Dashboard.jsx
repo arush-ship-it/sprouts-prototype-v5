@@ -190,6 +190,11 @@ const resumesProcessedData = [
 { month: "Mar", count: 142 },
 { month: "Apr", count: 134 }];
 
+const applicantsPerJobData = [
+{ job: "Product Designer", count: 156 },
+{ job: "Frontend Eng", count: 203 },
+{ job: "Product Manager", count: 89 },
+{ job: "Backend Eng", count: 134 }];
 
 const sourceData = [
 { name: "Direct", value: 45, color: "#6366f1" },
