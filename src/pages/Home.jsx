@@ -195,7 +195,7 @@ export default function Home() {
               {jobs.map((job) =>
               <div key={job.id} className="bg-[#ffffff] p-4 rounded-lg flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <div className="bg-slate-100 rounded-lg w-10 h-10 flex items-center justify-center">
                       <Briefcase className="w-5 h-5 text-blue-600" />
                     </div>
                     <div>
