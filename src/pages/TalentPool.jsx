@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, Maximize2, Minimize2, Bell, Settings, User } from "lucide-react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, Maximize2, Minimize2, Bell, Settings, User, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -302,9 +304,14 @@ export default function TalentPool() {
       <div className="flex-1 overflow-y-auto">
         <div className="p-8">
           <div className="mb-6">
-            <h1 className="text-[24px] font-semibold text-gray-900 mb-1">
-              Talent Pool
-            </h1>
+            <div className="flex items-center gap-2 mb-1">
+              <Link to={createPageUrl("Home")}>
+                <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+              </Link>
+              <h1 className="text-[24px] font-semibold text-gray-900">
+                Talent Pool
+              </h1>
+            </div>
             <p className="text-[13px] text-gray-500">
               {candidates.length} candidates found
             </p>
