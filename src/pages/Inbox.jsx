@@ -171,9 +171,6 @@ export default function Inbox() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
-      {/* Analytics Dashboard */}
-      <CommunicationAnalyticsDashboard />
-
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
           <div>
