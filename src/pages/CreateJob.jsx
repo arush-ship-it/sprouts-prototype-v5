@@ -108,7 +108,18 @@ export default function CreateJob() {
 
 
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden flex-col">
+        {/* Header */}
+        <div className="px-8 py-4 border-b border-gray-200 bg-white">
+          <div className="flex items-center gap-2">
+            <Link to={createPageUrl("Home")}>
+              <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+            </Link>
+            <h1 className="text-[24px] font-semibold text-gray-900">Create Job</h1>
+          </div>
+        </div>
+        
+        <div className="flex flex-1 overflow-hidden">
         {/* Left Panel - AI Chat */}
         <div className="bg-white mx-2 mt-24 mb-2 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
           {/* Progress Bar - Integrated into left panel */}
