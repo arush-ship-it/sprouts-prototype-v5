@@ -172,7 +172,7 @@ export default function Home() {
           {stats.map((stat, index) =>
           <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
               <div className="flex items-start gap-3">
-                <div className={`p-2 rounded-lg ${stat.iconBg} flex-shrink-0`}>
+                <div className="bg-blue-50 p-2 rounded-[10px] flex-shrink-0">
                   <stat.icon className={`w-5 h-5 ${stat.iconColor}`} />
                 </div>
                 <div className="flex-1">
