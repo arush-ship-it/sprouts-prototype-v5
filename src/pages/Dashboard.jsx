@@ -375,6 +375,22 @@ export default function Dashboard() {
                 )}
               </div>
             </div>
+
+            {/* Applicants per Job Posting */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                Applicants per Job Posting
+              </h3>
+              <ResponsiveContainer width="100%" height={160}>
+                <BarChart data={applicantsPerJobData} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis type="number" tick={{ fontSize: 10 }} />
+                  <YAxis dataKey="job" type="category" tick={{ fontSize: 10 }} width={80} />
+                  <Tooltip />
+                  <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           {/* Key Metrics Grid */}
