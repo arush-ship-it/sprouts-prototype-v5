@@ -276,7 +276,7 @@ export default function CreateJob() {
 
             {/* Step 2: Job Details */}
             {currentStep === 2 &&
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-6xl mx-auto">
               <div>
                 <h2 className="text-[20px] font-semibold text-gray-900 mb-2">Job Details</h2>
                 <p className="text-[13px] text-gray-500">Fill in the company and job information</p>
