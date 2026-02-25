@@ -289,6 +289,38 @@ export default function Dashboard() {
               </ResponsiveContainer>
             </div>
 
+            {/* New Applications */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                New Applications (To Be Reviewed)
+              </h3>
+              <ResponsiveContainer width="100%" height={160}>
+                <BarChart data={newApplicationsData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="week" tick={{ fontSize: 10 }} />
+                  <YAxis tick={{ fontSize: 10 }} />
+                  <Tooltip />
+                  <Bar dataKey="count" fill="#f97316" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Resumes Processed */}
+            <div className="p-4 rounded-xl bg-white border border-gray-200">
+              <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
+                Resumes Processed Per Month
+              </h3>
+              <ResponsiveContainer width="100%" height={160}>
+                <LineChart data={resumesProcessedData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                  <YAxis tick={{ fontSize: 10 }} />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="count" stroke="#ec4899" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
             {/* Monthly Trends */}
             <div className="p-4 rounded-xl bg-white border border-gray-200">
               <h3 className="text-[14px] font-semibold text-gray-900 mb-4">
