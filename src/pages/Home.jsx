@@ -204,11 +204,11 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-8">
                     <div className="text-center">
-                      <p className="text-[20px] font-bold text-gray-900">{job.applicants}</p>
+                      <p className="text-gray-900 text-base font-semibold">{job.applicants}</p>
                       <p className="text-[11px] text-gray-500">Applicants</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-[20px] font-bold text-blue-600">{job.inPipeline}</p>
+                      <p className="text-blue-600 text-base font-semibold">{job.inPipeline}</p>
                       <p className="text-[11px] text-gray-500">In Pipeline</p>
                     </div>
                     <div className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
