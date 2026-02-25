@@ -529,7 +529,6 @@ export default function CreateJob() {
 
           </div>
         </div>
-        </div>
       </div>
     </div>);
 
