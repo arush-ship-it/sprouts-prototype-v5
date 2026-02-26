@@ -15,8 +15,6 @@ import {
   TrendingUp,
   Activity,
   BarChart3,
-  Minimize2,
-  Maximize2,
   TrendingDown,
   Zap,
   Sparkles } from
@@ -276,15 +274,6 @@ export default function Agents() {
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isAnalyticsExpanded, setIsAnalyticsExpanded] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAnalyticsExpanded(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleToggle = (agentId) => {
     setAgents((prev) =>
@@ -360,38 +349,17 @@ export default function Agents() {
         </div>
 
         {/* Analytics Dashboard */}
-        <div className={`mb-6 rounded-xl border border-gray-200 bg-white transition-all duration-300 ${
-        isAnalyticsExpanded ? "p-6" : "p-4"}`
-        }>
+        <div className="mb-6 rounded-xl border border-gray-200 bg-white p-6">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
-              
-
-
               <div className="flex-1 min-w-0">
                 <h3 className="text-gray-900 text-sm font-semibold">
-                  {isAnalyticsExpanded ? "Analytics Dashboard" : "Analytics Dashboard - Click to Expand"}
+                  Analytics Dashboard
                 </h3>
-                {!isAnalyticsExpanded &&
-                <p className="text-[12px] text-gray-600 mt-0.5">View agent performance insights</p>
-                }
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-8"
-              onClick={() => setIsAnalyticsExpanded(!isAnalyticsExpanded)}>
-
-              {isAnalyticsExpanded ?
-              <Minimize2 className="w-4 h-4" /> :
-
-              <Maximize2 className="w-4 h-4" />
-              }
-            </Button>
           </div>
 
-          {isAnalyticsExpanded &&
           <div className="mt-6 space-y-6">
               {/* Overall Metrics */}
               <div>
@@ -539,7 +507,6 @@ export default function Agents() {
 
               </div>
             </div>
-          }
         </div>
 
         {/* Filters */}
