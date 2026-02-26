@@ -337,14 +337,14 @@ export default function Agents() {
 
 
 
-            <Button
-              size="sm"
-              className="h-8 text-[12px]"
-              onClick={() => setIsAddAgentModalOpen(true)}>
+            
 
-              <Plus className="w-3.5 h-3.5 mr-1.5" />
-              Add New Agent
-            </Button>
+
+
+
+
+
+
           </div>
         </div>
 
