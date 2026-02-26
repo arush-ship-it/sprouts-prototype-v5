@@ -6,110 +6,110 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  DialogTrigger } from
+"@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import CommunicationAnalyticsDashboard from "@/components/inbox/CommunicationAnalyticsDashboard";
 
 const activities = [
-  {
-    id: 1,
-    type: "email_sent",
-    candidate: "Maya Johnson",
-    subject: "Interview Invitation - Senior Product Designer",
-    timestamp: "2 hours ago",
-    status: "delivered",
-  },
-  {
-    id: 2,
-    type: "sequence_started",
-    candidate: "Marcus Rashford",
-    subject: "Warm Outreach Sequence Started",
-    timestamp: "5 hours ago",
-    status: "active",
-  },
-  {
-    id: 3,
-    type: "email_opened",
-    candidate: "Sarah Mitchell",
-    subject: "Re: Your Application - Senior Product Designer",
-    timestamp: "1 day ago",
-    status: "opened",
-  },
-  {
-    id: 4,
-    type: "email_replied",
-    candidate: "Alex Chen",
-    subject: "Re: Next Steps in Interview Process",
-    timestamp: "1 day ago",
-    status: "replied",
-  },
-  {
-    id: 5,
-    type: "sequence_completed",
-    candidate: "James Park",
-    subject: "Follow-up Sequence Completed",
-    timestamp: "2 days ago",
-    status: "completed",
-  },
-  {
-    id: 6,
-    type: "email_sent",
-    candidate: "Emma Williams",
-    subject: "Technical Assessment Details",
-    timestamp: "2 days ago",
-    status: "delivered",
-  },
-  {
-    id: 7,
-    type: "email_opened",
-    candidate: "David Brown",
-    subject: "Re: Interview Schedule Confirmation",
-    timestamp: "3 days ago",
-    status: "opened",
-  },
-  {
-    id: 8,
-    type: "email_replied",
-    candidate: "Lisa Anderson",
-    subject: "Re: Second Round Interview",
-    timestamp: "3 days ago",
-    status: "replied",
-  },
-  {
-    id: 9,
-    type: "sequence_started",
-    candidate: "Michael Taylor",
-    subject: "Welcome to Our Hiring Process",
-    timestamp: "4 days ago",
-    status: "active",
-  },
-  {
-    id: 10,
-    type: "email_sent",
-    candidate: "Jennifer Martinez",
-    subject: "Application Received - UX Designer",
-    timestamp: "4 days ago",
-    status: "delivered",
-  },
-  {
-    id: 11,
-    type: "email_opened",
-    candidate: "Robert Garcia",
-    subject: "Re: Portfolio Review Feedback",
-    timestamp: "5 days ago",
-    status: "opened",
-  },
-  {
-    id: 12,
-    type: "sequence_completed",
-    candidate: "Jessica Lee",
-    subject: "Onboarding Sequence Completed",
-    timestamp: "5 days ago",
-    status: "completed",
-  },
-];
+{
+  id: 1,
+  type: "email_sent",
+  candidate: "Maya Johnson",
+  subject: "Interview Invitation - Senior Product Designer",
+  timestamp: "2 hours ago",
+  status: "delivered"
+},
+{
+  id: 2,
+  type: "sequence_started",
+  candidate: "Marcus Rashford",
+  subject: "Warm Outreach Sequence Started",
+  timestamp: "5 hours ago",
+  status: "active"
+},
+{
+  id: 3,
+  type: "email_opened",
+  candidate: "Sarah Mitchell",
+  subject: "Re: Your Application - Senior Product Designer",
+  timestamp: "1 day ago",
+  status: "opened"
+},
+{
+  id: 4,
+  type: "email_replied",
+  candidate: "Alex Chen",
+  subject: "Re: Next Steps in Interview Process",
+  timestamp: "1 day ago",
+  status: "replied"
+},
+{
+  id: 5,
+  type: "sequence_completed",
+  candidate: "James Park",
+  subject: "Follow-up Sequence Completed",
+  timestamp: "2 days ago",
+  status: "completed"
+},
+{
+  id: 6,
+  type: "email_sent",
+  candidate: "Emma Williams",
+  subject: "Technical Assessment Details",
+  timestamp: "2 days ago",
+  status: "delivered"
+},
+{
+  id: 7,
+  type: "email_opened",
+  candidate: "David Brown",
+  subject: "Re: Interview Schedule Confirmation",
+  timestamp: "3 days ago",
+  status: "opened"
+},
+{
+  id: 8,
+  type: "email_replied",
+  candidate: "Lisa Anderson",
+  subject: "Re: Second Round Interview",
+  timestamp: "3 days ago",
+  status: "replied"
+},
+{
+  id: 9,
+  type: "sequence_started",
+  candidate: "Michael Taylor",
+  subject: "Welcome to Our Hiring Process",
+  timestamp: "4 days ago",
+  status: "active"
+},
+{
+  id: 10,
+  type: "email_sent",
+  candidate: "Jennifer Martinez",
+  subject: "Application Received - UX Designer",
+  timestamp: "4 days ago",
+  status: "delivered"
+},
+{
+  id: 11,
+  type: "email_opened",
+  candidate: "Robert Garcia",
+  subject: "Re: Portfolio Review Feedback",
+  timestamp: "5 days ago",
+  status: "opened"
+},
+{
+  id: 12,
+  type: "sequence_completed",
+  candidate: "Jessica Lee",
+  subject: "Onboarding Sequence Completed",
+  timestamp: "5 days ago",
+  status: "completed"
+}];
+
 
 function ActivityItem({ activity }) {
   const getIcon = () => {
@@ -153,16 +153,16 @@ function ActivityItem({ activity }) {
         </p>
         <p className="text-[12px] text-gray-600 flex-1 truncate">{activity.subject}</p>
         <span
-          className={`inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${getStatusColor()}`}
-        >
+          className={`inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${getStatusColor()}`}>
+
           {activity.status}
         </span>
         <span className="text-[11px] text-gray-400 whitespace-nowrap min-w-[80px] text-right">
           {activity.timestamp}
         </span>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 export default function Inbox() {
@@ -171,7 +171,7 @@ export default function Inbox() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
-      <div className="px-8 pt-5 pb-4">
+      <div className="px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-[22px] font-semibold text-gray-900 tracking-tight">
@@ -201,8 +201,8 @@ export default function Inbox() {
                   <Input placeholder="Sequence Name" />
                   <Textarea
                     placeholder="Sequence description..."
-                    className="min-h-[100px]"
-                  />
+                    className="min-h-[100px]" />
+
                   <Button className="w-full">Create Sequence</Button>
                 </div>
               </DialogContent>
@@ -223,8 +223,8 @@ export default function Inbox() {
                   <Input placeholder="Subject" />
                   <Textarea
                     placeholder="Write your message..."
-                    className="min-h-[200px]"
-                  />
+                    className="min-h-[200px]" />
+
                   <div className="flex gap-2">
                     <Button className="flex-1">Send</Button>
                     <Button variant="outline" className="flex-1">
@@ -244,11 +244,11 @@ export default function Inbox() {
       <div className="px-8 pb-6">
         {/* Activity List */}
         <div className="flex flex-col gap-2.5">
-          {activities.map((activity) => (
-            <ActivityItem key={activity.id} activity={activity} />
-          ))}
+          {activities.map((activity) =>
+          <ActivityItem key={activity.id} activity={activity} />
+          )}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
