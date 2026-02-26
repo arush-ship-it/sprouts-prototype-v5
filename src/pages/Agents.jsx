@@ -353,9 +353,9 @@ export default function Agents() {
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
               <div className="flex-1 min-w-0">
-                <h3 className="text-gray-900 text-sm font-semibold">
-                  Analytics Dashboard
-                </h3>
+                
+
+
               </div>
             </div>
           </div>
