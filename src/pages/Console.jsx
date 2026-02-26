@@ -5,6 +5,7 @@ import CandidateList from "@/components/console/CandidateList";
 import PipelineView from "@/components/console/PipelineView";
 import PipelineBuilderModal from "@/components/console/PipelineBuilderModal";
 import ActivityApprovalModal from "@/components/console/ActivityApprovalModal";
+import RecommendedPipeline from "@/components/console/RecommendedPipeline";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Workflow, AlertCircle } from "lucide-react";
@@ -14,6 +15,7 @@ export default function Console() {
   const [viewMode, setViewMode] = useState(activeTab === "pipeline" ? "pipeline" : "card");
   const [isPipelineBuilderOpen, setIsPipelineBuilderOpen] = useState(false);
   const [isActivityApprovalOpen, setIsActivityApprovalOpen] = useState(false);
+  const [showRecommendedPipeline, setShowRecommendedPipeline] = useState(false);
 
   // Update view mode when tab changes
   const handleTabChange = (newTab) => {
@@ -33,10 +35,10 @@ export default function Console() {
         />
         
         {/* Pipeline Builder Button - Only show in Pipeline tab */}
-        {activeTab === "pipeline" && (
+        {activeTab === "pipeline" && !showRecommendedPipeline && (
           <div className="px-8 pt-5 pb-3 flex justify-end">
             <Button
-              onClick={() => setIsPipelineBuilderOpen(true)}
+              onClick={() => setShowRecommendedPipeline(true)}
               size="sm"
               className="h-8 text-[12px] bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"
             >
@@ -46,7 +48,15 @@ export default function Console() {
           </div>
         )}
 
-        {activeTab === "review" ? (
+        {activeTab === "pipeline" && showRecommendedPipeline ? (
+          <RecommendedPipeline 
+            onClose={() => setShowRecommendedPipeline(false)}
+            onUsePipeline={() => {
+              setShowRecommendedPipeline(false);
+              // Pipeline creation logic here
+            }}
+          />
+        ) : activeTab === "review" ? (
           <CandidateList activeTab={activeTab} viewMode={viewMode} />
         ) : (
           viewMode === "pipeline" ? (
