@@ -349,7 +349,7 @@ export default function Agents() {
         </div>
 
         {/* Analytics Dashboard */}
-        <div className="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+        <div className="bg-slate-50 mb-6 p-6 rounded-xl border border-gray-200">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
               <div className="flex-1 min-w-0">
