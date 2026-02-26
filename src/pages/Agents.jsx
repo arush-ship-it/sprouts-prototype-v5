@@ -40,7 +40,7 @@ import AddAgentModal from "@/components/console/AddAgentModal";
 const allAgents = [
 {
   id: 1,
-  name: "Resume Screening Agent",
+  name: "Outreach automation",
   icon: FileCheck,
   type: "evaluation",
   status: "active",
