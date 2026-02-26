@@ -334,7 +334,10 @@ export default function Agents() {
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-[22px] font-semibold text-gray-900">Intelligence Layer</h1>
+          <div>
+            <h1 className="text-[22px] font-semibold text-gray-900">Intelligence Layer</h1>
+            <p className="text-[13px] text-gray-500 mt-1">Structured Intelligence for Modern Workflows</p>
+          </div>
           <div className="flex items-center gap-3">
             
 
