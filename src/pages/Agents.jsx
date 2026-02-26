@@ -363,7 +363,7 @@ export default function Agents() {
           <div className="mt-6 space-y-6">
               {/* Overall Metrics */}
               <div>
-                <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Overall Performance</h4>
+                
                 <div className="grid grid-cols-4 gap-4">
                   <div className="bg-[#ffffff] p-4 rounded-lg from-emerald-50 to-teal-50">
                     <div className="flex items-center gap-2 mb-2">
