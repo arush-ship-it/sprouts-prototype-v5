@@ -593,16 +593,83 @@ export default function Agents() {
 
 
 
-        {/* Agents Grid */}
-        <div className="grid grid-cols-3 gap-4">
-          {filteredAgents.map((agent) =>
-          <AgentCard
-            key={agent.id}
-            agent={agent}
-            onToggle={handleToggle}
-            onClick={() => handleAgentClick(agent)} />
-
-          )}
+        {/* Agents Pipeline */}
+        <div className="flex gap-4 overflow-x-auto pb-4">
+          {["Application Review", "Technical Assessment", "Interview", "All Stages"].map((stage) => {
+            const stageAgents = filteredAgents.filter(agent => agent.stage === stage);
+            if (stageAgents.length === 0) return null;
+            
+            const stageColors = {
+              "Application Review": "border-blue-200 bg-blue-50 text-blue-700",
+              "Technical Assessment": "border-violet-200 bg-violet-50 text-violet-700",
+              "Interview": "border-amber-200 bg-amber-50 text-amber-700",
+              "All Stages": "border-emerald-200 bg-emerald-50 text-emerald-700"
+            };
+            
+            return (
+              <div key={stage} className="flex-shrink-0 w-[320px] flex flex-col gap-3">
+                {/* Stage Header */}
+                <div className={`bg-white px-4 py-2.5 rounded-xl border-2 ${stageColors[stage] || 'border-gray-200'} flex items-center justify-between`}>
+                  <div className="flex items-center gap-2">
+                    <Bot className="w-4 h-4" />
+                    <span className="text-[13px] font-bold">{stage}</span>
+                  </div>
+                  <span className="text-[12px] font-bold px-2 py-0.5 rounded-md bg-white/60">
+                    {stageAgents.length}
+                  </span>
+                </div>
+                
+                {/* Agent Cards */}
+                <div className="flex flex-col gap-3">
+                  {stageAgents.map((agent) => {
+                    const Icon = agent.icon;
+                    return (
+                      <div
+                        key={agent.id}
+                        onClick={() => handleAgentClick(agent)}
+                        className="bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all cursor-pointer overflow-hidden"
+                      >
+                        {/* Mini Hero */}
+                        <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-4 flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                            <Icon className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-[14px] font-bold text-gray-900 truncate">
+                              {agent.name}
+                            </h3>
+                            <div className="flex items-center gap-1.5 mt-1">
+                              <div className={`w-1.5 h-1.5 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
+                              <span className="text-[11px] text-gray-600 font-medium capitalize">{agent.status}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="px-4 py-3">
+                          <p className="text-[12px] text-gray-500 mb-3 line-clamp-2">
+                            {agent.description}
+                          </p>
+                          
+                          {/* Metrics */}
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="bg-gray-50 rounded-md px-2 py-1.5">
+                              <p className="text-[10px] text-gray-500 mb-0.5">Processed</p>
+                              <p className="text-[14px] font-bold text-gray-900">{agent.totalProcessed}</p>
+                            </div>
+                            <div className="bg-gray-50 rounded-md px-2 py-1.5">
+                              <p className="text-[10px] text-gray-500 mb-0.5">Accuracy</p>
+                              <p className="text-[14px] font-bold text-gray-900">{agent.accuracy}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {filteredAgents.length === 0 &&
