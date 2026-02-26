@@ -435,52 +435,52 @@ export default function Agents() {
               {/* Trends and Distribution */}
               <div className="grid grid-cols-3 gap-4">
                 {/* Activity Trends */}
-                <div className="col-span-2 p-5 rounded-lg bg-white border border-gray-200">
-                  <h4 className="text-[13px] font-semibold text-gray-900 mb-4">Activity & Success Trends</h4>
-                  <ResponsiveContainer width="100%" height={200}>
-                    <LineChart data={trendData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                      <XAxis dataKey="week" tick={{ fontSize: 11 }} stroke="#9ca3af" />
-                      <YAxis yAxisId="left" tick={{ fontSize: 11 }} stroke="#9ca3af" />
-                      <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11 }} stroke="#9ca3af" />
-                      <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                      <Legend wrapperStyle={{ fontSize: 11 }} />
-                      <Line yAxisId="left" type="monotone" dataKey="processed" stroke="#6366f1" strokeWidth={2} name="Processed" />
-                      <Line yAxisId="right" type="monotone" dataKey="accuracy" stroke="#10b981" strokeWidth={2} name="Accuracy %" />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 {/* Agent Type Distribution */}
-                <div className="p-5 rounded-lg bg-white border border-gray-200">
-                  <h4 className="text-[13px] font-semibold text-gray-900 mb-4">Agent Types</h4>
-                  <ResponsiveContainer width="100%" height={200}>
-                    <PieChart>
-                      <Pie
-                      data={typeDistribution}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={50}
-                      outerRadius={80}
-                      paddingAngle={5}
-                      dataKey="value">
+                
 
-                        {typeDistribution.map((entry, index) =>
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                      )}
-                      </Pie>
-                      <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                  <div className="flex items-center justify-center gap-4 mt-2">
-                    {typeDistribution.map((item) =>
-                  <div key={item.name} className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                        <span className="text-[11px] text-gray-600">{item.name}: {item.value}</span>
-                      </div>
-                  )}
-                  </div>
-                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               </div>
 
               {/* Top and Under Performers */}
