@@ -349,7 +349,7 @@ export default function Agents() {
         </div>
 
         {/* Analytics Dashboard */}
-        <div className="mb-6 rounded-xl border border-gray-200 bg-white p-6">
+        <div className="mb-6 rounded-xl border border-gray-200 bg-white p-4 scale-y-[0.65] origin-top">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
               <div className="flex-1 min-w-0">
@@ -360,13 +360,13 @@ export default function Agents() {
             </div>
           </div>
 
-          <div className="mt-6 space-y-6">
+          <div className="mt-4 space-y-4">
               {/* Overall Metrics */}
               <div>
-                <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Overall Performance</h4>
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-emerald-50 to-teal-50">
-                    <div className="flex items-center gap-2 mb-2">
+                <h4 className="text-[13px] font-semibold text-gray-900 mb-2">Overall Performance</h4>
+                <div className="grid grid-cols-4 gap-3">
+                  <div className="bg-[#ffffff] p-3 rounded-lg from-emerald-50 to-teal-50">
+                    <div className="flex items-center gap-2 mb-1">
                       <Zap className="w-4 h-4 text-emerald-600" />
                       <p className="text-[11px] font-medium text-emerald-700">Total Processed</p>
                     </div>
@@ -374,8 +374,8 @@ export default function Agents() {
                     <p className="text-[10px] text-emerald-600 mt-1">+12% from last month</p>
                   </div>
 
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-indigo-50 to-purple-50">
-                    <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-[#ffffff] p-3 rounded-lg from-indigo-50 to-purple-50">
+                    <div className="flex items-center gap-2 mb-1">
                       <TrendingUp className="w-4 h-4 text-indigo-600" />
                       <p className="text-[11px] font-medium text-indigo-700">Avg Accuracy</p>
                     </div>
@@ -383,8 +383,8 @@ export default function Agents() {
                     <p className="text-[10px] text-indigo-600 mt-1">+2.3% from last month</p>
                   </div>
 
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-blue-50 to-cyan-50">
-                    <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-[#ffffff] p-3 rounded-lg from-blue-50 to-cyan-50">
+                    <div className="flex items-center gap-2 mb-1">
                       <Activity className="w-4 h-4 text-blue-600" />
                       <p className="text-[11px] font-medium text-blue-700">Active Agents</p>
                     </div>
@@ -392,8 +392,8 @@ export default function Agents() {
                     <p className="text-[10px] text-blue-600 mt-1">{(activeAgents / agents.length * 100).toFixed(0)}% deployment rate</p>
                   </div>
 
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-amber-50 to-orange-50">
-                    <div className="flex items-center gap-2 mb-2">
+                  <div className="bg-[#ffffff] p-3 rounded-lg from-amber-50 to-orange-50">
+                    <div className="flex items-center gap-2 mb-1">
                       <Clock className="w-4 h-4 text-amber-600" />
                       <p className="text-[11px] font-medium text-amber-700">Avg Processing Time</p>
                     </div>
@@ -404,7 +404,7 @@ export default function Agents() {
               </div>
 
               {/* Trends and Distribution */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-3">
                 {/* Activity Trends */}
                 
 
@@ -455,7 +455,7 @@ export default function Agents() {
               </div>
 
               {/* Top and Under Performers */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 {/* Top Performers */}
                 
 
