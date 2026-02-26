@@ -3,56 +3,56 @@ import { Button } from "@/components/ui/button";
 import { Bot, X, Sparkles } from "lucide-react";
 
 const recommendedPipeline = [
-  {
-    id: 1,
-    stageNumber: 1,
-    stageName: "Review",
-    stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
-    agent: {
-      name: "Automated Assessment",
-      icon: Bot,
-      description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
-    }
-  },
-  {
-    id: 2,
-    stageNumber: 2,
-    stageName: "Screening",
-    stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
-    agent: {
-      name: "AI Interview Agent",
-      icon: Bot,
-      description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
-    }
-  },
-  {
-    id: 3,
-    stageNumber: 3,
-    stageName: "Assessment",
-    stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
-    agent: {
-      name: "Smart Assessment Management",
-      icon: Bot,
-      description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
-    }
-  },
-  {
-    id: 4,
-    stageNumber: 4,
-    stageName: "Interview",
-    stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
-    agent: {
-      name: "Smart Interview Management",
-      icon: Bot,
-      description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
-    }
+{
+  id: 1,
+  stageNumber: 1,
+  stageName: "Review",
+  stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
+  agent: {
+    name: "Automated Assessment",
+    icon: Bot,
+    description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
   }
-];
+},
+{
+  id: 2,
+  stageNumber: 2,
+  stageName: "Screening",
+  stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
+  agent: {
+    name: "AI Interview Agent",
+    icon: Bot,
+    description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
+  }
+},
+{
+  id: 3,
+  stageNumber: 3,
+  stageName: "Assessment",
+  stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
+  agent: {
+    name: "Smart Assessment Management",
+    icon: Bot,
+    description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
+  }
+},
+{
+  id: 4,
+  stageNumber: 4,
+  stageName: "Interview",
+  stageDescription: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria.",
+  agent: {
+    name: "Smart Interview Management",
+    icon: Bot,
+    description: "Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation."
+  }
+}];
+
 
 export default function RecommendedPipeline({ onClose, onUsePipeline }) {
   return (
     <div className="px-8 pb-8">
-      <div className="bg-white rounded-2xl border border-gray-200 p-8">
+      <div className="bg-slate-50 p-8 rounded-2xl border border-gray-200">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
@@ -70,7 +70,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
         <div className="grid grid-cols-4 gap-6 mb-6">
           {recommendedPipeline.map((stage) => {
             const AgentIcon = stage.agent.icon;
-            
+
             return (
               <div key={stage.id} className="flex flex-col">
                 {/* Stage Card */}
@@ -84,7 +84,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                         {stage.stageName}
                       </h3>
                     </div>
-                    <Bot className="w-5 h-5 text-gray-400" />
+                    
                   </div>
                   
                   <p className="text-[12px] text-gray-500 leading-relaxed line-clamp-4">
@@ -113,8 +113,8 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                   <X className="w-3.5 h-3.5" />
                   Remove
                 </button>
-              </div>
-            );
+              </div>);
+
           })}
         </div>
 
@@ -123,18 +123,18 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
           <Button
             variant="outline"
             onClick={onClose}
-            className="h-10 px-6 text-[13px] font-semibold"
-          >
+            className="h-10 px-6 text-[13px] font-semibold">
+
             Create New
           </Button>
           <Button
             onClick={onUsePipeline}
-            className="h-10 px-6 text-[13px] font-semibold bg-blue-600 hover:bg-blue-700"
-          >
+            className="h-10 px-6 text-[13px] font-semibold bg-blue-600 hover:bg-blue-700">
+
             Use Pipeline
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
