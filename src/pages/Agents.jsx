@@ -334,7 +334,7 @@ export default function Agents() {
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-[22px] font-semibold text-gray-900">AI Modules</h1>
+          <h1 className="text-[22px] font-semibold text-gray-900">AI engine</h1>
           <div className="flex items-center gap-3">
             
 
