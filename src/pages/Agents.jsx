@@ -334,7 +334,7 @@ export default function Agents() {
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-[22px] font-semibold text-gray-900">Agents</h1>
+          <h1 className="text-[22px] font-semibold text-gray-900">Automation</h1>
           <div className="flex items-center gap-3">
             
 
@@ -596,16 +596,16 @@ export default function Agents() {
         {/* Agents Pipeline */}
         <div className="flex gap-4 overflow-x-auto pb-4">
           {["Application Review", "Technical Assessment", "Interview", "All Stages"].map((stage) => {
-            const stageAgents = filteredAgents.filter(agent => agent.stage === stage);
+            const stageAgents = filteredAgents.filter((agent) => agent.stage === stage);
             if (stageAgents.length === 0) return null;
-            
+
             const stageColors = {
               "Application Review": "border-blue-200 bg-blue-50 text-blue-700",
               "Technical Assessment": "border-violet-200 bg-violet-50 text-violet-700",
               "Interview": "border-amber-200 bg-amber-50 text-amber-700",
               "All Stages": "border-emerald-200 bg-emerald-50 text-emerald-700"
             };
-            
+
             return (
               <div key={stage} className="flex-shrink-0 w-[320px] flex flex-col gap-3">
                 {/* Stage Header */}
@@ -627,8 +627,8 @@ export default function Agents() {
                       <div
                         key={agent.id}
                         onClick={() => handleAgentClick(agent)}
-                        className="bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all cursor-pointer overflow-hidden"
-                      >
+                        className="bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all cursor-pointer overflow-hidden">
+
                         {/* Mini Hero */}
                         <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-4 flex items-center gap-3">
                           <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center flex-shrink-0">
@@ -663,12 +663,12 @@ export default function Agents() {
                             </div>
                           </div>
                         </div>
-                      </div>
-                    );
+                      </div>);
+
                   })}
                 </div>
-              </div>
-            );
+              </div>);
+
           })}
         </div>
 
