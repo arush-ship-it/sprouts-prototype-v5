@@ -59,7 +59,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
             <h2 className="text-[24px] font-semibold text-gray-900">
               Recommended <span className="text-blue-600">Pipeline</span>
             </h2>
-            <Sparkles className="w-5 h-5 text-blue-600" />
+            
           </div>
           <p className="text-[14px] text-gray-500">
             Connecting you with the talent you didn't know you were missing.
