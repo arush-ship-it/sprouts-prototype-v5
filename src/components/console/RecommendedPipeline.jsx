@@ -52,7 +52,7 @@ const recommendedPipeline = [
 export default function RecommendedPipeline({ onClose, onUsePipeline }) {
   return (
     <div className="px-8 pb-8">
-      <div className="bg-slate-50 p-8 rounded-2xl border border-gray-200">
+      <div className="bg-[#fafafa] p-8 rounded-2xl border border-gray-200">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
@@ -80,7 +80,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                       <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">
                         STAGE {stage.stageNumber}
                       </p>
-                      <h3 className="text-[18px] font-bold text-gray-900">
+                      <h3 className="text-gray-900 text-sm font-semibold">
                         {stage.stageName}
                       </h3>
                     </div>
