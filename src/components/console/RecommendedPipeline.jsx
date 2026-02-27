@@ -111,7 +111,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                 {/* Remove Button */}
                 <button className="text-[12px] text-red-500 hover:text-red-600 font-medium flex items-center justify-center gap-1.5 py-2 transition-colors">
                   <X className="w-3.5 h-3.5" />
-                  Remove
+                  Remove Stage
                 </button>
               </div>);
 
