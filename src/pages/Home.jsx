@@ -228,7 +228,7 @@ export default function Home() {
 
           {/* Recent Activity */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-[18px] font-bold text-gray-900 mb-6">Recent Activity</h2>
+            <h2 className="text-gray-800 mb-6 text-base font-semibold">Recent Activity</h2>
             <div className="space-y-4">
               {recentActivity.map((activity) =>
               <div key={activity.id} className="flex items-start gap-4">
