@@ -77,7 +77,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
             const AgentIcon = stage.agent.icon;
 
             return (
-              <div key={stage.id} className="bg-[#ffffff] px-2 py-2 flex flex-col">
+              <div key={stage.id} className="bg-[#ffffff] px-2 py-2 rounded-2xl flex flex-col">
                 {/* Stage Card */}
                 <div className="bg-white rounded-xl p-5 mb-4 flex-grow">
                   <div className="flex items-start justify-between mb-3">
