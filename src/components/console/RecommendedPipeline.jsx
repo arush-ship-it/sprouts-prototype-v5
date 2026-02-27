@@ -98,14 +98,22 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                 </div>
 
                 {/* Agent Card */}
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-5 mb-3">
+                <div className={`rounded-xl p-5 mb-3 transition-all ${intelligenceEnabled[stage.id] ? "bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100" : "bg-gray-50 border border-gray-200 opacity-50"}`}>
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center">
-                      <AgentIcon className="w-5 h-5 text-blue-600" />
+                      <AgentIcon className={`w-5 h-5 ${intelligenceEnabled[stage.id] ? "text-blue-600" : "text-gray-400"}`} />
                     </div>
                     <h4 className="text-[13px] font-bold text-gray-900 flex-1">
                       {stage.agent.name}
                     </h4>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] text-gray-400 font-medium">AI</span>
+                      <Switch
+                        checked={intelligenceEnabled[stage.id]}
+                        onCheckedChange={(val) => setIntelligenceEnabled(prev => ({ ...prev, [stage.id]: val }))}
+                        className="scale-75"
+                      />
+                    </div>
                   </div>
                   
                   <p className="text-[11px] text-gray-600 leading-relaxed line-clamp-5">
