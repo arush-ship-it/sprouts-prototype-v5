@@ -51,6 +51,10 @@ const recommendedPipeline = [
 
 
 export default function RecommendedPipeline({ onClose, onUsePipeline }) {
+  const [intelligenceEnabled, setIntelligenceEnabled] = useState(
+    () => Object.fromEntries(recommendedPipeline.map(s => [s.id, true]))
+  );
+
   return (
     <div className="px-8 pb-8">
       <div className="bg-[#fafafa] py-3 rounded-2xl">
