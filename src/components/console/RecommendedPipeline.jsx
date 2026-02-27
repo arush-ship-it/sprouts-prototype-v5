@@ -61,14 +61,14 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
-            <h2 className="text-[24px] font-semibold text-gray-900">
-              Recommended <span className="text-blue-600">Pipeline</span>
+            <h2 className="text-gray-900 text-lg font-semibold">Recommended Pipeline
+
             </h2>
             
           </div>
-          <p className="text-[14px] text-gray-500">
-            Connecting you with the talent you didn't know you were missing.
-          </p>
+          
+
+
         </div>
 
         {/* Pipeline Stages */}
