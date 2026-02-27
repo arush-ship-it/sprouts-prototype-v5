@@ -39,7 +39,7 @@ export default function Console() {
       <div className="px-8 pt-5 pb-3 flex justify-end">
             <Button
           onClick={() => setShowRecommendedPipeline(true)}
-          size="sm" className="bg-slate-100 text-[12px] px-3 font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8 from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
+          size="sm" className="bg-slate-100 text-slate-700 px-3 font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8 from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
 
 
               <Workflow className="w-3.5 h-3.5 mr-1.5" />
