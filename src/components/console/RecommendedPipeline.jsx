@@ -133,7 +133,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-end gap-3 border-t border-gray-200">
+        <div className="flex justify-end gap-3">
           <Button
             variant="outline"
             onClick={onClose}
