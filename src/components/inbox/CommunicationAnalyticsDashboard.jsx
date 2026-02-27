@@ -198,30 +198,30 @@ export default function CommunicationAnalyticsDashboard() {
           {/* Sequence Overview */}
           <div className="space-y-4">
             {/* Top Row: Status Cards + Donut Chart Side by Side */}
-            <div className="grid grid-cols-5 gap-6">
+            <div className="bg-[#ffffff] px-4 py-4 rounded-2xl grid grid-cols-5 gap-6">
               {/* Left: Status Cards (40%) */}
               <div className="col-span-2">
                 <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
                   Sequence Overview
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-slate-50 p-4 rounded-lg">
+                  <div className="bg-[#ffffff] p-4 rounded-lg">
                     <p className="text-[11px] text-emerald-700 font-medium mb-1">Active</p>
                     <p className="text-[24px] font-bold text-emerald-700">{sequenceOverview.active}</p>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-lg">
+                  <div className="bg-[#ffffff] p-4 rounded-lg">
                     <p className="text-[11px] text-indigo-700 font-medium mb-1">Completed</p>
                     <p className="text-[24px] font-bold text-indigo-700">{sequenceOverview.completed}</p>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-lg">
+                  <div className="bg-[#ffffff] p-4 rounded-lg">
                     <p className="text-[11px] text-amber-700 font-medium mb-1">Paused</p>
                     <p className="text-[24px] font-bold text-amber-700">{sequenceOverview.paused}</p>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-lg">
+                  <div className="bg-[#ffffff] p-4 rounded-lg">
                     <p className="text-[11px] text-red-700 font-medium mb-1">Errors</p>
                     <p className="text-[24px] font-bold text-red-700">{sequenceOverview.errors}</p>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-lg col-span-2">
+                  <div className="bg-[#ffffff] p-4 rounded-lg col-span-2">
                     <p className="text-[11px] text-gray-600 font-medium mb-1">In Sequences</p>
                     <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
                   </div>
@@ -235,7 +235,7 @@ export default function CommunicationAnalyticsDashboard() {
                 </h3>
                 <div className="h-[240px] flex items-center justify-center">
                   <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
+                    <PieChart className="bg-[#ffffff] rounded-[10px] recharts-surface">
                       <Pie
                       data={sequenceData}
                       cx="50%"
