@@ -582,8 +582,48 @@ export default function Agents() {
 
 
 
-        {/* Agents Pipeline */}
-        <div className="flex gap-4 overflow-x-auto pb-4">
+        {/* Agents Pipeline / List */}
+        {viewMode === "list" && (
+          <div className="flex flex-col gap-2 pb-4">
+            {filteredAgents.map((agent) => {
+              const Icon = agent.icon;
+              return (
+                <div
+                  key={agent.id}
+                  onClick={() => handleAgentClick(agent)}
+                  className="bg-white rounded-xl border border-gray-200 hover:shadow-md transition-all cursor-pointer flex items-center gap-4 px-5 py-4">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-5 h-5 text-blue-600" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <h3 className="text-[14px] font-semibold text-gray-900 truncate">{agent.name}</h3>
+                      <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
+                      <span className="text-[11px] text-gray-500 capitalize flex-shrink-0">{agent.status}</span>
+                    </div>
+                    <p className="text-[12px] text-gray-500 truncate">{agent.description}</p>
+                  </div>
+                  <div className="flex items-center gap-6 flex-shrink-0 text-right">
+                    <div>
+                      <p className="text-[10px] text-gray-400 mb-0.5">Stage</p>
+                      <p className="text-[12px] font-medium text-gray-700">{agent.stage}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-gray-400 mb-0.5">Processed</p>
+                      <p className="text-[14px] font-bold text-gray-900">{agent.totalProcessed}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-gray-400 mb-0.5">Accuracy</p>
+                      <p className="text-[14px] font-bold text-gray-900">{agent.accuracy}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className={`flex gap-4 overflow-x-auto pb-4 ${viewMode !== "pipeline" ? "hidden" : ""}`}>
           {["Application Review", "Technical Assessment", "Interview", "All Stages"].map((stage) => {
             const stageAgents = filteredAgents.filter((agent) => agent.stage === stage);
             if (stageAgents.length === 0) return null;
