@@ -17,7 +17,9 @@ import {
   BarChart3,
   TrendingDown,
   Zap,
-  Sparkles } from
+  Sparkles,
+  LayoutGrid,
+  List } from
 "lucide-react";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import { Button } from "@/components/ui/button";
