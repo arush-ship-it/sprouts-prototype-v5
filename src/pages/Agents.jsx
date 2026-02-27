@@ -584,7 +584,7 @@ export default function Agents() {
             {filteredAgents.map((agent) => {
             const Icon = agent.icon;
             return (
-              <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex h-[280px]">
+              <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex">
                   {/* Left gradient icon panel */}
                   <div className="bg-gradient-to-br mx-4 my-4 rounded-2xl w-[294px] flex-shrink-0 from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
                     <div className="bg-slate-50 rounded-full w-16 h-16 shadow-sm flex items-center justify-center">
