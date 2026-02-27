@@ -584,38 +584,86 @@ export default function Agents() {
 
         {/* Agents Pipeline / List */}
         {viewMode === "list" && (
-          <div className="flex flex-col gap-2 pb-4">
+          <div className="flex flex-col gap-4 pb-4">
             {filteredAgents.map((agent) => {
               const Icon = agent.icon;
               return (
-                <div
-                  key={agent.id}
-                  onClick={() => handleAgentClick(agent)}
-                  className="bg-white rounded-xl border border-gray-200 hover:shadow-md transition-all cursor-pointer flex items-center gap-4 px-5 py-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-blue-600" strokeWidth={1.5} />
+                <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex">
+                  {/* Left gradient icon panel */}
+                  <div className="w-[140px] flex-shrink-0 bg-gradient-to-br from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-white/80 shadow-sm flex items-center justify-center">
+                      <Icon className="w-8 h-8 text-blue-600" strokeWidth={1.5} />
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <h3 className="text-[14px] font-semibold text-gray-900 truncate">{agent.name}</h3>
-                      <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
-                      <span className="text-[11px] text-gray-500 capitalize flex-shrink-0">{agent.status}</span>
+
+                  {/* Right content */}
+                  <div className="flex-1 px-6 py-5">
+                    {/* Top row: stage, name, toggle, status, view details */}
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                          {agent.stage} &bull; {agent.type}
+                        </p>
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="text-[20px] font-bold text-gray-900">{agent.name}</h3>
+                          <Switch
+                            checked={agent.isActive}
+                            onCheckedChange={(e) => { e.stopPropagation(); handleToggle(agent.id); }}
+                          />
+                          <div className="flex items-center gap-1.5">
+                            <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
+                            <span className="text-[12px] font-medium text-gray-600 capitalize">{agent.status}</span>
+                          </div>
+                        </div>
+                        <p className="text-[13px] text-gray-500 leading-relaxed max-w-2xl">
+                          {agent.description}. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation.
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => handleAgentClick(agent)}
+                        className="ml-4 flex-shrink-0 px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                        View Details
+                      </button>
                     </div>
-                    <p className="text-[12px] text-gray-500 truncate">{agent.description}</p>
-                  </div>
-                  <div className="flex items-center gap-6 flex-shrink-0 text-right">
-                    <div>
-                      <p className="text-[10px] text-gray-400 mb-0.5">Stage</p>
-                      <p className="text-[12px] font-medium text-gray-700">{agent.stage}</p>
+
+                    {/* Metrics */}
+                    <div className="flex items-center gap-12 mt-4 mb-4">
+                      <div>
+                        <p className="text-[11px] text-gray-400 mb-0.5">Total Processed</p>
+                        <p className="text-[22px] font-bold text-gray-900">{agent.totalProcessed.toLocaleString()}</p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-gray-400 mb-0.5">Accuracy</p>
+                        <p className="text-[22px] font-bold text-gray-900">{agent.accuracy}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-[10px] text-gray-400 mb-0.5">Processed</p>
-                      <p className="text-[14px] font-bold text-gray-900">{agent.totalProcessed}</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-gray-400 mb-0.5">Accuracy</p>
-                      <p className="text-[14px] font-bold text-gray-900">{agent.accuracy}</p>
-                    </div>
+
+                    {/* Stack / Sub-agents */}
+                    {agent.subAgents && agent.subAgents.length > 0 && (
+                      <div>
+                        <p className="text-[13px] font-bold text-gray-900 mb-2">Stack</p>
+                        <div className="flex flex-col gap-2">
+                          {agent.subAgents.map((sub) => {
+                            const SubIcon = sub.icon;
+                            return (
+                              <div key={sub.id} className="bg-gray-50 rounded-xl px-4 py-3 flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
+                                  <SubIcon className="w-4 h-4 text-blue-600" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-[13px] font-semibold text-gray-900 mb-0.5">{sub.name}</p>
+                                  <p className="text-[11px] text-gray-500 line-clamp-1">Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation.</p>
+                                </div>
+                                <Switch className="flex-shrink-0" />
+                                <button className="ml-2 text-gray-400 hover:text-blue-600 transition-colors flex-shrink-0">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
