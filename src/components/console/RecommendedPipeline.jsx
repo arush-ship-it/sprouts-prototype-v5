@@ -103,7 +103,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center">
                       <AgentIcon className={`w-5 h-5 ${intelligenceEnabled[stage.id] ? "text-blue-600" : "text-gray-400"}`} />
                     </div>
-                    <h4 className="text-[13px] font-bold text-gray-900 flex-1">
+                    <h4 className="text-blue-600 text-sm font-semibold flex-1">
                       {stage.agent.name}
                     </h4>
                   </div>
