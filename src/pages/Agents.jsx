@@ -590,7 +590,7 @@ export default function Agents() {
               return (
                 <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex">
                   {/* Left gradient icon panel */}
-                  <div className="w-[140px] flex-shrink-0 bg-gradient-to-br from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
+                  <div className="w-[294px] flex-shrink-0 bg-gradient-to-br from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
                     <div className="w-16 h-16 rounded-full bg-white/80 shadow-sm flex items-center justify-center">
                       <Icon className="w-8 h-8 text-blue-600" strokeWidth={1.5} />
                     </div>
