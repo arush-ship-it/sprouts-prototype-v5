@@ -326,9 +326,25 @@ export default function Agents() {
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-[22px] font-semibold text-gray-900">Sprouts Intelligence Layer</h1>
-            <p className="text-[13px] text-gray-500 mt-1">Structured Intelligence for Modern Workflows</p>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
+              <button
+                onClick={() => setViewMode("pipeline")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium transition-all ${viewMode === "pipeline" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                <LayoutGrid className="w-3.5 h-3.5" />
+                Pipeline
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium transition-all ${viewMode === "list" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                <List className="w-3.5 h-3.5" />
+                List
+              </button>
+            </div>
+            <div>
+              <h1 className="text-[22px] font-semibold text-gray-900">Sprouts Intelligence Layer</h1>
+              <p className="text-[13px] text-gray-500 mt-1">Structured Intelligence for Modern Workflows</p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             
