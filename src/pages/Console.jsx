@@ -27,53 +27,53 @@ export default function Console() {
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
         <JobHeader onActivityApprovalClick={() => setIsActivityApprovalOpen(true)} />
-        <SubTabs 
-          activeTab={activeTab} 
-          setActiveTab={handleTabChange}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-        />
+        <SubTabs
+        activeTab={activeTab}
+        setActiveTab={handleTabChange}
+        viewMode={viewMode}
+        setViewMode={setViewMode} />
+
         
         {/* Pipeline Builder Button - Only show in Pipeline tab */}
-        {activeTab === "pipeline" && !showRecommendedPipeline && (
-          <div className="px-8 pt-5 pb-3 flex justify-end">
+        {activeTab === "pipeline" && !showRecommendedPipeline &&
+      <div className="px-8 pt-5 pb-3 flex justify-end">
             <Button
-              onClick={() => setShowRecommendedPipeline(true)}
-              size="sm"
-              className="h-8 text-[12px] bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"
-            >
+          onClick={() => setShowRecommendedPipeline(true)}
+          size="sm" className="bg-slate-100 text-[12px] px-3 font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8 from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
+
+
               <Workflow className="w-3.5 h-3.5 mr-1.5" />
               Build Pipeline
             </Button>
           </div>
-        )}
+      }
 
-        {activeTab === "pipeline" && showRecommendedPipeline ? (
-          <RecommendedPipeline 
-            onClose={() => setShowRecommendedPipeline(false)}
-            onUsePipeline={() => {
-              setShowRecommendedPipeline(false);
-              // Pipeline creation logic here
-            }}
-          />
-        ) : activeTab === "review" ? (
-          <CandidateList activeTab={activeTab} viewMode={viewMode} />
-        ) : (
-          viewMode === "pipeline" ? (
-            <PipelineView />
-          ) : (
-            <CandidateList activeTab={activeTab} viewMode={viewMode} />
-          )
-        )}
+        {activeTab === "pipeline" && showRecommendedPipeline ?
+      <RecommendedPipeline
+        onClose={() => setShowRecommendedPipeline(false)}
+        onUsePipeline={() => {
+          setShowRecommendedPipeline(false);
+          // Pipeline creation logic here
+        }} /> :
+
+      activeTab === "review" ?
+      <CandidateList activeTab={activeTab} viewMode={viewMode} /> :
+
+      viewMode === "pipeline" ?
+      <PipelineView /> :
+
+      <CandidateList activeTab={activeTab} viewMode={viewMode} />
+
+      }
 
         <PipelineBuilderModal
-          isOpen={isPipelineBuilderOpen}
-          onClose={() => setIsPipelineBuilderOpen(false)}
-        />
+        isOpen={isPipelineBuilderOpen}
+        onClose={() => setIsPipelineBuilderOpen(false)} />
+
         <ActivityApprovalModal
-          isOpen={isActivityApprovalOpen}
-          onClose={() => setIsActivityApprovalOpen(false)}
-        />
-    </div>
-  );
+        isOpen={isActivityApprovalOpen}
+        onClose={() => setIsActivityApprovalOpen(false)} />
+
+    </div>);
+
 }
