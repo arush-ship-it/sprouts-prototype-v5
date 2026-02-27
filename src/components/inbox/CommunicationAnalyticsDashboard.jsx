@@ -91,32 +91,32 @@ export default function CommunicationAnalyticsDashboard() {
 
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-0.5">
-            <Button
-              variant={timeFilter === "7days" ? "default" : "ghost"}
-              size="sm"
-              className="h-7 text-[11px] px-2"
-              onClick={() => setTimeFilter("7days")}>
+          
 
-              7 days
-            </Button>
-            <Button
-              variant={timeFilter === "30days" ? "default" : "ghost"}
-              size="sm"
-              className="h-7 text-[11px] px-2"
-              onClick={() => setTimeFilter("30days")}>
 
-              30 days
-            </Button>
-            <Button
-              variant={timeFilter === "custom" ? "default" : "ghost"}
-              size="sm"
-              className="h-7 text-[11px] px-2"
-              onClick={() => setTimeFilter("custom")}>
 
-              Custom
-            </Button>
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <Button
             variant="ghost"
             size="icon"
