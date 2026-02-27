@@ -79,7 +79,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
             return (
               <div key={stage.id} className="bg-[#ffffff] px-2 py-2 flex flex-col">
                 {/* Stage Card */}
-                <div className="bg-white border border-gray-200 rounded-xl p-5 mb-4 flex-grow">
+                <div className="bg-white rounded-xl p-5 mb-4 flex-grow">
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">
