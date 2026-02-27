@@ -579,93 +579,112 @@ export default function Agents() {
 
 
         {/* Agents Pipeline / List */}
-        {viewMode === "list" &&
-        <div className="flex flex-col gap-4 pb-4">
-            {filteredAgents.map((agent) => {
-            const Icon = agent.icon;
-            return (
-              <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex">
-                  {/* Left gradient icon panel */}
-                  <div className="bg-gradient-to-br mx-4 my-4 rounded-2xl w-[294px] flex-shrink-0 from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
-                    <div className="bg-slate-50 rounded-full w-16 h-16 shadow-sm flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-blue-600" strokeWidth={1.5} />
-                    </div>
-                  </div>
-
-                  {/* Right content */}
-                  <div className="flex-1 px-6 py-5">
-                    {/* Top row: stage, name, toggle, status, view details */}
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1">
-                        <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
-                          {agent.stage} &bull; {agent.type}
-                        </p>
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-[20px] font-bold text-gray-900">{agent.name}</h3>
-                          <Switch
-                          checked={agent.isActive}
-                          onCheckedChange={() => handleToggle(agent.id)} />
-
-                          <div className="flex items-center gap-1.5">
-                            <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
-                            <span className="text-[12px] font-medium text-gray-600 capitalize">{agent.status}</span>
-                          </div>
-                        </div>
-                        <p className="text-[13px] text-gray-500 leading-relaxed max-w-2xl">
-                          {agent.description}. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation.
-                        </p>
-                      </div>
-                      <button
-                      onClick={() => handleAgentClick(agent)}
-                      className="ml-4 flex-shrink-0 px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                        View Details
-                      </button>
+        {viewMode === "list" && (() => {
+          const stageConfig = [
+            { key: "screen", label: "Smart Screening", stageMatch: "Application Review" },
+            { key: "assess", label: "Smart Assessment", stageMatch: "Technical Assessment" },
+            { key: "interview", label: "Interview & Smart Management", stageMatch: "Interview" },
+            { key: "offer", label: "Smart Offer Management", stageMatch: "All Stages" },
+          ];
+          return (
+            <div className="grid grid-cols-4 gap-4 pb-4 items-stretch">
+              {stageConfig.map(({ key, label, stageMatch }) => {
+                const stageAgents = filteredAgents.filter((a) => a.stage === stageMatch);
+                return (
+                  <div key={key} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+                    {/* Stage header */}
+                    <div className="bg-gradient-to-br from-blue-100 via-indigo-100 to-blue-200 px-4 py-5 flex items-center justify-center min-h-[90px]">
+                      <h3 className="text-[15px] font-bold text-blue-900 text-center leading-tight">{label}</h3>
                     </div>
 
-                    {/* Metrics */}
-                    <div className="flex items-center gap-12 mt-4 mb-4">
-                      <div>
-                        <p className="text-[11px] text-gray-400 mb-0.5">Total Processed</p>
-                        <p className="text-[22px] font-bold text-gray-900">{agent.totalProcessed.toLocaleString()}</p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-gray-400 mb-0.5">Accuracy</p>
-                        <p className="text-[22px] font-bold text-gray-900">{agent.accuracy}</p>
-                      </div>
-                    </div>
-
-                    {/* Stack / Sub-agents */}
-                    {agent.subAgents && agent.subAgents.length > 0 &&
-                  <div>
-                        <p className="text-[13px] font-bold text-gray-900 mb-2">Stack</p>
-                        <div className="flex flex-col gap-2">
-                          {agent.subAgents.map((sub) => {
-                        const SubIcon = sub.icon;
+                    {/* Agents in this stage */}
+                    <div className="flex-1 flex flex-col divide-y divide-gray-50 px-5 py-4 gap-4">
+                      {stageAgents.length === 0 && (
+                        <p className="text-[12px] text-gray-400 text-center py-4">No agents</p>
+                      )}
+                      {stageAgents.map((agent) => {
+                        const Icon = agent.icon;
                         return (
-                          <div key={sub.id} className="bg-gray-50 rounded-xl px-4 py-3 flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
-                                  <SubIcon className="w-4 h-4 text-blue-600" />
+                          <div key={agent.id} className="pt-4 first:pt-0">
+                            {/* Name + toggle + status */}
+                            <div className="flex items-center justify-between mb-1">
+                              <div className="flex items-center gap-2 flex-1 min-w-0">
+                                <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                                  <Icon className="w-4 h-4 text-blue-600" strokeWidth={1.5} />
                                 </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-[13px] font-semibold text-gray-900 mb-0.5">{sub.name}</p>
-                                  <p className="text-[11px] text-gray-500 line-clamp-1">Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation.</p>
-                                </div>
-                                <Switch className="flex-shrink-0" />
-                                <button className="ml-2 text-gray-400 hover:text-blue-600 transition-colors flex-shrink-0">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-                                </button>
-                              </div>);
+                                <p className="text-[13px] font-bold text-gray-900 truncate">{agent.name}</p>
+                              </div>
+                              <Switch checked={agent.isActive} onCheckedChange={() => handleToggle(agent.id)} />
+                            </div>
 
+                            {/* Status */}
+                            <div className="flex items-center gap-1.5 mb-2 ml-9">
+                              <div className={`w-1.5 h-1.5 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
+                              <span className="text-[11px] font-medium text-gray-500 capitalize">{agent.status}</span>
+                            </div>
+
+                            {/* Description */}
+                            <p className="text-[11px] text-gray-500 leading-relaxed mb-3 ml-9">
+                              {agent.description}. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation.
+                            </p>
+
+                            {/* Metrics */}
+                            <div className="flex items-center gap-6 mb-3 ml-9">
+                              <div>
+                                <p className="text-[10px] text-gray-400 mb-0.5">Total Processed</p>
+                                <p className="text-[16px] font-bold text-gray-900">{agent.totalProcessed.toLocaleString()}</p>
+                              </div>
+                              <div>
+                                <p className="text-[10px] text-gray-400 mb-0.5">Accuracy</p>
+                                <p className="text-[16px] font-bold text-gray-900">{agent.accuracy}</p>
+                              </div>
+                            </div>
+
+                            {/* Stack / Sub-agents */}
+                            {agent.subAgents && agent.subAgents.length > 0 && (
+                              <div className="ml-9">
+                                <p className="text-[11px] font-bold text-gray-900 mb-2">Stack</p>
+                                <div className="flex flex-col gap-1.5">
+                                  {agent.subAgents.map((sub) => {
+                                    const SubIcon = sub.icon;
+                                    return (
+                                      <div key={sub.id} className="bg-gray-50 rounded-xl px-3 py-2 flex items-center gap-2">
+                                        <div className="w-6 h-6 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
+                                          <SubIcon className="w-3 h-3 text-blue-600" />
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                          <p className="text-[11px] font-semibold text-gray-900 mb-0">{sub.name}</p>
+                                          <p className="text-[10px] text-gray-500 line-clamp-1">Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates.</p>
+                                        </div>
+                                        <Switch className="flex-shrink-0" />
+                                        <button className="ml-1 text-gray-400 hover:text-blue-600 transition-colors flex-shrink-0">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                                        </button>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* View Details */}
+                            <div className="mt-3 ml-9">
+                              <button
+                                onClick={() => handleAgentClick(agent)}
+                                className="px-3 py-1.5 border border-gray-200 rounded-lg text-[11px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                                View Details
+                              </button>
+                            </div>
+                          </div>
+                        );
                       })}
-                        </div>
-                      </div>
-                  }
+                    </div>
                   </div>
-                </div>);
-
-          })}
-          </div>
-        }
+                );
+              })}
+            </div>
+          );
+        })()}
 
         <div className={`flex gap-4 overflow-x-auto pb-4 ${viewMode !== "pipeline" ? "hidden" : ""}`}>
           {["Application Review", "Technical Assessment", "Interview", "All Stages"].map((stage) => {
