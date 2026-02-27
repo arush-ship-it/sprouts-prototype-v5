@@ -106,19 +106,20 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                     <h4 className="text-[13px] font-bold text-gray-900 flex-1">
                       {stage.agent.name}
                     </h4>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] text-gray-400 font-medium">AI</span>
-                      <Switch
-                        checked={intelligenceEnabled[stage.id]}
-                        onCheckedChange={(val) => setIntelligenceEnabled(prev => ({ ...prev, [stage.id]: val }))}
-                        className="scale-75"
-                      />
-                    </div>
                   </div>
                   
                   <p className="text-[11px] text-gray-600 leading-relaxed line-clamp-5">
                     {stage.agent.description}
                   </p>
+
+                  <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-blue-100 justify-end">
+                    <span className="text-[10px] text-gray-400 font-medium">Intelligence Layer</span>
+                    <Switch
+                      checked={intelligenceEnabled[stage.id]}
+                      onCheckedChange={(val) => setIntelligenceEnabled(prev => ({ ...prev, [stage.id]: val }))}
+                      className="scale-75"
+                    />
+                  </div>
                 </div>
 
                 {/* Remove Button */}
