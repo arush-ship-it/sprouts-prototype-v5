@@ -583,15 +583,15 @@ export default function Agents() {
 
 
         {/* Agents Pipeline / List */}
-        {viewMode === "list" && (
-          <div className="flex flex-col gap-4 pb-4">
+        {viewMode === "list" &&
+        <div className="flex flex-col gap-4 pb-4">
             {filteredAgents.map((agent) => {
-              const Icon = agent.icon;
-              return (
-                <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex">
+            const Icon = agent.icon;
+            return (
+              <div key={agent.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex">
                   {/* Left gradient icon panel */}
-                  <div className="w-[294px] flex-shrink-0 bg-gradient-to-br from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/80 shadow-sm flex items-center justify-center">
+                  <div className="bg-gradient-to-br mx-4 my-4 rounded-2xl w-[294px] flex-shrink-0 from-blue-100 via-indigo-100 to-blue-200 flex items-center justify-center">
+                    <div className="bg-slate-50 rounded-full w-16 h-16 shadow-sm flex items-center justify-center">
                       <Icon className="w-8 h-8 text-blue-600" strokeWidth={1.5} />
                     </div>
                   </div>
@@ -607,9 +607,9 @@ export default function Agents() {
                         <div className="flex items-center gap-3 mb-2">
                           <h3 className="text-[20px] font-bold text-gray-900">{agent.name}</h3>
                           <Switch
-                            checked={agent.isActive}
-                            onCheckedChange={(e) => { e.stopPropagation(); handleToggle(agent.id); }}
-                          />
+                          checked={agent.isActive}
+                          onCheckedChange={(e) => {e.stopPropagation();handleToggle(agent.id);}} />
+
                           <div className="flex items-center gap-1.5">
                             <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
                             <span className="text-[12px] font-medium text-gray-600 capitalize">{agent.status}</span>
@@ -620,8 +620,8 @@ export default function Agents() {
                         </p>
                       </div>
                       <button
-                        onClick={() => handleAgentClick(agent)}
-                        className="ml-4 flex-shrink-0 px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                      onClick={() => handleAgentClick(agent)}
+                      className="ml-4 flex-shrink-0 px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                         View Details
                       </button>
                     </div>
@@ -639,14 +639,14 @@ export default function Agents() {
                     </div>
 
                     {/* Stack / Sub-agents */}
-                    {agent.subAgents && agent.subAgents.length > 0 && (
-                      <div>
+                    {agent.subAgents && agent.subAgents.length > 0 &&
+                  <div>
                         <p className="text-[13px] font-bold text-gray-900 mb-2">Stack</p>
                         <div className="flex flex-col gap-2">
                           {agent.subAgents.map((sub) => {
-                            const SubIcon = sub.icon;
-                            return (
-                              <div key={sub.id} className="bg-gray-50 rounded-xl px-4 py-3 flex items-center gap-3">
+                        const SubIcon = sub.icon;
+                        return (
+                          <div key={sub.id} className="bg-gray-50 rounded-xl px-4 py-3 flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
                                   <SubIcon className="w-4 h-4 text-blue-600" />
                                 </div>
@@ -656,20 +656,20 @@ export default function Agents() {
                                 </div>
                                 <Switch className="flex-shrink-0" />
                                 <button className="ml-2 text-gray-400 hover:text-blue-600 transition-colors flex-shrink-0">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
                                 </button>
-                              </div>
-                            );
-                          })}
+                              </div>);
+
+                      })}
                         </div>
                       </div>
-                    )}
+                  }
                   </div>
-                </div>
-              );
-            })}
+                </div>);
+
+          })}
           </div>
-        )}
+        }
 
         <div className={`flex gap-4 overflow-x-auto pb-4 ${viewMode !== "pipeline" ? "hidden" : ""}`}>
           {["Application Review", "Technical Assessment", "Interview", "All Stages"].map((stage) => {
