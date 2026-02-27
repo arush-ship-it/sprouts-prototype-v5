@@ -604,7 +604,7 @@ export default function Agents() {
                           <h3 className="text-[20px] font-bold text-gray-900">{agent.name}</h3>
                           <Switch
                           checked={agent.isActive}
-                          onCheckedChange={(e) => {e.stopPropagation();handleToggle(agent.id);}} />
+                          onCheckedChange={() => handleToggle(agent.id)} />
 
                           <div className="flex items-center gap-1.5">
                             <div className={`w-2 h-2 rounded-full ${agent.status === "active" ? "bg-emerald-500" : "bg-gray-400"}`} />
