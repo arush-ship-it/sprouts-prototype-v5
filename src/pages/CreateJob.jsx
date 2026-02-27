@@ -223,7 +223,7 @@ export default function CreateJob() {
             
             {/* Step 1: AI Generation - Preview */}
             {currentStep === 1 &&
-              <div className="space-y-6 max-w-6xl mx-auto">
+              <div className="mx-auto px-4 space-y-6 max-w-6xl">
                 <div className="bg-slate-50 px-3 rounded-2xl shadow-sm">
                   <div className="mb-6 border-b border-gray-200">
                     <h2 className="text-gray-900 mb-3 text-base font-semibold">{generatedJob.title}</h2>
