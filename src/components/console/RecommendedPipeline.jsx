@@ -52,7 +52,7 @@ const recommendedPipeline = [
 
 export default function RecommendedPipeline({ onClose, onUsePipeline }) {
   const [intelligenceEnabled, setIntelligenceEnabled] = useState(
-    () => Object.fromEntries(recommendedPipeline.map(s => [s.id, true]))
+    () => Object.fromEntries(recommendedPipeline.map((s) => [s.id, true]))
   );
 
   return (
@@ -77,7 +77,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
             const AgentIcon = stage.agent.icon;
 
             return (
-              <div key={stage.id} className="flex flex-col">
+              <div key={stage.id} className="bg-[#ffffff] px-2 py-2 flex flex-col">
                 {/* Stage Card */}
                 <div className="bg-white border border-gray-200 rounded-xl p-5 mb-4 flex-grow">
                   <div className="flex items-start justify-between mb-3">
@@ -116,9 +116,9 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                     <span className="text-[10px] text-gray-400 font-medium">Intelligence Layer</span>
                     <Switch
                       checked={intelligenceEnabled[stage.id]}
-                      onCheckedChange={(val) => setIntelligenceEnabled(prev => ({ ...prev, [stage.id]: val }))}
-                      className="scale-75"
-                    />
+                      onCheckedChange={(val) => setIntelligenceEnabled((prev) => ({ ...prev, [stage.id]: val }))}
+                      className="scale-75" />
+
                   </div>
                 </div>
 
