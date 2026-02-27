@@ -198,7 +198,7 @@ export default function CommunicationAnalyticsDashboard() {
           {/* Sequence Overview */}
           <div className="space-y-4">
             {/* Top Row: Status Cards + Donut Chart Side by Side */}
-            <div className="bg-[#ffffff] rounded-2xl grid grid-cols-5 gap-6">
+            <div className="bg-[#ffffff] py-4 rounded-2xl grid grid-cols-5 gap-6">
               {/* Left: Status Cards (40%) */}
               <div className="col-span-2">
                 <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
