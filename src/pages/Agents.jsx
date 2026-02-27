@@ -601,7 +601,7 @@ export default function Agents() {
                           {agent.stage} &bull; {agent.type}
                         </p>
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-[20px] font-bold text-gray-900">{agent.name}</h3>
+                          <h3 className="text-gray-900 text-base font-semibold">{agent.name}</h3>
                           <Switch
                           checked={agent.isActive}
                           onCheckedChange={() => handleToggle(agent.id)} />
