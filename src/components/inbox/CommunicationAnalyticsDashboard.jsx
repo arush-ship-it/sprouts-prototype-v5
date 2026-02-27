@@ -235,7 +235,7 @@ export default function CommunicationAnalyticsDashboard() {
                 </h3>
                 <div className="h-[240px] flex items-center justify-center">
                   <ResponsiveContainer width="100%" height="100%">
-                    <PieChart className="bg-[#ffffff] rounded-[10px] recharts-surface">
+                    <PieChart className="bg-slate-50 recharts-surface">
                       <Pie
                       data={sequenceData}
                       cx="50%"
