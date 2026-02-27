@@ -126,18 +126,18 @@ export default function PipelineView() {
 
             {/* Agents Section - Expanded */}
             {expandedStageId === stage.id &&
-            <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 space-y-2">
-              <h4 className="text-[12px] font-semibold text-gray-700 uppercase tracking-wider">Agents</h4>
+          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 space-y-2">
+              <h4 className="text-gray-700 text-xs font-medium capitalize tracking-wider">Intelligence Layer</h4>
               <div className="space-y-2">
                 {stage.agents.map((agent, idx) =>
-                <div key={idx} className="flex items-center gap-2 p-2 bg-white rounded-md border border-gray-200">
+              <div key={idx} className="flex items-center gap-2 p-2 bg-white rounded-md border border-gray-200">
                   <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                   <span className="text-[12px] text-gray-700">{agent}</span>
                 </div>
-                )}
+              )}
               </div>
             </div>
-            }
+          }
 
             {/* Candidates */}
             <div className="flex flex-col gap-2">
@@ -146,7 +146,7 @@ export default function PipelineView() {
             )}
             </div>
             </div>
-            )}
+        )}
             </div>
             </div>);
 
