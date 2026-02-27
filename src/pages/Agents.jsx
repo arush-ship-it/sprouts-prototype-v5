@@ -326,7 +326,11 @@ export default function Agents() {
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-[22px] font-semibold text-gray-900">Sprouts Intelligence Layer</h1>
+            <p className="text-[13px] text-gray-500 mt-1">Structured Intelligence for Modern Workflows</p>
+          </div>
+          <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
               <button
                 onClick={() => setViewMode("pipeline")}
@@ -341,12 +345,6 @@ export default function Agents() {
                 List
               </button>
             </div>
-            <div>
-              <h1 className="text-[22px] font-semibold text-gray-900">Sprouts Intelligence Layer</h1>
-              <p className="text-[13px] text-gray-500 mt-1">Structured Intelligence for Modern Workflows</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
             
 
 
