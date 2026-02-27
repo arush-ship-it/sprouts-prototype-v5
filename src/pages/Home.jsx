@@ -190,7 +190,7 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-6">
           {/* All Jobs */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-[18px] font-bold text-gray-900 mb-6">All Jobs</h2>
+            <h2 className="text-gray-800 mb-6 text-base font-semibold">All Jobs</h2>
             <div className="space-y-4">
               {jobs.map((job) =>
               <div key={job.id} className="bg-[#fcfcfc] p-4 rounded-lg flex items-center justify-between">
@@ -200,7 +200,7 @@ export default function Home() {
                     </div>
                     <div>
                       <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
-                        <h3 className="text-[15px] font-semibold text-gray-900 cursor-pointer hover:text-blue-600">{job.title}</h3>
+                        <h3 className="text-gray-800 text-base font-medium cursor-pointer hover:text-blue-600">{job.title}</h3>
                       </Link>
                       <p className="text-[12px] text-gray-500">{job.department}</p>
                     </div>
