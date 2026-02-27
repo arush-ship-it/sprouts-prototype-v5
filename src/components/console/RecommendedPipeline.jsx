@@ -98,7 +98,7 @@ export default function RecommendedPipeline({ onClose, onUsePipeline }) {
                 </div>
 
                 {/* Agent Card */}
-                <div className="bg-blue-50 mb-3 p-5 rounded-xl transition-all from-blue-50 to-indigo-50 border border-blue-100">
+                <div className="bg-blue-50 mb-3 p-5 rounded-xl transition-all">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center">
                       <AgentIcon className={`w-5 h-5 ${intelligenceEnabled[stage.id] ? "text-blue-600" : "text-gray-400"}`} />
