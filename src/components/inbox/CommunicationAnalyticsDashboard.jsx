@@ -157,7 +157,7 @@ export default function CommunicationAnalyticsDashboard() {
                   </div>
                   <div className="flex items-end justify-between">
                     <div>
-                      <span className="text-blue-700 text-3xl font-bold">
+                      <span className="text-slate-700 text-3xl font-bold">
                         {metric.value}
                       </span>
                       {metric.replyRate &&
