@@ -13,7 +13,8 @@ import {
   ChevronUp,
   Activity,
   Target,
-  CheckCircle2 } from
+  CheckCircle2,
+  ExternalLink } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
