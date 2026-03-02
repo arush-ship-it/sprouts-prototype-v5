@@ -360,9 +360,9 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 <h3 className="text-[13px] font-semibold text-gray-900">
                   {isSourcingExpanded ? "AI Sourcing Assistant" : "AI Sourcing - Click to Expand"}
                 </h3>
-                {!isSourcingExpanded &&
-              <p className="text-[11px] text-gray-600 mt-0.5">Source the right fit for your job</p>
-              }
+                
+
+
               </div>
             </div>
             <Button
