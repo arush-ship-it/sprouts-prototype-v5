@@ -6,7 +6,7 @@ const COLORS = {
   active: { start: "#6366f1", end: "#818cf8" },
   completed: { start: "#06b6d4", end: "#22d3ee" },
   paused: { start: "#f59e0b", end: "#fbbf24" },
-  error: { start: "#ef4444", end: "#f87171" },
+  error: { start: "#ef4444", end: "#f87171" }
 };
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -14,15 +14,15 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="bg-white/90 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-lg px-4 py-3">
         <p className="text-[11px] font-semibold text-slate-500 mb-2">{label}</p>
-        {payload.map((p, i) => (
-          <div key={i} className="flex items-center gap-2 text-[11px]">
+        {payload.map((p, i) =>
+        <div key={i} className="flex items-center gap-2 text-[11px]">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
             <span className="text-slate-600">{p.name}:</span>
             <span className="font-bold text-slate-900">{p.value}</span>
           </div>
-        ))}
-      </div>
-    );
+        )}
+      </div>);
+
   }
   return null;
 };
@@ -37,27 +37,27 @@ export default function CommunicationAnalyticsDashboard() {
   }, []);
 
   const breakdownData = [
-    { label: "Emails", value: 58, icon: Mail, color: "#6366f1" },
-    { label: "Messages", value: 42, icon: MessageSquare, color: "#06b6d4" },
-    { label: "Sequences", value: 42, icon: Zap, color: "#10b981" },
-  ];
+  { label: "Emails", value: 58, icon: Mail, color: "#6366f1" },
+  { label: "Messages", value: 42, icon: MessageSquare, color: "#06b6d4" },
+  { label: "Sequences", value: 42, icon: Zap, color: "#10b981" }];
+
 
   const sequenceData = [
-    { name: "Active", value: 12, startColor: "#6366f1", endColor: "#818cf8" },
-    { name: "Completed", value: 28, startColor: "#06b6d4", endColor: "#22d3ee" },
-    { name: "Paused", value: 5, startColor: "#f59e0b", endColor: "#fbbf24" },
-    { name: "Error", value: 2, startColor: "#ef4444", endColor: "#f87171" },
-  ];
+  { name: "Active", value: 12, startColor: "#6366f1", endColor: "#818cf8" },
+  { name: "Completed", value: 28, startColor: "#06b6d4", endColor: "#22d3ee" },
+  { name: "Paused", value: 5, startColor: "#f59e0b", endColor: "#fbbf24" },
+  { name: "Error", value: 2, startColor: "#ef4444", endColor: "#f87171" }];
+
 
   const trendData = [
-    { day: "Mon", active: 8, completed: 3, paused: 1 },
-    { day: "Tue", active: 10, completed: 5, paused: 2 },
-    { day: "Wed", active: 12, completed: 8, paused: 2 },
-    { day: "Thu", active: 11, completed: 12, paused: 3 },
-    { day: "Fri", active: 12, completed: 18, paused: 4 },
-    { day: "Sat", active: 12, completed: 25, paused: 4 },
-    { day: "Sun", active: 12, completed: 28, paused: 5 },
-  ];
+  { day: "Mon", active: 8, completed: 3, paused: 1 },
+  { day: "Tue", active: 10, completed: 5, paused: 2 },
+  { day: "Wed", active: 12, completed: 8, paused: 2 },
+  { day: "Thu", active: 11, completed: 12, paused: 3 },
+  { day: "Fri", active: 12, completed: 18, paused: 4 },
+  { day: "Sat", active: 12, completed: 25, paused: 4 },
+  { day: "Sun", active: 12, completed: 28, paused: 5 }];
+
 
   const total = sequenceData.reduce((s, d) => s + d.value, 0);
 
@@ -76,29 +76,29 @@ export default function CommunicationAnalyticsDashboard() {
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1">
-            {["7days", "30days"].map((f) => (
-              <button
-                key={f}
-                onClick={() => setTimeFilter(f)}
-                className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${
-                  timeFilter === f ? "bg-white text-slate-800 shadow-sm" : "text-slate-400 hover:text-slate-600"
-                }`}
-              >
+            {["7days", "30days"].map((f) =>
+            <button
+              key={f}
+              onClick={() => setTimeFilter(f)}
+              className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${
+              timeFilter === f ? "bg-white text-slate-800 shadow-sm" : "text-slate-400 hover:text-slate-600"}`
+              }>
+
                 {f === "7days" ? "7D" : "30D"}
               </button>
-            ))}
+            )}
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all"
-          >
+            className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all">
+
             {isExpanded ? <ChevronUp className="w-4 h-4 text-slate-500" /> : <ChevronDown className="w-4 h-4 text-slate-500" />}
           </button>
         </div>
       </div>
 
-      {isExpanded && (
-        <div className="space-y-4">
+      {isExpanded &&
+      <div className="space-y-4">
           {/* Unified Top Row: KPIs + Donut merged */}
           <div className="bg-white rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-slate-100 p-6">
             <div className="grid grid-cols-5 gap-6">
@@ -118,12 +118,12 @@ export default function CommunicationAnalyticsDashboard() {
                   </div>
                   {/* Mini breakdown pills */}
                   <div className="flex items-center gap-2 mt-3">
-                    {breakdownData.map((b, i) => (
-                      <div key={i} className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-2.5 py-1">
+                    {breakdownData.map((b, i) =>
+                  <div key={i} className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-2.5 py-1">
                         <b.icon className="w-3 h-3 text-slate-400" />
                         <span className="text-[10px] font-bold text-slate-700">{b.value}</span>
                       </div>
-                    ))}
+                  )}
                   </div>
                 </div>
 
@@ -154,36 +154,36 @@ export default function CommunicationAnalyticsDashboard() {
               </div>
 
               {/* Right: Sequence Distribution Donut */}
-              <div className="col-span-2">
+              <div className="px-2 py-3 col-span-2">
                 <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-4">Sequence Status</p>
                 <div className="flex items-center gap-6">
                   <div className="relative flex-shrink-0">
                     <svg width={0} height={0}>
                       <defs>
-                        {sequenceData.map((d, i) => (
-                          <linearGradient key={i} id={`grad-${i}`} x1="0" y1="0" x2="1" y2="1">
+                        {sequenceData.map((d, i) =>
+                      <linearGradient key={i} id={`grad-${i}`} x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stopColor={d.startColor} />
                             <stop offset="100%" stopColor={d.endColor} />
                           </linearGradient>
-                        ))}
+                      )}
                       </defs>
                     </svg>
                     <div style={{ width: 140, height: 140 }} className="relative">
                       <ResponsiveContainer width={140} height={140}>
                         <PieChart>
                           <Pie
-                            data={sequenceData}
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={42}
-                            outerRadius={64}
-                            paddingAngle={3}
-                            dataKey="value"
-                            strokeWidth={0}
-                          >
-                            {sequenceData.map((entry, idx) => (
-                              <Cell key={idx} fill={`url(#grad-${idx})`} />
-                            ))}
+                          data={sequenceData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={42}
+                          outerRadius={64}
+                          paddingAngle={3}
+                          dataKey="value"
+                          strokeWidth={0}>
+
+                            {sequenceData.map((entry, idx) =>
+                          <Cell key={idx} fill={`url(#grad-${idx})`} />
+                          )}
                           </Pie>
                         </PieChart>
                       </ResponsiveContainer>
@@ -198,9 +198,9 @@ export default function CommunicationAnalyticsDashboard() {
                   {/* Legend */}
                   <div className="flex flex-col gap-3 flex-1">
                     {sequenceData.map((item, idx) => {
-                      const pct = Math.round((item.value / total) * 100);
-                      return (
-                        <div key={idx} className="flex items-center gap-2.5">
+                    const pct = Math.round(item.value / total * 100);
+                    return (
+                      <div key={idx} className="flex items-center gap-2.5">
                           <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: `linear-gradient(135deg, ${item.startColor}, ${item.endColor})` }} />
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-0.5">
@@ -209,14 +209,14 @@ export default function CommunicationAnalyticsDashboard() {
                             </div>
                             <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
                               <div
-                                className="h-full rounded-full transition-all duration-700"
-                                style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${item.startColor}, ${item.endColor})` }}
-                              />
+                              className="h-full rounded-full transition-all duration-700"
+                              style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${item.startColor}, ${item.endColor})` }} />
+
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        </div>);
+
+                  })}
                   </div>
                 </div>
 
@@ -261,7 +261,7 @@ export default function CommunicationAnalyticsDashboard() {
             </div>
           </div>
         </div>
-      )}
-    </div>
-  );
+      }
+    </div>);
+
 }
