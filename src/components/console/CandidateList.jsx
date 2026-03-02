@@ -352,7 +352,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
 
           <div className="flex items-start justify-between">
-            <div className="flex items-center gap-2.5 flex-1">
+            <div className="py-2 flex items-center gap-2.5 flex-1">
               <div className="bg-slate-400 rounded-[32px] w-8 h-8 from-indigo-500 to-violet-600 flex items-center justify-center shrink-0">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
