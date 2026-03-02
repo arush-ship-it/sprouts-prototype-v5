@@ -106,23 +106,22 @@ export default function CommunicationAnalyticsDashboard() {
               {/* Left: KPI + Breakdown */}
               <div className="col-span-2 space-y-4">
                 {/* Total Sent - Hero Metric */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 p-5 shadow-lg shadow-indigo-200/40">
-                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-white/10 -translate-y-6 translate-x-6" />
-                  <p className="text-[11px] font-semibold text-indigo-200 uppercase tracking-wider mb-1">Total Sent</p>
-                  <p className="text-[42px] font-black text-white leading-none">142</p>
+                <div className="rounded-2xl bg-slate-50 border border-slate-100 p-5">
+                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Total Sent</p>
+                  <p className="text-[42px] font-black text-slate-800 leading-none">142</p>
                   <div className="flex items-center gap-1.5 mt-2">
-                    <div className="flex items-center gap-1 bg-white/20 rounded-full px-2 py-0.5">
-                      <TrendingUp className="w-3 h-3 text-emerald-300" />
-                      <span className="text-[10px] font-bold text-emerald-300">+12%</span>
+                    <div className="flex items-center gap-1">
+                      <TrendingUp className="w-3 h-3 text-emerald-500" />
+                      <span className="text-[10px] font-semibold text-emerald-500">+12%</span>
                     </div>
-                    <span className="text-[11px] text-indigo-200">Reply rate: <strong className="text-white">68%</strong></span>
+                    <span className="text-[11px] text-slate-400">Reply rate: <strong className="text-slate-700">68%</strong></span>
                   </div>
                   {/* Mini breakdown pills */}
                   <div className="flex items-center gap-2 mt-3">
                     {breakdownData.map((b, i) => (
-                      <div key={i} className="flex items-center gap-1.5 bg-white/15 rounded-full px-2.5 py-1">
-                        <b.icon className="w-3 h-3 text-white/80" />
-                        <span className="text-[10px] font-bold text-white">{b.value}</span>
+                      <div key={i} className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-full px-2.5 py-1">
+                        <b.icon className="w-3 h-3 text-slate-400" />
+                        <span className="text-[10px] font-bold text-slate-700">{b.value}</span>
                       </div>
                     ))}
                   </div>
