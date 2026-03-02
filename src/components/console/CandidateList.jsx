@@ -378,7 +378,26 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             }
             </Button>
           </div>
-          
+
+          {/* Inline chatbox - always visible when collapsed */}
+          {!isSourcingExpanded &&
+          <div className="relative mt-3">
+            <input
+              type="text"
+              value={sourcingInput}
+              onChange={(e) => setSourcingInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter" && sourcingInput.trim()) { setIsSourcingExpanded(true); } }}
+              placeholder="Type a sourcing prompt and press Enter..."
+              className="w-full text-[12px] bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 pr-10 focus:outline-none focus:ring-1 focus:ring-indigo-300 focus:border-indigo-300 placeholder:text-gray-400"
+            />
+            <button
+              onClick={() => { if (sourcingInput.trim()) setIsSourcingExpanded(true); }}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition-colors">
+              <Send className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          }
+
           {isSourcingExpanded &&
         <div className="mt-4 space-y-4">
               {/* Sub Tabs */}
