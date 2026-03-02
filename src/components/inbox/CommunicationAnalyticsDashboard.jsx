@@ -66,7 +66,7 @@ export default function CommunicationAnalyticsDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-md shadow-indigo-200">
+          <div className="bg-slate-400 rounded-xl w-8 h-8 from-indigo-500 to-violet-500 flex items-center justify-center shadow-md shadow-indigo-200">
             <TrendingUp className="w-4 h-4 text-white" />
           </div>
           <div>
@@ -75,19 +75,19 @@ export default function CommunicationAnalyticsDashboard() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1">
-            {["7days", "30days"].map((f) =>
-            <button
-              key={f}
-              onClick={() => setTimeFilter(f)}
-              className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${
-              timeFilter === f ? "bg-white text-slate-800 shadow-sm" : "text-slate-400 hover:text-slate-600"}`
-              }>
+          
 
-                {f === "7days" ? "7D" : "30D"}
-              </button>
-            )}
-          </div>
+
+
+
+
+
+
+
+
+
+
+
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all">
