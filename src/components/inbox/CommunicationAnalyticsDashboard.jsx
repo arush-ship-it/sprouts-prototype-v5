@@ -1,309 +1,268 @@
 import React, { useState, useEffect } from "react";
-import { ChevronUp, ChevronDown, TrendingUp, TrendingDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import { ChevronUp, ChevronDown, TrendingUp, TrendingDown, Mail, MessageSquare, Zap } from "lucide-react";
+import { PieChart, Pie, Cell, ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+
+const COLORS = {
+  active: { start: "#6366f1", end: "#818cf8" },
+  completed: { start: "#06b6d4", end: "#22d3ee" },
+  paused: { start: "#f59e0b", end: "#fbbf24" },
+  error: { start: "#ef4444", end: "#f87171" },
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white/90 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-lg px-4 py-3">
+        <p className="text-[11px] font-semibold text-slate-500 mb-2">{label}</p>
+        {payload.map((p, i) => (
+          <div key={i} className="flex items-center gap-2 text-[11px]">
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
+            <span className="text-slate-600">{p.name}:</span>
+            <span className="font-bold text-slate-900">{p.value}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
 
 export default function CommunicationAnalyticsDashboard() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [timeFilter, setTimeFilter] = useState("7days");
-  const [isBreakdownExpanded, setIsBreakdownExpanded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsExpanded(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Mock data
-  const metrics = [
-  {
-    label: "Total Sent",
-    value: 142,
-    replyRate: "68%",
-    trend: 12,
-    positive: true,
-    color: "bg-white border-gray-200",
-    textColor: "text-blue-700",
-    hasBreakdown: true
-  },
-  {
-    label: "Pending Replies",
-    value: 24,
-    trend: -3,
-    positive: false,
-    color: "bg-white border-gray-200",
-    textColor: "text-amber-700"
-  },
-  {
-    label: "Unread Responses",
-    value: 8,
-    trend: 2,
-    positive: true,
-    color: "bg-white border-gray-200",
-    textColor: "text-violet-700"
-  }];
-
   const breakdownData = [
-  { label: "Emails Sent", value: 58 },
-  { label: "Messages Sent", value: 42 },
-  { label: "Sequences Sent", value: 42 }];
-
-
+    { label: "Emails", value: 58, icon: Mail, color: "#6366f1" },
+    { label: "Messages", value: 42, icon: MessageSquare, color: "#06b6d4" },
+    { label: "Sequences", value: 42, icon: Zap, color: "#10b981" },
+  ];
 
   const sequenceData = [
-  { name: "Active", value: 12, fill: "#10b981" },
-  { name: "Completed", value: 28, fill: "#6366f1" },
-  { name: "Paused", value: 5, fill: "#f59e0b" },
-  { name: "Error", value: 2, fill: "#ef4444" }];
+    { name: "Active", value: 12, startColor: "#6366f1", endColor: "#818cf8" },
+    { name: "Completed", value: 28, startColor: "#06b6d4", endColor: "#22d3ee" },
+    { name: "Paused", value: 5, startColor: "#f59e0b", endColor: "#fbbf24" },
+    { name: "Error", value: 2, startColor: "#ef4444", endColor: "#f87171" },
+  ];
 
+  const trendData = [
+    { day: "Mon", active: 8, completed: 3, paused: 1 },
+    { day: "Tue", active: 10, completed: 5, paused: 2 },
+    { day: "Wed", active: 12, completed: 8, paused: 2 },
+    { day: "Thu", active: 11, completed: 12, paused: 3 },
+    { day: "Fri", active: 12, completed: 18, paused: 4 },
+    { day: "Sat", active: 12, completed: 25, paused: 4 },
+    { day: "Sun", active: 12, completed: 28, paused: 5 },
+  ];
 
-  const sequenceOverview = {
-    active: 12,
-    completed: 28,
-    paused: 5,
-    errors: 2,
-    candidatesInSequences: 47
-  };
-
-  const sequenceTrendData = [
-  { day: "Mon", active: 8, completed: 3, paused: 1, errors: 0 },
-  { day: "Tue", active: 10, completed: 5, paused: 2, errors: 1 },
-  { day: "Wed", active: 12, completed: 8, paused: 2, errors: 1 },
-  { day: "Thu", active: 11, completed: 12, paused: 3, errors: 1 },
-  { day: "Fri", active: 12, completed: 18, paused: 4, errors: 1 },
-  { day: "Sat", active: 12, completed: 25, paused: 4, errors: 2 },
-  { day: "Sun", active: 12, completed: 28, paused: 5, errors: 2 }];
-
-
-  const actionRequired = [
-  { label: "Candidates Awaiting Reply", count: 15, color: "bg-amber-50 text-amber-700" },
-  { label: "Failed Sequence Steps", count: 3, color: "bg-red-50 text-red-700" },
-  { label: "Follow-ups Due Today", count: 7, color: "bg-blue-50 text-blue-700" }];
-
+  const total = sequenceData.reduce((s, d) => s + d.value, 0);
 
   return (
-    <div className="bg-white mx-8 my-5 border-b border-gray-200">
+    <div className="mx-8 my-5">
       {/* Header */}
-      <div className="px-5 py-4 rounded-xl flex items-center justify-between">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <h2 className="text-[15px] font-semibold text-gray-900">Communication Health</h2>
-          
-
-
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-md shadow-indigo-200">
+            <TrendingUp className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[14px] font-bold text-slate-800">Communication Health</h2>
+            <p className="text-[11px] text-slate-400">Real-time outreach & sequence analytics</p>
+          </div>
         </div>
         <div className="flex items-center gap-2">
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8"
-            onClick={() => setIsExpanded(!isExpanded)}>
-
-            {isExpanded ?
-            <ChevronUp className="w-4 h-4" /> :
-
-            <ChevronDown className="w-4 h-4" />
-            }
-          </Button>
+          <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1">
+            {["7days", "30days"].map((f) => (
+              <button
+                key={f}
+                onClick={() => setTimeFilter(f)}
+                className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${
+                  timeFilter === f ? "bg-white text-slate-800 shadow-sm" : "text-slate-400 hover:text-slate-600"
+                }`}
+              >
+                {f === "7days" ? "7D" : "30D"}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all"
+          >
+            {isExpanded ? <ChevronUp className="w-4 h-4 text-slate-500" /> : <ChevronDown className="w-4 h-4 text-slate-500" />}
+          </button>
         </div>
       </div>
 
-      {/* Expanded Content */}
-      {isExpanded &&
-      <div className="px-5 space-y-6">
-          {/* KPI Cards */}
-          <div>
-            <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-              Key Metrics
-            </h3>
-            <div className="grid grid-cols-3 gap-3">
-              {metrics.map((metric, idx) =>
-            <div
-              key={idx} className="bg-slate-50 p-4 rounded-lg transition-all border-gray-200 cursor-pointer hover:shadow-sm"
+      {isExpanded && (
+        <div className="space-y-4">
+          {/* Unified Top Row: KPIs + Donut merged */}
+          <div className="bg-white rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-slate-100 p-6">
+            <div className="grid grid-cols-5 gap-6">
 
-              onClick={metric.hasBreakdown ? () => setIsBreakdownExpanded(!isBreakdownExpanded) : undefined}>
-
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-[11px] text-gray-600 font-medium">{metric.label}</p>
-                    {metric.hasBreakdown && (
-                isBreakdownExpanded ?
-                <ChevronUp className="w-3.5 h-3.5 text-gray-500" /> :
-                <ChevronDown className="w-3.5 h-3.5 text-gray-500" />)
-                }
+              {/* Left: KPI + Breakdown */}
+              <div className="col-span-2 space-y-4">
+                {/* Total Sent - Hero Metric */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 p-5 shadow-lg shadow-indigo-200/40">
+                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-white/10 -translate-y-6 translate-x-6" />
+                  <p className="text-[11px] font-semibold text-indigo-200 uppercase tracking-wider mb-1">Total Sent</p>
+                  <p className="text-[42px] font-black text-white leading-none">142</p>
+                  <div className="flex items-center gap-1.5 mt-2">
+                    <div className="flex items-center gap-1 bg-white/20 rounded-full px-2 py-0.5">
+                      <TrendingUp className="w-3 h-3 text-emerald-300" />
+                      <span className="text-[10px] font-bold text-emerald-300">+12%</span>
+                    </div>
+                    <span className="text-[11px] text-indigo-200">Reply rate: <strong className="text-white">68%</strong></span>
                   </div>
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <span className="text-slate-700 text-3xl font-bold">
-                        {metric.value}
-                      </span>
-                      {metric.replyRate &&
-                  <p className="text-[11px] text-gray-500 mt-1">Reply Rate: {metric.replyRate}</p>
-                  }
-                    </div>
-                    <div className="flex items-center gap-0.5">
-                      {metric.positive ?
-                  <TrendingUp className={`w-3 h-3 ${metric.textColor}`} /> :
-
-                  <TrendingDown className={`w-3 h-3 ${metric.textColor}`} />
-                  }
-                      <span className={`text-[10px] font-semibold ${metric.textColor}`}>
-                        {metric.positive ? "+" : ""}{metric.trend}%
-                      </span>
-                    </div>
+                  {/* Mini breakdown pills */}
+                  <div className="flex items-center gap-2 mt-3">
+                    {breakdownData.map((b, i) => (
+                      <div key={i} className="flex items-center gap-1.5 bg-white/15 rounded-full px-2.5 py-1">
+                        <b.icon className="w-3 h-3 text-white/80" />
+                        <span className="text-[10px] font-bold text-white">{b.value}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-            )}
-            </div>
 
-            {/* Breakdown Section */}
-            {isBreakdownExpanded &&
-          <div className="mt-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="text-[11px] font-semibold text-gray-600 uppercase tracking-wider mb-3">Breakdown</h4>
-                <div className="grid grid-cols-3 gap-3">
-                  {breakdownData.map((item, idx) =>
-              <div key={idx} className="bg-white p-3 rounded-lg border border-gray-200">
-                      <p className="text-[10px] text-gray-500 mb-1">{item.label}</p>
-                      <p className="text-[18px] font-bold text-gray-900">{item.value}</p>
-                    </div>
-              )}
-                </div>
-              </div>
-          }
-          </div>
-
-          {/* Sequence Overview */}
-          <div className="space-y-4">
-            {/* Top Row: Status Cards + Donut Chart Side by Side */}
-            <div className="bg-[#ffffff] py-4 rounded-2xl grid grid-cols-5 gap-6">
-              {/* Left: Status Cards (40%) */}
-              <div className="col-span-2">
-                <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-                  Sequence Overview
-                </h3>
+                {/* Secondary KPIs */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-slate-50 p-4 rounded-lg">
-                    <p className="text-[11px] text-emerald-700 font-medium mb-1">Active</p>
-                    <p className="text-[24px] font-bold text-emerald-700">{sequenceOverview.active}</p>
+                  <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Pending</p>
+                    <p className="text-[28px] font-black text-slate-800 leading-none">24</p>
+                    <div className="flex items-center gap-1 mt-1.5">
+                      <TrendingDown className="w-3 h-3 text-amber-500" />
+                      <span className="text-[10px] font-semibold text-amber-500">-3%</span>
+                    </div>
                   </div>
-                  <div className="bg-slate-50 p-4 rounded-lg">
-                    <p className="text-[11px] text-indigo-700 font-medium mb-1">Completed</p>
-                    <p className="text-[24px] font-bold text-indigo-700">{sequenceOverview.completed}</p>
-                  </div>
-                  <div className="bg-slate-50 p-4 rounded-lg">
-                    <p className="text-[11px] text-amber-700 font-medium mb-1">Paused</p>
-                    <p className="text-[24px] font-bold text-amber-700">{sequenceOverview.paused}</p>
-                  </div>
-                  <div className="bg-slate-50 p-4 rounded-lg">
-                    <p className="text-[11px] text-red-700 font-medium mb-1">Errors</p>
-                    <p className="text-[24px] font-bold text-red-700">{sequenceOverview.errors}</p>
-                  </div>
-                  <div className="bg-slate-50 p-4 rounded-lg col-span-2">
-                    <p className="text-[11px] text-gray-600 font-medium mb-1">In Sequences</p>
-                    <p className="text-[24px] font-bold text-gray-900">{sequenceOverview.candidatesInSequences}</p>
+                  <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4">
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Unread</p>
+                    <p className="text-[28px] font-black text-slate-800 leading-none">8</p>
+                    <div className="flex items-center gap-1 mt-1.5">
+                      <TrendingUp className="w-3 h-3 text-violet-500" />
+                      <span className="text-[10px] font-semibold text-violet-500">+2%</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Right: Donut Chart (60%) */}
-              <div className="col-span-3">
-                <h3 className="text-[12px] font-semibold text-gray-600 uppercase tracking-wider mb-3">
-                  Current Distribution
-                </h3>
-                <div className="h-[240px] flex items-center justify-center">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart className="bg-slate-50 recharts-surface">
-                      <Pie
-                      data={sequenceData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={40}
-                      outerRadius={70}
-                      paddingAngle={2}
-                      dataKey="value">
+              {/* Divider */}
+              <div className="col-span-1 flex flex-col items-center justify-center gap-6">
+                <div className="w-px h-full bg-gradient-to-b from-transparent via-slate-200 to-transparent" />
+              </div>
 
-                        {sequenceData.map((entry, idx) =>
-                      <Cell key={`cell-${idx}`} fill={entry.fill} />
-                      )}
-                      </Pie>
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="flex flex-col gap-1.5 mt-2 text-[11px]">
-                  {sequenceData.map((item, idx) =>
-                <div key={idx} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.fill }}></div>
-                    <span className="text-gray-600">{item.name}</span>
-                    <span className="font-semibold text-gray-900 ml-auto">{item.value}</span>
+              {/* Right: Sequence Distribution Donut */}
+              <div className="col-span-2">
+                <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-4">Sequence Status</p>
+                <div className="flex items-center gap-6">
+                  <div className="relative flex-shrink-0">
+                    <svg width={0} height={0}>
+                      <defs>
+                        {sequenceData.map((d, i) => (
+                          <linearGradient key={i} id={`grad-${i}`} x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stopColor={d.startColor} />
+                            <stop offset="100%" stopColor={d.endColor} />
+                          </linearGradient>
+                        ))}
+                      </defs>
+                    </svg>
+                    <div style={{ width: 140, height: 140 }} className="relative">
+                      <ResponsiveContainer width={140} height={140}>
+                        <PieChart>
+                          <Pie
+                            data={sequenceData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={42}
+                            outerRadius={64}
+                            paddingAngle={3}
+                            dataKey="value"
+                            strokeWidth={0}
+                          >
+                            {sequenceData.map((entry, idx) => (
+                              <Cell key={idx} fill={`url(#grad-${idx})`} />
+                            ))}
+                          </Pie>
+                        </PieChart>
+                      </ResponsiveContainer>
+                      {/* Center label */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <p className="text-[22px] font-black text-slate-800 leading-none">{total}</p>
+                        <p className="text-[9px] text-slate-400 font-medium mt-0.5">total</p>
+                      </div>
+                    </div>
                   </div>
-                )}
+
+                  {/* Legend */}
+                  <div className="flex flex-col gap-3 flex-1">
+                    {sequenceData.map((item, idx) => {
+                      const pct = Math.round((item.value / total) * 100);
+                      return (
+                        <div key={idx} className="flex items-center gap-2.5">
+                          <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: `linear-gradient(135deg, ${item.startColor}, ${item.endColor})` }} />
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-0.5">
+                              <span className="text-[11px] text-slate-600 font-medium">{item.name}</span>
+                              <span className="text-[11px] font-bold text-slate-800">{item.value}</span>
+                            </div>
+                            <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
+                              <div
+                                className="h-full rounded-full transition-all duration-700"
+                                style={{ width: `${pct}%`, background: `linear-gradient(90deg, ${item.startColor}, ${item.endColor})` }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Candidates in sequences */}
+                <div className="mt-4 rounded-xl bg-gradient-to-r from-cyan-50 to-indigo-50 border border-cyan-100 px-4 py-3 flex items-center justify-between">
+                  <p className="text-[11px] text-slate-500 font-medium">Candidates in sequences</p>
+                  <p className="text-[20px] font-black text-indigo-700">47</p>
                 </div>
               </div>
             </div>
-
           </div>
 
-          {/* Action Required */}
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-          {/* 7-Day Trend Chart */}
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          {/* 7-Day Trend */}
+          <div className="bg-white rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-slate-100 p-6">
+            <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-4">7-Day Activity Trend</p>
+            <div className="h-[140px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={trendData} margin={{ top: 0, right: 0, left: -30, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="areaActive" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#6366f1" stopOpacity={0.25} />
+                      <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="areaCompleted" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.2} />
+                      <stop offset="100%" stopColor="#06b6d4" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="areaPaused" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.15} />
+                      <stop offset="100%" stopColor="#f59e0b" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                  <XAxis dataKey="day" tick={{ fontSize: 10, fill: "#94a3b8", fontWeight: 600 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Area type="monotone" dataKey="completed" name="Completed" stroke="#06b6d4" strokeWidth={2} fill="url(#areaCompleted)" dot={false} />
+                  <Area type="monotone" dataKey="active" name="Active" stroke="#6366f1" strokeWidth={2} fill="url(#areaActive)" dot={false} />
+                  <Area type="monotone" dataKey="paused" name="Paused" stroke="#f59e0b" strokeWidth={1.5} fill="url(#areaPaused)" dot={false} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
         </div>
-      }
-    </div>);
-
+      )}
+    </div>
+  );
 }
