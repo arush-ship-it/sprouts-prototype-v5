@@ -132,7 +132,7 @@ export default function Home() {
         {/* Welcome Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="px-1 flex items-center gap-3">
-            <h1 className="text-slate-700 text-2xl font-semibold">Hello Arush, Welcome Back!
+            <h1 className="text-slate-700 text-2xl font-semibold">Hello Arush, Welcome to SproutsAI!
 
             </h1>
             <Bell className="text-gray-700 lucide lucide-bell w-5 h-5 cursor-pointer hover:text-gray-600" />
