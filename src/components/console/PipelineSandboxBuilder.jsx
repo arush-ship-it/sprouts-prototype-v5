@@ -84,7 +84,7 @@ function StageTypeCard({ stage, onAdd }) {
 
 function SandboxStageCard({ stage, onRemove }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col" style={{ maxWidth: "50%", minHeight: "200%" }}>
       <h4 className="text-[14px] font-semibold text-gray-900 mb-2">{stage.label}</h4>
       <p className="text-[12px] text-gray-500 leading-relaxed flex-1">{STAGE_FULL_DESC}</p>
       {/* AI Sub-card */}
