@@ -17,6 +17,7 @@ export default function Console() {
   const [isPipelineBuilderOpen, setIsPipelineBuilderOpen] = useState(false);
   const [isActivityApprovalOpen, setIsActivityApprovalOpen] = useState(false);
   const [showRecommendedPipeline, setShowRecommendedPipeline] = useState(false);
+  const [showSandboxBuilder, setShowSandboxBuilder] = useState(false);
 
   // Update view mode when tab changes
   const handleTabChange = (newTab) => {
