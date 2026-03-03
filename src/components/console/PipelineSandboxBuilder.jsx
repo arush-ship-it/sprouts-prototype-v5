@@ -139,7 +139,7 @@ export default function PipelineSandboxBuilder({ onClose }) {
               <p className="text-[13px] text-gray-400">Add Pipeline Stages Here By Dropping And Dragging</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-4 gap-4">
               {sandboxStages.map((stage) => (
                 <SandboxStageCard key={stage.instanceId} stage={stage} onRemove={handleRemove} />
               ))}
