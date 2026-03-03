@@ -6,6 +6,7 @@ import PipelineView from "@/components/console/PipelineView";
 import PipelineBuilderModal from "@/components/console/PipelineBuilderModal";
 import ActivityApprovalModal from "@/components/console/ActivityApprovalModal";
 import RecommendedPipeline from "@/components/console/RecommendedPipeline";
+import PipelineSandboxBuilder from "@/components/console/PipelineSandboxBuilder";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Workflow, AlertCircle } from "lucide-react";

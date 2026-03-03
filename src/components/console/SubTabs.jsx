@@ -3,7 +3,7 @@ import { LayoutGrid, List, Table, Workflow, Filter, Search } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode }) {
+export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode, onCreateNew }) {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   const tabs = [
