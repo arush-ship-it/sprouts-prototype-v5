@@ -33,7 +33,8 @@ export default function Console() {
         activeTab={activeTab}
         setActiveTab={handleTabChange}
         viewMode={viewMode}
-        setViewMode={setViewMode} />
+        setViewMode={setViewMode}
+        onCreateNew={() => setShowSandboxBuilder(true)} />
 
         
         {/* Pipeline Builder Button - Only show in Pipeline tab */}
