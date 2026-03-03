@@ -84,7 +84,7 @@ function StageTypeCard({ stage, onAdd }) {
 
 function SandboxStageCard({ stage, onRemove }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col" style={{ maxWidth: "50%", minHeight: "200%" }}>
+    <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col">
       <h4 className="text-[14px] font-semibold text-gray-900 mb-2">{stage.label}</h4>
       <p className="text-[12px] text-gray-500 leading-relaxed flex-1">{STAGE_FULL_DESC}</p>
       {/* AI Sub-card */}
@@ -139,7 +139,7 @@ export default function PipelineSandboxBuilder({ onClose }) {
               <p className="text-[13px] text-gray-400">Add Pipeline Stages Here By Dropping And Dragging</p>
             </div>
           ) : (
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {sandboxStages.map((stage) => (
                 <SandboxStageCard key={stage.instanceId} stage={stage} onRemove={handleRemove} />
               ))}
