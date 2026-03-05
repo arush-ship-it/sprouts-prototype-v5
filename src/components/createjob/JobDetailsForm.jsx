@@ -19,50 +19,50 @@ function SectionHeader({ icon: Icon, title, subtitle }) {
         <p className="text-[13px] font-semibold text-gray-900">{title}</p>
         {subtitle && <p className="text-[11px] text-gray-400">{subtitle}</p>}
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 function ChipToggle({ options, selected, onToggle }) {
   return (
     <div className="flex flex-wrap gap-2">
-      {options.map((opt) => (
-        <button
-          key={opt}
-          type="button"
-          onClick={() => onToggle(opt)}
-          className={`px-3 py-1.5 rounded-full text-[12px] font-medium border transition-all duration-150 ${
-            selected.includes(opt)
-              ? "bg-indigo-600 text-white border-indigo-600"
-              : "bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-600"
-          }`}
-        >
+      {options.map((opt) =>
+      <button
+        key={opt}
+        type="button"
+        onClick={() => onToggle(opt)}
+        className={`px-3 py-1.5 rounded-full text-[12px] font-medium border transition-all duration-150 ${
+        selected.includes(opt) ?
+        "bg-indigo-600 text-white border-indigo-600" :
+        "bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-600"}`
+        }>
+
           {opt}
         </button>
-      ))}
-    </div>
-  );
+      )}
+    </div>);
+
 }
 
 function SegmentedControl({ options, value, onChange }) {
   return (
     <div className="bg-gray-100 p-1 rounded-xl inline-flex gap-1">
-      {options.map((opt) => (
-        <button
-          key={opt}
-          type="button"
-          onClick={() => onChange(opt)}
-          className={`px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all duration-150 ${
-            value === opt
-              ? "bg-white text-gray-900 shadow-sm"
-              : "text-gray-500 hover:text-gray-700"
-          }`}
-        >
+      {options.map((opt) =>
+      <button
+        key={opt}
+        type="button"
+        onClick={() => onChange(opt)}
+        className={`px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all duration-150 ${
+        value === opt ?
+        "bg-white text-gray-900 shadow-sm" :
+        "text-gray-500 hover:text-gray-700"}`
+        }>
+
           {opt}
         </button>
-      ))}
-    </div>
-  );
+      )}
+    </div>);
+
 }
 
 function StepControl({ value, onChange, min = 1, max = 50 }) {
@@ -71,20 +71,20 @@ function StepControl({ value, onChange, min = 1, max = 50 }) {
       <button
         type="button"
         onClick={() => onChange(Math.max(min, value - 1))}
-        className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors"
-      >
+        className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors">
+
         <ChevronDown className="w-4 h-4" />
       </button>
       <span className="text-[15px] font-semibold text-gray-900 w-6 text-center">{value}</span>
       <button
         type="button"
         onClick={() => onChange(Math.min(max, value + 1))}
-        className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors"
-      >
+        className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors">
+
         <ChevronUp className="w-4 h-4" />
       </button>
-    </div>
-  );
+    </div>);
+
 }
 
 export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }) {
@@ -128,8 +128,8 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.companyName}
                 onChange={(e) => setJobDetails({ ...jobDetails, companyName: e.target.value })}
                 placeholder="e.g. Acme Corp"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Job Title <span className="text-red-500">*</span></Label>
@@ -137,8 +137,8 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.jobTitle}
                 onChange={(e) => setJobDetails({ ...jobDetails, jobTitle: e.target.value })}
                 placeholder="e.g. Senior Designer"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Department</Label>
@@ -146,8 +146,8 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.department}
                 onChange={(e) => setJobDetails({ ...jobDetails, department: e.target.value })}
                 placeholder="e.g. Engineering"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Internal Job Title</Label>
@@ -155,8 +155,8 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.internalJobTitle}
                 onChange={(e) => setJobDetails({ ...jobDetails, internalJobTitle: e.target.value })}
                 placeholder="Internal reference"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
           </div>
         </div>
@@ -170,16 +170,16 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
               <SegmentedControl
                 options={JOB_TYPES}
                 value={jobDetails.jobType}
-                onChange={(val) => setJobDetails({ ...jobDetails, jobType: val })}
-              />
+                onChange={(val) => setJobDetails({ ...jobDetails, jobType: val })} />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Workplace</Label>
               <SegmentedControl
                 options={WORKPLACE_TYPES}
                 value={jobDetails.workplaceType}
-                onChange={(val) => setJobDetails({ ...jobDetails, workplaceType: val })}
-              />
+                onChange={(val) => setJobDetails({ ...jobDetails, workplaceType: val })} />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Location</Label>
@@ -187,8 +187,8 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.location}
                 onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })}
                 placeholder="e.g. San Francisco, CA"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
           </div>
         </div>
@@ -203,8 +203,8 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.salary}
                 onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })}
                 placeholder="e.g. $120k – $180k"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Job Grade</Label>
@@ -212,15 +212,15 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
                 value={jobDetails.jobGrade}
                 onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })}
                 placeholder="e.g. L4, Senior"
-                className="h-9 text-[13px] bg-white"
-              />
+                className="h-9 text-[13px] bg-white" />
+
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Headcount</Label>
               <StepControl
                 value={parseInt(jobDetails.headcount) || 1}
-                onChange={(val) => setJobDetails({ ...jobDetails, headcount: String(val) })}
-              />
+                onChange={(val) => setJobDetails({ ...jobDetails, headcount: String(val) })} />
+
             </div>
           </div>
         </div>
@@ -235,30 +235,30 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
         <div className="bg-gray-50 rounded-2xl p-5">
           <SectionHeader icon={Users} title="Screening Questions" subtitle="Optional questions for candidates" />
           <div className="space-y-2">
-            {screeningQuestions.map((q, i) => (
-              <div key={i} className="flex gap-2 items-center">
+            {screeningQuestions.map((q, i) =>
+            <div key={i} className="flex gap-2 items-center">
                 <Input
-                  value={q}
-                  onChange={(e) => updateQuestion(i, e.target.value)}
-                  placeholder={`Question ${i + 1}`}
-                  className="h-9 text-[13px] bg-white"
-                />
-                {screeningQuestions.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removeQuestion(i)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors shrink-0"
-                  >
+                value={q}
+                onChange={(e) => updateQuestion(i, e.target.value)}
+                placeholder={`Question ${i + 1}`}
+                className="h-9 text-[13px] bg-white" />
+
+                {screeningQuestions.length > 1 &&
+              <button
+                type="button"
+                onClick={() => removeQuestion(i)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors shrink-0">
+
                     <X className="w-4 h-4" />
                   </button>
-                )}
+              }
               </div>
-            ))}
+            )}
             <button
               type="button"
               onClick={addQuestion}
-              className="flex items-center gap-1.5 text-[12px] text-indigo-600 hover:text-indigo-700 font-medium mt-1 transition-colors"
-            >
+              className="flex items-center gap-1.5 text-[12px] text-indigo-600 hover:text-indigo-700 font-medium mt-1 transition-colors">
+
               <Plus className="w-3.5 h-3.5" />
               Add question
             </button>
@@ -269,10 +269,10 @@ export default function JobDetailsForm({ jobDetails, setJobDetails, onContinue }
 
       {/* Footer */}
       <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-end">
-        <Button onClick={onContinue} className="bg-indigo-600 hover:bg-indigo-700 text-white text-[13px] px-5">
+        <Button onClick={onContinue} className="bg-blue-600 text-slate-50 px-5 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700">
           Continue to AI Generation
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
