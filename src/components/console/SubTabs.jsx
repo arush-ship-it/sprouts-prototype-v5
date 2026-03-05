@@ -7,7 +7,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   const tabs = [
-  { key: "review", label: "Prospects", count: 12 },
+  { key: "review", label: "In Review", count: 12 },
   { key: "pipeline", label: "In Pipeline", count: 34 }];
 
 

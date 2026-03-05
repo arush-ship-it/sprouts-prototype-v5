@@ -12,7 +12,7 @@ export default function Layout({ children, currentPageName }) {
       <TopNav currentPageName={currentPageName} />
       {showSidebar && <SidebarNav activePage={currentPageName} />}
       <main
-        className={`flex-1 overflow-auto pt-12 ${showSidebar ? "ml-[182px]" : ""}`}
+        className={`flex-1 overflow-auto pt-12 ${showSidebar ? "ml-[260px]" : ""}`}
       >
         {children}
       </main>
