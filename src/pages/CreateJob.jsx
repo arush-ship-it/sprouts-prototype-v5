@@ -97,14 +97,14 @@ function DefaultScreen({ onStart }) {
       {/* Right: Hero + Job Suggestions */}
       <div className="pt-8 pr-10 pb-40 pl-10 flex-1 flex flex-col items-center justify-center">
         {/* Step dots */}
-        <div className="flex items-center gap-3 mb-12">
-          {[0, 1, 2, 3].map((i) =>
-          <React.Fragment key={i}>
-              <div className={`rounded-full border-2 transition-all ${i === 0 ? "w-4 h-4 bg-indigo-600 border-indigo-600" : "w-3 h-3 bg-white border-gray-300"}`} />
-              {i < 3 && <div className="w-10 h-px bg-gray-300" />}
-            </React.Fragment>
-          )}
-        </div>
+        
+
+
+
+
+
+
+
 
         {/* Hero */}
         <div className="text-center mb-10">
