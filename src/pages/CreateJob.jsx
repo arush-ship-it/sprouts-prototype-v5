@@ -141,76 +141,40 @@ function DefaultScreen({ onStart }) {
 
 // ─── Step 1: Generating (animated) ────────────────────────────────────────────
 function GeneratingScreen({ prompt, onDone }) {
-  const [messages, setMessages] = useState([
-  { role: "assistant", content: "Got it! Let me analyse the role and generate a complete job description for you…" }]
-  );
-  const [input, setInput] = useState("");
-  const [isGenerating, setIsGenerating] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setMessages((prev) => [
-      ...prev,
-      { role: "assistant", content: `Based on your prompt, I've drafted a job description for a ${DEFAULT_JD.title} role. You can refine it or continue to review.` }]
-      );
-      setIsGenerating(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleSend = () => {
-    if (!input.trim()) return;
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
-    setInput("");
-    setTimeout(() => {
-      setMessages((prev) => [
-      ...prev,
-      { role: "assistant", content: "Great suggestion! I've updated the job description accordingly." }]
-      );
-    }, 600);
-  };
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) { clearInterval(interval); return 100; }
+        return prev + 5;
+      });
+    }, 100);
+    const timer = setTimeout(() => { onDone(); }, 2000);
+    return () => { clearTimeout(timer); clearInterval(interval); };
+  }, [onDone]);
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
-        {/* Prompt bubble */}
-        <div className="flex justify-end">
-          <div className="max-w-[80%] px-4 py-3 rounded-2xl text-[13px] bg-indigo-600 text-white">
-            {prompt || "Generate a job description for our team."}
-          </div>
-        </div>
-        {messages.map((msg, idx) =>
-        <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            {msg.role === "assistant" &&
-          <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center mr-2 mt-1 shrink-0">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-              </div>
-          }
-            <div
-            className={`max-w-[80%] px-4 py-3 rounded-2xl text-[13px] ${
-            msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`
-            }>
-
-              {msg.content}
-            </div>
-          </div>
-        )}
-        {isGenerating &&
-        <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            </div>
-            <div className="px-4 py-3 bg-gray-100 rounded-2xl flex gap-1.5 items-center">
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:0ms]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:150ms]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:300ms]" />
-            </div>
-          </div>
-        }
+    <div className="flex flex-col h-full items-center justify-center px-8">
+      <div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center mb-6">
+        <Sparkles className="w-8 h-8 text-indigo-500 animate-pulse" />
       </div>
+      <h2 className="text-[18px] font-semibold text-gray-900 mb-2">Generating Job Description…</h2>
+      <p className="text-[13px] text-gray-400 mb-8 text-center max-w-xs">
+        AI is analysing your prompt and creating a complete job description for you.
+      </p>
+      <div className="w-full max-w-xs bg-gray-100 rounded-full h-2 mb-3 overflow-hidden">
+        <div
+          className="bg-indigo-600 h-2 rounded-full transition-all duration-100"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+      <p className="text-[12px] text-gray-400">{progress}%</p>
+    </div>
+  );
+}
 
-      
-
+// placeholder to avoid blank gap
 
 
 
