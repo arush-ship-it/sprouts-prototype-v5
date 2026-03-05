@@ -159,48 +159,51 @@ function PipelineBar({ value, total }) {
 export default function Home() {
   const insightCards = [
   {
-    title: "Insights",
-    subtitle: "Revenue Growth",
-    numericValue: 75,
-    unit: "%",
+    title: "Applicants per job posting",
+    subtitle: "Average applicants",
+    numericValue: 156,
+    unit: "",
     badge: "↑",
     chartType: "line",
-    chartData: [30, 45, 35, 55, 50, 60, 75],
+    chartData: [120, 135, 128, 145, 150, 153, 156],
     lineColor: "#f97316",
     dotColor: "#f97316",
-    description: "Expect your revenue to rise and shine before this month closes."
+    description: "Strong application rates across all job postings."
   },
   {
-    title: "Conversion",
-    subtitle: "Conversion Rate",
-    numericValue: 120,
-    unit: "%",
+    title: "Candidates in Pipeline",
+    subtitle: "Active candidates",
+    numericValue: 89,
+    unit: "",
     badge: "↑",
     chartType: "line",
-    chartData: [60, 70, 65, 80, 90, 100, 120],
+    chartData: [60, 68, 72, 78, 82, 86, 89],
     lineColor: "#3b82f6",
     dotColor: "#3b82f6",
-    description: "Conversions set to rise this month."
+    description: "Steady growth in qualified candidates moving through stages."
   },
   {
-    title: "ROI",
-    subtitle: "Business ROI",
-    numericValue: 270,
-    unit: "%",
-    chartType: "donut",
-    chartData: [],
+    title: "New Applicants",
+    subtitle: "This week",
+    numericValue: 42,
+    unit: "",
+    badge: "↑",
+    chartType: "line",
+    chartData: [25, 30, 32, 36, 38, 40, 42],
     lineColor: "#6366f1",
-    description: "270%+ Business ROI increased compare to previous week."
+    dotColor: "#6366f1",
+    description: "New applications continuing to come in consistently."
   },
   {
-    title: "ROI",
-    subtitle: "Business ROI",
-    numericValue: 270,
-    unit: "%",
-    chartType: "donut",
-    chartData: [],
+    title: "Resume processed this month",
+    subtitle: "Total reviewed",
+    numericValue: 203,
+    unit: "",
+    chartType: "line",
+    chartData: [140, 155, 168, 180, 190, 198, 203],
     lineColor: "#a855f7",
-    description: "270%+ Business ROI increased compare to previous week."
+    dotColor: "#a855f7",
+    description: "Efficient resume screening and processing completed."
   }];
 
 
