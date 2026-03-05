@@ -304,13 +304,14 @@ export default function CreateJob() {
 
             {/* Step 3: Publish */}
             {currentStep === 3 &&
-              <div className="space-y-6 max-w-6xl mx-auto">
-              <div>
-                <h2 className="text-[20px] font-semibold text-gray-900 mb-2">Publish Job</h2>
-                <p className="text-[13px] text-gray-500">Choose where and how to publish your job</p>
+              <div className="flex flex-col h-full">
+              <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
+                <h2 className="text-[16px] font-semibold text-gray-900">Publish Job</h2>
+                <p className="text-[12px] text-gray-400 mt-0.5">Choose where and how to post your job</p>
               </div>
-
-              <div className="bg-white rounded-2xl border border-gray-200 p-8 space-y-6">
+              <div className="flex-1 overflow-y-auto px-6 py-5">
+              <div className="space-y-6 max-w-2xl">
+              <div className="bg-gray-50 rounded-2xl p-5 space-y-6">
                 <div className="space-y-4">
                   <Label className="text-[13px] font-medium">Visibility</Label>
                   <div className="flex gap-3">
