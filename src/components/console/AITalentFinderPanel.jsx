@@ -50,24 +50,24 @@ export default function AITalentFinderPanel() {
       {/* Top Tabs */}
       <div className="border-b border-gray-200 px-5 pt-5 pb-3">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex gap-1">
+          <div className="bg-slate-100 px-2 py-2 rounded-lg flex gap-1">
             <button
-              onClick={() => setActiveMode("ai")}
-              className={`px-4 py-2 text-[13px] font-semibold transition-colors ${
-              activeMode === "ai" ?
-              "text-gray-900" :
-              "text-gray-400 hover:text-gray-600"}`
-              }>
+              onClick={() => setActiveMode("ai")} className="bg-[#ffffff] text-gray-900 px-4 py-2 text-xs font-medium transition-colors">
+
+
+
+
+
 
               Create With Ai
             </button>
             <button
-              onClick={() => setActiveMode("manual")}
-              className={`px-4 py-2 text-[13px] font-semibold transition-colors ${
-              activeMode === "manual" ?
-              "text-gray-900" :
-              "text-gray-400 hover:text-gray-600"}`
-              }>
+              onClick={() => setActiveMode("manual")} className="text-gray-400 px-4 py-2 text-xs font-normal transition-colors hover:text-gray-600">
+
+
+
+
+
 
               Edit Manually
             </button>
