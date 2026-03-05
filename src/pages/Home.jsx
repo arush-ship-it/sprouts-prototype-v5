@@ -8,7 +8,7 @@ function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0);
   useEffect(() => {
     const num = parseFloat(target);
-    if (isNaN(num)) { setCount(target); return; }
+    if (isNaN(num)) {setCount(target);return;}
     const start = Date.now();
     const tick = () => {
       const elapsed = Date.now() - start;
@@ -33,8 +33,8 @@ function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 
   const h = height - pad * 2;
 
   const pts = data.map((v, i) => ({
-    x: pad + (i / (data.length - 1)) * w,
-    y: pad + (1 - (v - min) / range) * h,
+    x: pad + i / (data.length - 1) * w,
+    y: pad + (1 - (v - min) / range) * h
   }));
 
   // Build smooth bezier path
@@ -52,8 +52,8 @@ function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 
       <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
       <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
-    </svg>
-  );
+    </svg>);
+
 }
 
 // ── Donut / pie chart ─────────────────────────────────────────────────────────
@@ -62,7 +62,7 @@ function DonutChart({ percent, color, size = 80 }) {
   const cx = size / 2;
   const cy = size / 2;
   const circumference = 2 * Math.PI * r;
-  const dash = (percent / 100) * circumference;
+  const dash = percent / 100 * circumference;
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
@@ -75,10 +75,10 @@ function DonutChart({ percent, color, size = 80 }) {
         strokeDasharray={`${dash} ${circumference - dash}`}
         strokeLinecap="round"
         transform={`rotate(-90 ${cx} ${cy})`}
-        strokeOpacity="0.35"
-      />
-    </svg>
-  );
+        strokeOpacity="0.35" />
+
+    </svg>);
+
 }
 
 // ── Insight card ──────────────────────────────────────────────────────────────
@@ -91,8 +91,8 @@ function InsightCard({ card }) {
       className={`bg-white rounded-xl border border-gray-100 p-5 flex flex-col justify-between transition-all duration-200 cursor-default ${hovered ? "shadow-md -translate-y-0.5" : "shadow-sm"}`}
       style={{ minHeight: 337 }}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+      onMouseLeave={() => setHovered(false)}>
+
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
         <p className="text-[13px] font-semibold text-gray-700">{card.title}</p>
@@ -103,33 +103,33 @@ function InsightCard({ card }) {
       <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
 
       {/* Value + chart */}
-      <div className="flex flex-col gap-4 flex-1 min-w-0">
+      <div className="py-5 flex flex-col gap-4 flex-1 min-w-0">
         <div className="min-w-0">
           <div className="flex items-end gap-1">
             <span className="text-3xl font-bold text-gray-900">{animated}{card.unit}</span>
-            {card.badge && (
-              <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
+            {card.badge &&
+            <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
                 {card.badge}
               </span>
-            )}
+            }
           </div>
         </div>
         <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
-          {card.chartType === "line" && (
-            <LineChart
-              data={card.chartData}
-              color={card.lineColor}
-              fillColor={card.lineColor}
-              dotColor={card.dotColor}
-              width={160}
-              height={72}
-            />
-          )}
-          {card.chartType === "donut" && (
-            <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          {card.chartType === "line" &&
+          <LineChart
+            data={card.chartData}
+            color={card.lineColor}
+            fillColor={card.lineColor}
+            dotColor={card.dotColor}
+            width={160}
+            height={72} />
+
+          }
+          {card.chartType === "donut" &&
+          <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <DonutChart percent={card.numericValue} color={card.lineColor} size={80} />
             </div>
-          )}
+          }
         </div>
       </div>
 
@@ -140,87 +140,87 @@ function InsightCard({ card }) {
           <span className="text-gray-400 text-[14px] leading-none">›</span>
         </button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Pipeline fill bar ─────────────────────────────────────────────────────────
 function PipelineBar({ value, total }) {
   const [width, setWidth] = useState(0);
-  useEffect(() => { setTimeout(() => setWidth((value / total) * 100), 300); }, [value, total]);
+  useEffect(() => {setTimeout(() => setWidth(value / total * 100), 300);}, [value, total]);
   return (
     <div className="w-full bg-gray-100 rounded-full h-1 mt-1.5">
       <div className="h-1 rounded-full bg-blue-400 transition-all duration-700 ease-out" style={{ width: `${width}%` }} />
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
   const insightCards = [
-    {
-      title: "Insights",
-      subtitle: "Revenue Growth",
-      numericValue: 75,
-      unit: "%",
-      badge: "↑",
-      chartType: "line",
-      chartData: [30, 45, 35, 55, 50, 60, 75],
-      lineColor: "#f97316",
-      dotColor: "#f97316",
-      description: "Expect your revenue to rise and shine before this month closes.",
-    },
-    {
-      title: "Conversion",
-      subtitle: "Conversion Rate",
-      numericValue: 120,
-      unit: "%",
-      badge: "↑",
-      chartType: "line",
-      chartData: [60, 70, 65, 80, 90, 100, 120],
-      lineColor: "#3b82f6",
-      dotColor: "#3b82f6",
-      description: "Conversions set to rise this month.",
-    },
-    {
-      title: "ROI",
-      subtitle: "Business ROI",
-      numericValue: 270,
-      unit: "%",
-      chartType: "donut",
-      chartData: [],
-      lineColor: "#6366f1",
-      description: "270%+ Business ROI increased compare to previous week.",
-    },
-    {
-      title: "ROI",
-      subtitle: "Business ROI",
-      numericValue: 270,
-      unit: "%",
-      chartType: "donut",
-      chartData: [],
-      lineColor: "#a855f7",
-      description: "270%+ Business ROI increased compare to previous week.",
-    },
-  ];
+  {
+    title: "Insights",
+    subtitle: "Revenue Growth",
+    numericValue: 75,
+    unit: "%",
+    badge: "↑",
+    chartType: "line",
+    chartData: [30, 45, 35, 55, 50, 60, 75],
+    lineColor: "#f97316",
+    dotColor: "#f97316",
+    description: "Expect your revenue to rise and shine before this month closes."
+  },
+  {
+    title: "Conversion",
+    subtitle: "Conversion Rate",
+    numericValue: 120,
+    unit: "%",
+    badge: "↑",
+    chartType: "line",
+    chartData: [60, 70, 65, 80, 90, 100, 120],
+    lineColor: "#3b82f6",
+    dotColor: "#3b82f6",
+    description: "Conversions set to rise this month."
+  },
+  {
+    title: "ROI",
+    subtitle: "Business ROI",
+    numericValue: 270,
+    unit: "%",
+    chartType: "donut",
+    chartData: [],
+    lineColor: "#6366f1",
+    description: "270%+ Business ROI increased compare to previous week."
+  },
+  {
+    title: "ROI",
+    subtitle: "Business ROI",
+    numericValue: 270,
+    unit: "%",
+    chartType: "donut",
+    chartData: [],
+    lineColor: "#a855f7",
+    description: "270%+ Business ROI increased compare to previous week."
+  }];
+
 
   const jobs = [
-    { id: 1, title: "Senior Product Designer", department: "Design", applicants: 156, inPipeline: 34, status: "ACTIVE" },
-    { id: 2, title: "Frontend Engineer", department: "Engineering", applicants: 203, inPipeline: 45, status: "ACTIVE" },
-    { id: 3, title: "Product Manager", department: "Product", applicants: 89, inPipeline: 12, status: "ACTIVE" },
-  ];
+  { id: 1, title: "Senior Product Designer", department: "Design", applicants: 156, inPipeline: 34, status: "ACTIVE" },
+  { id: 2, title: "Frontend Engineer", department: "Engineering", applicants: 203, inPipeline: 45, status: "ACTIVE" },
+  { id: 3, title: "Product Manager", department: "Product", applicants: 89, inPipeline: 12, status: "ACTIVE" }];
+
 
   const approvals = [
-    { id: 1, text: "3 candidates moved to interview stage", time: "1 hour ago" },
-    { id: 2, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
-    { id: 3, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
-    { id: 4, text: "3 candidates moved to interview stage", time: "1 hour ago" },
-    { id: 5, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
-    { id: 6, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
-    { id: 7, text: "3 candidates moved to interview stage", time: "1 hour ago" },
-    { id: 8, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
-    { id: 9, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
-  ];
+  { id: 1, text: "3 candidates moved to interview stage", time: "1 hour ago" },
+  { id: 2, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
+  { id: 3, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
+  { id: 4, text: "3 candidates moved to interview stage", time: "1 hour ago" },
+  { id: 5, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
+  { id: 6, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
+  { id: 7, text: "3 candidates moved to interview stage", time: "1 hour ago" },
+  { id: 8, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
+  { id: 9, text: "5 candidates auto-qualified for screening", time: "6 hours ago" }];
+
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-6">
@@ -240,9 +240,9 @@ export default function Home() {
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
             <h2 className="text-[15px] font-semibold text-gray-800 mb-5">All Jobs</h2>
             <div className="space-y-1">
-              {jobs.map((job) => (
-                <JobRow key={job.id} job={job} />
-              ))}
+              {jobs.map((job) =>
+              <JobRow key={job.id} job={job} />
+              )}
             </div>
           </div>
         </div>
@@ -251,14 +251,14 @@ export default function Home() {
         <div className="w-[322px] shrink-0 bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
           <h2 className="text-[15px] font-semibold text-gray-800 mb-5 sticky top-0 bg-white pb-2">Pending Approval</h2>
           <div className="space-y-4">
-            {approvals.map((item) => (
-              <ApprovalItem key={item.id} item={item} />
-            ))}
+            {approvals.map((item) =>
+            <ApprovalItem key={item.id} item={item} />
+            )}
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Job row (extracted to avoid hooks-in-map) ─────────────────────────────────
@@ -268,8 +268,8 @@ function JobRow({ job }) {
     <div
       className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 ${hovered ? "bg-blue-50/40 border border-blue-100" : "border border-transparent"}`}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+      onMouseLeave={() => setHovered(false)}>
+
       <div className="flex items-center gap-3">
         <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${hovered ? "bg-blue-100" : "bg-gray-100"}`}>
           <Briefcase className={`w-4 h-4 transition-colors ${hovered ? "text-blue-500" : "text-gray-500"}`} />
@@ -295,8 +295,8 @@ function JobRow({ job }) {
           {job.status}
         </span>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Approval item ─────────────────────────────────────────────────────────────
@@ -306,8 +306,8 @@ function ApprovalItem({ item }) {
     <div
       className={`flex items-start gap-3 transition-all duration-150 ${hovered ? "translate-x-0.5" : ""}`}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+      onMouseLeave={() => setHovered(false)}>
+
       <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${hovered ? "bg-blue-500 border-blue-500" : "bg-white border-gray-200"}`}>
         <span className={`text-[11px] font-bold transition-colors ${hovered ? "text-white" : "text-gray-400"}`}>✓</span>
       </div>
@@ -315,6 +315,6 @@ function ApprovalItem({ item }) {
         <p className={`text-[13px] font-medium leading-snug transition-colors ${hovered ? "text-blue-600" : "text-gray-800"}`}>{item.text}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{item.time}</p>
       </div>
-    </div>
-  );
+    </div>);
+
 }
