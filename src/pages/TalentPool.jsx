@@ -312,7 +312,7 @@ export default function TalentPool() {
                 Talent Pool
               </h1>
             </div>
-            <p className="text-[13px] text-gray-500">
+            <p className="text-gray-500 px-1 text-xs">
               {candidates.length} candidates found
             </p>
           </div>
