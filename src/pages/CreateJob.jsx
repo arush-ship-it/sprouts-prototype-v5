@@ -210,8 +210,8 @@ export default function CreateJob() {
         </div>
 
         {/* Right Panel - Step Content */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="py-4 w-full">
+        <div className="flex-1 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+          <div className="h-full flex flex-col">
             {/* Header with Back Button */}
             
 
