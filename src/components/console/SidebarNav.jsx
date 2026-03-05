@@ -23,6 +23,7 @@ import {
 "@/components/ui/select";
 
 const mainLinks = [
+{ label: "Activity", icon: Activity, active: false, page: "Activity" },
 { label: "Talent", icon: Users, active: false, page: "Console" },
 { label: "Intelligence", icon: Activity, active: false, page: "Agents" },
 { label: "Inbox", icon: Inbox, active: false, page: "Inbox" },
