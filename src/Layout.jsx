@@ -7,12 +7,14 @@ export default function Layout({ children, currentPageName }) {
   const sidebarPages = ["Console", "Talent", "Agents", "Inbox", "JobDetails"];
   const showSidebar = sidebarPages.includes(currentPageName);
 
+  const showTopNav = currentPageName !== "Settings";
+
   return (
     <div className="flex min-h-screen bg-[#FAFAFA]">
-      <TopNav currentPageName={currentPageName} />
+      {showTopNav && <TopNav currentPageName={currentPageName} />}
       {showSidebar && <SidebarNav activePage={currentPageName} />}
       <main
-        className={`flex-1 overflow-auto pt-12 ${showSidebar ? "ml-[221px]" : ""}`}
+        className={`flex-1 overflow-auto ${showTopNav ? "pt-12" : ""} ${showSidebar ? "ml-[221px]" : ""}`}
       >
         {children}
       </main>
