@@ -429,58 +429,92 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 }
 
 // ─── Step 3: Screening Questions ──────────────────────────────────────────────
-function ScreeningScreen({ onBack, onNext, onSkip }) {
-  const [questions, setQuestions] = useState([
-  "How many years of relevant experience do you have?",
-  "Are you authorized to work in the country of this role?"]
-  );
+const RECOMMENDED_QUESTIONS = [
+  { id: 1, text: "Are you willing to undergo a background check, in accordance with local law/regulations?", type: "yes_no" },
+  { id: 2, text: "Mention your experience in the industry (in years)", type: "text_input" },
+  { id: 3, text: "Are you legally authorized to work in the country of job location?", type: "yes_no" },
+];
+const SUGGESTED_QUESTIONS = [
+  { id: 4, text: "Will you be able to reliably commute or relocate to the job location?", type: "yes_no" },
+  { id: 5, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
+  { id: 6, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
+  { id: 7, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
+];
 
-  const add = () => setQuestions([...questions, ""]);
-  const remove = (i) => setQuestions(questions.filter((_, idx) => idx !== i));
-  const update = (i, val) => {
-    const updated = [...questions];
-    updated[i] = val;
-    setQuestions(updated);
-  };
+function QuestionCard({ question, added, onAdd, onRemove }) {
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <p className="text-[13px] text-gray-800 flex-1">{question.text}</p>
+        {added ? (
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
+            <button className="text-gray-400 hover:text-indigo-500"><span className="text-[14px]">✎</span></button>
+            <button onClick={onRemove} className="text-gray-300 hover:text-red-400"><X className="w-4 h-4" /></button>
+          </div>
+        ) : (
+          <button onClick={onAdd} className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-400 hover:text-indigo-500 shrink-0">
+            <Plus className="w-4 h-4" />
+          </button>
+        )}
+      </div>
+      {question.type === "yes_no" && (
+        <div className="space-y-1.5">
+          <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
+            <input type="radio" name={`q-${question.id}`} defaultChecked className="accent-indigo-600" /> Yes
+          </label>
+          <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
+            <input type="radio" name={`q-${question.id}`} className="accent-indigo-600" /> No
+          </label>
+        </div>
+      )}
+      {question.type === "text_input" && (
+        <Input placeholder="Add your experience in years" className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />
+      )}
+    </div>
+  );
+}
+
+function ScreeningScreen({ onBack, onNext, onSkip }) {
+  const [addedIds, setAddedIds] = useState(RECOMMENDED_QUESTIONS.map(q => q.id));
+
+  const addQuestion = (id) => setAddedIds(prev => [...prev, id]);
+  const removeQuestion = (id) => setAddedIds(prev => prev.filter(x => x !== id));
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
-        <h2 className="text-[15px] font-semibold text-gray-900">Screening Questions</h2>
-        <p className="text-[12px] text-gray-400 mt-0.5">Optional — add questions candidates must answer when applying</p>
-      </div>
-      <div className="flex-1 overflow-y-auto px-6 py-5 space-y-3">
-        {questions.map((q, i) =>
-        <div key={i} className="flex gap-2 items-center">
-            <span className="text-[12px] text-gray-400 w-5 text-right shrink-0">{i + 1}.</span>
-            <Input
-            value={q}
-            onChange={(e) => update(i, e.target.value)}
-            placeholder={`Question ${i + 1}`}
-            className="h-9 text-[13px] bg-gray-50" />
-
-            <button
-            onClick={() => remove(i)}
-            className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-red-50 text-gray-300 hover:text-red-400 transition-colors shrink-0">
-
-              <X className="w-3.5 h-3.5" />
-            </button>
+      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+        {/* Recommended */}
+        <div>
+          <h2 className="text-[15px] font-bold text-gray-900 mb-0.5">Screening Questions</h2>
+          <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
+          <p className="text-[12px] text-indigo-500 mb-3">Here are the screening questions I've generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
+          <div className="space-y-3">
+            {RECOMMENDED_QUESTIONS.map(q => (
+              <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            ))}
           </div>
-        )}
-        <button
-          onClick={add}
-          className="flex items-center gap-1.5 text-[12px] text-indigo-600 hover:text-indigo-700 font-medium mt-2">
+        </div>
 
-          <Plus className="w-3.5 h-3.5" /> Add question
-        </button>
+        {/* Suggested */}
+        <div>
+          <p className="text-[13px] font-semibold text-gray-700 mb-1">Suggested</p>
+          <p className="text-[12px] text-gray-500 mb-3">These are the screening questions we suggest generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
+          <div className="space-y-3">
+            {SUGGESTED_QUESTIONS.map(q => (
+              <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            ))}
+          </div>
+        </div>
       </div>
+
       <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <div className="flex gap-2">
           <Button variant="ghost" size="sm" onClick={onSkip} className="text-gray-500 gap-1.5">
             <SkipForward className="w-3.5 h-3.5" /> Skip
           </Button>
-          <Button onClick={() => onNext(questions)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
+          <Button onClick={() => onNext(addedIds)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
             Continue <ArrowRight className="w-3.5 h-3.5" />
           </Button>
         </div>
