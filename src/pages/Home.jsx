@@ -47,14 +47,8 @@ function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 
   const lastPt = pts[pts.length - 1];
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <defs>
-        <linearGradient id={`grad-${color.replace(/[^a-z]/gi, "")}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={fillColor} stopOpacity="0.35" />
-          <stop offset="100%" stopColor={fillColor} stopOpacity="0.02" />
-        </linearGradient>
-      </defs>
-      <path d={fillPath} fill={`url(#grad-${color.replace(/[^a-z]/gi, "")})`} />
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
+      <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
       <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
       <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
