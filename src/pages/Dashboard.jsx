@@ -752,7 +752,7 @@ export default function Dashboard() {
 
         {/* Analytics Chat Panel */}
         <div className={`bg-white mx-2 my-2 rounded-2xl border-l border-gray-200 flex flex-col transition-all duration-300 ${
-        isChatMinimized ? "w-[60px]" : "w-[380px]"}`
+        isChatMinimized ? "hidden" : "w-[380px]"}`
         }>
 
 
