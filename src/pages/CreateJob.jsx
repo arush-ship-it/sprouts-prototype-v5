@@ -537,7 +537,7 @@ function ConfirmationScreen({ jobTitle, onGoToJobs }) {
         <span className="font-medium text-gray-700">{jobTitle}</span> has been published successfully. Candidates can now apply.
       </p>
       <div className="flex gap-3">
-        <Button variant="outline" size="sm" onClick={onGoToJobs}>
+        <Button variant="outline" size="sm" onClick={() => window.location.href = createPageUrl("Home")}>
           <Building2 className="w-3.5 h-3.5 mr-1.5" /> View All Jobs
         </Button>
         <Button className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5" onClick={() => window.location.reload()}>
