@@ -304,15 +304,15 @@ export default function TalentPool() {
       <div className="flex-1 overflow-y-auto">
         <div className="p-8">
           <div className="mb-6">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="mb-1 flex items-center gap-2">
               <Link to={createPageUrl("Home")}>
                 
               </Link>
-              <h1 className="text-[24px] font-semibold text-gray-900">
-                Talent Pool
-              </h1>
+              <h1 className="text-gray-900 text-lg font-semibold">Talent Pool
+
+                </h1>
             </div>
-            <p className="text-[13px] text-gray-500">
+            <p className="text-gray-500 pr-1 pl-2 text-sm">
               {candidates.length} candidates found
             </p>
           </div>
