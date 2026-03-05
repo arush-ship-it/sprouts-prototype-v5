@@ -8,15 +8,15 @@ import {
   Terminal,
   Bell,
   Settings,
-  User,
-} from "lucide-react";
+  User } from
+"lucide-react";
 
 const navLinks = [
-  { label: "Analytics", icon: LayoutDashboard, page: "Dashboard" },
-  { label: "Talent Pool", icon: FolderOpen, page: "TalentPool" },
-  { label: "Create Job", icon: PlusCircle, page: "CreateJob" },
-  { label: "Console", icon: Terminal, page: "Console" },
-];
+{ label: "Analytics", icon: LayoutDashboard, page: "Dashboard" },
+{ label: "Talent Pool", icon: FolderOpen, page: "TalentPool" },
+{ label: "Create Job", icon: PlusCircle, page: "CreateJob" },
+{ label: "Console", icon: Terminal, page: "Console" }];
+
 
 export default function TopNav({ currentPageName }) {
   return (
@@ -24,8 +24,8 @@ export default function TopNav({ currentPageName }) {
       {/* Brand */}
       <Link
         to={createPageUrl("Home")}
-        className="text-[13px] font-semibold text-gray-900 tracking-tight mr-4 hover:text-indigo-600 transition-colors shrink-0"
-      >
+        className="text-[13px] font-semibold text-gray-900 tracking-tight mr-4 hover:text-indigo-600 transition-colors shrink-0">
+
         Sprouts AI
       </Link>
 
@@ -36,17 +36,17 @@ export default function TopNav({ currentPageName }) {
           return (
             <Link
               key={link.page}
-              to={createPageUrl(link.page)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-all duration-150
-                ${isActive
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
-                }`}
-            >
+              to={createPageUrl(link.page)} className="text-gray-700 px-3 py-1.5 text-xs font-medium rounded-md flex items-center gap-1.5 transition-all duration-150 hover:text-gray-900 hover:bg-gray-50">
+
+
+
+
+
+
               <link.icon className={`w-3.5 h-3.5 ${isActive ? "text-gray-700" : "text-gray-400"}`} />
               {link.label}
-            </Link>
-          );
+            </Link>);
+
         })}
       </nav>
 
@@ -61,8 +61,8 @@ export default function TopNav({ currentPageName }) {
         {/* Settings */}
         <Link
           to={createPageUrl("Settings")}
-          className="p-2 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-        >
+          className="p-2 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+
           <Settings className="w-4 h-4" />
         </Link>
 
@@ -74,6 +74,6 @@ export default function TopNav({ currentPageName }) {
           <span className="text-[13px] font-medium text-gray-700">John Doe</span>
         </div>
       </div>
-    </header>
-  );
+    </header>);
+
 }
