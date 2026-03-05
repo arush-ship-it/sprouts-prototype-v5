@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import {
@@ -14,10 +14,95 @@ import {
   Briefcase,
   PlusCircle,
   UserSquare2,
-  ExternalLink } from
+  ExternalLink,
+  ArrowUpRight } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import TabSwitcher from "@/components/shared/TabSwitcher";
+
+// Animated counter hook
+function useCountUp(target, duration = 1000) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  useEffect(() => {
+    const num = parseFloat(target);
+    if (isNaN(num)) { setCount(target); return; }
+    const start = Date.now();
+    const step = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Number.isInteger(num) ? Math.round(eased * num) : (eased * num).toFixed(1));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration]);
+  return count;
+}
+
+// Mini sparkline bar chart
+function MiniSparkline({ data, color }) {
+  const max = Math.max(...data);
+  return (
+    <div className="flex items-end gap-0.5 h-8">
+      {data.map((v, i) => (
+        <div
+          key={i}
+          className={`w-1.5 rounded-sm transition-all duration-300 ${color}`}
+          style={{ height: `${(v / max) * 100}%`, opacity: i === data.length - 1 ? 1 : 0.4 + (i / data.length) * 0.5 }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Pipeline fill bar
+function PipelineBar({ value, total, color }) {
+  const [width, setWidth] = useState(0);
+  useEffect(() => { setTimeout(() => setWidth((value / total) * 100), 200); }, [value, total]);
+  return (
+    <div className="w-full bg-gray-100 rounded-full h-1.5 mt-2">
+      <div className={`h-1.5 rounded-full transition-all duration-700 ease-out ${color}`} style={{ width: `${width}%` }} />
+    </div>
+  );
+}
+
+// Animated stat card
+function StatCard({ stat }) {
+  const num = parseFloat(stat.value);
+  const animated = useCountUp(isNaN(num) ? 0 : num);
+  const displayValue = isNaN(num) ? stat.value : (Number.isInteger(num) ? animated : animated);
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className={`bg-white rounded-xl p-6 shadow-sm border border-gray-100 cursor-default transition-all duration-200 ${hovered ? "shadow-md -translate-y-0.5 border-gray-200" : ""}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3 flex-1">
+          <div className={`${stat.iconBg} p-2 rounded-[10px] flex-shrink-0`}>
+            <stat.icon className={`w-5 h-5 ${stat.iconColor}`} />
+          </div>
+          <div className="flex-1">
+            <p className="text-gray-500 mb-1 text-xs">{stat.title}</p>
+            <h3 className="text-gray-900 mb-1 text-xl font-bold">{displayValue}</h3>
+            <div className="flex items-center gap-1">
+              {stat.trend && <ArrowUpRight className="w-3 h-3 text-green-500" />}
+              <p className={`text-[12px] ${stat.trend ? "text-green-500 font-medium" : "text-gray-400"}`}>{stat.subtitle}</p>
+            </div>
+          </div>
+        </div>
+        {stat.sparkline && (
+          <div className="shrink-0">
+            <MiniSparkline data={stat.sparkline} color={stat.sparklineColor || "bg-blue-400"} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const stats = [
