@@ -209,38 +209,38 @@ function GeneratingScreen({ prompt, onDone }) {
         }
       </div>
 
-      <div className="p-4 border-t border-gray-100 shrink-0">
-        <div className="relative">
-          <Textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();handleSend();}
-            }}
-            placeholder="Refine or add details…"
-            className="resize-none text-[13px] pr-28 rounded-2xl min-h-[52px]"
-            rows={2} />
+      
 
-          <div className="absolute right-2 bottom-2 flex gap-2">
-            <Button
-              onClick={handleSend}
-              size="sm"
-              variant="ghost"
-              className="h-8 px-3 text-[12px]">
 
-              <Send className="w-3.5 h-3.5" />
-            </Button>
-            <Button
-              onClick={onDone}
-              disabled={isGenerating}
-              size="sm"
-              className="bg-indigo-600 hover:bg-indigo-700 h-8 px-3 text-[12px] gap-1">
 
-              Review <ArrowRight className="w-3.5 h-3.5" />
-            </Button>
-          </div>
-        </div>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>);
 
 }
