@@ -46,7 +46,7 @@ export default function AITalentFinderPanel() {
   });
 
   return (
-    <div className="bg-white mx-2 my-2 rounded-2xl w-[504px] border-r border-gray-200 flex flex-col h-screen">
+    <div className="bg-white mx-2 my-2 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col h-screen">
       {/* Top Tabs */}
       <div className="border-b border-gray-200 px-5 pt-5 pb-3">
         <div className="flex items-center justify-between mb-4">
