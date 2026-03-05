@@ -525,81 +525,72 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
 // ─── Step 4: Publish ──────────────────────────────────────────────────────────
 function PublishScreen({ onBack, onPublish }) {
-  const [settings, setSettings] = useState({ visibility: "public", duration: "30", platforms: [] });
-
-  const togglePlatform = (p) => {
-    const updated = settings.platforms.includes(p) ?
-    settings.platforms.filter((x) => x !== p) :
-    [...settings.platforms, p];
-    setSettings({ ...settings, platforms: updated });
-  };
+  const [visibility, setVisibility] = useState("public");
+  const [evergreen, setEvergreen] = useState(true);
+  const [setExpiration, setSetExpiration] = useState(false);
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
-        <h2 className="text-[15px] font-semibold text-gray-900">Publish Job</h2>
-        <p className="text-[12px] text-gray-400 mt-0.5">Choose where and how to post your job</p>
-      </div>
-      <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
-        {/* Visibility */}
-        <div className="space-y-2">
-          <Label className="text-[12px] font-medium text-gray-600">Visibility</Label>
-          <div className="flex gap-3">
-            {["public", "private"].map((v) =>
-            <button
-              key={v}
-              onClick={() => setSettings({ ...settings, visibility: v })}
-              className={`flex-1 p-4 rounded-xl border-2 text-left transition-all ${
-              settings.visibility === v ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`
-              }>
+      <div className="flex-1 overflow-y-auto flex items-center justify-center px-6 py-8">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-10 py-10 w-full max-w-lg">
+          {/* Illustration */}
+          <div className="flex justify-center mb-5">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=160&fit=crop&crop=center" alt="" className="w-32 h-24 object-cover rounded-xl opacity-60 grayscale" />
+          </div>
 
-                <p className="font-semibold text-[13px] text-gray-900 capitalize mb-0.5">{v}</p>
-                <p className="text-[11px] text-gray-500">
-                  {v === "public" ? "Visible to everyone" : "Only invited candidates"}
-                </p>
-              </button>
-            )}
+          <h2 className="text-center text-[16px] font-bold text-green-500 mb-6">All Job Related Details Have Been Filled!</h2>
+
+          {/* Visibility */}
+          <div className="mb-5">
+            <p className="text-[13px] font-medium text-gray-700 mb-3">Visibility</p>
+            <div className="flex rounded-xl border border-gray-200 overflow-hidden">
+              {["Private", "Public"].map((v) => (
+                <button
+                  key={v}
+                  onClick={() => setVisibility(v.toLowerCase())}
+                  className={`flex-1 py-3 text-[13px] font-medium transition-all ${
+                    visibility === v.toLowerCase() ? "bg-indigo-50 text-gray-900" : "bg-white text-gray-500 hover:bg-gray-50"
+                  }`}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
+            <div className="flex mt-3 gap-4">
+              {["Confidential (shareable Link)", "Internal"].map((opt) => (
+                <button key={opt} className="text-[12px] text-gray-500 hover:text-indigo-600 font-medium">{opt}</button>
+              ))}
+            </div>
+          </div>
+
+          {/* Duration */}
+          <div className="mb-8">
+            <p className="text-[13px] font-medium text-gray-700 mb-3">Duration</p>
+            <div className="flex gap-6">
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input type="checkbox" checked={evergreen} onChange={(e) => setEvergreen(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4" />
+                <div>
+                  <p className="text-[13px] text-gray-800 font-medium">Evergreen Job Position</p>
+                  <p className="text-[11px] text-gray-400">Keep this job open indefinitely</p>
+                </div>
+              </label>
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input type="checkbox" checked={setExpiration} onChange={(e) => setSetExpiration(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4" />
+                <div>
+                  <p className="text-[13px] text-gray-800 font-medium">Set Expiration</p>
+                  <p className="text-[11px] text-gray-400">Set an expiration date for the job</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="flex justify-center">
+            <Button onClick={onPublish} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-8 rounded-full h-10">
+              Confirm Details
+            </Button>
           </div>
         </div>
-
-        {/* Duration */}
-        <div className="space-y-2">
-          <Label className="text-[12px] font-medium text-gray-600">Duration</Label>
-          <Select value={settings.duration} onValueChange={(val) => setSettings({ ...settings, duration: val })}>
-            <SelectTrigger className="h-9 text-[13px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {["7", "14", "30", "60", "90"].map((d) =>
-              <SelectItem key={d} value={d}>{d} days</SelectItem>
-              )}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Platforms */}
-        <div className="space-y-2">
-          <Label className="text-[12px] font-medium text-gray-600">Post to Platforms</Label>
-          <div className="grid grid-cols-2 gap-3">
-            {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((p) =>
-            <button
-              key={p}
-              onClick={() => togglePlatform(p)}
-              className={`p-3.5 rounded-xl border-2 text-left transition-all ${
-              settings.platforms.includes(p) ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`
-              }>
-
-                <p className="font-semibold text-[13px] text-gray-900">{p}</p>
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
-        <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
-        <Button onClick={onPublish} className="bg-emerald-600 hover:bg-emerald-700 text-[13px] px-6 gap-1.5">
-          <Sparkles className="w-4 h-4" /> Publish Job
-        </Button>
       </div>
     </div>);
 
