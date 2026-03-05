@@ -412,7 +412,7 @@ export default function AITalentFinderPanel() {
             <div className="bg-slate-400 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
-            <div className="flex-1">
+            <div className="mr-10 flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Perfect ! all the filters have been applied, and are visible in the above panel. What other filters can SproutsAI help you with?
               </p>
