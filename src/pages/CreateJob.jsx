@@ -278,8 +278,8 @@ export default function CreateJob() {
                 </div>
 
                 <div className="flex justify-end">
-                  <Button onClick={() => setCurrentStep(2)} className="bg-blue-600 text-primary-foreground px-4 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700">
-                    Continue to Job Details
+                  <Button onClick={() => setCurrentStep(3)} className="bg-blue-600 text-primary-foreground px-4 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700">
+                    Continue to Publish
                   </Button>
                 </div>
               </div>
