@@ -64,7 +64,7 @@ export default function CommunicationAnalyticsDashboard() {
   return (
     <div className="mx-8 my-5">
       {/* Header */}
-      <div className="mb-4 py-3 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="bg-slate-400 rounded-xl w-8 h-8 from-indigo-500 to-violet-500 flex items-center justify-center shadow-md shadow-indigo-200">
             <TrendingUp className="w-4 h-4 text-white" />
