@@ -461,7 +461,7 @@ function PublishScreen({ onBack, onPublish }) {
   return (
     <div className="flex flex-col h-full">
       <div className="bg-[#f2f2f2] px-6 py-8 flex-1 overflow-y-auto flex items-center justify-center">
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-10 py-10 w-full max-w-lg">
+        <div className="bg-[#f2f2f2] px-10 py-10 rounded-2xl border border-gray-100 shadow-sm w-full max-w-lg">
           {/* Illustration */}
           <div className="flex justify-center mb-5">
             
