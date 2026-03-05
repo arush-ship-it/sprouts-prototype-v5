@@ -519,7 +519,8 @@ export default function CreateJob() {
                 <Button variant="outline" onClick={() => setCurrentStep(2)}>
                   Back
                 </Button>
-                <Button className="bg-emerald-600 hover:bg-emerald-700">
+                <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={() => {}}>
+
                   <Sparkles className="w-4 h-4 mr-2" />
                   Publish Job
                 </Button>
