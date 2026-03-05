@@ -412,7 +412,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+      <div className="bg-[#f2f2f2] px-6 py-6 flex-1 overflow-y-auto space-y-6">
         {/* Recommended */}
         <div>
           <h2 className="text-[15px] font-bold text-gray-900 mb-0.5">Screening Questions</h2>
