@@ -25,7 +25,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   const currentViews = activeTab === "review" ? reviewViews : pipelineViews;
 
   return (
-    <div className="px-6 py-5">
+    <div className="px-6 py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 p-1 bg-gray-100/70 rounded-xl w-fit">
           {tabs.map((tab) =>
