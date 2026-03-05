@@ -347,7 +347,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] pt-2 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] pt-4 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <Button onClick={() => onNext(jd)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
           Continue <ArrowRight className="w-3.5 h-3.5" />
@@ -437,7 +437,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] pt-4 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <div className="flex gap-2">
           <Button variant="ghost" size="sm" onClick={onSkip} className="text-gray-500 gap-1.5">
@@ -460,11 +460,11 @@ function PublishScreen({ onBack, onPublish }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto flex items-center justify-center px-6 py-8">
+      <div className="bg-[#f2f2f2] px-6 py-8 flex-1 overflow-y-auto flex items-center justify-center">
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-10 py-10 w-full max-w-lg">
           {/* Illustration */}
           <div className="flex justify-center mb-5">
-            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=160&fit=crop&crop=center" alt="" className="w-32 h-24 object-cover rounded-xl opacity-60 grayscale" />
+            
           </div>
 
           <h2 className="text-center text-[16px] font-bold text-green-500 mb-6">All Job Related Details Have Been Filled!</h2>
