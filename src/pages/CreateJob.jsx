@@ -85,7 +85,7 @@ export default function CreateJob() {
 
 
   return (
-    <div className="flex flex-col h-screen bg-[#F2F3F5] overflow-hidden">
+    <div className="flex flex-col h-[calc(100vh-48px)] bg-[#F2F3F5] overflow-hidden">
       {/* Top Navigation */}
       
 
