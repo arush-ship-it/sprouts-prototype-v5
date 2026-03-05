@@ -121,7 +121,7 @@ export default function CreateJob() {
         <div className="flex flex-1 overflow-hidden px-4 py-4 gap-4 min-h-0">
         {/* Left Panel - AI Chat */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-[380px] shrink-0 flex flex-col overflow-hidden">
-          <div className="pt-5 pr-3 pb-4 pl-3 border-b border-gray-200">
+          <div className="px-4 py-3 border-b border-gray-200">
             <div className="flex items-center gap-2.5 mb-2">
               <div className="bg-slate-400 rounded-3xl w-8 h-8 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
