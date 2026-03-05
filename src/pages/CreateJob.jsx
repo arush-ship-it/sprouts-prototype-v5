@@ -95,7 +95,7 @@ function DefaultScreen({ onStart }) {
       </div>
 
       {/* Right: Hero + Job Suggestions */}
-      <div className="flex-1 flex flex-col items-center justify-center px-10 py-8">
+      <div className="pt-8 pr-10 pb-40 pl-10 flex-1 flex flex-col items-center justify-center">
         {/* Step dots */}
         <div className="flex items-center gap-3 mb-12">
           {[0, 1, 2, 3].map((i) =>
@@ -261,7 +261,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
   const toggleBenefit = (b) => {
-    const updated = selectedBenefits.includes(b) ? selectedBenefits.filter(x => x !== b) : [...selectedBenefits, b];
+    const updated = selectedBenefits.includes(b) ? selectedBenefits.filter((x) => x !== b) : [...selectedBenefits, b];
     setJobDetails({ ...jobDetails, benefits: updated.join(",") });
   };
   const toggleJobType = (val) => setJobDetails({ ...jobDetails, jobType: val });
@@ -279,20 +279,20 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
           <h3 className="text-[15px] font-bold text-gray-900 mb-2">Requirements</h3>
           <ul className="mb-5 space-y-1">
-            {jd.requirements.map((req, i) => (
-              <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
+            {jd.requirements.map((req, i) =>
+            <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />{req}
               </li>
-            ))}
+            )}
           </ul>
 
           <h3 className="text-[15px] font-bold text-gray-900 mb-2">Responsibilities</h3>
           <ul className="space-y-1">
-            {jd.responsibilities.map((resp, i) => (
-              <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
+            {jd.responsibilities.map((resp, i) =>
+            <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />{resp}
               </li>
-            ))}
+            )}
           </ul>
         </div>
 
@@ -309,16 +309,16 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { label: "Company Name", key: "companyName", placeholder: "e.g. Acme Corp" },
-              { label: "Job Title *", key: "jobTitle", placeholder: "e.g. Senior Designer" },
-              { label: "Department", key: "department", placeholder: "e.g. Engineering" },
-              { label: "Internal Job Title", key: "internalJobTitle", placeholder: "Internal reference" },
-            ].map(({ label, key, placeholder }) => (
-              <div key={key} className="space-y-1.5">
+            { label: "Company Name", key: "companyName", placeholder: "e.g. Acme Corp" },
+            { label: "Job Title *", key: "jobTitle", placeholder: "e.g. Senior Designer" },
+            { label: "Department", key: "department", placeholder: "e.g. Engineering" },
+            { label: "Internal Job Title", key: "internalJobTitle", placeholder: "Internal reference" }].
+            map(({ label, key, placeholder }) =>
+            <div key={key} className="space-y-1.5">
                 <Label className="text-[12px] font-medium text-gray-600">{label}</Label>
                 <Input value={jobDetails[key]} onChange={(e) => setJobDetails({ ...jobDetails, [key]: e.target.value })} placeholder={placeholder} className="h-9 text-[13px] bg-gray-50" />
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -336,21 +336,21 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-[12px] font-medium text-gray-600 w-20">Job Type</span>
-              {JOB_TYPES.map(t => (
-                <button key={t} onClick={() => toggleJobType(t)}
-                  className={`px-3 py-1 rounded-full text-[12px] border transition-all ${jobDetails.jobType === t ? "bg-indigo-50 border-indigo-400 text-indigo-700" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+              {JOB_TYPES.map((t) =>
+              <button key={t} onClick={() => toggleJobType(t)}
+              className={`px-3 py-1 rounded-full text-[12px] border transition-all ${jobDetails.jobType === t ? "bg-indigo-50 border-indigo-400 text-indigo-700" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
                   {t}
                 </button>
-              ))}
+              )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-[12px] font-medium text-gray-600 w-20">Workplace</span>
-              {WORKPLACE_TYPES.map(t => (
-                <button key={t} onClick={() => toggleWorkplace(t)}
-                  className={`px-3 py-1 rounded-full text-[12px] border transition-all ${jobDetails.workplaceType === t ? "bg-indigo-50 border-indigo-400 text-indigo-700" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+              {WORKPLACE_TYPES.map((t) =>
+              <button key={t} onClick={() => toggleWorkplace(t)}
+              className={`px-3 py-1 rounded-full text-[12px] border transition-all ${jobDetails.workplaceType === t ? "bg-indigo-50 border-indigo-400 text-indigo-700" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
                   {t}
                 </button>
-              ))}
+              )}
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Location</Label>
@@ -384,12 +384,12 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             <Label className="text-[12px] font-medium text-gray-600">Headcount</Label>
             <div className="flex items-center gap-3">
               <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.max(1, parseInt(jobDetails.headcount || 1) - 1)) })}
-                className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+              className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
                 <span className="text-lg leading-none">‹</span>
               </button>
               <span className="text-[15px] font-semibold text-gray-900 w-6 text-center">{jobDetails.headcount}</span>
               <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.min(50, parseInt(jobDetails.headcount || 1) + 1)) })}
-                className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+              className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
                 <span className="text-lg leading-none">›</span>
               </button>
             </div>
@@ -408,12 +408,12 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
-            {BENEFITS_OPTIONS.map(b => (
-              <button key={b} onClick={() => toggleBenefit(b)}
-                className={`px-3 py-1.5 rounded-full text-[12px] border transition-all ${selectedBenefits.includes(b) ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+            {BENEFITS_OPTIONS.map((b) =>
+            <button key={b} onClick={() => toggleBenefit(b)}
+            className={`px-3 py-1.5 rounded-full text-[12px] border transition-all ${selectedBenefits.includes(b) ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
                 {b}
               </button>
-            ))}
+            )}
           </div>
         </div>
       </div>
@@ -430,36 +430,36 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
 // ─── Step 3: Screening Questions ──────────────────────────────────────────────
 const RECOMMENDED_QUESTIONS = [
-  { id: 1, text: "Are you willing to undergo a background check, in accordance with local law/regulations?", type: "yes_no" },
-  { id: 2, text: "Mention your experience in the industry (in years)", type: "text_input" },
-  { id: 3, text: "Are you legally authorized to work in the country of job location?", type: "yes_no" },
-];
+{ id: 1, text: "Are you willing to undergo a background check, in accordance with local law/regulations?", type: "yes_no" },
+{ id: 2, text: "Mention your experience in the industry (in years)", type: "text_input" },
+{ id: 3, text: "Are you legally authorized to work in the country of job location?", type: "yes_no" }];
+
 const SUGGESTED_QUESTIONS = [
-  { id: 4, text: "Will you be able to reliably commute or relocate to the job location?", type: "yes_no" },
-  { id: 5, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
-  { id: 6, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
-  { id: 7, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
-];
+{ id: 4, text: "Will you be able to reliably commute or relocate to the job location?", type: "yes_no" },
+{ id: 5, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
+{ id: 6, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" },
+{ id: 7, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" }];
+
 
 function QuestionCard({ question, added, onAdd, onRemove }) {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
       <div className="flex items-start justify-between gap-3 mb-3">
         <p className="text-[13px] text-gray-800 flex-1">{question.text}</p>
-        {added ? (
-          <div className="flex items-center gap-2 shrink-0">
+        {added ?
+        <div className="flex items-center gap-2 shrink-0">
             <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
             <button className="text-gray-400 hover:text-indigo-500"><span className="text-[14px]">✎</span></button>
             <button onClick={onRemove} className="text-gray-300 hover:text-red-400"><X className="w-4 h-4" /></button>
-          </div>
-        ) : (
-          <button onClick={onAdd} className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-400 hover:text-indigo-500 shrink-0">
+          </div> :
+
+        <button onClick={onAdd} className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-400 hover:text-indigo-500 shrink-0">
             <Plus className="w-4 h-4" />
           </button>
-        )}
+        }
       </div>
-      {question.type === "yes_no" && (
-        <div className="space-y-1.5">
+      {question.type === "yes_no" &&
+      <div className="space-y-1.5">
           <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
             <input type="radio" name={`q-${question.id}`} defaultChecked className="accent-indigo-600" /> Yes
           </label>
@@ -467,19 +467,19 @@ function QuestionCard({ question, added, onAdd, onRemove }) {
             <input type="radio" name={`q-${question.id}`} className="accent-indigo-600" /> No
           </label>
         </div>
-      )}
-      {question.type === "text_input" && (
-        <Input placeholder="Add your experience in years" className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />
-      )}
-    </div>
-  );
+      }
+      {question.type === "text_input" &&
+      <Input placeholder="Add your experience in years" className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />
+      }
+    </div>);
+
 }
 
 function ScreeningScreen({ onBack, onNext, onSkip }) {
-  const [addedIds, setAddedIds] = useState(RECOMMENDED_QUESTIONS.map(q => q.id));
+  const [addedIds, setAddedIds] = useState(RECOMMENDED_QUESTIONS.map((q) => q.id));
 
-  const addQuestion = (id) => setAddedIds(prev => [...prev, id]);
-  const removeQuestion = (id) => setAddedIds(prev => prev.filter(x => x !== id));
+  const addQuestion = (id) => setAddedIds((prev) => [...prev, id]);
+  const removeQuestion = (id) => setAddedIds((prev) => prev.filter((x) => x !== id));
 
   return (
     <div className="flex flex-col h-full">
@@ -490,9 +490,9 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
           <p className="text-[12px] text-indigo-500 mb-3">Here are the screening questions I've generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
           <div className="space-y-3">
-            {RECOMMENDED_QUESTIONS.map(q => (
-              <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
-            ))}
+            {RECOMMENDED_QUESTIONS.map((q) =>
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            )}
           </div>
         </div>
 
@@ -501,9 +501,9 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <p className="text-[13px] font-semibold text-gray-700 mb-1">Suggested</p>
           <p className="text-[12px] text-gray-500 mb-3">These are the screening questions we suggest generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
           <div className="space-y-3">
-            {SUGGESTED_QUESTIONS.map(q => (
-              <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
-            ))}
+            {SUGGESTED_QUESTIONS.map((q) =>
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            )}
           </div>
         </div>
       </div>
@@ -544,22 +544,22 @@ function PublishScreen({ onBack, onPublish }) {
           <div className="mb-5">
             <p className="text-[13px] font-medium text-gray-700 mb-3">Visibility</p>
             <div className="flex rounded-xl border border-gray-200 overflow-hidden">
-              {["Private", "Public"].map((v) => (
-                <button
-                  key={v}
-                  onClick={() => setVisibility(v.toLowerCase())}
-                  className={`flex-1 py-3 text-[13px] font-medium transition-all ${
-                    visibility === v.toLowerCase() ? "bg-indigo-50 text-gray-900" : "bg-white text-gray-500 hover:bg-gray-50"
-                  }`}
-                >
+              {["Private", "Public"].map((v) =>
+              <button
+                key={v}
+                onClick={() => setVisibility(v.toLowerCase())}
+                className={`flex-1 py-3 text-[13px] font-medium transition-all ${
+                visibility === v.toLowerCase() ? "bg-indigo-50 text-gray-900" : "bg-white text-gray-500 hover:bg-gray-50"}`
+                }>
+
                   {v}
                 </button>
-              ))}
+              )}
             </div>
             <div className="flex mt-3 gap-4">
-              {["Confidential (shareable Link)", "Internal"].map((opt) => (
-                <button key={opt} className="text-[12px] text-gray-500 hover:text-indigo-600 font-medium">{opt}</button>
-              ))}
+              {["Confidential (shareable Link)", "Internal"].map((opt) =>
+              <button key={opt} className="text-[12px] text-gray-500 hover:text-indigo-600 font-medium">{opt}</button>
+              )}
             </div>
           </div>
 
