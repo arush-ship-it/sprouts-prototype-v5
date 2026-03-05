@@ -378,13 +378,13 @@ export default function CreateJob() {
                 </div>
               </div>
 
-              <div className="flex justify-between">
-                <Button variant="outline" onClick={() => setCurrentStep(2)}>
-                  Back
-                </Button>
-                <Button className="bg-emerald-600 hover:bg-emerald-700">
-
-                  <Sparkles className="w-4 h-4 mr-2" />
+              </div>
+              </div>
+              </div>
+              <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
+                <Button variant="outline" onClick={() => setCurrentStep(2)}>Back</Button>
+                <Button className="bg-emerald-600 hover:bg-emerald-700 text-[13px] px-5">
+                  <Sparkles className="w-4 h-4" />
                   Publish Job
                 </Button>
               </div>
