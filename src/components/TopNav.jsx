@@ -36,7 +36,7 @@ export default function TopNav({ currentPageName }) {
           return (
             <Link
               key={link.page}
-              to={createPageUrl(link.page)} className="text-gray-700 px-3 py-1.5 text-xs font-medium rounded-md flex items-center gap-1.5 transition-all duration-150 hover:text-gray-900 hover:bg-gray-50">
+              to={createPageUrl(link.page)} className={`px-3 py-1.5 text-xs font-medium rounded-md flex items-center gap-1.5 transition-all duration-150 hover:text-gray-900 hover:bg-gray-50 ${isActive ? "text-indigo-600" : "text-gray-700"}`}>
 
 
 
