@@ -196,7 +196,7 @@ export default function Home() {
               <div key={job.id} className="bg-[#fcfcfc] p-4 rounded-lg flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="bg-slate-50 rounded-lg w-10 h-10 flex items-center justify-center">
-                      <Briefcase className="w-5 h-5 text-blue-600" />
+                      <Briefcase className="text-zinc-500 lucide lucide-briefcase w-5 h-5" />
                     </div>
                     <div>
                       <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
