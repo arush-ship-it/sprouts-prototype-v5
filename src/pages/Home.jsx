@@ -225,7 +225,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-6">
       {/* Welcome */}
-      <h1 className="text-gray-900 mb-6 text-xl font-semibold">Hello Arush, Welcome To SproutsAI!</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-gray-900 text-xl font-semibold">Hello Arush, Welcome To SproutsAI!</h1>
+        <div className="flex gap-3">
+          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Connect Email</button>
+          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Connect Calendar</button>
+          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">Connect ATS</button>
+        </div>
+      </div>
 
       {/* Main 2-col layout */}
       <div className="flex gap-6">
