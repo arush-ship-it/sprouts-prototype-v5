@@ -178,7 +178,7 @@ export default function Home() {
                 </div>
                 <div className="flex-1">
                   <p className="text-gray-500 mb-1 text-xs">{stat.title}</p>
-                  <h3 className="text-gray-900 mb-1 text-2xl font-bold">{stat.value}</h3>
+                  <h3 className="text-gray-900 mb-1 text-xl font-bold">{stat.value}</h3>
                   <p className="text-[12px] text-gray-400">{stat.subtitle}</p>
                 </div>
               </div>
