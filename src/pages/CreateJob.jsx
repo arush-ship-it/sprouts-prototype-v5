@@ -515,7 +515,7 @@ function PublishScreen({ onBack, onPublish }) {
 
           {/* CTA */}
           <div className="flex justify-center">
-            <Button onClick={onPublish} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-8 rounded-full h-10">
+            <Button onClick={onPublish} className="bg-blue-600 text-[#ffffff] px-8 py-2 font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-indigo-700 h-10">
               Confirm Details
             </Button>
           </div>
