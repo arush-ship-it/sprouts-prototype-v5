@@ -11,10 +11,10 @@ import StepIndicator from "@/components/createjob/StepIndicator";
 
 // Mock existing jobs for the default screen
 const existingJobs = [
-  { id: 1, title: "Senior Product Designer", department: "Design", applicants: 34, status: "Active" },
-  { id: 2, title: "Frontend Engineer", department: "Engineering", applicants: 67, status: "Active" },
-  { id: 3, title: "Product Manager", department: "Product", applicants: 12, status: "Draft" },
-];
+{ id: 1, title: "Senior Product Designer", department: "Design", applicants: 34, status: "Active" },
+{ id: 2, title: "Frontend Engineer", department: "Engineering", applicants: 67, status: "Active" },
+{ id: 3, title: "Product Manager", department: "Product", applicants: 12, status: "Draft" }];
+
 
 const DEFAULT_JD = {
   title: "Senior Product Designer",
@@ -23,27 +23,27 @@ const DEFAULT_JD = {
   type: "Full-time",
   salary: "$120k – $180k",
   description:
-    "We're looking for a talented Senior Product Designer to join our team and help shape the future of our products. You'll work closely with cross-functional teams to create intuitive, user-centered designs that solve real problems.",
+  "We're looking for a talented Senior Product Designer to join our team and help shape the future of our products. You'll work closely with cross-functional teams to create intuitive, user-centered designs that solve real problems.",
   requirements: [
-    "5+ years of product design experience",
-    "Strong portfolio showcasing UX/UI work",
-    "Proficiency in Figma and design systems",
-    "Experience with user research and testing",
-    "Excellent communication and collaboration skills",
-  ],
+  "5+ years of product design experience",
+  "Strong portfolio showcasing UX/UI work",
+  "Proficiency in Figma and design systems",
+  "Experience with user research and testing",
+  "Excellent communication and collaboration skills"],
+
   responsibilities: [
-    "Lead design projects from concept to launch",
-    "Create wireframes, prototypes, and high-fidelity designs",
-    "Conduct user research and usability testing",
-    "Collaborate with product and engineering teams",
-    "Contribute to and maintain design system",
-  ],
+  "Lead design projects from concept to launch",
+  "Create wireframes, prototypes, and high-fidelity designs",
+  "Conduct user research and usability testing",
+  "Collaborate with product and engineering teams",
+  "Contribute to and maintain design system"]
+
 };
 
 const JOB_SUGGESTIONS = {
   Software: ["Senior Software Engineer", "Senior Automation Engineer", "Backend Engineer"],
   Product: ["Product Manager", "Project Manager", "Senior Project Manager"],
-  Design: ["Senior Product Designer", "UX Designer", "Junior UI Designer"],
+  Design: ["Senior Product Designer", "UX Designer", "Junior UI Designer"]
 };
 
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
@@ -77,17 +77,17 @@ function DefaultScreen({ onStart }) {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (prompt.trim()) onStart(prompt); }
+                if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();if (prompt.trim()) onStart(prompt);}
               }}
               placeholder="Describe the role, requirements, or make changes…"
               className="resize-none text-[13px] pr-12 rounded-2xl min-h-[60px] bg-white border-gray-200"
-              rows={2}
-            />
+              rows={2} />
+
             <Button
-              onClick={() => { if (prompt.trim()) onStart(prompt); }}
+              onClick={() => {if (prompt.trim()) onStart(prompt);}}
               size="icon"
-              className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-indigo-600 hover:bg-indigo-700"
-            >
+              className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-indigo-600 hover:bg-indigo-700">
+
               <Send className="w-3.5 h-3.5" />
             </Button>
           </div>
@@ -98,12 +98,12 @@ function DefaultScreen({ onStart }) {
       <div className="flex-1 flex flex-col items-center justify-center px-10 py-8">
         {/* Step dots */}
         <div className="flex items-center gap-3 mb-12">
-          {[0,1,2,3].map((i) => (
-            <React.Fragment key={i}>
+          {[0, 1, 2, 3].map((i) =>
+          <React.Fragment key={i}>
               <div className={`rounded-full border-2 transition-all ${i === 0 ? "w-4 h-4 bg-indigo-600 border-indigo-600" : "w-3 h-3 bg-white border-gray-300"}`} />
               {i < 3 && <div className="w-10 h-px bg-gray-300" />}
             </React.Fragment>
-          ))}
+          )}
         </div>
 
         {/* Hero */}
@@ -111,48 +111,48 @@ function DefaultScreen({ onStart }) {
           <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-4">
             <Sparkles className="w-7 h-7 text-indigo-500" />
           </div>
-          <h2 className="text-[18px] font-bold text-indigo-700 mb-1">SproutsAI Job Generation</h2>
+          <h2 className="text-indigo-700 mb-1 text-lg font-medium">SproutsAI Job Generation</h2>
           <p className="text-[12px] text-gray-400">Generate &amp; Post Job Instantly With Ease With SproutsAI Job Builder</p>
         </div>
 
         {/* Job suggestion grid */}
         <div className="grid grid-cols-3 gap-6 w-full max-w-2xl">
-          {Object.entries(JOB_SUGGESTIONS).map(([category, roles]) => (
-            <div key={category}>
+          {Object.entries(JOB_SUGGESTIONS).map(([category, roles]) =>
+          <div key={category}>
               <p className="text-[12px] font-semibold text-gray-700 text-center mb-3">{category}</p>
               <div className="space-y-2">
-                {roles.map((role) => (
-                  <button
-                    key={role}
-                    onClick={() => handleSuggestion(role)}
-                    className="w-full px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-[12px] text-gray-600 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all text-center"
-                  >
+                {roles.map((role) =>
+              <button
+                key={role}
+                onClick={() => handleSuggestion(role)}
+                className="w-full px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-[12px] text-gray-600 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all text-center">
+
                     {role}
                   </button>
-                ))}
+              )}
               </div>
             </div>
-          ))}
+          )}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 1: Generating (animated) ────────────────────────────────────────────
 function GeneratingScreen({ prompt, onDone }) {
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Got it! Let me analyse the role and generate a complete job description for you…" },
-  ]);
+  { role: "assistant", content: "Got it! Let me analyse the role and generate a complete job description for you…" }]
+  );
   const [input, setInput] = useState("");
   const [isGenerating, setIsGenerating] = useState(true);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: `Based on your prompt, I've drafted a job description for a ${DEFAULT_JD.title} role. You can refine it or continue to review.` },
-      ]);
+      ...prev,
+      { role: "assistant", content: `Based on your prompt, I've drafted a job description for a ${DEFAULT_JD.title} role. You can refine it or continue to review.` }]
+      );
       setIsGenerating(false);
     }, 2000);
     return () => clearTimeout(timer);
@@ -164,9 +164,9 @@ function GeneratingScreen({ prompt, onDone }) {
     setInput("");
     setTimeout(() => {
       setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Great suggestion! I've updated the job description accordingly." },
-      ]);
+      ...prev,
+      { role: "assistant", content: "Great suggestion! I've updated the job description accordingly." }]
+      );
     }, 600);
   };
 
@@ -179,24 +179,24 @@ function GeneratingScreen({ prompt, onDone }) {
             {prompt || "Generate a job description for our team."}
           </div>
         </div>
-        {messages.map((msg, idx) => (
-          <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            {msg.role === "assistant" && (
-              <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center mr-2 mt-1 shrink-0">
+        {messages.map((msg, idx) =>
+        <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+            {msg.role === "assistant" &&
+          <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center mr-2 mt-1 shrink-0">
                 <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
               </div>
-            )}
+          }
             <div
-              className={`max-w-[80%] px-4 py-3 rounded-2xl text-[13px] ${
-                msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"
-              }`}
-            >
+            className={`max-w-[80%] px-4 py-3 rounded-2xl text-[13px] ${
+            msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`
+            }>
+
               {msg.content}
             </div>
           </div>
-        ))}
-        {isGenerating && (
-          <div className="flex items-center gap-2">
+        )}
+        {isGenerating &&
+        <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
             </div>
@@ -206,7 +206,7 @@ function GeneratingScreen({ prompt, onDone }) {
               <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:300ms]" />
             </div>
           </div>
-        )}
+        }
       </div>
 
       <div className="p-4 border-t border-gray-100 shrink-0">
@@ -215,34 +215,34 @@ function GeneratingScreen({ prompt, onDone }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); }
+              if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();handleSend();}
             }}
             placeholder="Refine or add details…"
             className="resize-none text-[13px] pr-28 rounded-2xl min-h-[52px]"
-            rows={2}
-          />
+            rows={2} />
+
           <div className="absolute right-2 bottom-2 flex gap-2">
             <Button
               onClick={handleSend}
               size="sm"
               variant="ghost"
-              className="h-8 px-3 text-[12px]"
-            >
+              className="h-8 px-3 text-[12px]">
+
               <Send className="w-3.5 h-3.5" />
             </Button>
             <Button
               onClick={onDone}
               disabled={isGenerating}
               size="sm"
-              className="bg-indigo-600 hover:bg-indigo-700 h-8 px-3 text-[12px] gap-1"
-            >
+              className="bg-indigo-600 hover:bg-indigo-700 h-8 px-3 text-[12px] gap-1">
+
               Review <ArrowRight className="w-3.5 h-3.5" />
             </Button>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 2: Review JD ─────────────────────────────────────────────────────────
@@ -259,20 +259,20 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         {/* Meta */}
         <div className="grid grid-cols-2 gap-4">
           {[
-            { label: "Job Title", key: "title" },
-            { label: "Department", key: "department" },
-            { label: "Location", key: "location" },
-            { label: "Salary Range", key: "salary" },
-          ].map(({ label, key }) => (
-            <div key={key} className="space-y-1">
+          { label: "Job Title", key: "title" },
+          { label: "Department", key: "department" },
+          { label: "Location", key: "location" },
+          { label: "Salary Range", key: "salary" }].
+          map(({ label, key }) =>
+          <div key={key} className="space-y-1">
               <Label className="text-[11px] text-gray-500">{label}</Label>
               <Input
-                value={jd[key]}
-                onChange={(e) => setJd({ ...jd, [key]: e.target.value })}
-                className="h-8 text-[13px] bg-gray-50"
-              />
+              value={jd[key]}
+              onChange={(e) => setJd({ ...jd, [key]: e.target.value })}
+              className="h-8 text-[13px] bg-gray-50" />
+
             </div>
-          ))}
+          )}
         </div>
 
         {/* Description */}
@@ -282,46 +282,46 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             value={jd.description}
             onChange={(e) => setJd({ ...jd, description: e.target.value })}
             className="text-[13px] bg-gray-50 resize-none"
-            rows={4}
-          />
+            rows={4} />
+
         </div>
 
         {/* Requirements */}
         <div className="space-y-2">
           <Label className="text-[11px] text-gray-500">Requirements</Label>
-          {jd.requirements.map((req, i) => (
-            <div key={i} className="flex gap-2 items-center">
+          {jd.requirements.map((req, i) =>
+          <div key={i} className="flex gap-2 items-center">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
               <Input
-                value={req}
-                onChange={(e) => {
-                  const updated = [...jd.requirements];
-                  updated[i] = e.target.value;
-                  setJd({ ...jd, requirements: updated });
-                }}
-                className="h-8 text-[13px] bg-gray-50"
-              />
+              value={req}
+              onChange={(e) => {
+                const updated = [...jd.requirements];
+                updated[i] = e.target.value;
+                setJd({ ...jd, requirements: updated });
+              }}
+              className="h-8 text-[13px] bg-gray-50" />
+
             </div>
-          ))}
+          )}
         </div>
 
         {/* Responsibilities */}
         <div className="space-y-2">
           <Label className="text-[11px] text-gray-500">Responsibilities</Label>
-          {jd.responsibilities.map((resp, i) => (
-            <div key={i} className="flex gap-2 items-center">
+          {jd.responsibilities.map((resp, i) =>
+          <div key={i} className="flex gap-2 items-center">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
               <Input
-                value={resp}
-                onChange={(e) => {
-                  const updated = [...jd.responsibilities];
-                  updated[i] = e.target.value;
-                  setJd({ ...jd, responsibilities: updated });
-                }}
-                className="h-8 text-[13px] bg-gray-50"
-              />
+              value={resp}
+              onChange={(e) => {
+                const updated = [...jd.responsibilities];
+                updated[i] = e.target.value;
+                setJd({ ...jd, responsibilities: updated });
+              }}
+              className="h-8 text-[13px] bg-gray-50" />
+
             </div>
-          ))}
+          )}
         </div>
       </div>
       <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
@@ -330,16 +330,16 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           Continue <ArrowRight className="w-3.5 h-3.5" />
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 3: Screening Questions ──────────────────────────────────────────────
 function ScreeningScreen({ onBack, onNext, onSkip }) {
   const [questions, setQuestions] = useState([
-    "How many years of relevant experience do you have?",
-    "Are you authorized to work in the country of this role?",
-  ]);
+  "How many years of relevant experience do you have?",
+  "Are you authorized to work in the country of this role?"]
+  );
 
   const add = () => setQuestions([...questions, ""]);
   const remove = (i) => setQuestions(questions.filter((_, idx) => idx !== i));
@@ -356,27 +356,27 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         <p className="text-[12px] text-gray-400 mt-0.5">Optional — add questions candidates must answer when applying</p>
       </div>
       <div className="flex-1 overflow-y-auto px-6 py-5 space-y-3">
-        {questions.map((q, i) => (
-          <div key={i} className="flex gap-2 items-center">
+        {questions.map((q, i) =>
+        <div key={i} className="flex gap-2 items-center">
             <span className="text-[12px] text-gray-400 w-5 text-right shrink-0">{i + 1}.</span>
             <Input
-              value={q}
-              onChange={(e) => update(i, e.target.value)}
-              placeholder={`Question ${i + 1}`}
-              className="h-9 text-[13px] bg-gray-50"
-            />
+            value={q}
+            onChange={(e) => update(i, e.target.value)}
+            placeholder={`Question ${i + 1}`}
+            className="h-9 text-[13px] bg-gray-50" />
+
             <button
-              onClick={() => remove(i)}
-              className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-red-50 text-gray-300 hover:text-red-400 transition-colors shrink-0"
-            >
+            onClick={() => remove(i)}
+            className="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-red-50 text-gray-300 hover:text-red-400 transition-colors shrink-0">
+
               <X className="w-3.5 h-3.5" />
             </button>
           </div>
-        ))}
+        )}
         <button
           onClick={add}
-          className="flex items-center gap-1.5 text-[12px] text-indigo-600 hover:text-indigo-700 font-medium mt-2"
-        >
+          className="flex items-center gap-1.5 text-[12px] text-indigo-600 hover:text-indigo-700 font-medium mt-2">
+
           <Plus className="w-3.5 h-3.5" /> Add question
         </button>
       </div>
@@ -391,8 +391,8 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 4: Publish ──────────────────────────────────────────────────────────
@@ -400,9 +400,9 @@ function PublishScreen({ onBack, onPublish }) {
   const [settings, setSettings] = useState({ visibility: "public", duration: "30", platforms: [] });
 
   const togglePlatform = (p) => {
-    const updated = settings.platforms.includes(p)
-      ? settings.platforms.filter((x) => x !== p)
-      : [...settings.platforms, p];
+    const updated = settings.platforms.includes(p) ?
+    settings.platforms.filter((x) => x !== p) :
+    [...settings.platforms, p];
     setSettings({ ...settings, platforms: updated });
   };
 
@@ -417,20 +417,20 @@ function PublishScreen({ onBack, onPublish }) {
         <div className="space-y-2">
           <Label className="text-[12px] font-medium text-gray-600">Visibility</Label>
           <div className="flex gap-3">
-            {["public", "private"].map((v) => (
-              <button
-                key={v}
-                onClick={() => setSettings({ ...settings, visibility: v })}
-                className={`flex-1 p-4 rounded-xl border-2 text-left transition-all ${
-                  settings.visibility === v ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"
-                }`}
-              >
+            {["public", "private"].map((v) =>
+            <button
+              key={v}
+              onClick={() => setSettings({ ...settings, visibility: v })}
+              className={`flex-1 p-4 rounded-xl border-2 text-left transition-all ${
+              settings.visibility === v ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`
+              }>
+
                 <p className="font-semibold text-[13px] text-gray-900 capitalize mb-0.5">{v}</p>
                 <p className="text-[11px] text-gray-500">
                   {v === "public" ? "Visible to everyone" : "Only invited candidates"}
                 </p>
               </button>
-            ))}
+            )}
           </div>
         </div>
 
@@ -442,9 +442,9 @@ function PublishScreen({ onBack, onPublish }) {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {["7", "14", "30", "60", "90"].map((d) => (
-                <SelectItem key={d} value={d}>{d} days</SelectItem>
-              ))}
+              {["7", "14", "30", "60", "90"].map((d) =>
+              <SelectItem key={d} value={d}>{d} days</SelectItem>
+              )}
             </SelectContent>
           </Select>
         </div>
@@ -453,17 +453,17 @@ function PublishScreen({ onBack, onPublish }) {
         <div className="space-y-2">
           <Label className="text-[12px] font-medium text-gray-600">Post to Platforms</Label>
           <div className="grid grid-cols-2 gap-3">
-            {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((p) => (
-              <button
-                key={p}
-                onClick={() => togglePlatform(p)}
-                className={`p-3.5 rounded-xl border-2 text-left transition-all ${
-                  settings.platforms.includes(p) ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"
-                }`}
-              >
+            {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((p) =>
+            <button
+              key={p}
+              onClick={() => togglePlatform(p)}
+              className={`p-3.5 rounded-xl border-2 text-left transition-all ${
+              settings.platforms.includes(p) ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`
+              }>
+
                 <p className="font-semibold text-[13px] text-gray-900">{p}</p>
               </button>
-            ))}
+            )}
           </div>
         </div>
       </div>
@@ -473,8 +473,8 @@ function PublishScreen({ onBack, onPublish }) {
           <Sparkles className="w-4 h-4" /> Publish Job
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 5: Confirmation ─────────────────────────────────────────────────────
@@ -496,8 +496,8 @@ function ConfirmationScreen({ jobTitle, onGoToJobs }) {
           Create Another Job
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
@@ -512,8 +512,8 @@ export default function CreateJob() {
       <div className="flex flex-1 overflow-hidden px-4 py-4 gap-4 min-h-0">
 
         {/* Left Panel — AI Assistant (hidden on landing & confirmation) */}
-        {step > 0 && step < 5 && (
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-[360px] shrink-0 flex flex-col overflow-hidden">
+        {step > 0 && step < 5 &&
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-[360px] shrink-0 flex flex-col overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-200 shrink-0">
               <div className="flex items-center gap-2.5">
                 <div className="bg-indigo-600 rounded-xl w-8 h-8 flex items-center justify-center">
@@ -532,78 +532,78 @@ export default function CreateJob() {
                   {prompt || "I'll help you build the perfect job posting."}
                 </div>
               </div>
-              {step >= 2 && (
-                <div className="flex justify-start">
+              {step >= 2 &&
+            <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
                     ✅ Job description generated! Review it on the right and make any edits.
                   </div>
                 </div>
-              )}
-              {step >= 3 && (
-                <div className="flex justify-start">
+            }
+              {step >= 3 &&
+            <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
                     Great! Now add optional screening questions, or skip this step.
                   </div>
                 </div>
-              )}
-              {step >= 4 && (
-                <div className="flex justify-start">
+            }
+              {step >= 4 &&
+            <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
                     Almost there! Choose your publish settings and go live.
                   </div>
                 </div>
-              )}
+            }
             </div>
           </div>
-        )}
+        }
 
         {/* Right Panel — Main Content */}
         <div className={`${step === 0 ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"} overflow-hidden flex flex-col flex-1`}>
-          {step === 0 && (
-            <DefaultScreen
-              onStart={(p) => {
-                setPrompt(p);
-                setStep(1);
-              }}
-            />
-          )}
-          {step === 1 && (
-            <GeneratingScreen
-              prompt={prompt}
-              onDone={() => setStep(2)}
-            />
-          )}
-          {step === 2 && (
-            <ReviewJDScreen
-              job={generatedJob}
-              onBack={() => setStep(1)}
-              onNext={(updatedJd) => {
-                setGeneratedJob(updatedJd);
-                setStep(3);
-              }}
-            />
-          )}
-          {step === 3 && (
-            <ScreeningScreen
-              onBack={() => setStep(2)}
-              onNext={() => setStep(4)}
-              onSkip={() => setStep(4)}
-            />
-          )}
-          {step === 4 && (
-            <PublishScreen
-              onBack={() => setStep(3)}
-              onPublish={() => setStep(5)}
-            />
-          )}
-          {step === 5 && (
-            <ConfirmationScreen
-              jobTitle={generatedJob.title}
-              onGoToJobs={() => window.location.href = createPageUrl("Dashboard")}
-            />
-          )}
+          {step === 0 &&
+          <DefaultScreen
+            onStart={(p) => {
+              setPrompt(p);
+              setStep(1);
+            }} />
+
+          }
+          {step === 1 &&
+          <GeneratingScreen
+            prompt={prompt}
+            onDone={() => setStep(2)} />
+
+          }
+          {step === 2 &&
+          <ReviewJDScreen
+            job={generatedJob}
+            onBack={() => setStep(1)}
+            onNext={(updatedJd) => {
+              setGeneratedJob(updatedJd);
+              setStep(3);
+            }} />
+
+          }
+          {step === 3 &&
+          <ScreeningScreen
+            onBack={() => setStep(2)}
+            onNext={() => setStep(4)}
+            onSkip={() => setStep(4)} />
+
+          }
+          {step === 4 &&
+          <PublishScreen
+            onBack={() => setStep(3)}
+            onPublish={() => setStep(5)} />
+
+          }
+          {step === 5 &&
+          <ConfirmationScreen
+            jobTitle={generatedJob.title}
+            onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
+
+          }
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
