@@ -122,7 +122,7 @@ export default function CreateJob() {
         <div className="flex flex-1 overflow-hidden">
         {/* Left Panel - AI Chat */}
         <div className="bg-white mx-3 my-3 px-1 rounded-2xl w-[420px] border-r border-gray-200 flex flex-col">
-          <div className="p-6 border-b border-gray-200">
+          <div className="pt-5 pr-3 pb-4 pl-3 border-b border-gray-200">
             <div className="flex items-center gap-2.5 mb-2">
               <div className="bg-slate-400 rounded-3xl w-8 h-8 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
@@ -131,9 +131,9 @@ export default function CreateJob() {
                 AI Job Builder
               </h2>
             </div>
-            <p className="text-[12px] text-gray-500">
-              Tell me about the position and I'll create a compelling job posting
-            </p>
+            
+
+
           </div>
           {/* Progress Bar - Integrated into left panel */}
           <div className="px-6 py-4 border-b border-gray-200">
