@@ -159,48 +159,48 @@ function PipelineBar({ value, total }) {
 export default function Home() {
   const insightCards = [
   {
-    title: "Insights",
-    subtitle: "Revenue Growth",
+    title: "Applicants per job posting",
+    subtitle: "Average applicants",
     numericValue: 75,
-    unit: "%",
+    unit: "",
     badge: "↑",
     chartType: "line",
     chartData: [30, 45, 35, 55, 50, 60, 75],
     lineColor: "#f97316",
     dotColor: "#f97316",
-    description: "Expect your revenue to rise and shine before this month closes."
+    description: "Average number of applicants across all active job postings."
   },
   {
-    title: "Conversion",
-    subtitle: "Conversion Rate",
+    title: "Candidates in Pipeline",
+    subtitle: "Pipeline status",
     numericValue: 120,
-    unit: "%",
+    unit: "",
     badge: "↑",
     chartType: "line",
     chartData: [60, 70, 65, 80, 90, 100, 120],
     lineColor: "#3b82f6",
     dotColor: "#3b82f6",
-    description: "Conversions set to rise this month."
+    description: "Total candidates currently in your hiring pipeline."
   },
   {
-    title: "ROI",
-    subtitle: "Business ROI",
+    title: "New Applicants",
+    subtitle: "This week",
     numericValue: 270,
-    unit: "%",
+    unit: "",
     chartType: "donut",
     chartData: [],
     lineColor: "#6366f1",
-    description: "270%+ Business ROI increased compare to previous week."
+    description: "New applicants received this week across all positions."
   },
   {
-    title: "ROI",
-    subtitle: "Business ROI",
+    title: "Resume processed this month",
+    subtitle: "Total processed",
     numericValue: 270,
-    unit: "%",
+    unit: "",
     chartType: "donut",
     chartData: [],
     lineColor: "#a855f7",
-    description: "270%+ Business ROI increased compare to previous week."
+    description: "Total resumes processed and reviewed this month."
   }];
 
 
