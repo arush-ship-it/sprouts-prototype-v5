@@ -558,7 +558,7 @@ export default function CreateJob() {
         )}
 
         {/* Right Panel — Main Content */}
-        <div className={`bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col ${step === 0 || step === 5 ? "flex-1" : "flex-1"}`}>
+        <div className={`${step === 0 ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"} overflow-hidden flex flex-col flex-1`}>
           {step === 0 && (
             <DefaultScreen
               onStart={(p) => {
