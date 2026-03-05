@@ -108,10 +108,10 @@ function DefaultScreen({ onStart }) {
 
         {/* Hero */}
         <div className="text-center mb-10">
-          <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-4">
-            <Sparkles className="w-7 h-7 text-indigo-500" />
+          <div className="bg-[#f2f2f2] mb-4 mx-auto rounded-2xl w-14 h-14 flex items-center justify-center">
+            <Sparkles className="text-blue-600 lucide lucide-sparkles w-7 h-7" />
           </div>
-          <h2 className="text-indigo-700 mb-1 text-lg font-medium">SproutsAI Job Generation</h2>
+          <h2 className="text-blue-700 mb-1 text-lg font-medium">SproutsAI Job Generation</h2>
           <p className="text-[12px] text-gray-400">Generate &amp; Post Job Instantly With Ease With SproutsAI Job Builder</p>
         </div>
 
