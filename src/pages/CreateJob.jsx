@@ -528,7 +528,7 @@ function PublishScreen({ onBack, onPublish }) {
 // ─── Step 5: Confirmation ─────────────────────────────────────────────────────
 function ConfirmationScreen({ jobTitle, onGoToJobs }) {
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center px-8">
+    <div className="bg-[#f2f2f2] px-8 text-center flex flex-col items-center justify-center h-full">
       <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-5">
         <CheckCircle2 className="w-8 h-8 text-emerald-500" />
       </div>
