@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Briefcase, ChevronDown } from "lucide-react";
+import { Briefcase, ChevronDown, Mail, Calendar } from "lucide-react";
 
 // ── Animated counter ──────────────────────────────────────────────────────────
 function useCountUp(target, duration = 1200) {
