@@ -112,7 +112,9 @@ export default function Home() {
     iconBg: "bg-blue-50",
     title: "Applicants per Job Posting",
     value: "45.2",
-    subtitle: "Average per posting"
+    subtitle: "Average per posting",
+    sparkline: [28, 32, 38, 35, 40, 43, 45],
+    sparklineColor: "bg-blue-400"
   },
   {
     icon: FileText,
@@ -121,7 +123,9 @@ export default function Home() {
     title: "JD Processed This Month",
     value: "23",
     subtitle: "+12% from last month",
-    trend: true
+    trend: true,
+    sparkline: [10, 14, 16, 18, 20, 21, 23],
+    sparklineColor: "bg-purple-400"
   },
   {
     icon: TrendingUp,
@@ -129,7 +133,9 @@ export default function Home() {
     iconBg: "bg-green-50",
     title: "Candidates in Pipeline",
     value: "342",
-    subtitle: "Across all jobs"
+    subtitle: "Across all jobs",
+    sparkline: [200, 240, 260, 290, 310, 330, 342],
+    sparklineColor: "bg-green-400"
   },
   {
     icon: Inbox,
@@ -137,7 +143,9 @@ export default function Home() {
     iconBg: "bg-orange-50",
     title: "New Applications",
     value: "28",
-    subtitle: "To be reviewed"
+    subtitle: "To be reviewed",
+    sparkline: [10, 15, 18, 22, 20, 25, 28],
+    sparklineColor: "bg-orange-400"
   },
   {
     icon: FileCheck,
@@ -146,7 +154,9 @@ export default function Home() {
     title: "Resumes Processed This Month",
     value: "156",
     subtitle: "+38% from last month",
-    trend: true
+    trend: true,
+    sparkline: [60, 80, 100, 115, 130, 145, 156],
+    sparklineColor: "bg-pink-400"
   },
   {
     icon: PieChart,
