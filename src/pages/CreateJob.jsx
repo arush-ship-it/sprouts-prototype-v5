@@ -285,8 +285,8 @@ export default function CreateJob() {
               </div>
               }
 
-            {/* Step 2: Job Details */}
-            {currentStep === 2 &&
+            {/* Step 1: Job Details */}
+            {currentStep === 1 &&
               <div className="space-y-6 max-w-6xl mx-auto">
               <div>
                 <h2 className="text-[20px] font-semibold text-gray-900 mb-2">Job Details</h2>
