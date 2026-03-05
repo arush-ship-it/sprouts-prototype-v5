@@ -198,7 +198,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-[F2F3F5] flex-1 overflow-y-auto">
+      <div className="bg-[#f2f2f2] flex-1 overflow-y-auto">
         {/* JD Preview Card */}
         <div className="bg-white mt-6 mb-5 mx-6 rounded-2xl border border-gray-100 shadow-sm">
           <h2 className="text-[16px] font-bold text-gray-900 mb-5">{jd.title}</h2>
@@ -347,7 +347,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
       </div>
 
-      <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <Button onClick={() => onNext(jd)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
           Continue <ArrowRight className="w-3.5 h-3.5" />
