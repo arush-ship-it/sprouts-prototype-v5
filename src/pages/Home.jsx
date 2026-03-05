@@ -135,37 +135,37 @@ export default function Home() {
             <h1 className="text-slate-700 text-2xl font-semibold">Hello Arush, Welcome to SproutsAI!
 
             </h1>
-            <Bell className="text-gray-700 lucide lucide-bell w-5 h-5 cursor-pointer hover:text-gray-600" />
+            
             <Link to={createPageUrl("Settings")}>
-              <Settings className="text-gray-700 lucide lucide-settings w-5 h-5 cursor-pointer hover:text-gray-600" />
+              
             </Link>
           </div>
-          <div className="my-1 flex items-center gap-2">
-            <Link to={createPageUrl("Dashboard")}>
-              <Button variant="outline" size="sm" className="gap-2 h-12 px-5 border-0">
-                <BarChart3 className="w-5 h-5" />
-                Analytics
-              </Button>
-            </Link>
-            <Link to={createPageUrl("Console")}>
-              <Button variant="outline" size="sm" className="gap-2 h-12 px-5 border-0">
-                <Briefcase className="w-5 h-5" />
-                Console
-              </Button>
-            </Link>
-            <Link to={createPageUrl("CreateJob")}>
-              <Button variant="outline" size="sm" className="gap-2 h-12 px-5 border-0">
-                <PlusCircle className="w-5 h-5" />
-                Create Job
-              </Button>
-            </Link>
-            <Link to={createPageUrl("TalentPool")}>
-              <Button variant="outline" size="sm" className="gap-2 h-12 px-5 border-0">
-                <UserSquare2 className="w-5 h-5" />
-                Talent Pool
-              </Button>
-            </Link>
-          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
         {/* Stats Grid */}
