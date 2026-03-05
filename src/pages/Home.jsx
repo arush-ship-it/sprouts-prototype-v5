@@ -26,7 +26,7 @@ function useCountUp(target, duration = 1000) {
   const ref = useRef(null);
   useEffect(() => {
     const num = parseFloat(target);
-    if (isNaN(num)) { setCount(target); return; }
+    if (isNaN(num)) {setCount(target);return;}
     const start = Date.now();
     const step = () => {
       const elapsed = Date.now() - start;
@@ -45,41 +45,41 @@ function MiniSparkline({ data, color }) {
   const max = Math.max(...data);
   return (
     <div className="flex items-end gap-0.5 h-8">
-      {data.map((v, i) => (
-        <div
-          key={i}
-          className={`w-1.5 rounded-sm transition-all duration-300 ${color}`}
-          style={{ height: `${(v / max) * 100}%`, opacity: i === data.length - 1 ? 1 : 0.4 + (i / data.length) * 0.5 }}
-        />
-      ))}
-    </div>
-  );
+      {data.map((v, i) =>
+      <div
+        key={i}
+        className={`w-1.5 rounded-sm transition-all duration-300 ${color}`}
+        style={{ height: `${v / max * 100}%`, opacity: i === data.length - 1 ? 1 : 0.4 + i / data.length * 0.5 }} />
+
+      )}
+    </div>);
+
 }
 
 // Pipeline fill bar
 function PipelineBar({ value, total, color }) {
   const [width, setWidth] = useState(0);
-  useEffect(() => { setTimeout(() => setWidth((value / total) * 100), 200); }, [value, total]);
+  useEffect(() => {setTimeout(() => setWidth(value / total * 100), 200);}, [value, total]);
   return (
     <div className="w-full bg-gray-100 rounded-full h-1.5 mt-2">
       <div className={`h-1.5 rounded-full transition-all duration-700 ease-out ${color}`} style={{ width: `${width}%` }} />
-    </div>
-  );
+    </div>);
+
 }
 
 // Animated stat card
 function StatCard({ stat }) {
   const num = parseFloat(stat.value);
   const animated = useCountUp(isNaN(num) ? 0 : num);
-  const displayValue = isNaN(num) ? stat.value : (Number.isInteger(num) ? animated : animated);
+  const displayValue = isNaN(num) ? stat.value : Number.isInteger(num) ? animated : animated;
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
       className={`bg-white rounded-xl p-6 shadow-sm border border-gray-100 cursor-default transition-all duration-200 ${hovered ? "shadow-md -translate-y-0.5 border-gray-200" : ""}`}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+      onMouseLeave={() => setHovered(false)}>
+
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
           <div className={`${stat.iconBg} p-2 rounded-[10px] flex-shrink-0`}>
@@ -94,14 +94,14 @@ function StatCard({ stat }) {
             </div>
           </div>
         </div>
-        {stat.sparkline && (
-          <div className="shrink-0">
+        {stat.sparkline &&
+        <div className="shrink-0">
             <MiniSparkline data={stat.sparkline} color={stat.sparklineColor || "bg-blue-400"} />
           </div>
-        )}
+        }
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 export default function Home() {
@@ -281,8 +281,8 @@ export default function Home() {
                     key={job.id}
                     className={`bg-[#fcfcfc] p-4 rounded-lg border transition-all duration-200 ${hovered ? "border-blue-100 shadow-sm bg-blue-50/20" : "border-transparent"}`}
                     onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                  >
+                    onMouseLeave={() => setHovered(false)}>
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
                         <div className={`rounded-lg w-10 h-10 flex items-center justify-center transition-colors duration-200 ${hovered ? "bg-blue-50" : "bg-slate-50"}`}>
@@ -310,15 +310,15 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
+                  </div>);
+
               })}
             </div>
           </div>
 
           {/* Recent Activity */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-gray-800 mb-6 text-base font-semibold">Recent Activity</h2>
+            <h2 className="text-gray-800 mb-6 text-base font-semibold">Pending Approvals</h2>
             <div className="space-y-4 relative">
               <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-100" />
               {recentActivity.map((activity, idx) => {
@@ -328,8 +328,8 @@ export default function Home() {
                     key={activity.id}
                     className={`flex items-start gap-4 relative transition-all duration-200 ${hovered ? "translate-x-0.5" : ""}`}
                     onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                  >
+                    onMouseLeave={() => setHovered(false)}>
+
                     <div className={`rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 border-2 transition-all duration-200 z-10 ${hovered ? "bg-blue-500 border-blue-500" : "bg-white border-slate-200"}`}>
                       <span className={`text-[13px] font-bold transition-colors duration-200 ${hovered ? "text-white" : "text-slate-400"}`}>✓</span>
                     </div>
@@ -337,8 +337,8 @@ export default function Home() {
                       <p className={`text-[14px] font-medium transition-colors duration-200 ${hovered ? "text-blue-600" : "text-gray-900"}`}>{activity.text}</p>
                       <p className="text-[12px] text-gray-400 mt-0.5">{activity.time}</p>
                     </div>
-                  </div>
-                );
+                  </div>);
+
               })}
             </div>
           </div>
