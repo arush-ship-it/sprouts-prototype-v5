@@ -192,9 +192,6 @@ function GeneratingScreen({ prompt, onDone }) {
 
 
 
-
-
-
     </div>);
 
 }
