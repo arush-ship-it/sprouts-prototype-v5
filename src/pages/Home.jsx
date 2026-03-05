@@ -308,9 +308,9 @@ function ApprovalItem({ item }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
 
-      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${hovered ? "bg-blue-500 border-blue-500" : "bg-white border-gray-200"}`}>
-        <span className={`text-[11px] font-bold transition-colors ${hovered ? "text-white" : "text-gray-400"}`}>✓</span>
-      </div>
+      
+
+
       <div>
         <p className={`text-[13px] font-medium leading-snug transition-colors ${hovered ? "text-blue-600" : "text-gray-800"}`}>{item.text}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{item.time}</p>
