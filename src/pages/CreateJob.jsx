@@ -282,91 +282,75 @@ export default function CreateJob() {
             {/* Step 3: Publish */}
             {currentStep === 3 &&
               <div className="flex flex-col h-full">
-              <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
-                <h2 className="text-[16px] font-semibold text-gray-900">Publish Job</h2>
-                <p className="text-[12px] text-gray-400 mt-0.5">Choose where and how to post your job</p>
-              </div>
-              <div className="flex-1 overflow-y-auto px-6 py-5">
-              <div className="space-y-6 max-w-2xl">
-              <div className="bg-gray-50 rounded-2xl p-5 space-y-6">
-                <div className="space-y-4">
-                  <Label className="text-[13px] font-medium">Visibility</Label>
-                  <div className="flex gap-3">
-                    <button
-                        onClick={() => setPublishSettings({ ...publishSettings, visibility: "public" })}
-                        className={`flex-1 p-4 rounded-xl border-2 transition-all ${
-                        publishSettings.visibility === "public" ?
-                        "border-indigo-600 bg-indigo-50" :
-                        "border-gray-200 hover:border-gray-300"}`
-                        }>
-                      <p className="font-semibold text-[14px] text-gray-900 mb-1">Public</p>
-                      <p className="text-[12px] text-gray-500">Visible to everyone</p>
-                    </button>
-                    <button
-                        onClick={() => setPublishSettings({ ...publishSettings, visibility: "private" })}
-                        className={`flex-1 p-4 rounded-xl border-2 transition-all ${
-                        publishSettings.visibility === "private" ?
-                        "border-indigo-600 bg-indigo-50" :
-                        "border-gray-200 hover:border-gray-300"}`
-                        }>
-                      <p className="font-semibold text-[14px] text-gray-900 mb-1">Private</p>
-                      <p className="text-[12px] text-gray-500">Only visible to invited candidates</p>
-                    </button>
+                <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
+                  <h2 className="text-[16px] font-semibold text-gray-900">Publish Job</h2>
+                  <p className="text-[12px] text-gray-400 mt-0.5">Choose where and how to post your job</p>
+                </div>
+                <div className="flex-1 overflow-y-auto px-6 py-5">
+                  <div className="space-y-6 max-w-2xl">
+                    <div className="bg-gray-50 rounded-2xl p-5 space-y-6">
+                      <div className="space-y-4">
+                        <Label className="text-[13px] font-medium">Visibility</Label>
+                        <div className="flex gap-3">
+                          <button
+                            onClick={() => setPublishSettings({ ...publishSettings, visibility: "public" })}
+                            className={`flex-1 p-4 rounded-xl border-2 transition-all ${publishSettings.visibility === "public" ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`}>
+                            <p className="font-semibold text-[14px] text-gray-900 mb-1">Public</p>
+                            <p className="text-[12px] text-gray-500">Visible to everyone</p>
+                          </button>
+                          <button
+                            onClick={() => setPublishSettings({ ...publishSettings, visibility: "private" })}
+                            className={`flex-1 p-4 rounded-xl border-2 transition-all ${publishSettings.visibility === "private" ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`}>
+                            <p className="font-semibold text-[14px] text-gray-900 mb-1">Private</p>
+                            <p className="text-[12px] text-gray-500">Only visible to invited candidates</p>
+                          </button>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="duration" className="text-[13px] font-medium">Duration (days)</Label>
+                        <Select value={publishSettings.duration} onValueChange={(val) => setPublishSettings({ ...publishSettings, duration: val })}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select duration" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="7">7 days</SelectItem>
+                            <SelectItem value="14">14 days</SelectItem>
+                            <SelectItem value="30">30 days</SelectItem>
+                            <SelectItem value="60">60 days</SelectItem>
+                            <SelectItem value="90">90 days</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-3">
+                        <Label className="text-[13px] font-medium">Post to Platforms</Label>
+                        <div className="grid grid-cols-2 gap-3">
+                          {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((platform) =>
+                            <button
+                              key={platform}
+                              onClick={() => {
+                                const platforms = publishSettings.platforms.includes(platform) ?
+                                  publishSettings.platforms.filter((p) => p !== platform) :
+                                  [...publishSettings.platforms, platform];
+                                setPublishSettings({ ...publishSettings, platforms });
+                              }}
+                              className={`p-4 rounded-xl border-2 text-left transition-all ${publishSettings.platforms.includes(platform) ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`}>
+                              <p className="font-semibold text-[14px] text-gray-900">{platform}</p>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="duration" className="text-[13px] font-medium">Duration (days)</Label>
-                  <Select value={publishSettings.duration} onValueChange={(val) => setPublishSettings({ ...publishSettings, duration: val })}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select duration" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="7">7 days</SelectItem>
-                      <SelectItem value="14">14 days</SelectItem>
-                      <SelectItem value="30">30 days</SelectItem>
-                      <SelectItem value="60">60 days</SelectItem>
-                      <SelectItem value="90">90 days</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-3">
-                  <Label className="text-[13px] font-medium">Post to Platforms</Label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((platform) =>
-                      <button
-                        key={platform}
-                        onClick={() => {
-                          const platforms = publishSettings.platforms.includes(platform) ?
-                          publishSettings.platforms.filter((p) => p !== platform) :
-                          [...publishSettings.platforms, platform];
-                          setPublishSettings({ ...publishSettings, platforms });
-                        }}
-                        className={`p-4 rounded-xl border-2 text-left transition-all ${
-                        publishSettings.platforms.includes(platform) ?
-                        "border-indigo-600 bg-indigo-50" :
-                        "border-gray-200 hover:border-gray-300"}`
-                        }>
-                        <p className="font-semibold text-[14px] text-gray-900">{platform}</p>
-                      </button>
-                      )}
-                  </div>
+                <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
+                  <Button variant="outline" onClick={() => setCurrentStep(2)}>Back</Button>
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-[13px] px-5">
+                    <Sparkles className="w-4 h-4" />
+                    Publish Job
+                  </Button>
                 </div>
               </div>
-
-              </div>
-              </div>
-              </div>
-              <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
-                <Button variant="outline" onClick={() => setCurrentStep(2)}>Back</Button>
-                <Button className="bg-emerald-600 hover:bg-emerald-700 text-[13px] px-5">
-                  <Sparkles className="w-4 h-4" />
-                  Publish Job
-                </Button>
-              </div>
-            </div>
-              }
+            }
 
           </div>
         </div>
