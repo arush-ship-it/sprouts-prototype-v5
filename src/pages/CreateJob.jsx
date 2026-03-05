@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Send, Sparkles, Briefcase, MapPin, DollarSign, Clock, Bell, Settings, User, CheckCircle2, Circle, ChevronLeft } from "lucide-react";
+import { Send, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import TabSwitcher from "@/components/shared/TabSwitcher";
+import { Label } from "@/components/ui/label";
+import JobDetailsForm from "@/components/createjob/JobDetailsForm";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 
