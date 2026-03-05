@@ -157,6 +157,7 @@ function PipelineBar({ value, total }) {
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
+  const navigate = useNavigate();
   const insightCards = [
   {
     title: "Applicants per job posting",
