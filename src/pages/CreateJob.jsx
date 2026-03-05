@@ -246,84 +246,178 @@ function GeneratingScreen({ prompt, onDone }) {
 }
 
 // ─── Step 2: Review JD ─────────────────────────────────────────────────────────
+const JOB_TYPES = ["Full-time", "Part-time", "Contract", "Internship", "Freelance"];
+const WORKPLACE_TYPES = ["On-site", "Remote", "Hybrid"];
+const BENEFITS_OPTIONS = ["Health Insurance", "401k", "Flexible Hours", "Stock Options", "Remote Work", "Gym Membership", "Learning Budget", "Unlimited PTO"];
+
 function ReviewJDScreen({ job, onBack, onNext }) {
   const [jd, setJd] = useState(job);
+  const [jobDetails, setJobDetails] = useState({
+    companyName: "", jobTitle: jd.title || "", department: jd.department || "",
+    internalJobTitle: "", jobType: "Full-time", workplaceType: "On-site",
+    location: jd.location || "", salary: jd.salary || "", jobGrade: "", headcount: "1",
+    benefits: ""
+  });
+
+  const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
+  const toggleBenefit = (b) => {
+    const updated = selectedBenefits.includes(b) ? selectedBenefits.filter(x => x !== b) : [...selectedBenefits, b];
+    setJobDetails({ ...jobDetails, benefits: updated.join(",") });
+  };
+  const toggleJobType = (val) => setJobDetails({ ...jobDetails, jobType: val });
+  const toggleWorkplace = (val) => setJobDetails({ ...jobDetails, workplaceType: val });
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
-        <h2 className="text-[15px] font-semibold text-gray-900">Review Job Description</h2>
-        <p className="text-[12px] text-gray-400 mt-0.5">Review and edit before continuing</p>
+      <div className="flex-1 overflow-y-auto">
+        {/* JD Preview Card */}
+        <div className="mx-6 mt-6 mb-5 bg-white rounded-2xl border border-gray-100 shadow-sm px-8 py-6">
+          <h2 className="text-[16px] font-bold text-gray-900 mb-5">{jd.title}</h2>
+
+          <h3 className="text-[15px] font-bold text-gray-900 mb-2">About the Role</h3>
+          <p className="text-[13px] text-gray-700 leading-relaxed mb-5">{jd.description}</p>
+
+          <h3 className="text-[15px] font-bold text-gray-900 mb-2">Requirements</h3>
+          <ul className="mb-5 space-y-1">
+            {jd.requirements.map((req, i) => (
+              <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />{req}
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="text-[15px] font-bold text-gray-900 mb-2">Responsibilities</h3>
+          <ul className="space-y-1">
+            {jd.responsibilities.map((resp, i) => (
+              <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />{resp}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Role Information */}
+        <div className="mx-6 mb-4 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+              <Sparkles className="w-4 h-4 text-indigo-600" />
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-gray-900">Role Information</p>
+              <p className="text-[11px] text-gray-400">Core job details</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { label: "Company Name", key: "companyName", placeholder: "e.g. Acme Corp" },
+              { label: "Job Title *", key: "jobTitle", placeholder: "e.g. Senior Designer" },
+              { label: "Department", key: "department", placeholder: "e.g. Engineering" },
+              { label: "Internal Job Title", key: "internalJobTitle", placeholder: "Internal reference" },
+            ].map(({ label, key, placeholder }) => (
+              <div key={key} className="space-y-1.5">
+                <Label className="text-[12px] font-medium text-gray-600">{label}</Label>
+                <Input value={jobDetails[key]} onChange={(e) => setJobDetails({ ...jobDetails, [key]: e.target.value })} placeholder={placeholder} className="h-9 text-[13px] bg-gray-50" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Work Arrangement */}
+        <div className="mx-6 mb-4 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+              <ArrowRight className="w-4 h-4 text-indigo-600" />
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-gray-900">Work Arrangement</p>
+              <p className="text-[11px] text-gray-400">Type and location</p>
+            </div>
+          </div>
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[12px] font-medium text-gray-600 w-20">Job Type</span>
+              {JOB_TYPES.map(t => (
+                <button key={t} onClick={() => toggleJobType(t)}
+                  className={`px-3 py-1 rounded-full text-[12px] border transition-all ${jobDetails.jobType === t ? "bg-indigo-50 border-indigo-400 text-indigo-700" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+                  {t}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[12px] font-medium text-gray-600 w-20">Workplace</span>
+              {WORKPLACE_TYPES.map(t => (
+                <button key={t} onClick={() => toggleWorkplace(t)}
+                  className={`px-3 py-1 rounded-full text-[12px] border transition-all ${jobDetails.workplaceType === t ? "bg-indigo-50 border-indigo-400 text-indigo-700" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+                  {t}
+                </button>
+              ))}
+            </div>
+            <div className="space-y-1.5">
+              <Label className="text-[12px] font-medium text-gray-600">Location</Label>
+              <Input value={jobDetails.location} onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })} placeholder="e.g. San Francisco, CA" className="h-9 text-[13px] bg-gray-50" />
+            </div>
+          </div>
+        </div>
+
+        {/* Compensation */}
+        <div className="mx-6 mb-4 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+              <ArrowRight className="w-4 h-4 text-indigo-600" />
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-gray-900">Compensation &amp; Scale</p>
+              <p className="text-[11px] text-gray-400">Salary and headcount</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="space-y-1.5">
+              <Label className="text-[12px] font-medium text-gray-600">Salary Range</Label>
+              <Input value={jobDetails.salary} onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })} placeholder="e.g. $120k – $180k" className="h-9 text-[13px] bg-gray-50" />
+            </div>
+            <div className="space-y-1.5">
+              <Label className="text-[12px] font-medium text-gray-600">Job Grade</Label>
+              <Input value={jobDetails.jobGrade} onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })} placeholder="e.g. L4, Senior" className="h-9 text-[13px] bg-gray-50" />
+            </div>
+          </div>
+          <div className="space-y-1.5">
+            <Label className="text-[12px] font-medium text-gray-600">Headcount</Label>
+            <div className="flex items-center gap-3">
+              <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.max(1, parseInt(jobDetails.headcount || 1) - 1)) })}
+                className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+                <span className="text-lg leading-none">‹</span>
+              </button>
+              <span className="text-[15px] font-semibold text-gray-900 w-6 text-center">{jobDetails.headcount}</span>
+              <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.min(50, parseInt(jobDetails.headcount || 1) + 1)) })}
+                className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+                <span className="text-lg leading-none">›</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Benefits */}
+        <div className="mx-6 mb-6 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+              <ArrowRight className="w-4 h-4 text-indigo-600" />
+            </div>
+            <div>
+              <p className="text-[13px] font-semibold text-gray-900">Benefits &amp; Perks</p>
+              <p className="text-[11px] text-gray-400">Select what you offer</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {BENEFITS_OPTIONS.map(b => (
+              <button key={b} onClick={() => toggleBenefit(b)}
+                className={`px-3 py-1.5 rounded-full text-[12px] border transition-all ${selectedBenefits.includes(b) ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+                {b}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
-        {/* Meta */}
-        <div className="grid grid-cols-2 gap-4">
-          {[
-          { label: "Job Title", key: "title" },
-          { label: "Department", key: "department" },
-          { label: "Location", key: "location" },
-          { label: "Salary Range", key: "salary" }].
-          map(({ label, key }) =>
-          <div key={key} className="space-y-1">
-              <Label className="text-[11px] text-gray-500">{label}</Label>
-              <Input
-              value={jd[key]}
-              onChange={(e) => setJd({ ...jd, [key]: e.target.value })}
-              className="h-8 text-[13px] bg-gray-50" />
 
-            </div>
-          )}
-        </div>
-
-        {/* Description */}
-        <div className="space-y-1">
-          <Label className="text-[11px] text-gray-500">About the Role</Label>
-          <Textarea
-            value={jd.description}
-            onChange={(e) => setJd({ ...jd, description: e.target.value })}
-            className="text-[13px] bg-gray-50 resize-none"
-            rows={4} />
-
-        </div>
-
-        {/* Requirements */}
-        <div className="space-y-2">
-          <Label className="text-[11px] text-gray-500">Requirements</Label>
-          {jd.requirements.map((req, i) =>
-          <div key={i} className="flex gap-2 items-center">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
-              <Input
-              value={req}
-              onChange={(e) => {
-                const updated = [...jd.requirements];
-                updated[i] = e.target.value;
-                setJd({ ...jd, requirements: updated });
-              }}
-              className="h-8 text-[13px] bg-gray-50" />
-
-            </div>
-          )}
-        </div>
-
-        {/* Responsibilities */}
-        <div className="space-y-2">
-          <Label className="text-[11px] text-gray-500">Responsibilities</Label>
-          {jd.responsibilities.map((resp, i) =>
-          <div key={i} className="flex gap-2 items-center">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
-              <Input
-              value={resp}
-              onChange={(e) => {
-                const updated = [...jd.responsibilities];
-                updated[i] = e.target.value;
-                setJd({ ...jd, responsibilities: updated });
-              }}
-              className="h-8 text-[13px] bg-gray-50" />
-
-            </div>
-          )}
-        </div>
-      </div>
       <div className="px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <Button onClick={() => onNext(jd)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
