@@ -302,7 +302,7 @@ export default function TalentPool() {
 
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto">
-        <div className="p-8">
+        <div className="px-8 py-4">
           <div className="mb-6">
             <div className="mb-1 flex items-center gap-2">
               <Link to={createPageUrl("Home")}>
