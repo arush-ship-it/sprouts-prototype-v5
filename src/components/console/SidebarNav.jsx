@@ -54,11 +54,11 @@ export default function SidebarNav({ activePage = "Console" }) {
           
 
 
-          <Link to={createPageUrl("Home")}>
-            <span className="text-gray-900 font-semibold text-[15px] tracking-tight cursor-pointer hover:text-blue-600 transition-colors">
-              Sprouts AI
-            </span>
-          </Link>
+          
+
+
+
+
         </div>
 
         {/* Job Selector */}
