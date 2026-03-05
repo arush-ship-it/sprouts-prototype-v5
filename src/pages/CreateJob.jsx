@@ -347,7 +347,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] pt-4 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] pt-2 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <Button onClick={() => onNext(jd)} className="bg-blue-600 text-[#ffffff] px-5 py-2 text-xs font-medium rounded-lg inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700 gap-1.5">
           Continue <ArrowRight className="w-3.5 h-3.5" />
@@ -437,7 +437,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] pt-4 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] pt-2 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <div className="flex gap-2">
           <Button variant="ghost" size="sm" onClick={onSkip} className="text-gray-500 gap-1.5">
