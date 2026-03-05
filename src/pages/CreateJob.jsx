@@ -125,7 +125,7 @@ function DefaultScreen({ onStart }) {
               <button
                 key={role}
                 onClick={() => handleSuggestion(role)}
-                className="w-full px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-[12px] text-gray-600 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all text-center">
+                className="w-full px-3 py-2.5 rounded-lg bg-white text-[12px] text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all text-center">
 
                     {role}
                   </button>
