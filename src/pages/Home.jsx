@@ -273,38 +273,46 @@ export default function Home() {
           {/* All Jobs */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <h2 className="text-gray-800 mb-6 text-base font-semibold">All Jobs</h2>
-            <div className="space-y-4">
-              {jobs.map((job) =>
-              <div key={job.id} className="bg-[#fcfcfc] p-4 rounded-lg flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="bg-slate-50 rounded-lg w-10 h-10 flex items-center justify-center">
-                      <Briefcase className="text-zinc-500 lucide lucide-briefcase w-5 h-5" />
-                    </div>
-                    <div>
-                      <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
-                        <h3 className="text-gray-800 text-base font-medium cursor-pointer hover:text-blue-600">{job.title}</h3>
-                      </Link>
-                      <p className="text-[12px] text-gray-500">{job.department}</p>
+            <div className="space-y-3">
+              {jobs.map((job) => {
+                const [hovered, setHovered] = useState(false);
+                return (
+                  <div
+                    key={job.id}
+                    className={`bg-[#fcfcfc] p-4 rounded-lg border transition-all duration-200 ${hovered ? "border-blue-100 shadow-sm bg-blue-50/20" : "border-transparent"}`}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className={`rounded-lg w-10 h-10 flex items-center justify-center transition-colors duration-200 ${hovered ? "bg-blue-50" : "bg-slate-50"}`}>
+                          <Briefcase className={`w-5 h-5 transition-colors duration-200 ${hovered ? "text-blue-500" : "text-zinc-500"}`} />
+                        </div>
+                        <div>
+                          <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
+                            <h3 className="text-gray-800 text-base font-medium cursor-pointer hover:text-blue-600">{job.title}</h3>
+                          </Link>
+                          <p className="text-[12px] text-gray-500">{job.department}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-8">
+                        <div className="text-center">
+                          <p className="text-gray-900 text-base font-semibold">{job.applicants}</p>
+                          <p className="text-[11px] text-gray-500">Applicants</p>
+                        </div>
+                        <div className="text-center min-w-[70px]">
+                          <p className="text-blue-600 text-base font-semibold">{job.inPipeline}</p>
+                          <p className="text-[11px] text-gray-500">In Pipeline</p>
+                          <PipelineBar value={job.inPipeline} total={job.applicants} color="bg-blue-400" />
+                        </div>
+                        <div className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
+                          {job.status}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-8">
-                    <div className="text-center">
-                      <p className="text-gray-900 text-base font-semibold">{job.applicants}</p>
-                      <p className="text-[11px] text-gray-500">Applicants</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-blue-600 text-base font-semibold">{job.inPipeline}</p>
-                      <p className="text-[11px] text-gray-500">In Pipeline</p>
-                    </div>
-                    <div className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
-                      {job.status}
-                    </div>
-                    <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
-                      
-                    </Link>
-                  </div>
-                </div>
-              )}
+                );
+              })}
             </div>
           </div>
 
