@@ -174,10 +174,6 @@ function GeneratingScreen({ prompt, onDone }) {
   );
 }
 
-// placeholder to avoid blank gap
-
-
-
 
 
 
