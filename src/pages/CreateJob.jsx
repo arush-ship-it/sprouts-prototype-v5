@@ -146,12 +146,12 @@ function GeneratingScreen({ prompt, onDone }) {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) { clearInterval(interval); return 100; }
+        if (prev >= 100) {clearInterval(interval);return 100;}
         return prev + 5;
       });
     }, 100);
-    const timer = setTimeout(() => { onDone(); }, 2000);
-    return () => { clearTimeout(timer); clearInterval(interval); };
+    const timer = setTimeout(() => {onDone();}, 2000);
+    return () => {clearTimeout(timer);clearInterval(interval);};
   }, [onDone]);
 
   return (
@@ -166,12 +166,12 @@ function GeneratingScreen({ prompt, onDone }) {
       <div className="w-full max-w-xs bg-gray-100 rounded-full h-2 mb-3 overflow-hidden">
         <div
           className="bg-indigo-600 h-2 rounded-full transition-all duration-100"
-          style={{ width: `${progress}%` }}
-        />
+          style={{ width: `${progress}%` }} />
+
       </div>
       <p className="text-[12px] text-gray-400">{progress}%</p>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 2: Review JD ─────────────────────────────────────────────────────────
@@ -198,7 +198,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-slate-50 flex-1 overflow-y-auto">
+      <div className="bg-[F2F3F5] flex-1 overflow-y-auto">
         {/* JD Preview Card */}
         <div className="mx-6 mt-6 mb-5 bg-white rounded-2xl border border-gray-100 shadow-sm px-8 py-6">
           <h2 className="text-[16px] font-bold text-gray-900 mb-5">{jd.title}</h2>
