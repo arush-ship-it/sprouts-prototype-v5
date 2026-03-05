@@ -237,7 +237,7 @@ export default function Home() {
           </div>
 
           {/* All Jobs */}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+          <div className="bg-white px-4 py-4 rounded-xl border border-gray-100 shadow-sm">
             <h2 className="text-[15px] font-semibold text-gray-800 mb-5">All Jobs</h2>
             <div className="space-y-1">
               {jobs.map((job) =>
@@ -265,10 +265,10 @@ export default function Home() {
 function JobRow({ job }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <div
-      className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 ${hovered ? "bg-blue-50/40 border border-blue-100" : "border border-transparent"}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+    <div className="py-3 rounded-lg flex items-center justify-between transition-all duration-200 border border-transparent"
+
+    onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}>
 
       <div className="flex items-center gap-3">
         <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${hovered ? "bg-blue-100" : "bg-gray-100"}`}>
