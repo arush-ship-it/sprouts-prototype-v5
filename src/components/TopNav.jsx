@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 const navLinks = [
-  { label: "Dashboard", icon: LayoutDashboard, page: "Dashboard" },
+  { label: "Analytics", icon: LayoutDashboard, page: "Dashboard" },
   { label: "Talent Pool", icon: FolderOpen, page: "TalentPool" },
   { label: "Create Job", icon: PlusCircle, page: "CreateJob" },
   { label: "Console", icon: Terminal, page: "Console" },
