@@ -347,7 +347,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] px-6 py-4 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] pt-2 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <Button onClick={() => onNext(jd)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
           Continue <ArrowRight className="w-3.5 h-3.5" />
