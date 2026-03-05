@@ -430,11 +430,11 @@ export default function CreateJob() {
               </div>
 
               <div className="flex justify-between">
-                <Button variant="outline" onClick={() => setCurrentStep(1)}>
+                <Button variant="outline" onClick={() => setCurrentStep(0)}>
                   Back
                 </Button>
-                <Button onClick={() => setCurrentStep(3)} className="bg-indigo-600 hover:bg-indigo-700">
-                  Continue to Publish
+                <Button onClick={() => setCurrentStep(2)} className="bg-indigo-600 hover:bg-indigo-700">
+                  Continue to AI Generation
                 </Button>
               </div>
             </div>
