@@ -229,7 +229,7 @@ export default function CreateJob() {
                 </div>
                 <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
                   <div className="mx-auto space-y-6 max-w-3xl">
-                    <div className="bg-slate-50 px-3 rounded-2xl shadow-sm">
+                    <div className="bg-[#ffffff] px-3 rounded-2xl shadow-sm">
                       <div className="mb-6 border-b border-gray-200">
                         <h2 className="text-gray-900 mb-3 text-base font-semibold">{generatedJob.title}</h2>
                       </div>
@@ -241,7 +241,7 @@ export default function CreateJob() {
                         <h3 className="text-[18px] font-semibold text-gray-900 mb-3">Requirements</h3>
                         <ul className="space-y-2">
                           {generatedJob.requirements.map((req, idx) =>
-                            <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
+                          <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
                               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0" />
                               {req}
                             </li>
@@ -252,7 +252,7 @@ export default function CreateJob() {
                         <h3 className="text-[18px] font-semibold text-gray-900 mb-3">Responsibilities</h3>
                         <ul className="space-y-2">
                           {generatedJob.responsibilities.map((resp, idx) =>
-                            <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
+                          <li key={idx} className="flex items-start gap-3 text-[14px] text-gray-700">
                               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 shrink-0" />
                               {resp}
                             </li>
@@ -268,16 +268,16 @@ export default function CreateJob() {
                   </Button>
                 </div>
               </div>
-            }
+              }
 
             {/* Step 1: Job Details */}
             {currentStep === 1 &&
               <JobDetailsForm
                 jobDetails={jobDetails}
                 setJobDetails={setJobDetails}
-                onContinue={() => setCurrentStep(2)}
-              />
-            }
+                onContinue={() => setCurrentStep(2)} />
+
+              }
 
             {/* Step 3: Publish */}
             {currentStep === 3 &&
@@ -325,15 +325,15 @@ export default function CreateJob() {
                         <Label className="text-[13px] font-medium">Post to Platforms</Label>
                         <div className="grid grid-cols-2 gap-3">
                           {["LinkedIn", "Indeed", "Glassdoor", "Company Website"].map((platform) =>
-                            <button
-                              key={platform}
-                              onClick={() => {
-                                const platforms = publishSettings.platforms.includes(platform) ?
-                                  publishSettings.platforms.filter((p) => p !== platform) :
-                                  [...publishSettings.platforms, platform];
-                                setPublishSettings({ ...publishSettings, platforms });
-                              }}
-                              className={`p-4 rounded-xl border-2 text-left transition-all ${publishSettings.platforms.includes(platform) ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`}>
+                          <button
+                            key={platform}
+                            onClick={() => {
+                              const platforms = publishSettings.platforms.includes(platform) ?
+                              publishSettings.platforms.filter((p) => p !== platform) :
+                              [...publishSettings.platforms, platform];
+                              setPublishSettings({ ...publishSettings, platforms });
+                            }}
+                            className={`p-4 rounded-xl border-2 text-left transition-all ${publishSettings.platforms.includes(platform) ? "border-indigo-600 bg-indigo-50" : "border-gray-200 hover:border-gray-300"}`}>
                               <p className="font-semibold text-[14px] text-gray-900">{platform}</p>
                             </button>
                           )}
@@ -350,7 +350,7 @@ export default function CreateJob() {
                   </Button>
                 </div>
               </div>
-            }
+              }
 
           </div>
         </div>
