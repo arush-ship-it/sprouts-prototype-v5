@@ -135,7 +135,7 @@ export default function AITalentFinderPanel() {
 
           {/* AI Response with Skills */}
           <div className="flex gap-2">
-            <div className="bg-slate-500 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="flex-1">
@@ -203,7 +203,7 @@ export default function AITalentFinderPanel() {
 
           {/* Category Pills Response */}
           <div className="flex gap-2">
-            <div className="bg-slate-500 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="flex-1">
@@ -231,7 +231,7 @@ export default function AITalentFinderPanel() {
 
           {/* Attributes Response */}
           <div className="flex gap-2">
-            <div className="bg-slate-500 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="mr-10 flex-1">
@@ -279,7 +279,7 @@ export default function AITalentFinderPanel() {
 
           {/* PhD Response with Options */}
           <div className="flex gap-2">
-            <div className="bg-slate-400 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="mr-10 flex-1">
@@ -314,8 +314,8 @@ export default function AITalentFinderPanel() {
           </div>
 
           {/* Masters Details Response */}
-          <div className="flex gap-2">
-            <div className="bg-slate-400 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+          <div className="bg-[#ffffff] flex gap-2">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="mr-10 flex-1">
@@ -371,7 +371,7 @@ export default function AITalentFinderPanel() {
 
           {/* Final Options */}
           <div className="flex gap-2">
-            <div className="bg-slate-400 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="flex-1">
@@ -409,7 +409,7 @@ export default function AITalentFinderPanel() {
 
           {/* Experience Templates */}
           <div className="flex gap-2">
-            <div className="bg-slate-400 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="mr-10 flex-1">
@@ -449,7 +449,7 @@ export default function AITalentFinderPanel() {
 
           {/* Job Title Details */}
           <div className="flex gap-2 mb-20">
-            <div className="bg-slate-400 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
+            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
             <div className="mr-10 flex-1">
