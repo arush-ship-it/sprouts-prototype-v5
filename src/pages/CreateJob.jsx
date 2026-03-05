@@ -80,11 +80,9 @@ export default function CreateJob() {
   };
 
   const steps = [
-  { number: 1, label: "AI Generation", description: "Generate job description" },
-  { number: 2, label: "Job Details", description: "Add company & job info" },
+  { number: 1, label: "Job Details", description: "Add company & job info" },
+  { number: 2, label: "AI Generation", description: "Generate job description" },
   { number: 3, label: "Publish", description: "Post your job" }];
-
-  // Ensure step 1 is AI Generation (currentStep=1 shows AI preview, 2 shows Job Details, 3 shows Publish)
 
 
   return (
