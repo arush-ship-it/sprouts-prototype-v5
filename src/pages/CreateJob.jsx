@@ -222,7 +222,13 @@ export default function CreateJob() {
             
             {/* Step 2: AI Generation - Preview */}
             {currentStep === 2 &&
-              <div className="mx-auto px-4 space-y-6 max-w-6xl">
+              <div className="flex flex-col h-full">
+              <div className="px-6 pt-5 pb-4 border-b border-gray-100 shrink-0">
+                <h2 className="text-[16px] font-semibold text-gray-900">AI Generated Preview</h2>
+                <p className="text-[12px] text-gray-400 mt-0.5">Review and refine the generated job posting</p>
+              </div>
+              <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
+              <div className="mx-auto space-y-6 max-w-3xl">
                 <div className="bg-slate-50 px-3 rounded-2xl shadow-sm">
                   <div className="mb-6 border-b border-gray-200">
                     <h2 className="text-gray-900 mb-3 text-base font-semibold">{generatedJob.title}</h2>
