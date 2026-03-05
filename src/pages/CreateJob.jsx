@@ -84,6 +84,8 @@ export default function CreateJob() {
   { number: 2, label: "Job Details", description: "Add company & job info" },
   { number: 3, label: "Publish", description: "Post your job" }];
 
+  // Ensure step 1 is AI Generation (currentStep=1 shows AI preview, 2 shows Job Details, 3 shows Publish)
+
 
   return (
     <div className="flex flex-col h-screen bg-[#FAFAFA]">
