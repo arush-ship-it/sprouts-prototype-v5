@@ -319,18 +319,27 @@ export default function Home() {
           {/* Recent Activity */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <h2 className="text-gray-800 mb-6 text-base font-semibold">Recent Activity</h2>
-            <div className="space-y-4">
-              {recentActivity.map((activity) =>
-              <div key={activity.id} className="flex items-start gap-4">
-                  <div className="bg-slate-300 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-[14px] font-bold">✓</span>
+            <div className="space-y-4 relative">
+              <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-100" />
+              {recentActivity.map((activity, idx) => {
+                const [hovered, setHovered] = useState(false);
+                return (
+                  <div
+                    key={activity.id}
+                    className={`flex items-start gap-4 relative transition-all duration-200 ${hovered ? "translate-x-0.5" : ""}`}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                  >
+                    <div className={`rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 border-2 transition-all duration-200 z-10 ${hovered ? "bg-blue-500 border-blue-500" : "bg-white border-slate-200"}`}>
+                      <span className={`text-[13px] font-bold transition-colors duration-200 ${hovered ? "text-white" : "text-slate-400"}`}>✓</span>
+                    </div>
+                    <div className="flex-1 pt-1">
+                      <p className={`text-[14px] font-medium transition-colors duration-200 ${hovered ? "text-blue-600" : "text-gray-900"}`}>{activity.text}</p>
+                      <p className="text-[12px] text-gray-400 mt-0.5">{activity.time}</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-[14px] text-gray-900 font-medium">{activity.text}</p>
-                    <p className="text-[12px] text-gray-400 mt-1">{activity.time}</p>
-                  </div>
-                </div>
-              )}
+                );
+              })}
             </div>
           </div>
         </div>
