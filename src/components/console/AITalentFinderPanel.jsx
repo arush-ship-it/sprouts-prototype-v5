@@ -259,7 +259,7 @@ export default function AITalentFinderPanel() {
                   </Button>
                 </div>
                 <div className="flex justify-end">
-                  <Button size="sm" className="h-8 px-6">Apply</Button>
+                  <Button size="sm" className="bg-blue-600 text-primary-foreground px-6 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">Apply</Button>
                 </div>
               </div>
             </div>
@@ -353,7 +353,7 @@ export default function AITalentFinderPanel() {
                 </Button>
 
                 <div className="flex justify-end">
-                  <Button size="sm" className="h-8 px-6">Apply</Button>
+                  <Button size="sm" className="bg-blue-600 text-primary-foreground px-6 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">Apply</Button>
                 </div>
               </div>
             </div>
@@ -481,7 +481,7 @@ export default function AITalentFinderPanel() {
                 </div>
 
                 <div className="flex justify-end">
-                  <Button size="sm" className="h-8 px-6">Apply</Button>
+                  <Button size="sm" className="bg-blue-600 text-primary-foreground px-6 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">Apply</Button>
                 </div>
               </div>
             </div>
