@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function JobHeader({ onActivityApprovalClick }) {
   return (
-    <div className="px-8 pt-8 pb-0">
+    <div className="my-6 px-6">
       <div className="flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3 mb-1">
