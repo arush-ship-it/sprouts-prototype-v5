@@ -401,14 +401,14 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           {isSourcingExpanded &&
         <div className="mt-4 space-y-4">
               {/* Sub Tabs */}
-              <div className="bg-gray-100 p-1 rounded-full inline-flex">
+              <div className="bg-gray-100 mr-2 px-2 py-2 rounded-xl inline-flex">
                 <button
-              onClick={() => setSourcingTab("ai")}
-              className={`px-4 py-2 text-[12px] font-semibold rounded-full transition-all ${
-              sourcingTab === "ai" ?
-              "bg-white text-gray-900 shadow-sm" :
-              "text-gray-600 hover:text-gray-900"}`
-              }>
+              onClick={() => setSourcingTab("ai")} className="bg-white text-gray-900 px-4 py-2 text-xs font-semibold rounded-[10px] transition-all shadow-sm">
+
+
+
+
+
                   Talk to AI
                 </button>
                 <button
