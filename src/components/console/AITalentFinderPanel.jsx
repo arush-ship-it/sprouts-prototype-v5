@@ -76,7 +76,7 @@ export default function AITalentFinderPanel() {
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <RefreshCw className="w-4 h-4 text-gray-500" />
             </Button>
-            <Button size="sm" className="bg-slate-100 text-slate-600 px-4 font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
+            <Button size="sm" className="bg-[#ffffff] text-slate-600 px-4 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
               Save
             </Button>
           </div>
