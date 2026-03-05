@@ -23,7 +23,7 @@ export default function TopNav({ currentPageName }) {
     <header className="fixed top-0 left-0 right-0 z-50 h-12 bg-white border-b border-gray-200 flex items-center px-4 gap-1">
       {/* Brand */}
       <Link
-        to={createPageUrl("Dashboard")}
+        to={createPageUrl("Home")}
         className="text-[13px] font-semibold text-gray-900 tracking-tight mr-4 hover:text-indigo-600 transition-colors shrink-0"
       >
         Sprouts AI
