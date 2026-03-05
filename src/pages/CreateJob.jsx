@@ -415,9 +415,9 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
       <div className="bg-[#f2f2f2] px-6 py-6 flex-1 overflow-y-auto space-y-6">
         {/* Recommended */}
         <div>
-          <h2 className="text-[15px] font-bold text-gray-900 mb-0.5">Screening Questions</h2>
+          <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
           <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
-          <p className="text-[12px] text-indigo-500 mb-3">Here are the screening questions I've generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
+          <p className="text-slate-500 mb-3 text-xs font-normal">Here are the screening questions I've generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
           <div className="space-y-3">
             {RECOMMENDED_QUESTIONS.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
