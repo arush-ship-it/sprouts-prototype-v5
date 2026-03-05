@@ -106,7 +106,7 @@ function InsightCard({ card }) {
       <div className="py-5 flex flex-col gap-4 flex-1 min-w-0">
         <div className="min-w-0">
           <div className="flex items-end gap-1">
-            <span className="text-3xl font-bold text-gray-900">{animated}{card.unit}</span>
+            <span className="text-gray-900 text-3xl font-medium">{animated}{card.unit}</span>
             {card.badge &&
             <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
                 {card.badge}
