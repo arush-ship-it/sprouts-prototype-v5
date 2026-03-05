@@ -443,7 +443,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <Button variant="ghost" size="sm" onClick={onSkip} className="text-gray-500 gap-1.5">
             <SkipForward className="w-3.5 h-3.5" /> Skip
           </Button>
-          <Button onClick={() => onNext(addedIds)} className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5 gap-1.5">
+          <Button onClick={() => onNext(addedIds)} className="bg-blue-600 text-[#ffffff] px-5 py-2 text-sm font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700 gap-1.5">
             Continue <ArrowRight className="w-3.5 h-3.5" />
           </Button>
         </div>
