@@ -144,7 +144,7 @@ export default function AITalentFinderPanel() {
               </p>
               
               {/* Skills Section */}
-              <div className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
+              <div className="bg-white mr-8 mb-3 pt-4 pr-4 pb-4 pl-4 rounded-xl border border-gray-200">
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Skills</h4>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {appliedFilters.skills.map((skill, idx) =>
