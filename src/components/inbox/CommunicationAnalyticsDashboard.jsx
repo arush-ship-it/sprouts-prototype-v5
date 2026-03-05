@@ -71,7 +71,7 @@ export default function CommunicationAnalyticsDashboard() {
           </div>
           <div>
             <h2 className="text-[14px] font-bold text-slate-800">Communication Health</h2>
-            <p className="text-[11px] text-slate-400">Real-time outreach & sequence analytics</p>
+            
           </div>
         </div>
         <div className="flex items-center gap-2">
