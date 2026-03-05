@@ -221,8 +221,8 @@ export default function CreateJob() {
 
 
             
-            {/* Step 1: AI Generation - Preview */}
-            {currentStep === 1 &&
+            {/* Step 2: AI Generation - Preview */}
+            {currentStep === 2 &&
               <div className="mx-auto px-4 space-y-6 max-w-6xl">
                 <div className="bg-slate-50 px-3 rounded-2xl shadow-sm">
                   <div className="mb-6 border-b border-gray-200">
