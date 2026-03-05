@@ -83,9 +83,9 @@ export default function AITalentFinderPanel() {
         </div>
 
         {/* Active Filters Section */}
-        <div
-          className="rounded-xl border border-gray-200 bg-gray-50 p-4 cursor-pointer hover:bg-gray-100 transition-colors"
-          onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
+        <div className="bg-[#ffffff] p-4 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors"
+
+        onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
 
           <div className="flex items-center justify-between">
             <div>
