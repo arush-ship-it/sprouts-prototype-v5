@@ -225,7 +225,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-6">
       {/* Welcome */}
-      <h1 className="text-[22px] font-bold text-gray-900 mb-6">Hello Arush, Welcome To SproutsAI!</h1>
+      <h1 className="text-gray-900 mb-6 text-xl font-semibold">Hello Arush, Welcome To SproutsAI!</h1>
 
       {/* Main 2-col layout */}
       <div className="flex gap-6">
