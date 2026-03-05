@@ -110,14 +110,14 @@ export default function CreateJob() {
 
       <div className="flex flex-1 overflow-hidden flex-col">
         {/* Header */}
-        <div className="bg-slate-50 px-8 py-4">
-          
+        
 
 
 
 
 
-        </div>
+
+
         
         <div className="flex flex-1 overflow-hidden">
         {/* Left Panel - AI Chat */}
