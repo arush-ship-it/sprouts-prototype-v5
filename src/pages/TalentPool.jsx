@@ -276,7 +276,7 @@ export default function TalentPool() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#FAFAFA]">
+    <div className="flex flex-col h-[calc(100vh-48px)] bg-[#FAFAFA] overflow-hidden">
       {/* Top Navigation */}
       
 
