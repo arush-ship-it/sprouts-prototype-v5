@@ -269,7 +269,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto">
+      <div className="bg-slate-50 flex-1 overflow-y-auto">
         {/* JD Preview Card */}
         <div className="mx-6 mt-6 mb-5 bg-white rounded-2xl border border-gray-100 shadow-sm px-8 py-6">
           <h2 className="text-[16px] font-bold text-gray-900 mb-5">{jd.title}</h2>
