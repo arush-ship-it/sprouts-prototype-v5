@@ -306,7 +306,7 @@ export default function TalentPool() {
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-1">
               <Link to={createPageUrl("Home")}>
-                <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+                
               </Link>
               <h1 className="text-[24px] font-semibold text-gray-900">
                 Talent Pool
