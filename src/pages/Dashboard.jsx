@@ -275,7 +275,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Link to={createPageUrl("Home")}>
-                  <ChevronLeft className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-900" />
+                  
                 </Link>
                 <h1 className="text-gray-700 text-2xl font-semibold">Analytics Dashboard</h1>
               </div>
@@ -289,7 +289,7 @@ export default function Dashboard() {
                 Deep Dive with AI
               </Button>
             </div>
-            <p className="text-gray-500 px-8 text-sm">Overview of all recruitment activities
+            <p className="text-gray-500 px-1 text-sm">Overview of all recruitment activities
 
             </p>
           </div>
