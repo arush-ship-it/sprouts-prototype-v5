@@ -50,9 +50,9 @@ export default function AITalentFinderPanel() {
       {/* Top Tabs */}
       <div className="border-b border-gray-200 px-5 pt-5 pb-3">
         <div className="flex items-center justify-between mb-4">
-          <div className="bg-slate-100 px-2 py-2 rounded-lg flex gap-1">
+          <div className="bg-slate-100 px-1 py-1 rounded-[10px] flex gap-1">
             <button
-              onClick={() => setActiveMode("ai")} className="bg-[#ffffff] text-gray-900 px-4 py-2 text-xs font-medium transition-colors">
+              onClick={() => setActiveMode("ai")} className="bg-[#ffffff] text-gray-900 px-4 py-2 text-xs font-medium rounded-lg transition-colors">
 
 
 
