@@ -425,13 +425,13 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" &&
           <div className="space-y-3">
-                  <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                  <div className="my-6 space-y-2 max-h-[400px] overflow-y-auto">
                     <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
                       <p className="text-[11px] text-gray-700">
                         <strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?
                       </p>
                     </div>
-                    <div className="p-3 rounded-lg bg-indigo-100/60 border border-indigo-200 ml-12">
+                    <div className="bg-indigo-100/60 mx-12 my-5 p-3 rounded-lg border border-indigo-200">
                       <p className="text-[11px] text-gray-700">
                         <strong>You:</strong> Find me 10 senior product designers in San Francisco
                       </p>
@@ -446,7 +446,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     <Textarea
                 value={sourcingInput}
                 onChange={(e) => setSourcingInput(e.target.value)}
-                placeholder="Type your message..." className="bg-white text-[12px] pr-12 px-3 py-2 rounded-2xl flex min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
+                placeholder="Type your message..." className="bg-white text-[12px] my-1 px-3 py-2 rounded-2xl flex min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
 
                 rows={2} />
                     <Button size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[28px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 absolute right-2 bottom-2 h-8 w-8">
