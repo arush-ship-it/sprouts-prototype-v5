@@ -174,13 +174,6 @@ function GeneratingScreen({ prompt, onDone }) {
   );
 }
 
-
-
-
-    </div>);
-
-}
-
 // ─── Step 2: Review JD ─────────────────────────────────────────────────────────
 const JOB_TYPES = ["Full-time", "Part-time", "Contract", "Internship", "Freelance"];
 const WORKPLACE_TYPES = ["On-site", "Remote", "Hybrid"];
