@@ -48,7 +48,7 @@ export default function AITalentFinderPanel() {
   return (
     <div className="bg-white mx-2 my-2 rounded-2xl w-[483px] border-r border-gray-200 flex flex-col h-screen">
       {/* Top Tabs */}
-      <div className="border-b border-gray-200 px-5 pt-5 pb-3">
+      <div className="px-3 py-3 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
           <div className="bg-slate-100 px-1 py-1 rounded-[10px] flex gap-1">
             <button
