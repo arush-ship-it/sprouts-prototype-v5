@@ -1,349 +1,324 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import {
-  Users,
-  FileText,
-  TrendingUp,
-  Inbox,
-  FileCheck,
-  PieChart,
-  Bell,
-  Settings,
-  BarChart3,
-  Briefcase,
-  PlusCircle,
-  UserSquare2,
-  ExternalLink,
-  ArrowUpRight } from
-"lucide-react";
-import { Button } from "@/components/ui/button";
-import TabSwitcher from "@/components/shared/TabSwitcher";
+import { Briefcase, ChevronDown } from "lucide-react";
 
-// Animated counter hook
-function useCountUp(target, duration = 1000) {
+// ── Animated counter ──────────────────────────────────────────────────────────
+function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
   useEffect(() => {
     const num = parseFloat(target);
-    if (isNaN(num)) {setCount(target);return;}
+    if (isNaN(num)) { setCount(target); return; }
     const start = Date.now();
-    const step = () => {
+    const tick = () => {
       const elapsed = Date.now() - start;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Number.isInteger(num) ? Math.round(eased * num) : (eased * num).toFixed(1));
-      if (progress < 1) requestAnimationFrame(step);
+      setCount(Number.isInteger(num) ? Math.round(eased * num) : (eased * num).toFixed(0));
+      if (progress < 1) requestAnimationFrame(tick);
     };
-    requestAnimationFrame(step);
+    requestAnimationFrame(tick);
   }, [target, duration]);
   return count;
 }
 
-// Mini sparkline bar chart
-function MiniSparkline({ data, color }) {
+// ── SVG line chart (smooth curve) ────────────────────────────────────────────
+function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 }) {
+  if (!data || data.length < 2) return null;
+  const min = Math.min(...data);
   const max = Math.max(...data);
+  const range = max - min || 1;
+  const pad = 8;
+  const w = width - pad * 2;
+  const h = height - pad * 2;
+
+  const pts = data.map((v, i) => ({
+    x: pad + (i / (data.length - 1)) * w,
+    y: pad + (1 - (v - min) / range) * h,
+  }));
+
+  // Build smooth bezier path
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const cx = (pts[i].x + pts[i + 1].x) / 2;
+    d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
+  }
+  const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
+  const lastPt = pts[pts.length - 1];
+
   return (
-    <div className="flex items-end gap-0.5 h-8">
-      {data.map((v, i) =>
-      <div
-        key={i}
-        className={`w-1.5 rounded-sm transition-all duration-300 ${color}`}
-        style={{ height: `${v / max * 100}%`, opacity: i === data.length - 1 ? 1 : 0.4 + i / data.length * 0.5 }} />
-
-      )}
-    </div>);
-
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <defs>
+        <linearGradient id={`grad-${color.replace(/[^a-z]/gi, "")}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={fillColor} stopOpacity="0.35" />
+          <stop offset="100%" stopColor={fillColor} stopOpacity="0.02" />
+        </linearGradient>
+      </defs>
+      <path d={fillPath} fill={`url(#grad-${color.replace(/[^a-z]/gi, "")})`} />
+      <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
+      <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
+    </svg>
+  );
 }
 
-// Pipeline fill bar
-function PipelineBar({ value, total, color }) {
-  const [width, setWidth] = useState(0);
-  useEffect(() => {setTimeout(() => setWidth(value / total * 100), 200);}, [value, total]);
-  return (
-    <div className="w-full bg-gray-100 rounded-full h-1.5 mt-2">
-      <div className={`h-1.5 rounded-full transition-all duration-700 ease-out ${color}`} style={{ width: `${width}%` }} />
-    </div>);
+// ── Donut / pie chart ─────────────────────────────────────────────────────────
+function DonutChart({ percent, color, size = 80 }) {
+  const r = 30;
+  const cx = size / 2;
+  const cy = size / 2;
+  const circumference = 2 * Math.PI * r;
+  const dash = (percent / 100) * circumference;
 
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth="10" />
+      <circle
+        cx={cx} cy={cy} r={r}
+        fill="none"
+        stroke={color}
+        strokeWidth="10"
+        strokeDasharray={`${dash} ${circumference - dash}`}
+        strokeLinecap="round"
+        transform={`rotate(-90 ${cx} ${cy})`}
+        strokeOpacity="0.35"
+      />
+    </svg>
+  );
 }
 
-// Animated stat card
-function StatCard({ stat }) {
-  const num = parseFloat(stat.value);
-  const animated = useCountUp(isNaN(num) ? 0 : num);
-  const displayValue = isNaN(num) ? stat.value : Number.isInteger(num) ? animated : animated;
+// ── Insight card ──────────────────────────────────────────────────────────────
+function InsightCard({ card }) {
+  const animated = useCountUp(card.numericValue);
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      className={`bg-white rounded-xl p-6 shadow-sm border border-gray-100 cursor-default transition-all duration-200 ${hovered ? "shadow-md -translate-y-0.5 border-gray-200" : ""}`}
+      className={`bg-white rounded-xl border border-gray-100 p-5 flex flex-col justify-between transition-all duration-200 cursor-default ${hovered ? "shadow-md -translate-y-0.5" : "shadow-sm"}`}
+      style={{ minHeight: 220 }}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between mb-1">
+        <p className="text-[13px] font-semibold text-gray-700">{card.title}</p>
+        <button className="flex items-center gap-1 text-[11px] text-gray-400 border border-gray-200 rounded-md px-2 py-0.5 hover:bg-gray-50">
+          Weekly <ChevronDown className="w-3 h-3" />
+        </button>
+      </div>
+      <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
 
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3 flex-1">
-          <div className={`${stat.iconBg} p-2 rounded-[10px] flex-shrink-0`}>
-            <stat.icon className={`w-5 h-5 ${stat.iconColor}`} />
-          </div>
-          <div className="flex-1">
-            <p className="text-gray-500 mb-1 text-xs">{stat.title}</p>
-            <h3 className="text-gray-900 mb-1 text-xl font-bold">{displayValue}</h3>
-            <div className="flex items-center gap-1">
-              {stat.trend && <ArrowUpRight className="w-3 h-3 text-green-500" />}
-              <p className={`text-[12px] ${stat.trend ? "text-green-500 font-medium" : "text-gray-400"}`}>{stat.subtitle}</p>
-            </div>
+      {/* Value + chart */}
+      <div className="flex items-end justify-between gap-2 flex-1">
+        <div>
+          <div className="flex items-end gap-1">
+            <span className="text-3xl font-bold text-gray-900">{animated}{card.unit}</span>
+            {card.badge && (
+              <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
+                {card.badge}
+              </span>
+            )}
           </div>
         </div>
-        {stat.sparkline &&
         <div className="shrink-0">
-            <MiniSparkline data={stat.sparkline} color={stat.sparklineColor || "bg-blue-400"} />
-          </div>
-        }
+          {card.chartType === "line" && (
+            <LineChart
+              data={card.chartData}
+              color={card.lineColor}
+              fillColor={card.lineColor}
+              dotColor={card.dotColor}
+              width={160}
+              height={72}
+            />
+          )}
+          {card.chartType === "donut" && (
+            <DonutChart percent={card.numericValue} color={card.lineColor} size={80} />
+          )}
+        </div>
       </div>
-    </div>);
 
+      {/* Footer description */}
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-50">
+        <p className="text-[11px] text-gray-400 leading-snug max-w-[70%]">{card.description}</p>
+        <button className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center hover:bg-blue-50 transition-colors">
+          <span className="text-gray-400 text-[14px] leading-none">›</span>
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default function Home() {
-  const stats = [
-  {
-    icon: Users,
-    iconColor: "text-blue-500",
-    iconBg: "bg-blue-50",
-    title: "Applicants per Job Posting",
-    value: "45.2",
-    subtitle: "Average per posting",
-    sparkline: [28, 32, 38, 35, 40, 43, 45],
-    sparklineColor: "bg-blue-400"
-  },
-  {
-    icon: FileText,
-    iconColor: "text-purple-500",
-    iconBg: "bg-purple-50",
-    title: "JD Processed This Month",
-    value: "23",
-    subtitle: "+12% from last month",
-    trend: true,
-    sparkline: [10, 14, 16, 18, 20, 21, 23],
-    sparklineColor: "bg-purple-400"
-  },
-  {
-    icon: TrendingUp,
-    iconColor: "text-green-500",
-    iconBg: "bg-green-50",
-    title: "Candidates in Pipeline",
-    value: "342",
-    subtitle: "Across all jobs",
-    sparkline: [200, 240, 260, 290, 310, 330, 342],
-    sparklineColor: "bg-green-400"
-  },
-  {
-    icon: Inbox,
-    iconColor: "text-orange-500",
-    iconBg: "bg-orange-50",
-    title: "New Applications",
-    value: "28",
-    subtitle: "To be reviewed",
-    sparkline: [10, 15, 18, 22, 20, 25, 28],
-    sparklineColor: "bg-orange-400"
-  },
-  {
-    icon: FileCheck,
-    iconColor: "text-pink-500",
-    iconBg: "bg-pink-50",
-    title: "Resumes Processed This Month",
-    value: "156",
-    subtitle: "+38% from last month",
-    trend: true,
-    sparkline: [60, 80, 100, 115, 130, 145, 156],
-    sparklineColor: "bg-pink-400"
-  },
-  {
-    icon: PieChart,
-    iconColor: "text-yellow-500",
-    iconBg: "bg-yellow-50",
-    title: "Application Source Breakdown",
-    value: "Direct: 45%",
-    subtitle: "LinkedIn: 35%, Others: 20%"
-  }];
+// ── Pipeline fill bar ─────────────────────────────────────────────────────────
+function PipelineBar({ value, total }) {
+  const [width, setWidth] = useState(0);
+  useEffect(() => { setTimeout(() => setWidth((value / total) * 100), 300); }, [value, total]);
+  return (
+    <div className="w-full bg-gray-100 rounded-full h-1 mt-1.5">
+      <div className="h-1 rounded-full bg-blue-400 transition-all duration-700 ease-out" style={{ width: `${width}%` }} />
+    </div>
+  );
+}
 
+// ── Main Page ─────────────────────────────────────────────────────────────────
+export default function Home() {
+  const insightCards = [
+    {
+      title: "Insights",
+      subtitle: "Revenue Growth",
+      numericValue: 75,
+      unit: "%",
+      badge: "↑",
+      chartType: "line",
+      chartData: [30, 45, 35, 55, 50, 60, 75],
+      lineColor: "#f97316",
+      dotColor: "#f97316",
+      description: "Expect your revenue to rise and shine before this month closes.",
+    },
+    {
+      title: "Conversion",
+      subtitle: "Conversion Rate",
+      numericValue: 120,
+      unit: "%",
+      badge: "↑",
+      chartType: "line",
+      chartData: [60, 70, 65, 80, 90, 100, 120],
+      lineColor: "#3b82f6",
+      dotColor: "#3b82f6",
+      description: "Conversions set to rise this month.",
+    },
+    {
+      title: "ROI",
+      subtitle: "Business ROI",
+      numericValue: 270,
+      unit: "%",
+      chartType: "donut",
+      chartData: [],
+      lineColor: "#6366f1",
+      description: "270%+ Business ROI increased compare to previous week.",
+    },
+    {
+      title: "ROI",
+      subtitle: "Business ROI",
+      numericValue: 270,
+      unit: "%",
+      chartType: "donut",
+      chartData: [],
+      lineColor: "#a855f7",
+      description: "270%+ Business ROI increased compare to previous week.",
+    },
+  ];
 
   const jobs = [
-  {
-    id: 1,
-    title: "Senior Product Designer",
-    department: "Design",
-    applicants: 156,
-    inPipeline: 34,
-    status: "ACTIVE"
-  },
-  {
-    id: 2,
-    title: "Frontend Engineer",
-    department: "Engineering",
-    applicants: 203,
-    inPipeline: 45,
-    status: "ACTIVE"
-  },
-  {
-    id: 3,
-    title: "Product Manager",
-    department: "Product",
-    applicants: 89,
-    inPipeline: 12,
-    status: "ACTIVE"
-  }];
+    { id: 1, title: "Senior Product Designer", department: "Design", applicants: 156, inPipeline: 34, status: "ACTIVE" },
+    { id: 2, title: "Frontend Engineer", department: "Engineering", applicants: 203, inPipeline: 45, status: "ACTIVE" },
+    { id: 3, title: "Product Manager", department: "Product", applicants: 89, inPipeline: 12, status: "ACTIVE" },
+  ];
 
-
-  const recentActivity = [
-  {
-    id: 1,
-    text: "3 candidates moved to interview stage",
-    time: "1 hour ago"
-  },
-  {
-    id: 2,
-    text: "Resume screening completed for 12 applicants",
-    time: "3 hours ago"
-  },
-  {
-    id: 3,
-    text: "5 candidates auto-qualified for screening",
-    time: "6 hours ago"
-  }];
-
+  const approvals = [
+    { id: 1, text: "3 candidates moved to interview stage", time: "1 hour ago" },
+    { id: 2, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
+    { id: 3, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
+    { id: 4, text: "3 candidates moved to interview stage", time: "1 hour ago" },
+    { id: 5, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
+    { id: 6, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
+    { id: 7, text: "3 candidates moved to interview stage", time: "1 hour ago" },
+    { id: 8, text: "Resume screening completed for 12 applicants", time: "3 hours ago" },
+    { id: 9, text: "5 candidates auto-qualified for screening", time: "6 hours ago" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Navigation */}
-      <div className="bg-white border-b border-gray-200">
-        
+    <div className="min-h-screen bg-gray-50 px-6 py-6">
+      {/* Welcome */}
+      <h1 className="text-[22px] font-bold text-gray-900 mb-6">Hello Arush, Welcome To SproutsAI!</h1>
 
-
-      </div>
-
-      {/* Main Content */}
-      <div className="px-8 py-6">
-        {/* Welcome Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="px-1 flex items-center gap-3">
-            <h1 className="text-slate-700 text-2xl font-semibold">Hello Arush, Welcome to SproutsAI!
-
-            </h1>
-            
-            <Link to={createPageUrl("Settings")}>
-              
-            </Link>
+      {/* Main 2-col layout */}
+      <div className="flex gap-6">
+        {/* Left column */}
+        <div className="flex-1 min-w-0 flex flex-col gap-6">
+          {/* 4 insight cards */}
+          <div className="grid grid-cols-4 gap-4">
+            {insightCards.map((card, i) => <InsightCard key={i} card={card} />)}
           </div>
-          
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          {stats.map((stat, index) => <StatCard key={index} stat={stat} />)}
-        </div>
-
-        {/* Bottom Section */}
-        <div className="grid grid-cols-2 gap-6">
           {/* All Jobs */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-gray-800 mb-6 text-base font-semibold">All Jobs</h2>
-            <div className="space-y-3">
-              {jobs.map((job) => {
-                const [hovered, setHovered] = useState(false);
-                return (
-                  <div
-                    key={job.id}
-                    className={`bg-[#fcfcfc] p-4 rounded-lg border transition-all duration-200 ${hovered ? "border-blue-100 shadow-sm bg-blue-50/20" : "border-transparent"}`}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className={`rounded-lg w-10 h-10 flex items-center justify-center transition-colors duration-200 ${hovered ? "bg-blue-50" : "bg-slate-50"}`}>
-                          <Briefcase className={`w-5 h-5 transition-colors duration-200 ${hovered ? "text-blue-500" : "text-zinc-500"}`} />
-                        </div>
-                        <div>
-                          <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
-                            <h3 className="text-gray-800 text-base font-medium cursor-pointer hover:text-blue-600">{job.title}</h3>
-                          </Link>
-                          <p className="text-[12px] text-gray-500">{job.department}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-8">
-                        <div className="text-center">
-                          <p className="text-gray-900 text-base font-semibold">{job.applicants}</p>
-                          <p className="text-[11px] text-gray-500">Applicants</p>
-                        </div>
-                        <div className="text-center min-w-[70px]">
-                          <p className="text-blue-600 text-base font-semibold">{job.inPipeline}</p>
-                          <p className="text-[11px] text-gray-500">In Pipeline</p>
-                          <PipelineBar value={job.inPipeline} total={job.applicants} color="bg-blue-400" />
-                        </div>
-                        <div className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
-                          {job.status}
-                        </div>
-                      </div>
-                    </div>
-                  </div>);
-
-              })}
-            </div>
-          </div>
-
-          {/* Recent Activity */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-gray-800 mb-6 text-base font-semibold">Pending Approvals</h2>
-            <div className="space-y-4 relative">
-              <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gray-100" />
-              {recentActivity.map((activity, idx) => {
-                const [hovered, setHovered] = useState(false);
-                return (
-                  <div
-                    key={activity.id}
-                    className={`flex items-start gap-4 relative transition-all duration-200 ${hovered ? "translate-x-0.5" : ""}`}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}>
-
-                    <div className={`rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 border-2 transition-all duration-200 z-10 ${hovered ? "bg-blue-500 border-blue-500" : "bg-white border-slate-200"}`}>
-                      <span className={`text-[13px] font-bold transition-colors duration-200 ${hovered ? "text-white" : "text-slate-400"}`}>✓</span>
-                    </div>
-                    <div className="flex-1 pt-1">
-                      <p className={`text-[14px] font-medium transition-colors duration-200 ${hovered ? "text-blue-600" : "text-gray-900"}`}>{activity.text}</p>
-                      <p className="text-[12px] text-gray-400 mt-0.5">{activity.time}</p>
-                    </div>
-                  </div>);
-
-              })}
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+            <h2 className="text-[15px] font-semibold text-gray-800 mb-5">All Jobs</h2>
+            <div className="space-y-1">
+              {jobs.map((job) => (
+                <JobRow key={job.id} job={job} />
+              ))}
             </div>
           </div>
         </div>
-      </div>
-    </div>);
 
+        {/* Right column — Pending Approval */}
+        <div className="w-[280px] shrink-0 bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
+          <h2 className="text-[15px] font-semibold text-gray-800 mb-5 sticky top-0 bg-white pb-2">Pending Approval</h2>
+          <div className="space-y-4">
+            {approvals.map((item) => (
+              <ApprovalItem key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Job row (extracted to avoid hooks-in-map) ─────────────────────────────────
+function JobRow({ job }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 ${hovered ? "bg-blue-50/40 border border-blue-100" : "border border-transparent"}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="flex items-center gap-3">
+        <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${hovered ? "bg-blue-100" : "bg-gray-100"}`}>
+          <Briefcase className={`w-4 h-4 transition-colors ${hovered ? "text-blue-500" : "text-gray-500"}`} />
+        </div>
+        <div>
+          <Link to={createPageUrl("Console") + `?jobId=${job.id}`}>
+            <p className="text-[14px] font-medium text-gray-800 hover:text-blue-600">{job.title}</p>
+          </Link>
+          <p className="text-[11px] text-gray-400">{job.department}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-8">
+        <div className="text-center">
+          <p className="text-[15px] font-bold text-gray-800">{job.applicants}</p>
+          <p className="text-[10px] text-gray-400">Applicants</p>
+        </div>
+        <div className="text-center min-w-[64px]">
+          <p className="text-[15px] font-bold text-blue-600">{job.inPipeline}</p>
+          <p className="text-[10px] text-gray-400">In Pipeline</p>
+          <PipelineBar value={job.inPipeline} total={job.applicants} />
+        </div>
+        <span className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
+          {job.status}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ── Approval item ─────────────────────────────────────────────────────────────
+function ApprovalItem({ item }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className={`flex items-start gap-3 transition-all duration-150 ${hovered ? "translate-x-0.5" : ""}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${hovered ? "bg-blue-500 border-blue-500" : "bg-white border-gray-200"}`}>
+        <span className={`text-[11px] font-bold transition-colors ${hovered ? "text-white" : "text-gray-400"}`}>✓</span>
+      </div>
+      <div>
+        <p className={`text-[13px] font-medium leading-snug transition-colors ${hovered ? "text-blue-600" : "text-gray-800"}`}>{item.text}</p>
+        <p className="text-[11px] text-gray-400 mt-0.5">{item.time}</p>
+      </div>
+    </div>
+  );
 }
