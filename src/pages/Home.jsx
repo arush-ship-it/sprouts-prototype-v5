@@ -109,8 +109,8 @@ function InsightCard({ card }) {
       <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
 
       {/* Value + chart */}
-      <div className="flex items-end justify-between gap-2 flex-1">
-        <div>
+      <div className="flex items-end justify-between gap-2 flex-1 min-w-0">
+        <div className="min-w-0">
           <div className="flex items-end gap-1">
             <span className="text-3xl font-bold text-gray-900">{animated}{card.unit}</span>
             {card.badge && (
@@ -120,7 +120,7 @@ function InsightCard({ card }) {
             )}
           </div>
         </div>
-        <div className="shrink-0">
+        <div className="shrink-0 flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
           {card.chartType === "line" && (
             <LineChart
               data={card.chartData}
@@ -132,7 +132,9 @@ function InsightCard({ card }) {
             />
           )}
           {card.chartType === "donut" && (
-            <DonutChart percent={card.numericValue} color={card.lineColor} size={80} />
+            <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <DonutChart percent={card.numericValue} color={card.lineColor} size={80} />
+            </div>
           )}
         </div>
       </div>
