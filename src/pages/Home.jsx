@@ -248,7 +248,7 @@ export default function Home() {
         </div>
 
         {/* Right column — Pending Approval */}
-        <div className="w-[322px] shrink-0 bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
+        <div className="w-[429px] shrink-0 bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
           <h2 className="text-[15px] font-semibold text-gray-800 mb-5 sticky top-0 bg-white pb-2">Pending Approval</h2>
           <div className="space-y-4">
             {approvals.map((item) =>
