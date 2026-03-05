@@ -467,7 +467,7 @@ function PublishScreen({ onBack, onPublish }) {
             
           </div>
 
-          <h2 className="text-center text-[16px] font-bold text-green-500 mb-6">All Job Related Details Have Been Filled!</h2>
+          <h2 className="text-blue-600 mb-6 text-xl font-semibold text-center">All Job Related Details Have Been Filled!</h2>
 
           {/* Visibility */}
           <div className="mb-5">
