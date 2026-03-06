@@ -9,7 +9,7 @@ export default function JobHeader({ onActivityApprovalClick }) {
       <div className="pt-3 pl-2 flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3 mb-1">
-            <h1 className="text-gray-800 text-2xl font-medium tracking-tight">Senior Product Designer
+            <h1 className="text-gray-800 text-xl font-semibold tracking-tight">Senior Product Designer
 
             </h1>
             <span className="px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
