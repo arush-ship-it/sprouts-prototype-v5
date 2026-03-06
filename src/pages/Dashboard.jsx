@@ -269,7 +269,7 @@ export default function Dashboard() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Main Content */}
-        <div className="flex-1 overflow-y-auto px-8 pt-6 pb-8">
+        <div className="bg-[#f2f3f5] pt-6 pb-8 px-8 flex-1 overflow-y-auto">
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
