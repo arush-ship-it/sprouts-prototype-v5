@@ -54,7 +54,7 @@ export default function TopNav({ currentPageName }) {
       <div className="flex items-center gap-1 ml-auto shrink-0">
         {/* Bell */}
         <button className="relative p-2 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
-          <Bell className="w-4 h-4" />
+          <Bell className="text-slate-600 lucide lucide-bell w-4 h-4" />
           <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
         </button>
 
@@ -63,7 +63,7 @@ export default function TopNav({ currentPageName }) {
           to={createPageUrl("Settings")}
           className="p-2 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
 
-          <Settings className="w-4 h-4" />
+          <Settings className="text-slate-600 lucide lucide-settings w-4 h-4" />
         </Link>
 
         {/* User */}
