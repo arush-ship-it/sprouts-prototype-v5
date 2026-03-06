@@ -10,14 +10,14 @@ export default function Layout({ children, currentPageName }) {
   const showTopNav = currentPageName !== "Settings";
 
   return (
-    <div className="flex min-h-screen bg-[#FAFAFA]">
+    <div className="bg-[#F2F3F5] flex min-h-screen">
       {showTopNav && <TopNav currentPageName={currentPageName} />}
       {showSidebar && <SidebarNav activePage={currentPageName} />}
       <main
-        className={`flex-1 overflow-auto ${showTopNav ? "pt-12" : ""} ${showSidebar ? "ml-[221px]" : ""}`}
-      >
+        className={`flex-1 overflow-auto ${showTopNav ? "pt-12" : ""} ${showSidebar ? "ml-[221px]" : ""}`}>
+
         {children}
       </main>
-    </div>
-  );
+    </div>);
+
 }
