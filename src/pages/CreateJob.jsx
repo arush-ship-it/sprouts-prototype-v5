@@ -602,6 +602,9 @@ export default function CreateJob() {
                 </div>
             }
             </div>
+            <div className="p-3 border-t border-gray-100 shrink-0">
+              <AIChatBox />
+            </div>
           </div>
         }
 
