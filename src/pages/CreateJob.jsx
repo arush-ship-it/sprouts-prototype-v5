@@ -245,7 +245,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             map(({ label, key, placeholder }) =>
             <div key={key} className="space-y-1.5">
                 <Label className="text-[12px] font-medium text-gray-600">{label}</Label>
-                <Input value={jobDetails[key]} onChange={(e) => setJobDetails({ ...jobDetails, [key]: e.target.value })} placeholder={placeholder} className="h-9 text-[13px] bg-gray-50" />
+                <Input value={jobDetails[key]} onChange={(e) => setJobDetails({ ...jobDetails, [key]: e.target.value })} placeholder={placeholder} className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
               </div>
             )}
           </div>
@@ -556,19 +556,19 @@ function AIChatBox() {
       <Textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); setMessage(""); } }}
+        onKeyDown={(e) => {if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();setMessage("");}}}
         placeholder="Ask AI to make changes…"
         className="resize-none text-[13px] pr-12 rounded-2xl min-h-[60px] bg-white border-gray-200"
-        rows={2}
-      />
+        rows={2} />
+
       <Button
         onClick={() => setMessage("")}
         size="icon"
         className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-indigo-600 hover:bg-indigo-700">
         <Send className="w-3.5 h-3.5" />
       </Button>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
