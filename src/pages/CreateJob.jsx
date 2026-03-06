@@ -347,7 +347,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] pt-2 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#f2f2f2] pt-3 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <Button onClick={() => onNext(jd)} className="bg-blue-600 text-[#ffffff] px-5 py-2 text-xs font-medium rounded-lg inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700 gap-1.5">
           Continue <ArrowRight className="w-3.5 h-3.5" />
@@ -651,7 +651,7 @@ export default function CreateJob() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-48px)] bg-[#F2F3F5] overflow-hidden">
-      <div className="flex flex-1 overflow-hidden px-4 py-4 gap-4 min-h-0">
+      <div className="px-2 py-2 flex flex-1 overflow-hidden gap-4 min-h-0">
 
         {/* Left Panel — AI Assistant (hidden on landing & confirmation) */}
         {step > 0 && step < 5 &&
