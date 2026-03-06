@@ -443,6 +443,9 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
             {visibleRecommended.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
+            {promotedQuestions.map((q) =>
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            )}
           </div>
         </div>
 
@@ -451,7 +454,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <p className="text-[13px] font-semibold text-gray-700 mb-1">Suggested</p>
           <p className="text-[12px] text-gray-500 mb-3">These are the screening questions we suggest generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
           <div className="space-y-3">
-            {SUGGESTED_QUESTIONS.map((q) =>
+            {visibleSuggested.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
             {dismissedQuestions.map((q) =>
