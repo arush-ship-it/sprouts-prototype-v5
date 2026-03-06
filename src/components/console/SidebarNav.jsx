@@ -97,12 +97,19 @@ export default function SidebarNav({ activePage = "Console" }) {
             "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`
             }>
 
-              <link.icon
-              className={`w-[18px] h-[18px] transition-colors ${
-              activePage === link.page ?
-              "text-indigo-600" :
-              "text-gray-500 group-hover:text-gray-700"}`
-              } />
+              <div className="relative">
+                <link.icon
+                className={`w-[18px] h-[18px] transition-colors ${
+                activePage === link.page ?
+                "text-indigo-600" :
+                "text-gray-500 group-hover:text-gray-700"}`
+                } />
+                {link.unreadCount > 0 &&
+                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
+                    {link.unreadCount > 9 ? "9+" : link.unreadCount}
+                  </span>
+                }
+              </div>
 
               {link.label}
             </Link>
