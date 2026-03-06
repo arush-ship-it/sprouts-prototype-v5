@@ -408,9 +408,18 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
   const [addedIds, setAddedIds] = useState(RECOMMENDED_QUESTIONS.map((q) => q.id));
   const [dismissedIds, setDismissedIds] = useState([]);
 
-  const addQuestion = (id) => setAddedIds((prev) => [...prev, id]);
+  const [promotedIds, setPromotedIds] = useState([]);
+
+  const addQuestion = (id) => {
+    setAddedIds((prev) => [...prev, id]);
+    // If it's a suggested question, promote it to recommended section
+    if (SUGGESTED_QUESTIONS.find((q) => q.id === id)) {
+      setPromotedIds((prev) => [...prev, id]);
+    }
+  };
   const removeQuestion = (id) => {
     setAddedIds((prev) => prev.filter((x) => x !== id));
+    setPromotedIds((prev) => prev.filter((x) => x !== id));
     // If it's a recommended question, move it to dismissed (bottom of suggested)
     if (RECOMMENDED_QUESTIONS.find((q) => q.id === id)) {
       setDismissedIds((prev) => [...prev, id]);
