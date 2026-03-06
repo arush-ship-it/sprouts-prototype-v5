@@ -208,7 +208,7 @@ export default function Home() {
 
 
   return (
-    <div className="bg-[#f2f3f5] px-6 py-6 min-h-screen">
+    <div className="bg-[#f2f3f5] px-6 py-6 h-screen overflow-hidden flex flex-col">
       {/* Welcome */}
       <div className="mb-6 pt-4 flex items-center justify-between">
         <h1 className="text-gray-900 text-2xl font-medium">Hello, Welcome To SproutsAI</h1>
