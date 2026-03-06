@@ -89,13 +89,13 @@ export default function SidebarNav({ activePage = "Console" }) {
           {mainLinks.map((link) =>
           <Link
             key={link.label}
-            to={createPageUrl(link.page)} className="bg-white text-slate-700 px-3 py-2.5 font-medium rounded-lg flex items-center gap-3 transition-all duration-200 group">
-
-
-
-
-
-
+            to={createPageUrl(link.page)}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group
+                ${
+            activePage === link.page ?
+            "bg-white text-indigo-900" :
+            "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`
+            }>
 
               <link.icon
               className={`w-[18px] h-[18px] transition-colors ${
