@@ -326,9 +326,13 @@ function ApprovalItem({ item }) {
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <div>
+      <div className="flex-1 min-w-0">
         <p className="text-[13px] font-semibold text-gray-800 leading-snug">{item.text}</p>
-        <p className="text-[11px] text-gray-400 mt-0.5">{item.time}</p>
+        <div className="flex items-center gap-2 mt-1 flex-wrap">
+          <span className="text-[11px] font-medium text-blue-600">{item.jobName}</span>
+          <span className="text-[10px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">{item.jobId}</span>
+          <span className="text-[11px] text-orange-500">Pending {item.pendingSince}</span>
+        </div>
       </div>
     </div>);
 }
