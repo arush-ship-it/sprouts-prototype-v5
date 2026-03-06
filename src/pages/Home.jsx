@@ -229,9 +229,9 @@ export default function Home() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-gray-900 text-2xl font-semibold">Hello Arush, Welcome To SproutsAI!</h1>
         <div className="flex gap-3">
-          <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"><Mail className="w-4 h-4" /> Connect Email</button>
-          <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"><Calendar className="w-4 h-4" /> Connect Calendar</button>
-          <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">⚡ Integrated with Greenhouse</button>
+          <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"><Mail className="w-4 h-4" /> Connect Email</button>
+          <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"><Calendar className="w-4 h-4" /> Connect Calendar</button>
+          <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2">⚡ Integrated with Greenhouse</button>
         </div>
       </div>
 
