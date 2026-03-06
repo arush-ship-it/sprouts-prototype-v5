@@ -326,7 +326,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
 
         {/* Benefits */}
-        <div className="bg-white mb-6 mx-6 py-6 rounded-2xl border border-gray-100 shadow-sm">
+        <div className="bg-white mb-6 mx-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
