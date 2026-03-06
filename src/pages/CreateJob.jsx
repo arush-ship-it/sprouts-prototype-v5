@@ -393,11 +393,11 @@ function QuestionCard({ question, added, onAdd, onRemove }) {
         {added ?
         <div className="flex items-center gap-2 shrink-0">
             <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
-            <button onClick={() => setEditing((v) => !v)} className={`text-gray-400 hover:text-indigo-500 ${editing ? "text-indigo-500" : ""}`}><span className="text-[14px]">✎</span></button>
-            <button onClick={onRemove} className="text-gray-300 hover:text-red-400"><X className="w-4 h-4" /></button>
+            <button onClick={() => setEditing((v) => !v)} className={`text-gray-400 hover:text-indigo-500 ${editing ? "text-indigo-500" : ""}`}><span className="text-slate-700">✎</span></button>
+            <button onClick={onRemove} className="text-gray-300 hover:text-red-400"><X className="bg-[#ffffff] text-slate-700 lucide lucide-x w-4 h-4" /></button>
           </div> :
         <button onClick={onAdd} className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-400 hover:text-indigo-500 shrink-0">
-            <Plus className="w-4 h-4" />
+            <Plus className="text-slate-700 lucide lucide-plus w-4 h-4" />
           </button>
         }
       </div>
