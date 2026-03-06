@@ -26,7 +26,7 @@ const mainLinks = [
 { label: "Activity", icon: Activity, active: false, page: "Activity" },
 { label: "Talent", icon: Users, active: false, page: "Console" },
 { label: "Intelligence", icon: Activity, active: false, page: "Agents" },
-{ label: "Inbox", icon: Inbox, active: false, page: "Inbox" },
+{ label: "Inbox", icon: Inbox, active: false, page: "Inbox", unreadCount: 4 },
 { label: "Job Details", icon: FileText, active: false, page: "JobDetails" }];
 
 
