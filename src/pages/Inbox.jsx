@@ -150,8 +150,8 @@ function ActivityItem({ activity }) {
     <div
       className="bg-white px-4 py-4 rounded-xl flex items-center gap-3 border border-gray-200 hover:shadow-sm transition-all cursor-pointer"
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+      onMouseLeave={() => setHovered(false)}>
+
       <div className="p-2 rounded-lg bg-gray-50">{getIcon()}</div>
       <div className="flex-1 min-w-0 flex items-center gap-4">
         <p className="text-[13px] font-semibold text-gray-900 min-w-[140px]">
@@ -167,15 +167,15 @@ function ActivityItem({ activity }) {
         </span>
         <div className={`flex items-center gap-1.5 transition-opacity ${hovered ? "opacity-100" : "opacity-0"}`}>
           <button
-            onClick={(e) => { e.stopPropagation(); setStarred((v) => !v); }}
-            className="p-1.5 rounded-lg hover:bg-yellow-50 transition-colors"
-          >
+            onClick={(e) => {e.stopPropagation();setStarred((v) => !v);}}
+            className="p-1.5 rounded-lg hover:bg-yellow-50 transition-colors">
+
             <Star className={`w-4 h-4 ${starred ? "fill-yellow-400 text-yellow-400" : "text-gray-400"}`} />
           </button>
           <button
             onClick={(e) => e.stopPropagation()}
-            className="p-1.5 rounded-lg hover:bg-red-50 transition-colors"
-          >
+            className="p-1.5 rounded-lg hover:bg-red-50 transition-colors">
+
             <Trash2 className="w-4 h-4 text-gray-400 hover:text-red-500" />
           </button>
         </div>
@@ -278,7 +278,7 @@ export default function Inbox() {
               </button>
             )}
           </div>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 mb-1 text-[12px] font-medium text-gray-500 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+          <button className="bg-[#ffffff] text-gray-800 mb-1 px-3 py-1.5 text-sm font-medium rounded-lg flex items-center gap-1.5 border border-gray-200 hover:bg-gray-50 transition-colors">
             <Filter className="w-3.5 h-3.5" /> Filters
           </button>
         </div>
