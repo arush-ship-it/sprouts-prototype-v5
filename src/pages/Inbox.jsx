@@ -202,10 +202,10 @@ export default function Inbox() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Filter className="w-3.5 h-3.5 mr-1.5" />
-              Filters
-            </Button>
+            
+
+
+
             <Dialog open={isSequenceOpen} onOpenChange={setIsSequenceOpen}>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
