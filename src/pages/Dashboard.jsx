@@ -289,9 +289,9 @@ export default function Dashboard() {
                 Deep Dive with AI
               </Button>
             </div>
-            <p className="text-gray-500 px-1 text-sm">Overview of all recruitment activities
+            
 
-            </p>
+
           </div>
 
           {/* Data Visualizations */}
