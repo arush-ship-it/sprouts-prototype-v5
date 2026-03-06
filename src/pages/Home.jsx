@@ -229,7 +229,7 @@ export default function Home() {
           </div>
 
           {/* All Jobs */}
-          <div className="bg-white px-4 py-4 rounded-xl border border-gray-100 shadow-sm">
+          <div className="bg-white px-4 py-4 rounded-xl border border-gray-100 shadow-sm flex-1 min-h-0 overflow-hidden">
             <h2 className="text-[15px] font-semibold text-gray-800 mb-5">All Jobs</h2>
             <div className="space-y-1">
               {jobs.map((job) =>
