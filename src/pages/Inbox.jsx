@@ -113,8 +113,8 @@ const activities = [
 
 
 function ActivityItem({ activity }) {
-  const [hovered, setHovered] = React.useState(false);
-  const [starred, setStarred] = React.useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [starred, setStarred] = useState(false);
   const getIcon = () => {
     switch (activity.type) {
       case "email_sent":
