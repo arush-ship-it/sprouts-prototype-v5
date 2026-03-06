@@ -762,7 +762,7 @@ export default function Dashboard() {
             {!isChatMinimized ?
             <>
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                  <div className="bg-slate-400 rounded-[32px] w-8 h-8 from-indigo-500 to-purple-600 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
                   <div>
