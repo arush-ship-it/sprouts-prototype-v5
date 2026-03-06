@@ -15,7 +15,7 @@ const navLinks = [
 { label: "Analytics", icon: LayoutDashboard, page: "Dashboard" },
 { label: "Talent Pool", icon: FolderOpen, page: "TalentPool" },
 { label: "Create Job", icon: PlusCircle, page: "CreateJob" },
-{ label: "Console", icon: Terminal, page: "Console" }];
+{ label: "Workspace", icon: Terminal, page: "Console" }];
 
 
 export default function TopNav({ currentPageName }) {
