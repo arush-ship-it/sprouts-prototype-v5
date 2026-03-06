@@ -272,7 +272,7 @@ export default function Dashboard() {
         <div className="bg-[#f2f3f5] pt-6 pb-8 px-8 flex-1 overflow-y-auto">
           {/* Header */}
           <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
+            <div className="mt-2 mb-2 pt-2 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Link to={createPageUrl("Home")}>
                   
