@@ -244,7 +244,7 @@ export default function Home() {
         </div>
 
         {/* Right column */}
-        <div className="w-[403px] shrink-0 flex flex-col gap-4" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
+        <div className="w-[403px] shrink-0 flex flex-col gap-4">
           {/* Ad Banner */}
           <div className="rounded-2xl overflow-hidden shrink-0" style={{ background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)" }}>
             <div className="p-6 flex flex-col items-center text-center">
