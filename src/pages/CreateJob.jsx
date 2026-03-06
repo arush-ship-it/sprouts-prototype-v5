@@ -226,7 +226,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
 
         {/* Role Information */}
-        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl border border-gray-100 shadow-sm">
+        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4 text-indigo-600" />
@@ -252,7 +252,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
 
         {/* Work Arrangement */}
-        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl border border-gray-100 shadow-sm">
+        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
@@ -289,7 +289,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
 
         {/* Compensation */}
-        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl border border-gray-100 shadow-sm">
+        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
