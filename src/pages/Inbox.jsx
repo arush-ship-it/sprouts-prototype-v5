@@ -168,6 +168,7 @@ function ActivityItem({ activity }) {
 export default function Inbox() {
   const [isComposeOpen, setIsComposeOpen] = useState(false);
   const [isSequenceOpen, setIsSequenceOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("Inbox");
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
