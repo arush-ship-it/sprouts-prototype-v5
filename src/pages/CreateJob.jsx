@@ -85,8 +85,8 @@ function DefaultScreen({ onStart }) {
 
             <Button
               onClick={() => {if (prompt.trim()) onStart(prompt);}}
-              size="icon"
-              className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-indigo-600 hover:bg-indigo-700">
+              size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-full inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow absolute right-2 bottom-2 h-8 w-8 hover:bg-indigo-700">
+
 
               <Send className="w-3.5 h-3.5" />
             </Button>
