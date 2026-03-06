@@ -371,35 +371,79 @@ const SUGGESTED_QUESTIONS = [
 
 
 function QuestionCard({ question, added, onAdd, onRemove }) {
+  const [editing, setEditing] = useState(false);
+  const [questionText, setQuestionText] = useState(question.text);
+  const [yesLabel, setYesLabel] = useState("Yes");
+  const [noLabel, setNoLabel] = useState("No");
+  const [textPlaceholder, setTextPlaceholder] = useState("Add your experience in years");
+
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
       <div className="flex items-start justify-between gap-3 mb-3">
-        <p className="text-[13px] text-gray-800 flex-1">{question.text}</p>
+        {editing ? (
+          <textarea
+            value={questionText}
+            onChange={(e) => setQuestionText(e.target.value)}
+            className="flex-1 text-[13px] text-gray-800 border border-indigo-300 rounded-lg px-2 py-1 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-400"
+            rows={2}
+          />
+        ) : (
+          <p className="text-[13px] text-gray-800 flex-1">{questionText}</p>
+        )}
         {added ?
         <div className="flex items-center gap-2 shrink-0">
             <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
-            <button className="text-gray-400 hover:text-indigo-500"><span className="text-[14px]">✎</span></button>
+            <button onClick={() => setEditing((v) => !v)} className={`text-gray-400 hover:text-indigo-500 ${editing ? "text-indigo-500" : ""}`}><span className="text-[14px]">✎</span></button>
             <button onClick={onRemove} className="text-gray-300 hover:text-red-400"><X className="w-4 h-4" /></button>
           </div> :
-
         <button onClick={onAdd} className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-400 hover:text-indigo-500 shrink-0">
             <Plus className="w-4 h-4" />
           </button>
         }
       </div>
-      {question.type === "yes_no" &&
-      <div className="space-y-1.5">
-          <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
-            <input type="radio" name={`q-${question.id}`} defaultChecked className="accent-indigo-600" /> Yes
-          </label>
-          <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
-            <input type="radio" name={`q-${question.id}`} className="accent-indigo-600" /> No
-          </label>
+      {question.type === "yes_no" && (
+        editing ? (
+          <div className="space-y-1.5">
+            <input
+              value={yesLabel}
+              onChange={(e) => setYesLabel(e.target.value)}
+              className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-24 focus:outline-none focus:ring-1 focus:ring-indigo-400"
+            />
+            <div />
+            <input
+              value={noLabel}
+              onChange={(e) => setNoLabel(e.target.value)}
+              className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-24 focus:outline-none focus:ring-1 focus:ring-indigo-400"
+            />
+          </div>
+        ) : (
+          <div className="space-y-1.5">
+            <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
+              <input type="radio" name={`q-${question.id}`} defaultChecked className="accent-indigo-600" /> {yesLabel}
+            </label>
+            <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
+              <input type="radio" name={`q-${question.id}`} className="accent-indigo-600" /> {noLabel}
+            </label>
+          </div>
+        )
+      )}
+      {question.type === "text_input" && (
+        editing ? (
+          <input
+            value={textPlaceholder}
+            onChange={(e) => setTextPlaceholder(e.target.value)}
+            className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-full max-w-[260px] focus:outline-none focus:ring-1 focus:ring-indigo-400"
+            placeholder="Placeholder text"
+          />
+        ) : (
+          <Input placeholder={textPlaceholder} className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />
+        )
+      )}
+      {editing && (
+        <div className="flex justify-end mt-3">
+          <button onClick={() => setEditing(false)} className="text-[12px] text-indigo-600 font-medium hover:underline">Done</button>
         </div>
-      }
-      {question.type === "text_input" &&
-      <Input placeholder="Add your experience in years" className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />
-      }
+      )}
     </div>);
 
 }
