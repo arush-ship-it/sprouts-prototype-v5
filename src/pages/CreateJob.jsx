@@ -548,6 +548,29 @@ function ConfirmationScreen({ jobTitle, onGoToJobs }) {
 
 }
 
+// ─── AI Chat Box ──────────────────────────────────────────────────────────────
+function AIChatBox() {
+  const [message, setMessage] = useState("");
+  return (
+    <div className="relative">
+      <Textarea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); setMessage(""); } }}
+        placeholder="Ask AI to make changes…"
+        className="resize-none text-[13px] pr-12 rounded-2xl min-h-[60px] bg-white border-gray-200"
+        rows={2}
+      />
+      <Button
+        onClick={() => setMessage("")}
+        size="icon"
+        className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-indigo-600 hover:bg-indigo-700">
+        <Send className="w-3.5 h-3.5" />
+      </Button>
+    </div>
+  );
+}
+
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function CreateJob() {
   // step 0 = default landing, 1 = generating, 2 = review JD, 3 = screening, 4 = publish, 5 = confirmation
