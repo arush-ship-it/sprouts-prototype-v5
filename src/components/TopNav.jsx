@@ -20,7 +20,7 @@ const navLinks = [
 
 export default function TopNav({ currentPageName }) {
   return (
-    <header className="bg-[#ffffff] mx-2 my-2 px-4 rounded-lg fixed top-0 left-0 right-0 z-50 h-12 border-b border-gray-200 flex items-center gap-1">
+    <header className="bg-[#ffffff] px-4 rounded-[0px_0px_4px_4px] fixed top-0 left-0 right-0 z-50 h-12 border-b border-gray-200 flex items-center gap-1">
       {/* Brand */}
       <Link
         to={createPageUrl("Home")}
