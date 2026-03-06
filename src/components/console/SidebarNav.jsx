@@ -48,7 +48,7 @@ export default function SidebarNav({ activePage = "Console" }) {
   const [selectedJob, setSelectedJob] = useState("1");
 
   return (
-    <aside className="bg-[#ffffff] px-3 rounded-none w-[221px] flex flex-col fixed left-0 top-12 bottom-0 shrink-0 border-r border-gray-200 overflow-hidden">
+    <aside className="bg-[#E5E7EB] px-3 rounded-none w-[221px] flex flex-col fixed left-0 top-12 bottom-0 shrink-0 border-r border-gray-200 overflow-hidden">
       {/* Top: Brand + Job Selector + Main Links */}
       <div className="flex-1 overflow-y-auto">
         <div className="flex items-center gap-2.5 px-3 mb-6">
