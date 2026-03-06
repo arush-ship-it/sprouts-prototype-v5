@@ -380,16 +380,16 @@ function QuestionCard({ question, added, onAdd, onRemove }) {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
       <div className="flex items-start justify-between gap-3 mb-3">
-        {editing ? (
-          <textarea
-            value={questionText}
-            onChange={(e) => setQuestionText(e.target.value)}
-            className="flex-1 text-[13px] text-gray-800 border border-indigo-300 rounded-lg px-2 py-1 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-400"
-            rows={2}
-          />
-        ) : (
-          <p className="text-[13px] text-gray-800 flex-1">{questionText}</p>
-        )}
+        {editing ?
+        <textarea
+          value={questionText}
+          onChange={(e) => setQuestionText(e.target.value)}
+          className="flex-1 text-[13px] text-gray-800 border border-indigo-300 rounded-lg px-2 py-1 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-400"
+          rows={2} /> :
+
+
+        <p className="text-[13px] text-gray-800 flex-1">{questionText}</p>
+        }
         {added ?
         <div className="flex items-center gap-2 shrink-0">
             <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
@@ -402,48 +402,48 @@ function QuestionCard({ question, added, onAdd, onRemove }) {
         }
       </div>
       {question.type === "yes_no" && (
-        editing ? (
-          <div className="space-y-1.5">
+      editing ?
+      <div className="space-y-1.5">
             <input
-              value={yesLabel}
-              onChange={(e) => setYesLabel(e.target.value)}
-              className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-24 focus:outline-none focus:ring-1 focus:ring-indigo-400"
-            />
+          value={yesLabel}
+          onChange={(e) => setYesLabel(e.target.value)}
+          className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-24 focus:outline-none focus:ring-1 focus:ring-indigo-400" />
+
             <div />
             <input
-              value={noLabel}
-              onChange={(e) => setNoLabel(e.target.value)}
-              className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-24 focus:outline-none focus:ring-1 focus:ring-indigo-400"
-            />
-          </div>
-        ) : (
-          <div className="space-y-1.5">
+          value={noLabel}
+          onChange={(e) => setNoLabel(e.target.value)}
+          className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-24 focus:outline-none focus:ring-1 focus:ring-indigo-400" />
+
+          </div> :
+
+      <div className="space-y-1.5">
             <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
               <input type="radio" name={`q-${question.id}`} defaultChecked className="accent-indigo-600" /> {yesLabel}
             </label>
             <label className="flex items-center gap-2 text-[13px] text-gray-700 cursor-pointer">
               <input type="radio" name={`q-${question.id}`} className="accent-indigo-600" /> {noLabel}
             </label>
-          </div>
-        )
-      )}
+          </div>)
+
+      }
       {question.type === "text_input" && (
-        editing ? (
-          <input
-            value={textPlaceholder}
-            onChange={(e) => setTextPlaceholder(e.target.value)}
-            className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-full max-w-[260px] focus:outline-none focus:ring-1 focus:ring-indigo-400"
-            placeholder="Placeholder text"
-          />
-        ) : (
-          <Input placeholder={textPlaceholder} className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />
-        )
-      )}
-      {editing && (
-        <div className="flex justify-end mt-3">
+      editing ?
+      <input
+        value={textPlaceholder}
+        onChange={(e) => setTextPlaceholder(e.target.value)}
+        className="text-[13px] border border-indigo-200 rounded px-2 py-0.5 w-full max-w-[260px] focus:outline-none focus:ring-1 focus:ring-indigo-400"
+        placeholder="Placeholder text" /> :
+
+
+      <Input placeholder={textPlaceholder} className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />)
+
+      }
+      {editing &&
+      <div className="flex justify-end mt-3">
           <button onClick={() => setEditing(false)} className="text-[12px] text-indigo-600 font-medium hover:underline">Done</button>
         </div>
-      )}
+      }
     </div>);
 
 }
@@ -482,7 +482,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         <div>
           <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
           <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
-          <p className="text-slate-500 mb-3 text-xs font-normal">Here are the screening questions I've generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
+          
           <div className="space-y-3">
             {visibleRecommended.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
@@ -496,7 +496,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         {/* Suggested */}
         <div>
           <p className="text-[13px] font-semibold text-gray-700 mb-1">Suggested</p>
-          <p className="text-[12px] text-gray-500 mb-3">These are the screening questions we suggest generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
+          
           <div className="space-y-3">
             {visibleSuggested.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
