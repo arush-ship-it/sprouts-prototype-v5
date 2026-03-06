@@ -212,9 +212,9 @@ export default function Home() {
 
 
   return (
-    <div className="bg-[#f2f3f5] px-6 py-6 min-h-screen">
+    <div className="bg-[#f2f3f5] px-6 py-6 h-screen overflow-hidden flex flex-col">
       {/* Welcome */}
-      <div className="mb-6 pt-4 flex items-center justify-between">
+      <div className="mb-6 pt-4 flex items-center justify-between shrink-0">
         <h1 className="text-gray-900 text-2xl font-medium">Hello, Welcome To SproutsAI</h1>
         <div className="flex gap-3">
           <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"><Mail className="w-4 h-4" /> Connect Email</button>
