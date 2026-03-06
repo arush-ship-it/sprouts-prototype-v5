@@ -56,7 +56,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
         {/* Filter, Search & View Mode */}
         <div className="flex items-center gap-2">
           {/* Search Bar */}
-          <div className="bg-gray-200 px-3 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 w-10"
+          <div className="bg-[#ffffff] px-3 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 w-10"
 
 
 
@@ -75,15 +75,15 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           {/* Filter Button */}
           <Button
             variant="ghost"
-            size="sm" className="bg-gray-200 text-gray-700 px-3 text-xs font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-10 hover:bg-gray-200">
+            size="sm" className="bg-[#ffffff] text-gray-700 px-3 text-xs font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-10 hover:bg-gray-200">
 
 
             <Filter className="w-4 h-4 mr-2" />
-            <span className="text-[13px] font-medium">Filters</span>
+            <span className="text-[13px] text-xs font-medium">Filters</span>
           </Button>
 
           {/* View Mode Toggle */}
-          <div className="bg-gray-200 p-1 rounded-lg flex items-center gap-1">
+          <div className="bg-[#F2F3F5] p-1 rounded-lg flex items-center gap-1">
             {currentViews.map((view) =>
             <Button
               key={view.key}
