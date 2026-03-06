@@ -264,19 +264,23 @@ export default function Inbox() {
       <div className="px-8 pb-6">
         {/* Tabs */}
         <div className="flex items-center justify-between mb-4 border-b border-gray-200">
-          {["Inbox", "Sent", "Starred"].map((tab) =>
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 text-[13px] font-medium transition-colors border-b-2 -mb-px ${
-            activeTab === tab ?
-            "border-blue-600 text-blue-600" :
-            "border-transparent text-gray-500 hover:text-gray-700"}`
-            }>
-
-              {tab}
-            </button>
-          )}
+          <div className="flex">
+            {["Inbox", "Sent", "Starred"].map((tab) =>
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 text-[13px] font-medium transition-colors border-b-2 -mb-px ${
+              activeTab === tab ?
+              "border-blue-600 text-blue-600" :
+              "border-transparent text-gray-500 hover:text-gray-700"}`
+              }>
+                {tab}
+              </button>
+            )}
+          </div>
+          <button className="flex items-center gap-1.5 px-3 py-1.5 mb-1 text-[12px] font-medium text-gray-500 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+            <Filter className="w-3.5 h-3.5" /> Filters
+          </button>
         </div>
         {/* Activity List */}
         <div className="flex flex-col gap-2.5">
