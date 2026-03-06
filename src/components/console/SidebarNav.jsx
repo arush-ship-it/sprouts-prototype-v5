@@ -24,7 +24,7 @@ import {
 
 const mainLinks = [
 { label: "Activity", icon: Activity, active: false, page: "Activity" },
-{ label: "Talent", icon: Users, active: false, page: "Console", newCount: 12 },
+{ label: "Talent", icon: Users, active: false, page: "Console" },
 { label: "Intelligence", icon: Activity, active: false, page: "Agents" },
 { label: "Inbox", icon: Inbox, active: false, page: "Inbox", unreadCount: 4 },
 { label: "Job Details", icon: FileText, active: false, page: "JobDetails" }];
@@ -107,11 +107,6 @@ export default function SidebarNav({ activePage = "Console" }) {
                 {link.unreadCount > 0 &&
                   <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
                     {link.unreadCount > 9 ? "9+" : link.unreadCount}
-                  </span>
-                }
-                {link.newCount > 0 &&
-                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-blue-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
-                    {link.newCount > 9 ? "9+" : link.newCount}
                   </span>
                 }
               </div>
