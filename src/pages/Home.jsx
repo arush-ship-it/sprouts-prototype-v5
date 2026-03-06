@@ -247,7 +247,7 @@ export default function Home() {
         <div className="w-[403px] shrink-0 flex flex-col gap-4">
           {/* Ad Banner */}
           <div className="rounded-2xl overflow-hidden shrink-0" style={{ background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)" }}>
-            <div className="p-10 flex flex-col items-center text-center">
+            <div className="my-5 px-10 py-6 text-center flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-4 shadow-sm">
                 <Mail className="w-6 h-6 text-blue-500" />
               </div>
@@ -257,9 +257,9 @@ export default function Home() {
                 <Mail className="w-4 h-4" /> Integrate Email Now
               </button>
               <div className="flex gap-1.5 mt-5">
-                {[0,1,2,3,4].map((i) => (
-                  <div key={i} className={`rounded-full ${i === 0 ? "w-2 h-2 bg-blue-600" : "w-2 h-2 bg-blue-300"}`} />
-                ))}
+                {[0, 1, 2, 3, 4].map((i) =>
+                <div key={i} className={`rounded-full ${i === 0 ? "w-2 h-2 bg-blue-600" : "w-2 h-2 bg-blue-300"}`} />
+                )}
               </div>
             </div>
           </div>
