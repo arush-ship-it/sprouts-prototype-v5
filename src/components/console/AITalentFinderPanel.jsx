@@ -46,7 +46,7 @@ export default function AITalentFinderPanel() {
   });
 
   return (
-    <div className="bg-white mx-4 my-4 rounded-xl w-[483px] border-r border-gray-200 flex flex-col h-full overflow-hidden">
+    <div className="bg-white mx-4 my-4 rounded-xl w-[483px] border-r border-gray-200 flex flex-col overflow-hidden" style={{ height: "110vh" }}>
       {/* Top Tabs */}
       <div className="px-4 py-4 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
