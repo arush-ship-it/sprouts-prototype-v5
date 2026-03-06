@@ -508,7 +508,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         </div>
       </div>
 
-      <div className="bg-[#f2f2f2] pt-2 pr-6 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
+      <div className="bg-[#ffffff] pt-4 pr-6 pb-4 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
         <div className="flex gap-2">
           <Button variant="ghost" size="sm" onClick={onSkip} className="text-gray-500 gap-1.5">
