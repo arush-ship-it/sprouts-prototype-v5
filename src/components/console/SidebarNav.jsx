@@ -109,6 +109,11 @@ export default function SidebarNav({ activePage = "Console" }) {
                     {link.unreadCount > 9 ? "9+" : link.unreadCount}
                   </span>
                 }
+                {link.newCount > 0 &&
+                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-blue-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
+                    {link.newCount > 9 ? "9+" : link.newCount}
+                  </span>
+                }
               </div>
 
               {link.label}
