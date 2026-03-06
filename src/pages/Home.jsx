@@ -160,18 +160,6 @@ export default function Home() {
   const navigate = useNavigate();
   const insightCards = [
   {
-    title: "Applicants per job posting",
-    subtitle: "Average applicants",
-    numericValue: 75,
-    unit: "",
-    badge: "↑",
-    chartType: "line",
-    chartData: [30, 45, 35, 55, 50, 60, 75],
-    lineColor: "#f97316",
-    dotColor: "#f97316",
-    description: "Average number of applicants across all active job postings."
-  },
-  {
     title: "Candidates in Pipeline",
     subtitle: "Pipeline status",
     numericValue: 120,
