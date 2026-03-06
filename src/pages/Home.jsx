@@ -265,7 +265,7 @@ export default function Home() {
           </div>
 
           {/* Recent Activity */}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col flex-1 overflow-y-auto">
+          <div className="bg-white mt-2 p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col flex-1 overflow-y-auto">
             <h2 className="text-[15px] font-semibold text-gray-800 mb-5">Recent Activity</h2>
             <div className="space-y-4">
               {approvals.map((item) =>
