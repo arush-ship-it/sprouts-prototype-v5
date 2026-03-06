@@ -266,8 +266,8 @@ export default function Home() {
 
           {/* Recent Activity */}
           <div className="bg-white mt-3 px-4 py-4 rounded-xl border border-gray-100 shadow-sm flex flex-col flex-1 min-h-0 overflow-hidden">
-            <h2 className="text-[15px] font-semibold text-gray-800 mb-5">Pending Approvals</h2>
-            <div className="space-y-4">
+            <h2 className="text-[15px] font-semibold text-gray-800 mb-5 shrink-0">Pending Approvals</h2>
+            <div className="space-y-4 overflow-y-auto flex-1">
               {approvals.map((item) =>
               <ApprovalItem key={item.id} item={item} />
               )}
