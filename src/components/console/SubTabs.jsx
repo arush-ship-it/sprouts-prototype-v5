@@ -27,7 +27,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   return (
     <div className="px-8 py-2">
       <div className="flex items-center justify-between">
-        <div className="bg-[#f0f0f0] p-1 rounded-xl flex items-center gap-1 w-fit">
+        <div className="bg-gray-200 p-1 rounded-xl flex items-center gap-1 w-fit">
           {tabs.map((tab) =>
           <button
             key={tab.key}
@@ -56,14 +56,14 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
         {/* Filter, Search & View Mode */}
         <div className="flex items-center gap-2">
           {/* Search Bar */}
-          <div
-            className={`flex items-center gap-2 bg-gray-100/70 rounded-lg px-3 py-2 transition-all duration-300 ${
-            isSearchExpanded ? "w-64" : "w-10"}`
-            }
-            onMouseEnter={() => setIsSearchExpanded(true)}
-            onMouseLeave={() => setIsSearchExpanded(false)}>
+          <div className="bg-gray-200 px-3 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 w-10"
 
-            <Search className="w-4 h-4 text-gray-400 shrink-0" />
+
+
+          onMouseEnter={() => setIsSearchExpanded(true)}
+          onMouseLeave={() => setIsSearchExpanded(false)}>
+
+            <Search className="text-gray-600 lucide lucide-search w-4 h-4 shrink-0" />
             {isSearchExpanded &&
             <Input
               placeholder="Search candidates..."
@@ -75,15 +75,15 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           {/* Filter Button */}
           <Button
             variant="ghost"
-            size="sm"
-            className="h-10 px-3 bg-gray-100/70 text-gray-600 hover:bg-gray-200 rounded-lg">
+            size="sm" className="bg-gray-200 text-gray-700 px-3 text-xs font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-10 hover:bg-gray-200">
+
 
             <Filter className="w-4 h-4 mr-2" />
             <span className="text-[13px] font-medium">Filters</span>
           </Button>
 
           {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 p-1 bg-gray-100/70 rounded-lg">
+          <div className="bg-gray-200 p-1 rounded-lg flex items-center gap-1">
             {currentViews.map((view) =>
             <Button
               key={view.key}
