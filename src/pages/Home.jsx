@@ -251,14 +251,14 @@ export default function Home() {
               <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-4 shadow-sm">
                 <Mail className="w-6 h-6 text-blue-500" />
               </div>
-              <h3 className="text-[17px] font-bold text-gray-900 mb-1 leading-snug">Communication Optimised<br />For One Click</h3>
+              <h3 className="text-zinc-700 mb-1 text-lg font-semibold leading-snug">Communication Optimised
+For One Click</h3>
               <p className="text-[12px] text-gray-500 mb-5">AI-crafted sequences tailored &amp; ready to send in seconds</p>
               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-medium px-6 py-2.5 rounded-xl flex items-center gap-2 transition-colors">
                 <Mail className="w-4 h-4" /> Integrate Email Now
               </button>
               <div className="flex gap-1.5 mt-5">
-                {[0, 1, 2, 3, 4].map((i) =>
-                <div key={i} className={`rounded-full ${i === 0 ? "w-2 h-2 bg-blue-600" : "w-2 h-2 bg-blue-300"}`} />
+                {[0, 1, 2, 3, 4].map((i) => <div key={i} className={`rounded-full ${i === 0 ? "w-2 h-2 bg-blue-600" : "w-2 h-2 bg-blue-300"}`} />
                 )}
               </div>
             </div>
