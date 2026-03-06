@@ -27,7 +27,7 @@ export default function Console() {
   };
 
   return (
-    <div className="bg-[#f2f3f5] flex-1 min-h-screen overflow-auto">
+    <div className="bg-[#f2f3f5] pl-3 flex-1 min-h-screen overflow-auto">
         <JobHeader onActivityApprovalClick={() => setIsActivityApprovalOpen(true)} />
         <SubTabs
         activeTab={activeTab}
