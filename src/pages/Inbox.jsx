@@ -147,7 +147,11 @@ function ActivityItem({ activity }) {
   };
 
   return (
-    <div className="bg-white px-4 py-4 rounded-xl flex items-center gap-3 border border-gray-200 hover:shadow-sm transition-all cursor-pointer">
+    <div
+      className="bg-white px-4 py-4 rounded-xl flex items-center gap-3 border border-gray-200 hover:shadow-sm transition-all cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div className="p-2 rounded-lg bg-gray-50">{getIcon()}</div>
       <div className="flex-1 min-w-0 flex items-center gap-4">
         <p className="text-[13px] font-semibold text-gray-900 min-w-[140px]">
@@ -156,12 +160,25 @@ function ActivityItem({ activity }) {
         <p className="text-[12px] text-gray-600 flex-1 truncate">{activity.subject}</p>
         <span
           className={`inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-md border ${getStatusColor()}`}>
-
           {activity.status}
         </span>
         <span className="text-[11px] text-gray-400 whitespace-nowrap min-w-[80px] text-right">
           {activity.timestamp}
         </span>
+        <div className={`flex items-center gap-1.5 transition-opacity ${hovered ? "opacity-100" : "opacity-0"}`}>
+          <button
+            onClick={(e) => { e.stopPropagation(); setStarred((v) => !v); }}
+            className="p-1.5 rounded-lg hover:bg-yellow-50 transition-colors"
+          >
+            <Star className={`w-4 h-4 ${starred ? "fill-yellow-400 text-yellow-400" : "text-gray-400"}`} />
+          </button>
+          <button
+            onClick={(e) => e.stopPropagation()}
+            className="p-1.5 rounded-lg hover:bg-red-50 transition-colors"
+          >
+            <Trash2 className="w-4 h-4 text-gray-400 hover:text-red-500" />
+          </button>
+        </div>
       </div>
     </div>);
 
