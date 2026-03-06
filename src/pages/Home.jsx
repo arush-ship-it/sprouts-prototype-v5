@@ -279,7 +279,7 @@ function JobRow({ job }) {
     onMouseLeave={() => setHovered(false)}>
 
       <div className="flex items-center gap-3">
-        <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${hovered ? "bg-blue-100" : "bg-gray-100"}`}>
+        <div className="bg-gray-100 rounded-[20px] w-9 h-9 flex items-center justify-center transition-colors">
           <Briefcase className={`w-4 h-4 transition-colors ${hovered ? "text-blue-500" : "text-gray-500"}`} />
         </div>
         <div>
