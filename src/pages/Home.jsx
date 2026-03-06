@@ -227,7 +227,7 @@ export default function Home() {
     <div className="bg-[#f2f3f5] px-6 py-6 min-h-screen">
       {/* Welcome */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-gray-900 text-2xl font-semibold">Hello Arush, Welcome To SproutsAI!</h1>
+        <h1 className="text-gray-900 text-2xl font-semibold">Hello Arush, Welcome To SproutsAi !</h1>
         <div className="flex gap-3">
           <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"><Mail className="w-4 h-4" /> Connect Email</button>
           <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"><Calendar className="w-4 h-4" /> Connect Calendar</button>
