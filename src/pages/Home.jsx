@@ -247,7 +247,7 @@ export default function Home() {
         <div className="w-[403px] shrink-0 flex flex-col gap-4">
           {/* Ad Banner */}
           <div className="opacity-100 rounded-2xl overflow-hidden shrink-0" style={{ background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)", border: "5px solid white" }}>
-            <div className="mt-3 mb-5 px-10 py-6 text-center flex flex-col items-center">
+            <div className="mt-8 mb-5 px-10 py-6 text-center flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-4 shadow-sm">
                 <Mail className="w-6 h-6 text-blue-500" />
               </div>
@@ -265,7 +265,7 @@ export default function Home() {
           </div>
 
           {/* Recent Activity */}
-          <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col flex-1 overflow-y-auto">
+          <div className="bg-white mt-3 p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col flex-1 overflow-y-auto">
             <h2 className="text-[15px] font-semibold text-gray-800 mb-5">Pending Approvals</h2>
             <div className="space-y-4">
               {approvals.map((item) =>
