@@ -283,7 +283,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Location</Label>
-              <Input value={jobDetails.location} onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })} placeholder="e.g. San Francisco, CA" className="h-9 text-[13px] bg-gray-50" />
+              <Input value={jobDetails.location} onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })} placeholder="e.g. San Francisco, CA" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
             </div>
           </div>
         </div>
@@ -302,11 +302,11 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Salary Range</Label>
-              <Input value={jobDetails.salary} onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })} placeholder="e.g. $120k – $180k" className="h-9 text-[13px] bg-gray-50" />
+              <Input value={jobDetails.salary} onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })} placeholder="e.g. $120k – $180k" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Job Grade</Label>
-              <Input value={jobDetails.jobGrade} onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })} placeholder="e.g. L4, Senior" className="h-9 text-[13px] bg-gray-50" />
+              <Input value={jobDetails.jobGrade} onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })} placeholder="e.g. L4, Senior" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
             </div>
           </div>
           <div className="space-y-1.5">
