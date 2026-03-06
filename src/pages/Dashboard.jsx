@@ -277,7 +277,7 @@ export default function Dashboard() {
                 <Link to={createPageUrl("Home")}>
                   
                 </Link>
-                <h1 className="text-gray-700 text-2xl font-semibold">Analytics Dashboard</h1>
+                <h1 className="text-gray-700 text-2xl font-medium">Analytics Dashboard</h1>
               </div>
               <Button
                 onClick={() => setIsChatMinimized(false)}
