@@ -406,9 +406,19 @@ function QuestionCard({ question, added, onAdd, onRemove }) {
 
 function ScreeningScreen({ onBack, onNext, onSkip }) {
   const [addedIds, setAddedIds] = useState(RECOMMENDED_QUESTIONS.map((q) => q.id));
+  const [dismissedIds, setDismissedIds] = useState([]);
 
   const addQuestion = (id) => setAddedIds((prev) => [...prev, id]);
-  const removeQuestion = (id) => setAddedIds((prev) => prev.filter((x) => x !== id));
+  const removeQuestion = (id) => {
+    setAddedIds((prev) => prev.filter((x) => x !== id));
+    // If it's a recommended question, move it to dismissed (bottom of suggested)
+    if (RECOMMENDED_QUESTIONS.find((q) => q.id === id)) {
+      setDismissedIds((prev) => [...prev, id]);
+    }
+  };
+
+  const dismissedQuestions = RECOMMENDED_QUESTIONS.filter((q) => dismissedIds.includes(q.id));
+  const visibleRecommended = RECOMMENDED_QUESTIONS.filter((q) => !dismissedIds.includes(q.id));
 
   return (
     <div className="flex flex-col h-full">
@@ -419,7 +429,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
           <p className="text-slate-500 mb-3 text-xs font-normal">Here are the screening questions I've generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
           <div className="space-y-3">
-            {RECOMMENDED_QUESTIONS.map((q) =>
+            {visibleRecommended.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
           </div>
@@ -431,6 +441,9 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <p className="text-[12px] text-gray-500 mb-3">These are the screening questions we suggest generated based on the job description. You can use these to efficiently identify qualified candidates in the initial application stage.</p>
           <div className="space-y-3">
             {SUGGESTED_QUESTIONS.map((q) =>
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            )}
+            {dismissedQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
           </div>
