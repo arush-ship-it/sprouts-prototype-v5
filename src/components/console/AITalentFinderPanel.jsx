@@ -120,7 +120,7 @@ export default function AITalentFinderPanel() {
 
 
         {/* Conversation Area */}
-        <div className="px-5 py-4 space-y-4">
+        <div className="px-4 py-4 space-y-4">
           {/* Example User Message */}
           <div className="flex justify-end gap-2">
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
