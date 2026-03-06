@@ -428,6 +428,8 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
   const dismissedQuestions = RECOMMENDED_QUESTIONS.filter((q) => dismissedIds.includes(q.id));
   const visibleRecommended = RECOMMENDED_QUESTIONS.filter((q) => !dismissedIds.includes(q.id));
+  const promotedQuestions = SUGGESTED_QUESTIONS.filter((q) => promotedIds.includes(q.id));
+  const visibleSuggested = SUGGESTED_QUESTIONS.filter((q) => !promotedIds.includes(q.id));
 
   return (
     <div className="flex flex-col h-full">
