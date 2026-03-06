@@ -212,9 +212,9 @@ export default function Home() {
 
 
   return (
-    <div className="bg-[#f2f3f5] px-6 py-6 h-screen overflow-hidden flex flex-col">
+    <div className="bg-[#f2f3f5] px-6 py-6 min-h-screen">
       {/* Welcome */}
-      <div className="mb-6 pt-4 flex items-center justify-between shrink-0">
+      <div className="mb-6 pt-4 flex items-center justify-between">
         <h1 className="text-gray-900 text-2xl font-medium">Hello, Welcome To SproutsAI</h1>
         <div className="flex gap-3">
           <button onClick={() => navigate(createPageUrl("Settings") + "?tab=integrations")} className="bg-white text-gray-700 px-4 py-2 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"><Mail className="w-4 h-4" /> Connect Email</button>
@@ -224,9 +224,9 @@ export default function Home() {
       </div>
 
       {/* Main 2-col layout */}
-      <div className="flex gap-6 flex-1 min-h-0">
+      <div className="flex gap-6 items-stretch">
         {/* Left column */}
-        <div className="flex-1 min-w-0 flex flex-col gap-6 overflow-y-auto">
+        <div className="flex-1 min-w-0 flex flex-col gap-6">
           {/* 4 insight cards */}
           <div className="grid grid-cols-3 gap-4">
             {insightCards.map((card, i) => <InsightCard key={i} card={card} />)}
@@ -244,7 +244,7 @@ export default function Home() {
         </div>
 
         {/* Right column */}
-        <div className="w-[403px] shrink-0 flex flex-col gap-4 overflow-hidden">
+        <div className="w-[403px] shrink-0 flex flex-col gap-4">
           {/* Ad Banner */}
           <div className="opacity-100 rounded-2xl overflow-hidden shrink-0" style={{ background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)", border: "5px solid white" }}>
             <div className="mt-8 mb-5 px-10 py-6 text-center flex flex-col items-center">
@@ -265,9 +265,9 @@ export default function Home() {
           </div>
 
           {/* Recent Activity */}
-          <div className="bg-white mt-3 px-4 py-4 rounded-xl border border-gray-100 shadow-sm flex flex-col flex-1 min-h-0 overflow-hidden">
-            <h2 className="text-[15px] font-semibold text-gray-800 mb-5 shrink-0">Pending Approvals</h2>
-            <div className="space-y-4 overflow-y-auto flex-1">
+          <div className="bg-white mt-3 px-4 py-4 rounded-xl border border-gray-100 shadow-sm flex flex-col flex-1 overflow-y-auto">
+            <h2 className="text-[15px] font-semibold text-gray-800 mb-5">Pending Approvals</h2>
+            <div className="space-y-4">
               {approvals.map((item) =>
               <ApprovalItem key={item.id} item={item} />
               )}
