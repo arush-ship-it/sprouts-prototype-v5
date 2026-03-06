@@ -54,11 +54,11 @@ import CreateJob from './pages/CreateJob';
 import CreatePipeline from './pages/CreatePipeline';
 import Dashboard from './pages/Dashboard';
 import Evaluation from './pages/Evaluation';
-import Home from './pages/Home';
 import Inbox from './pages/Inbox';
 import JobDetails from './pages/JobDetails';
 import Settings from './pages/Settings';
 import TalentPool from './pages/TalentPool';
+import Home from './pages/Home';
 import __Layout from './Layout.jsx';
 
 
@@ -70,11 +70,11 @@ export const PAGES = {
     "CreatePipeline": CreatePipeline,
     "Dashboard": Dashboard,
     "Evaluation": Evaluation,
-    "Home": Home,
     "Inbox": Inbox,
     "JobDetails": JobDetails,
     "Settings": Settings,
     "TalentPool": TalentPool,
+    "Home": Home,
 }
 
 export const pagesConfig = {

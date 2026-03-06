@@ -204,11 +204,7 @@ export default function Home() {
   { id: 2, text: "Resume screening completed for 12 applicants", jobName: "Frontend Engineer", jobId: "JOB-1038", pendingSince: "3 hours ago" },
   { id: 3, text: "5 candidates auto-qualified for screening", jobName: "Product Manager", jobId: "JOB-1031", pendingSince: "6 hours ago" },
   { id: 4, text: "3 candidates moved to interview stage", jobName: "Senior Product Designer", jobId: "JOB-1042", pendingSince: "8 hours ago" },
-  { id: 5, text: "Resume screening completed for 12 applicants", jobName: "Frontend Engineer", jobId: "JOB-1038", pendingSince: "1 day ago" },
-  { id: 6, text: "5 candidates auto-qualified for screening", jobName: "Product Manager", jobId: "JOB-1031", pendingSince: "1 day ago" },
-  { id: 7, text: "3 candidates moved to interview stage", jobName: "Senior Product Designer", jobId: "JOB-1042", pendingSince: "2 days ago" },
-  { id: 8, text: "Resume screening completed for 12 applicants", jobName: "Frontend Engineer", jobId: "JOB-1038", pendingSince: "2 days ago" },
-  { id: 9, text: "5 candidates auto-qualified for screening", jobName: "Product Manager", jobId: "JOB-1031", pendingSince: "3 days ago" }];
+  { id: 5, text: "Resume screening completed for 12 applicants", jobName: "Frontend Engineer", jobId: "JOB-1038", pendingSince: "1 day ago" }];
 
 
   return (
