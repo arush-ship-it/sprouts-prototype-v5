@@ -267,7 +267,7 @@ export default function Dashboard() {
 
 
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="bg-[#f2f3f5] flex flex-1 overflow-hidden">
         {/* Main Content */}
         <div className="bg-[#f2f3f5] pt-6 pb-8 px-8 flex-1 overflow-y-auto">
           {/* Header */}
