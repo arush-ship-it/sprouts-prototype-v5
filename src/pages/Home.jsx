@@ -319,20 +319,16 @@ function JobRow({ job }) {
 
 // ── Approval item ─────────────────────────────────────────────────────────────
 function ApprovalItem({ item }) {
-  const [hovered, setHovered] = useState(false);
   return (
-    <div
-      className={`flex items-start gap-3 transition-all duration-150 ${hovered ? "translate-x-0.5" : ""}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
-
-      
-
-
+    <div className="flex items-start gap-3">
+      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center shrink-0 mt-0.5">
+        <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
       <div>
-        <p className={`text-[13px] font-medium leading-snug transition-colors ${hovered ? "text-blue-600" : "text-gray-800"}`}>{item.text}</p>
+        <p className="text-[13px] font-semibold text-gray-800 leading-snug">{item.text}</p>
         <p className="text-[11px] text-gray-400 mt-0.5">{item.time}</p>
       </div>
     </div>);
-
 }
