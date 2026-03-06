@@ -108,7 +108,7 @@ function DefaultScreen({ onStart }) {
 
         {/* Hero */}
         <div className="text-center mb-10">
-          <div className="bg-[#f2f2f2] mb-4 mx-auto rounded-2xl w-14 h-14 flex items-center justify-center">
+          <div className="bg-[#ffffff] mb-4 mx-auto rounded-[64px] w-14 h-14 flex items-center justify-center">
             <Sparkles className="text-blue-600 lucide lucide-sparkles w-7 h-7" />
           </div>
           <h2 className="text-blue-700 mb-1 text-lg font-medium">SproutsAI Job Generation</h2>
