@@ -89,7 +89,7 @@ function InsightCard({ card }) {
   return (
     <div
       className={`bg-white rounded-xl border border-gray-100 p-5 flex flex-col justify-between transition-all duration-200 cursor-default ${hovered ? "shadow-md -translate-y-0.5" : "shadow-sm"}`}
-      style={{ minHeight: 337 }}
+      style={{ minHeight: 0 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
 
