@@ -263,7 +263,7 @@ export default function Inbox() {
 
       <div className="px-8 pb-6">
         {/* Tabs */}
-        <div className="flex gap-1 mb-4 border-b border-gray-200">
+        <div className="flex items-center justify-between mb-4 border-b border-gray-200">
           {["Inbox", "Sent", "Starred"].map((tab) =>
           <button
             key={tab}
