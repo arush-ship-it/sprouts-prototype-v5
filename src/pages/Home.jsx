@@ -240,7 +240,7 @@ export default function Home() {
         </div>
 
         {/* Right column */}
-        <div className="w-[403px] shrink-0 flex flex-col gap-4">
+        <div className="w-[403px] shrink-0 flex flex-col gap-4 min-h-0 overflow-hidden">
           {/* Ad Banner */}
           <div className="opacity-100 rounded-2xl overflow-hidden shrink-0" style={{ background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)", border: "5px solid white" }}>
             <div className="mt-8 mb-5 px-10 py-6 text-center flex flex-col items-center">
