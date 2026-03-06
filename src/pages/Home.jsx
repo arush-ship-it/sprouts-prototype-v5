@@ -243,13 +243,35 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right column — Pending Approval */}
-        <div className="w-[403px] shrink-0 bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
-          <h2 className="text-[15px] font-semibold text-gray-800 mb-5 sticky top-0 bg-white pb-2">Pending Approval</h2>
-          <div className="space-y-4">
-            {approvals.map((item) =>
-            <ApprovalItem key={item.id} item={item} />
-            )}
+        {/* Right column */}
+        <div className="w-[403px] shrink-0 flex flex-col gap-4" style={{ maxHeight: "calc(100vh - 96px)", overflowY: "auto" }}>
+          {/* Ad Banner */}
+          <div className="rounded-2xl overflow-hidden shrink-0" style={{ background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 60%, #93c5fd 100%)" }}>
+            <div className="p-6 flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-4 shadow-sm">
+                <Mail className="w-6 h-6 text-blue-500" />
+              </div>
+              <h3 className="text-[17px] font-bold text-gray-900 mb-1 leading-snug">Communication Optimised<br />For One Click</h3>
+              <p className="text-[12px] text-gray-500 mb-5">AI-crafted sequences tailored &amp; ready to send in seconds</p>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-medium px-6 py-2.5 rounded-xl flex items-center gap-2 transition-colors">
+                <Mail className="w-4 h-4" /> Integrate Email Now
+              </button>
+              <div className="flex gap-1.5 mt-5">
+                {[0,1,2,3,4].map((i) => (
+                  <div key={i} className={`rounded-full ${i === 0 ? "w-2 h-2 bg-blue-600" : "w-2 h-2 bg-blue-300"}`} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Recent Activity */}
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col flex-1 overflow-y-auto">
+            <h2 className="text-[15px] font-semibold text-gray-800 mb-5">Recent Activity</h2>
+            <div className="space-y-4">
+              {approvals.map((item) =>
+              <ApprovalItem key={item.id} item={item} />
+              )}
+            </div>
           </div>
         </div>
       </div>
