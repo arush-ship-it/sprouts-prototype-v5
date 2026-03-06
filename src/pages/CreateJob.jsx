@@ -495,7 +495,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
         {/* Suggested */}
         <div>
-          <p className="text-[13px] font-semibold text-gray-700 mb-1">Suggested</p>
+          <p className="text-[13px] font-semibold text-gray-700 mb-1">Question Bank</p>
           
           <div className="space-y-3">
             {visibleSuggested.map((q) =>
