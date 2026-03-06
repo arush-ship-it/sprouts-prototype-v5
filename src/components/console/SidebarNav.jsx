@@ -111,7 +111,12 @@ export default function SidebarNav({ activePage = "Console" }) {
                 }
               </div>
 
-              {link.label}
+              <span className="flex-1">{link.label}</span>
+              {link.newCandidates > 0 &&
+                <span className="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                  +{link.newCandidates} new
+                </span>
+              }
             </Link>
           )}
         </nav>
