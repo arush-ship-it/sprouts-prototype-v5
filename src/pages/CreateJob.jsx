@@ -436,7 +436,7 @@ function QuestionCard({ question, added, onAdd, onRemove }) {
         placeholder="Placeholder text" /> :
 
 
-      <Input placeholder={textPlaceholder} className="h-8 text-[13px] bg-gray-50 max-w-[200px]" />)
+      <Input placeholder={textPlaceholder} className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-8 max-w-[200px]" />)
 
       }
       {editing &&
