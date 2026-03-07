@@ -453,31 +453,14 @@ function QuestionCard({ question, added, onAdd, onRemove, bankMode }) {
 }
 
 function ScreeningScreen({ onBack, onNext, onSkip }) {
-  const [addedIds, setAddedIds] = useState(RECOMMENDED_QUESTIONS.map((q) => q.id));
-  const [dismissedIds, setDismissedIds] = useState([]);
+  const allQuestions = [...RECOMMENDED_QUESTIONS, ...SUGGESTED_QUESTIONS];
+  const [chosenIds, setChosenIds] = useState([]);
 
-  const [promotedIds, setPromotedIds] = useState([]);
+  const addQuestion = (id) => setChosenIds((prev) => [...prev, id]);
+  const removeQuestion = (id) => setChosenIds((prev) => prev.filter((x) => x !== id));
 
-  const addQuestion = (id) => {
-    setAddedIds((prev) => [...prev, id]);
-    // If it's a suggested question, promote it to recommended section
-    if (SUGGESTED_QUESTIONS.find((q) => q.id === id)) {
-      setPromotedIds((prev) => [...prev, id]);
-    }
-  };
-  const removeQuestion = (id) => {
-    setAddedIds((prev) => prev.filter((x) => x !== id));
-    setPromotedIds((prev) => prev.filter((x) => x !== id));
-    // If it's a recommended question, move it to dismissed (bottom of suggested)
-    if (RECOMMENDED_QUESTIONS.find((q) => q.id === id)) {
-      setDismissedIds((prev) => [...prev, id]);
-    }
-  };
-
-  const dismissedQuestions = RECOMMENDED_QUESTIONS.filter((q) => dismissedIds.includes(q.id));
-  const visibleRecommended = RECOMMENDED_QUESTIONS.filter((q) => !dismissedIds.includes(q.id));
-  const promotedQuestions = SUGGESTED_QUESTIONS.filter((q) => promotedIds.includes(q.id));
-  const visibleSuggested = SUGGESTED_QUESTIONS.filter((q) => !promotedIds.includes(q.id));
+  const chosenQuestions = allQuestions.filter((q) => chosenIds.includes(q.id));
+  const bankQuestions = allQuestions.filter((q) => !chosenIds.includes(q.id));
 
   return (
     <div className="flex flex-col h-full">
