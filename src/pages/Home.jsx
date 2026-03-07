@@ -22,66 +22,38 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-// ── SVG line chart (smooth spline + gradient fill + day labels) ───────────────
-function LineChart({ data, color, width = 200, height = 100 }) {
+// ── SVG line chart (smooth curve) ────────────────────────────────────────────
+function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 }) {
   if (!data || data.length < 2) return null;
-  const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
-  const labelH = 18;
-  const padL = 4;
-  const padR = 4;
-  const padTop = 8;
-  const chartH = height - labelH - padTop;
-  const chartW = width - padL - padR;
-
   const min = Math.min(...data);
   const max = Math.max(...data);
   const range = max - min || 1;
+  const pad = 8;
+  const w = width - pad * 2;
+  const h = height - pad * 2;
 
   const pts = data.map((v, i) => ({
-    x: padL + (i / (data.length - 1)) * chartW,
-    y: padTop + (1 - (v - min) / range) * chartH
+    x: pad + i / (data.length - 1) * w,
+    y: pad + (1 - (v - min) / range) * h
   }));
 
-  // Smooth catmull-rom style bezier
+  // Build smooth bezier path
   let d = `M ${pts[0].x} ${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const cx = (pts[i].x + pts[i + 1].x) / 2;
     d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
   }
-  const baseline = padTop + chartH;
-  const fillPath = `${d} L ${pts[pts.length - 1].x} ${baseline} L ${pts[0].x} ${baseline} Z`;
-  const gradId = `grad-${color.replace("#", "")}`;
+  const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
+  const lastPt = pts[pts.length - 1];
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
-      <defs>
-        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.25" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {/* Baseline axis */}
-      <line x1={padL} y1={baseline} x2={padL + chartW} y2={baseline} stroke="#e5e7eb" strokeWidth="1" />
-      {/* Gradient fill */}
-      <path d={fillPath} fill={`url(#${gradId})`} />
-      {/* Bold spline line */}
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
+      <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
       <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Day labels */}
-      {pts.map((pt, i) => (
-        <text
-          key={i}
-          x={pt.x}
-          y={height - 2}
-          textAnchor="middle"
-          fontSize="7.5"
-          fill="#9ca3af"
-          fontFamily="inherit"
-        >
-          {days[i % days.length]}
-        </text>
-      ))}
-    </svg>
-  );
+      <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
+      <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
+    </svg>);
+
 }
 
 // ── Donut / pie chart ─────────────────────────────────────────────────────────
@@ -142,13 +114,16 @@ function InsightCard({ card }) {
             }
           </div>
         </div>
-        <div className="self-center flex items-center justify-center overflow-hidden w-full">
+        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
           {card.chartType === "line" &&
           <LineChart
             data={card.chartData}
             color={card.lineColor}
-            width={200}
-            height={90} />
+            fillColor={card.lineColor}
+            dotColor={card.dotColor}
+            width={160}
+            height={72} />
+
           }
           {card.chartType === "donut" &&
           <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -191,7 +166,7 @@ export default function Home() {
     unit: "",
     badge: "↑",
     chartType: "line",
-    chartData: [60, 72, 65, 85, 78, 95, 120],
+    chartData: [60, 70, 65, 80, 90, 100, 120],
     lineColor: "#3b82f6",
     dotColor: "#3b82f6",
     description: "Total candidates currently in your hiring pipeline."
