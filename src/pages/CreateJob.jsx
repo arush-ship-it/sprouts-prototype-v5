@@ -460,13 +460,13 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           <div className="space-y-1.5">
             <Label className="text-[12px] font-medium text-gray-600">Headcount</Label>
             <div className="flex items-center gap-3">
-              <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.max(1, parseInt(jobDetails.headcount || 1) - 1)) })}
-              className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+              <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.max(1, parseInt(jobDetails.headcount || 1) - 1)) })} className="bg-[#ffffff] text-gray-600 rounded-lg w-8 h-8 border border-gray-200 flex items-center justify-center hover:bg-gray-50">
+
                 <span className="text-lg leading-none">‹</span>
               </button>
               <span className="text-[15px] font-semibold text-gray-900 w-6 text-center">{jobDetails.headcount}</span>
-              <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.min(50, parseInt(jobDetails.headcount || 1) + 1)) })}
-              className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50">
+              <button onClick={() => setJobDetails({ ...jobDetails, headcount: String(Math.min(50, parseInt(jobDetails.headcount || 1) + 1)) })} className="bg-[#ffffff] text-gray-600 rounded-lg w-8 h-8 border border-gray-200 flex items-center justify-center hover:bg-gray-50">
+
                 <span className="text-lg leading-none">›</span>
               </button>
             </div>
