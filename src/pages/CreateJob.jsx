@@ -182,26 +182,26 @@ const BENEFITS_OPTIONS = ["Health Insurance", "401k", "Flexible Hours", "Stock O
 function AIEnhanceToolbar({ position, selectedText, onEnhance, onClose }) {
   if (!position || !selectedText) return null;
   const actions = [
-    { label: "Make Professional", prompt: "Make this text more professional" },
-    { label: "Make Concise", prompt: "Make this text more concise" },
-    { label: "Expand", prompt: "Expand this text with more detail" },
-    { label: "Fix Grammar", prompt: "Fix grammar and spelling" },
-  ];
+  { label: "Make Professional", prompt: "Make this text more professional" },
+  { label: "Make Concise", prompt: "Make this text more concise" },
+  { label: "Expand", prompt: "Expand this text with more detail" },
+  { label: "Fix Grammar", prompt: "Fix grammar and spelling" }];
+
   return (
     <div
       className="fixed z-50 bg-white border border-gray-200 rounded-xl shadow-lg px-2 py-1.5 flex items-center gap-1"
       style={{ top: position.y - 48, left: position.x, transform: "translateX(-50%)" }}>
       <Sparkles className="w-3.5 h-3.5 text-indigo-500 shrink-0 mr-1" />
-      {actions.map((a) => (
-        <button
-          key={a.label}
-          onMouseDown={(e) => { e.preventDefault(); onEnhance(a.prompt); }}
-          className="text-[11px] font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap transition-colors">
+      {actions.map((a) =>
+      <button
+        key={a.label}
+        onMouseDown={(e) => {e.preventDefault();onEnhance(a.prompt);}}
+        className="text-[11px] font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap transition-colors">
           {a.label}
         </button>
-      ))}
-    </div>
-  );
+      )}
+    </div>);
+
 }
 
 function EditableListItem({ value, onChange, onDelete, placeholder }) {
@@ -215,13 +215,13 @@ function EditableListItem({ value, onChange, onDelete, placeholder }) {
         rows={1}
         className="flex-1 text-[13px] text-gray-700 leading-relaxed bg-transparent border-b border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none resize-none py-0.5 transition-colors"
         style={{ minHeight: "1.5rem" }}
-        onInput={(e) => { e.target.style.height = "auto"; e.target.style.height = e.target.scrollHeight + "px"; }}
-      />
+        onInput={(e) => {e.target.style.height = "auto";e.target.style.height = e.target.scrollHeight + "px";}} />
+
       <button onClick={onDelete} className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-400 transition-all mt-0.5 shrink-0">
         <X className="w-3.5 h-3.5" />
       </button>
-    </li>
-  );
+    </li>);
+
 }
 
 function ReviewJDScreen({ job, onBack, onNext }) {
@@ -246,7 +246,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   const handleTextSelect = (field) => {
     const selection = window.getSelection();
-    if (!selection || selection.toString().trim().length < 3) { setToolbar(null); return; }
+    if (!selection || selection.toString().trim().length < 3) {setToolbar(null);return;}
     const range = selection.getRangeAt(0);
     const rect = range.getBoundingClientRect();
     setToolbar({ x: rect.left + rect.width / 2, y: rect.top + window.scrollY, text: selection.toString(), field });
@@ -258,7 +258,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
     setToolbar(null);
     const { base44 } = await import("@/api/base44Client");
     const result = await base44.integrations.Core.InvokeLLM({
-      prompt: `${prompt}:\n\n"${toolbar.text}"\n\nReturn only the improved text, nothing else.`,
+      prompt: `${prompt}:\n\n"${toolbar.text}"\n\nReturn only the improved text, nothing else.`
     });
     const improved = typeof result === "string" ? result : result?.text || result?.content || toolbar.text;
     const field = toolbar.field;
@@ -274,11 +274,11 @@ function ReviewJDScreen({ job, onBack, onNext }) {
     setEnhancing(false);
   };
 
-  const updateReq = (i, val) => setJd((prev) => { const r = [...prev.requirements]; r[i] = val; return { ...prev, requirements: r }; });
+  const updateReq = (i, val) => setJd((prev) => {const r = [...prev.requirements];r[i] = val;return { ...prev, requirements: r };});
   const deleteReq = (i) => setJd((prev) => ({ ...prev, requirements: prev.requirements.filter((_, idx) => idx !== i) }));
   const addReq = () => setJd((prev) => ({ ...prev, requirements: [...prev.requirements, ""] }));
 
-  const updateResp = (i, val) => setJd((prev) => { const r = [...prev.responsibilities]; r[i] = val; return { ...prev, responsibilities: r }; });
+  const updateResp = (i, val) => setJd((prev) => {const r = [...prev.responsibilities];r[i] = val;return { ...prev, responsibilities: r };});
   const deleteResp = (i) => setJd((prev) => ({ ...prev, responsibilities: prev.responsibilities.filter((_, idx) => idx !== i) }));
   const addResp = () => setJd((prev) => ({ ...prev, responsibilities: [...prev.responsibilities, ""] }));
 
@@ -299,8 +299,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             value={jd.title}
             onChange={(e) => setJd({ ...jd, title: e.target.value })}
             onMouseUp={() => handleTextSelect("title")}
-            className="text-gray-900 mb-5 text-xl font-semibold w-full bg-transparent border-b border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none pb-1 transition-colors"
-          />
+            className="text-gray-900 mb-5 text-xl font-semibold w-full bg-transparent border-b border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none pb-1 transition-colors" />
+
 
           <h3 className="text-[15px] font-bold text-gray-900 mb-2">About the Role</h3>
           <textarea
@@ -308,8 +308,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             onChange={(e) => setJd({ ...jd, description: e.target.value })}
             onMouseUp={() => handleTextSelect("description")}
             rows={4}
-            className="text-[13px] text-gray-700 leading-relaxed mb-5 w-full bg-transparent border border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none rounded-lg px-2 py-1 resize-none transition-colors"
-          />
+            className="text-[13px] text-gray-700 leading-relaxed mb-5 w-full bg-transparent border border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none rounded-lg px-2 py-1 resize-none transition-colors" />
+
 
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-[15px] font-bold text-gray-900">Requirements</h3>
@@ -317,7 +317,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           </div>
           <ul className="mb-5 space-y-1" onMouseUp={() => handleTextSelect("requirements")}>
             {jd.requirements.map((req, i) =>
-              <EditableListItem key={i} value={req} onChange={(v) => updateReq(i, v)} onDelete={() => deleteReq(i)} placeholder="Add requirement…" />
+            <EditableListItem key={i} value={req} onChange={(v) => updateReq(i, v)} onDelete={() => deleteReq(i)} placeholder="Add requirement…" />
             )}
           </ul>
 
@@ -327,7 +327,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           </div>
           <ul className="space-y-1" onMouseUp={() => handleTextSelect("responsibilities")}>
             {jd.responsibilities.map((resp, i) =>
-              <EditableListItem key={i} value={resp} onChange={(v) => updateResp(i, v)} onDelete={() => deleteResp(i)} placeholder="Add responsibility…" />
+            <EditableListItem key={i} value={resp} onChange={(v) => updateResp(i, v)} onDelete={() => deleteResp(i)} placeholder="Add responsibility…" />
             )}
           </ul>
           {enhancing && <p className="text-[12px] text-indigo-500 mt-3 animate-pulse flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Enhancing with AI…</p>}
@@ -494,8 +494,8 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           Continue <ArrowRight className="w-3.5 h-3.5" />
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 3: Screening Questions ──────────────────────────────────────────────
@@ -782,7 +782,7 @@ export default function CreateJob() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-[360px] shrink-0 flex flex-col overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-200 shrink-0">
               <div className="flex items-center gap-2.5">
-                <div className="bg-indigo-600 rounded-xl w-8 h-8 flex items-center justify-center">
+                <div className="bg-slate-400 rounded-[20px] w-8 h-8 flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
                 <div>
