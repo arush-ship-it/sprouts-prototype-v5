@@ -67,31 +67,88 @@ function PipelineBar({ value, total }) {
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
   const navigate = useNavigate();
+  const pipelineData = [
+    { stage: "Applied", count: 342 },
+    { stage: "Screening", count: 156 },
+    { stage: "Assessment", count: 89 },
+    { stage: "Interview", count: 45 },
+    { stage: "Offer", count: 12 },
+  ];
+  const applicantsData = [
+    { week: "W1", count: 45 },
+    { week: "W2", count: 62 },
+    { week: "W3", count: 38 },
+    { week: "W4", count: 28 },
+  ];
+  const resumesData = [
+    { month: "Jan", count: 120 },
+    { month: "Feb", count: 156 },
+    { month: "Mar", count: 142 },
+    { month: "Apr", count: 134 },
+  ];
+
   const insightCards = [
   {
     title: "Candidates in Pipeline",
-    subtitle: "Pipeline status",
-    numericValue: 120,
-    unit: "",
-    badge: "↑",
-    chartType: "line-orange",
-    description: "Total candidates currently in your hiring pipeline."
+    subtitle: "Across all jobs",
+    value: "342",
+    hoverShadow: "rgba(99,102,241,0.12)",
+    hoverGradient: "from-indigo-500/5 via-transparent to-violet-500/5",
+    chart: (
+      <BarChart data={pipelineData}>
+        <defs>
+          <linearGradient id="pipelineGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#6366f1" stopOpacity={0.9} />
+            <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.6} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+        <XAxis dataKey="stage" tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={{ stroke: '#e2e8f0' }} />
+        <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={false} />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(99,102,241,0.05)' }} />
+        <Bar dataKey="count" fill="url(#pipelineGrad)" radius={[8, 8, 0, 0]} maxBarSize={40} />
+      </BarChart>
+    ),
   },
   {
     title: "New Applicants",
-    subtitle: "This week",
-    numericValue: 270,
-    unit: "",
-    chartType: "wave-blue",
-    description: "New applicants received this week across all positions."
+    subtitle: "To be reviewed this week",
+    value: "28",
+    hoverShadow: "rgba(249,115,22,0.12)",
+    hoverGradient: "from-orange-500/5 via-transparent to-amber-500/5",
+    chart: (
+      <BarChart data={applicantsData}>
+        <defs>
+          <linearGradient id="applicantsGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#f97316" stopOpacity={0.9} />
+            <stop offset="100%" stopColor="#fb923c" stopOpacity={0.6} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+        <XAxis dataKey="week" tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={{ stroke: '#e2e8f0' }} />
+        <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={false} />
+        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(249,115,22,0.05)' }} />
+        <Bar dataKey="count" fill="url(#applicantsGrad)" radius={[8, 8, 0, 0]} maxBarSize={40} />
+      </BarChart>
+    ),
   },
   {
-    title: "Resume processed this month",
-    subtitle: "Total processed",
-    numericValue: 270,
-    unit: "",
-    chartType: "wave-purple",
-    description: "Total resumes processed and reviewed this month."
+    title: "Resumes Processed This Month",
+    subtitle: "+18% from last month",
+    value: "156",
+    hoverShadow: "rgba(236,72,153,0.12)",
+    hoverGradient: "from-pink-500/5 via-transparent to-rose-500/5",
+    chart: (
+      <LineChart data={resumesData}>
+        <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
+        <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={{ stroke: '#e2e8f0' }} />
+        <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={false} />
+        <Tooltip content={<CustomTooltip />} />
+        <Line type="monotone" dataKey="count" stroke="#ec4899" strokeWidth={3}
+          dot={{ fill: '#ec4899', strokeWidth: 2, r: 5, stroke: '#fff' }}
+          activeDot={{ r: 7, fill: '#ec4899', stroke: '#fff', strokeWidth: 2 }} />
+      </LineChart>
+    ),
   }];
 
 
