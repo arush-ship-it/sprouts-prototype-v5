@@ -324,7 +324,7 @@ export default function Agents() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA]">
-      <div className="px-8 pt-8 pb-6">
+      <div className="bg-[#F2F3F5] pt-8 pb-6 px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-[22px] font-semibold text-gray-900">Sprouts Intelligence Layer</h1>
