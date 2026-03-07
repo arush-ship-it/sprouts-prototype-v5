@@ -371,10 +371,10 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-[#f2f3f5] flex-1 overflow-y-auto space-y-4 px-0 py-4">
+      <div className="bg-[#ffffff] py-6 flex-1 overflow-y-auto space-y-4">
 
         {/* Role Information */}
-        <div className="bg-white mb-0 mx-6 py-6 rounded-2xl shadow-sm px-6">
+        <div className="bg-slate-50 mb-0 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4 text-indigo-600" />
@@ -400,7 +400,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         </div>
 
         {/* Work Arrangement */}
-        <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm px-6">
+        <div className="bg-slate-50 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
@@ -437,7 +437,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         </div>
 
         {/* Compensation */}
-        <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm px-6">
+        <div className="bg-slate-50 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
@@ -474,7 +474,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         </div>
 
         {/* Benefits */}
-        <div className="bg-white mb-0 mx-6 py-6 rounded-2xl shadow-sm px-6">
+        <div className="bg-slate-50 mb-0 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
