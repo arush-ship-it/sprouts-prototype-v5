@@ -153,22 +153,10 @@ function InsightCard({ card }) {
             }
           </div>
         </div>
-        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
-          {card.chartType === "line" &&
-          <LineChart
-            data={card.chartData}
-            color={card.lineColor}
-            fillColor={card.lineColor}
-            dotColor={card.dotColor}
-            width={160}
-            height={72} />
-
-          }
-          {card.chartType === "donut" &&
-          <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <DonutChart percent={card.numericValue} color={card.lineColor} size={80} />
-            </div>
-          }
+        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 90 }}>
+          {card.chartType === "line-orange" && <LineChartOrange width={160} height={72} />}
+          {card.chartType === "wave-blue" && <WaveChartBlue width={160} height={72} />}
+          {card.chartType === "pie-soft" && <SoftPieChart size={90} />}
         </div>
       </div>
 
