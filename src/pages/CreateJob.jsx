@@ -486,7 +486,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
             {promotedQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
-            {promotedQuestions.length === 0 && <p className="text-gray-400 my-8 py-4 text-base font-normal text-center normal-case">Add questions from the bank below</p>}
+            {promotedQuestions.length === 0 && <p className="text-gray-400 my-8 py-20 text-base font-normal text-center normal-case">Add questions from the bank below</p>}
           </div>
         </div>
 
