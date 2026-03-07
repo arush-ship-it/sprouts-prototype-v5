@@ -10,7 +10,7 @@ export default function Layout({ children, currentPageName }) {
   const showTopNav = currentPageName !== "Settings";
 
   return (
-    <div className="bg-[##F2F3F5] flex min-h-screen">
+    <div className="bg-[#F2F3F5] flex min-h-screen">
       {showTopNav && <TopNav currentPageName={currentPageName} />}
       {showSidebar && <SidebarNav activePage={currentPageName} />}
       <main
