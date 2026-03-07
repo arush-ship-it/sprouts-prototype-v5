@@ -22,61 +22,38 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-// ── SVG spline chart with gradient fill ──────────────────────────────────────
-function SplineChart({ data, labels, color, gradientId, width = 280, height = 90 }) {
+// ── SVG line chart (smooth curve) ────────────────────────────────────────────
+function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 }) {
   if (!data || data.length < 2) return null;
-  const min = Math.min(...data) * 0.85;
-  const max = Math.max(...data) * 1.05;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
   const range = max - min || 1;
-  const padX = 4;
-  const padTop = 8;
-  const padBottom = 24;
-  const w = width - padX * 2;
-  const h = height - padTop - padBottom;
+  const pad = 8;
+  const w = width - pad * 2;
+  const h = height - pad * 2;
 
   const pts = data.map((v, i) => ({
-    x: padX + i / (data.length - 1) * w,
-    y: padTop + (1 - (v - min) / range) * h
+    x: pad + i / (data.length - 1) * w,
+    y: pad + (1 - (v - min) / range) * h
   }));
 
-  // Smooth cubic bezier spline
+  // Build smooth bezier path
   let d = `M ${pts[0].x} ${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const cx = (pts[i].x + pts[i + 1].x) / 2;
     d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
   }
-  const baseline = padTop + h;
-  const fillPath = `${d} L ${pts[pts.length - 1].x} ${baseline} L ${pts[0].x} ${baseline} Z`;
+  const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
+  const lastPt = pts[pts.length - 1];
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
-      <defs>
-        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.25" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {/* Baseline axis */}
-      <line x1={padX} y1={baseline} x2={width - padX} y2={baseline} stroke="#e5e7eb" strokeWidth="1" />
-      {/* Gradient fill */}
-      <path d={fillPath} fill={`url(#${gradientId})`} />
-      {/* Bold spline line */}
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
+      <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
       <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* X-axis labels */}
-      {labels && labels.map((label, i) => (
-        <text
-          key={i}
-          x={pts[i].x}
-          y={height - 4}
-          textAnchor="middle"
-          fontSize="9"
-          fill="#9ca3af"
-          fontFamily="sans-serif">
-          {label}
-        </text>
-      ))}
-    </svg>
-  );
+      <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
+      <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
+    </svg>);
+
 }
 
 // ── Donut / pie chart ─────────────────────────────────────────────────────────
@@ -126,44 +103,34 @@ function InsightCard({ card }) {
       <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
 
       {/* Value + chart */}
-      <div className="py-2 flex flex-col gap-2 flex-1 min-w-0">
+      <div className="py-5 flex flex-col gap-4 flex-1 min-w-0">
         <div className="min-w-0">
           <div className="flex items-end gap-1">
             <span className="text-gray-900 text-3xl font-medium">{animated}{card.unit}</span>
             {card.badge &&
-            <span className="mb-1 text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
+            <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
                 {card.badge}
               </span>
             }
           </div>
         </div>
-        <div className="w-full mt-1">
-          <SplineChart
+        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
+          {card.chartType === "line" &&
+          <LineChart
             data={card.chartData}
-            labels={card.monthLabels}
             color={card.lineColor}
-            gradientId={card.gradientId}
-            width={240}
-            height={90}
-          />
+            fillColor={card.lineColor}
+            dotColor={card.dotColor}
+            width={160}
+            height={72} />
+
+          }
+          {card.chartType === "donut" &&
+          <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <DonutChart percent={card.numericValue} color={card.lineColor} size={80} />
+            </div>
+          }
         </div>
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
 
       {/* Footer description */}
@@ -191,42 +158,37 @@ function PipelineBar({ value, total }) {
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
   const navigate = useNavigate();
-  const monthLabels = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
   const insightCards = [
   {
     title: "Candidates in Pipeline",
     subtitle: "Pipeline status",
     numericValue: 120,
     unit: "",
-    badge: "↑ 12%",
-    chartData: [60, 72, 65, 85, 92, 108, 120],
-    monthLabels,
+    badge: "↑",
+    chartType: "line",
+    chartData: [60, 70, 65, 80, 90, 100, 120],
     lineColor: "#3b82f6",
-    gradientId: "grad-pipeline",
+    dotColor: "#3b82f6",
     description: "Total candidates currently in your hiring pipeline."
   },
   {
     title: "New Applicants",
-    subtitle: "This month",
+    subtitle: "This week",
     numericValue: 270,
     unit: "",
-    badge: "↑ 8%",
-    chartData: [140, 165, 155, 180, 210, 245, 270],
-    monthLabels,
+    chartType: "donut",
+    chartData: [],
     lineColor: "#6366f1",
-    gradientId: "grad-applicants",
-    description: "New applicants received this month across all positions."
+    description: "New applicants received this week across all positions."
   },
   {
-    title: "Resumes Processed",
-    subtitle: "This month",
-    numericValue: 430,
+    title: "Resume processed this month",
+    subtitle: "Total processed",
+    numericValue: 270,
     unit: "",
-    badge: "↑ 21%",
-    chartData: [210, 240, 195, 280, 320, 390, 430],
-    monthLabels,
+    chartType: "donut",
+    chartData: [],
     lineColor: "#a855f7",
-    gradientId: "grad-resumes",
     description: "Total resumes processed and reviewed this month."
   }];
 
