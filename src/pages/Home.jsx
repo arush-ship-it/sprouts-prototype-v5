@@ -142,16 +142,13 @@ function InsightCard({ card }) {
             }
           </div>
         </div>
-        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
+        <div className="self-center flex items-center justify-center overflow-hidden w-full">
           {card.chartType === "line" &&
           <LineChart
             data={card.chartData}
             color={card.lineColor}
-            fillColor={card.lineColor}
-            dotColor={card.dotColor}
-            width={160}
-            height={72} />
-
+            width={200}
+            height={90} />
           }
           {card.chartType === "donut" &&
           <div style={{ width: 80, height: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
