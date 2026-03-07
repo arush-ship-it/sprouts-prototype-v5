@@ -137,13 +137,11 @@ function InsightCard({ card }) {
             }
           </div>
         </div>
-        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
+        <div className="self-stretch flex items-center justify-center overflow-hidden rounded-xl" style={{ height: 72, background: card.chartType === "line" ? card.lineColor : "transparent" }}>
           {card.chartType === "line" &&
           <LineChart
             data={card.chartData}
             color={card.lineColor}
-            fillColor={card.lineColor}
-            dotColor={card.dotColor}
             width={160}
             height={72} />
 
