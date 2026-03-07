@@ -370,7 +370,7 @@ const SUGGESTED_QUESTIONS = [
 { id: 7, text: "Are you legally authorised to work in the country of job location?", type: "yes_no" }];
 
 
-function QuestionCard({ question, added, onAdd, onRemove }) {
+function QuestionCard({ question, added, onAdd, onRemove, bankMode }) {
   const [editing, setEditing] = useState(false);
   const [questionText, setQuestionText] = useState(question.text);
   const [yesLabel, setYesLabel] = useState("Yes");
