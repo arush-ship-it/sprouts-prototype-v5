@@ -94,7 +94,7 @@ const approvals = [
 ];
 
 export default function ActivityApprovalModal({ isOpen, onClose }) {
-  const [selectedApproval, setSelectedApproval] = useState(null);
+  const [selectedApproval, setSelectedApproval] = useState(approvals[0]);
   const [viewMode, setViewMode] = useState("review"); // "review", "list", "cards"
   const [currentCandidateIndex, setCurrentCandidateIndex] = useState(0);
   const [decisions, setDecisions] = useState({});
