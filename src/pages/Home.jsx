@@ -181,37 +181,42 @@ function PipelineBar({ value, total }) {
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Home() {
   const navigate = useNavigate();
+  const monthLabels = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
   const insightCards = [
   {
     title: "Candidates in Pipeline",
     subtitle: "Pipeline status",
     numericValue: 120,
     unit: "",
-    badge: "↑",
-    chartType: "line",
-    chartData: [60, 70, 65, 80, 90, 100, 120],
+    badge: "↑ 12%",
+    chartData: [60, 72, 65, 85, 92, 108, 120],
+    monthLabels,
     lineColor: "#3b82f6",
-    dotColor: "#3b82f6",
+    gradientId: "grad-pipeline",
     description: "Total candidates currently in your hiring pipeline."
   },
   {
     title: "New Applicants",
-    subtitle: "This week",
+    subtitle: "This month",
     numericValue: 270,
     unit: "",
-    chartType: "donut",
-    chartData: [],
+    badge: "↑ 8%",
+    chartData: [140, 165, 155, 180, 210, 245, 270],
+    monthLabels,
     lineColor: "#6366f1",
-    description: "New applicants received this week across all positions."
+    gradientId: "grad-applicants",
+    description: "New applicants received this month across all positions."
   },
   {
-    title: "Resume processed this month",
-    subtitle: "Total processed",
-    numericValue: 270,
+    title: "Resumes Processed",
+    subtitle: "This month",
+    numericValue: 430,
     unit: "",
-    chartType: "donut",
-    chartData: [],
+    badge: "↑ 21%",
+    chartData: [210, 240, 195, 280, 320, 390, 430],
+    monthLabels,
     lineColor: "#a855f7",
+    gradientId: "grad-resumes",
     description: "Total resumes processed and reviewed this month."
   }];
 
