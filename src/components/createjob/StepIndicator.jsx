@@ -4,8 +4,9 @@ import { Check } from "lucide-react";
 const STEPS = [
   { number: 1, label: "Generate" },
   { number: 2, label: "Review JD" },
-  { number: 3, label: "Screening" },
-  { number: 4, label: "Publish" },
+  { number: 3, label: "Confirm Details" },
+  { number: 4, label: "Screening" },
+  { number: 5, label: "Publish" },
 ];
 
 export default function StepIndicator({ currentStep }) {

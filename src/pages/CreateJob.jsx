@@ -333,8 +333,41 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           {enhancing && <p className="text-[12px] text-indigo-500 mt-3 animate-pulse flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Enhancing with AI…</p>}
         </div>
 
+      </div>
+
+      <div className="bg-[#ffffff] pt-4 pr-6 pb-4 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
+        <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
+        <Button onClick={() => onNext(jd)} className="bg-blue-600 text-[#ffffff] px-5 py-2 text-xs font-medium rounded-lg inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700 gap-1.5">
+          Next <ArrowRight className="w-3.5 h-3.5" />
+        </Button>
+      </div>
+    </div>);
+
+}
+
+// ─── Step 3: Confirm Details ──────────────────────────────────────────────────
+function ConfirmDetailsScreen({ onBack, onNext }) {
+  const [jobDetails, setJobDetails] = useState({
+    companyName: "", jobTitle: "", department: "",
+    internalJobTitle: "", jobType: "Full-time", workplaceType: "On-site",
+    location: "", salary: "", jobGrade: "", headcount: "1",
+    benefits: ""
+  });
+
+  const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
+  const toggleBenefit = (b) => {
+    const updated = selectedBenefits.includes(b) ? selectedBenefits.filter((x) => x !== b) : [...selectedBenefits, b];
+    setJobDetails({ ...jobDetails, benefits: updated.join(",") });
+  };
+  const toggleJobType = (val) => setJobDetails({ ...jobDetails, jobType: val });
+  const toggleWorkplace = (val) => setJobDetails({ ...jobDetails, workplaceType: val });
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="bg-[#f2f3f5] flex-1 overflow-y-auto space-y-4 px-0 py-4">
+
         {/* Role Information */}
-        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl shadow-sm">
+        <div className="bg-white mb-0 mx-6 py-6 rounded-2xl shadow-sm px-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4 text-indigo-600" />
@@ -353,14 +386,14 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             map(({ label, key, placeholder }) =>
             <div key={key} className="space-y-1.5">
                 <Label className="text-[12px] font-medium text-gray-600">{label}</Label>
-                <Input value={jobDetails[key]} onChange={(e) => setJobDetails({ ...jobDetails, [key]: e.target.value })} placeholder={placeholder} className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
+                <Input value={jobDetails[key]} onChange={(e) => setJobDetails({ ...jobDetails, [key]: e.target.value })} placeholder={placeholder} className="bg-[#ffffff] text-[13px] h-9" />
               </div>
             )}
           </div>
         </div>
 
         {/* Work Arrangement */}
-        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl shadow-sm">
+        <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm px-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
@@ -391,13 +424,13 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Location</Label>
-              <Input value={jobDetails.location} onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })} placeholder="e.g. San Francisco, CA" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
+              <Input value={jobDetails.location} onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })} placeholder="e.g. San Francisco, CA" className="bg-[#ffffff] text-[13px] h-9" />
             </div>
           </div>
         </div>
 
         {/* Compensation */}
-        <div className="bg-white mb-4 mx-6 py-6 rounded-2xl shadow-sm">
+        <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm px-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
@@ -410,11 +443,11 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Salary Range</Label>
-              <Input value={jobDetails.salary} onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })} placeholder="e.g. $120k – $180k" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
+              <Input value={jobDetails.salary} onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })} placeholder="e.g. $120k – $180k" className="bg-[#ffffff] text-[13px] h-9" />
             </div>
             <div className="space-y-1.5">
               <Label className="text-[12px] font-medium text-gray-600">Job Grade</Label>
-              <Input value={jobDetails.jobGrade} onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })} placeholder="e.g. L4, Senior" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-md flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
+              <Input value={jobDetails.jobGrade} onChange={(e) => setJobDetails({ ...jobDetails, jobGrade: e.target.value })} placeholder="e.g. L4, Senior" className="bg-[#ffffff] text-[13px] h-9" />
             </div>
           </div>
           <div className="space-y-1.5">
@@ -434,7 +467,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         </div>
 
         {/* Benefits */}
-        <div className="bg-white mb-6 mx-6 py-6 rounded-2xl shadow-sm">
+        <div className="bg-white mb-0 mx-6 py-6 rounded-2xl shadow-sm px-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
@@ -453,16 +486,16 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             )}
           </div>
         </div>
-      </div>
 
+      </div>
       <div className="bg-[#ffffff] pt-4 pr-6 pb-4 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
         <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
-        <Button onClick={() => onNext(jd)} className="bg-blue-600 text-[#ffffff] px-5 py-2 text-xs font-medium rounded-lg inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 hover:bg-indigo-700 gap-1.5">
-          Confirm & Continue <ArrowRight className="w-3.5 h-3.5" />
+        <Button onClick={() => onNext(jobDetails)} className="bg-blue-600 text-[#ffffff] px-5 py-2 text-xs font-medium rounded-lg inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 shadow h-9 hover:bg-indigo-700 gap-1.5">
+          Continue <ArrowRight className="w-3.5 h-3.5" />
         </Button>
       </div>
-    </div>);
-
+    </div>
+  );
 }
 
 // ─── Step 3: Screening Questions ──────────────────────────────────────────────
