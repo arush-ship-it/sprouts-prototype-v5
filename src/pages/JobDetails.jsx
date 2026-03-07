@@ -89,17 +89,17 @@ const activityLog = [
 const idealPersona = {
   overview: "A creative problem-solver with a passion for user-centered design and a track record of shipping impactful products at scale.",
   traits: [
-    { label: "Experience Level", value: "Senior (5-8 years)" },
-    { label: "Design Philosophy", value: "User-first, data-informed" },
-    { label: "Work Style", value: "Collaborative, iterative" },
-    { label: "Technical Skills", value: "Figma, design systems, prototyping" }
-  ],
+  { label: "Experience Level", value: "Senior (5-8 years)" },
+  { label: "Design Philosophy", value: "User-first, data-informed" },
+  { label: "Work Style", value: "Collaborative, iterative" },
+  { label: "Technical Skills", value: "Figma, design systems, prototyping" }],
+
   strengths: [
-    "Strong visual and interaction design skills",
-    "Proven ability to conduct user research and translate insights into design decisions",
-    "Experience working in fast-paced, agile environments",
-    "Excellent communication and stakeholder management skills"
-  ],
+  "Strong visual and interaction design skills",
+  "Proven ability to conduct user research and translate insights into design decisions",
+  "Experience working in fast-paced, agile environments",
+  "Excellent communication and stakeholder management skills"],
+
   cultureFit: "Someone who thrives in a collaborative environment, values feedback, and is passionate about creating beautiful, functional products that solve real user problems."
 };
 
@@ -131,7 +131,7 @@ export default function JobDetails() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
-      <div className="px-8 pt-8 pb-8">
+      <div className="bg-[#F2F3F5] pt-8 pb-8 px-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-start justify-between mb-3">
@@ -269,32 +269,32 @@ export default function JobDetails() {
           <h3 className="text-[16px] font-semibold text-gray-900 mb-4">Posted On</h3>
           <div className="flex flex-col gap-3">
             {[
-              { platform: "LinkedIn", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png", url: "https://linkedin.com/jobs/view/senior-product-designer" },
-              { platform: "Indeed", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Indeed_logo.png", url: "https://indeed.com/job/senior-product-designer" },
-              { platform: "Company Website", logo: null, url: "https://company.com/careers/senior-product-designer" },
-            ].map((posting) => (
-              <div key={posting.platform} className="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
+            { platform: "LinkedIn", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png", url: "https://linkedin.com/jobs/view/senior-product-designer" },
+            { platform: "Indeed", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Indeed_logo.png", url: "https://indeed.com/job/senior-product-designer" },
+            { platform: "Company Website", logo: null, url: "https://company.com/careers/senior-product-designer" }].
+            map((posting) =>
+            <div key={posting.platform} className="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
                 <div className="flex items-center gap-3">
-                  {posting.logo ? (
-                    <img src={posting.logo} alt={posting.platform} className="w-6 h-6 rounded object-contain" />
-                  ) : (
-                    <div className="w-6 h-6 rounded bg-indigo-100 flex items-center justify-center">
+                  {posting.logo ?
+                <img src={posting.logo} alt={posting.platform} className="w-6 h-6 rounded object-contain" /> :
+
+                <div className="w-6 h-6 rounded bg-indigo-100 flex items-center justify-center">
                       <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
                     </div>
-                  )}
+                }
                   <span className="text-[13px] font-medium text-gray-900">{posting.platform}</span>
                 </div>
                 <a
-                  href={posting.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
-                >
+                href={posting.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+
                   View Posting
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -322,8 +322,8 @@ export default function JobDetails() {
           </p>
 
           <div className="grid grid-cols-2 gap-6 mb-6 pb-6 border-b border-gray-100">
-            {idealPersona.traits.map((trait, idx) => (
-              <div key={idx}>
+            {idealPersona.traits.map((trait, idx) =>
+            <div key={idx}>
                 <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">
                   {trait.label}
                 </p>
@@ -331,7 +331,7 @@ export default function JobDetails() {
                   {trait.value}
                 </p>
               </div>
-            ))}
+            )}
           </div>
 
           <div className="mb-6 pb-6 border-b border-gray-100">
@@ -339,12 +339,12 @@ export default function JobDetails() {
               Key Strengths
             </h4>
             <ul className="space-y-2">
-              {idealPersona.strengths.map((strength, idx) => (
-                <li key={idx} className="text-[13px] text-gray-600 flex items-start gap-2">
+              {idealPersona.strengths.map((strength, idx) =>
+              <li key={idx} className="text-[13px] text-gray-600 flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-0.5 shrink-0" />
                   {strength}
                 </li>
-              ))}
+              )}
             </ul>
           </div>
 
@@ -508,41 +508,41 @@ export default function JobDetails() {
 
             <div className="space-y-2">
               <Label>Key Traits</Label>
-              {editedPersona.traits.map((trait, idx) => (
-                <div key={idx} className="grid grid-cols-2 gap-2">
+              {editedPersona.traits.map((trait, idx) =>
+              <div key={idx} className="grid grid-cols-2 gap-2">
                   <Input
-                    placeholder="Label"
-                    value={trait.label}
-                    onChange={(e) => {
-                      const newTraits = [...editedPersona.traits];
-                      newTraits[idx] = { ...newTraits[idx], label: e.target.value };
-                      setEditedPersona({ ...editedPersona, traits: newTraits });
-                    }} />
+                  placeholder="Label"
+                  value={trait.label}
+                  onChange={(e) => {
+                    const newTraits = [...editedPersona.traits];
+                    newTraits[idx] = { ...newTraits[idx], label: e.target.value };
+                    setEditedPersona({ ...editedPersona, traits: newTraits });
+                  }} />
                   <Input
-                    placeholder="Value"
-                    value={trait.value}
-                    onChange={(e) => {
-                      const newTraits = [...editedPersona.traits];
-                      newTraits[idx] = { ...newTraits[idx], value: e.target.value };
-                      setEditedPersona({ ...editedPersona, traits: newTraits });
-                    }} />
+                  placeholder="Value"
+                  value={trait.value}
+                  onChange={(e) => {
+                    const newTraits = [...editedPersona.traits];
+                    newTraits[idx] = { ...newTraits[idx], value: e.target.value };
+                    setEditedPersona({ ...editedPersona, traits: newTraits });
+                  }} />
                 </div>
-              ))}
+              )}
             </div>
 
             <div className="space-y-2">
               <Label>Key Strengths</Label>
-              {editedPersona.strengths.map((strength, idx) => (
-                <Input
-                  key={idx}
-                  value={strength}
-                  onChange={(e) => {
-                    const newStrengths = [...editedPersona.strengths];
-                    newStrengths[idx] = e.target.value;
-                    setEditedPersona({ ...editedPersona, strengths: newStrengths });
-                  }}
-                  className="mb-2" />
-              ))}
+              {editedPersona.strengths.map((strength, idx) =>
+              <Input
+                key={idx}
+                value={strength}
+                onChange={(e) => {
+                  const newStrengths = [...editedPersona.strengths];
+                  newStrengths[idx] = e.target.value;
+                  setEditedPersona({ ...editedPersona, strengths: newStrengths });
+                }}
+                className="mb-2" />
+              )}
             </div>
 
             <div className="space-y-2">
