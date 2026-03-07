@@ -499,13 +499,13 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <p className="text-gray-700 mb-1 text-base font-semibold">Question Bank</p>
           <div className="space-y-3">
             {visibleRecommended.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
             )}
             {visibleSuggested.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
             )}
             {dismissedQuestions.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
             )}
           </div>
         </div>
