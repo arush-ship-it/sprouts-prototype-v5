@@ -768,7 +768,7 @@ function AIChatBox() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function CreateJob() {
-  // step 0 = default landing, 1 = generating, 2 = review JD, 3 = screening, 4 = publish, 5 = confirmation
+  // step 0 = default landing, 1 = generating, 2 = review JD, 3 = confirm details, 4 = screening, 5 = publish, 6 = confirmation
   const [step, setStep] = useState(0);
   const [prompt, setPrompt] = useState("");
   const [generatedJob, setGeneratedJob] = useState(DEFAULT_JD);
