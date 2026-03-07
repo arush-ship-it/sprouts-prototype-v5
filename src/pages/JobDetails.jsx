@@ -303,40 +303,6 @@ export default function JobDetails() {
           </ul>
         </div>
 
-        {/* Posted On Section */}
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
-          <h3 className="text-[16px] font-semibold text-gray-900 mb-4">Posted On</h3>
-          <div className="flex flex-col gap-3">
-            {[
-            { platform: "LinkedIn", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png", url: "https://linkedin.com/jobs/view/senior-product-designer" },
-            { platform: "Indeed", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Indeed_logo.png", url: "https://indeed.com/job/senior-product-designer" },
-            { platform: "Company Website", logo: null, url: "https://company.com/careers/senior-product-designer" }].
-            map((posting) =>
-            <div key={posting.platform} className="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
-                <div className="flex items-center gap-3">
-                  {posting.logo ?
-                <img src={posting.logo} alt={posting.platform} className="w-6 h-6 rounded object-contain" /> :
-
-                <div className="w-6 h-6 rounded bg-indigo-100 flex items-center justify-center">
-                      <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
-                    </div>
-                }
-                  <span className="text-[13px] font-medium text-gray-900">{posting.platform}</span>
-                </div>
-                <a
-                href={posting.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
-
-                  View Posting
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Ideal Persona Section */}
         <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
           <div className="flex items-center justify-between mb-4">
