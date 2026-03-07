@@ -255,7 +255,6 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
               </div>
             </div>
           </div>
-        )}
       </DialogContent>
     </Dialog>
   );
