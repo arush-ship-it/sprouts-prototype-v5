@@ -390,7 +390,11 @@ function QuestionCard({ question, added, onAdd, onRemove, bankMode }) {
 
         <p className="text-[13px] text-gray-800 flex-1">{questionText}</p>
         }
-        {added ?
+        {bankMode ?
+        <button onClick={onAdd} className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-indigo-400 hover:text-indigo-500 shrink-0">
+            <Plus className="text-slate-700 lucide lucide-plus w-4 h-4" />
+          </button> :
+        added ?
         <div className="flex items-center gap-2 shrink-0">
             <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
             <button onClick={() => setEditing((v) => !v)} className={`text-gray-400 hover:text-indigo-500 ${editing ? "text-indigo-500" : ""}`}><span className="text-slate-700">✎</span></button>
