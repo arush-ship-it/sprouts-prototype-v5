@@ -204,7 +204,7 @@ export default function Home() {
     subtitle: "Total processed",
     numericValue: 270,
     unit: "",
-    chartType: "pie-soft",
+    chartType: "wave-purple",
     description: "Total resumes processed and reviewed this month."
   }];
 
