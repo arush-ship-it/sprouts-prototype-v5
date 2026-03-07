@@ -117,6 +117,11 @@ export default function SidebarNav({ activePage = "Console" }) {
                   +{link.newCandidates} new
                 </span>
               }
+              {link.unreadCount > 0 &&
+                <span className="text-[10px] text-red-500 font-semibold bg-red-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                  {link.unreadCount} unread
+                </span>
+              }
             </Link>
           )}
         </nav>
