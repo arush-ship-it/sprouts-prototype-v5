@@ -470,10 +470,10 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
           <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
           <p className="text-gray-700 mt-4 mb-1 text-base font-semibold">Chosen Questions</p>
           <div className="space-y-3">
-            {promotedQuestions.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            {chosenQuestions.map((q) =>
+            <QuestionCard key={q.id} question={q} added onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
-            {promotedQuestions.length === 0 && <p className="text-gray-400 my-8 py-20 text-base font-normal text-center normal-case">Add questions from the bank below</p>}
+            {chosenQuestions.length === 0 && <p className="text-gray-400 my-8 py-20 text-base font-normal text-center normal-case">Add questions from the bank below</p>}
           </div>
         </div>
 
@@ -481,14 +481,8 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         <div>
           <p className="text-gray-700 mb-1 text-base font-semibold">Question Bank</p>
           <div className="space-y-3">
-            {visibleRecommended.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
-            )}
-            {visibleSuggested.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
-            )}
-            {dismissedQuestions.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
+            {bankQuestions.map((q) =>
+            <QuestionCard key={q.id} question={q} added={false} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
             )}
           </div>
         </div>
