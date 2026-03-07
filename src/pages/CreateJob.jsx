@@ -504,7 +504,10 @@ function QuestionCard({ question, added, onAdd, onRemove, bankMode }) {
           </button> :
         added ?
         <div className="flex items-center gap-2 shrink-0">
-            <span className="flex items-center gap-1 text-[12px] text-gray-500 border border-gray-200 rounded-md px-2 py-0.5">Required <span className="text-gray-400">∨</span></span>
+            <label className="flex items-center gap-1.5 text-[12px] text-gray-500 cursor-pointer select-none">
+              <input type="checkbox" defaultChecked className="accent-indigo-600 w-3.5 h-3.5" />
+              Required
+            </label>
             <button onClick={() => setEditing((v) => !v)} className={`text-gray-400 hover:text-indigo-500 ${editing ? "text-indigo-500" : ""}`}><Pencil className="bg-transparent text-slate-500 lucide lucide-pencil w-4 h-4" /></button>
             <button onClick={onRemove} className="text-gray-300 hover:text-red-400"><X className="bg-[#ffffff] text-slate-700 lucide lucide-x w-4 h-4" /></button>
           </div> :
