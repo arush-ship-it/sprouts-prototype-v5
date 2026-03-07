@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CheckCircle2, XCircle, ExternalLink, Mail, MessageSquare, Phone, Linkedin, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown, StickyNote, Briefcase, GraduationCap, Award, Target, Calendar } from "lucide-react";
+import { CheckCircle2, XCircle, ExternalLink, Mail, MessageSquare, Phone, Linkedin, ChevronDown, ChevronUp, ThumbsUp, ThumbsDown, StickyNote, Briefcase, GraduationCap, Award, Target, Calendar, Star, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -15,107 +15,62 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
   const [selectedStage, setSelectedStage] = useState(candidate.stage || "screening");
   
   const scoreColor =
-    candidate.score >= 75
-      ? "text-emerald-600 bg-emerald-50"
-      : "text-gray-500 bg-gray-50";
+    candidate.score >= 90
+      ? "text-emerald-600 bg-emerald-50 border-emerald-100"
+      : candidate.score >= 75
+      ? "text-amber-600 bg-amber-50 border-amber-100"
+      : "text-gray-500 bg-gray-50 border-gray-200";
 
   return (
     <div 
       onClick={onClick}
-      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
+      className="group flex flex-col gap-0 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer"
     >
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div className="flex items-start gap-3">
+      {/* Main row — matches CandidateCard style */}
+      <div className="flex items-center gap-5 px-5 py-4">
+        {/* Avatar */}
+        <div className="relative shrink-0">
           <img
             src={candidate.avatar}
             alt={candidate.name}
-            className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100"
+            className="w-11 h-11 rounded-full object-cover ring-2 ring-gray-100"
           />
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-[15px] font-semibold text-gray-900">
-                {candidate.name}
-              </h3>
-              <span className={`px-2 py-0.5 text-[11px] font-bold rounded-md ${scoreColor}`}>
-                Strong {candidate.score}%
-              </span>
-            </div>
-            <p className="text-[13px] text-gray-500 mt-0.5">
-              {candidate.title}{" "}
-              <CheckCircle2 className="inline w-3 h-3 text-emerald-500" /> @{" "}
-              {candidate.company}{" "}
-              <CheckCircle2 className="inline w-3 h-3 text-emerald-500" />
-            </p>
+          <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white" />
+        </div>
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <p className="text-[14px] font-semibold text-gray-900 truncate">{candidate.name}</p>
+            {candidate.starred && <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />}
           </div>
+          <p className="text-[12.5px] text-gray-400 mt-0.5 truncate">
+            {candidate.title} · {candidate.company}
+          </p>
         </div>
-        <div className="flex items-center gap-1.5">
-          <button className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400">
-            <ExternalLink className="w-4 h-4" />
-          </button>
-          <button className="p-1.5 rounded-lg hover:bg-emerald-50 transition-colors text-emerald-600">
-            <Linkedin className="w-4 h-4" />
-          </button>
-          <button className="p-1.5 rounded-lg hover:bg-blue-50 transition-colors text-blue-600">
-            <Mail className="w-4 h-4" />
-          </button>
-          <button className="p-1.5 rounded-lg hover:bg-orange-50 transition-colors text-orange-500">
-            <MessageSquare className="w-4 h-4" />
-          </button>
-          <button className="p-1.5 rounded-lg hover:bg-violet-50 transition-colors text-violet-600">
-            <Phone className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
 
-      {/* Details */}
-      <div className="flex items-center gap-1 text-[12.5px] text-gray-500">
-        <span>
-          {candidate.degree}{" "}
-          <CheckCircle2 className="inline w-3 h-3 text-emerald-500" /> @{" "}
-          {candidate.university}
+        {/* Stage */}
+        <span className="hidden sm:block px-3 py-1 text-[11px] font-semibold rounded-full bg-violet-50 text-violet-600 border border-violet-100 uppercase tracking-wider">
+          {candidate.stage}
         </span>
+
+        {/* Score */}
+        <div className={`px-2.5 py-1 rounded-lg text-[13px] font-bold border ${scoreColor}`}>
+          {candidate.score}
+        </div>
+
+        {/* Expand / More */}
+        <button
+          className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-gray-100 transition-all text-gray-400"
+          onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}
+        >
+          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
       </div>
 
-      <div className="text-[12.5px] text-gray-500 flex items-center gap-1">
-        <span>{candidate.location}</span>
-        <CheckCircle2 className="inline w-3 h-3 text-emerald-500" />
-      </div>
-
-      {/* Stats */}
-      <div className="flex items-center gap-4 pt-2 border-t border-gray-100">
-        <div className="flex items-center gap-2 text-[12.5px]">
-          <span className="text-gray-500">Experience:</span>
-          <span className="font-semibold text-gray-900">
-            {candidate.experience}
-          </span>
-          <XCircle className="w-3 h-3 text-red-400" />
-        </div>
-        <div className="flex items-center gap-2 text-[12.5px]">
-          <span className="text-gray-500">Skills:</span>
-          <span className="font-semibold text-gray-900">
-            {candidate.skillsMatch}
-          </span>
-          <ExternalLink className="w-3 h-3 text-blue-400" />
-        </div>
-        <div className="flex items-center gap-2 text-[12.5px]">
-          <span className="text-gray-500">Attributes:</span>
-          <span className="font-semibold text-gray-900">
-            {candidate.attributesMatch}
-          </span>
-        </div>
-      </div>
-
-      {/* Sequence & Actions */}
-      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-        <div className="flex items-center gap-2 text-[12px]">
-          <span className="text-gray-500">Sequence:</span>
-          <span className="text-blue-600 font-medium">
-            {candidate.sequence}
-          </span>
-          <ExternalLink className="w-3 h-3 text-blue-400" />
-        </div>
-        <div className="flex items-center gap-2">
+      {/* Expanded actions row */}
+      {isExpanded && (
+        <div className="px-5 pb-3 flex items-center gap-2 border-t border-gray-50 pt-3">
           {isPipeline ? (
             <>
               <Select value={selectedStage} onValueChange={setSelectedStage}>
@@ -130,47 +85,21 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
                   <SelectItem value="offer" className="text-[11px]">Offer</SelectItem>
                 </SelectContent>
               </Select>
-              <Button size="sm" variant="outline" className="h-7 w-7 p-0">
-                <ThumbsUp className="w-3 h-3" />
-              </Button>
-              <Button size="sm" variant="outline" className="h-7 w-7 p-0">
-                <ThumbsDown className="w-3 h-3" />
-              </Button>
-              <Button size="sm" variant="outline" className="h-7 text-[11px]">
-                <StickyNote className="w-3 h-3 mr-1" />
-                Note
-              </Button>
-              <Button size="sm" variant="outline" className="h-7 text-[11px]">
-                <Calendar className="w-3 h-3 mr-1" />
-                Schedule
-              </Button>
+              <Button size="sm" variant="outline" className="h-7 w-7 p-0"><ThumbsUp className="w-3 h-3" /></Button>
+              <Button size="sm" variant="outline" className="h-7 w-7 p-0"><ThumbsDown className="w-3 h-3" /></Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]"><StickyNote className="w-3 h-3 mr-1" />Note</Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]"><Calendar className="w-3 h-3 mr-1" />Schedule</Button>
             </>
           ) : (
             <>
-              <Button size="sm" variant="outline" className="h-7 text-[11px]">
-                <ThumbsUp className="w-3 h-3 mr-1" />
-                Shortlist
-              </Button>
-              <Button size="sm" variant="outline" className="h-7 text-[11px]">
-                <ThumbsDown className="w-3 h-3 mr-1" />
-                Reject
-              </Button>
-              <Button size="sm" variant="outline" className="h-7 text-[11px]">
-                <StickyNote className="w-3 h-3 mr-1" />
-                Note
-              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]"><ThumbsUp className="w-3 h-3 mr-1" />Shortlist</Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]"><ThumbsDown className="w-3 h-3 mr-1" />Reject</Button>
+              <Button size="sm" variant="outline" className="h-7 text-[11px]"><StickyNote className="w-3 h-3 mr-1" />Note</Button>
             </>
           )}
-          <Button 
-            size="sm" 
-            variant="ghost" 
-            className="h-7 text-[11px]"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </Button>
         </div>
-      </div>
+      )}
+
 
       {/* Expanded View */}
       {isExpanded && (
