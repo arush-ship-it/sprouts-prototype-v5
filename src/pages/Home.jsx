@@ -38,11 +38,11 @@ function InsightCard({ card, index }) {
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-gray-400 mb-2 text-xs font-normal capitalize tracking-wider">{card.title}</p>
-            <h3 className="bg-clip-text text-slate-700 text-3xl font-semibold from-gray-900 to-gray-600">
+            <p className="text-gray-500 mb-2 text-xs font-normal capitalize tracking-wider">{card.title}</p>
+            <h3 className="bg-clip-text text-slate-800 text-4xl font-medium from-gray-900 to-gray-600">
               {card.value}
             </h3>
-            <p className="text-[12px] text-gray-500 mt-1">{card.subtitle}</p>
+            <p className="text-gray-700 mt-1 text-xs">{card.subtitle}</p>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={160}>
