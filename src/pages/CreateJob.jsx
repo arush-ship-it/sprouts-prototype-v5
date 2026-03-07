@@ -618,8 +618,8 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
       <div className="bg-[#f2f2f2] px-6 py-6 flex-1 overflow-y-auto space-y-6">
         {/* Recommended (added questions only) */}
         <div>
-          <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
-          <p className="text-gray-700 mt-4 mb-1 text-base font-semibold">Chosen Questions</p>
+          <h2 className="text-gray-800 mb-0.5 text-xl font-medium">Screening Questions</h2>
+          <p className="text-gray-700 mt-4 mb-1 text-base font-medium">Chosen Questions</p>
           <div className="space-y-3">
             {chosenQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
@@ -630,7 +630,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
         {/* Question Bank */}
         <div>
-          <p className="text-gray-700 mb-1 text-base font-semibold">Question Bank</p>
+          <p className="text-gray-700 mb-1 text-base font-medium">Question Bank</p>
           <div className="space-y-3">
             {bankQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added={false} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} bankMode />
