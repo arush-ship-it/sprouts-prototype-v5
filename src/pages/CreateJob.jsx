@@ -481,7 +481,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         {/* Recommended (added questions only) */}
         <div>
           <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
-          <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Chosen Questions</p>
+          <p className="text-gray-700 mt-4 mb-1 text-base font-semibold">Chosen Questions</p>
           <div className="space-y-3">
             {promotedQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
@@ -492,7 +492,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
         {/* Question Bank */}
         <div>
-          <p className="text-[13px] font-semibold text-gray-700 mb-1">Question Bank</p>
+          <p className="text-gray-700 mb-1 text-base font-semibold">Question Bank</p>
           <div className="space-y-3">
             {visibleRecommended.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
