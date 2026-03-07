@@ -47,7 +47,7 @@ function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 
   const lastPt = pts[pts.length - 1];
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
       <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
       <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
