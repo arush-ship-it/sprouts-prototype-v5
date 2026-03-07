@@ -163,7 +163,7 @@ export default function JobDetails() {
                 </span>
               </div>
             </div>
-            <button className="bg-blue-600 text-[#ffffff] px-4 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+            <button className="bg-blue-600 text-[#ffffff] px-4 py-1.5 text-sm font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
               Job Health Report
             </button>
           </div>
