@@ -136,47 +136,8 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
           <DialogTitle>Activity Approvals</DialogTitle>
         </DialogHeader>
 
-        {!selectedApproval ? (
-          // Agent List Only
-          <div className="flex-1 overflow-y-auto">
-            <p className="text-[13px] text-gray-500 mb-4">
-              Select an agent approval to review candidates
-            </p>
-            <div className="space-y-3">
-              {approvals.map((approval) => (
-                <button
-                  key={approval.id}
-                  onClick={() => handleSelectApproval(approval)}
-                  className="w-full p-4 rounded-xl bg-white border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all text-left"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center shrink-0">
-                      <Bot className="w-5 h-5 text-orange-600" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h3 className="text-[14px] font-semibold text-gray-900">
-                            {approval.agentName}
-                          </h3>
-                          <p className="text-[12px] text-gray-600 mt-0.5">
-                            {approval.description}
-                          </p>
-                        </div>
-                        <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-                          {approval.candidates.length} candidates
-                        </Badge>
-                      </div>
-                      <p className="text-[11px] text-gray-400">{approval.timestamp}</p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          // Two Column Layout
-          <div className="flex-1 overflow-hidden flex gap-4">
+        {/* Two Column Layout */}
+        <div className="flex-1 overflow-hidden flex gap-4">
             {/* Left Column: Agent List */}
             <div className="w-96 overflow-y-auto">
               <Button
