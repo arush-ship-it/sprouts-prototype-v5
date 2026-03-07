@@ -197,9 +197,9 @@ export default function Inbox() {
             <h1 className="text-[22px] font-semibold text-gray-900 tracking-tight">
               Inbox
             </h1>
-            <p className="text-[13px] text-gray-400 mt-1">
-              All communications and sequences
-            </p>
+            
+
+
           </div>
           <div className="flex items-center gap-2">
             
