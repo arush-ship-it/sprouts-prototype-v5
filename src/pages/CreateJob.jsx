@@ -860,19 +860,25 @@ export default function CreateJob() {
 
           }
           {step === 3 &&
-          <ScreeningScreen
+          <ConfirmDetailsScreen
             onBack={() => setStep(2)}
-            onNext={() => setStep(4)}
-            onSkip={() => setStep(4)} />
+            onNext={() => setStep(4)} />
 
           }
           {step === 4 &&
-          <PublishScreen
+          <ScreeningScreen
             onBack={() => setStep(3)}
-            onPublish={() => setStep(5)} />
+            onNext={() => setStep(5)}
+            onSkip={() => setStep(5)} />
 
           }
           {step === 5 &&
+          <PublishScreen
+            onBack={() => setStep(4)}
+            onPublish={() => setStep(6)} />
+
+          }
+          {step === 6 &&
           <ConfirmationScreen
             jobTitle={generatedJob.title}
             onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
