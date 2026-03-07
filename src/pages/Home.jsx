@@ -191,7 +191,7 @@ export default function Home() {
     unit: "",
     badge: "↑",
     chartType: "line",
-    chartData: [60, 70, 65, 80, 90, 100, 120],
+    chartData: [60, 72, 65, 85, 78, 95, 120],
     lineColor: "#3b82f6",
     dotColor: "#3b82f6",
     description: "Total candidates currently in your hiring pipeline."
