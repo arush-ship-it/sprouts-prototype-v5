@@ -95,7 +95,7 @@ function DefaultScreen({ onStart }) {
       </div>
 
       {/* Right: Hero + Job Suggestions */}
-      <div className="pt-8 pr-10 pb-40 pl-10 flex-1 flex flex-col items-center justify-center">
+      <div className="pt-8 pr-10 pb-10 pl-10 flex-1 flex flex-col items-center justify-center">
         {/* Step dots */}
         
 
