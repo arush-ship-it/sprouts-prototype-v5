@@ -380,7 +380,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               <Sparkles className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
-              <p className="text-[13px] font-semibold text-gray-900">Role Information</p>
+              <p className="text-gray-900 text-base font-medium">Role Information</p>
               <p className="text-[11px] text-gray-400">Core job details</p>
             </div>
           </div>
@@ -406,7 +406,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               <ArrowRight className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
-              <p className="text-[13px] font-semibold text-gray-900">Work Arrangement</p>
+              <p className="text-gray-900 text-base font-medium">Work Arrangement</p>
               <p className="text-[11px] text-gray-400">Type and location</p>
             </div>
           </div>
@@ -443,7 +443,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               <ArrowRight className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
-              <p className="text-[13px] font-semibold text-gray-900">Compensation &amp; Scale</p>
+              <p className="text-gray-900 text-base font-medium">Compensation & Scale</p>
               <p className="text-[11px] text-gray-400">Salary and headcount</p>
             </div>
           </div>
