@@ -808,11 +808,18 @@ export default function CreateJob() {
               {step >= 3 &&
             <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
-                    Great! Now add optional screening questions, or skip this step.
+                    Great! Now confirm the role details.
                   </div>
                 </div>
             }
               {step >= 4 &&
+            <div className="flex justify-start">
+                  <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
+                    Now add optional screening questions, or skip this step.
+                  </div>
+                </div>
+            }
+              {step >= 5 &&
             <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
                     Almost there! Choose your publish settings and go live.
