@@ -140,14 +140,6 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
         <div className="flex-1 overflow-hidden flex gap-4">
             {/* Left Column: Agent List */}
             <div className="w-96 overflow-y-auto">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setSelectedApproval(null)}
-                className="mb-4"
-              >
-                ← Back
-              </Button>
               <div className="space-y-3">
                 {approvals.map((approval) => (
                   <button
