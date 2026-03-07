@@ -136,9 +136,14 @@ export default function JobDetails() {
         <div className="mb-8">
           <div className="flex items-start justify-between mb-3">
             <div>
-              <h1 className="text-[24px] font-semibold text-gray-900 tracking-tight">
-                {jobData.title}
-              </h1>
+              <div className="flex items-center gap-3">
+                <h1 className="text-[24px] font-semibold text-gray-900 tracking-tight">
+                  {jobData.title}
+                </h1>
+                <span className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
+                  {jobData.status}
+                </span>
+              </div>
               <div className="flex items-center gap-4 mt-2 text-[13px] text-gray-500">
                 <span className="flex items-center gap-1.5">
                   <Briefcase className="w-3.5 h-3.5" />
