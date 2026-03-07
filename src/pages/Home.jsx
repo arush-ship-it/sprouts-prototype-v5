@@ -96,9 +96,9 @@ function InsightCard({ card }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
         <p className="text-[13px] font-semibold text-gray-700">{card.title}</p>
-        <button className="flex items-center gap-1 text-[11px] text-gray-400 border border-gray-200 rounded-md px-2 py-0.5 hover:bg-gray-50">
-          Weekly <ChevronDown className="w-3 h-3" />
-        </button>
+        
+
+
       </div>
       <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
 
