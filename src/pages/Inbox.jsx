@@ -190,7 +190,7 @@ export default function Inbox() {
   const [activeTab, setActiveTab] = useState("Inbox");
 
   return (
-    <div className="flex-1 min-h-screen bg-[#FAFAFA] overflow-auto">
+    <div className="bg-[#F2F3F5] flex-1 min-h-screen overflow-auto">
       <div className="px-8">
         <div className="mt-8 mb-6 flex items-center justify-between">
           <div>
