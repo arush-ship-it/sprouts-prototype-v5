@@ -478,26 +478,25 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
   return (
     <div className="flex flex-col h-full">
       <div className="bg-[#f2f2f2] px-6 py-6 flex-1 overflow-y-auto space-y-6">
-        {/* Recommended */}
+        {/* Recommended (added questions only) */}
         <div>
           <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
           <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
-          
+          <div className="space-y-3">
+            {promotedQuestions.map((q) =>
+            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
+            )}
+            {promotedQuestions.length === 0 && <p className="text-[12px] text-gray-400 italic">Add questions from the bank below.</p>}
+          </div>
+        </div>
+
+        {/* Question Bank */}
+        <div>
+          <p className="text-[13px] font-semibold text-gray-700 mb-1">Question Bank</p>
           <div className="space-y-3">
             {visibleRecommended.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
-            {promotedQuestions.map((q) =>
-            <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
-            )}
-          </div>
-        </div>
-
-        {/* Suggested */}
-        <div>
-          <p className="text-[13px] font-semibold text-gray-700 mb-1">Question Bank</p>
-          
-          <div className="space-y-3">
             {visibleSuggested.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
