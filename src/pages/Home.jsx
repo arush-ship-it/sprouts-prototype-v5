@@ -126,16 +126,26 @@ function InsightCard({ card }) {
       <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
 
       {/* Value + chart */}
-      <div className="py-5 flex flex-col gap-4 flex-1 min-w-0">
+      <div className="py-2 flex flex-col gap-2 flex-1 min-w-0">
         <div className="min-w-0">
           <div className="flex items-end gap-1">
             <span className="text-gray-900 text-3xl font-medium">{animated}{card.unit}</span>
             {card.badge &&
-            <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
+            <span className="mb-1 text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
                 {card.badge}
               </span>
             }
           </div>
+        </div>
+        <div className="w-full mt-1">
+          <SplineChart
+            data={card.chartData}
+            labels={card.monthLabels}
+            color={card.lineColor}
+            gradientId={card.gradientId}
+            width={240}
+            height={90}
+          />
         </div>
         
 
