@@ -104,24 +104,24 @@ export default function SidebarNav({ activePage = "Console" }) {
                 "text-indigo-600" :
                 "text-gray-500 group-hover:text-gray-700"}`
                 } />
-                {link.unreadCount > 0 &&
-                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
-                    {link.unreadCount > 9 ? "9+" : link.unreadCount}
-                  </span>
-                }
+                
+
+
+
+
               </div>
 
               <span className="flex-1">{link.label}</span>
               {link.newCandidates > 0 &&
-                <span className="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+            <span className="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                   +{link.newCandidates} new
                 </span>
-              }
+            }
               {link.unreadCount > 0 &&
-                <span className="text-[10px] text-red-500 font-semibold bg-red-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+            <span className="text-[10px] text-red-500 font-semibold bg-red-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                   {link.unreadCount} unread
                 </span>
-              }
+            }
             </Link>
           )}
         </nav>
