@@ -179,6 +179,51 @@ const JOB_TYPES = ["Full-time", "Part-time", "Contract", "Internship", "Freelanc
 const WORKPLACE_TYPES = ["On-site", "Remote", "Hybrid"];
 const BENEFITS_OPTIONS = ["Health Insurance", "401k", "Flexible Hours", "Stock Options", "Remote Work", "Gym Membership", "Learning Budget", "Unlimited PTO"];
 
+function AIEnhanceToolbar({ position, selectedText, onEnhance, onClose }) {
+  if (!position || !selectedText) return null;
+  const actions = [
+    { label: "Make Professional", prompt: "Make this text more professional" },
+    { label: "Make Concise", prompt: "Make this text more concise" },
+    { label: "Expand", prompt: "Expand this text with more detail" },
+    { label: "Fix Grammar", prompt: "Fix grammar and spelling" },
+  ];
+  return (
+    <div
+      className="fixed z-50 bg-white border border-gray-200 rounded-xl shadow-lg px-2 py-1.5 flex items-center gap-1"
+      style={{ top: position.y - 48, left: position.x, transform: "translateX(-50%)" }}>
+      <Sparkles className="w-3.5 h-3.5 text-indigo-500 shrink-0 mr-1" />
+      {actions.map((a) => (
+        <button
+          key={a.label}
+          onMouseDown={(e) => { e.preventDefault(); onEnhance(a.prompt); }}
+          className="text-[11px] font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 px-2 py-1 rounded-md whitespace-nowrap transition-colors">
+          {a.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function EditableListItem({ value, onChange, onDelete, placeholder }) {
+  return (
+    <li className="flex items-start gap-2 group">
+      <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2.5 shrink-0" />
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        rows={1}
+        className="flex-1 text-[13px] text-gray-700 leading-relaxed bg-transparent border-b border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none resize-none py-0.5 transition-colors"
+        style={{ minHeight: "1.5rem" }}
+        onInput={(e) => { e.target.style.height = "auto"; e.target.style.height = e.target.scrollHeight + "px"; }}
+      />
+      <button onClick={onDelete} className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-red-400 transition-all mt-0.5 shrink-0">
+        <X className="w-3.5 h-3.5" />
+      </button>
+    </li>
+  );
+}
+
 function ReviewJDScreen({ job, onBack, onNext }) {
   const [jd, setJd] = useState(job);
   const [jobDetails, setJobDetails] = useState({
@@ -188,6 +233,9 @@ function ReviewJDScreen({ job, onBack, onNext }) {
     benefits: ""
   });
 
+  const [toolbar, setToolbar] = useState(null); // { x, y, text, field }
+  const [enhancing, setEnhancing] = useState(false);
+
   const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
   const toggleBenefit = (b) => {
     const updated = selectedBenefits.includes(b) ? selectedBenefits.filter((x) => x !== b) : [...selectedBenefits, b];
@@ -196,33 +244,93 @@ function ReviewJDScreen({ job, onBack, onNext }) {
   const toggleJobType = (val) => setJobDetails({ ...jobDetails, jobType: val });
   const toggleWorkplace = (val) => setJobDetails({ ...jobDetails, workplaceType: val });
 
+  const handleTextSelect = (field) => {
+    const selection = window.getSelection();
+    if (!selection || selection.toString().trim().length < 3) { setToolbar(null); return; }
+    const range = selection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    setToolbar({ x: rect.left + rect.width / 2, y: rect.top + window.scrollY, text: selection.toString(), field });
+  };
+
+  const handleEnhance = async (prompt) => {
+    if (!toolbar) return;
+    setEnhancing(true);
+    setToolbar(null);
+    const { base44 } = await import("@/api/base44Client");
+    const result = await base44.integrations.Core.InvokeLLM({
+      prompt: `${prompt}:\n\n"${toolbar.text}"\n\nReturn only the improved text, nothing else.`,
+    });
+    const improved = typeof result === "string" ? result : result?.text || result?.content || toolbar.text;
+    const field = toolbar.field;
+    if (field === "description") {
+      setJd((prev) => ({ ...prev, description: prev.description.replace(toolbar.text, improved) }));
+    } else if (field === "requirements") {
+      setJd((prev) => ({ ...prev, requirements: prev.requirements.map((r) => r === toolbar.text ? improved : r) }));
+    } else if (field === "responsibilities") {
+      setJd((prev) => ({ ...prev, responsibilities: prev.responsibilities.map((r) => r === toolbar.text ? improved : r) }));
+    } else if (field === "title") {
+      setJd((prev) => ({ ...prev, title: improved }));
+    }
+    setEnhancing(false);
+  };
+
+  const updateReq = (i, val) => setJd((prev) => { const r = [...prev.requirements]; r[i] = val; return { ...prev, requirements: r }; });
+  const deleteReq = (i) => setJd((prev) => ({ ...prev, requirements: prev.requirements.filter((_, idx) => idx !== i) }));
+  const addReq = () => setJd((prev) => ({ ...prev, requirements: [...prev.requirements, ""] }));
+
+  const updateResp = (i, val) => setJd((prev) => { const r = [...prev.responsibilities]; r[i] = val; return { ...prev, responsibilities: r }; });
+  const deleteResp = (i) => setJd((prev) => ({ ...prev, responsibilities: prev.responsibilities.filter((_, idx) => idx !== i) }));
+  const addResp = () => setJd((prev) => ({ ...prev, responsibilities: [...prev.responsibilities, ""] }));
+
+  React.useEffect(() => {
+    const close = () => setToolbar(null);
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full" onClick={() => setToolbar(null)}>
+      <AIEnhanceToolbar position={toolbar} selectedText={toolbar?.text} onEnhance={handleEnhance} onClose={() => setToolbar(null)} />
       <div className="bg-[#ffffff] flex-1 overflow-y-auto">
         {/* JD Preview Card */}
-        <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm">
-          <h2 className="text-gray-900 mb-5 text-xl font-semibold">{jd.title}</h2>
+        <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm" onClick={(e) => e.stopPropagation()}>
+          {/* Title */}
+          <input
+            value={jd.title}
+            onChange={(e) => setJd({ ...jd, title: e.target.value })}
+            onMouseUp={() => handleTextSelect("title")}
+            className="text-gray-900 mb-5 text-xl font-semibold w-full bg-transparent border-b border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none pb-1 transition-colors"
+          />
 
           <h3 className="text-[15px] font-bold text-gray-900 mb-2">About the Role</h3>
-          <p className="text-[13px] text-gray-700 leading-relaxed mb-5">{jd.description}</p>
+          <textarea
+            value={jd.description}
+            onChange={(e) => setJd({ ...jd, description: e.target.value })}
+            onMouseUp={() => handleTextSelect("description")}
+            rows={4}
+            className="text-[13px] text-gray-700 leading-relaxed mb-5 w-full bg-transparent border border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none rounded-lg px-2 py-1 resize-none transition-colors"
+          />
 
-          <h3 className="text-[15px] font-bold text-gray-900 mb-2">Requirements</h3>
-          <ul className="mb-5 space-y-1">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-[15px] font-bold text-gray-900">Requirements</h3>
+            <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
+          </div>
+          <ul className="mb-5 space-y-1" onMouseUp={() => handleTextSelect("requirements")}>
             {jd.requirements.map((req, i) =>
-            <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />{req}
-              </li>
+              <EditableListItem key={i} value={req} onChange={(v) => updateReq(i, v)} onDelete={() => deleteReq(i)} placeholder="Add requirement…" />
             )}
           </ul>
 
-          <h3 className="text-[15px] font-bold text-gray-900 mb-2">Responsibilities</h3>
-          <ul className="space-y-1">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-[15px] font-bold text-gray-900">Responsibilities</h3>
+            <button onClick={addResp} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
+          </div>
+          <ul className="space-y-1" onMouseUp={() => handleTextSelect("responsibilities")}>
             {jd.responsibilities.map((resp, i) =>
-            <li key={i} className="flex items-start gap-2 text-[13px] text-gray-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />{resp}
-              </li>
+              <EditableListItem key={i} value={resp} onChange={(v) => updateResp(i, v)} onDelete={() => deleteResp(i)} placeholder="Add responsibility…" />
             )}
           </ul>
+          {enhancing && <p className="text-[12px] text-indigo-500 mt-3 animate-pulse flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Enhancing with AI…</p>}
         </div>
 
         {/* Role Information */}
