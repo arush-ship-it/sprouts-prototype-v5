@@ -22,38 +22,61 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-// ── SVG line chart (smooth curve) ────────────────────────────────────────────
-function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 }) {
+// ── SVG spline chart with gradient fill ──────────────────────────────────────
+function SplineChart({ data, labels, color, gradientId, width = 280, height = 90 }) {
   if (!data || data.length < 2) return null;
-  const min = Math.min(...data);
-  const max = Math.max(...data);
+  const min = Math.min(...data) * 0.85;
+  const max = Math.max(...data) * 1.05;
   const range = max - min || 1;
-  const pad = 8;
-  const w = width - pad * 2;
-  const h = height - pad * 2;
+  const padX = 4;
+  const padTop = 8;
+  const padBottom = 24;
+  const w = width - padX * 2;
+  const h = height - padTop - padBottom;
 
   const pts = data.map((v, i) => ({
-    x: pad + i / (data.length - 1) * w,
-    y: pad + (1 - (v - min) / range) * h
+    x: padX + i / (data.length - 1) * w,
+    y: padTop + (1 - (v - min) / range) * h
   }));
 
-  // Build smooth bezier path
+  // Smooth cubic bezier spline
   let d = `M ${pts[0].x} ${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const cx = (pts[i].x + pts[i + 1].x) / 2;
     d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
   }
-  const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
-  const lastPt = pts[pts.length - 1];
+  const baseline = padTop + h;
+  const fillPath = `${d} L ${pts[pts.length - 1].x} ${baseline} L ${pts[0].x} ${baseline} Z`;
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
-      <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.25" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {/* Baseline axis */}
+      <line x1={padX} y1={baseline} x2={width - padX} y2={baseline} stroke="#e5e7eb" strokeWidth="1" />
+      {/* Gradient fill */}
+      <path d={fillPath} fill={`url(#${gradientId})`} />
+      {/* Bold spline line */}
       <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
-      <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
-    </svg>);
-
+      {/* X-axis labels */}
+      {labels && labels.map((label, i) => (
+        <text
+          key={i}
+          x={pts[i].x}
+          y={height - 4}
+          textAnchor="middle"
+          fontSize="9"
+          fill="#9ca3af"
+          fontFamily="sans-serif">
+          {label}
+        </text>
+      ))}
+    </svg>
+  );
 }
 
 // ── Donut / pie chart ─────────────────────────────────────────────────────────
