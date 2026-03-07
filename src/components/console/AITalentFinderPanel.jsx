@@ -59,7 +59,7 @@ export default function AITalentFinderPanel() {
 
 
 
-              Create With Ai
+              Explore with Ai
             </button>
             <button
               onClick={() => setActiveMode("manual")} className="text-gray-400 px-4 py-2 text-xs font-normal transition-colors hover:text-gray-600">
@@ -69,7 +69,7 @@ export default function AITalentFinderPanel() {
 
 
 
-              Edit Manually
+              Manual Edit
             </button>
           </div>
           <div className="flex items-center gap-2">
