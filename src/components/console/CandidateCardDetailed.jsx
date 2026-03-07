@@ -101,9 +101,9 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
       )}
 
 
-      {/* Expanded View */}
+      {/* Expanded Detail View */}
       {isExpanded && (
-        <div className="pt-4 border-t border-gray-100 space-y-4">
+        <div className="px-5 pb-5 pt-4 border-t border-gray-100 space-y-4">
           {/* AI Fit Analysis */}
           <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100">
             <div className="flex items-center gap-2 mb-3">
