@@ -22,63 +22,102 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-// ── SVG line chart (smooth curve) ────────────────────────────────────────────
-function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 }) {
-  if (!data || data.length < 2) return null;
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = max - min || 1;
-  const pad = 8;
-  const w = width - pad * 2;
-  const h = height - pad * 2;
-
-  const pts = data.map((v, i) => ({
-    x: pad + i / (data.length - 1) * w,
-    y: pad + (1 - (v - min) / range) * h
-  }));
-
-  // Build smooth bezier path
+// ── SVG line chart (upward trending, orange) ─────────────────────────────────
+function LineChartOrange({ width = 160, height = 72 }) {
+  const id = "orangeGrad";
+  // Simple upward line from bottom-left to top-right
+  const pts = [
+    { x: 10, y: 62 },
+    { x: 40, y: 58 },
+    { x: 70, y: 50 },
+    { x: 100, y: 38 },
+    { x: 130, y: 22 },
+    { x: 150, y: 10 },
+  ];
   let d = `M ${pts[0].x} ${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const cx = (pts[i].x + pts[i + 1].x) / 2;
     d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
   }
   const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
-  const lastPt = pts[pts.length - 1];
-
+  const last = pts[pts.length - 1];
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
-      <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
-      <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
-      <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
-    </svg>);
-
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#f97316" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#f97316" stopOpacity="0.02" />
+        </linearGradient>
+      </defs>
+      <path d={fillPath} fill={`url(#${id})`} />
+      <path d={d} fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Glow dot */}
+      <circle cx={last.x} cy={last.y} r="10" fill="#ef4444" fillOpacity="0.15" />
+      <circle cx={last.x} cy={last.y} r="5" fill="#ef4444" />
+    </svg>
+  );
 }
 
-// ── Donut / pie chart ─────────────────────────────────────────────────────────
-function DonutChart({ percent, color, size = 80 }) {
-  const r = 30;
+// ── SVG wave chart (blue bell curve) ─────────────────────────────────────────
+function WaveChartBlue({ width = 160, height = 72 }) {
+  const id = "blueWaveGrad";
+  // Bell/wave curve: starts low, peaks in middle, comes back down
+  const d = `M 5 65 C 30 65, 50 60, 65 25 C 75 5, 85 5, 95 25 C 110 60, 130 65, 155 65`;
+  const fillPath = `${d} L 155 ${height} L 5 ${height} Z`;
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.02" />
+        </linearGradient>
+        <filter id="blueGlow">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <path d={fillPath} fill={`url(#${id})`} />
+      <path d={d} fill="none" stroke="#93c5fd" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#blueGlow)" />
+      {/* Glowing dot at peak */}
+      <circle cx="80" cy="15" r="14" fill="#3b82f6" fillOpacity="0.2" />
+      <circle cx="80" cy="15" r="8" fill="#3b82f6" fillOpacity="0.4" />
+      <circle cx="80" cy="15" r="5" fill="#3b82f6" />
+    </svg>
+  );
+}
+
+// ── Soft pie chart (light blue) ───────────────────────────────────────────────
+function SoftPieChart({ size = 90 }) {
   const cx = size / 2;
   const cy = size / 2;
-  const circumference = 2 * Math.PI * r;
-  const dash = percent / 100 * circumference;
+  const r = size / 2 - 6;
+  // ~75% filled arc
+  const startAngle = -Math.PI / 2;
+  const endAngle = startAngle + 2 * Math.PI * 0.75;
+  const x1 = cx + r * Math.cos(startAngle);
+  const y1 = cy + r * Math.sin(startAngle);
+  const x2 = cx + r * Math.cos(endAngle);
+  const y2 = cy + r * Math.sin(endAngle);
+  const arcPath = `M ${x1} ${y1} A ${r} ${r} 0 1 1 ${x2} ${y2}`;
+  const gapX = cx + r * Math.cos(endAngle + 0.08);
+  const gapY = cy + r * Math.sin(endAngle + 0.08);
+  const remainPath = `M ${x2} ${y2} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth="10" />
-      <circle
-        cx={cx} cy={cy} r={r}
-        fill="none"
-        stroke={color}
-        strokeWidth="10"
-        strokeDasharray={`${dash} ${circumference - dash}`}
-        strokeLinecap="round"
-        transform={`rotate(-90 ${cx} ${cy})`}
-        strokeOpacity="0.35" />
-
-    </svg>);
-
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ pointerEvents: "none" }}>
+      <defs>
+        <filter id="softBlur">
+          <feGaussianBlur stdDeviation="2.5" />
+        </filter>
+      </defs>
+      {/* Soft blurred background circle */}
+      <circle cx={cx} cy={cy} r={r + 4} fill="#bfdbfe" fillOpacity="0.35" filter="url(#softBlur)" />
+      {/* Main arc - light blue filled */}
+      <path d={arcPath} fill="none" stroke="#93c5fd" strokeWidth={r * 0.7} strokeLinecap="butt" strokeOpacity="0.55" />
+      {/* Gap arc */}
+      <path d={remainPath} fill="none" stroke="#e0f0ff" strokeWidth={r * 0.7} strokeLinecap="butt" strokeOpacity="0.4" />
+    </svg>
+  );
 }
 
 // ── Insight card ──────────────────────────────────────────────────────────────
