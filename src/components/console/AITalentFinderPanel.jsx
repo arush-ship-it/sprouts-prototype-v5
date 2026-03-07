@@ -73,9 +73,9 @@ export default function AITalentFinderPanel() {
             </button>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <RefreshCw className="w-4 h-4 text-gray-500" />
-            </Button>
+            
+
+
             
 
 
