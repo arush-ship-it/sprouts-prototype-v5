@@ -8,168 +8,49 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 
-// ── Animated counter ──────────────────────────────────────────────────────────
-function useCountUp(target, duration = 1200) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const num = parseFloat(target);
-    if (isNaN(num)) {setCount(target);return;}
-    const start = Date.now();
-    const tick = () => {
-      const elapsed = Date.now() - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Number.isInteger(num) ? Math.round(eased * num) : (eased * num).toFixed(0));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [target, duration]);
-  return count;
-}
-
-// ── SVG line chart (upward trending, orange) ─────────────────────────────────
-function LineChartOrange({ width = 160, height = 72 }) {
-  const id = "orangeGrad";
-  // Simple upward line from bottom-left to top-right
-  const pts = [
-    { x: 10, y: 62 },
-    { x: 40, y: 58 },
-    { x: 70, y: 50 },
-    { x: 100, y: 38 },
-    { x: 130, y: 22 },
-    { x: 150, y: 10 },
-  ];
-  let d = `M ${pts[0].x} ${pts[0].y}`;
-  for (let i = 0; i < pts.length - 1; i++) {
-    const cx = (pts[i].x + pts[i + 1].x) / 2;
-    d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
+// ── Custom tooltip ────────────────────────────────────────────────────────────
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white/90 backdrop-blur-xl border border-gray-200/50 rounded-xl px-4 py-3 shadow-2xl">
+        <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wide mb-1">{label}</p>
+        {payload.map((entry, index) =>
+          <p key={index} className="text-[14px] font-semibold" style={{ color: entry.color }}>
+            {entry.value}
+          </p>
+        )}
+      </div>
+    );
   }
-  const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
-  const last = pts[pts.length - 1];
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#f97316" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#f97316" stopOpacity="0.02" />
-        </linearGradient>
-      </defs>
-      <path d={fillPath} fill={`url(#${id})`} />
-      <path d={d} fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Glow dot */}
-      <circle cx={last.x} cy={last.y} r="10" fill="#ef4444" fillOpacity="0.15" />
-      <circle cx={last.x} cy={last.y} r="5" fill="#ef4444" />
-    </svg>
-  );
-}
-
-// ── SVG wave chart (blue bell curve) ─────────────────────────────────────────
-function WaveChartBlue({ width = 160, height = 72 }) {
-  const id = "blueWaveGrad";
-  // Bell/wave curve: starts low, peaks in middle, comes back down
-  const d = `M 5 65 C 30 65, 50 60, 65 25 C 75 5, 85 5, 95 25 C 110 60, 130 65, 155 65`;
-  const fillPath = `${d} L 155 ${height} L 5 ${height} Z`;
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.02" />
-        </linearGradient>
-        <filter id="blueGlow">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-      <path d={fillPath} fill={`url(#${id})`} />
-      <path d={d} fill="none" stroke="#93c5fd" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#blueGlow)" />
-      {/* Glowing dot at peak */}
-      <circle cx="80" cy="15" r="14" fill="#3b82f6" fillOpacity="0.2" />
-      <circle cx="80" cy="15" r="8" fill="#3b82f6" fillOpacity="0.4" />
-      <circle cx="80" cy="15" r="5" fill="#3b82f6" />
-    </svg>
-  );
-}
-
-// ── SVG wave chart (purple/violet) ───────────────────────────────────────────
-function WaveChartPurple({ width = 160, height = 72 }) {
-  const id = "purpleWaveGrad";
-  // Slightly different wave shape - two humps, peaking on the right
-  const d = `M 5 65 C 20 65, 35 55, 50 40 C 60 28, 65 28, 75 40 C 85 52, 90 52, 105 30 C 118 10, 130 8, 155 12`;
-  const fillPath = `${d} L 155 ${height} L 5 ${height} Z`;
-  const peakX = 130;
-  const peakY = 8;
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#a855f7" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#a855f7" stopOpacity="0.02" />
-        </linearGradient>
-        <filter id="purpleGlow">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-      <path d={fillPath} fill={`url(#${id})`} />
-      <path d={d} fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#purpleGlow)" />
-      {/* Glowing dot at peak */}
-      <circle cx={peakX} cy={peakY} r="14" fill="#a855f7" fillOpacity="0.15" />
-      <circle cx={peakX} cy={peakY} r="8" fill="#a855f7" fillOpacity="0.35" />
-      <circle cx={peakX} cy={peakY} r="5" fill="#a855f7" />
-    </svg>
-  );
-}
+  return null;
+};
 
 // ── Insight card ──────────────────────────────────────────────────────────────
-function InsightCard({ card }) {
-  const animated = useCountUp(card.numericValue);
-  const [hovered, setHovered] = useState(false);
-
+function InsightCard({ card, index }) {
   return (
-    <div
-      className={`bg-white rounded-xl border border-gray-100 p-5 flex flex-col justify-between transition-all duration-200 cursor-default ${hovered ? "shadow-md -translate-y-0.5" : "shadow-sm"}`}
-      style={{ minHeight: 0 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className={`group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_${card.hoverShadow}] transition-all duration-500 overflow-hidden`}>
 
-      {/* Header */}
-      <div className="flex items-center justify-between mb-1">
-        <p className="text-[13px] font-semibold text-gray-700">{card.title}</p>
-        
-
-
-      </div>
-      <p className="text-[11px] text-gray-400 mb-3">{card.subtitle}</p>
-
-      {/* Value + chart */}
-      <div className="py-5 flex flex-col gap-4 flex-1 min-w-0">
-        <div className="min-w-0">
-          <div className="flex items-end gap-1">
-            <span className="text-gray-900 text-3xl font-medium">{animated}{card.unit}</span>
-            {card.badge &&
-            <span className="mb-1 text-[11px] font-semibold text-orange-500 bg-orange-50 px-1.5 py-0.5 rounded-full">
-                {card.badge}
-              </span>
-            }
+      <div className={`absolute inset-0 bg-gradient-to-br ${card.hoverGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">{card.title}</p>
+            <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              {card.value}
+            </h3>
+            <p className="text-[12px] text-gray-500 mt-1">{card.subtitle}</p>
           </div>
         </div>
-        <div className="self-center flex items-center justify-center overflow-hidden w-full" style={{ height: 90 }}>
-          {card.chartType === "line-orange" && <LineChartOrange width={220} height={72} />}
-          {card.chartType === "wave-blue" && <WaveChartBlue width={220} height={72} />}
-          {card.chartType === "wave-purple" && <WaveChartPurple width={220} height={72} />}
-        </div>
+        <ResponsiveContainer width="100%" height={160}>
+          {card.chart}
+        </ResponsiveContainer>
       </div>
-
-      {/* Footer description */}
-      <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-50">
-        <p className="text-[11px] text-gray-400 leading-snug max-w-[70%]">{card.description}</p>
-        <button className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center hover:bg-blue-50 transition-colors">
-          <span className="text-gray-400 text-[14px] leading-none">›</span>
-        </button>
-      </div>
-    </div>);
-
+    </motion.div>
+  );
 }
 
 // ── Pipeline fill bar ─────────────────────────────────────────────────────────
