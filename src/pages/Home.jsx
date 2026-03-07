@@ -86,36 +86,32 @@ function WaveChartBlue({ width = 160, height = 72 }) {
   );
 }
 
-// ── Soft pie chart (light blue) ───────────────────────────────────────────────
-function SoftPieChart({ size = 90 }) {
-  const cx = size / 2;
-  const cy = size / 2;
-  const r = size / 2 - 6;
-  // ~75% filled arc
-  const startAngle = -Math.PI / 2;
-  const endAngle = startAngle + 2 * Math.PI * 0.75;
-  const x1 = cx + r * Math.cos(startAngle);
-  const y1 = cy + r * Math.sin(startAngle);
-  const x2 = cx + r * Math.cos(endAngle);
-  const y2 = cy + r * Math.sin(endAngle);
-  const arcPath = `M ${x1} ${y1} A ${r} ${r} 0 1 1 ${x2} ${y2}`;
-  const gapX = cx + r * Math.cos(endAngle + 0.08);
-  const gapY = cy + r * Math.sin(endAngle + 0.08);
-  const remainPath = `M ${x2} ${y2} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
-
+// ── SVG wave chart (purple/violet) ───────────────────────────────────────────
+function WaveChartPurple({ width = 160, height = 72 }) {
+  const id = "purpleWaveGrad";
+  // Slightly different wave shape - two humps, peaking on the right
+  const d = `M 5 65 C 20 65, 35 55, 50 40 C 60 28, 65 28, 75 40 C 85 52, 90 52, 105 30 C 118 10, 130 8, 155 12`;
+  const fillPath = `${d} L 155 ${height} L 5 ${height} Z`;
+  const peakX = 130;
+  const peakY = 8;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ pointerEvents: "none" }}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
       <defs>
-        <filter id="softBlur">
-          <feGaussianBlur stdDeviation="2.5" />
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#a855f7" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#a855f7" stopOpacity="0.02" />
+        </linearGradient>
+        <filter id="purpleGlow">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
-      {/* Soft blurred background circle */}
-      <circle cx={cx} cy={cy} r={r + 4} fill="#bfdbfe" fillOpacity="0.35" filter="url(#softBlur)" />
-      {/* Main arc - light blue filled */}
-      <path d={arcPath} fill="none" stroke="#93c5fd" strokeWidth={r * 0.7} strokeLinecap="butt" strokeOpacity="0.55" />
-      {/* Gap arc */}
-      <path d={remainPath} fill="none" stroke="#e0f0ff" strokeWidth={r * 0.7} strokeLinecap="butt" strokeOpacity="0.4" />
+      <path d={fillPath} fill={`url(#${id})`} />
+      <path d={d} fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#purpleGlow)" />
+      {/* Glowing dot at peak */}
+      <circle cx={peakX} cy={peakY} r="14" fill="#a855f7" fillOpacity="0.15" />
+      <circle cx={peakX} cy={peakY} r="8" fill="#a855f7" fillOpacity="0.35" />
+      <circle cx={peakX} cy={peakY} r="5" fill="#a855f7" />
     </svg>
   );
 }
