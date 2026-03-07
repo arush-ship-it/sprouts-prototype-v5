@@ -116,7 +116,7 @@ function DefaultScreen({ onStart }) {
         </div>
 
         {/* Job suggestion grid */}
-        <div className="grid grid-cols-3 gap-6 w-full max-w-2xl">
+        <div className="grid grid-cols-3 gap-6 w-full max-w-2xl mb-8">
           {Object.entries(JOB_SUGGESTIONS).map(([category, roles]) =>
           <div key={category}>
               <p className="text-[12px] font-semibold text-gray-700 text-center mb-3">{category}</p>
@@ -134,6 +134,13 @@ function DefaultScreen({ onStart }) {
             </div>
           )}
         </div>
+
+        {/* Upload JD Button */}
+        <label className="cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dashed border-gray-300 bg-white hover:border-indigo-400 hover:bg-indigo-50 transition-all text-[13px] text-gray-500 hover:text-indigo-600 font-medium">
+          <input type="file" accept=".pdf,.doc,.docx,.txt" className="hidden" onChange={(e) => { if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`); }} />
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12V4m0 0l-3 3m3-3l3 3" /></svg>
+          Upload Job Description
+        </label>
       </div>
     </div>);
 
