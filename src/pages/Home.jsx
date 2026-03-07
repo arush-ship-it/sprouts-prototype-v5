@@ -192,10 +192,7 @@ export default function Home() {
     numericValue: 120,
     unit: "",
     badge: "↑",
-    chartType: "line",
-    chartData: [60, 70, 65, 80, 90, 100, 120],
-    lineColor: "#3b82f6",
-    dotColor: "#3b82f6",
+    chartType: "line-orange",
     description: "Total candidates currently in your hiring pipeline."
   },
   {
@@ -203,9 +200,7 @@ export default function Home() {
     subtitle: "This week",
     numericValue: 270,
     unit: "",
-    chartType: "donut",
-    chartData: [],
-    lineColor: "#6366f1",
+    chartType: "wave-blue",
     description: "New applicants received this week across all positions."
   },
   {
@@ -213,9 +208,7 @@ export default function Home() {
     subtitle: "Total processed",
     numericValue: 270,
     unit: "",
-    chartType: "donut",
-    chartData: [],
-    lineColor: "#a855f7",
+    chartType: "pie-soft",
     description: "Total resumes processed and reviewed this month."
   }];
 
