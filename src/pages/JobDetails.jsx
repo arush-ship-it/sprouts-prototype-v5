@@ -236,7 +236,7 @@ export default function JobDetails() {
         </div>
 
         {/* Posted On Section */}
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
+        <div className="bg-white mb-6 px-4 py-4 rounded-xl border border-gray-200">
           <h3 className="text-[16px] font-semibold text-gray-900 mb-4">Posted On</h3>
           <div className="flex flex-col gap-3">
             {[
