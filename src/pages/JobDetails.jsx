@@ -163,14 +163,9 @@ export default function JobDetails() {
                 </span>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <button className="bg-blue-600 text-[#ffffff] px-4 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                Job Health Report
-              </button>
-              <span className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
-                {jobData.status}
-              </span>
-            </div>
+            <button className="bg-blue-600 text-[#ffffff] px-4 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+              Job Health Report
+            </button>
           </div>
         </div>
 
