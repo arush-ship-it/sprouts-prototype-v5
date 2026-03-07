@@ -22,61 +22,38 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-// ── SVG line chart (smooth organic glow style) ───────────────────────────────
-function LineChart({ data, color, width = 180, height = 80 }) {
+// ── SVG line chart (smooth curve) ────────────────────────────────────────────
+function LineChart({ data, color, fillColor, dotColor, width = 180, height = 80 }) {
   if (!data || data.length < 2) return null;
   const min = Math.min(...data);
   const max = Math.max(...data);
   const range = max - min || 1;
-  const padX = 12;
-  const padY = 12;
-  const w = width - padX * 2;
-  const h = height - padY * 2;
+  const pad = 8;
+  const w = width - pad * 2;
+  const h = height - pad * 2;
 
   const pts = data.map((v, i) => ({
-    x: padX + i / (data.length - 1) * w,
-    y: padY + (1 - (v - min) / range) * h
+    x: pad + i / (data.length - 1) * w,
+    y: pad + (1 - (v - min) / range) * h
   }));
 
-  // Smooth bezier path
+  // Build smooth bezier path
   let d = `M ${pts[0].x} ${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
     const cx = (pts[i].x + pts[i + 1].x) / 2;
     d += ` C ${cx} ${pts[i].y}, ${cx} ${pts[i + 1].y}, ${pts[i + 1].x} ${pts[i + 1].y}`;
   }
-
-  // Highlighted point = last point
-  const hlPt = pts[pts.length - 1];
-  const gradId = `grad-${color.replace("#", "")}`;
-  const glowId = `glow-${color.replace("#", "")}`;
+  const fillPath = `${d} L ${pts[pts.length - 1].x} ${height} L ${pts[0].x} ${height} Z`;
+  const lastPt = pts[pts.length - 1];
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none", overflow: "visible" }}>
-      <defs>
-        <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      {/* Dotted vertical guide line at highlight point */}
-      <line
-        x1={hlPt.x} y1={hlPt.y + 6}
-        x2={hlPt.x} y2={height - padY + 4}
-        stroke="rgba(255,255,255,0.35)"
-        strokeWidth="1"
-        strokeDasharray="3 3" />
-      {/* Glow line */}
-      <path d={d} fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Main white line */}
-      <path d={d} fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" filter={`url(#${glowId})`} />
-      {/* Highlighted dot outer ring */}
-      <circle cx={hlPt.x} cy={hlPt.y} r="7" fill="rgba(255,255,255,0.15)" />
-      {/* Highlighted dot */}
-      <circle cx={hlPt.x} cy={hlPt.y} r="4" fill="#1e293b" stroke="white" strokeWidth="1.5" />
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ pointerEvents: "none" }}>
+      <path d={fillPath} fill={fillColor} fillOpacity="0.15" />
+      <path d={d} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx={lastPt.x} cy={lastPt.y} r="4" fill={dotColor || color} />
+      <circle cx={lastPt.x} cy={lastPt.y} r="7" fill={dotColor || color} fillOpacity="0.2" />
     </svg>);
+
 }
 
 // ── Donut / pie chart ─────────────────────────────────────────────────────────
@@ -137,11 +114,13 @@ function InsightCard({ card }) {
             }
           </div>
         </div>
-        <div className="self-stretch flex items-center justify-center overflow-hidden rounded-xl" style={{ height: 72, background: card.chartType === "line" ? card.lineColor : "transparent" }}>
+        <div className="self-center flex items-center justify-center overflow-hidden" style={{ width: 160, height: 72 }}>
           {card.chartType === "line" &&
           <LineChart
             data={card.chartData}
             color={card.lineColor}
+            fillColor={card.lineColor}
+            dotColor={card.dotColor}
             width={160}
             height={72} />
 
