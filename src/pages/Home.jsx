@@ -5,8 +5,8 @@ import { Briefcase, Mail, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   BarChart, Bar, LineChart, Line,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
-} from "recharts";
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from
+"recharts";
 
 // ── Custom tooltip ────────────────────────────────────────────────────────────
 const CustomTooltip = ({ active, payload, label }) => {
@@ -15,12 +15,12 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="bg-white/90 backdrop-blur-xl border border-gray-200/50 rounded-xl px-4 py-3 shadow-2xl">
         <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wide mb-1">{label}</p>
         {payload.map((entry, index) =>
-          <p key={index} className="text-[14px] font-semibold" style={{ color: entry.color }}>
+        <p key={index} className="text-[14px] font-semibold" style={{ color: entry.color }}>
             {entry.value}
           </p>
         )}
-      </div>
-    );
+      </div>);
+
   }
   return null;
 };
@@ -34,12 +34,12 @@ function InsightCard({ card, index }) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_${card.hoverShadow}] transition-all duration-500 overflow-hidden`}>
 
-      <div className={`absolute inset-0 bg-gradient-to-br ${card.hoverGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <div className="bg-gradient-to-br opacity-0 rounded-none absolute inset-0 from-indigo-500/5 via-transparent to-violet-500/5 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
           <div>
             <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">{card.title}</p>
-            <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            <h3 className="bg-clip-text text-slate-700 text-3xl font-semibold from-gray-900 to-gray-600">
               {card.value}
             </h3>
             <p className="text-[12px] text-gray-500 mt-1">{card.subtitle}</p>
@@ -49,8 +49,8 @@ function InsightCard({ card, index }) {
           {card.chart}
         </ResponsiveContainer>
       </div>
-    </motion.div>
-  );
+    </motion.div>);
+
 }
 
 // ── Pipeline fill bar ─────────────────────────────────────────────────────────
@@ -68,24 +68,24 @@ function PipelineBar({ value, total }) {
 export default function Home() {
   const navigate = useNavigate();
   const pipelineData = [
-    { stage: "Applied", count: 342 },
-    { stage: "Screening", count: 156 },
-    { stage: "Assessment", count: 89 },
-    { stage: "Interview", count: 45 },
-    { stage: "Offer", count: 12 },
-  ];
+  { stage: "Applied", count: 342 },
+  { stage: "Screening", count: 156 },
+  { stage: "Assessment", count: 89 },
+  { stage: "Interview", count: 45 },
+  { stage: "Offer", count: 12 }];
+
   const applicantsData = [
-    { week: "W1", count: 45 },
-    { week: "W2", count: 62 },
-    { week: "W3", count: 38 },
-    { week: "W4", count: 28 },
-  ];
+  { week: "W1", count: 45 },
+  { week: "W2", count: 62 },
+  { week: "W3", count: 38 },
+  { week: "W4", count: 28 }];
+
   const resumesData = [
-    { month: "Jan", count: 120 },
-    { month: "Feb", count: 156 },
-    { month: "Mar", count: 142 },
-    { month: "Apr", count: 134 },
-  ];
+  { month: "Jan", count: 120 },
+  { month: "Feb", count: 156 },
+  { month: "Mar", count: 142 },
+  { month: "Apr", count: 134 }];
+
 
   const insightCards = [
   {
@@ -94,8 +94,8 @@ export default function Home() {
     value: "342",
     hoverShadow: "rgba(99,102,241,0.12)",
     hoverGradient: "from-indigo-500/5 via-transparent to-violet-500/5",
-    chart: (
-      <BarChart data={pipelineData}>
+    chart:
+    <BarChart data={pipelineData}>
         <defs>
           <linearGradient id="pipelineGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#6366f1" stopOpacity={0.9} />
@@ -108,7 +108,7 @@ export default function Home() {
         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(99,102,241,0.05)' }} />
         <Bar dataKey="count" fill="url(#pipelineGrad)" radius={[8, 8, 0, 0]} maxBarSize={40} />
       </BarChart>
-    ),
+
   },
   {
     title: "New Applicants",
@@ -116,8 +116,8 @@ export default function Home() {
     value: "28",
     hoverShadow: "rgba(249,115,22,0.12)",
     hoverGradient: "from-orange-500/5 via-transparent to-amber-500/5",
-    chart: (
-      <BarChart data={applicantsData}>
+    chart:
+    <BarChart data={applicantsData}>
         <defs>
           <linearGradient id="applicantsGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#f97316" stopOpacity={0.9} />
@@ -130,7 +130,7 @@ export default function Home() {
         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(249,115,22,0.05)' }} />
         <Bar dataKey="count" fill="url(#applicantsGrad)" radius={[8, 8, 0, 0]} maxBarSize={40} />
       </BarChart>
-    ),
+
   },
   {
     title: "Resumes Processed This Month",
@@ -138,17 +138,17 @@ export default function Home() {
     value: "156",
     hoverShadow: "rgba(236,72,153,0.12)",
     hoverGradient: "from-pink-500/5 via-transparent to-rose-500/5",
-    chart: (
-      <LineChart data={resumesData}>
+    chart:
+    <LineChart data={resumesData}>
         <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" strokeOpacity={0.5} vertical={false} />
         <XAxis dataKey="month" tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={{ stroke: '#e2e8f0' }} />
         <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickLine={false} axisLine={false} />
         <Tooltip content={<CustomTooltip />} />
         <Line type="monotone" dataKey="count" stroke="#ec4899" strokeWidth={3}
-          dot={{ fill: '#ec4899', strokeWidth: 2, r: 5, stroke: '#fff' }}
-          activeDot={{ r: 7, fill: '#ec4899', stroke: '#fff', strokeWidth: 2 }} />
+      dot={{ fill: '#ec4899', strokeWidth: 2, r: 5, stroke: '#fff' }}
+      activeDot={{ r: 7, fill: '#ec4899', stroke: '#fff', strokeWidth: 2 }} />
       </LineChart>
-    ),
+
   }];
 
 
@@ -183,7 +183,7 @@ export default function Home() {
         {/* Left column */}
         <div className="flex-1 min-w-0 flex flex-col gap-4 min-h-0 overflow-hidden">
           {/* 4 insight cards */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="rounded-none grid grid-cols-3 gap-4">
             {insightCards.map((card, i) => <InsightCard key={i} card={card} index={i} />)}
           </div>
 
