@@ -100,7 +100,7 @@ export default function CommunicationAnalyticsDashboard() {
       {isExpanded &&
       <div className="space-y-4">
           {/* Unified Top Row: KPIs + Donut merged */}
-          <div className="bg-white rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-slate-100 p-6">
+          <div className="bg-white px-3 py-3 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-slate-100">
             <div className="grid grid-cols-5 gap-6">
 
               {/* Left: KPI + Breakdown */}
