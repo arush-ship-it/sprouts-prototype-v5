@@ -615,11 +615,16 @@ export default function Agents() {
                           {agent.description}. Analyses Inputs Against Defined Criteria. Filters Noise And Highlights High-Signal Candidates. Surfaces Structured Insights For Evaluation.
                         </p>
                       </div>
-                      <button
-                      onClick={() => handleAgentClick(agent)}
-                      className="ml-4 flex-shrink-0 px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                        View Details
-                      </button>
+                      <div className="ml-4 flex-shrink-0 flex gap-2">
+                        <button className="px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                          Setup
+                        </button>
+                        <button
+                        onClick={() => handleAgentClick(agent)}
+                        className="px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                          View Details
+                        </button>
+                      </div>
                     </div>
 
                     {/* Metrics */}
