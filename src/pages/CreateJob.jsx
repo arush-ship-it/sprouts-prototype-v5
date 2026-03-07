@@ -481,12 +481,12 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
         {/* Recommended (added questions only) */}
         <div>
           <h2 className="text-gray-900 mb-0.5 text-lg font-semibold">Screening Questions</h2>
-          <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Recommended</p>
+          <p className="text-[13px] font-semibold text-gray-700 mt-4 mb-1">Chosen Questions</p>
           <div className="space-y-3">
             {promotedQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added={addedIds.includes(q.id)} onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
-            {promotedQuestions.length === 0 && <p className="text-[12px] text-gray-400 italic">Add questions from the bank below.</p>}
+            {promotedQuestions.length === 0 && <p className="text-gray-400 text-xl font-normal text-left normal-case italic">Add questions from the bank below</p>}
           </div>
         </div>
 
