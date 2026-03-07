@@ -184,7 +184,7 @@ export default function Home() {
         <div className="flex-1 min-w-0 flex flex-col gap-4 min-h-0 overflow-hidden">
           {/* 4 insight cards */}
           <div className="grid grid-cols-3 gap-4">
-            {insightCards.map((card, i) => <InsightCard key={i} card={card} />)}
+            {insightCards.map((card, i) => <InsightCard key={i} card={card} index={i} />)}
           </div>
 
           {/* All Jobs */}
