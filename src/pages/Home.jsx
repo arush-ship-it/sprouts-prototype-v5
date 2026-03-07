@@ -65,7 +65,7 @@ function DonutChart({ percent, color, size = 80 }) {
   const dash = percent / 100 * circumference;
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       <circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth="10" />
       <circle
         cx={cx} cy={cy} r={r}
