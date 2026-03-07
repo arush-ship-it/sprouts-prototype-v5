@@ -150,9 +150,9 @@ function InsightCard({ card }) {
           </div>
         </div>
         <div className="self-center flex items-center justify-center overflow-hidden w-full" style={{ height: 90 }}>
-          {card.chartType === "line-orange" && <LineChartOrange width={160} height={72} />}
-          {card.chartType === "wave-blue" && <WaveChartBlue width={160} height={72} />}
-          {card.chartType === "wave-purple" && <WaveChartPurple width={160} height={72} />}
+          {card.chartType === "line-orange" && <LineChartOrange width={220} height={72} />}
+          {card.chartType === "wave-blue" && <WaveChartBlue width={220} height={72} />}
+          {card.chartType === "wave-purple" && <WaveChartPurple width={220} height={72} />}
         </div>
       </div>
 
