@@ -123,42 +123,7 @@ const allAgents = [
   { time: "3 hours ago", action: "Analyzed Marcus Rivera's video", result: "Good communication" }]
 
 },
-{
-  id: 7,
-  name: "Notification Agent",
-  icon: MessageSquare,
-  type: "operations",
-  status: "active",
-  stage: "All Stages",
-  description: "Sends status updates to candidates",
-  lastActivity: "15 minutes ago",
-  isActive: true,
-  totalProcessed: 512,
-  avgProcessingTime: "0.3s",
-  accuracy: "99%",
-  activityLog: [
-  { time: "15 min ago", action: "Sent status update to Tom Jones", result: "Delivered" },
-  { time: "20 min ago", action: "Sent status update to Lena Kim", result: "Opened" }]
-
-},
-{
-  id: 8,
-  name: "Initial Screening",
-  icon: Users,
-  type: "operations",
-  status: "active",
-  stage: "Screening",
-  description: "Conducts initial candidate screening",
-  lastActivity: "45 minutes ago",
-  isActive: true,
-  totalProcessed: 178,
-  avgProcessingTime: "3.5s",
-  accuracy: "92%",
-  activityLog: [
-  { time: "45 min ago", action: "Screened Robert Chen", result: "Passed" },
-  { time: "1 hour ago", action: "Screened Emily Davis", result: "Failed" }]
-
-}];
+];
 
 
 // Agent Card Component
