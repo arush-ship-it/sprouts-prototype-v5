@@ -61,25 +61,7 @@ const allAgents = [
   { time: "12 min ago", action: "Screened Sarah Mitchell's resume", result: "Not qualified" }]
 
 },
-{
-  id: 2,
-  name: "Email Sequence Agent",
-  icon: Mail,
-  type: "operations",
-  status: "active",
-  stage: "All Stages",
-  description: "Sends automated emails to candidates",
-  lastActivity: "5 minutes ago",
-  isActive: true,
-  totalProcessed: 423,
-  avgProcessingTime: "0.5s",
-  accuracy: "99%",
-  activityLog: [
-  { time: "5 min ago", action: "Sent follow-up to John Doe", result: "Delivered" },
-  { time: "10 min ago", action: "Sent interview reminder to Jane Smith", result: "Opened" },
-  { time: "15 min ago", action: "Sent rejection to Mike Wilson", result: "Delivered" }]
 
-},
 {
   id: 3,
   name: "Smart Assessment",
