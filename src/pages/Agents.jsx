@@ -101,27 +101,7 @@ const allAgents = [
   { time: "2 hours ago", action: "Scheduled interview for Lisa Brown", result: "Confirmed" }]
 
 },
-{
-  id: 5,
-  name: "Culture Fit Analyzer",
-  icon: Users,
-  type: "evaluation",
-  status: "active",
-  stage: "Interview",
-  description: "Assesses culture alignment and team fit",
-  lastActivity: "30 minutes ago",
-  isActive: true,
-  totalProcessed: 67,
-  avgProcessingTime: "5.8s",
-  accuracy: "89%",
-  subAgents: [
-  { id: 105, name: "Interview Invite", icon: Mail, type: "operations" },
-  { id: 106, name: "Feedback Request", icon: MessageSquare, type: "operations" }],
 
-  activityLog: [
-  { time: "30 min ago", action: "Analyzed Daniel Wright's interview", result: "Strong fit - 87%" }]
-
-},
 {
   id: 6,
   name: "Video Interview AI",
