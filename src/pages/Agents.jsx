@@ -82,7 +82,7 @@ const allAgents = [
 },
 {
   id: 3,
-  name: "Skills Evaluator",
+  name: "Smart Assessment",
   icon: CheckCircle,
   type: "evaluation",
   status: "active",
