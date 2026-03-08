@@ -358,7 +358,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-[13px] font-semibold text-gray-900">
-                  {isSourcingExpanded ? "AI Sourcing Assistant" : "AI Sourcing - Click to Expand"}
+                  AI Sourcing
                 </h3>
                 
 
