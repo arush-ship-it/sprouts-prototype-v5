@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, Sparkles, CheckCircle2, ArrowRight, SkipForward, Plus, X, Building2, Pencil, TrendingUp, ChevronUp, ChevronDown } from "lucide-react";
+import { Send, Sparkles, CheckCircle2, ArrowRight, SkipForward, Plus, X, Building2, Pencil, TrendingUp, ChevronUp, ChevronDown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
