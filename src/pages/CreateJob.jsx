@@ -498,9 +498,6 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           </div>
         </div>
 
-        {/* Salary Intelligence - inside Compensation */}
-        {/* (moved inside Compensation section below) */}
-
         {/* Benefits */}
         <div className="bg-slate-50 mb-0 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
