@@ -409,11 +409,11 @@ function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
           <tbody>
             {candidates.map((candidate, idx) =>
             <tr key={idx} className="border-b border-gray-100 hover:bg-indigo-50/30 transition-colors">
-                <td className="px-4 py-3">{candidate.name}</td>
-                <td className="px-4 py-3 text-gray-600">{candidate.title}</td>
-                <td className="px-4 py-3 text-gray-600">{candidate.experience}</td>
-                <td className="px-4 py-3">
-                  <Badge className="bg-indigo-100 text-indigo-700">
+                <td className="px-5 py-3 font-medium text-gray-900">{candidate.name}</td>
+                <td className="px-5 py-3 text-gray-600">{candidate.title}</td>
+                <td className="px-5 py-3 text-gray-600">{candidate.experience}</td>
+                <td className="px-5 py-3">
+                  <Badge className="bg-indigo-100 text-indigo-700 font-semibold">
                     {candidate.score}
                   </Badge>
                 </td>
