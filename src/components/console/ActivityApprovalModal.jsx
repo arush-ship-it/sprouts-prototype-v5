@@ -166,11 +166,14 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
                           {approval.description}
                         </p>
                         <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200/60 mt-2 text-[10px] font-medium">
-                          {approval.candidates.length} candidates
-                        </Badge>
-                      </div>
-                    </div>
-                  </motion.button>
+                            {approval.candidates.length} candidates
+                          </Badge>
+                          <Button variant="ghost" size="sm" className="mt-3 h-7 text-[11px] text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50/50 -ml-2 px-2">
+                            View Full Activity
+                          </Button>
+                        </div>
+                        </div>
+                        </motion.button>
               )}
               </div>
             </div>
