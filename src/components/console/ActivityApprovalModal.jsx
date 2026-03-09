@@ -284,7 +284,7 @@ function ReviewModeContent({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="p-8 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm">
+        className="p-6 rounded-xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm">
         <div className="flex items-start gap-5 mb-6">
           <Avatar className="w-20 h-20 ring-2 ring-indigo-100">
             <AvatarFallback className="bg-gradient-to-br from-indigo-100 to-indigo-50 text-indigo-700 text-[20px] font-semibold">
