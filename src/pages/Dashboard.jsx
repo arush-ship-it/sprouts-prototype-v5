@@ -280,6 +280,17 @@ export default function Dashboard() {
   const [chatInput, setChatInput] = useState("");
   const [activeContext, setActiveContext] = useState(null);
 
+  const handleSelectContext = (topic) => {
+    setActiveContext(topic);
+    setChatMessages((prev) => [
+      ...prev,
+      { role: "user", content: topic.prompt },
+      { role: "assistant", content: `Sure! Let's deep dive into **${topic.label}** (${topic.sublabel}). Based on your current data, here's what I'm seeing...` }
+    ]);
+  };
+
+  const hasInteracted = chatMessages.length > 1;
+
   const handleSendChat = () => {
     if (!chatInput.trim()) return;
     setChatMessages([...chatMessages, { role: "user", content: chatInput }]);
