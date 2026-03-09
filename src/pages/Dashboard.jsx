@@ -221,6 +221,54 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 
+const CONTEXT_TOPICS = [
+  {
+    id: "pipeline",
+    label: "Pipeline Health",
+    sublabel: "Volume & Flow",
+    icon: "📊",
+    color: "from-indigo-50 to-indigo-100/60 border-indigo-200",
+    activeColor: "from-indigo-500 to-violet-600",
+    prompt: "Give me a deep dive on pipeline health — volume, flow, and bottlenecks across stages."
+  },
+  {
+    id: "conversion",
+    label: "Conversion & Drop-off",
+    sublabel: "Funnel Leaks",
+    icon: "🔻",
+    color: "from-rose-50 to-rose-100/60 border-rose-200",
+    activeColor: "from-rose-500 to-pink-600",
+    prompt: "Analyze my funnel conversion rates and where candidates are dropping off."
+  },
+  {
+    id: "speed",
+    label: "Speed & Efficiency",
+    sublabel: "Velocity",
+    icon: "⚡",
+    color: "from-amber-50 to-amber-100/60 border-amber-200",
+    activeColor: "from-amber-500 to-orange-600",
+    prompt: "What's my hiring velocity? Break down time-to-hire and efficiency across stages."
+  },
+  {
+    id: "sourcing",
+    label: "Sourcing ROI",
+    sublabel: "Channel Performance",
+    icon: "🎯",
+    color: "from-emerald-50 to-emerald-100/60 border-emerald-200",
+    activeColor: "from-emerald-500 to-teal-600",
+    prompt: "Which sourcing channels are performing best? Show me ROI by channel."
+  },
+  {
+    id: "candidates",
+    label: "Candidate Insights",
+    sublabel: "Quality & Behavior",
+    icon: "👥",
+    color: "from-blue-50 to-blue-100/60 border-blue-200",
+    activeColor: "from-blue-500 to-cyan-600",
+    prompt: "Give me insights on candidate quality, engagement patterns, and behavior trends."
+  }
+];
+
 export default function Dashboard() {
   const [isChatMinimized, setIsChatMinimized] = useState(true);
   const [chatMessages, setChatMessages] = useState([
@@ -230,6 +278,7 @@ export default function Dashboard() {
   }]
   );
   const [chatInput, setChatInput] = useState("");
+  const [activeContext, setActiveContext] = useState(null);
 
   const handleSendChat = () => {
     if (!chatInput.trim()) return;
