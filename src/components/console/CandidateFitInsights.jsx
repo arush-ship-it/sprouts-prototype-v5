@@ -83,10 +83,10 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
 
       {/* CTA: View Insights or Skip */}
       {!showRecommendations &&
-      <div className="flex gap-2">
-          <Button
-          className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[12px] gap-1.5"
-          onClick={() => {setShowRecommendations(true);onViewInsights?.();}}>
+      <div className="pl-1 flex gap-2">
+          <Button className="bg-blue-600 text-[#ffffff] px-4 py-2 text-xs font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 flex-1 hover:bg-indigo-700 gap-1.5"
+
+        onClick={() => {setShowRecommendations(true);onViewInsights?.();}}>
             <Sparkles className="w-3.5 h-3.5" />
             View Insights
           </Button>
