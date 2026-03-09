@@ -93,8 +93,8 @@ function QuickActionSlideshow({ onStart }) {
         onChange={(e) => {if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`);}} />
 
       <div
-        onClick={handleAction}
-        className={`cursor-pointer rounded-2xl border ${card.border} ${card.bg} px-5 py-5 flex flex-col items-center text-center gap-3 transition-all hover:shadow-sm`}>
+        onClick={handleAction} className="bg-sky-50 px-5 py-12 text-center rounded-2xl cursor-pointer border border-sky-100 flex flex-col items-center gap-3 transition-all hover:shadow-sm">
+
 
         <div className={`w-12 h-12 rounded-2xl ${card.iconBg} flex items-center justify-center text-2xl`}>
           {card.emoji}
