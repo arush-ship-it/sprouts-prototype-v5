@@ -390,7 +390,7 @@ export default function Dashboard() {
 
           {!isChatMinimized &&
           <>
-              <div className="flex-1 overflow-y-auto p-5 space-y-3">
+              <div className="flex-1 overflow-y-auto min-h-0 p-5 space-y-3">
                 {/* Messages */}
                 {chatMessages.map((msg, idx) =>
                 <div
