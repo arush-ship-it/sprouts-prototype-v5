@@ -603,6 +603,8 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
                 </div>
               )}
             </div>
+              </>
+            )}
           </div>
         </div>
 
