@@ -371,7 +371,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             variant="ghost"
             size="sm"
             className="h-7"
-            onClick={() => setIsSourcingExpanded(!isSourcingExpanded)}>
+            onClick={() => { const next = !isSourcingExpanded; setIsSourcingExpanded(next); if (next) setShowInsightsScreen(true); }}>
 
               {isSourcingExpanded ?
             <ChevronUp className="w-3.5 h-3.5" /> :
