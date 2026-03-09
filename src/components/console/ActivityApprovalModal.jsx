@@ -137,43 +137,46 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
         </DialogHeader>
 
         {/* Two Column Layout */}
-        <div className="flex-1 overflow-hidden flex gap-4">
+        <div className="flex-1 overflow-hidden flex gap-6">
             {/* Left Column: Agent List */}
-            <div className="w-96 overflow-y-auto">
-              <div className="space-y-3">
-                {approvals.map((approval) =>
-              <button
+            <div className="w-96 overflow-y-auto pr-4">
+              <div className="space-y-2">
+                {approvals.map((approval, idx) =>
+              <motion.button
                 key={approval.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.05 }}
                 onClick={() => handleSelectApproval(approval)}
-                className={`w-full p-3 rounded-lg text-left transition-all border-2 ${
+                className={`w-full p-4 rounded-xl text-left transition-all duration-200 ${
                 selectedApproval.id === approval.id ?
-                "border-indigo-500 bg-indigo-50" :
-                "border-gray-200 bg-white hover:border-indigo-200"}`
+                "border border-indigo-300 bg-indigo-50/80 shadow-sm" :
+                "border border-gray-200 bg-white hover:border-indigo-200 hover:bg-indigo-50/30"}`
                 }>
 
-                    <div className="flex items-start gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center shrink-0">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center shrink-0">
                         <Bot className="w-4 h-4 text-orange-600" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-[13px] font-semibold text-gray-900 truncate">
+                        <h3 className="text-[13px] font-semibold text-gray-900 truncate leading-snug">
                           {approval.agentName}
                         </h3>
-                        <p className="text-[11px] text-gray-600 mt-0.5">
+                        <p className="text-[11px] text-gray-500 mt-1">
                           {approval.description}
                         </p>
-                        <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200 mt-1.5 text-[10px]">
+                        <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200/60 mt-2 text-[10px] font-medium">
                           {approval.candidates.length} candidates
                         </Badge>
                       </div>
                     </div>
-                  </button>
+                  </motion.button>
               )}
               </div>
             </div>
 
             {/* Right Column: Candidate View */}
-            <div className="flex-1 flex flex-col overflow-hidden border-l border-gray-200 pl-4">
+            <div className="flex-1 flex flex-col overflow-hidden border-l border-gray-100 pl-6">
               {/* Header with View Mode Toggles */}
               <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
                 <div>
