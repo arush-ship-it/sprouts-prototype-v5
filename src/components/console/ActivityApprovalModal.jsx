@@ -446,10 +446,10 @@ function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
           </tbody>
         </table>
       </div>
-      <Button onClick={onComplete} className="w-full">
+      <Button onClick={onComplete} className="w-full h-11 font-semibold bg-gradient-to-r from-emerald-600 to-emerald-600 hover:from-emerald-700 hover:to-emerald-700">
         Complete Review
       </Button>
-    </div>);
+      </div>);
 
 }
 
