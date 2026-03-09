@@ -473,6 +473,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                   {/* Experience */}
                   <div className="p-4 rounded-lg bg-white border border-indigo-100">
                     <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Experience</h4>
+
                     
                     <div className="space-y-3">
                       <div>
