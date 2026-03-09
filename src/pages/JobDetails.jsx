@@ -174,9 +174,23 @@ export default function JobDetails() {
                 </span>
               </div>
             </div>
-            <button className="bg-blue-600 text-[#ffffff] px-4 py-1.5 text-sm font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-              Job Health Report
-            </button>
+            <div className="flex items-center gap-2">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors">
+                <Share2 className="w-3.5 h-3.5" />
+                Share
+              </button>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-amber-600 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+                <XCircle className="w-3.5 h-3.5" />
+                Close Job
+              </button>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-red-600 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 transition-colors">
+                <Trash2 className="w-3.5 h-3.5" />
+                Delete
+              </button>
+              <button className="bg-blue-600 text-[#ffffff] px-4 py-1.5 text-sm font-medium rounded-lg border border-gray-200 hover:bg-blue-700 transition-colors">
+                Job Health Report
+              </button>
+            </div>
           </div>
         </div>
 
