@@ -366,7 +366,10 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-[15px] font-bold text-gray-900">Responsibilities</h3>
-            <button onClick={addResp} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
+            <div className="flex items-center gap-3">
+              <button onClick={addResp} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
+              <button onClick={() => setJd((prev) => ({ ...prev, responsibilities: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
+            </div>
           </div>
           <ul className="space-y-1" onMouseUp={() => handleTextSelect("responsibilities")}>
             {jd.responsibilities.map((resp, i) =>
