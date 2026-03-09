@@ -502,19 +502,19 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           <div className="bg-[#ffffff] mt-5 pt-4 pr-5 pl-5 pb-4 rounded-2xl border-t border-gray-100">
             <button
               onClick={() => setSalaryExpanded((v) => !v)}
-              className="flex items-center gap-2 w-full text-left"
-            >
+              className="flex items-center gap-2 w-full text-left">
+
               <TrendingUp className="w-4 h-4 text-amber-600 shrink-0" />
-              <p className="text-[13px] font-semibold text-gray-800 flex-1">Salary Intelligence</p>
+              <p className="text-[13px] font-semibold text-gray-800 flex-1">Salary Insight</p>
               <span className="text-[10px] font-semibold bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full border border-amber-200 mr-2">AI Insight</span>
-              {salaryExpanded
-                ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" />
-                : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
+              {salaryExpanded ?
+              <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" /> :
+              <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
             </button>
 
             {/* Collapsed summary */}
-            {!salaryExpanded && (
-              <div className="mt-3 flex items-center gap-3">
+            {!salaryExpanded &&
+            <div className="mt-3 flex items-center gap-3">
                 <div className="flex-1">
                   <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div className="absolute h-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 rounded-full" style={{ left: "10%", width: "80%" }} />
@@ -528,10 +528,10 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
                 </div>
                 <span className="text-[11px] text-indigo-600 font-medium shrink-0">Competitive ✓</span>
               </div>
-            )}
+            }
 
-            {salaryExpanded && (
-              <div>
+            {salaryExpanded &&
+            <div>
             <p className="text-[11px] text-gray-400 mt-2 mb-4">Market data for Senior Product Designer · San Francisco, CA</p>
 
             {/* Market range bar */}
@@ -573,38 +573,38 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
             <p className="text-[12px] font-semibold text-gray-700 mb-2">Similar roles currently hiring</p>
             <div className="space-y-2 mb-5">
               {[
-              { company: "Figma", title: "Senior Product Designer", range: "$130k – $165k", location: "San Francisco, CA" },
-              { company: "Notion", title: "Product Designer (Senior)", range: "$125k – $155k", location: "Remote" },
-              { company: "Linear", title: "Sr. UX Designer", range: "$115k – $150k", location: "Remote" }].
-              map((job) =>
-              <div key={job.company} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+                { company: "Figma", title: "Senior Product Designer", range: "$130k – $165k", location: "San Francisco, CA" },
+                { company: "Notion", title: "Product Designer (Senior)", range: "$125k – $155k", location: "Remote" },
+                { company: "Linear", title: "Sr. UX Designer", range: "$115k – $150k", location: "Remote" }].
+                map((job) =>
+                <div key={job.company} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
                   <div>
                     <p className="text-[13px] font-semibold text-gray-800">{job.company} <span className="font-normal text-gray-500">· {job.title}</span></p>
                     <p className="text-[11px] text-gray-400">{job.location}</p>
                   </div>
                   <p className="text-[12px] font-bold text-gray-800">{job.range}</p>
                 </div>
-              )}
+                )}
             </div>
 
             {/* Past internal hires */}
             <p className="text-[12px] font-semibold text-gray-700 mb-2">Past hires at your company</p>
             <div className="space-y-2">
               {[
-              { name: "Alex Chen", role: "Senior Product Designer", year: "2023", salary: "$128k", level: "L5" },
-              { name: "Priya Sharma", role: "Product Designer", year: "2022", salary: "$112k", level: "L4" }].
-              map((hire) =>
-              <div key={hire.name} className="flex items-center justify-between bg-indigo-50 rounded-xl px-4 py-3">
+                { name: "Alex Chen", role: "Senior Product Designer", year: "2023", salary: "$128k", level: "L5" },
+                { name: "Priya Sharma", role: "Product Designer", year: "2022", salary: "$112k", level: "L4" }].
+                map((hire) =>
+                <div key={hire.name} className="flex items-center justify-between bg-indigo-50 rounded-xl px-4 py-3">
                   <div>
                     <p className="text-[13px] font-semibold text-gray-800">{hire.name} <span className="text-gray-400 font-normal">· {hire.role}</span></p>
                     <p className="text-[11px] text-gray-400">Hired {hire.year} · Grade {hire.level}</p>
                   </div>
                   <p className="text-[13px] font-bold text-indigo-700">{hire.salary}</p>
                 </div>
-              )}
+                )}
             </div>
               </div>
-            )}
+            }
           </div>
         </div>
 
