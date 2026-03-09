@@ -329,6 +329,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [isSourcingExpanded, setIsSourcingExpanded] = useState(false);
   const [sourcingInput, setSourcingInput] = useState("");
   const [sourcingTab, setSourcingTab] = useState("ai");
+  const [showInsightsScreen, setShowInsightsScreen] = useState(true);
   const [jobTitles, setJobTitles] = useState(["Product Designer", "UX Designer"]);
   const [companies, setCompanies] = useState(["Google", "Meta"]);
   const [industries, setIndustries] = useState(["Technology", "SaaS"]);
