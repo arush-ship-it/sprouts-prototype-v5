@@ -48,27 +48,27 @@ const JOB_SUGGESTIONS = {
 
 // ─── Quick Action Slideshow ───────────────────────────────────────────────────
 const QUICK_ACTIONS = [
-  {
-    key: "upload",
-    label: "Upload Job Description",
-    desc: "Import from PDF, DOC, or TXT",
-    bg: "bg-violet-50",
-    iconBg: "bg-violet-100",
-    iconColor: "text-violet-400",
-    border: "border-violet-100",
-    emoji: "📄",
-  },
-  {
-    key: "drafts",
-    label: "Use Saved Drafts",
-    desc: "Continue from a previous draft",
-    bg: "bg-sky-50",
-    iconBg: "bg-sky-100",
-    iconColor: "text-sky-400",
-    border: "border-sky-100",
-    emoji: "📝",
-  },
-];
+{
+  key: "upload",
+  label: "Upload Job Description",
+  desc: "Import from PDF, DOC, or TXT",
+  bg: "bg-violet-50",
+  iconBg: "bg-violet-100",
+  iconColor: "text-violet-400",
+  border: "border-violet-100",
+  emoji: "📄"
+},
+{
+  key: "drafts",
+  label: "Use Saved Drafts",
+  desc: "Continue from a previous draft",
+  bg: "bg-sky-50",
+  iconBg: "bg-sky-100",
+  iconColor: "text-sky-400",
+  border: "border-sky-100",
+  emoji: "📝"
+}];
+
 
 function QuickActionSlideshow({ onStart }) {
   const [index, setIndex] = React.useState(0);
@@ -90,12 +90,12 @@ function QuickActionSlideshow({ onStart }) {
         type="file"
         accept=".pdf,.doc,.docx,.txt"
         className="hidden"
-        onChange={(e) => { if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`); }}
-      />
+        onChange={(e) => {if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`);}} />
+
       <div
         onClick={handleAction}
-        className={`cursor-pointer rounded-2xl border ${card.border} ${card.bg} px-5 py-5 flex flex-col items-center text-center gap-3 transition-all hover:shadow-sm`}
-      >
+        className={`cursor-pointer rounded-2xl border ${card.border} ${card.bg} px-5 py-5 flex flex-col items-center text-center gap-3 transition-all hover:shadow-sm`}>
+
         <div className={`w-12 h-12 rounded-2xl ${card.iconBg} flex items-center justify-center text-2xl`}>
           {card.emoji}
         </div>
@@ -106,16 +106,16 @@ function QuickActionSlideshow({ onStart }) {
       </div>
       {/* Dots */}
       <div className="flex items-center justify-center gap-2 mt-3">
-        {QUICK_ACTIONS.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            className={`rounded-full transition-all ${i === index ? `w-4 h-2 ${i === 0 ? "bg-violet-300" : "bg-sky-300"}` : "w-2 h-2 bg-gray-200 hover:bg-gray-300"}`}
-          />
-        ))}
+        {QUICK_ACTIONS.map((_, i) =>
+        <button
+          key={i}
+          onClick={() => setIndex(i)}
+          className={`rounded-full transition-all ${i === index ? `w-4 h-2 ${i === 0 ? "bg-violet-300" : "bg-sky-300"}` : "w-2 h-2 bg-gray-200 hover:bg-gray-300"}`} />
+
+        )}
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
@@ -211,11 +211,11 @@ function DefaultScreen({ onStart }) {
         </div>
 
         {/* Upload JD Button */}
-        <label className="cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl border border-dashed border-gray-300 bg-white hover:border-indigo-400 hover:bg-indigo-50 transition-all text-[13px] text-gray-500 hover:text-indigo-600 font-medium mt-8">
-          <input type="file" accept=".pdf,.doc,.docx,.txt" className="hidden" onChange={(e) => {if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`);}} />
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12V4m0 0l-3 3m3-3l3 3" /></svg>
-          Upload Job Description
-        </label>
+        
+
+
+
+
       </div>
     </div>);
 
