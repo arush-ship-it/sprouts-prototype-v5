@@ -66,9 +66,39 @@ function DefaultScreen({ onStart }) {
             <span className="text-[14px] font-semibold text-gray-900">Sprouts Generate</span>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto px-4 py-5">
+        <div className="flex-1 overflow-y-auto px-4 py-5 space-y-3">
           <div className="bg-gray-100 rounded-2xl px-4 py-3 text-[13px] text-gray-700 max-w-[90%]">
             Hi! I'll help you create a job posting.<br />What position are you hiring for?
+          </div>
+
+          {/* Quick action cards */}
+          <div className="pt-2 space-y-2">
+            <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wide px-1">Or get started with</p>
+
+            {/* Upload JD */}
+            <label className="cursor-pointer flex items-center gap-3 px-4 py-3 rounded-2xl border border-dashed border-gray-200 bg-gray-50 hover:border-indigo-400 hover:bg-indigo-50 transition-all group">
+              <input type="file" accept=".pdf,.doc,.docx,.txt" className="hidden" onChange={(e) => { if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`); }} />
+              <div className="w-8 h-8 rounded-xl bg-white border border-gray-200 group-hover:border-indigo-300 flex items-center justify-center shrink-0 transition-all">
+                <Upload className="w-4 h-4 text-gray-400 group-hover:text-indigo-500" />
+              </div>
+              <div>
+                <p className="text-[13px] font-medium text-gray-700 group-hover:text-indigo-700">Upload Job Description</p>
+                <p className="text-[11px] text-gray-400">PDF, DOC, DOCX or TXT</p>
+              </div>
+            </label>
+
+            {/* Saved Drafts */}
+            <button
+              onClick={() => onStart("Load from saved drafts")}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 hover:border-indigo-400 hover:bg-indigo-50 transition-all group text-left">
+              <div className="w-8 h-8 rounded-xl bg-white border border-gray-200 group-hover:border-indigo-300 flex items-center justify-center shrink-0 transition-all">
+                <FileText className="w-4 h-4 text-gray-400 group-hover:text-indigo-500" />
+              </div>
+              <div>
+                <p className="text-[13px] font-medium text-gray-700 group-hover:text-indigo-700">Use Saved Drafts</p>
+                <p className="text-[11px] text-gray-400">Continue from a previous draft</p>
+              </div>
+            </button>
           </div>
         </div>
         <div className="p-3 border-t border-gray-100 shrink-0">
