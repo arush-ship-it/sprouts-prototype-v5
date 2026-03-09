@@ -49,6 +49,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [universities, setUniversities] = useState(["Stanford", "MIT"]);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [sourcedCandidates, setSourcedCandidates] = useState([]);
+  const [selectedSourced, setSelectedSourced] = useState(new Set());
 
   const isPipeline = activeTab === "pipeline";
 
