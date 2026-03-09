@@ -417,14 +417,14 @@ function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
                     {candidate.score}
                   </Badge>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-3">
                   <div className="flex gap-2">
                     <Button
                     size="sm"
                     variant={
                     decisions[candidate.id] === "approve" ? "default" : "outline"
                     }
-                    className="h-7 text-[11px] px-2"
+                    className="h-8 text-[11px] px-3 font-medium transition-all"
                     onClick={() => onDecision(candidate.id, "approve")}>
 
                       Approve
@@ -434,7 +434,7 @@ function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
                     variant={
                     decisions[candidate.id] === "reject" ? "destructive" : "outline"
                     }
-                    className="h-7 text-[11px] px-2"
+                    className="h-8 text-[11px] px-3 font-medium transition-all"
                     onClick={() => onDecision(candidate.id, "reject")}>
 
                       Reject
