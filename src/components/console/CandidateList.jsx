@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
 import CandidateDetailsDrawer from "./CandidateDetailsDrawer";
+import CandidateFitInsights from "./CandidateFitInsights";
 import { Search, SlidersHorizontal, Sparkles, ChevronDown, ChevronUp, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
