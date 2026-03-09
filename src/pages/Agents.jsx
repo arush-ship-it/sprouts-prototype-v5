@@ -122,8 +122,8 @@ const allAgents = [
   activityLog: [
   { time: "3 hours ago", action: "Analyzed Marcus Rivera's video", result: "Good communication" }]
 
-},
-];
+}];
+
 
 
 // Agent Card Component
@@ -254,8 +254,8 @@ export default function Agents() {
       <div className="bg-[#F2F3F5] pt-8 pb-6 px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-[22px] font-semibold text-gray-900">Sprouts Intelligence Layer</h1>
-            <p className="text-[13px] text-gray-500 mt-1">Structured Intelligence for Modern Workflows</p>
+            <h1 className="text-[22px] font-semibold text-gray-900">Stage Embedded Agents</h1>
+            <p className="text-[13px] text-gray-500 mt-1">Dedicated intelligence embedded within every pipeline stage</p>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
