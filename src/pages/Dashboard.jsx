@@ -169,7 +169,7 @@ export default function Dashboard() {
 
           {!isChatMinimized &&
           <>
-              <div className="pt-5 pr-5 pb-5 pl-5 flex-1 overflow-y-auto min-h-0 space-y-3">
+              <div className="pt-4 pr-4 pb-4 pl-4 flex-1 overflow-y-auto min-h-0 space-y-3">
                 {chatMessages.map((msg, idx) =>
               <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                     <div className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`}>
