@@ -380,10 +380,10 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 // ─── Step 3: Confirm Details ──────────────────────────────────────────────────
 function ConfirmDetailsScreen({ onBack, onNext }) {
   const [jobDetails, setJobDetails] = useState({
-    companyName: "", jobTitle: "", department: "",
-    internalJobTitle: "", jobType: "Full-time", workplaceType: "On-site",
-    location: "", salary: "", jobGrade: "", headcount: "1",
-    benefits: ""
+    companyName: "Sprouts AI", jobTitle: "Senior Product Designer", department: "Product",
+    internalJobTitle: "SPD-2024", jobType: "Full-time", workplaceType: "Hybrid",
+    location: "San Francisco, CA", salary: "$120k – $160k", jobGrade: "L5", headcount: "2",
+    benefits: "Health Insurance,401k,Flexible Hours,Learning Budget"
   });
 
   const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
