@@ -374,18 +374,18 @@ function ReviewModeContent({
       </motion.div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-        <Button variant="outline" onClick={onPrevious} disabled={index === 0}>
-          <ChevronLeft className="w-4 h-4 mr-1" />
+      <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+        <Button variant="outline" onClick={onPrevious} disabled={index === 0} className="h-10">
+          <ChevronLeft className="w-4 h-4 mr-2" />
           Previous
         </Button>
         {index < total - 1 ?
-        <Button onClick={onNext}>
+        <Button onClick={onNext} className="h-10 font-semibold">
             Next
-            <ChevronRight className="w-4 h-4 ml-1" />
+            <ChevronRight className="w-4 h-4 ml-2" />
           </Button> :
 
-        <Button onClick={onComplete}>Complete Review</Button>
+        <Button onClick={onComplete} className="h-10 font-semibold bg-gradient-to-r from-emerald-600 to-emerald-600 hover:from-emerald-700 hover:to-emerald-700">Complete Review</Button>
         }
       </div>
     </div>);
