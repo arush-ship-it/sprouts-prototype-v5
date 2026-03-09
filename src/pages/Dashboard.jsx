@@ -533,7 +533,8 @@ export default function Dashboard() {
 
           </div>
 
-          {/* Data Visualizations */}
+          {/* Data Visualizations - scrollable section */}
+          <div className="flex-1 overflow-y-auto px-8 pb-6">
           <div className="grid grid-cols-3 gap-5 mb-8">
             {/* Pipeline Funnel */}
             <motion.div
