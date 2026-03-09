@@ -338,6 +338,27 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             )}
           </ul>
           {enhancing && <p className="text-[12px] text-indigo-500 mt-3 animate-pulse flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Enhancing with AI…</p>}
+
+          {/* Section Hints */}
+          <div className="mt-6 pt-5 border-t border-dashed border-gray-200">
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-3">Add more sections</p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { label: "Talk About the Company", icon: "🏢" },
+                { label: "Mention Benefits", icon: "🎁" },
+                { label: "Growth Opportunities", icon: "📈" },
+                { label: "Team Culture", icon: "🤝" },
+                { label: "What We Value", icon: "⭐" },
+              ].map(({ label, icon }) => (
+                <button
+                  key={label}
+                  onClick={() => setJd({ ...jd, description: jd.description + `\n\n${label}\n` })}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                  <span>{icon}</span> {label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
       </div>
