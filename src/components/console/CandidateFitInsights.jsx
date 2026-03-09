@@ -37,7 +37,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
     <div className="px-64 space-y-4">
       {/* Stats Row */}
       <div className="flex gap-3">
-        <div className="bg-[#ffffff] p-4 rounded-xl flex-1 border border-indigo-100 flex items-center gap-3">
+        <div className="bg-slate-50 p-4 rounded-xl flex-1 border border-indigo-100 flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center shrink-0">
             <Users className="w-4 h-4 text-indigo-600" />
           </div>
@@ -46,7 +46,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
             <p className="text-[11px] text-indigo-500 font-medium">Candidates Applied</p>
           </div>
         </div>
-        <div className="bg-[#ffffff] p-4 rounded-xl flex-1 border border-violet-100 flex items-center gap-3">
+        <div className="bg-slate-50 p-4 rounded-xl flex-1 border border-violet-100 flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
             <TrendingUp className="w-4 h-4 text-violet-600" />
           </div>
@@ -58,7 +58,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
       </div>
 
       {/* Chart */}
-      <div className="bg-white px-4 py-10 rounded-xl border border-gray-200">
+      <div className="bg-white px-4 py-20 rounded-xl border border-gray-200">
         <p className="text-[12px] font-semibold text-gray-500 mb-1 text-center">Analysed 301 Candidates</p>
         <ResponsiveContainer width="100%" height={160}>
           <BarChart data={matchData} barSize={36}>
