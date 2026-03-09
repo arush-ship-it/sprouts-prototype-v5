@@ -265,16 +265,19 @@ function ReviewModeContent({
   return (
     <div className="space-y-4">
       {/* Progress Bar */}
-      <div className="flex gap-1">
-        {Array.from({ length: total }).map((_, idx) =>
-        <div
-          key={idx}
-          className={`h-1 flex-1 rounded-full ${
-          idx <= index ? "bg-indigo-600" : "bg-gray-200"}`
-          } />
+       <div className="flex gap-1.5">
+         {Array.from({ length: total }).map((_, idx) =>
+         <motion.div
+           key={idx}
+           initial={{ scaleX: 0 }}
+           animate={{ scaleX: 1 }}
+           transition={{ delay: idx * 0.05 }}
+           className={`h-1.5 flex-1 rounded-full origin-left transition-colors duration-300 ${
+           idx <= index ? "bg-indigo-600" : "bg-gray-200"}`
+           } />
 
-        )}
-      </div>
+         )}
+       </div>
 
       {/* Candidate Card */}
       <motion.div 
