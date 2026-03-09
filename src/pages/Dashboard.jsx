@@ -864,9 +864,8 @@ export default function Dashboard() {
     </div>);
 }
 
-/* placeholder to prevent unreachable content below */
-function _unused() { return (
-          <>{/* Key Metrics Grid */}
+/* removed */
+function _unused() { return (<>
           
 
 
