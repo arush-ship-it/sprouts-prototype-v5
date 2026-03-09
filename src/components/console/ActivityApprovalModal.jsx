@@ -345,28 +345,28 @@ function ReviewModeContent({
 
         {/* Decision */}
         <div>
-          <p className="text-[12px] font-bold text-gray-900 mb-4 uppercase tracking-wide">Your Decision</p>
-          <div className="flex gap-3">
+          <p className="text-[11px] font-bold text-gray-900 mb-3 uppercase tracking-wide">Decision</p>
+          <div className="flex gap-2">
             <Button
               onClick={() => onDecision(candidate.id, "approve")}
-              className={`flex-1 h-12 font-semibold transition-all duration-200 ${
+              className={`flex-1 h-9 font-medium text-[12px] transition-all duration-200 ${
               decisions[candidate.id] === "approve" ?
               "bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm" :
               "bg-gray-100 text-gray-700 hover:bg-emerald-50 border border-gray-200"}`
               }>
 
-              <ThumbsUp className="w-4 h-4 mr-2" />
+              <ThumbsUp className="w-3 h-3 mr-1.5" />
               Approve
             </Button>
             <Button
               onClick={() => onDecision(candidate.id, "reject")}
-              className={`flex-1 h-12 font-semibold transition-all duration-200 ${
+              className={`flex-1 h-9 font-medium text-[12px] transition-all duration-200 ${
               decisions[candidate.id] === "reject" ?
               "bg-red-600 hover:bg-red-700 text-white shadow-sm" :
               "bg-gray-100 text-gray-700 hover:bg-red-50 border border-gray-200"}`
               }>
 
-              <ThumbsDown className="w-4 h-4 mr-2" />
+              <ThumbsDown className="w-3 h-3 mr-1.5" />
               Reject
             </Button>
           </div>
