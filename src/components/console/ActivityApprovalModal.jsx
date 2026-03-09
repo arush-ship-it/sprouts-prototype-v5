@@ -326,22 +326,22 @@ function ReviewModeContent({
           </div>
         </div>
 
-        <div className="mb-6 pb-6 border-b border-gray-100">
-          <h4 className="text-[12px] font-bold text-gray-900 mb-3 uppercase tracking-wide">Skills & Expertise</h4>
-          <div className="flex flex-wrap gap-2">
-            {candidate.skills.map((skill, idx) =>
-            <Badge key={idx} className="text-[10px] font-medium bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 transition-colors">
-                {skill}
-              </Badge>
-            )}
-          </div>
-        </div>
+        <div className="mb-4 pb-4 border-b border-gray-100">
+           <h4 className="text-[11px] font-bold text-gray-900 mb-2 uppercase tracking-wide">Skills</h4>
+           <div className="flex flex-wrap gap-1.5">
+             {candidate.skills.map((skill, idx) =>
+             <Badge key={idx} className="text-[9px] font-medium bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 transition-colors">
+                 {skill}
+               </Badge>
+             )}
+           </div>
+         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-indigo-50/50 border border-indigo-100/50 mb-6">
-          <p className="text-[12px] text-gray-700 leading-relaxed">
-            <strong className="text-indigo-700 font-semibold">AI Reasoning:</strong> <span className="text-gray-600">{candidate.reason}</span>
-          </p>
-        </div>
+         <div className="p-3 rounded-lg bg-gradient-to-r from-indigo-50 to-indigo-50/50 border border-indigo-100/50 mb-4">
+           <p className="text-[11px] text-gray-700 leading-relaxed">
+             <strong className="text-indigo-700 font-semibold">AI:</strong> <span className="text-gray-600">{candidate.reason}</span>
+           </p>
+         </div>
 
         {/* Decision */}
         <div>
