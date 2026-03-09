@@ -461,6 +461,65 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               <Input value={jobDetails.location} onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })} placeholder="e.g. San Francisco, CA" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-[10px] flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
             </div>
           </div>
+
+          {/* Past Roles Context */}
+          <div className="bg-[#ffffff] mt-5 pt-4 pr-5 pl-5 pb-4 rounded-2xl border-t border-gray-100">
+            <button
+              onClick={() => setRolesExpanded((v) => !v)}
+              className="flex items-center gap-2 w-full text-left">
+              <Building2 className="w-4 h-4 text-indigo-500 shrink-0" />
+              <p className="text-[13px] font-semibold text-gray-800 flex-1">Past Roles at Your Company</p>
+              <span className="text-[10px] font-semibold bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full border border-indigo-200 mr-2">AI Insight</span>
+              {rolesExpanded ?
+              <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" /> :
+              <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
+            </button>
+
+            {/* Collapsed summary */}
+            {!rolesExpanded &&
+            <div className="mt-3 flex items-center gap-3">
+              <div className="flex gap-2">
+                {[{ label: "Hybrid", pct: "50%" }, { label: "Remote", pct: "30%" }, { label: "On-site", pct: "20%" }].map((t) =>
+                <span key={t.label} className="text-[11px] bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full font-medium">{t.label} · {t.pct}</span>
+                )}
+              </div>
+              <span className="text-[11px] text-indigo-600 font-medium shrink-0 ml-auto">3 similar roles</span>
+            </div>
+            }
+
+            {rolesExpanded &&
+            <div className="mt-3">
+              <p className="text-[11px] text-gray-400 mb-4">Work arrangement history for similar roles at your company</p>
+              <div className="grid grid-cols-3 gap-3 mb-5">
+                {[
+                  { label: "Hybrid", count: 3, pct: "50%", color: "bg-indigo-50 text-indigo-700" },
+                  { label: "Remote", count: 2, pct: "30%", color: "bg-emerald-50 text-emerald-700" },
+                  { label: "On-site", count: 1, pct: "20%", color: "bg-amber-50 text-amber-700" }].map((t) =>
+                <div key={t.label} className={`${t.color} rounded-xl px-3 py-3 text-center`}>
+                  <p className="text-[11px] opacity-70 mb-1">{t.label}</p>
+                  <p className="text-[16px] font-bold">{t.pct}</p>
+                  <p className="text-[10px] opacity-60">{t.count} roles</p>
+                </div>
+                )}
+              </div>
+              <p className="text-[12px] font-semibold text-gray-700 mb-2">Past similar roles</p>
+              <div className="space-y-2">
+                {[
+                  { name: "Alex Chen", role: "Senior Product Designer", year: "2023", arrangement: "Hybrid", location: "San Francisco, CA" },
+                  { name: "Priya Sharma", role: "Product Designer", year: "2022", arrangement: "Remote", location: "Remote" },
+                  { name: "James Liu", role: "UX Designer", year: "2021", arrangement: "On-site", location: "New York, NY" }].map((hire) =>
+                <div key={hire.name} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-800">{hire.name} <span className="text-gray-400 font-normal">· {hire.role}</span></p>
+                    <p className="text-[11px] text-gray-400">Hired {hire.year} · {hire.location}</p>
+                  </div>
+                  <span className="text-[11px] font-semibold bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full">{hire.arrangement}</span>
+                </div>
+                )}
+              </div>
+            </div>
+            }
+          </div>
         </div>
 
         {/* Compensation */}
