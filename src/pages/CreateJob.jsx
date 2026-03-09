@@ -46,6 +46,78 @@ const JOB_SUGGESTIONS = {
   Design: ["Senior Product Designer", "UX Designer", "Junior UI Designer"]
 };
 
+// ─── Quick Action Slideshow ───────────────────────────────────────────────────
+const QUICK_ACTIONS = [
+  {
+    key: "upload",
+    label: "Upload Job Description",
+    desc: "Import from PDF, DOC, or TXT",
+    bg: "bg-violet-50",
+    iconBg: "bg-violet-100",
+    iconColor: "text-violet-400",
+    border: "border-violet-100",
+    emoji: "📄",
+  },
+  {
+    key: "drafts",
+    label: "Use Saved Drafts",
+    desc: "Continue from a previous draft",
+    bg: "bg-sky-50",
+    iconBg: "bg-sky-100",
+    iconColor: "text-sky-400",
+    border: "border-sky-100",
+    emoji: "📝",
+  },
+];
+
+function QuickActionSlideshow({ onStart }) {
+  const [index, setIndex] = React.useState(0);
+  const card = QUICK_ACTIONS[index];
+
+  const handleAction = () => {
+    if (card.key === "upload") {
+      document.getElementById("quick-upload-input").click();
+    } else {
+      onStart("Load from saved drafts");
+    }
+  };
+
+  return (
+    <div className="pt-3">
+      <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide px-1 mb-2">Or get started with</p>
+      <input
+        id="quick-upload-input"
+        type="file"
+        accept=".pdf,.doc,.docx,.txt"
+        className="hidden"
+        onChange={(e) => { if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`); }}
+      />
+      <div
+        onClick={handleAction}
+        className={`cursor-pointer rounded-2xl border ${card.border} ${card.bg} px-5 py-5 flex flex-col items-center text-center gap-3 transition-all hover:shadow-sm`}
+      >
+        <div className={`w-12 h-12 rounded-2xl ${card.iconBg} flex items-center justify-center text-2xl`}>
+          {card.emoji}
+        </div>
+        <div>
+          <p className="text-[13px] font-semibold text-gray-700">{card.label}</p>
+          <p className="text-[11px] text-gray-400 mt-0.5">{card.desc}</p>
+        </div>
+      </div>
+      {/* Dots */}
+      <div className="flex items-center justify-center gap-2 mt-3">
+        {QUICK_ACTIONS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`rounded-full transition-all ${i === index ? `w-4 h-2 ${i === 0 ? "bg-violet-300" : "bg-sky-300"}` : "w-2 h-2 bg-gray-200 hover:bg-gray-300"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
 function DefaultScreen({ onStart }) {
   const [prompt, setPrompt] = useState("");
