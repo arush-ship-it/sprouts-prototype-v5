@@ -111,6 +111,13 @@ export default function JobDetails() {
   const [editedJob, setEditedJob] = useState({ ...jobData });
   const [isEditPersonaOpen, setIsEditPersonaOpen] = useState(false);
   const [editedPersona, setEditedPersona] = useState({ ...idealPersona });
+  const [unpublishedPlatforms, setUnpublishedPlatforms] = useState([]);
+
+  const toggleUnpublish = (platform) => {
+    setUnpublishedPlatforms((prev) =>
+      prev.includes(platform) ? prev.filter((p) => p !== platform) : [...prev, platform]
+    );
+  };
 
   const handleSave = () => {
     setIsEditDialogOpen(false);
