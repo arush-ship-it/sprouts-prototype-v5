@@ -465,18 +465,21 @@ export default function Dashboard() {
                 <div className="flex flex-col gap-1.5">
                     <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">Switch context</p>
                     <div className="flex flex-wrap gap-1.5">
-                      {CONTEXT_TOPICS.map((topic) =>
-                      <button
-                        key={topic.id}
-                        onClick={() => handleSelectContext(topic)}
-                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
-                        activeContext?.id === topic.id
-                          ? "bg-indigo-600 text-white border-indigo-600"
-                          : "bg-gray-50 text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-600"
-                        }`}>
-                          <span>{topic.icon}</span> {topic.label}
-                        </button>
-                      )}
+                      {CONTEXT_TOPICS.map((topic) => {
+                        const { Icon: TIcon } = topic;
+                        return (
+                          <button
+                            key={topic.id}
+                            onClick={() => handleSelectContext(topic)}
+                            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
+                            activeContext?.id === topic.id
+                              ? "bg-indigo-600 text-white border-indigo-600"
+                              : `${topic.bg} ${topic.iconColor} ${topic.border} hover:opacity-80`
+                            }`}>
+                            <TIcon className="w-3 h-3" /> {topic.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 }
