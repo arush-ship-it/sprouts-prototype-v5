@@ -37,7 +37,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
     <div className="px-64 space-y-4">
       {/* Stats Row */}
       <div className="flex gap-3">
-        <div className="bg-slate-50 p-4 rounded-xl flex-1 border border-indigo-100 flex items-center gap-3">
+        <div className="bg-slate-50 p-4 rounded-xl flex-1 flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center shrink-0">
             <Users className="w-4 h-4 text-indigo-600" />
           </div>
