@@ -1108,7 +1108,7 @@ function PublishScreen({ onBack, onPublish }) {
 }
 
 // ─── Step 5: Confirmation ─────────────────────────────────────────────────────
-function ConfirmationScreen({ jobTitle, onGoToJobs }) {
+function ConfirmationScreen({ jobTitle, generatedJob, onGoToJobs }) {
   return (
     <div className="bg-[#f2f2f2] px-8 text-center flex flex-col items-center justify-center h-full">
       <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-5">
