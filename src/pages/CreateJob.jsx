@@ -231,6 +231,38 @@ function EditableListItem({ value, onChange, onDelete, placeholder }) {
 
 }
 
+const EXTRA_SECTIONS_CONFIG = [
+  { label: "Talk About the Company", icon: "🏢", key: "company", defaultItems: [
+    "We are a fast-growing company with a mission to [describe mission].",
+    "Our team is made up of passionate individuals who [describe team culture].",
+    "We believe in [core values] and are committed to building a product that [impact]."
+  ]},
+  { label: "Mention Benefits", icon: "🎁", key: "benefits_section", defaultItems: [
+    "Competitive salary and equity package",
+    "Comprehensive health, dental, and vision insurance",
+    "Flexible work hours and remote-friendly environment",
+    "Learning & development budget",
+    "Generous PTO and paid holidays"
+  ]},
+  { label: "Growth Opportunities", icon: "📈", key: "growth", defaultItems: [
+    "Access to mentorship and regular performance reviews",
+    "Clear career progression path with internal promotions",
+    "Dedicated learning budget to support your growth"
+  ]},
+  { label: "Team Culture", icon: "🤝", key: "culture", defaultItems: [
+    "Collaboration, transparency, and mutual respect",
+    "Inclusive environment where every voice matters",
+    "We celebrate wins together and support each other through challenges"
+  ]},
+  { label: "What We Value", icon: "⭐", key: "values", defaultItems: [
+    "Ownership & accountability",
+    "Curiosity and continuous learning",
+    "Collaboration over competition",
+    "Honest and open communication",
+    "Customer-first mindset"
+  ]},
+];
+
 function ReviewJDScreen({ job, onBack, onNext }) {
   const [jd, setJd] = useState(job);
   const [jobDetails, setJobDetails] = useState({
@@ -242,7 +274,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   const [toolbar, setToolbar] = useState(null); // { x, y, text, field }
   const [enhancing, setEnhancing] = useState(false);
-  const [addedSections, setAddedSections] = useState([]);
+  const [addedSections, setAddedSections] = useState([]); // array of { key, label, icon, items }
 
   const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
   const toggleBenefit = (b) => {
