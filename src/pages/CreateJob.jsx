@@ -345,22 +345,22 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-3">Add more sections</p>
             <div className="flex flex-wrap gap-2">
               {[
-                { label: "Talk About the Company", icon: "🏢", content: "\n\nAbout the Company\nWe are a fast-growing company with a mission to [describe mission]. Our team is made up of passionate individuals who [describe team culture]. We believe in [core values] and are committed to building a product that [impact]." },
-                { label: "Mention Benefits", icon: "🎁", content: "\n\nBenefits & Perks\n• Competitive salary and equity package\n• Comprehensive health, dental, and vision insurance\n• Flexible work hours and remote-friendly environment\n• Learning & development budget\n• Generous PTO and paid holidays" },
-                { label: "Growth Opportunities", icon: "📈", content: "\n\nGrowth Opportunities\nWe invest in our people. You'll have access to mentorship, regular performance reviews, and a clear career progression path. We encourage internal promotions and provide a dedicated learning budget to support your growth." },
-                { label: "Team Culture", icon: "🤝", content: "\n\nTeam Culture\nOur team thrives on collaboration, transparency, and mutual respect. We celebrate wins together, support each other through challenges, and foster an inclusive environment where every voice matters." },
-                { label: "What We Value", icon: "⭐", content: "\n\nWhat We Value\n• Ownership & accountability\n• Curiosity and continuous learning\n• Collaboration over competition\n• Honest and open communication\n• Customer-first mindset" },
-              ].filter(({ label }) => !addedSections.includes(label)).map(({ label, icon, content }) => (
-                <button
-                  key={label}
-                  onClick={() => {
-                    setJd((prev) => ({ ...prev, description: prev.description + content }));
-                    setAddedSections((prev) => [...prev, label]);
-                  }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+              { label: "Talk About the Company", icon: "🏢", content: "\n\nAbout the Company\nWe are a fast-growing company with a mission to [describe mission]. Our team is made up of passionate individuals who [describe team culture]. We believe in [core values] and are committed to building a product that [impact]." },
+              { label: "Mention Benefits", icon: "🎁", content: "\n\nBenefits & Perks\n• Competitive salary and equity package\n• Comprehensive health, dental, and vision insurance\n• Flexible work hours and remote-friendly environment\n• Learning & development budget\n• Generous PTO and paid holidays" },
+              { label: "Growth Opportunities", icon: "📈", content: "\n\nGrowth Opportunities\nWe invest in our people. You'll have access to mentorship, regular performance reviews, and a clear career progression path. We encourage internal promotions and provide a dedicated learning budget to support your growth." },
+              { label: "Team Culture", icon: "🤝", content: "\n\nTeam Culture\nOur team thrives on collaboration, transparency, and mutual respect. We celebrate wins together, support each other through challenges, and foster an inclusive environment where every voice matters." },
+              { label: "What We Value", icon: "⭐", content: "\n\nWhat We Value\n• Ownership & accountability\n• Curiosity and continuous learning\n• Collaboration over competition\n• Honest and open communication\n• Customer-first mindset" }].
+              filter(({ label }) => !addedSections.includes(label)).map(({ label, icon, content }) =>
+              <button
+                key={label}
+                onClick={() => {
+                  setJd((prev) => ({ ...prev, description: prev.description + content }));
+                  setAddedSections((prev) => [...prev, label]);
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                   <span>{icon}</span> {label}
                 </button>
-              ))}
+              )}
             </div>
           </div>
         </div>
@@ -498,7 +498,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           </div>
 
           {/* Salary Intelligence */}
-          <div className="mt-5 pt-5 border-t border-gray-100">
+          <div className="bg-[#ffffff] mt-5 pt-5 pr-5 pl-5 rounded-2xl border-t border-gray-100">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="w-4 h-4 text-amber-600" />
               <p className="text-[13px] font-semibold text-gray-800">Salary Intelligence</p>
@@ -545,35 +545,35 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
             <p className="text-[12px] font-semibold text-gray-700 mb-2">Similar roles currently hiring</p>
             <div className="space-y-2 mb-5">
               {[
-                { company: "Figma", title: "Senior Product Designer", range: "$130k – $165k", location: "San Francisco, CA" },
-                { company: "Notion", title: "Product Designer (Senior)", range: "$125k – $155k", location: "Remote" },
-                { company: "Linear", title: "Sr. UX Designer", range: "$115k – $150k", location: "Remote" },
-              ].map((job) => (
-                <div key={job.company} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+              { company: "Figma", title: "Senior Product Designer", range: "$130k – $165k", location: "San Francisco, CA" },
+              { company: "Notion", title: "Product Designer (Senior)", range: "$125k – $155k", location: "Remote" },
+              { company: "Linear", title: "Sr. UX Designer", range: "$115k – $150k", location: "Remote" }].
+              map((job) =>
+              <div key={job.company} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
                   <div>
                     <p className="text-[13px] font-semibold text-gray-800">{job.company} <span className="font-normal text-gray-500">· {job.title}</span></p>
                     <p className="text-[11px] text-gray-400">{job.location}</p>
                   </div>
                   <p className="text-[12px] font-bold text-gray-800">{job.range}</p>
                 </div>
-              ))}
+              )}
             </div>
 
             {/* Past internal hires */}
             <p className="text-[12px] font-semibold text-gray-700 mb-2">Past hires at your company</p>
             <div className="space-y-2">
               {[
-                { name: "Alex Chen", role: "Senior Product Designer", year: "2023", salary: "$128k", level: "L5" },
-                { name: "Priya Sharma", role: "Product Designer", year: "2022", salary: "$112k", level: "L4" },
-              ].map((hire) => (
-                <div key={hire.name} className="flex items-center justify-between bg-indigo-50 rounded-xl px-4 py-3">
+              { name: "Alex Chen", role: "Senior Product Designer", year: "2023", salary: "$128k", level: "L5" },
+              { name: "Priya Sharma", role: "Product Designer", year: "2022", salary: "$112k", level: "L4" }].
+              map((hire) =>
+              <div key={hire.name} className="flex items-center justify-between bg-indigo-50 rounded-xl px-4 py-3">
                   <div>
                     <p className="text-[13px] font-semibold text-gray-800">{hire.name} <span className="text-gray-400 font-normal">· {hire.role}</span></p>
                     <p className="text-[11px] text-gray-400">Hired {hire.year} · Grade {hire.level}</p>
                   </div>
                   <p className="text-[13px] font-bold text-indigo-700">{hire.salary}</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
