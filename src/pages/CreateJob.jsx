@@ -345,15 +345,18 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-3">Add more sections</p>
             <div className="flex flex-wrap gap-2">
               {[
-                { label: "Talk About the Company", icon: "🏢" },
-                { label: "Mention Benefits", icon: "🎁" },
-                { label: "Growth Opportunities", icon: "📈" },
-                { label: "Team Culture", icon: "🤝" },
-                { label: "What We Value", icon: "⭐" },
-              ].map(({ label, icon }) => (
+                { label: "Talk About the Company", icon: "🏢", content: "\n\nAbout the Company\nWe are a fast-growing company with a mission to [describe mission]. Our team is made up of passionate individuals who [describe team culture]. We believe in [core values] and are committed to building a product that [impact]." },
+                { label: "Mention Benefits", icon: "🎁", content: "\n\nBenefits & Perks\n• Competitive salary and equity package\n• Comprehensive health, dental, and vision insurance\n• Flexible work hours and remote-friendly environment\n• Learning & development budget\n• Generous PTO and paid holidays" },
+                { label: "Growth Opportunities", icon: "📈", content: "\n\nGrowth Opportunities\nWe invest in our people. You'll have access to mentorship, regular performance reviews, and a clear career progression path. We encourage internal promotions and provide a dedicated learning budget to support your growth." },
+                { label: "Team Culture", icon: "🤝", content: "\n\nTeam Culture\nOur team thrives on collaboration, transparency, and mutual respect. We celebrate wins together, support each other through challenges, and foster an inclusive environment where every voice matters." },
+                { label: "What We Value", icon: "⭐", content: "\n\nWhat We Value\n• Ownership & accountability\n• Curiosity and continuous learning\n• Collaboration over competition\n• Honest and open communication\n• Customer-first mindset" },
+              ].filter(({ label }) => !addedSections.includes(label)).map(({ label, icon, content }) => (
                 <button
                   key={label}
-                  onClick={() => setJd({ ...jd, description: jd.description + `\n\n${label}\n` })}
+                  onClick={() => {
+                    setJd((prev) => ({ ...prev, description: prev.description + content }));
+                    setAddedSections((prev) => [...prev, label]);
+                  }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                   <span>{icon}</span> {label}
                 </button>
