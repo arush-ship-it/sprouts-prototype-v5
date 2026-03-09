@@ -263,11 +263,102 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 </div>
           }
             </div>
-        }
-        </div>
-      }
+            }
+            </div>
+            }
 
-      {/* Card/List/Table View */}
+            {/* Sourced Candidates Section */}
+            {sourcedCandidates.length > 0 && (
+             <div className="bg-white my-5 pt-5 pr-5 pb-5 pl-5 rounded-[20px] border border-gray-200">
+               <div className="flex items-center justify-between mb-4">
+                 <h2 className="text-[16px] font-semibold text-gray-900">Sourced Candidates</h2>
+                 <Button 
+                   variant="outline"
+                   size="sm"
+                   className="text-[12px]">
+                   + Apply All Prospects
+                 </Button>
+               </div>
+
+               {/* Match indicator */}
+               <div className="mb-4 p-3 bg-emerald-50 border border-emerald-100 rounded-lg flex items-center gap-2">
+                 <div className="w-5 h-5 rounded-full border-2 border-emerald-500 flex items-center justify-center">
+                   <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                 </div>
+                 <p className="text-[13px] text-emerald-700 font-medium">Sourcing match : {sourcedCandidates.length}00</p>
+               </div>
+
+               {/* Candidate cards */}
+               <div className="space-y-4">
+                 {sourcedCandidates.map((candidate) => (
+                   <div key={candidate.id} className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-all">
+                     <div className="flex items-start gap-3 mb-3">
+                       <input
+                         type="checkbox"
+                         checked={selectedSourced.has(candidate.id)}
+                         onChange={() => toggleSourcedCandidate(candidate.id)}
+                         className="w-4 h-4 mt-1 accent-indigo-600 cursor-pointer" />
+                       <img
+                         src={candidate.avatar}
+                         alt={candidate.name}
+                         className="w-12 h-12 rounded-full object-cover" />
+                       <div className="flex-1">
+                         <div className="flex items-center gap-2">
+                           <h3 className="text-[14px] font-semibold text-gray-900">{candidate.name}</h3>
+                           <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Strong {candidate.score}%</span>
+                         </div>
+                         <p className="text-[12px] text-gray-600">{candidate.title}</p>
+                       </div>
+                     </div>
+
+                     {/* Info row */}
+                     <div className="ml-7 mb-3 space-y-1">
+                       <p className="text-[12px] text-gray-600">
+                         {candidate.degree} @ {candidate.location}
+                       </p>
+                       <p className="text-[12px] text-gray-500">
+                         <span className="font-medium">Experience:</span> {candidate.experience} | <span className="font-medium">Skills:</span> {candidate.skillsMatch}
+                       </p>
+                       <p className="text-[12px] text-blue-600">
+                         {candidate.sequence}
+                       </p>
+                     </div>
+
+                     {/* Add as prospect button */}
+                     <div className="ml-7 flex justify-end">
+                       <button
+                         onClick={() => toggleSourcedCandidate(candidate.id)}
+                         className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${
+                           selectedSourced.has(candidate.id)
+                             ? "bg-indigo-50 border border-indigo-300 text-indigo-700"
+                             : "border border-gray-300 text-gray-700 hover:border-indigo-300"
+                         }`}>
+                         {selectedSourced.has(candidate.id) ? "✓ Selected" : "Add As Prospect"}
+                       </button>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+
+               {/* Action buttons */}
+               {selectedSourced.size > 0 && (
+                 <div className="mt-4 flex justify-end gap-3">
+                   <Button
+                     variant="outline"
+                     onClick={() => setSelectedSourced(new Set())}
+                     className="text-[12px]">
+                     Clear Selection
+                   </Button>
+                   <Button
+                     className="bg-indigo-600 hover:bg-indigo-700 text-white text-[12px]">
+                     Add {selectedSourced.size} to Prospects
+                   </Button>
+                 </div>
+               )}
+             </div>
+            )}
+
+            {/* Card/List/Table View */}
       {viewMode === "card" &&
       <div className="flex flex-col gap-3">
           {candidates.map((candidate) =>
