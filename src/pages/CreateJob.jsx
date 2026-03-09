@@ -379,6 +379,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
 // ─── Step 3: Confirm Details ──────────────────────────────────────────────────
 function ConfirmDetailsScreen({ onBack, onNext }) {
+  const [salaryExpanded, setSalaryExpanded] = useState(false);
   const [jobDetails, setJobDetails] = useState({
     companyName: "Sprouts AI", jobTitle: "Senior Product Designer", department: "Product",
     internalJobTitle: "SPD-2024", jobType: "Full-time", workplaceType: "Hybrid",
