@@ -257,22 +257,50 @@ export default function TalentPool() {
   );
   const [input, setInput] = useState("");
   const [isMaximized, setIsMaximized] = useState(false);
+  const [sourcedCandidates, setSourcedCandidates] = useState([]);
+  const [selectedSourced, setSelectedSourced] = useState(new Set());
 
   const handleSend = () => {
     if (!input.trim()) return;
     setMessages([...messages, { role: "user", content: input }]);
     setInput("");
-    // Simulate AI response
+    // Simulate AI response with sourced candidates
     setTimeout(() => {
       setMessages((prev) => [
       ...prev,
       {
         role: "assistant",
         content:
-        "I've found several candidates matching your criteria. Take a look at the profiles on the right!"
+        "I've found 5 candidates matching your criteria. Review them below and add the ones you want to your prospects!"
       }]
       );
+      // Simulate sourcing candidates
+      const sampled = candidates.sort(() => Math.random() - 0.5).slice(0, 5);
+      setSourcedCandidates(sampled);
+      setSelectedSourced(new Set());
     }, 500);
+  };
+
+  const toggleSourcedCandidate = (id) => {
+    const updated = new Set(selectedSourced);
+    if (updated.has(id)) {
+      updated.delete(id);
+    } else {
+      updated.add(id);
+    }
+    setSelectedSourced(updated);
+  };
+
+  const handleApplyAll = () => {
+    setSelectedSourced(new Set(sourcedCandidates.map(c => c.id)));
+  };
+
+  const handleAddAsProspect = () => {
+    if (selectedSourced.size > 0) {
+      alert(`Added ${selectedSourced.size} candidate(s) to prospects!`);
+      setSourcedCandidates([]);
+      setSelectedSourced(new Set());
+    }
   };
 
   return (
