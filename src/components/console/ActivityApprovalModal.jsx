@@ -456,60 +456,65 @@ function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
 function CardsModeContent({ candidates, decisions, onDecision, onComplete }) {
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
-        {candidates.map((candidate, idx) =>
-        <div key={idx} className="p-4 rounded-lg border border-gray-200 bg-white hover:shadow-sm transition-all">
-            <div className="flex items-start gap-3 mb-3">
-              <Avatar className="w-12 h-12">
-                <AvatarFallback className="bg-indigo-100 text-indigo-700 text-[14px] font-semibold">
-                  {candidate.name.
-                split(" ").
-                map((n) => n[0]).
-                join("")}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <h4 className="text-[13px] font-semibold text-gray-900 truncate">
-                  {candidate.name}
-                </h4>
-                <p className="text-[11px] text-gray-600 truncate">{candidate.title}</p>
-              </div>
-              <div className="text-right">
-                <div className="text-[16px] font-bold text-indigo-600">
-                  {candidate.score}
-                </div>
-              </div>
+    <div className="grid grid-cols-2 gap-4">
+      {candidates.map((candidate, idx) =>
+      <motion.div 
+        key={idx} 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: idx * 0.05 }}
+        className="p-5 rounded-xl border border-gray-100 bg-white hover:shadow-md hover:border-indigo-200 transition-all duration-200">
+          <div className="flex items-start gap-3 mb-4">
+            <Avatar className="w-12 h-12 ring-2 ring-indigo-50">
+              <AvatarFallback className="bg-gradient-to-br from-indigo-100 to-indigo-50 text-indigo-700 text-[14px] font-semibold">
+                {candidate.name.
+              split(" ").
+              map((n) => n[0]).
+              join("")}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-[13px] font-bold text-gray-900 truncate">
+                {candidate.name}
+              </h4>
+              <p className="text-[11px] text-gray-600 truncate mt-0.5">{candidate.title}</p>
             </div>
-            <div className="flex gap-2">
-              <Button
-              size="sm"
-              variant={
-              decisions[candidate.id] === "approve" ? "default" : "outline"
-              }
-              className="flex-1 h-8 text-[11px]"
-              onClick={() => onDecision(candidate.id, "approve")}>
-
-                <ThumbsUp className="w-3 h-3 mr-1" />
-                Approve
-              </Button>
-              <Button
-              size="sm"
-              variant={
-              decisions[candidate.id] === "reject" ? "destructive" : "outline"
-              }
-              className="flex-1 h-8 text-[11px]"
-              onClick={() => onDecision(candidate.id, "reject")}>
-
-                <ThumbsDown className="w-3 h-3 mr-1" />
-                Reject
-              </Button>
+            <div className="text-right bg-indigo-50 px-2.5 py-1.5 rounded-lg">
+              <div className="text-[16px] font-bold text-indigo-600">
+                {candidate.score}
+              </div>
             </div>
           </div>
-        )}
-      </div>
-      <Button onClick={onComplete} className="w-full">
-        Complete Review
-      </Button>
+          <div className="flex gap-2">
+            <Button
+            size="sm"
+            variant={
+            decisions[candidate.id] === "approve" ? "default" : "outline"
+            }
+            className="flex-1 h-8 text-[11px] font-medium transition-all"
+            onClick={() => onDecision(candidate.id, "approve")}>
+
+              <ThumbsUp className="w-3 h-3 mr-1" />
+              Approve
+            </Button>
+            <Button
+            size="sm"
+            variant={
+            decisions[candidate.id] === "reject" ? "destructive" : "outline"
+            }
+            className="flex-1 h-8 text-[11px] font-medium transition-all"
+            onClick={() => onDecision(candidate.id, "reject")}>
+
+              <ThumbsDown className="w-3 h-3 mr-1" />
+              Reject
+            </Button>
+          </div>
+        </motion.div>
+      )}
+    </div>
+    <Button onClick={onComplete} className="w-full h-11 font-semibold bg-gradient-to-r from-emerald-600 to-emerald-600 hover:from-emerald-700 hover:to-emerald-700">
+      Complete Review
+    </Button>
     </div>);
 
 }
