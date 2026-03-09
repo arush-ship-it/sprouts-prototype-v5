@@ -785,7 +785,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
                   <div className="flex items-center gap-3">
                     <p className="text-[12px] font-bold text-gray-800">{job.range}</p>
                     <button onClick={() => window.open("https://www.linkedin.com/jobs/search/?keywords=" + encodeURIComponent(job.title), "_blank")} className="text-gray-300 hover:text-indigo-500 transition-colors">
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="text-blue-600 lucide lucide-external-link w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
