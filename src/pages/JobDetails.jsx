@@ -252,7 +252,7 @@ export default function JobDetails() {
             { platform: "Indeed", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Indeed_logo.png", url: "https://indeed.com/job/senior-product-designer" },
             { platform: "Company Website", logo: null, url: "https://company.com/careers/senior-product-designer" }].
             map((posting) =>
-            <div key={posting.platform} className="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
+            <div key={posting.platform} className={`flex items-center justify-between p-3 rounded-lg border bg-gray-50 transition-all ${unpublishedPlatforms.includes(posting.platform) ? "border-red-100 bg-red-50 opacity-60" : "border-gray-100"}`}>
                 <div className="flex items-center gap-3">
                   {posting.logo ?
                 <img src={posting.logo} alt={posting.platform} className="w-6 h-6 rounded object-contain" /> :
@@ -261,17 +261,28 @@ export default function JobDetails() {
                       <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
                     </div>
                 }
-                  <span className="text-[13px] font-medium text-gray-900">{posting.platform}</span>
+                  <div>
+                    <span className="text-[13px] font-medium text-gray-900">{posting.platform}</span>
+                    {unpublishedPlatforms.includes(posting.platform) && (
+                      <span className="ml-2 text-[11px] text-red-500 font-medium">Unpublished</span>
+                    )}
+                  </div>
                 </div>
-                <a
-                href={posting.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
-
-                  View Posting
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                <div className="flex items-center gap-3">
+                  {!unpublishedPlatforms.includes(posting.platform) && (
+                    <a href={posting.url} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                      View Posting
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  <button
+                    onClick={() => toggleUnpublish(posting.platform)}
+                    className={`flex items-center gap-1.5 text-[12px] font-medium transition-colors ${unpublishedPlatforms.includes(posting.platform) ? "text-emerald-600 hover:text-emerald-800" : "text-red-400 hover:text-red-600"}`}>
+                    <EyeOff className="w-3.5 h-3.5" />
+                    {unpublishedPlatforms.includes(posting.platform) ? "Republish" : "Unpublish"}
+                  </button>
+                </div>
               </div>
             )}
           </div>
