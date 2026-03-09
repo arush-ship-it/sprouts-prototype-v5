@@ -131,7 +131,7 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-background p-6 rounded-xl fixed left-[50%] top-[50%] z-50 w-full translate-x-[-50%] translate-y-[-50%] gap-4 border shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
+      <DialogContent className="bg-background px-12 py-12 rounded-xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 w-full translate-x-[-50%] translate-y-[-50%] gap-4 border shadow-lg duration-200 sm:rounded-lg max-w-7xl max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle>Activity Approvals</DialogTitle>
         </DialogHeader>
@@ -198,8 +198,8 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
                   <Button
                   variant={viewMode === "list" ? "default" : "ghost"}
                   size="sm"
-                  onClick={() => setViewMode("list")}
-                  className="h-8 text-[12px]">
+                  onClick={() => setViewMode("list")} className="bg-slate-400 text-[12px] px-3 font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
+
                     Table
                   </Button>
                   <Button
@@ -267,20 +267,20 @@ function ReviewModeContent({
       {/* Progress Bar */}
        <div className="flex gap-1.5">
          {Array.from({ length: total }).map((_, idx) =>
-         <motion.div
-           key={idx}
-           initial={{ scaleX: 0 }}
-           animate={{ scaleX: 1 }}
-           transition={{ delay: idx * 0.05 }}
-           className={`h-1.5 flex-1 rounded-full origin-left transition-colors duration-300 ${
-           idx <= index ? "bg-indigo-600" : "bg-gray-200"}`
-           } />
+        <motion.div
+          key={idx}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: idx * 0.05 }}
+          className={`h-1.5 flex-1 rounded-full origin-left transition-colors duration-300 ${
+          idx <= index ? "bg-indigo-600" : "bg-gray-200"}`
+          } />
 
-         )}
+        )}
        </div>
 
       {/* Candidate Card */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
@@ -330,10 +330,10 @@ function ReviewModeContent({
            <h4 className="text-[11px] font-bold text-gray-900 mb-2 uppercase tracking-wide">Skills</h4>
            <div className="flex flex-wrap gap-1.5">
              {candidate.skills.map((skill, idx) =>
-             <Badge key={idx} className="text-[9px] font-medium bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 transition-colors">
+            <Badge key={idx} className="text-[9px] font-medium bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 transition-colors">
                  {skill}
                </Badge>
-             )}
+            )}
            </div>
          </div>
 
@@ -458,19 +458,19 @@ function CardsModeContent({ candidates, decisions, onDecision, onComplete }) {
     <div className="space-y-4">
     <div className="grid grid-cols-2 gap-4">
       {candidates.map((candidate, idx) =>
-      <motion.div 
-        key={idx} 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: idx * 0.05 }}
-        className="p-5 rounded-xl border border-gray-100 bg-white hover:shadow-md hover:border-indigo-200 transition-all duration-200">
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.05 }}
+          className="p-5 rounded-xl border border-gray-100 bg-white hover:shadow-md hover:border-indigo-200 transition-all duration-200">
           <div className="flex items-start gap-3 mb-4">
             <Avatar className="w-12 h-12 ring-2 ring-indigo-50">
               <AvatarFallback className="bg-gradient-to-br from-indigo-100 to-indigo-50 text-indigo-700 text-[14px] font-semibold">
                 {candidate.name.
-              split(" ").
-              map((n) => n[0]).
-              join("")}
+                split(" ").
+                map((n) => n[0]).
+                join("")}
               </AvatarFallback>
             </Avatar>
             <div className="flex-1 min-w-0">
@@ -487,30 +487,30 @@ function CardsModeContent({ candidates, decisions, onDecision, onComplete }) {
           </div>
           <div className="flex gap-2">
             <Button
-            size="sm"
-            variant={
-            decisions[candidate.id] === "approve" ? "default" : "outline"
-            }
-            className="flex-1 h-8 text-[11px] font-medium transition-all"
-            onClick={() => onDecision(candidate.id, "approve")}>
+              size="sm"
+              variant={
+              decisions[candidate.id] === "approve" ? "default" : "outline"
+              }
+              className="flex-1 h-8 text-[11px] font-medium transition-all"
+              onClick={() => onDecision(candidate.id, "approve")}>
 
               <ThumbsUp className="w-3 h-3 mr-1" />
               Approve
             </Button>
             <Button
-            size="sm"
-            variant={
-            decisions[candidate.id] === "reject" ? "destructive" : "outline"
-            }
-            className="flex-1 h-8 text-[11px] font-medium transition-all"
-            onClick={() => onDecision(candidate.id, "reject")}>
+              size="sm"
+              variant={
+              decisions[candidate.id] === "reject" ? "destructive" : "outline"
+              }
+              className="flex-1 h-8 text-[11px] font-medium transition-all"
+              onClick={() => onDecision(candidate.id, "reject")}>
 
               <ThumbsDown className="w-3 h-3 mr-1" />
               Reject
             </Button>
           </div>
         </motion.div>
-      )}
+        )}
     </div>
     <Button onClick={onComplete} className="w-full h-11 font-semibold bg-gradient-to-r from-emerald-600 to-emerald-600 hover:from-emerald-700 hover:to-emerald-700">
       Complete Review
