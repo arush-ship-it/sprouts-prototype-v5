@@ -169,6 +169,15 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
                         <p className="text-[11px] text-gray-500 mt-1">
                           {approval.description}
                         </p>
+                        <div className="mt-2 flex items-center gap-2">
+                          <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200/60 text-[10px] font-medium">
+                            {approval.fromStage}
+                          </Badge>
+                          <span className="text-[10px] text-gray-400">→</span>
+                          <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200/60 text-[10px] font-medium">
+                            {approval.toStage}
+                          </Badge>
+                        </div>
                         <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200/60 mt-2 text-[10px] font-medium">
                             {approval.candidates.length} candidates
                           </Badge>
