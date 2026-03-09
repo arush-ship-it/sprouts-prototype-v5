@@ -496,6 +496,86 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               </button>
             </div>
           </div>
+
+          {/* Salary Intelligence */}
+          <div className="mt-5 pt-5 border-t border-gray-100">
+            <div className="flex items-center gap-2 mb-4">
+              <TrendingUp className="w-4 h-4 text-amber-600" />
+              <p className="text-[13px] font-semibold text-gray-800">Salary Intelligence</p>
+              <span className="ml-auto text-[10px] font-semibold bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full border border-amber-200">AI Insight</span>
+            </div>
+            <p className="text-[11px] text-gray-400 mb-4">Market data for Senior Product Designer · San Francisco, CA</p>
+
+            {/* Market range bar */}
+            <div className="mb-5">
+              <div className="flex justify-between text-[11px] text-gray-400 mb-1.5">
+                <span>Market Low</span>
+                <span>Median</span>
+                <span>Market High</span>
+              </div>
+              <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div className="absolute h-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 rounded-full" style={{ left: "10%", width: "80%" }} />
+                <div className="absolute h-full bg-indigo-500 rounded-full opacity-80" style={{ left: "30%", width: "22%" }} />
+              </div>
+              <div className="flex justify-between text-[11px] mt-1.5">
+                <span className="text-gray-400">$90k</span>
+                <span className="font-semibold text-gray-700">$135k</span>
+                <span className="text-gray-400">$175k</span>
+              </div>
+              <p className="text-[11px] text-indigo-600 font-medium mt-1.5">Your range ($120k–$160k) is <span className="font-bold">competitive</span> — above median for this location.</p>
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-3 gap-3 mb-5">
+              <div className="bg-gray-50 rounded-xl px-3 py-3 text-center">
+                <p className="text-[11px] text-gray-400 mb-1">SF Bay Median</p>
+                <p className="text-[16px] font-bold text-gray-900">$138k</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl px-3 py-3 text-center">
+                <p className="text-[11px] text-gray-400 mb-1">Remote Median</p>
+                <p className="text-[16px] font-bold text-gray-900">$118k</p>
+              </div>
+              <div className="bg-gray-50 rounded-xl px-3 py-3 text-center">
+                <p className="text-[11px] text-gray-400 mb-1">NYC Median</p>
+                <p className="text-[16px] font-bold text-gray-900">$142k</p>
+              </div>
+            </div>
+
+            {/* Similar open roles */}
+            <p className="text-[12px] font-semibold text-gray-700 mb-2">Similar roles currently hiring</p>
+            <div className="space-y-2 mb-5">
+              {[
+                { company: "Figma", title: "Senior Product Designer", range: "$130k – $165k", location: "San Francisco, CA" },
+                { company: "Notion", title: "Product Designer (Senior)", range: "$125k – $155k", location: "Remote" },
+                { company: "Linear", title: "Sr. UX Designer", range: "$115k – $150k", location: "Remote" },
+              ].map((job) => (
+                <div key={job.company} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-800">{job.company} <span className="font-normal text-gray-500">· {job.title}</span></p>
+                    <p className="text-[11px] text-gray-400">{job.location}</p>
+                  </div>
+                  <p className="text-[12px] font-bold text-gray-800">{job.range}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Past internal hires */}
+            <p className="text-[12px] font-semibold text-gray-700 mb-2">Past hires at your company</p>
+            <div className="space-y-2">
+              {[
+                { name: "Alex Chen", role: "Senior Product Designer", year: "2023", salary: "$128k", level: "L5" },
+                { name: "Priya Sharma", role: "Product Designer", year: "2022", salary: "$112k", level: "L4" },
+              ].map((hire) => (
+                <div key={hire.name} className="flex items-center justify-between bg-indigo-50 rounded-xl px-4 py-3">
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-800">{hire.name} <span className="text-gray-400 font-normal">· {hire.role}</span></p>
+                    <p className="text-[11px] text-gray-400">Hired {hire.year} · Grade {hire.level}</p>
+                  </div>
+                  <p className="text-[13px] font-bold text-indigo-700">{hire.salary}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Benefits */}
