@@ -858,6 +858,7 @@ export default function Dashboard() {
               </div>
             </motion.div>
           </div>
+          </div>{/* end scrollable graphs section */}
 
           {/* Key Metrics Grid */}
           
