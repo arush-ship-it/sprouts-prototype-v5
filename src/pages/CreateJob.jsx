@@ -985,9 +985,6 @@ function PublishScreen({ onBack, onPublish }) {
 
           {/* CTA */}
           <div className="flex justify-center gap-3">
-            <Button variant="outline" onClick={onBack} className="h-10 px-6">
-              Back
-            </Button>
             <Button variant="outline" onClick={() => window.open("https://app.sproutsai.com/job-post/details/69707956bc83600006f4e2ae", "_blank")} className="h-10 px-6 gap-2">
               <ExternalLink className="w-3.5 h-3.5" /> Preview Job
             </Button>
