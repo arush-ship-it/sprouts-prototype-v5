@@ -391,24 +391,57 @@ export default function Dashboard() {
           {!isChatMinimized &&
           <>
               <div className="flex-1 overflow-y-auto p-5 space-y-3">
-                {/* Zero state: context topic slides */}
+                {/* Zero state: context topic slideshow */}
                 {!hasInteracted &&
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col items-center gap-5 pt-4">
                     <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wide text-center">Choose a topic to deep dive</p>
-                    <div className="flex flex-col gap-2.5">
-                      {CONTEXT_TOPICS.map((topic) =>
-                      <button
-                        key={topic.id}
-                        onClick={() => handleSelectContext(topic)}
-                        className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border bg-gradient-to-r ${topic.color} hover:shadow-sm transition-all text-left group`}>
-                          <span className="text-xl">{topic.icon}</span>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-[13px] font-semibold text-gray-800 group-hover:text-gray-900">{topic.label}</p>
-                            <p className="text-[11px] text-gray-500">{topic.sublabel}</p>
+
+                    {/* Slide card */}
+                    {(() => {
+                      const topic = CONTEXT_TOPICS[slideIndex];
+                      const { Icon } = topic;
+                      return (
+                        <motion.div
+                          key={topic.id}
+                          initial={{ opacity: 0, x: 24 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -24 }}
+                          transition={{ duration: 0.22 }}
+                          className={`w-full rounded-2xl border ${topic.border} ${topic.bg} p-6 flex flex-col items-center text-center gap-4 cursor-pointer hover:shadow-md transition-all`}
+                          onClick={() => handleSelectContext(topic)}>
+                          <div className={`w-14 h-14 rounded-2xl bg-white/70 flex items-center justify-center shadow-sm`}>
+                            <Icon className={`w-6 h-6 ${topic.iconColor}`} />
                           </div>
-                          <ChevronLeft className="w-3.5 h-3.5 text-gray-400 rotate-180 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                      )}
+                          <div>
+                            <p className="text-[15px] font-semibold text-gray-800">{topic.label}</p>
+                            <p className="text-[12px] text-gray-500 mt-1">{topic.sublabel}</p>
+                          </div>
+                          <p className="text-[11px] text-gray-400 leading-relaxed max-w-[220px]">{topic.prompt}</p>
+                          <div className={`mt-1 px-4 py-1.5 rounded-full text-[11px] font-medium ${topic.iconColor} bg-white/60 border ${topic.border}`}>
+                            Start deep dive →
+                          </div>
+                        </motion.div>
+                      );
+                    })()}
+
+                    {/* Prev / next + dots */}
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => setSlideIndex((i) => (i - 1 + CONTEXT_TOPICS.length) % CONTEXT_TOPICS.length)}
+                        className="w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-300 transition-all">
+                        <ChevronLeft className="w-3.5 h-3.5 text-gray-500" />
+                      </button>
+                      <div className="flex items-center gap-1.5">
+                        {CONTEXT_TOPICS.map((t, i) =>
+                        <button key={t.id} onClick={() => setSlideIndex(i)}
+                          className={`rounded-full transition-all ${i === slideIndex ? `w-4 h-2 ${CONTEXT_TOPICS[slideIndex].dot}` : "w-2 h-2 bg-gray-200 hover:bg-gray-300"}`} />
+                        )}
+                      </div>
+                      <button
+                        onClick={() => setSlideIndex((i) => (i + 1) % CONTEXT_TOPICS.length)}
+                        className="w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-300 transition-all">
+                        <ChevronRight className="w-3.5 h-3.5 text-gray-500" />
+                      </button>
                     </div>
                   </div>
                 }
