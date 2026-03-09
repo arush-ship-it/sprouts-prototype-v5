@@ -17,7 +17,13 @@ import {
   Bell,
   Settings,
   User,
-  ChevronLeft } from
+  ChevronLeft,
+  ChevronRight,
+  GitBranch,
+  Zap,
+  Target,
+  UserSearch,
+  Filter } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
