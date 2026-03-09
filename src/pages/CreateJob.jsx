@@ -70,15 +70,15 @@ const QUICK_ACTIONS = [
 }];
 
 
-function QuickActionSlideshow({ onStart }) {
+function QuickActionSlideshow({ onStart, onShowDrafts }) {
   const [index, setIndex] = React.useState(0);
   const card = QUICK_ACTIONS[index];
 
   const handleAction = () => {
     if (card.key === "upload") {
-      document.getElementById("quick-upload-input").click();
+      onShowDrafts?.(true);
     } else {
-      onStart("Load from saved drafts");
+      onShowDrafts?.(true);
     }
   };
 
