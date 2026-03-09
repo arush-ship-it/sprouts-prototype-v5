@@ -372,27 +372,54 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           </ul>
           {enhancing && <p className="text-[12px] text-indigo-500 mt-3 animate-pulse flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Enhancing with AI…</p>}
 
+          {/* Extra Sections (added by user) */}
+          {addedSections.map((sec) => (
+            <div key={sec.key} className="mt-5">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-[15px] font-bold text-gray-900 flex items-center gap-1.5">
+                  <span>{sec.icon}</span> {sec.label}
+                </h3>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: [...s.items, ""] } : s))}
+                    className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1">
+                    <Plus className="w-3 h-3" /> Add
+                  </button>
+                  <button
+                    onClick={() => setAddedSections((prev) => prev.filter((s) => s.key !== sec.key))}
+                    className="text-gray-300 hover:text-red-400">
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+              <ul className="space-y-1">
+                {sec.items.map((item, i) => (
+                  <EditableListItem
+                    key={i}
+                    value={item}
+                    onChange={(v) => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: s.items.map((it, idx) => idx === i ? v : it) } : s))}
+                    onDelete={() => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: s.items.filter((_, idx) => idx !== i) } : s))}
+                    placeholder="Add item…"
+                  />
+                ))}
+              </ul>
+            </div>
+          ))}
+
           {/* Section Hints */}
           <div className="mt-6 pt-5 border-t border-dashed border-gray-200">
             <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-3">Add more sections</p>
             <div className="flex flex-wrap gap-2">
-              {[
-              { label: "Talk About the Company", icon: "🏢", content: "\n\nAbout the Company\nWe are a fast-growing company with a mission to [describe mission]. Our team is made up of passionate individuals who [describe team culture]. We believe in [core values] and are committed to building a product that [impact]." },
-              { label: "Mention Benefits", icon: "🎁", content: "\n\nBenefits & Perks\n• Competitive salary and equity package\n• Comprehensive health, dental, and vision insurance\n• Flexible work hours and remote-friendly environment\n• Learning & development budget\n• Generous PTO and paid holidays" },
-              { label: "Growth Opportunities", icon: "📈", content: "\n\nGrowth Opportunities\nWe invest in our people. You'll have access to mentorship, regular performance reviews, and a clear career progression path. We encourage internal promotions and provide a dedicated learning budget to support your growth." },
-              { label: "Team Culture", icon: "🤝", content: "\n\nTeam Culture\nOur team thrives on collaboration, transparency, and mutual respect. We celebrate wins together, support each other through challenges, and foster an inclusive environment where every voice matters." },
-              { label: "What We Value", icon: "⭐", content: "\n\nWhat We Value\n• Ownership & accountability\n• Curiosity and continuous learning\n• Collaboration over competition\n• Honest and open communication\n• Customer-first mindset" }].
-              filter(({ label }) => !addedSections.includes(label)).map(({ label, icon, content }) =>
-              <button
-                key={label}
-                onClick={() => {
-                  setJd((prev) => ({ ...prev, description: prev.description + content }));
-                  setAddedSections((prev) => [...prev, label]);
-                }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+              {EXTRA_SECTIONS_CONFIG
+                .filter(({ key }) => !addedSections.find((s) => s.key === key))
+                .map(({ label, icon, key, defaultItems }) => (
+                <button
+                  key={key}
+                  onClick={() => setAddedSections((prev) => [...prev, { key, label, icon, items: [...defaultItems] }])}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                   <span>{icon}</span> {label}
                 </button>
-              )}
+              ))}
             </div>
           </div>
         </div>
