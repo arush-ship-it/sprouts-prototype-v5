@@ -1265,8 +1265,9 @@ export default function CreateJob() {
           }
           {step === 6 &&
           <ConfirmationScreen
-            jobTitle={generatedJob.title}
-            onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
+           jobTitle={generatedJob.title}
+           generatedJob={generatedJob}
+           onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
 
           }
         </div>
