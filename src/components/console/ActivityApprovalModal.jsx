@@ -295,18 +295,18 @@ function ReviewModeContent({
             </AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start justify-between mb-2">
               <div>
-                <h3 className="text-[19px] font-bold text-gray-900">
+                <h3 className="text-[16px] font-bold text-gray-900">
                   {candidate.name}
                 </h3>
-                <p className="text-[14px] text-gray-600 mt-1">{candidate.title}</p>
+                <p className="text-[12px] text-gray-600 mt-0.5">{candidate.title}</p>
               </div>
-              <div className="text-right bg-gradient-to-br from-indigo-50 to-indigo-100 px-3 py-2 rounded-lg">
-                <div className="text-[28px] font-bold text-indigo-600">
+              <div className="text-right bg-gradient-to-br from-indigo-50 to-indigo-100 px-2.5 py-1.5 rounded-lg">
+                <div className="text-[18px] font-bold text-indigo-600">
                   {candidate.score}
                 </div>
-                <p className="text-[10px] text-indigo-600 font-semibold">AI Score</p>
+                <p className="text-[9px] text-indigo-600 font-semibold">Score</p>
               </div>
             </div>
             <div className="flex flex-wrap gap-2 mt-3">
