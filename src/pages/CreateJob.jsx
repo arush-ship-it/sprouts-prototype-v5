@@ -993,7 +993,6 @@ function PublishScreen({ onBack, onPublish }) {
             </Button>
           </div>
         </div>
-        </div>
       </div>
     </div>);
 
