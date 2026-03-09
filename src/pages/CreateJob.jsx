@@ -119,8 +119,16 @@ function QuickActionSlideshow({ onStart }) {
 }
 
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
+const SAVED_DRAFTS = [
+  { id: 1, title: "Senior Product Manager", role: "Product", status: "Draft", created: "2 days ago" },
+  { id: 2, title: "Frontend Engineer", role: "Engineering", status: "Draft", created: "1 week ago" },
+  { id: 3, title: "UX Designer", role: "Design", status: "Draft", created: "3 days ago" },
+  { id: 4, title: "Sales Executive", role: "Sales", status: "Draft", created: "5 days ago" }
+];
+
 function DefaultScreen({ onStart }) {
   const [prompt, setPrompt] = useState("");
+  const [showDrafts, setShowDrafts] = useState(false);
 
   const handleSuggestion = (title) => {
     onStart(`Create a job posting for a ${title}`);
