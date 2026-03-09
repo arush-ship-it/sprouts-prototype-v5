@@ -14,7 +14,8 @@ import {
   Activity,
   Target,
   CheckCircle2,
-  ExternalLink } from
+  ExternalLink,
+  EyeOff } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
