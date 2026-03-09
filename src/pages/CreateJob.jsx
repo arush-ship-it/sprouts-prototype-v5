@@ -232,36 +232,36 @@ function EditableListItem({ value, onChange, onDelete, placeholder }) {
 }
 
 const EXTRA_SECTIONS_CONFIG = [
-  { label: "Talk About the Company", icon: "🏢", key: "company", defaultItems: [
-    "We are a fast-growing company with a mission to [describe mission].",
-    "Our team is made up of passionate individuals who [describe team culture].",
-    "We believe in [core values] and are committed to building a product that [impact]."
-  ]},
-  { label: "Mention Benefits", icon: "🎁", key: "benefits_section", defaultItems: [
-    "Competitive salary and equity package",
-    "Comprehensive health, dental, and vision insurance",
-    "Flexible work hours and remote-friendly environment",
-    "Learning & development budget",
-    "Generous PTO and paid holidays"
-  ]},
-  { label: "Growth Opportunities", icon: "📈", key: "growth", defaultItems: [
-    "Access to mentorship and regular performance reviews",
-    "Clear career progression path with internal promotions",
-    "Dedicated learning budget to support your growth"
-  ]},
-  { label: "Team Culture", icon: "🤝", key: "culture", defaultItems: [
-    "Collaboration, transparency, and mutual respect",
-    "Inclusive environment where every voice matters",
-    "We celebrate wins together and support each other through challenges"
-  ]},
-  { label: "What We Value", icon: "⭐", key: "values", defaultItems: [
-    "Ownership & accountability",
-    "Curiosity and continuous learning",
-    "Collaboration over competition",
-    "Honest and open communication",
-    "Customer-first mindset"
-  ]},
-];
+{ label: "Talk About the Company", icon: "🏢", key: "company", defaultItems: [
+  "We are a fast-growing company with a mission to [describe mission].",
+  "Our team is made up of passionate individuals who [describe team culture].",
+  "We believe in [core values] and are committed to building a product that [impact]."]
+},
+{ label: "Mention Benefits", icon: "🎁", key: "benefits_section", defaultItems: [
+  "Competitive salary and equity package",
+  "Comprehensive health, dental, and vision insurance",
+  "Flexible work hours and remote-friendly environment",
+  "Learning & development budget",
+  "Generous PTO and paid holidays"]
+},
+{ label: "Growth Opportunities", icon: "📈", key: "growth", defaultItems: [
+  "Access to mentorship and regular performance reviews",
+  "Clear career progression path with internal promotions",
+  "Dedicated learning budget to support your growth"]
+},
+{ label: "Team Culture", icon: "🤝", key: "culture", defaultItems: [
+  "Collaboration, transparency, and mutual respect",
+  "Inclusive environment where every voice matters",
+  "We celebrate wins together and support each other through challenges"]
+},
+{ label: "What We Value", icon: "⭐", key: "values", defaultItems: [
+  "Ownership & accountability",
+  "Curiosity and continuous learning",
+  "Collaboration over competition",
+  "Honest and open communication",
+  "Customer-first mindset"]
+}];
+
 
 function ReviewJDScreen({ job, onBack, onNext }) {
   const [jd, setJd] = useState(job);
@@ -379,53 +379,53 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           {enhancing && <p className="text-[12px] text-indigo-500 mt-3 animate-pulse flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> Enhancing with AI…</p>}
 
           {/* Extra Sections (added by user) */}
-          {addedSections.map((sec) => (
-            <div key={sec.key} className="mt-5">
+          {addedSections.map((sec) =>
+          <div key={sec.key} className="mt-5">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-[15px] font-bold text-gray-900 flex items-center gap-1.5">
                   <span>{sec.icon}</span> {sec.label}
                 </h3>
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: [...s.items, ""] } : s))}
-                    className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1">
+                  onClick={() => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: [...s.items, ""] } : s))}
+                  className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1">
                     <Plus className="w-3 h-3" /> Add
                   </button>
                   <button
-                    onClick={() => setAddedSections((prev) => prev.filter((s) => s.key !== sec.key))}
-                    className="text-gray-300 hover:text-red-400">
+                  onClick={() => setAddedSections((prev) => prev.filter((s) => s.key !== sec.key))}
+                  className="text-gray-300 hover:text-red-400">
                     <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
               <ul className="space-y-1">
-                {sec.items.map((item, i) => (
-                  <EditableListItem
-                    key={i}
-                    value={item}
-                    onChange={(v) => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: s.items.map((it, idx) => idx === i ? v : it) } : s))}
-                    onDelete={() => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: s.items.filter((_, idx) => idx !== i) } : s))}
-                    placeholder="Add item…"
-                  />
-                ))}
+                {sec.items.map((item, i) =>
+              <EditableListItem
+                key={i}
+                value={item}
+                onChange={(v) => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: s.items.map((it, idx) => idx === i ? v : it) } : s))}
+                onDelete={() => setAddedSections((prev) => prev.map((s) => s.key === sec.key ? { ...s, items: s.items.filter((_, idx) => idx !== i) } : s))}
+                placeholder="Add item…" />
+
+              )}
               </ul>
             </div>
-          ))}
+          )}
 
           {/* Section Hints */}
           <div className="mt-6 pt-5 border-t border-dashed border-gray-200">
             <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-3">Add more sections</p>
             <div className="flex flex-wrap gap-2">
-              {EXTRA_SECTIONS_CONFIG
-                .filter(({ key }) => !addedSections.find((s) => s.key === key))
-                .map(({ label, icon, key, defaultItems }) => (
-                <button
-                  key={key}
-                  onClick={() => setAddedSections((prev) => [...prev, { key, label, icon, items: [...defaultItems] }])}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+              {EXTRA_SECTIONS_CONFIG.
+              filter(({ key }) => !addedSections.find((s) => s.key === key)).
+              map(({ label, icon, key, defaultItems }) =>
+              <button
+                key={key}
+                onClick={() => setAddedSections((prev) => [...prev, { key, label, icon, items: [...defaultItems] }])}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                   <span>{icon}</span> {label}
                 </button>
-              ))}
+              )}
             </div>
           </div>
         </div>
@@ -533,7 +533,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               onClick={() => setRolesExpanded((v) => !v)}
               className="flex items-center gap-2 w-full text-left">
               <Building2 className="w-4 h-4 text-indigo-500 shrink-0" />
-              <p className="text-[13px] font-semibold text-gray-800 flex-1">Past Roles at Your Company</p>
+              <p className="text-[13px] font-semibold text-gray-800 flex-1">Work Arrangement Insights</p>
               <span className="text-[10px] font-semibold bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full border border-indigo-200 mr-2">AI Insight</span>
               {rolesExpanded ?
               <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" /> :
@@ -557,9 +557,9 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               <p className="text-[11px] text-gray-400 mb-4">Work arrangement history for similar roles at your company</p>
               <div className="grid grid-cols-3 gap-3 mb-5">
                 {[
-                  { label: "Hybrid", count: 3, pct: "50%", color: "bg-indigo-50 text-indigo-700" },
-                  { label: "Remote", count: 2, pct: "30%", color: "bg-emerald-50 text-emerald-700" },
-                  { label: "On-site", count: 1, pct: "20%", color: "bg-amber-50 text-amber-700" }].map((t) =>
+                { label: "Hybrid", count: 3, pct: "50%", color: "bg-indigo-50 text-indigo-700" },
+                { label: "Remote", count: 2, pct: "30%", color: "bg-emerald-50 text-emerald-700" },
+                { label: "On-site", count: 1, pct: "20%", color: "bg-amber-50 text-amber-700" }].map((t) =>
                 <div key={t.label} className={`${t.color} rounded-xl px-3 py-3 text-center`}>
                   <p className="text-[11px] opacity-70 mb-1">{t.label}</p>
                   <p className="text-[16px] font-bold">{t.pct}</p>
@@ -570,9 +570,9 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
               <p className="text-[12px] font-semibold text-gray-700 mb-2">Past similar roles</p>
               <div className="space-y-2">
                 {[
-                  { name: "Alex Chen", role: "Senior Product Designer", year: "2023", arrangement: "Hybrid", location: "San Francisco, CA" },
-                  { name: "Priya Sharma", role: "Product Designer", year: "2022", arrangement: "Remote", location: "Remote" },
-                  { name: "James Liu", role: "UX Designer", year: "2021", arrangement: "On-site", location: "New York, NY" }].map((hire) =>
+                { name: "Alex Chen", role: "Senior Product Designer", year: "2023", arrangement: "Hybrid", location: "San Francisco, CA" },
+                { name: "Priya Sharma", role: "Product Designer", year: "2022", arrangement: "Remote", location: "Remote" },
+                { name: "James Liu", role: "UX Designer", year: "2021", arrangement: "On-site", location: "New York, NY" }].map((hire) =>
                 <div key={hire.name} className="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
                   <div>
                     <p className="text-[13px] font-semibold text-gray-800">{hire.name} <span className="text-gray-400 font-normal">· {hire.role}</span></p>
@@ -942,23 +942,23 @@ function PublishScreen({ onBack, onPublish }) {
                 { value: "public", label: "Public", Icon: Globe, desc: "Visible to everyone on job boards" },
                 { value: "private", label: "Private", Icon: Lock, desc: "Only accessible via direct link" },
                 { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Shareable link, company name hidden" },
-                { value: "internal", label: "Internal", Icon: Users, desc: "Visible only to internal employees" },
-              ].map(({ value, label, Icon, desc }) => (
+                { value: "internal", label: "Internal", Icon: Users, desc: "Visible only to internal employees" }].
+                map(({ value, label, Icon, desc }) =>
                 <button
                   key={value}
                   onClick={() => setVisibility(value)}
                   className={`flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
-                    visibility === value
-                      ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-300"
-                      : "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"
-                  }`}>
+                  visibility === value ?
+                  "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-300" :
+                  "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"}`
+                  }>
                   <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${visibility === value ? "text-indigo-500" : "text-gray-400"}`} />
                   <div>
                     <p className={`text-[13px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
                     <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">{desc}</p>
                   </div>
                 </button>
-              ))}
+                )}
             </div>
           </div>
 
