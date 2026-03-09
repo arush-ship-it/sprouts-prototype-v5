@@ -577,8 +577,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                   </Button>
                 </div>
           }
-            </div>
-          }
+              </div>}
         </div>
       }
 
