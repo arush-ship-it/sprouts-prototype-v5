@@ -937,11 +937,11 @@ function PublishScreen({ onBack, onPublish }) {
             <p className="text-[13px] font-medium text-gray-700 mb-3">Visibility</p>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { value: "public", label: "Public", icon: "🌐", desc: "Visible to everyone on job boards" },
-                { value: "private", label: "Private", icon: "🔒", desc: "Only accessible via direct link" },
-                { value: "confidential", label: "Confidential", icon: "🔗", desc: "Shareable link, company name hidden" },
-                { value: "internal", label: "Internal", icon: "🏢", desc: "Visible only to internal employees" },
-              ].map(({ value, label, icon, desc }) => (
+                { value: "public", label: "Public", Icon: Globe, desc: "Visible to everyone on job boards" },
+                { value: "private", label: "Private", Icon: Lock, desc: "Only accessible via direct link" },
+                { value: "confidential", label: "Confidential", Icon: Link, desc: "Shareable link, company name hidden" },
+                { value: "internal", label: "Internal", Icon: Users, desc: "Visible only to internal employees" },
+              ].map(({ value, label, Icon, desc }) => (
                 <button
                   key={value}
                   onClick={() => setVisibility(value)}
@@ -950,7 +950,7 @@ function PublishScreen({ onBack, onPublish }) {
                       ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-300"
                       : "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"
                   }`}>
-                  <span className="text-lg mt-0.5 shrink-0">{icon}</span>
+                  <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${visibility === value ? "text-indigo-500" : "text-gray-400"}`} />
                   <div>
                     <p className={`text-[13px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
                     <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">{desc}</p>
