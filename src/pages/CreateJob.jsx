@@ -935,23 +935,28 @@ function PublishScreen({ onBack, onPublish }) {
           {/* Visibility */}
           <div className="mb-5">
             <p className="text-[13px] font-medium text-gray-700 mb-3">Visibility</p>
-            <div className="flex rounded-xl border border-gray-200 overflow-hidden">
-              {["Private", "Public"].map((v) =>
-              <button
-                key={v}
-                onClick={() => setVisibility(v.toLowerCase())}
-                className={`flex-1 py-3 text-[13px] font-medium transition-all ${
-                visibility === v.toLowerCase() ? "bg-indigo-50 text-gray-900" : "bg-white text-gray-500 hover:bg-gray-50"}`
-                }>
-
-                  {v}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { value: "public", label: "Public", icon: "🌐", desc: "Visible to everyone on job boards" },
+                { value: "private", label: "Private", icon: "🔒", desc: "Only accessible via direct link" },
+                { value: "confidential", label: "Confidential", icon: "🔗", desc: "Shareable link, company name hidden" },
+                { value: "internal", label: "Internal", icon: "🏢", desc: "Visible only to internal employees" },
+              ].map(({ value, label, icon, desc }) => (
+                <button
+                  key={value}
+                  onClick={() => setVisibility(value)}
+                  className={`flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
+                    visibility === value
+                      ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-300"
+                      : "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"
+                  }`}>
+                  <span className="text-lg mt-0.5 shrink-0">{icon}</span>
+                  <div>
+                    <p className={`text-[13px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
+                    <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">{desc}</p>
+                  </div>
                 </button>
-              )}
-            </div>
-            <div className="flex mt-3 gap-4">
-              {["Confidential (shareable Link)", "Internal"].map((opt) =>
-              <button key={opt} className="text-[12px] text-gray-500 hover:text-indigo-600 font-medium">{opt}</button>
-              )}
+              ))}
             </div>
           </div>
 
