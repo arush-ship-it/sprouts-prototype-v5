@@ -939,7 +939,7 @@ function PublishScreen({ onBack, onPublish }) {
               {[
                 { value: "public", label: "Public", Icon: Globe, desc: "Visible to everyone on job boards" },
                 { value: "private", label: "Private", Icon: Lock, desc: "Only accessible via direct link" },
-                { value: "confidential", label: "Confidential", Icon: Link, desc: "Shareable link, company name hidden" },
+                { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Shareable link, company name hidden" },
                 { value: "internal", label: "Internal", Icon: Users, desc: "Visible only to internal employees" },
               ].map(({ value, label, Icon, desc }) => (
                 <button
