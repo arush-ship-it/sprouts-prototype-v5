@@ -218,12 +218,7 @@ function DefaultScreen({ onStart }) {
           )}
         </div>
 
-        {/* Use Saved Drafts Button */}
-        <button
-          onClick={() => setShowDrafts(!showDrafts)}
-          className="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-200 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors mb-6">
-          {showDrafts ? "Hide Saved Drafts" : "Use Saved Drafts"}
-        </button>
+
 
         {/* Saved Drafts List */}
         {showDrafts && (
