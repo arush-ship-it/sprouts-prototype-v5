@@ -152,7 +152,7 @@ function DefaultScreen({ onStart }) {
           </div>
 
           {/* Quick action cards - slideshow */}
-          <QuickActionSlideshow onStart={onStart} />
+           <QuickActionSlideshow onStart={onStart} onShowDrafts={setShowDrafts} />
         </div>
         <div className="p-3 border-t border-gray-100 shrink-0">
           <div className="relative">
