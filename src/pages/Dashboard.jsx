@@ -458,17 +458,6 @@ export default function Dashboard() {
                   </div>
                 }
 
-                {/* Messages */}
-                {chatMessages.map((msg, idx) =>
-                <div
-                  key={idx}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
-                    msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`}>
-                      {msg.content}
-                    </div>
-                  </div>
-                )}
               </div>
 
               <div className="p-4 border-t border-gray-200 space-y-3">
