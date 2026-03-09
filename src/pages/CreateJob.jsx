@@ -499,13 +499,40 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           </div>
 
           {/* Salary Intelligence */}
-          <div className="bg-[#ffffff] mt-5 pt-5 pr-5 pl-5 rounded-2xl border-t border-gray-100">
-            <div className="flex items-center gap-2 mb-4">
-              <TrendingUp className="w-4 h-4 text-amber-600" />
-              <p className="text-[13px] font-semibold text-gray-800">Salary Intelligence</p>
-              <span className="ml-auto text-[10px] font-semibold bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full border border-amber-200">AI Insight</span>
-            </div>
-            <p className="text-[11px] text-gray-400 mb-4">Market data for Senior Product Designer · San Francisco, CA</p>
+          <div className="bg-[#ffffff] mt-5 pt-4 pr-5 pl-5 pb-4 rounded-2xl border-t border-gray-100">
+            <button
+              onClick={() => setSalaryExpanded((v) => !v)}
+              className="flex items-center gap-2 w-full text-left"
+            >
+              <TrendingUp className="w-4 h-4 text-amber-600 shrink-0" />
+              <p className="text-[13px] font-semibold text-gray-800 flex-1">Salary Intelligence</p>
+              <span className="text-[10px] font-semibold bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full border border-amber-200 mr-2">AI Insight</span>
+              {salaryExpanded
+                ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0" />
+                : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0" />}
+            </button>
+
+            {/* Collapsed summary */}
+            {!salaryExpanded && (
+              <div className="mt-3 flex items-center gap-3">
+                <div className="flex-1">
+                  <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="absolute h-full bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 rounded-full" style={{ left: "10%", width: "80%" }} />
+                    <div className="absolute h-full bg-indigo-500 rounded-full opacity-80" style={{ left: "30%", width: "22%" }} />
+                  </div>
+                  <div className="flex justify-between text-[10px] mt-1">
+                    <span className="text-gray-400">$90k</span>
+                    <span className="font-semibold text-gray-600">$135k median</span>
+                    <span className="text-gray-400">$175k</span>
+                  </div>
+                </div>
+                <span className="text-[11px] text-indigo-600 font-medium shrink-0">Competitive ✓</span>
+              </div>
+            )}
+
+            {salaryExpanded && (
+              <>
+            <p className="text-[11px] text-gray-400 mt-2 mb-4">Market data for Senior Product Designer · San Francisco, CA</p>
 
             {/* Market range bar */}
             <div className="mb-5">
