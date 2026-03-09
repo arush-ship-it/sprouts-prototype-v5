@@ -395,20 +395,20 @@ function ReviewModeContent({
 function ListModeContent({ candidates, decisions, onDecision, onComplete }) {
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border border-gray-200 overflow-hidden">
+      <div className="rounded-xl border border-gray-100 overflow-hidden bg-white">
         <table className="w-full text-[13px]">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-gradient-to-r from-gray-50 to-gray-50 border-b border-gray-100">
             <tr>
-              <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
-              <th className="px-4 py-2 text-left font-semibold text-gray-700">Title</th>
-              <th className="px-4 py-2 text-left font-semibold text-gray-700">Experience</th>
-              <th className="px-4 py-2 text-left font-semibold text-gray-700">Score</th>
-              <th className="px-4 py-2 text-left font-semibold text-gray-700">Decision</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wide text-[11px]">Name</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wide text-[11px]">Title</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wide text-[11px]">Experience</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wide text-[11px]">Score</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-700 uppercase tracking-wide text-[11px]">Decision</th>
             </tr>
           </thead>
           <tbody>
             {candidates.map((candidate, idx) =>
-            <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
+            <tr key={idx} className="border-b border-gray-100 hover:bg-indigo-50/30 transition-colors">
                 <td className="px-4 py-3">{candidate.name}</td>
                 <td className="px-4 py-3 text-gray-600">{candidate.title}</td>
                 <td className="px-4 py-3 text-gray-600">{candidate.experience}</td>
