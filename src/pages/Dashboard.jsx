@@ -391,6 +391,18 @@ export default function Dashboard() {
           {!isChatMinimized &&
           <>
               <div className="flex-1 overflow-y-auto p-5 space-y-3">
+                {/* Messages */}
+                {chatMessages.map((msg, idx) =>
+                <div
+                  key={idx}
+                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
+                    msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`}>
+                      {msg.content}
+                    </div>
+                  </div>
+                )}
+
                 {/* Zero state: context topic slideshow */}
                 {!hasInteracted &&
                 <div className="flex flex-col items-center gap-5 pt-4">
