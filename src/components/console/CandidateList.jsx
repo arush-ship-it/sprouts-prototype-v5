@@ -61,7 +61,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     <div className="px-8 py-2">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" &&
-      <div className="bg-white my-5 pt-5 pr-5 pb-20 pl-5 rounded-[20px] border border-indigo-200 transition-all duration-300">
+      <div className="bg-white my-5 pt-5 pr-5 pb-5 pl-5 rounded-[20px] border border-indigo-200 transition-all duration-300">
           {/* Header */}
           <div className="flex items-start justify-between">
             <div className="py-2 flex items-center gap-2.5 flex-1">
