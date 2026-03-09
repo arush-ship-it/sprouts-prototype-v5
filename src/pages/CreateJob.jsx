@@ -218,9 +218,34 @@ function DefaultScreen({ onStart }) {
           )}
         </div>
 
-        {/* Upload JD Button */}
-        
+        {/* Use Saved Drafts Button */}
+        <button
+          onClick={() => setShowDrafts(!showDrafts)}
+          className="px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-200 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors mb-6">
+          {showDrafts ? "Hide Saved Drafts" : "Use Saved Drafts"}
+        </button>
 
+        {/* Saved Drafts List */}
+        {showDrafts && (
+          <div className="mb-8">
+            <p className="text-[13px] font-semibold text-gray-700 mb-3">Recent Drafts</p>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {SAVED_DRAFTS.map((draft) => (
+                <button
+                  key={draft.id}
+                  onClick={() => onStart(`Continue editing: ${draft.title}`)}
+                  className="flex-shrink-0 w-[240px] p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all text-left">
+                  <p className="text-[13px] font-semibold text-gray-900 mb-1">{draft.title}</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded">{draft.role}</span>
+                    <span className="text-[11px] text-gray-400">{draft.status}</span>
+                  </div>
+                  <p className="text-[11px] text-gray-400">Created {draft.created}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
 
 
