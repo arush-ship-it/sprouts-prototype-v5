@@ -67,6 +67,8 @@ const approvals = [
   type: "auto_reject",
   agentName: "Pipeline Movement Agent",
   description: "5 candidates ready to advance - needs approval",
+  fromStage: "Interview",
+  toStage: "Offer",
   candidates: [
   {
     id: 4,
