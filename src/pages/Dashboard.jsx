@@ -346,7 +346,7 @@ export default function Dashboard() {
 
       <div className="bg-[#f2f3f5] flex flex-1 overflow-hidden">
         {/* Analytics Chat Panel */}
-        <div className={`bg-white mx-2 my-2 rounded-2xl border-l border-gray-200 flex flex-col transition-all duration-300 ${
+        <div className={`bg-white mx-2 my-2 rounded-2xl border-l border-gray-200 flex flex-col overflow-hidden transition-all duration-300 ${
         isChatMinimized ? "hidden" : "w-[456px]"}`
         }>
 
