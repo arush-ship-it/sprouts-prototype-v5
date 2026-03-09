@@ -178,38 +178,35 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
             {/* Right Column: Candidate View */}
             <div className="flex-1 flex flex-col overflow-hidden border-l border-gray-100 pl-6">
               {/* Header with View Mode Toggles */}
-              <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
+              <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-100">
                 <div>
-                  <h3 className="text-[14px] font-semibold text-gray-900">
+                  <h3 className="text-[15px] font-bold text-gray-900 leading-snug">
                     {selectedApproval.agentName}
                   </h3>
-                  <p className="text-[12px] text-gray-500">
+                  <p className="text-[12px] text-gray-500 mt-1.5">
                     {selectedApproval.candidates.length} candidates to review
                   </p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">
                   <Button
-                  variant={viewMode === "review" ? "default" : "outline"}
+                  variant={viewMode === "review" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("review")}
-                  className="h-8">
-
-                    Review Mode
+                  className="h-8 text-[12px]">
+                    Review
                   </Button>
                   <Button
-                  variant={viewMode === "list" ? "default" : "outline"}
+                  variant={viewMode === "list" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("list")}
-                  className="h-8">
-
-                    Table Mode
+                  className="h-8 text-[12px]">
+                    Table
                   </Button>
                   <Button
-                  variant={viewMode === "cards" ? "default" : "outline"}
+                  variant={viewMode === "cards" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("cards")}
-                  className="h-8">
-
+                  className="h-8 text-[12px]">
                     Cards
                   </Button>
                 </div>
