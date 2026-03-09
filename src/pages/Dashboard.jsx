@@ -374,27 +374,62 @@ export default function Dashboard() {
           {!isChatMinimized &&
           <>
               <div className="flex-1 overflow-y-auto p-5 space-y-3">
+                {/* Zero state: context topic slides */}
+                {!hasInteracted &&
+                <div className="flex flex-col gap-4">
+                    <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wide text-center">Choose a topic to deep dive</p>
+                    <div className="flex flex-col gap-2.5">
+                      {CONTEXT_TOPICS.map((topic) =>
+                      <button
+                        key={topic.id}
+                        onClick={() => handleSelectContext(topic)}
+                        className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl border bg-gradient-to-r ${topic.color} hover:shadow-sm transition-all text-left group`}>
+                          <span className="text-xl">{topic.icon}</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[13px] font-semibold text-gray-800 group-hover:text-gray-900">{topic.label}</p>
+                            <p className="text-[11px] text-gray-500">{topic.sublabel}</p>
+                          </div>
+                          <ChevronLeft className="w-3.5 h-3.5 text-gray-400 rotate-180 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                }
+
+                {/* Messages */}
                 {chatMessages.map((msg, idx) =>
-              <div
-                key={idx}
-                className={`flex ${
-                msg.role === "user" ? "justify-end" : "justify-start"}`
-                }>
-
-                    <div
-                  className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
-                  msg.role === "user" ?
-                  "bg-indigo-600 text-white" :
-                  "bg-gray-100 text-gray-900"}`
-                  }>
-
+                <div
+                  key={idx}
+                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[85%] px-3.5 py-2.5 rounded-xl text-[12px] ${
+                    msg.role === "user" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-900"}`}>
                       {msg.content}
                     </div>
                   </div>
-              )}
+                )}
               </div>
 
-              <div className="p-4 border-t border-gray-200">
+              <div className="p-4 border-t border-gray-200 space-y-3">
+                {/* Context chips — shown after interaction */}
+                {hasInteracted &&
+                <div className="flex flex-col gap-1.5">
+                    <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">Switch context</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {CONTEXT_TOPICS.map((topic) =>
+                      <button
+                        key={topic.id}
+                        onClick={() => handleSelectContext(topic)}
+                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
+                        activeContext?.id === topic.id
+                          ? "bg-indigo-600 text-white border-indigo-600"
+                          : "bg-gray-50 text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-600"
+                        }`}>
+                          <span>{topic.icon}</span> {topic.label}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                }
                 <div className="flex gap-2">
                   <Textarea
                   value={chatInput}
