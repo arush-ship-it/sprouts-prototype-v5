@@ -277,10 +277,14 @@ function ReviewModeContent({
       </div>
 
       {/* Candidate Card */}
-      <div className="p-6 rounded-xl bg-gradient-to-br from-white to-gray-50 border border-gray-200">
-        <div className="flex items-start gap-4 mb-4">
-          <Avatar className="w-16 h-16">
-            <AvatarFallback className="bg-indigo-100 text-indigo-700 text-[18px] font-semibold">
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="p-8 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100 shadow-sm">
+        <div className="flex items-start gap-5 mb-6">
+          <Avatar className="w-20 h-20 ring-2 ring-indigo-100">
+            <AvatarFallback className="bg-gradient-to-br from-indigo-100 to-indigo-50 text-indigo-700 text-[20px] font-semibold">
               {candidate.name.
               split(" ").
               map((n) => n[0]).
@@ -288,30 +292,30 @@ function ReviewModeContent({
             </AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <div className="flex items-start justify-between mb-2">
+            <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="text-[18px] font-semibold text-gray-900">
+                <h3 className="text-[19px] font-bold text-gray-900">
                   {candidate.name}
                 </h3>
-                <p className="text-[14px] text-gray-600">{candidate.title}</p>
+                <p className="text-[14px] text-gray-600 mt-1">{candidate.title}</p>
               </div>
-              <div className="text-right">
-                <div className="text-[24px] font-bold text-indigo-600">
+              <div className="text-right bg-gradient-to-br from-indigo-50 to-indigo-100 px-3 py-2 rounded-lg">
+                <div className="text-[28px] font-bold text-indigo-600">
                   {candidate.score}
                 </div>
-                <p className="text-[11px] text-gray-500">AI Score</p>
+                <p className="text-[10px] text-indigo-600 font-semibold">AI Score</p>
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              <Badge variant="secondary" className="text-[11px]">
+            <div className="flex flex-wrap gap-2 mt-3">
+              <Badge variant="outline" className="text-[11px] font-medium bg-gray-50">
                 <MapPin className="w-3 h-3 mr-1" />
                 {candidate.location}
               </Badge>
-              <Badge variant="secondary" className="text-[11px]">
+              <Badge variant="outline" className="text-[11px] font-medium bg-gray-50">
                 <Briefcase className="w-3 h-3 mr-1" />
                 {candidate.experience}
               </Badge>
-              <Badge variant="secondary" className="text-[11px]">
+              <Badge variant="outline" className="text-[11px] font-medium bg-gray-50">
                 <GraduationCap className="w-3 h-3 mr-1" />
                 {candidate.education}
               </Badge>
@@ -319,33 +323,33 @@ function ReviewModeContent({
           </div>
         </div>
 
-        <div className="mb-4">
-          <h4 className="text-[13px] font-semibold text-gray-900 mb-2">Skills</h4>
-          <div className="flex flex-wrap gap-1.5">
+        <div className="mb-6 pb-6 border-b border-gray-100">
+          <h4 className="text-[12px] font-bold text-gray-900 mb-3 uppercase tracking-wide">Skills & Expertise</h4>
+          <div className="flex flex-wrap gap-2">
             {candidate.skills.map((skill, idx) =>
-            <Badge key={idx} className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200">
+            <Badge key={idx} className="text-[10px] font-medium bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 transition-colors">
                 {skill}
               </Badge>
             )}
           </div>
         </div>
 
-        <div className="p-3 rounded-lg bg-indigo-50 border border-indigo-100">
-          <p className="text-[12px] text-gray-700">
-            <strong className="text-indigo-700">AI Reasoning:</strong> {candidate.reason}
+        <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-indigo-50/50 border border-indigo-100/50 mb-6">
+          <p className="text-[12px] text-gray-700 leading-relaxed">
+            <strong className="text-indigo-700 font-semibold">AI Reasoning:</strong> <span className="text-gray-600">{candidate.reason}</span>
           </p>
         </div>
 
         {/* Decision */}
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <p className="text-[13px] font-semibold text-gray-900 mb-3">Your Decision:</p>
+        <div>
+          <p className="text-[12px] font-bold text-gray-900 mb-4 uppercase tracking-wide">Your Decision</p>
           <div className="flex gap-3">
             <Button
               onClick={() => onDecision(candidate.id, "approve")}
-              className={`flex-1 h-12 ${
+              className={`flex-1 h-12 font-semibold transition-all duration-200 ${
               decisions[candidate.id] === "approve" ?
-              "bg-emerald-600 hover:bg-emerald-700" :
-              "bg-gray-100 text-gray-700 hover:bg-emerald-50"}`
+              "bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm" :
+              "bg-gray-100 text-gray-700 hover:bg-emerald-50 border border-gray-200"}`
               }>
 
               <ThumbsUp className="w-4 h-4 mr-2" />
@@ -353,10 +357,10 @@ function ReviewModeContent({
             </Button>
             <Button
               onClick={() => onDecision(candidate.id, "reject")}
-              className={`flex-1 h-12 ${
+              className={`flex-1 h-12 font-semibold transition-all duration-200 ${
               decisions[candidate.id] === "reject" ?
-              "bg-red-600 hover:bg-red-700" :
-              "bg-gray-100 text-gray-700 hover:bg-red-50"}`
+              "bg-red-600 hover:bg-red-700 text-white shadow-sm" :
+              "bg-gray-100 text-gray-700 hover:bg-red-50 border border-gray-200"}`
               }>
 
               <ThumbsDown className="w-4 h-4 mr-2" />
@@ -364,7 +368,7 @@ function ReviewModeContent({
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Navigation */}
       <div className="flex items-center justify-between pt-4 border-t border-gray-200">
