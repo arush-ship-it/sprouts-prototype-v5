@@ -23,6 +23,8 @@ const approvals = [
   type: "stage_move",
   agentName: "Resume Screening Agent",
   description: "3 candidates moved to Interview stage",
+  fromStage: "Applied",
+  toStage: "Interview",
   candidates: [
   {
     id: 1,
