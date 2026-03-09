@@ -531,7 +531,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
             )}
 
             {salaryExpanded && (
-              <>
+              <div>
             <p className="text-[11px] text-gray-400 mt-2 mb-4">Market data for Senior Product Designer · San Francisco, CA</p>
 
             {/* Market range bar */}
