@@ -242,6 +242,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
   const [toolbar, setToolbar] = useState(null); // { x, y, text, field }
   const [enhancing, setEnhancing] = useState(false);
+  const [addedSections, setAddedSections] = useState([]);
 
   const selectedBenefits = jobDetails.benefits ? jobDetails.benefits.split(",").filter(Boolean) : [];
   const toggleBenefit = (b) => {
