@@ -155,9 +155,9 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
                 }>
 
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center shrink-0">
-                        <Bot className="w-4 h-4 text-orange-600" />
-                      </div>
+                      
+
+
                       <div className="flex-1 min-w-0">
                         <h3 className="text-[13px] font-semibold text-gray-900 truncate leading-snug">
                           {approval.agentName}
