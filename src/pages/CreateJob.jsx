@@ -782,7 +782,12 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
                     <p className="text-[13px] font-semibold text-gray-800">{job.company} <span className="font-normal text-gray-500">· {job.title}</span></p>
                     <p className="text-[11px] text-gray-400">{job.location}</p>
                   </div>
-                  <p className="text-[12px] font-bold text-gray-800">{job.range}</p>
+                  <div className="flex items-center gap-3">
+                    <p className="text-[12px] font-bold text-gray-800">{job.range}</p>
+                    <button onClick={() => window.open("https://www.linkedin.com/jobs/search/?keywords=" + encodeURIComponent(job.title), "_blank")} className="text-gray-300 hover:text-indigo-500 transition-colors">
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
                 )}
             </div>
