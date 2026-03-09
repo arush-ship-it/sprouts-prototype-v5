@@ -59,6 +59,25 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     setIsDrawerOpen(true);
   };
 
+  const handleSendSourcingPrompt = () => {
+    if (!sourcingInput.trim()) return;
+    // Simulate AI sourcing - sample 5 random candidates
+    const sampled = reviewCandidates.sort(() => Math.random() - 0.5).slice(0, 5);
+    setSourcedCandidates(sampled);
+    setSelectedSourced(new Set());
+    setSourcingInput("");
+  };
+
+  const toggleSourcedCandidate = (id) => {
+    const updated = new Set(selectedSourced);
+    if (updated.has(id)) {
+      updated.delete(id);
+    } else {
+      updated.add(id);
+    }
+    setSelectedSourced(updated);
+  };
+
   return (
     <div className="px-8 py-2">
       {/* Sourcing Card - Only show in Review tab */}
