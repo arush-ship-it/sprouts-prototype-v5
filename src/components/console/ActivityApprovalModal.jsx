@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
 import {
   AlertCircle,
   Bot,
@@ -14,8 +15,7 @@ import {
   MapPin,
   Briefcase,
   GraduationCap,
-  Award } from
-"lucide-react";
+  Award } from "lucide-react";
 
 const approvals = [
 {
