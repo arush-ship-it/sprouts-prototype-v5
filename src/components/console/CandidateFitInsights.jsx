@@ -38,7 +38,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
       {/* Stats Row */}
       <div className="flex gap-3">
         <div className="bg-slate-50 p-4 rounded-xl flex-1 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center shrink-0">
+          <div className="bg-[#ffffff] rounded-lg w-9 h-9 flex items-center justify-center shrink-0">
             <Users className="w-4 h-4 text-indigo-600" />
           </div>
           <div>
@@ -47,7 +47,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
           </div>
         </div>
         <div className="bg-slate-50 p-4 rounded-xl flex-1 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
+          <div className="bg-[#ffffff] rounded-lg w-9 h-9 flex items-center justify-center shrink-0">
             <TrendingUp className="w-4 h-4 text-violet-600" />
           </div>
           <div>
