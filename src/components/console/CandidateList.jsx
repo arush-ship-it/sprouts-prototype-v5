@@ -411,7 +411,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               }
 
               {/* Sub Tabs — shown after insights are dismissed */}
-              {!showInsightsScreen &&
+              {!showInsightsScreen && <div className="space-y-4">
               <div className="bg-gray-100 mr-2 px-2 py-2 rounded-xl inline-flex">
                 <button
               onClick={() => setSourcingTab("ai")} className="bg-white text-gray-900 px-4 py-2 text-xs font-semibold rounded-[10px] transition-all shadow-sm">
