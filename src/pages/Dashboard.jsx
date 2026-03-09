@@ -295,6 +295,7 @@ export default function Dashboard() {
   );
   const [chatInput, setChatInput] = useState("");
   const [activeContext, setActiveContext] = useState(null);
+  const [slideIndex, setSlideIndex] = useState(0);
 
   const handleSelectContext = (topic) => {
     setActiveContext(topic);
