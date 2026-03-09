@@ -15,7 +15,10 @@ import {
   Target,
   CheckCircle2,
   ExternalLink,
-  EyeOff } from
+  EyeOff,
+  Trash2,
+  Share2,
+  XCircle } from
 "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
