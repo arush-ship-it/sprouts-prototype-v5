@@ -125,11 +125,11 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
                   <p className="text-[13px] font-semibold text-gray-800">Preferred Skills</p>
                   <p className="text-[11px] text-gray-400">Focus on FinTech and E-commerce professionals for higher skill match</p>
                 </div>
-                <button
-                onClick={() => setSkills([])}
-                className="text-[11px] text-gray-500 border border-gray-200 rounded-full px-3 py-1 hover:bg-gray-50 whitespace-nowrap ml-3">
-                  Remove
-                </button>
+                
+
+
+
+
               </div>
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {skills.map((s) =>
@@ -147,9 +147,9 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
                   <p className="text-[13px] font-semibold text-gray-800">Preferred Industries</p>
                   <p className="text-[11px] text-gray-400">Focus on FinTech and E-commerce professionals for higher skill match</p>
                 </div>
-                <button className="text-[11px] text-gray-500 border border-gray-200 rounded-full px-3 py-1 hover:bg-gray-50 whitespace-nowrap ml-3 flex items-center gap-1">
-                  <Plus className="w-3 h-3" /> Add
-                </button>
+                
+
+
               </div>
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {industries.map((i) =>
@@ -167,9 +167,9 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
                   <p className="text-[13px] font-semibold text-gray-800">Preferred Job Titles</p>
                   <p className="text-[11px] text-gray-400">Focus on FinTech and E-commerce professionals for higher skill match</p>
                 </div>
-                <button className="text-[11px] text-gray-500 border border-gray-200 rounded-full px-3 py-1 hover:bg-gray-50 whitespace-nowrap ml-3 flex items-center gap-1">
-                  <Plus className="w-3 h-3" /> Add
-                </button>
+                
+
+
               </div>
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {jobTitles.map((t) =>
