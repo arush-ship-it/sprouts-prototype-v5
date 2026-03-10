@@ -70,7 +70,7 @@ export default function CommunicationAnalyticsDashboard() {
             <TrendingUp className="w-4 h-4 text-white" />
           </div>
           <div>
-            <h2 className="text-[14px] font-bold text-slate-800">Communication Health</h2>
+            <h2 className="text-slate-800 text-sm font-semibold">Communication Health</h2>
             
           </div>
         </div>
