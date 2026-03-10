@@ -491,18 +491,97 @@ export default function Agents() {
 
 
 
-        {/* Pill Tabs */}
-        <div className="flex gap-2 mb-5">
-          <button
-            onClick={() => setActiveTab("activity")}
-            className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "activity" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-            Activity
-          </button>
-          <button
-            onClick={() => setActiveTab("agents")}
-            className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "agents" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-            Agents
-          </button>
+        {/* Pill Tabs + Controls */}
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex gap-2">
+            <button
+              onClick={() => setActiveTab("activity")}
+              className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "activity" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
+              Activity
+            </button>
+            <button
+              onClick={() => setActiveTab("agents")}
+              className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "agents" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
+              Agents
+            </button>
+          </div>
+
+          {activeTab === "agents" && (
+            <div className="flex items-center gap-2">
+              {/* Filter Button */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-all ${showFilters || filterStage !== "all" || filterType !== "all" || filterStatus !== "all" ? "bg-gray-900 text-white border-gray-900" : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
+                  <Filter className="w-3.5 h-3.5" />
+                  Filter
+                  {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 ml-0.5" />
+                  )}
+                </button>
+                {showFilters && (
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg z-20 p-4 flex flex-col gap-3">
+                    <div>
+                      <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Stage</p>
+                      <Select value={filterStage} onValueChange={setFilterStage}>
+                        <SelectTrigger className="h-8 text-[12px]"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Stages</SelectItem>
+                          <SelectItem value="Application Review">Application Review</SelectItem>
+                          <SelectItem value="Technical Assessment">Technical Assessment</SelectItem>
+                          <SelectItem value="Interview">Interview</SelectItem>
+                          <SelectItem value="All Stages">All Stages</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Type</p>
+                      <Select value={filterType} onValueChange={setFilterType}>
+                        <SelectTrigger className="h-8 text-[12px]"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Types</SelectItem>
+                          <SelectItem value="evaluation">Evaluation</SelectItem>
+                          <SelectItem value="operations">Operations</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Status</p>
+                      <Select value={filterStatus} onValueChange={setFilterStatus}>
+                        <SelectTrigger className="h-8 text-[12px]"><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Statuses</SelectItem>
+                          <SelectItem value="active">Active</SelectItem>
+                          <SelectItem value="idle">Idle</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") && (
+                      <button
+                        onClick={() => { setFilterStage("all"); setFilterType("all"); setFilterStatus("all"); }}
+                        className="text-[12px] text-red-500 hover:text-red-700 font-medium text-left">
+                        Clear filters
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* View Toggle */}
+              <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode("list")}
+                  className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "list" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                  <List className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => setViewMode("pipeline")}
+                  className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "pipeline" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Agents Pipeline / List */}
