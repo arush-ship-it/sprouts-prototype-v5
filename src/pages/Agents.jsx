@@ -559,10 +559,10 @@ export default function Agents() {
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-full">
             {["agents", "activity"].map((tab) =>
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-all capitalize ${activeTab === tab ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-all capitalize ${activeTab === tab ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
                 {tab === "agents" ? "Agents" : "Activity"}
               </button>
             )}
@@ -631,8 +631,8 @@ export default function Agents() {
               {/* View Toggle */}
               <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
                 <button
-                onClick={() => setViewMode("list")}
-                className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "list" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setViewMode("list")} className="bg-slate-400 text-white p-1.5 rounded-md flex items-center justify-center transition-all">
+
                   <List className="w-3.5 h-3.5" />
                 </button>
                 <button
