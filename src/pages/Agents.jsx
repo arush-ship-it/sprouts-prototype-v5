@@ -11,6 +11,7 @@ import {
   PlayCircle,
   Plus,
   SlidersHorizontal,
+  Filter,
   X,
   TrendingUp,
   Activity,
