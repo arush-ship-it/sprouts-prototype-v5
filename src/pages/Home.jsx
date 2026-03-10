@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Briefcase, Mail, Calendar } from "lucide-react";
+import { Briefcase, Mail, Calendar, Inbox } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   BarChart, Bar, LineChart, Line,
