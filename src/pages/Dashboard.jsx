@@ -309,6 +309,7 @@ export default function Dashboard() {
                       <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">342</h3>
                       <p className="text-[12px] text-gray-500 mt-1">Total candidates</p>
                     </div>
+                    <CardActions />
                   </div>
                   <ResponsiveContainer width="100%" height={200}>
                     <BarChart data={pipelineFunnelData}>
