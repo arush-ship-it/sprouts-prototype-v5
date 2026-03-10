@@ -580,7 +580,6 @@ export default function Agents() {
                 </button>
               </div>
             </div>
-          )}
         </div>
 
         {/* Agents Pipeline / List */}
