@@ -209,6 +209,7 @@ export default function Agents() {
   const [viewMode, setViewMode] = useState("list"); // "pipeline" | "list"
   const [activeTab, setActiveTab] = useState("agents"); // "activity" | "agents"
   const [showFilters, setShowFilters] = useState(false);
+  const [analysisExpanded, setAnalysisExpanded] = useState(true);
 
   const handleToggle = (agentId) => {
     setAgents((prev) =>
