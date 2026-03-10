@@ -596,7 +596,7 @@ export default function Agents() {
           </div>
         }
 
-        <div className={`flex gap-4 overflow-x-auto pb-4 ${viewMode !== "pipeline" ? "hidden" : ""}`}>
+        <div className={`flex gap-4 overflow-x-auto pb-4 ${activeTab !== "agents" || viewMode !== "pipeline" ? "hidden" : ""}`}>
           {["Application Review", "Technical Assessment", "Interview", "All Stages"].map((stage) => {
             const stageAgents = filteredAgents.filter((agent) => agent.stage === stage);
             if (stageAgents.length === 0) return null;
