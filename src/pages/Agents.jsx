@@ -559,14 +559,14 @@ export default function Agents() {
         <div className="flex items-center justify-between mb-5">
           <div className="flex gap-2">
             <button
-              onClick={() => setActiveTab("activity")}
-              className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "activity" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-              Activity
-            </button>
-            <button
               onClick={() => setActiveTab("agents")}
               className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "agents" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
               Agents
+            </button>
+            <button
+              onClick={() => setActiveTab("activity")}
+              className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "activity" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
+              Activity
             </button>
           </div>
 
