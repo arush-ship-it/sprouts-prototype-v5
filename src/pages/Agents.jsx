@@ -557,17 +557,15 @@ export default function Agents() {
 
         {/* Pill Tabs + Controls */}
         <div className="flex items-center justify-between mb-5">
-          <div className="flex gap-2">
-            <button
-              onClick={() => setActiveTab("agents")}
-              className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "agents" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-              Agents
-            </button>
-            <button
-              onClick={() => setActiveTab("activity")}
-              className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-all ${activeTab === "activity" ? "bg-gray-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-              Activity
-            </button>
+          <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-full">
+            {["agents", "activity"].map((tab) =>
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-all capitalize ${activeTab === tab ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+                {tab === "agents" ? "Agents" : "Activity"}
+              </button>
+            )}
           </div>
 
           <div className="flex items-center gap-2">
