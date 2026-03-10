@@ -310,10 +310,28 @@ export default function Agents() {
 
           <div className="space-y-6">
               {/* Section Title */}
-              <div className="flex items-center justify-between">
+              <button
+                onClick={() => setAnalysisExpanded(!analysisExpanded)}
+                className="w-full flex items-center justify-between group">
                 <p className="text-[15px] font-semibold text-gray-900">Agent Analysis</p>
-                <ChevronDown className="w-4 h-4 text-gray-400" />
-              </div>
+                <div className="flex items-center gap-3">
+                  {!analysisExpanded && (
+                    <div className="flex items-center gap-4">
+                      {agents.map((a) => (
+                        <div key={a.id} className="flex items-center gap-1.5">
+                          <div className={`w-1.5 h-1.5 rounded-full ${a.status === "active" ? "bg-emerald-500" : "bg-gray-300"}`} />
+                          <span className="text-[11px] text-gray-500 font-medium">{a.name.split(" ")[0]}</span>
+                          <span className="text-[11px] font-semibold text-gray-700">{a.accuracy}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${analysisExpanded ? "" : "-rotate-90"}`} />
+                </div>
+              </button>
+
+              {/* Expanded Content */}
+              {analysisExpanded && <>
               {/* Overall Metrics */}
               <div>
                 
