@@ -506,8 +506,7 @@ export default function Agents() {
             </button>
           </div>
 
-          {activeTab === "agents" && (
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
               {/* Filter Button */}
               <div className="relative">
                 <button
