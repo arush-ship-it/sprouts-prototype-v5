@@ -331,7 +331,7 @@ export default function Agents() {
               </button>
 
               {/* Expanded Content */}
-              {analysisExpanded && <>
+              {analysisExpanded && <div className="space-y-6">
               {/* Overall Metrics */}
               <div>
                 
