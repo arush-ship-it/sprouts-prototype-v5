@@ -341,7 +341,7 @@ export default function Agents() {
               <div>
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-[#ffffff] p-6 rounded-lg from-emerald-50 to-teal-50">
+                  <div className="bg-[#ffffff] p-6 rounded-2xl from-emerald-50 to-teal-50">
                     <div className="flex items-center gap-2 mb-2">
                       <Zap className="w-4 h-4 text-emerald-600" />
                       <p className="text-[11px] font-medium text-emerald-700">Total Processed</p>
@@ -350,7 +350,7 @@ export default function Agents() {
                     <p className="text-[10px] text-emerald-600 mt-1">+12% from last month</p>
                   </div>
 
-                  <div className="bg-[#ffffff] p-6 rounded-lg from-blue-50 to-cyan-50">
+                  <div className="bg-[#ffffff] p-6 rounded-2xl from-blue-50 to-cyan-50">
                     <div className="flex items-center gap-2 mb-2">
                       <Activity className="w-4 h-4 text-blue-600" />
                       <p className="text-[11px] font-medium text-blue-700">Active Agents</p>
@@ -362,7 +362,7 @@ export default function Agents() {
               </div>
 
               {/* Comparative Agent Analysis Chart */}
-              <div className="bg-white rounded-xl p-5 border border-gray-100">
+              <div className="bg-white p-5 rounded-2xl border border-gray-100">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-[13px] font-semibold text-gray-900">Agent Comparative Analysis</p>
