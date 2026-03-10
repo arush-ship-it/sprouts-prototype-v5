@@ -311,21 +311,21 @@ export default function Agents() {
           <div className="space-y-6">
               {/* Section Title */}
               <button
-                onClick={() => setAnalysisExpanded(!analysisExpanded)}
-                className="w-full flex items-center justify-between group">
+              onClick={() => setAnalysisExpanded(!analysisExpanded)}
+              className="w-full flex items-center justify-between group">
                 <p className="text-[15px] font-semibold text-gray-900">Agent Analysis</p>
                 <div className="flex items-center gap-3">
-                  {!analysisExpanded && (
-                    <div className="flex items-center gap-4">
-                      {agents.map((a) => (
-                        <div key={a.id} className="flex items-center gap-1.5">
-                          <div className={`w-1.5 h-1.5 rounded-full ${a.status === "active" ? "bg-emerald-500" : "bg-gray-300"}`} />
-                          <span className="text-[11px] text-gray-500 font-medium">{a.name.split(" ")[0]}</span>
-                          <span className="text-[11px] font-semibold text-gray-700">{a.accuracy}</span>
-                        </div>
-                      ))}
-                    </div>
+                  {!analysisExpanded &&
+                <div className="flex items-center gap-4">
+                      {agents.map((a) => null
+
+
+
+
+
                   )}
+                    </div>
+                }
                   <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${analysisExpanded ? "" : "-rotate-90"}`} />
                 </div>
               </button>
@@ -369,19 +369,19 @@ export default function Agents() {
                     data={agents.map((a) => ({
                       name: a.name.length > 16 ? a.name.slice(0, 14) + "…" : a.name,
                       Accuracy: parseFloat(a.accuracy),
-                      Processed: a.totalProcessed,
+                      Processed: a.totalProcessed
                     }))}
                     margin={{ top: 4, right: 8, left: -10, bottom: 0 }}
-                    barCategoryGap="30%"
-                  >
+                    barCategoryGap="30%">
+
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
                     <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
                     <YAxis yAxisId="left" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} domain={[0, 100]} unit="%" />
                     <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
                     <Tooltip
                       contentStyle={{ fontSize: 11, borderRadius: 8, border: "1px solid #e5e7eb" }}
-                      formatter={(value, name) => [name === "Accuracy" ? `${value}%` : value, name]}
-                    />
+                      formatter={(value, name) => [name === "Accuracy" ? `${value}%` : value, name]} />
+
                     <Legend iconType="circle" iconSize={7} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
                     <Bar yAxisId="left" dataKey="Accuracy" fill="#6366f1" radius={[4, 4, 0, 0]} />
                     <Bar yAxisId="right" dataKey="Processed" fill="#10b981" radius={[4, 4, 0, 0]} />
