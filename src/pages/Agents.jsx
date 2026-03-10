@@ -318,7 +318,7 @@ export default function Agents() {
               <button
               onClick={() => setAnalysisExpanded(!analysisExpanded)}
               className="w-full flex items-center justify-between group">
-                <p className="text-[15px] font-semibold text-gray-900">Agent Analysis</p>
+                <p className="text-gray-900 text-sm font-semibold">Agent Analysis</p>
                 <div className="flex items-center gap-3">
                   {!analysisExpanded &&
                 <div className="flex items-center gap-4">
@@ -331,7 +331,7 @@ export default function Agents() {
                   )}
                     </div>
                 }
-                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${analysisExpanded ? "" : "-rotate-90"}`} />
+                  <ChevronDown className="text-gray-700 lucide lucide-chevron-down w-4 h-4 transition-transform -rotate-90" />
                 </div>
               </button>
 
