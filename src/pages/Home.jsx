@@ -194,7 +194,7 @@ export default function Home() {
               <h2 className="text-[15px] font-semibold text-gray-800">All Jobs</h2>
               <span className="bg-[#ffffff] text-slate-500 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "ACTIVE").length} Active</span>
               <span className="bg-[#ffffff] text-slate-500 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "CLOSED").length} Closed</span>
-              <span className="px-2 py-0.5 rounded-md bg-yellow-100 text-yellow-600 text-[11px] font-semibold">{jobs.filter((j) => j.status === "DRAFT").length} Drafts</span>
+              <span className="bg-transparent text-slate-500 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "DRAFT").length} Drafts</span>
             </div>
             <div className="space-y-1">
               {jobs.map((job) =>
