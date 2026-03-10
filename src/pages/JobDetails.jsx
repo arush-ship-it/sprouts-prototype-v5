@@ -118,7 +118,7 @@ export default function JobDetails() {
 
   const toggleUnpublish = (platform) => {
     setUnpublishedPlatforms((prev) =>
-      prev.includes(platform) ? prev.filter((p) => p !== platform) : [...prev, platform]
+    prev.includes(platform) ? prev.filter((p) => p !== platform) : [...prev, platform]
     );
   };
 
@@ -179,11 +179,11 @@ export default function JobDetails() {
                 <Share2 className="w-3.5 h-3.5" />
                 Share
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-amber-600 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 transition-colors">
+              <button className="bg-[#ffffff] text-slate-700 px-3 py-1.5 text-sm font-medium rounded-lg flex items-center gap-1.5 border border-amber-200 hover:bg-amber-100 transition-colors">
                 <XCircle className="w-3.5 h-3.5" />
                 Close Job
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-red-600 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 transition-colors">
+              <button className="bg-[#ffffff] text-slate-700 px-3 py-1.5 text-sm font-medium rounded-lg flex items-center gap-1.5 border border-red-200 hover:bg-red-100 transition-colors">
                 <Trash2 className="w-3.5 h-3.5" />
                 Delete
               </button>
@@ -280,22 +280,22 @@ export default function JobDetails() {
                 }
                   <div>
                     <span className="text-[13px] font-medium text-gray-900">{posting.platform}</span>
-                    {unpublishedPlatforms.includes(posting.platform) && (
-                      <span className="ml-2 text-[11px] text-red-500 font-medium">Unpublished</span>
-                    )}
+                    {unpublishedPlatforms.includes(posting.platform) &&
+                  <span className="ml-2 text-[11px] text-red-500 font-medium">Unpublished</span>
+                  }
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  {!unpublishedPlatforms.includes(posting.platform) && (
-                    <a href={posting.url} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                  {!unpublishedPlatforms.includes(posting.platform) &&
+                <a href={posting.url} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
                       View Posting
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
-                  )}
+                }
                   <button
-                    onClick={() => toggleUnpublish(posting.platform)}
-                    className={`flex items-center gap-1.5 text-[12px] font-medium transition-colors ${unpublishedPlatforms.includes(posting.platform) ? "text-emerald-600 hover:text-emerald-800" : "text-red-400 hover:text-red-600"}`}>
+                  onClick={() => toggleUnpublish(posting.platform)}
+                  className={`flex items-center gap-1.5 text-[12px] font-medium transition-colors ${unpublishedPlatforms.includes(posting.platform) ? "text-emerald-600 hover:text-emerald-800" : "text-red-400 hover:text-red-600"}`}>
                     <EyeOff className="w-3.5 h-3.5" />
                     {unpublishedPlatforms.includes(posting.platform) ? "Republish" : "Unpublish"}
                   </button>
