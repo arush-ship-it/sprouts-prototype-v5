@@ -192,7 +192,7 @@ export default function Home() {
           <div className="bg-white px-4 py-4 rounded-xl border border-gray-100 shadow-sm flex-1 min-h-0 overflow-hidden">
             <div className="flex items-center gap-3 mb-5">
               <h2 className="text-[15px] font-semibold text-gray-800">All Jobs</h2>
-              <span className="bg-[#ffffff] text-slate-500 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "ACTIVE").length} Active</span>
+              <span className="bg-[#ffffff] text-green-600 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "ACTIVE").length} Active</span>
               <span className="bg-[#ffffff] text-slate-500 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "CLOSED").length} Closed</span>
               <span className="bg-transparent text-slate-500 px-2 py-0.5 text-xs font-medium rounded-md">{jobs.filter((j) => j.status === "DRAFT").length} Drafts</span>
             </div>
