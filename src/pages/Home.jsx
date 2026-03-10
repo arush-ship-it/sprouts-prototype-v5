@@ -288,7 +288,7 @@ function JobRow({ job }) {
 // ── Approval item ─────────────────────────────────────────────────────────────
 function ApprovalItem({ item }) {
   return (
-    <div className="flex items-start gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100/80 transition-colors duration-200 group">
+    <div className="bg-transparent p-3 rounded-xl flex items-start gap-3 hover:bg-gray-100/80 transition-colors duration-200 group">
       <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5">
         <Briefcase className="w-3.5 h-3.5 text-orange-500" />
       </div>
