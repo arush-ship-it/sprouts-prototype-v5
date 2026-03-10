@@ -674,7 +674,11 @@ export default function Agents() {
           })}
         </div>
 
-        {filteredAgents.length === 0 &&
+        {activeTab === "activity" &&
+        <div className="py-12 text-center text-gray-400 text-[13px]">Activity feed coming soon.</div>
+        }
+
+        {activeTab === "agents" && filteredAgents.length === 0 &&
         <div className="text-center py-12">
             <Bot className="w-12 h-12 text-gray-300 mx-auto mb-3" />
             <p className="text-[14px] text-gray-500">No agents found matching your filters</p>
