@@ -273,8 +273,8 @@ function JobRow({ job }) {
         <Mail className="w-3 h-3" />
         {job.unreadEmails} unread
       </div>
-      <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-gray-200 text-[11px] font-medium text-gray-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all duration-200">
-        <Inbox className="w-3.5 h-3.5" /> Inbox
+      <button className="flex items-center justify-center w-7 h-7 rounded-lg border border-gray-200 text-gray-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all duration-200">
+        <Inbox className="w-3.5 h-3.5" />
       </button>
       <span className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
         {job.status}
