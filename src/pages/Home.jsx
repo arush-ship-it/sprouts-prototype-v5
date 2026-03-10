@@ -265,10 +265,13 @@ function JobRow({ job }) {
         <p className="text-[10px] text-gray-400">In Pipeline</p>
         <PipelineBar value={job.inPipeline} total={job.applicants} />
       </div>
-      <div className="flex items-center gap-1.5 text-gray-500">
-        <Mail className="w-3.5 h-3.5" />
-        <span className="text-[13px] font-semibold text-gray-700">{job.unreadEmails}</span>
-        <span className="text-[10px] text-gray-400">unread</span>
+      <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+        job.unreadEmails >= 10 ? "bg-red-100 text-red-600" :
+        job.unreadEmails >= 4 ? "bg-yellow-100 text-yellow-600" :
+        "bg-gray-100 text-gray-500"
+      }`}>
+        <Mail className="w-3 h-3" />
+        {job.unreadEmails} unread
       </div>
       <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-gray-200 text-[11px] font-medium text-gray-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all duration-200">
         <Inbox className="w-3.5 h-3.5" /> Inbox
