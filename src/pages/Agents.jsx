@@ -262,18 +262,18 @@ export default function Agents() {
             <p className="text-[13px] text-gray-500 mt-1">Dedicated intelligence embedded within every pipeline stage</p>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode("pipeline")}
-                className={`flex items-center justify-center p-2 rounded-md transition-all ${viewMode === "pipeline" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
-                <LayoutGrid className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => setViewMode("list")}
-                className={`flex items-center justify-center p-2 rounded-md transition-all ${viewMode === "list" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
-                <List className="w-3.5 h-3.5" />
-              </button>
-            </div>
+            
+
+
+
+
+
+
+
+
+
+
+
             
 
 
@@ -510,16 +510,16 @@ export default function Agents() {
               {/* Filter Button */}
               <div className="relative">
                 <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-all ${showFilters || filterStage !== "all" || filterType !== "all" || filterStatus !== "all" ? "bg-gray-900 text-white border-gray-900" : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
+                onClick={() => setShowFilters(!showFilters)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-all ${showFilters || filterStage !== "all" || filterType !== "all" || filterStatus !== "all" ? "bg-gray-900 text-white border-gray-900" : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
                   <Filter className="w-3.5 h-3.5" />
                   Filter
-                  {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 ml-0.5" />
-                  )}
+                  {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") &&
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 ml-0.5" />
+                }
                 </button>
-                {showFilters && (
-                  <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg z-20 p-4 flex flex-col gap-3">
+                {showFilters &&
+              <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg z-20 p-4 flex flex-col gap-3">
                     <div>
                       <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Stage</p>
                       <Select value={filterStage} onValueChange={setFilterStage}>
@@ -555,27 +555,27 @@ export default function Agents() {
                         </SelectContent>
                       </Select>
                     </div>
-                    {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") && (
-                      <button
-                        onClick={() => { setFilterStage("all"); setFilterType("all"); setFilterStatus("all"); }}
-                        className="text-[12px] text-red-500 hover:text-red-700 font-medium text-left">
+                    {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") &&
+                <button
+                  onClick={() => {setFilterStage("all");setFilterType("all");setFilterStatus("all");}}
+                  className="text-[12px] text-red-500 hover:text-red-700 font-medium text-left">
                         Clear filters
                       </button>
-                    )}
+                }
                   </div>
-                )}
+              }
               </div>
 
               {/* View Toggle */}
               <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
                 <button
-                  onClick={() => setViewMode("list")}
-                  className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "list" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setViewMode("list")}
+                className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "list" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
                   <List className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => setViewMode("pipeline")}
-                  className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "pipeline" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setViewMode("pipeline")}
+                className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "pipeline" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
                   <LayoutGrid className="w-3.5 h-3.5" />
                 </button>
               </div>
