@@ -56,20 +56,18 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
         {/* Filter, Search & View Mode */}
         <div className="flex items-center gap-2">
           {/* Search Bar */}
-          <div className="bg-gray-200 px-3 py-3 rounded-lg flex items-center gap-2 transition-all duration-300 w-10"
-
-
-
-          onMouseEnter={() => setIsSearchExpanded(true)}
-          onMouseLeave={() => setIsSearchExpanded(false)}>
-
-            <Search className="text-gray-600 lucide lucide-search w-4 h-4 shrink-0" />
-            {isSearchExpanded &&
-            <Input
+          <div
+            className="bg-gray-200 px-3 py-2 rounded-lg flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out"
+            style={{ width: isSearchExpanded ? "200px" : "40px" }}
+            onMouseEnter={() => setIsSearchExpanded(true)}
+            onMouseLeave={() => setIsSearchExpanded(false)}
+          >
+            <Search className="text-gray-600 w-4 h-4 shrink-0" />
+            <input
               placeholder="Search candidates..."
-              className="border-0 bg-transparent h-6 px-0 text-[13px] focus-visible:ring-0 focus-visible:ring-offset-0" />
-
-            }
+              className="bg-transparent border-none outline-none text-[13px] text-gray-700 placeholder-gray-400 w-full transition-opacity duration-300"
+              style={{ opacity: isSearchExpanded ? 1 : 0 }}
+            />
           </div>
 
           {/* Filter Button */}
