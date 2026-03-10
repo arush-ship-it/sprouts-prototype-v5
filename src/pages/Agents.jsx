@@ -676,7 +676,7 @@ export default function Agents() {
         </div>
 
         {activeTab === "activity" &&
-        <div className="py-12 text-center text-gray-400 text-[13px]">Activity feed coming soon.</div>
+        <AgentActivityFeed />
         }
 
         {activeTab === "agents" && filteredAgents.length === 0 &&
