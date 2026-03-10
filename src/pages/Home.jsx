@@ -288,18 +288,18 @@ function JobRow({ job }) {
 // ── Approval item ─────────────────────────────────────────────────────────────
 function ApprovalItem({ item }) {
   return (
-    <div className="flex items-start gap-3">
-      
-
-
-
-
+    <div className="flex items-start gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100/80 transition-colors duration-200 group">
+      <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <Briefcase className="w-3.5 h-3.5 text-orange-500" />
+      </div>
       <div className="flex-1 min-w-0">
         <p className="text-[13px] font-semibold text-gray-800 leading-snug">{item.text}</p>
-        <div className="flex items-center gap-2 mt-1 flex-wrap">
-          <span className="text-slate-500 text-xs font-medium">{item.jobName}</span>
-          
-          <span className="text-[11px] text-orange-500">Pending {item.pendingSince}</span>
+        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+          <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-white border border-gray-200 text-slate-600 text-[11px] font-medium">{item.jobName}</span>
+          <span className="inline-flex items-center gap-1 text-[11px] text-orange-500 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 inline-block" />
+            Pending {item.pendingSince}
+          </span>
         </div>
       </div>
     </div>);
