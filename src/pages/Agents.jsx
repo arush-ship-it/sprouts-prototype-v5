@@ -307,6 +307,11 @@ export default function Agents() {
           </div>
 
           <div className="space-y-6">
+              {/* Section Title */}
+              <div className="flex items-center justify-between">
+                <p className="text-[15px] font-semibold text-gray-900">Agent Analysis</p>
+                <ChevronDown className="w-4 h-4 text-gray-400" />
+              </div>
               {/* Overall Metrics */}
               <div>
                 
