@@ -254,19 +254,27 @@ function JobRow({ job }) {
           <p className="text-[11px] text-gray-400">{job.department}</p>
         </div>
       </div>
-      <div className="flex items-center gap-8">
-        <div className="text-center">
-          <p className="text-[15px] font-bold text-gray-800">{job.applicants}</p>
-          <p className="text-[10px] text-gray-400">Applicants</p>
-        </div>
-        <div className="text-center min-w-[64px]">
-          <p className="text-[15px] font-bold text-blue-600">{job.inPipeline}</p>
-          <p className="text-[10px] text-gray-400">In Pipeline</p>
-          <PipelineBar value={job.inPipeline} total={job.applicants} />
-        </div>
-        <span className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
-          {job.status}
-        </span>
+      <div className="flex items-center gap-6">
+      <div className="text-center">
+        <p className="text-[15px] font-bold text-gray-800">{job.applicants}</p>
+        <p className="text-[10px] text-gray-400">Applicants</p>
+      </div>
+      <div className="text-center min-w-[64px]">
+        <p className="text-[15px] font-bold text-blue-600">{job.inPipeline}</p>
+        <p className="text-[10px] text-gray-400">In Pipeline</p>
+        <PipelineBar value={job.inPipeline} total={job.applicants} />
+      </div>
+      <div className="flex items-center gap-1.5 text-gray-500">
+        <Mail className="w-3.5 h-3.5" />
+        <span className="text-[13px] font-semibold text-gray-700">{job.unreadEmails}</span>
+        <span className="text-[10px] text-gray-400">unread</span>
+      </div>
+      <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-gray-200 text-[11px] font-medium text-gray-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all duration-200">
+        <Inbox className="w-3.5 h-3.5" /> Inbox
+      </button>
+      <span className="px-3 py-1 bg-green-100 text-green-700 text-[11px] font-semibold rounded-md">
+        {job.status}
+      </span>
       </div>
     </div>);
 
