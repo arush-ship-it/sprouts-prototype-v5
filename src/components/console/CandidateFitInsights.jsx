@@ -58,7 +58,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
       </div>
 
       {/* Chart */}
-      <div className="bg-white px-4 py-20 rounded-xl border border-gray-200">
+      <div className="bg-white px-4 py-20 rounded-xl">
         <p className="text-[12px] font-semibold text-gray-500 mb-1 text-center">Analysed 301 Candidates</p>
         <ResponsiveContainer width="100%" height={160}>
           <BarChart data={matchData} barSize={36}>
