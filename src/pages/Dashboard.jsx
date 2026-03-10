@@ -386,6 +386,7 @@ export default function Dashboard() {
                         <div><h3 className="text-[28px] font-bold bg-gradient-to-br from-emerald-600 to-emerald-400 bg-clip-text text-transparent">156</h3><p className="text-[10px] text-gray-500">Resumes</p></div>
                       </div>
                     </div>
+                    <CardActions />
                   </div>
                   <ResponsiveContainer width="100%" height={200}>
                     <LineChart data={monthlyData}>
