@@ -20,7 +20,8 @@ import {
   Zap,
   Sparkles,
   LayoutGrid,
-  List } from
+  List,
+  ChevronDown } from
 "lucide-react";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import { Button } from "@/components/ui/button";
