@@ -405,10 +405,13 @@ export default function Dashboard() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="group relative p-7 rounded-[20px] bg-gradient-to-br from-white/80 via-white/60 to-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_48px_rgba(99,102,241,0.12)] transition-all duration-500 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-violet-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10">
-                  <div className="mb-6">
-                    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Source Breakdown</p>
-                    <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">45%</h3>
-                    <p className="text-[12px] text-gray-500 mt-1">Direct applications</p>
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Source Breakdown</p>
+                      <h3 className="text-[32px] font-bold bg-gradient-to-br from-gray-900 to-gray-600 bg-clip-text text-transparent">45%</h3>
+                      <p className="text-[12px] text-gray-500 mt-1">Direct applications</p>
+                    </div>
+                    <CardActions />
                   </div>
                   <ResponsiveContainer width="100%" height={160}>
                     <RechartsPieChart>
