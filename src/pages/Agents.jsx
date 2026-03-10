@@ -302,7 +302,7 @@ export default function Agents() {
             </div>
           </div>
 
-          <div className="pl-1 space-y-6">
+          <div className="space-y-6">
               {/* Overall Metrics */}
               <div>
                 
