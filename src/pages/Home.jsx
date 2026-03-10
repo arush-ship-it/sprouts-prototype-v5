@@ -260,7 +260,7 @@ function JobRow({ job }) {
           <p className="text-[11px] text-gray-400">{job.department}</p>
         </div>
       </div>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-8">
       <div className="text-center">
         <p className="text-[15px] font-bold text-gray-800">{job.applicants}</p>
         <p className="text-[10px] text-gray-400">Applicants</p>
