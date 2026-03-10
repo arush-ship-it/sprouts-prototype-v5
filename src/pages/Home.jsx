@@ -244,7 +244,7 @@ export default function Home() {
 function JobRow({ job }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <div className="py-1 rounded-lg flex items-center justify-between transition-all duration-200 border border-transparent"
+    <div className="py-3 px-2 rounded-lg flex items-center justify-between transition-all duration-200 border border-transparent"
 
     onMouseEnter={() => setHovered(true)}
     onMouseLeave={() => setHovered(false)}>
