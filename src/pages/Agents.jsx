@@ -211,6 +211,11 @@ export default function Agents() {
   const [showFilters, setShowFilters] = useState(false);
   const [analysisExpanded, setAnalysisExpanded] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setAnalysisExpanded(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleToggle = (agentId) => {
     setAgents((prev) =>
     prev.map((agent) =>
