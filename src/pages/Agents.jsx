@@ -207,6 +207,7 @@ export default function Agents() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState("list"); // "pipeline" | "list"
   const [activeTab, setActiveTab] = useState("agents"); // "activity" | "agents"
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleToggle = (agentId) => {
     setAgents((prev) =>
