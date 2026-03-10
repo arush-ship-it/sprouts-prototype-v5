@@ -85,6 +85,17 @@ const sourceData = [
 { name: "Others", value: 8, color: "#f59e0b" }];
 
 
+const CardActions = () => (
+  <div className="flex items-center gap-1">
+    <button className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-200" title="Add Filter">
+      <SlidersHorizontal className="w-3.5 h-3.5" />
+    </button>
+    <button className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-200" title="Download PDF">
+      <Download className="w-3.5 h-3.5" />
+    </button>
+  </div>
+);
+
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
