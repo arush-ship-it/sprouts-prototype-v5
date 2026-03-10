@@ -331,6 +331,39 @@ export default function Agents() {
                 </div>
               </div>
 
+              {/* Comparative Agent Analysis Chart */}
+              <div className="bg-white rounded-xl p-5 border border-gray-100">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-900">Agent Comparative Analysis</p>
+                    <p className="text-[11px] text-gray-400 mt-0.5">Accuracy (%) vs Total Processed across all agents</p>
+                  </div>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart
+                    data={agents.map((a) => ({
+                      name: a.name.length > 16 ? a.name.slice(0, 14) + "…" : a.name,
+                      Accuracy: parseFloat(a.accuracy),
+                      Processed: a.totalProcessed,
+                    }))}
+                    margin={{ top: 4, right: 8, left: -10, bottom: 0 }}
+                    barCategoryGap="30%"
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
+                    <YAxis yAxisId="left" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} domain={[0, 100]} unit="%" />
+                    <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
+                    <Tooltip
+                      contentStyle={{ fontSize: 11, borderRadius: 8, border: "1px solid #e5e7eb" }}
+                      formatter={(value, name) => [name === "Accuracy" ? `${value}%` : value, name]}
+                    />
+                    <Legend iconType="circle" iconSize={7} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
+                    <Bar yAxisId="left" dataKey="Accuracy" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                    <Bar yAxisId="right" dataKey="Processed" fill="#10b981" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
               {/* Trends and Distribution */}
               <div className="grid grid-cols-3 gap-4">
                 {/* Activity Trends */}
