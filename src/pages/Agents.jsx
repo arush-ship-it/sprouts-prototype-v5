@@ -306,41 +306,23 @@ export default function Agents() {
               {/* Overall Metrics */}
               <div>
                 
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-emerald-50 to-teal-50">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-[#ffffff] p-6 rounded-lg from-emerald-50 to-teal-50">
                     <div className="flex items-center gap-2 mb-2">
                       <Zap className="w-4 h-4 text-emerald-600" />
                       <p className="text-[11px] font-medium text-emerald-700">Total Processed</p>
                     </div>
-                    <p className="text-[28px] font-bold text-emerald-900">{totalProcessed.toLocaleString()}</p>
+                    <p className="text-[32px] font-bold text-emerald-900">{totalProcessed.toLocaleString()}</p>
                     <p className="text-[10px] text-emerald-600 mt-1">+12% from last month</p>
                   </div>
 
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-indigo-50 to-purple-50">
-                    <div className="flex items-center gap-2 mb-2">
-                      <TrendingUp className="w-4 h-4 text-indigo-600" />
-                      <p className="text-[11px] font-medium text-indigo-700">Avg Accuracy</p>
-                    </div>
-                    <p className="text-[28px] font-bold text-indigo-900">{avgAccuracy}%</p>
-                    <p className="text-[10px] text-indigo-600 mt-1">+2.3% from last month</p>
-                  </div>
-
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-blue-50 to-cyan-50">
+                  <div className="bg-[#ffffff] p-6 rounded-lg from-blue-50 to-cyan-50">
                     <div className="flex items-center gap-2 mb-2">
                       <Activity className="w-4 h-4 text-blue-600" />
                       <p className="text-[11px] font-medium text-blue-700">Active Agents</p>
                     </div>
-                    <p className="text-[28px] font-bold text-blue-900">{activeAgents}/{agents.length}</p>
+                    <p className="text-[32px] font-bold text-blue-900">{activeAgents}/{agents.length}</p>
                     <p className="text-[10px] text-blue-600 mt-1">{(activeAgents / agents.length * 100).toFixed(0)}% deployment rate</p>
-                  </div>
-
-                  <div className="bg-[#ffffff] p-4 rounded-lg from-amber-50 to-orange-50">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Clock className="w-4 h-4 text-amber-600" />
-                      <p className="text-[11px] font-medium text-amber-700">Avg Processing Time</p>
-                    </div>
-                    <p className="text-[28px] font-bold text-amber-900">3.2s</p>
-                    <p className="text-[10px] text-amber-600 mt-1">-0.5s faster</p>
                   </div>
                 </div>
               </div>
