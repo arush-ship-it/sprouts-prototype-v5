@@ -30,7 +30,7 @@ export default function TopNav({ currentPageName }) {
       </Link>
 
       {/* Nav Links */}
-      <nav className="pl-6 flex items-center gap-0.5 flex-1 justify-center">
+      <nav className="pl-24 flex items-center gap-0.5 flex-1 justify-center">
         {navLinks.map((link) => {
           const isActive = currentPageName === link.page;
           return (
