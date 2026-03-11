@@ -227,7 +227,7 @@ export default function CommunicationAnalyticsDashboard() {
                 </div>
 
                 {/* View All Sequences Button */}
-                <button className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[12px] font-semibold transition-colors shadow-sm shadow-indigo-200">
+                <button className="bg-slate-50 text-[12px] mt-3 px-4 py-2.5 font-semibold rounded-xl w-full flex items-center justify-center gap-2 hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200">
                   <Zap className="w-3.5 h-3.5" />
                   View All Sequences
                 </button>
