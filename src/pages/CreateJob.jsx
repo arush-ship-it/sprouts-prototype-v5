@@ -417,6 +417,33 @@ function ReviewJDScreen({ job, onBack, onNext }) {
     setEnhancing(false);
   };
 
+  const [enhancingSection, setEnhancingSection] = useState(null);
+
+  const handleEnhanceSection = async (section) => {
+    setEnhancingSection(section);
+    const { base44 } = await import("@/api/base44Client");
+    if (section === "requirements") {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Enhance and improve these job requirements to be more clear, compelling, and professional. Return a JSON array of strings only, no extra text:\n\n${JSON.stringify(jd.requirements)}`,
+        response_json_schema: { type: "object", properties: { items: { type: "array", items: { type: "string" } } } }
+      });
+      if (result?.items) setJd((prev) => ({ ...prev, requirements: result.items }));
+    } else if (section === "responsibilities") {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Enhance and improve these job responsibilities to be more clear, compelling, and professional. Return a JSON array of strings only, no extra text:\n\n${JSON.stringify(jd.responsibilities)}`,
+        response_json_schema: { type: "object", properties: { items: { type: "array", items: { type: "string" } } } }
+      });
+      if (result?.items) setJd((prev) => ({ ...prev, responsibilities: result.items }));
+    } else if (section === "description") {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Enhance and improve this job description to be more engaging, clear, and professional. Return only the improved text:\n\n${jd.description}`
+      });
+      const improved = typeof result === "string" ? result : result?.text || result?.content || jd.description;
+      setJd((prev) => ({ ...prev, description: improved }));
+    }
+    setEnhancingSection(null);
+  };
+
   const updateReq = (i, val) => setJd((prev) => {const r = [...prev.requirements];r[i] = val;return { ...prev, requirements: r };});
   const deleteReq = (i) => setJd((prev) => ({ ...prev, requirements: prev.requirements.filter((_, idx) => idx !== i) }));
   const addReq = () => setJd((prev) => ({ ...prev, requirements: [...prev.requirements, ""] }));
