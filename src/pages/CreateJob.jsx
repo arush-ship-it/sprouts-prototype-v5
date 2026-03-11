@@ -1154,13 +1154,45 @@ function PublishScreen({ onBack, onPublish }) {
             </div>
           </div>
 
+          {/* Job Boards */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-[13px] font-medium text-gray-700">Post to Job Boards</p>
+              <span className="text-[11px] text-indigo-500 font-medium">{selectedBoards.length} selected</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {JOB_BOARDS.map(({ id, name, logo, desc }) => {
+                const selected = selectedBoards.includes(id);
+                return (
+                  <button
+                    key={id}
+                    onClick={() => toggleBoard(id)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left transition-all ${
+                      selected ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"
+                    }`}>
+                    <span className="text-lg shrink-0">{logo}</span>
+                    <div className="min-w-0">
+                      <p className={`text-[12px] font-semibold ${selected ? "text-indigo-700" : "text-gray-800"}`}>{name}</p>
+                      <p className="text-[10px] text-gray-400 truncate">{desc}</p>
+                    </div>
+                    <div className={`ml-auto w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                      selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"
+                    }`}>
+                      {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* CTA */}
           <div className="flex justify-center gap-3">
             <Button variant="outline" onClick={() => window.open("https://app.sproutsai.com/job-post/details/69707956bc83600006f4e2ae", "_blank")} className="h-10 px-6 gap-2">
               <ExternalLink className="w-3.5 h-3.5" /> Preview Job
             </Button>
             <Button onClick={onPublish} className="bg-blue-600 text-[#ffffff] px-8 py-2 font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-indigo-700 h-10">
-              Post Job
+              Post Job {selectedBoards.length > 0 && `to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`}
             </Button>
           </div>
         </div>
