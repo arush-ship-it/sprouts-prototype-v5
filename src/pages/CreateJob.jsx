@@ -1094,88 +1094,98 @@ function PublishScreen({ onBack, onPublish }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-[#f2f2f2] px-6 py-8 flex-1 overflow-y-auto relative">
-        <button onClick={onBack} className="absolute top-4 left-6 text-[13px] text-gray-500 hover:text-gray-800 transition-colors">← Back</button>
-        <div className="flex items-center justify-center h-full">
-        <div className="bg-[#f2f2f2] px-10 py-10 rounded-2xl border border-gray-100 shadow-sm w-full max-w-lg">
-          {/* Illustration */}
-          <div className="flex justify-center mb-5">
-            
+      <div className="bg-[#f2f2f2] flex-1 overflow-y-auto">
+        {/* Header */}
+        <div className="px-8 pt-6 pb-4 flex items-center gap-3">
+          <button onClick={onBack} className="text-[13px] text-gray-400 hover:text-gray-700 transition-colors flex items-center gap-1">← Back</button>
+          <span className="text-gray-300">|</span>
+          <div>
+            <h2 className="text-[16px] font-semibold text-gray-900">Ready to Publish</h2>
+            <p className="text-[12px] text-gray-400">Configure your posting settings and go live</p>
           </div>
+        </div>
 
-          <h2 className="text-blue-600 mb-6 text-xl font-semibold text-center">All Job Related Details Have Been Filled!</h2>
+        {/* Two-column body */}
+        <div className="px-8 pb-8 grid grid-cols-2 gap-5">
 
-          {/* Visibility */}
-          <div className="mb-5">
-            <p className="text-[13px] font-medium text-gray-700 mb-3">Visibility</p>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { value: "public", label: "Public", Icon: Globe, desc: "Visible to everyone on job boards" },
-                { value: "private", label: "Private", Icon: Lock, desc: "Only accessible via direct link" },
-                { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Shareable link, company name hidden" },
-                { value: "internal", label: "Internal", Icon: Users, desc: "Visible only to internal employees" }].
-                map(({ value, label, Icon, desc }) =>
-                <button
-                  key={value}
-                  onClick={() => setVisibility(value)}
-                  className={`flex items-start gap-3 px-4 py-3 rounded-xl border text-left transition-all ${
-                  visibility === value ?
-                  "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-300" :
-                  "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"}`
-                  }>
-                  <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${visibility === value ? "text-indigo-500" : "text-gray-400"}`} />
-                  <div>
-                    <p className={`text-[13px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
-                    <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">{desc}</p>
-                  </div>
-                </button>
+          {/* Left column */}
+          <div className="flex flex-col gap-4">
+            {/* Visibility card */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <p className="text-[13px] font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                <Globe className="w-3.5 h-3.5 text-indigo-400" /> Visibility
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards" },
+                  { value: "private", label: "Private", Icon: Lock, desc: "Direct link only" },
+                  { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden" },
+                  { value: "internal", label: "Internal", Icon: Users, desc: "Employees only" },
+                ].map(({ value, label, Icon, desc }) =>
+                  <button
+                    key={value}
+                    onClick={() => setVisibility(value)}
+                    className={`flex flex-col items-start gap-1 px-3 py-3 rounded-xl border text-left transition-all ${
+                      visibility === value ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"
+                    }`}>
+                    <div className="flex items-center gap-2">
+                      <Icon className={`w-3.5 h-3.5 ${visibility === value ? "text-indigo-500" : "text-gray-400"}`} />
+                      <p className={`text-[12px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
+                    </div>
+                    <p className="text-[10px] text-gray-400 leading-tight">{desc}</p>
+                  </button>
                 )}
+              </div>
+            </div>
+
+            {/* Duration card */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <p className="text-[13px] font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5 text-indigo-400" /> Duration
+              </p>
+              <div className="flex flex-col gap-3">
+                <label className={`flex items-start gap-3 px-3 py-3 rounded-xl border cursor-pointer transition-all ${evergreen ? "border-indigo-300 bg-indigo-50" : "border-gray-100 bg-gray-50 hover:border-indigo-200"}`}>
+                  <input type="checkbox" checked={evergreen} onChange={(e) => setEvergreen(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4 shrink-0" />
+                  <div>
+                    <p className="text-[12px] text-gray-800 font-semibold">Evergreen Position</p>
+                    <p className="text-[11px] text-gray-400">Keep this job open indefinitely</p>
+                  </div>
+                </label>
+                <label className={`flex items-start gap-3 px-3 py-3 rounded-xl border cursor-pointer transition-all ${setExpiration ? "border-indigo-300 bg-indigo-50" : "border-gray-100 bg-gray-50 hover:border-indigo-200"}`}>
+                  <input type="checkbox" checked={setExpiration} onChange={(e) => setSetExpiration(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4 shrink-0" />
+                  <div>
+                    <p className="text-[12px] text-gray-800 font-semibold">Set Expiration Date</p>
+                    <p className="text-[11px] text-gray-400">Automatically close after a date</p>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
 
-          {/* Duration */}
-          <div className="mb-8">
-            <p className="text-[13px] font-medium text-gray-700 mb-3">Duration</p>
-            <div className="flex gap-6">
-              <label className="flex items-start gap-2.5 cursor-pointer">
-                <input type="checkbox" checked={evergreen} onChange={(e) => setEvergreen(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4" />
-                <div>
-                  <p className="text-[13px] text-gray-800 font-medium">Evergreen Job Position</p>
-                  <p className="text-[11px] text-gray-400">Keep this job open indefinitely</p>
-                </div>
-              </label>
-              <label className="flex items-start gap-2.5 cursor-pointer">
-                <input type="checkbox" checked={setExpiration} onChange={(e) => setSetExpiration(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4" />
-                <div>
-                  <p className="text-[13px] text-gray-800 font-medium">Set Expiration</p>
-                  <p className="text-[11px] text-gray-400">Set an expiration date for the job</p>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          {/* Job Boards */}
-          <div className="mb-8">
+          {/* Right column — Job Boards */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col">
             <div className="flex items-center justify-between mb-3">
-              <p className="text-[13px] font-medium text-gray-700">Post to Job Boards</p>
-              <span className="text-[11px] text-indigo-500 font-medium">{selectedBoards.length} selected</span>
+              <p className="text-[13px] font-semibold text-gray-700 flex items-center gap-2">
+                <ExternalLink className="w-3.5 h-3.5 text-indigo-400" /> Post to Job Boards
+              </p>
+              <span className="bg-indigo-100 text-indigo-600 text-[11px] font-semibold px-2 py-0.5 rounded-full">{selectedBoards.length} selected</span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2 flex-1">
               {JOB_BOARDS.map(({ id, name, logo, desc }) => {
                 const selected = selectedBoards.includes(id);
                 return (
                   <button
                     key={id}
                     onClick={() => toggleBoard(id)}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left transition-all ${
-                      selected ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50"
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all ${
+                      selected ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"
                     }`}>
-                    <span className="text-lg shrink-0">{logo}</span>
-                    <div className="min-w-0">
-                      <p className={`text-[12px] font-semibold ${selected ? "text-indigo-700" : "text-gray-800"}`}>{name}</p>
+                    <span className="text-base shrink-0">{logo}</span>
+                    <div className="min-w-0 flex-1">
+                      <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-800"}`}>{name}</p>
                       <p className="text-[10px] text-gray-400 truncate">{desc}</p>
                     </div>
-                    <div className={`ml-auto w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
+                    <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
                       selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"
                     }`}>
                       {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -1185,17 +1195,16 @@ function PublishScreen({ onBack, onPublish }) {
               })}
             </div>
           </div>
-
-          {/* CTA */}
-          <div className="flex justify-center gap-3">
-            <Button variant="outline" onClick={() => window.open("https://app.sproutsai.com/job-post/details/69707956bc83600006f4e2ae", "_blank")} className="h-10 px-6 gap-2">
-              <ExternalLink className="w-3.5 h-3.5" /> Preview Job
-            </Button>
-            <Button onClick={onPublish} className="bg-blue-600 text-[#ffffff] px-8 py-2 font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-indigo-700 h-10">
-              Post Job {selectedBoards.length > 0 && `to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`}
-            </Button>
-          </div>
         </div>
+
+        {/* Sticky CTA */}
+        <div className="px-8 pb-8 flex justify-end gap-3">
+          <Button variant="outline" onClick={() => window.open("https://app.sproutsai.com/job-post/details/69707956bc83600006f4e2ae", "_blank")} className="h-10 px-6 gap-2">
+            <ExternalLink className="w-3.5 h-3.5" /> Preview Job
+          </Button>
+          <Button onClick={onPublish} className="bg-blue-600 text-white px-8 h-10 font-medium rounded-lg gap-2 hover:bg-indigo-700 shadow">
+            Post Job {selectedBoards.length > 0 && `to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`}
+          </Button>
         </div>
       </div>
     </div>);
