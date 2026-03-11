@@ -492,6 +492,12 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-[15px] font-bold text-gray-900">Requirements</h3>
             <div className="flex items-center gap-3">
+              <button
+                onClick={() => handleEnhanceSection("requirements")}
+                disabled={enhancingSection === "requirements"}
+                className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
+                <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"}
+              </button>
               <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
               <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
             </div>
