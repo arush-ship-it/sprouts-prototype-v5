@@ -472,7 +472,15 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             className="text-gray-900 mb-5 text-xl font-semibold w-full bg-transparent border-b border-transparent hover:border-gray-200 focus:border-indigo-300 focus:outline-none pb-1 transition-colors" />
 
 
-          <h3 className="text-[15px] font-bold text-gray-900 mb-2">About the Role</h3>
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-[15px] font-bold text-gray-900">About the Role</h3>
+            <button
+              onClick={() => handleEnhanceSection("description")}
+              disabled={enhancingSection === "description"}
+              className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
+              <Sparkles className="w-3 h-3" /> {enhancingSection === "description" ? "Enhancing…" : "Enhance"}
+            </button>
+          </div>
           <textarea
             value={jd.description}
             onChange={(e) => setJd({ ...jd, description: e.target.value })}
