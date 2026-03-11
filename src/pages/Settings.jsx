@@ -364,7 +364,7 @@ export default function Settings() {
   return (
     <div className="flex min-h-screen bg-[#FAFAFA]">
       {/* Left Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 p-6">
+      <aside className="w-64 bg-white border-r border-gray-200 p-6 relative flex flex-col">
         <Button
           variant="ghost"
           size="sm"
