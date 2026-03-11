@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { ArrowLeft, User, Lock, Bell, Plug, Settings as SettingsIcon, Building2, Users, CheckSquare, Briefcase, Mail, FileText } from "lucide-react";
+import { ArrowLeft, User, Lock, Bell, Plug, Settings as SettingsIcon, Building2, Users, CheckSquare, Briefcase, Mail, FileText, LogOut } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 const settingsCategories = [
   { id: "account", label: "Account Info", icon: User },
