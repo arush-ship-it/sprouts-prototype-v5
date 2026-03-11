@@ -4,7 +4,7 @@ import { Users, ChevronDown } from "lucide-react";
 const stages = [
 {
   id: 1,
-  name: "Screening",
+  name: "In Review",
   count: 18,
   color: "bg-blue-50 border-blue-200 text-blue-700",
   agents: ["Outreach Agent", "Screening Bot", "Resume Parser"],
