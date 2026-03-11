@@ -1071,10 +1071,26 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 }
 
 // ─── Step 4: Publish ──────────────────────────────────────────────────────────
+const JOB_BOARDS = [
+  { id: "linkedin", name: "LinkedIn", logo: "💼", desc: "500M+ professionals" },
+  { id: "indeed", name: "Indeed", logo: "🔍", desc: "World's #1 job site" },
+  { id: "glassdoor", name: "Glassdoor", logo: "🏢", desc: "Company reviews + jobs" },
+  { id: "naukri", name: "Naukri", logo: "📋", desc: "India's top job portal" },
+  { id: "monster", name: "Monster", logo: "👾", desc: "Global job marketplace" },
+  { id: "ziprecruiter", name: "ZipRecruiter", logo: "⚡", desc: "AI-powered matching" },
+  { id: "greenhouse", name: "Greenhouse", logo: "🌱", desc: "Integrated ATS posting" },
+  { id: "wellfound", name: "Wellfound", logo: "🚀", desc: "Startup jobs & talent" },
+];
+
 function PublishScreen({ onBack, onPublish }) {
   const [visibility, setVisibility] = useState("public");
   const [evergreen, setEvergreen] = useState(true);
   const [setExpiration, setSetExpiration] = useState(false);
+  const [selectedBoards, setSelectedBoards] = useState(["linkedin", "indeed"]);
+
+  const toggleBoard = (id) => setSelectedBoards((prev) =>
+    prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
+  );
 
   return (
     <div className="flex flex-col h-full">
