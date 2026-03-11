@@ -120,11 +120,11 @@ function QuickActionSlideshow({ onStart, onShowDrafts }) {
 
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
 const SAVED_DRAFTS = [
-  { id: 1, title: "Senior Product Manager", role: "Product", status: "Draft", created: "2 days ago" },
-  { id: 2, title: "Frontend Engineer", role: "Engineering", status: "Draft", created: "1 week ago" },
-  { id: 3, title: "UX Designer", role: "Design", status: "Draft", created: "3 days ago" },
-  { id: 4, title: "Sales Executive", role: "Sales", status: "Draft", created: "5 days ago" }
-];
+{ id: 1, title: "Senior Product Manager", role: "Product", status: "Draft", created: "2 days ago" },
+{ id: 2, title: "Frontend Engineer", role: "Engineering", status: "Draft", created: "1 week ago" },
+{ id: 3, title: "UX Designer", role: "Design", status: "Draft", created: "3 days ago" },
+{ id: 4, title: "Sales Executive", role: "Sales", status: "Draft", created: "5 days ago" }];
+
 
 function DefaultScreen({ onStart }) {
   const [prompt, setPrompt] = useState("");
@@ -221,15 +221,15 @@ function DefaultScreen({ onStart }) {
 
 
         {/* Saved Drafts List */}
-        {showDrafts && (
-          <div className="mb-8">
+        {showDrafts &&
+        <div className="mb-8">
             <p className="text-[13px] font-semibold text-gray-700 mb-3">Recent Drafts</p>
             <div className="flex gap-3 overflow-x-auto pb-2">
-              {SAVED_DRAFTS.map((draft) => (
-                <button
-                  key={draft.id}
-                  onClick={() => onStart(`Continue editing: ${draft.title}`)}
-                  className="flex-shrink-0 w-[240px] p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all text-left">
+              {SAVED_DRAFTS.map((draft) =>
+            <button
+              key={draft.id}
+              onClick={() => onStart(`Continue editing: ${draft.title}`)}
+              className="flex-shrink-0 w-[240px] p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all text-left">
                   <p className="text-[13px] font-semibold text-gray-900 mb-1">{draft.title}</p>
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded">{draft.role}</span>
@@ -237,10 +237,10 @@ function DefaultScreen({ onStart }) {
                   </div>
                   <p className="text-[11px] text-gray-400">Created {draft.created}</p>
                 </button>
-              ))}
+            )}
             </div>
           </div>
-        )}
+        }
 
 
 
@@ -1072,15 +1072,15 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
 // ─── Step 4: Publish ──────────────────────────────────────────────────────────
 const JOB_BOARDS = [
-  { id: "linkedin", name: "LinkedIn", logo: "💼", desc: "500M+ professionals" },
-  { id: "indeed", name: "Indeed", logo: "🔍", desc: "World's #1 job site" },
-  { id: "glassdoor", name: "Glassdoor", logo: "🏢", desc: "Company reviews + jobs" },
-  { id: "naukri", name: "Naukri", logo: "📋", desc: "India's top job portal" },
-  { id: "monster", name: "Monster", logo: "👾", desc: "Global job marketplace" },
-  { id: "ziprecruiter", name: "ZipRecruiter", logo: "⚡", desc: "AI-powered matching" },
-  { id: "greenhouse", name: "Greenhouse", logo: "🌱", desc: "Integrated ATS posting" },
-  { id: "wellfound", name: "Wellfound", logo: "🚀", desc: "Startup jobs & talent" },
-];
+{ id: "linkedin", name: "LinkedIn", logo: "💼", desc: "500M+ professionals" },
+{ id: "indeed", name: "Indeed", logo: "🔍", desc: "World's #1 job site" },
+{ id: "glassdoor", name: "Glassdoor", logo: "🏢", desc: "Company reviews + jobs" },
+{ id: "naukri", name: "Naukri", logo: "📋", desc: "India's top job portal" },
+{ id: "monster", name: "Monster", logo: "👾", desc: "Global job marketplace" },
+{ id: "ziprecruiter", name: "ZipRecruiter", logo: "⚡", desc: "AI-powered matching" },
+{ id: "greenhouse", name: "Greenhouse", logo: "🌱", desc: "Integrated ATS posting" },
+{ id: "wellfound", name: "Wellfound", logo: "🚀", desc: "Startup jobs & talent" }];
+
 
 function PublishScreen({ onBack, onPublish }) {
   const [visibility, setVisibility] = useState("public");
@@ -1089,7 +1089,7 @@ function PublishScreen({ onBack, onPublish }) {
   const [selectedBoards, setSelectedBoards] = useState(["linkedin", "indeed"]);
 
   const toggleBoard = (id) => setSelectedBoards((prev) =>
-    prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
+  prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
   );
 
   return (
@@ -1117,17 +1117,17 @@ function PublishScreen({ onBack, onPublish }) {
               </p>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards" },
-                  { value: "private", label: "Private", Icon: Lock, desc: "Direct link only" },
-                  { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden" },
-                  { value: "internal", label: "Internal", Icon: Users, desc: "Employees only" },
-                ].map(({ value, label, Icon, desc }) =>
-                  <button
-                    key={value}
-                    onClick={() => setVisibility(value)}
-                    className={`flex flex-col items-start gap-1 px-3 py-3 rounded-xl border text-left transition-all ${
-                      visibility === value ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"
-                    }`}>
+                { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards" },
+                { value: "private", label: "Private", Icon: Lock, desc: "Direct link only" },
+                { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden" },
+                { value: "internal", label: "Internal", Icon: Users, desc: "Employees only" }].
+                map(({ value, label, Icon, desc }) =>
+                <button
+                  key={value}
+                  onClick={() => setVisibility(value)}
+                  className={`flex flex-col items-start gap-1 px-3 py-3 rounded-xl border text-left transition-all ${
+                  visibility === value ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"}`
+                  }>
                     <div className="flex items-center gap-2">
                       <Icon className={`w-3.5 h-3.5 ${visibility === value ? "text-indigo-500" : "text-gray-400"}`} />
                       <p className={`text-[12px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
@@ -1178,20 +1178,20 @@ function PublishScreen({ onBack, onPublish }) {
                     key={id}
                     onClick={() => toggleBoard(id)}
                     className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all ${
-                      selected ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"
-                    }`}>
-                    <span className="text-base shrink-0">{logo}</span>
+                    selected ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"}`
+                    }>
+                    
                     <div className="min-w-0 flex-1">
                       <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-800"}`}>{name}</p>
                       <p className="text-[10px] text-gray-400 truncate">{desc}</p>
                     </div>
                     <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
-                      selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"
-                    }`}>
+                    selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"}`
+                    }>
                       {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                     </div>
-                  </button>
-                );
+                  </button>);
+
               })}
             </div>
           </div>
@@ -1369,9 +1369,9 @@ export default function CreateJob() {
           }
           {step === 6 &&
           <ConfirmationScreen
-           jobTitle={generatedJob.title}
-           generatedJob={generatedJob}
-           onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
+            jobTitle={generatedJob.title}
+            generatedJob={generatedJob}
+            onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
 
           }
         </div>
