@@ -1163,7 +1163,7 @@ function PublishScreen({ onBack, onPublish }) {
           </div>
 
           {/* Right column — Job Boards */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col">
+          <div className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col transition-all ${visibility !== "public" ? "opacity-40 pointer-events-none" : ""}`}>
             <div className="flex items-center justify-between mb-3">
               <p className="text-[13px] font-semibold text-gray-700 flex items-center gap-2">
                 <ExternalLink className="w-3.5 h-3.5 text-indigo-400" /> Post to Job Boards
