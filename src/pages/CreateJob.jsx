@@ -1241,14 +1241,14 @@ function AIChatBox() {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => {if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();setMessage("");}}}
-        placeholder="Ask AI to make changes…"
-        className="resize-none text-[13px] pr-12 rounded-2xl min-h-[60px] bg-white border-gray-200"
+        placeholder="Ask AI to make changes…" className="bg-white text-[13px] pr-12 px-3 py-2 opacity-40 rounded-2xl flex w-full border shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px] border-gray-200"
+
         rows={2} />
 
       <Button
         onClick={() => setMessage("")}
-        size="icon"
-        className="absolute right-2 bottom-2 h-8 w-8 rounded-full bg-indigo-600 hover:bg-indigo-700">
+        size="icon" className="bg-indigo-600 text-primary-foreground text-sm font-medium opacity-40 rounded-full inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow absolute right-2 bottom-2 h-8 w-8 hover:bg-indigo-700">
+
         <Send className="w-3.5 h-3.5" />
       </Button>
     </div>);
