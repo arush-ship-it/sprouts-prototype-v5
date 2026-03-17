@@ -1032,7 +1032,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-[#f2f2f2] px-6 py-6 flex-1 overflow-y-auto space-y-6">
+      <div className="bg-[#ffffff] px-6 py-6 flex-1 overflow-y-auto space-y-6">
 
         {/* Candidate Application Form Preview */}
         <div>
