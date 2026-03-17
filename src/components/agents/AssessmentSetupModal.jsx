@@ -492,18 +492,18 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
         </div>
       </div>
 
-      <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
-        <div className="flex items-center justify-between mb-1">
-          <div className="flex items-center gap-2">
-            <Bot className="w-4 h-4 text-indigo-500" />
-            <p className="text-[14px] font-semibold text-gray-900">AI Auto-decision</p>
-          </div>
-          <Switch checked={criteria.autoDecide} onCheckedChange={(v) => setCriteria({ ...criteria, autoDecide: v })} />
-        </div>
-        <p className="text-[12px] text-gray-400 leading-relaxed">
-          When enabled, the AI will automatically reject candidates below the threshold without manual review. When disabled, the AI flags them but waits for human confirmation.
-        </p>
-      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
 
       <div className={`border-2 rounded-2xl p-5 mb-4 bg-white transition-all ${criteria.humanReview ? "border-emerald-300" : "border-gray-100"}`}>
         <div className="flex items-center justify-between mb-1">
