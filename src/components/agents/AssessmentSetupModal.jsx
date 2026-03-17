@@ -626,6 +626,12 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [questions, setQuestions] = useState(DEFAULT_QUESTIONS);
   const [generating, setGenerating] = useState(false);
   const [filterCriteria, setFilterCriteria] = useState({ threshold: 3, autoDecide: true, humanReview: true });
+  const [stackStatus, setStackStatus] = useState([
+    { label: "Invite Criteria", configured: false, enabled: false },
+    { label: "Invite Email", configured: false, enabled: false },
+    { label: "Assessment", configured: false, enabled: true },
+    { label: "Filtering Criteria", configured: false, enabled: false },
+  ]);
 
   // Determine transition config after completing certain stages
   const getTransitionConfig = (completedStep, skipped) => {
