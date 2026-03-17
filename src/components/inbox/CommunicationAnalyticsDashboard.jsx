@@ -98,7 +98,16 @@ export default function CommunicationAnalyticsDashboard() {
         </div>
       </div>
 
+      <AnimatePresence initial={false}>
       {isExpanded &&
+      <motion.div
+        key="dashboard-content"
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: "auto" }}
+        exit={{ opacity: 0, height: 0 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        style={{ overflow: "hidden" }}
+      >
       <div className="space-y-4">
           {/* Unified Top Row: KPIs + Donut merged */}
           <div className="bg-white px-3 py-3 rounded-2xl shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-slate-100">
