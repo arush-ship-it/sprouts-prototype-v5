@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import StepIndicator from "@/components/createjob/StepIndicator";
+import CandidateApplicationPreview from "@/components/createjob/CandidateApplicationPreview";
 
 // Mock existing jobs for the default screen
 const existingJobs = [
