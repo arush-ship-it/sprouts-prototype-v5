@@ -534,7 +534,7 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
 // ── Main Modal ────────────────────────────────────────────────────────────────
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
-  const [inviteCriteria, setInviteCriteria] = useState({ minScore: 3, autoInvite: true, humanReview: true });
+  const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
   const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
   const [creationMethod, setCreationMethod] = useState("ai");
