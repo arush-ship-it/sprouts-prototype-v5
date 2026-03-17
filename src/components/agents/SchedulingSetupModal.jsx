@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const STACK_STEPS = [
 {
-  id: 1, label: "Availability Finder", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
+  id: 1, label: "Availability Finder", tag: "Automation", badge: "Mandatory", badgeColor: "text-orange-500",
   desc: "Share an availability template with candidates and collect their preferred time slots"
 },
 {
@@ -22,7 +22,7 @@ const STACK_STEPS = [
   desc: "Define scheduling criteria, interview format guidelines, and the invitation email sent to candidates"
 },
 {
-  id: 3, label: "Feedback Setup", tag: "Report", badge: "Optional", badgeColor: "text-blue-500",
+  id: 3, label: "Feedback Setup", tag: "Report", badge: "Mandatory", badgeColor: "text-orange-500",
   desc: "Configure the feedback form interviewers must fill in, and the email to send it to them after the interview"
 },
 {
