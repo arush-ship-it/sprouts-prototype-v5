@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { X, Sparkles, FileText, PenLine, ChevronRight, ChevronLeft, Check, Mail, Clock, Shield, Bot, AlertTriangle, Eye, Loader2, Plus, Trash2, UserCheck, Filter } from "lucide-react";
+import { X, Sparkles, FileText, PenLine, ChevronRight, ChevronLeft, Check, Mail, Clock, Shield, Bot, AlertTriangle, Eye, Loader2, Plus, Trash2, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
+// Sidebar stack items and which modal steps map to them
 const STACK_STEPS = [
-  { id: 1, label: "Invite Criteria", tag: "Automation", tagColor: "text-gray-500", badge: "Optional", badgeColor: "text-blue-500", desc: "Set invite criteria, for which candidates who need to be sent an invite" },
-  { id: 2, label: "Invite Email", tag: "Email Template", tagColor: "text-gray-500", badge: "Optional", badgeColor: "text-blue-500", desc: "Set invite criteria, for which candidates who need to be sent an invite" },
-  { id: 3, label: "Assessment", tag: "Report", tagColor: "text-gray-500", badge: "Mandatory", badgeColor: "text-orange-500", desc: "Set invite criteria, for which candidates who need to be sent an invite" },
-  { id: 4, label: "Filtering Criteria", tag: "Automation", tagColor: "text-gray-500", badge: "Optional", badgeColor: "text-blue-500", desc: "Set invite criteria, for which candidates who need to be sent an invite" },
+  { id: 1, label: "Invite Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500", desc: "Define which candidates should be automatically invited to take this assessment" },
+  { id: 2, label: "Invite Email", tag: "Email Template", badge: "Optional", badgeColor: "text-blue-500", desc: "Customize the invitation email and deadline reminder sent to candidates" },
+  { id: 3, label: "Assessment", tag: "Report", badge: "Mandatory", badgeColor: "text-orange-500", desc: "Create and configure the assessment questions, difficulty, and duration" },
+  { id: 4, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500", desc: "Define how AI handles results and approval rules for rejections" },
 ];
+
+// step → sidebar item
+const STEP_TO_SIDEBAR = { 1: 1, 2: 2, 3: 3, 4: 3, 5: 3, 6: 4 };
+
+const TOTAL_STEPS = 6;
 
 const DEFAULT_QUESTIONS = [
   { id: 1, type: "coding", text: "Write a function to reverse a linked list in O(n) time.", difficulty: "Medium" },
@@ -46,18 +52,14 @@ Best regards,
 
 // ── Left Sidebar ──────────────────────────────────────────────────────────────
 function StackSidebar({ currentStep }) {
+  const activeSidebarId = STEP_TO_SIDEBAR[currentStep];
   return (
-    <div className="w-[260px] shrink-0 bg-gray-50 border-r border-gray-100 px-5 py-6 flex flex-col gap-3">
+    <div className="w-[270px] shrink-0 bg-gray-50 border-r border-gray-100 px-5 py-6 flex flex-col gap-3 overflow-y-auto">
       <p className="text-[13px] font-bold text-gray-900 mb-2">Stack</p>
       {STACK_STEPS.map((s) => {
-        const active = currentStep === s.id;
+        const active = activeSidebarId === s.id;
         return (
-          <div
-            key={s.id}
-            className={`rounded-2xl px-4 py-4 border transition-all ${
-              active ? "bg-indigo-50 border-indigo-200" : "bg-white border-gray-100"
-            }`}
-          >
+          <div key={s.id} className={`rounded-2xl px-4 py-4 border transition-all ${active ? "bg-indigo-50 border-indigo-200" : "bg-white border-gray-100"}`}>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className={`text-[13px] font-semibold ${active ? "text-indigo-700" : "text-gray-800"}`}>{s.label}</span>
               <span className="text-[10px] text-gray-400 font-medium bg-gray-100 px-1.5 py-0.5 rounded-md">{s.tag}</span>
@@ -71,14 +73,198 @@ function StackSidebar({ currentStep }) {
   );
 }
 
-// ── Step 1: Creation Method ───────────────────────────────────────────────────
-function Step1({ value, onChange }) {
+// ── Step 1: Invite Criteria ───────────────────────────────────────────────────
+function StepInviteCriteria({ criteria, setCriteria }) {
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+          <Filter className="w-5 h-5 text-blue-600" />
+        </div>
+        <div>
+          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Invite Criteria</h2>
+          <p className="text-[13px] text-gray-400">Define which candidates should be automatically invited</p>
+        </div>
+      </div>
+
+      {/* Min score to invite */}
+      <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum score to invite</p>
+        <p className="text-[12px] text-gray-400 mb-5">Candidates scoring at or above this threshold will be automatically invited</p>
+        <div className="flex items-center justify-between text-[12px] text-gray-400 mb-1">
+          <span>0</span>
+          <span className="font-bold text-indigo-700 text-[15px]">{criteria.minScore} / 5</span>
+          <span>5</span>
+        </div>
+        <input
+          type="range" min={1} max={5} step={0.5}
+          value={criteria.minScore}
+          onChange={(e) => setCriteria({ ...criteria, minScore: parseFloat(e.target.value) })}
+          className="w-full accent-indigo-600 mb-2"
+        />
+        <div className="flex justify-between mb-4">
+          {[1, 2, 3, 4, 5].map((v) => (
+            <span key={v} className={`text-[11px] font-medium ${criteria.minScore >= v ? "text-indigo-600" : "text-gray-300"}`}>{v}</span>
+          ))}
+        </div>
+        <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 flex items-center gap-2">
+          <Check className="w-4 h-4 text-blue-500 shrink-0" />
+          <p className="text-[12px] text-blue-600">Candidates scoring <strong>{criteria.minScore}/5</strong> or above will be auto-invited</p>
+        </div>
+      </div>
+
+      {/* Auto-invite toggle */}
+      <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2">
+            <Bot className="w-4 h-4 text-indigo-500" />
+            <p className="text-[14px] font-semibold text-gray-900">AI Auto-invite</p>
+          </div>
+          <Switch checked={criteria.autoInvite} onCheckedChange={(v) => setCriteria({ ...criteria, autoInvite: v })} />
+        </div>
+        <p className="text-[12px] text-gray-400 leading-relaxed">
+          When enabled, the AI will automatically send assessment invites to qualifying candidates without manual review. When disabled, candidates are flagged for your approval first.
+        </p>
+      </div>
+
+      {/* Human review before invite */}
+      <div className={`border-2 rounded-2xl p-5 mb-4 bg-white transition-all ${criteria.humanReview ? "border-emerald-300" : "border-gray-100"}`}>
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2">
+            <Eye className="w-4 h-4 text-emerald-600" />
+            <p className="text-[14px] font-semibold text-gray-900">Human review before invite</p>
+          </div>
+          <Switch checked={criteria.humanReview} onCheckedChange={(v) => setCriteria({ ...criteria, humanReview: v })} />
+        </div>
+        <p className="text-[12px] text-gray-400 leading-relaxed mb-3">
+          Even when the AI qualifies a candidate, you'll get a notification to review their profile before the invite is sent.
+        </p>
+        {criteria.humanReview && (
+          <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
+            <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+            <p className="text-[12px] text-emerald-700 font-medium">Invites won't be sent until you approve them</p>
+          </div>
+        )}
+      </div>
+
+      {/* Summary */}
+      <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
+        <p className="text-[12px] font-bold text-indigo-700 mb-2">Summary</p>
+        <ul className="space-y-1.5">
+          <li className="text-[12px] text-indigo-600 flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+            Candidates scoring <strong>{criteria.minScore}/5</strong> or above are invited
+          </li>
+          <li className="text-[12px] text-indigo-600 flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+            AI will <strong>{criteria.autoInvite ? "automatically" : "not automatically"}</strong> send invites
+          </li>
+          <li className="text-[12px] text-indigo-600 flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+            Human review is <strong>{criteria.humanReview ? "required" : "not required"}</strong> before invite
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ── Step 2: Invite Email + Deadline Reminder ──────────────────────────────────
+function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
+  return (
+    <div className="space-y-6">
+      {/* Invite Email */}
+      <div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+            <Mail className="w-5 h-5 text-blue-500" />
+          </div>
+          <div>
+            <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Assessment Invitation Email</h2>
+            <p className="text-[13px] text-gray-400">Customize the email candidates receive</p>
+          </div>
+        </div>
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 flex items-start gap-2">
+          <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+          <p className="text-[12px] text-amber-700 leading-relaxed">
+            Variables in <span className="font-mono font-bold bg-amber-100 px-1 rounded">{`{{double_braces}}`}</span> are auto-filled by the system — candidate name, job title, assessment link, etc.
+          </p>
+        </div>
+        <div className="space-y-3">
+          <div>
+            <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
+            <input
+              defaultValue="Technical Assessment Invitation — {{job_title}} at {{company_name}}"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Email Body</label>
+            <Textarea
+              value={emailContent}
+              onChange={(e) => onChange(e.target.value)}
+              className="w-full min-h-[200px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-dashed border-gray-200" />
+
+      {/* Deadline Reminder */}
+      <div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+            <Clock className="w-5 h-5 text-amber-600" />
+          </div>
+          <div>
+            <h2 className="text-[18px] font-bold text-gray-900 mb-0.5">Deadline Reminder</h2>
+            <p className="text-[13px] text-gray-400">Automatically nudge candidates before the deadline</p>
+          </div>
+        </div>
+        <div className={`border-2 rounded-2xl px-5 py-4 mb-4 flex items-center justify-between transition-all ${reminder.enabled ? "border-amber-300 bg-amber-50/40" : "border-gray-100 bg-gray-50"}`}>
+          <div>
+            <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Enable Reminder</p>
+            <p className="text-[12px] text-gray-400">Send an automated reminder before the deadline</p>
+          </div>
+          <Switch checked={reminder.enabled} onCheckedChange={(v) => setReminder({ ...reminder, enabled: v })} />
+        </div>
+        {reminder.enabled && (
+          <div className="space-y-3">
+            <div>
+              <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Send reminder</p>
+              <div className="flex gap-2 flex-wrap">
+                {["24 hours before", "48 hours before", "3 days before"].map((t) => (
+                  <button key={t} onClick={() => setReminder({ ...reminder, timing: t })}
+                    className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${reminder.timing === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Reminder Email Body</label>
+              <Textarea
+                value={reminder.emailContent}
+                onChange={(e) => setReminder({ ...reminder, emailContent: e.target.value })}
+                className="w-full min-h-[160px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono"
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Step 3: How to create? ────────────────────────────────────────────────────
+function StepCreationMethod({ value, onChange }) {
   const options = [
     { id: "ai", icon: Sparkles, title: "Generate with AI", badge: "Recommended", badgeColor: "bg-indigo-100 text-indigo-600", iconBg: "bg-indigo-100", iconColor: "text-indigo-600", desc: "Let AI create a tailored assessment based on the job role and requirements." },
     { id: "template", icon: FileText, title: "Use a Template", badge: "Quick", badgeColor: "bg-emerald-100 text-emerald-600", iconBg: "bg-emerald-100", iconColor: "text-emerald-600", desc: "Start from a pre-built assessment template for common roles." },
     { id: "scratch", icon: PenLine, title: "Create from Scratch", badge: "Custom", badgeColor: "bg-amber-100 text-amber-600", iconBg: "bg-amber-100", iconColor: "text-amber-600", desc: "Build your own assessment entirely from scratch with full control." },
   ];
-
   return (
     <div>
       <h2 className="text-[20px] font-bold text-gray-900 mb-1">How would you like to create this assessment?</h2>
@@ -88,13 +274,8 @@ function Step1({ value, onChange }) {
           const Icon = opt.icon;
           const selected = value === opt.id;
           return (
-            <button
-              key={opt.id}
-              onClick={() => onChange(opt.id)}
-              className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all ${
-                selected ? "border-indigo-400 bg-indigo-50/60" : "border-gray-100 bg-white hover:border-indigo-200"
-              }`}
-            >
+            <button key={opt.id} onClick={() => onChange(opt.id)}
+              className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-2 text-left transition-all ${selected ? "border-indigo-400 bg-indigo-50/60" : "border-gray-100 bg-white hover:border-indigo-200"}`}>
               <div className={`w-10 h-10 rounded-xl ${opt.iconBg} flex items-center justify-center shrink-0`}>
                 <Icon className={`w-5 h-5 ${opt.iconColor}`} />
               </div>
@@ -105,9 +286,7 @@ function Step1({ value, onChange }) {
                 </div>
                 <p className="text-[12px] text-gray-400">{opt.desc}</p>
               </div>
-              <div className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
-                selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"
-              }`}>
+              <div className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"}`}>
                 {selected && <div className="w-2 h-2 rounded-full bg-white" />}
               </div>
             </button>
@@ -118,8 +297,8 @@ function Step1({ value, onChange }) {
   );
 }
 
-// ── Step 2: Assessment Setup ──────────────────────────────────────────────────
-function Step2({ config, onChange }) {
+// ── Step 4: Configure Assessment ─────────────────────────────────────────────
+function StepConfigureAssessment({ config, onChange }) {
   const total = (config.coding || 0) + (config.mcq || 0) + (config.descriptive || 0);
   return (
     <div className="space-y-6">
@@ -179,14 +358,13 @@ function Step2({ config, onChange }) {
   );
 }
 
-// ── Step 3: Review Questions ──────────────────────────────────────────────────
-function Step3({ questions, setQuestions, generating }) {
+// ── Step 5: Review Questions ──────────────────────────────────────────────────
+function StepReviewQuestions({ questions, setQuestions, generating }) {
   const typeColors = {
     coding: { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
     mcq: { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-200" },
     descriptive: { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-200" },
   };
-
   if (generating) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-4">
@@ -198,7 +376,6 @@ function Step3({ questions, setQuestions, generating }) {
       </div>
     );
   }
-
   return (
     <div>
       <div className="flex items-center justify-between mb-5">
@@ -247,95 +424,8 @@ function Step3({ questions, setQuestions, generating }) {
   );
 }
 
-// ── Step 4: Invitation Email ──────────────────────────────────────────────────
-function Step4({ emailContent, onChange }) {
-  return (
-    <div>
-      <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
-          <Mail className="w-5 h-5 text-blue-500" />
-        </div>
-        <div>
-          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Assessment Invitation Email</h2>
-          <p className="text-[13px] text-gray-400">Customize the email candidates receive</p>
-        </div>
-      </div>
-      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-5 flex items-start gap-2">
-        <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-        <p className="text-[12px] text-amber-700 leading-relaxed">
-          Variables in <span className="font-mono font-bold bg-amber-100 px-1 rounded">{`{{double_braces}}`}</span> are auto-filled by the system — candidate name, job title, assessment link, etc.
-        </p>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
-          <input
-            defaultValue="Technical Assessment Invitation — {{job_title}} at {{company_name}}"
-            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white"
-          />
-        </div>
-        <div>
-          <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Email Body</label>
-          <Textarea
-            value={emailContent}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full min-h-[240px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Step 5: Reminder ─────────────────────────────────────────────────────────
-function Step5({ reminder, setReminder }) {
-  return (
-    <div>
-      <div className="flex items-center gap-3 mb-5">
-        <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
-          <Clock className="w-5 h-5 text-amber-600" />
-        </div>
-        <div>
-          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Deadline Reminder</h2>
-          <p className="text-[13px] text-gray-400">Automatically nudge candidates before the deadline</p>
-        </div>
-      </div>
-      <div className={`border-2 rounded-2xl px-5 py-4 mb-5 flex items-center justify-between transition-all ${reminder.enabled ? "border-amber-300 bg-amber-50/40" : "border-gray-100 bg-gray-50"}`}>
-        <div>
-          <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Enable Reminder</p>
-          <p className="text-[12px] text-gray-400">Send an automated reminder before the deadline</p>
-        </div>
-        <Switch checked={reminder.enabled} onCheckedChange={(v) => setReminder({ ...reminder, enabled: v })} />
-      </div>
-      {reminder.enabled && (
-        <div className="space-y-4">
-          <div>
-            <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Send reminder</p>
-            <div className="flex gap-2 flex-wrap">
-              {["24 hours before", "48 hours before", "3 days before"].map((t) => (
-                <button key={t} onClick={() => setReminder({ ...reminder, timing: t })}
-                  className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${reminder.timing === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div>
-            <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Reminder Email Body</label>
-            <Textarea
-              value={reminder.emailContent}
-              onChange={(e) => setReminder({ ...reminder, emailContent: e.target.value })}
-              className="w-full min-h-[180px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono"
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ── Step 6: Filtering & Approval ─────────────────────────────────────────────
-function Step6({ criteria, setCriteria }) {
+// ── Step 6: Filtering & Approval Rules ───────────────────────────────────────
+function StepFilteringCriteria({ criteria, setCriteria }) {
   return (
     <div>
       <div className="flex items-center gap-3 mb-6">
@@ -348,7 +438,6 @@ function Step6({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* Score threshold */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
         <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Auto-rejection threshold</p>
         <p className="text-[12px] text-gray-400 mb-5">Candidates scoring below this will be flagged for rejection</p>
@@ -374,7 +463,6 @@ function Step6({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* AI Auto-decision */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
@@ -388,7 +476,6 @@ function Step6({ criteria, setCriteria }) {
         </p>
       </div>
 
-      {/* Human review */}
       <div className={`border-2 rounded-2xl p-5 mb-4 bg-white transition-all ${criteria.humanReview ? "border-emerald-300" : "border-gray-100"}`}>
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
@@ -408,7 +495,6 @@ function Step6({ criteria, setCriteria }) {
         )}
       </div>
 
-      {/* Summary */}
       <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
         <p className="text-[12px] font-bold text-indigo-700 mb-2">Summary</p>
         <ul className="space-y-1.5">
@@ -433,20 +519,19 @@ function Step6({ criteria, setCriteria }) {
 // ── Main Modal ────────────────────────────────────────────────────────────────
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
+  const [inviteCriteria, setInviteCriteria] = useState({ minScore: 3, autoInvite: true, humanReview: true });
+  const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
+  const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
   const [creationMethod, setCreationMethod] = useState("ai");
   const [assessmentConfig, setAssessmentConfig] = useState({ difficulty: "Medium", coding: 2, mcq: 2, descriptive: 1, duration: 60 });
   const [questions, setQuestions] = useState(DEFAULT_QUESTIONS);
   const [generating, setGenerating] = useState(false);
-  const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
-  const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
-  const [criteria, setCriteria] = useState({ threshold: 3, autoDecide: true, humanReview: true });
-
-  const TOTAL_STEPS = 6;
+  const [filterCriteria, setFilterCriteria] = useState({ threshold: 3, autoDecide: true, humanReview: true });
 
   const handleNext = () => {
-    if (step === 2 && creationMethod === "ai") {
+    if (step === 4 && creationMethod === "ai") {
       setGenerating(true);
-      setStep(3);
+      setStep(5);
       setTimeout(() => setGenerating(false), 2200);
     } else if (step < TOTAL_STEPS) {
       setStep(step + 1);
@@ -457,21 +542,16 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
 
   const handleBack = () => { if (step > 1) setStep(step - 1); };
 
-  // Map modal step → sidebar highlight (steps 4,5,6 relate to sidebar items 2,3,4)
-  const sidebarActive = step <= 3 ? step : step - 2;
-
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[75rem] mx-4 flex flex-col overflow-hidden max-h-[90vh]" style={{ height: "680px" }}>
-
-        {/* Modal layout: sidebar + content */}
+      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[75rem] mx-4 flex flex-col overflow-hidden max-h-[90vh]" style={{ height: "700px" }}>
         <div className="flex flex-1 overflow-hidden">
 
           {/* Left Sidebar */}
-          <StackSidebar currentStep={sidebarActive} />
+          <StackSidebar currentStep={step} />
 
           {/* Right Content */}
           <div className="flex-1 flex flex-col overflow-hidden">
@@ -493,12 +573,12 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-8 py-6">
-              {step === 1 && <Step1 value={creationMethod} onChange={setCreationMethod} />}
-              {step === 2 && <Step2 config={assessmentConfig} onChange={setAssessmentConfig} />}
-              {step === 3 && <Step3 questions={questions} setQuestions={setQuestions} generating={generating} />}
-              {step === 4 && <Step4 emailContent={inviteEmail} onChange={setInviteEmail} />}
-              {step === 5 && <Step5 reminder={reminder} setReminder={setReminder} />}
-              {step === 6 && <Step6 criteria={criteria} setCriteria={setCriteria} />}
+              {step === 1 && <StepInviteCriteria criteria={inviteCriteria} setCriteria={setInviteCriteria} />}
+              {step === 2 && <StepInviteEmail emailContent={inviteEmail} onChange={setInviteEmail} reminder={reminder} setReminder={setReminder} />}
+              {step === 3 && <StepCreationMethod value={creationMethod} onChange={setCreationMethod} />}
+              {step === 4 && <StepConfigureAssessment config={assessmentConfig} onChange={setAssessmentConfig} />}
+              {step === 5 && <StepReviewQuestions questions={questions} setQuestions={setQuestions} generating={generating} />}
+              {step === 6 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
             </div>
 
             {/* Footer */}
@@ -510,14 +590,11 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
               >
                 <ChevronLeft className="w-4 h-4" /> Back
               </button>
-
-              {/* Dot indicators */}
               <div className="flex items-center gap-1.5">
                 {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
                   <div key={i} className={`rounded-full transition-all ${step === i + 1 ? "w-4 h-2.5 bg-indigo-600" : "w-2.5 h-2.5 bg-gray-200"}`} />
                 ))}
               </div>
-
               <Button
                 onClick={handleNext}
                 disabled={generating}
