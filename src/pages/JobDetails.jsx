@@ -36,7 +36,10 @@ import {
   Tooltip,
   ResponsiveContainer,
   LineChart,
-  Line } from
+  Line,
+  AreaChart,
+  Area,
+  Cell } from
 "recharts";
 
 const jobData = {
