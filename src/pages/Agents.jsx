@@ -107,7 +107,7 @@ const allAgents = [
 
 {
   id: 6,
-  name: "Video Interview AI",
+  name: "AI Interview Agent",
   icon: PlayCircle,
   type: "evaluation",
   status: "idle",
