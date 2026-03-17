@@ -1125,10 +1125,13 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
   const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
   const [filterCriteria, setFilterCriteria] = useState({ noShowLimit: 1, autoReschedule: true, humanReview: true });
+  const [feedbackForm, setFeedbackForm] = useState({ fields: DEFAULT_FEEDBACK_SECTIONS.map((f) => ({ ...f, enabled: true })), deadline: "24 hours" });
+  const [feedbackEmail, setFeedbackEmail] = useState({ body: DEFAULT_FEEDBACK_EMAIL, reminderEnabled: true, reminderTiming: "24 hours before deadline", reminderBody: DEFAULT_FEEDBACK_REMINDER_EMAIL });
   const [generating, setGenerating] = useState(false);
   const [stackStatus, setStackStatus] = useState([
   { label: "Availability Finder", configured: false, enabled: false },
   { label: "Interview Setup", configured: false, enabled: true },
+  { label: "Feedback Setup", configured: false, enabled: false },
   { label: "Filtering Criteria", configured: false, enabled: false }]
   );
 
