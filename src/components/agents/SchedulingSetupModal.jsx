@@ -87,7 +87,9 @@ function StackSidebar({ currentStep }) {
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className={`text-[13px] font-semibold ${active ? "text-indigo-700" : "text-gray-800"}`}>{s.label}</span>
               <span className="text-[10px] text-gray-400 font-medium bg-gray-100 px-1.5 py-0.5 rounded-md">{s.tag}</span>
-              <span className={`text-[10px] font-semibold ml-auto ${s.badgeColor}`}>{s.badge}</span>
+            </div>
+            <div className="mb-1.5">
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${s.badge === "Mandatory" ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-blue-50 text-blue-500 border-blue-200"}`}>{s.badge}</span>
             </div>
             <p className="text-[11px] text-gray-400 leading-relaxed">{s.desc}</p>
           </div>);
