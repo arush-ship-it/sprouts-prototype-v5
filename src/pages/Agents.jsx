@@ -847,6 +847,7 @@ export default function Agents() {
 
       <AddAgentModal isOpen={isAddAgentModalOpen} onClose={() => setIsAddAgentModalOpen(false)} />
       <AssessmentSetupModal isOpen={assessmentSetupOpen} onClose={() => setAssessmentSetupOpen(false)} />
+      <SchedulingSetupModal isOpen={schedulingSetupOpen} onClose={() => setSchedulingSetupOpen(false)} />
 
       {/* Agent Details Drawer */}
       <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
