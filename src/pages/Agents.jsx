@@ -362,34 +362,45 @@ export default function Agents() {
               </div>
 
               {/* Comparative Agent Analysis Chart */}
-              <div className="bg-white p-5 rounded-2xl border border-gray-100">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-[13px] font-semibold text-gray-900">Agent Comparative Analysis</p>
-                    <p className="text-[11px] text-gray-400 mt-0.5">Accuracy (%) vs Total Processed across all agents</p>
+              <div className="bg-white p-5 rounded-2xl shadow-[0_2px_16px_rgba(0,0,0,0.05)] border border-gray-100">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[13px] font-semibold text-gray-900">Agent Comparative Analysis</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-indigo-500" /><span className="text-[10px] text-gray-500 font-medium">Accuracy</span></div>
+                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-emerald-400" /><span className="text-[10px] text-gray-500 font-medium">Processed</span></div>
                   </div>
                 </div>
+                <p className="text-[11px] text-gray-400 mb-4">Accuracy (%) vs Total Processed across all agents</p>
                 <ResponsiveContainer width="100%" height={200}>
                   <BarChart
                     data={agents.map((a) => ({
-                      name: a.name.length > 16 ? a.name.slice(0, 14) + "…" : a.name,
+                      name: a.name.replace(" Agent", ""),
                       Accuracy: parseFloat(a.accuracy),
                       Processed: a.totalProcessed
                     }))}
                     margin={{ top: 4, right: 8, left: -10, bottom: 0 }}
-                    barCategoryGap="30%">
-
-                    <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
-                    <YAxis yAxisId="left" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} domain={[0, 100]} unit="%" />
-                    <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: "#9ca3af" }} axisLine={false} tickLine={false} />
+                    barCategoryGap="35%"
+                    barGap={4}>
+                    <defs>
+                      <linearGradient id="accGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#6366f1" stopOpacity={0.95} />
+                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.75} />
+                      </linearGradient>
+                      <linearGradient id="procGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#10b981" stopOpacity={0.9} />
+                        <stop offset="100%" stopColor="#34d399" stopOpacity={0.65} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#94a3b8", fontWeight: 500 }} axisLine={false} tickLine={false} />
+                    <YAxis yAxisId="left" tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} domain={[0, 100]} unit="%" />
+                    <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
                     <Tooltip
-                      contentStyle={{ fontSize: 11, borderRadius: 8, border: "1px solid #e5e7eb" }}
+                      contentStyle={{ fontSize: 11, borderRadius: 10, border: "none", boxShadow: "0 4px 20px rgba(0,0,0,0.12)", padding: "8px 12px" }}
+                      cursor={{ fill: "rgba(99,102,241,0.05)" }}
                       formatter={(value, name) => [name === "Accuracy" ? `${value}%` : value, name]} />
-
-                    <Legend iconType="circle" iconSize={7} wrapperStyle={{ fontSize: 11, paddingTop: 8 }} />
-                    <Bar yAxisId="left" dataKey="Accuracy" fill="#6366f1" radius={[4, 4, 0, 0]} />
-                    <Bar yAxisId="right" dataKey="Processed" fill="#10b981" radius={[4, 4, 0, 0]} />
+                    <Bar yAxisId="left" dataKey="Accuracy" fill="url(#accGrad)" radius={[6, 6, 2, 2]} />
+                    <Bar yAxisId="right" dataKey="Processed" fill="url(#procGrad)" radius={[6, 6, 2, 2]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
