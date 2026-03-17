@@ -943,7 +943,7 @@ function QuestionCard({ question, added, onAdd, onRemove, bankMode }) {
   const [textPlaceholder, setTextPlaceholder] = useState("Add your experience in years");
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4">
+    <div className="bg-slate-50 px-5 py-4 rounded-2xl border border-gray-100 shadow-sm">
       <div className="flex items-start justify-between gap-3 mb-3">
         {editing ?
         <textarea
@@ -1048,7 +1048,7 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
             {chosenQuestions.map((q) =>
             <QuestionCard key={q.id} question={q} added onAdd={() => addQuestion(q.id)} onRemove={() => removeQuestion(q.id)} />
             )}
-            {chosenQuestions.length === 0 && <p className="text-gray-400 my-8 py-20 text-base font-normal text-center normal-case">Add questions from the bank below</p>}
+            {chosenQuestions.length === 0 && <p className="bg-[#ffffff] text-gray-400 my-8 py-20 text-base font-normal text-center normal-case">Add questions from the bank below</p>}
           </div>
         </div>
 
