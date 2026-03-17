@@ -501,12 +501,30 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-[15px] font-bold text-gray-900">Requirements</h3>
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => handleEnhanceSection("requirements")}
-                disabled={enhancingSection === "requirements"}
-                className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
-                <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"}
-              </button>
+              <div className="relative">
+                <button
+                  onClick={() => setReqDropdownOpen((v) => !v)}
+                  disabled={enhancingSection === "requirements"}
+                  className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
+                  <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"} <ChevronDown className="w-3 h-3" />
+                </button>
+                {reqDropdownOpen && (
+                  <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-gray-200 rounded-xl shadow-lg z-30 py-1 overflow-hidden">
+                    {[
+                      { label: "Make it longer", mode: "longer" },
+                      { label: "Make it more detailed", mode: "detailed" },
+                      { label: "Make it shorter", mode: "shorter" },
+                    ].map(({ label, mode }) => (
+                      <button
+                        key={mode}
+                        onMouseDown={(e) => { e.preventDefault(); handleEnhanceSection("requirements", mode); }}
+                        className="w-full text-left px-4 py-2 text-[12px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
               <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
               <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
             </div>
