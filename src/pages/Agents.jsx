@@ -43,7 +43,7 @@ import AgentActivityFeed from "@/components/console/AgentActivityFeed";
 const allAgents = [
 {
   id: 1,
-  name: "Outreach automation",
+  name: "Outreach Agent",
   icon: FileCheck,
   type: "evaluation",
   status: "active",
