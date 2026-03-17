@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { X, ChevronRight, ChevronLeft, Check, Mail, Clock, Shield, Bot, AlertTriangle, Eye, Loader2, Calendar, Filter, Video, MapPin, Users, Globe, FileText, ListChecks } from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Check, Mail, Clock, Shield, Bot, AlertTriangle, Eye, Loader2, Calendar, Filter, Video, MapPin, Users, Globe, FileText, ListChecks, ChevronLeft as PrevIcon, ChevronRight as NextIcon } from "lucide-react";
+import { addDays, format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay, isWithinInterval, isAfter, isBefore, addMonths } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
