@@ -690,9 +690,25 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
     }
   };
 
+  const updateStackStatus = (completedStep, skipped) => {
+    const labelMap = { 1: "Invite Criteria", 2: "Invite Email", 5: "Assessment", 6: "Filtering Criteria" };
+    const label = labelMap[completedStep];
+    if (!label) return;
+    const enabledMap = {
+      1: !skipped && inviteCriteria.autoInvite,
+      2: !skipped,
+      5: true,
+      6: !skipped && filterCriteria.autoDecide,
+    };
+    setStackStatus((prev) => prev.map((s) =>
+      s.label === label ? { ...s, configured: true, enabled: enabledMap[completedStep] } : s
+    ));
+  };
+
   const handleNext = () => {
     const tc = getTransitionConfig(step, false);
     if (tc) {
+      updateStackStatus(step, false);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
       advanceStep(step);
@@ -702,6 +718,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const handleSkip = () => {
     const tc = getTransitionConfig(step, true);
     if (tc) {
+      updateStackStatus(step, true);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
       advanceStep(step);
