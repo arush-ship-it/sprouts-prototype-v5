@@ -67,7 +67,7 @@ const allAgents = [
 
 {
   id: 3,
-  name: "Smart Assessment",
+  name: "Assessment Agent",
   icon: CheckCircle,
   type: "evaluation",
   status: "active",
