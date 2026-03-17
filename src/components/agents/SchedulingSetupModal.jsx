@@ -8,8 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 // ── Stack Structure ───────────────────────────────────────────────────────────
 // Stack 1: Availability Finder  → wizard steps 1, 2
 // Stack 2: Interview Setup      → wizard steps 3, 4, 5
-// Stack 3: Filtering Criteria   → wizard step 6
-// + Review step 7
+// Stack 3: Feedback Setup       → wizard steps 6, 7
+// Stack 4: Filtering Criteria   → wizard step 8
+// + Review step 9
 
 const STACK_STEPS = [
 {
@@ -21,16 +22,20 @@ const STACK_STEPS = [
   desc: "Define scheduling criteria, interview format guidelines, and the invitation email sent to candidates"
 },
 {
-  id: 3, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
+  id: 3, label: "Feedback Setup", tag: "Report", badge: "Optional", badgeColor: "text-blue-500",
+  desc: "Configure the feedback form interviewers must fill in, and the email to send it to them after the interview"
+},
+{
+  id: 4, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
   desc: "Define how AI handles no-shows and cancellations"
 }];
 
 
 // step → sidebar item
-const STEP_TO_SIDEBAR = { 1: 1, 2: 1, 3: 2, 4: 2, 5: 2, 6: 3, 7: 3 };
-const TOTAL_STEPS = 7;
+const STEP_TO_SIDEBAR = { 1: 1, 2: 1, 3: 2, 4: 2, 5: 2, 6: 3, 7: 3, 8: 4, 9: 4 };
+const TOTAL_STEPS = 9;
 // Steps with a Skip button
-const OPTIONAL_STEPS = new Set([1, 2, 6]);
+const OPTIONAL_STEPS = new Set([1, 2, 6, 7, 8]);
 
 // ── Email defaults ────────────────────────────────────────────────────────────
 const DEFAULT_AVAILABILITY_EMAIL = `Hi {{candidate_name}},
