@@ -462,7 +462,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
   const addResp = () => setJd((prev) => ({ ...prev, responsibilities: [...prev.responsibilities, ""] }));
 
   React.useEffect(() => {
-    const close = () => setToolbar(null);
+    const close = () => { setToolbar(null); setReqDropdownOpen(false); };
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
   }, []);
