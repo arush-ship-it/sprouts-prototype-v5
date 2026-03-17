@@ -603,8 +603,8 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
       }
 
       <button
-        onClick={onContinue}
-        className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 h-10 rounded-xl text-[13px] font-semibold flex items-center gap-2 transition-colors">
+        onClick={onContinue} className="bg-blue-600 text-[#ffffff] px-8 text-xs font-semibold rounded-xl hover:bg-indigo-700 h-10 flex items-center gap-2 transition-colors">
+
 
         {isLast ? <><Check className="w-4 h-4" /> Finish Setup</> : <>Continue <ChevronRight className="w-4 h-4" /></>}
       </button>
