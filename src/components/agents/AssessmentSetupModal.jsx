@@ -755,7 +755,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-8 py-6">
               {transition ? (
-                <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} />
+                <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} stackItems={completedSections} />
               ) : (
                 <>
                   {step === 1 && <StepInviteCriteria criteria={inviteCriteria} setCriteria={setInviteCriteria} />}
