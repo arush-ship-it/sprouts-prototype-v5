@@ -693,7 +693,196 @@ function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
 
 }
 
-// ── Step 6: Filtering & No-Show Rules ─────────────────────────────────────────
+// ── Step 6: Feedback Form Builder ────────────────────────────────────────────
+const DEFAULT_FEEDBACK_SECTIONS = [
+  { id: "overall", label: "Overall Impression", type: "rating", required: true },
+  { id: "technical", label: "Technical Skills", type: "rating", required: true },
+  { id: "communication", label: "Communication & Clarity", type: "rating", required: true },
+  { id: "culture", label: "Culture Fit", type: "rating", required: false },
+  { id: "strengths", label: "Key Strengths", type: "text", required: true },
+  { id: "concerns", label: "Concerns / Red Flags", type: "text", required: false },
+  { id: "recommendation", label: "Hire Recommendation", type: "decision", required: true },
+  { id: "notes", label: "Additional Notes", type: "text", required: false },
+];
+
+const FIELD_TYPE_META = {
+  rating:   { label: "Rating (1–5)", color: "text-amber-600",   bg: "bg-amber-50",   border: "border-amber-200" },
+  text:     { label: "Text answer",  color: "text-blue-600",    bg: "bg-blue-50",    border: "border-blue-200" },
+  decision: { label: "Yes / No / Maybe", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-200" },
+};
+
+function StepFeedbackForm({ feedbackForm, setFeedbackForm }) {
+  const toggleField = (id) =>
+    setFeedbackForm((prev) => ({ ...prev, fields: prev.fields.map((f) => f.id === id ? { ...f, enabled: !f.enabled } : f) }));
+  const toggleRequired = (id) =>
+    setFeedbackForm((prev) => ({ ...prev, fields: prev.fields.map((f) => f.id === id ? { ...f, required: !f.required } : f) }));
+
+  const fields = feedbackForm.fields || DEFAULT_FEEDBACK_SECTIONS.map((f) => ({ ...f, enabled: true }));
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+          <FileText className="w-5 h-5 text-violet-600" />
+        </div>
+        <div>
+          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Feedback Form</h2>
+          <p className="text-[13px] text-gray-400">Select which sections interviewers must complete after each interview</p>
+        </div>
+      </div>
+
+      <div className="bg-violet-50 border border-violet-100 rounded-xl px-4 py-3 flex items-start gap-2">
+        <ListChecks className="w-4 h-4 text-violet-500 shrink-0 mt-0.5" />
+        <p className="text-[12px] text-violet-700 leading-relaxed">
+          Toggle sections on/off and mark them as required or optional. Interviewers will receive a link to this form after the interview ends.
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        {fields.map((field) => {
+          const meta = FIELD_TYPE_META[field.type];
+          return (
+            <div key={field.id} className={`border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all ${field.enabled ? "bg-white border-gray-100" : "bg-gray-50 border-gray-100 opacity-50"}`}>
+              <Switch checked={field.enabled} onCheckedChange={() => toggleField(field.id)} />
+              <div className="flex-1 min-w-0">
+                <p className={`text-[13px] font-semibold ${field.enabled ? "text-gray-900" : "text-gray-400"}`}>{field.label}</p>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${meta.bg} ${meta.color} ${meta.border}`}>{meta.label}</span>
+              </div>
+              {field.enabled && (
+                <button
+                  onClick={() => toggleRequired(field.id)}
+                  className={`text-[11px] font-semibold px-3 py-1 rounded-full border transition-all ${field.required ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-gray-50 text-gray-400 border-gray-200 hover:border-gray-300"}`}>
+                  {field.required ? "Required" : "Optional"}
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Deadline to submit */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-white">
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Submission deadline</p>
+        <p className="text-[12px] text-gray-400 mb-3">How long after the interview should feedback be submitted?</p>
+        <div className="flex gap-2 flex-wrap">
+          {["Same day", "24 hours", "48 hours", "72 hours"].map((d) => (
+            <button key={d} onClick={() => setFeedbackForm((prev) => ({ ...prev, deadline: d }))}
+              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${feedbackForm.deadline === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+              {d}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Step 7: Feedback Form Email ───────────────────────────────────────────────
+const DEFAULT_FEEDBACK_EMAIL = `Hi {{interviewer_name}},
+
+Thank you for conducting the interview with {{candidate_name}} for the {{job_title}} role.
+
+Please take a few minutes to complete your feedback using the link below:
+{{feedback_form_link}}
+
+Deadline: {{feedback_deadline}}
+
+Your feedback helps us make a fair and informed hiring decision. Please be as specific as possible.
+
+Thank you!`;
+
+const DEFAULT_FEEDBACK_REMINDER_EMAIL = `Hi {{interviewer_name}},
+
+Just a reminder — your feedback for {{candidate_name}} ({{job_title}}) is due by {{feedback_deadline}}.
+
+Complete your feedback here: {{feedback_form_link}}
+
+Thank you!`;
+
+function StepFeedbackEmail({ feedbackEmail, setFeedbackEmail }) {
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+          <Mail className="w-5 h-5 text-violet-600" />
+        </div>
+        <div>
+          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Feedback Request Email</h2>
+          <p className="text-[13px] text-gray-400">Customise the email sent to interviewers after the interview ends</p>
+        </div>
+      </div>
+
+      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-start gap-2">
+        <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+        <p className="text-[12px] text-amber-700 leading-relaxed">
+          Variables in <span className="font-mono font-bold bg-amber-100 px-1 rounded">{`{{double_braces}}`}</span> are auto-filled — interviewer name, candidate name, feedback link, deadline, etc.
+        </p>
+      </div>
+
+      <div className="space-y-3">
+        <div>
+          <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
+          <input
+            defaultValue="Feedback required — {{candidate_name}} interview ({{job_title}})"
+            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-violet-400 bg-white" />
+        </div>
+        <div>
+          <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Email Body</label>
+          <Textarea
+            value={feedbackEmail.body}
+            onChange={(e) => setFeedbackEmail((prev) => ({ ...prev, body: e.target.value }))}
+            className="w-full min-h-[200px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-violet-400 resize-none bg-white font-mono" />
+        </div>
+      </div>
+
+      <div className="border-t border-dashed border-gray-200" />
+
+      {/* Reminder */}
+      <div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
+            <Clock className="w-5 h-5 text-amber-600" />
+          </div>
+          <div>
+            <h2 className="text-[18px] font-bold text-gray-900 mb-0.5">Feedback Reminder</h2>
+            <p className="text-[13px] text-gray-400">Nudge interviewers who haven't submitted yet</p>
+          </div>
+        </div>
+        <div className={`border-2 rounded-2xl px-5 py-4 mb-4 flex items-center justify-between transition-all ${feedbackEmail.reminderEnabled ? "border-amber-300 bg-amber-50/40" : "border-gray-100 bg-gray-50"}`}>
+          <div>
+            <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Enable Reminder</p>
+            <p className="text-[12px] text-gray-400">Send a follow-up if feedback hasn't been submitted</p>
+          </div>
+          <Switch checked={feedbackEmail.reminderEnabled} onCheckedChange={(v) => setFeedbackEmail((prev) => ({ ...prev, reminderEnabled: v }))} />
+        </div>
+        {feedbackEmail.reminderEnabled && (
+          <div className="space-y-3">
+            <div>
+              <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Send reminder</p>
+              <div className="flex gap-2 flex-wrap">
+                {["12 hours before deadline", "24 hours before deadline", "On deadline day"].map((t) => (
+                  <button key={t} onClick={() => setFeedbackEmail((prev) => ({ ...prev, reminderTiming: t }))}
+                    className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${feedbackEmail.reminderTiming === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Reminder Email Body</label>
+              <Textarea
+                value={feedbackEmail.reminderBody}
+                onChange={(e) => setFeedbackEmail((prev) => ({ ...prev, reminderBody: e.target.value }))}
+                className="w-full min-h-[140px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Step 8: Filtering & No-Show Rules ─────────────────────────────────────────
 function StepFilteringCriteria({ criteria, setCriteria }) {
   return (
     <div>
