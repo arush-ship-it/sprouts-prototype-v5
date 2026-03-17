@@ -1265,8 +1265,10 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
                   {step === 3 && <StepSchedulingCriteria criteria={schedulingCriteria} setCriteria={setSchedulingCriteria} />}
                   {step === 4 && <StepInterviewFormat config={interviewConfig} onChange={setInterviewConfig} />}
                   {step === 5 && <StepInviteEmail emailContent={inviteEmail} onChange={setInviteEmail} reminder={reminder} setReminder={setReminder} />}
-                  {step === 6 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
-                  {step === 7 && <StepReviewConfirm availabilityConfig={availabilityConfig} schedulingCriteria={schedulingCriteria} interviewConfig={interviewConfig} reminder={reminder} filterCriteria={filterCriteria} generating={generating} />}
+                  {step === 6 && <StepFeedbackForm feedbackForm={feedbackForm} setFeedbackForm={setFeedbackForm} />}
+                  {step === 7 && <StepFeedbackEmail feedbackEmail={feedbackEmail} setFeedbackEmail={setFeedbackEmail} />}
+                  {step === 8 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
+                  {step === 9 && <StepReviewConfirm availabilityConfig={availabilityConfig} schedulingCriteria={schedulingCriteria} interviewConfig={interviewConfig} reminder={reminder} feedbackForm={feedbackForm} feedbackEmail={feedbackEmail} filterCriteria={filterCriteria} generating={generating} />}
                 </>
               }
             </div>
