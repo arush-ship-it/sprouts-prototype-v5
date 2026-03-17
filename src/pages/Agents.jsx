@@ -211,6 +211,7 @@ export default function Agents() {
   const [activeTab, setActiveTab] = useState("agents"); // "activity" | "agents"
   const [showFilters, setShowFilters] = useState(false);
   const [analysisExpanded, setAnalysisExpanded] = useState(true);
+  const [assessmentSetupOpen, setAssessmentSetupOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setAnalysisExpanded(false), 2000);
