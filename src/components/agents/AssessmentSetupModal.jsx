@@ -544,12 +544,9 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
 }
 
 // ── Stage Transition Microinteraction ────────────────────────────────────────
-function StageTransition({ config, onContinue, isLast, stackItems }) {
+function StageTransition({ config, onContinue, isLast }) {
   const [visible, setVisible] = useState(false);
   React.useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
-
-  const enabledCount = stackItems.filter(s => s.enabled).length;
-  const idleCount = stackItems.filter(s => !s.enabled).length;
 
   return (
     <div className={`flex flex-col items-center justify-center h-full px-12 text-center transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
@@ -568,37 +565,13 @@ function StageTransition({ config, onContinue, isLast, stackItems }) {
 
       {/* Heading */}
       <h2 className="text-[22px] font-bold text-gray-900 mb-2">{config.title}</h2>
-      <p className="text-[13px] text-gray-400 max-w-sm mb-6 leading-relaxed">{config.desc}</p>
+      <p className="text-[13px] text-gray-400 max-w-sm mb-8 leading-relaxed">{config.desc}</p>
 
       {/* Status pill */}
-      <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold mb-6 ${config.enabled ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
+      <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold mb-8 ${config.enabled ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
         <div className={`w-2 h-2 rounded-full ${config.enabled ? "bg-emerald-500" : "bg-gray-400"}`} />
         {config.statusLabel}
       </div>
-
-      {/* Stack overview */}
-      {stackItems.length > 0 && (
-        <div className="w-full max-w-sm mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wide">Stack overview</p>
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-semibold text-emerald-600">{enabledCount} active</span>
-              {idleCount > 0 && <span className="text-[11px] font-semibold text-gray-400">{idleCount} idle</span>}
-            </div>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            {stackItems.map((item, i) => (
-              <div key={i} className={`flex items-center justify-between px-3 py-2 rounded-xl border text-left ${item.enabled ? "bg-emerald-50 border-emerald-100" : "bg-gray-50 border-gray-100"}`}>
-                <span className={`text-[12px] font-medium ${item.enabled ? "text-emerald-700" : "text-gray-400"}`}>{item.label}</span>
-                <div className="flex items-center gap-1.5">
-                  <div className={`w-1.5 h-1.5 rounded-full ${item.enabled ? "bg-emerald-500" : "bg-gray-300"}`} />
-                  <span className={`text-[10px] font-semibold ${item.enabled ? "text-emerald-600" : "text-gray-400"}`}>{item.enabled ? "Active" : "Idle"}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       <button
         onClick={onContinue}
@@ -618,7 +591,6 @@ const OPTIONAL_STEPS = new Set([1, 2, 6]);
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [transition, setTransition] = useState(null); // null | { config }
-  const [completedSections, setCompletedSections] = useState([]); // array of { label, enabled }
   const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
   const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
@@ -688,7 +660,6 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const handleNext = () => {
     const tc = getTransitionConfig(step, false);
     if (tc) {
-      setCompletedSections(prev => [...prev.filter(s => s.label !== tc.sectionLabel), { label: tc.sectionLabel, enabled: tc.enabled }]);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
       advanceStep(step);
@@ -698,7 +669,6 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const handleSkip = () => {
     const tc = getTransitionConfig(step, true);
     if (tc) {
-      setCompletedSections(prev => [...prev.filter(s => s.label !== tc.sectionLabel), { label: tc.sectionLabel, enabled: false }]);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
       advanceStep(step);
@@ -755,7 +725,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-8 py-6">
               {transition ? (
-                <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} stackItems={completedSections} />
+                <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} />
               ) : (
                 <>
                   {step === 1 && <StepInviteCriteria criteria={inviteCriteria} setCriteria={setInviteCriteria} />}
