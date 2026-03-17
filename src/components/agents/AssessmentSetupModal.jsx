@@ -20,9 +20,13 @@ const TOTAL_STEPS = 6;
 const DEFAULT_QUESTIONS = [
   { id: 1, type: "coding", text: "Write a function to reverse a linked list in O(n) time.", difficulty: "Medium" },
   { id: 2, type: "coding", text: "Implement a binary search algorithm and explain its time complexity.", difficulty: "Medium" },
-  { id: 3, type: "mcq", text: "Which of the following is NOT a feature of React?", options: ["Virtual DOM", "Two-way data binding", "JSX", "Component-based architecture"], answer: 1, difficulty: "Easy" },
-  { id: 4, type: "mcq", text: "What is the time complexity of quicksort in the average case?", options: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"], answer: 1, difficulty: "Medium" },
-  { id: 5, type: "descriptive", text: "Describe your experience with system design. How would you design a URL shortener like bit.ly?", difficulty: "Hard" },
+  { id: 3, type: "coding", text: "Given an array of integers, find two numbers that add up to a target sum. Return their indices.", difficulty: "Easy" },
+  { id: 4, type: "mcq", text: "Which of the following is NOT a feature of React?", options: ["Virtual DOM", "Two-way data binding", "JSX", "Component-based architecture"], answer: 1, difficulty: "Easy" },
+  { id: 5, type: "mcq", text: "What is the time complexity of quicksort in the average case?", options: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"], answer: 1, difficulty: "Medium" },
+  { id: 6, type: "mcq", text: "Which HTTP method is idempotent but NOT safe?", options: ["GET", "DELETE", "POST", "PATCH"], answer: 1, difficulty: "Medium" },
+  { id: 7, type: "mcq", text: "What does the 'S' in SOLID principles stand for?", options: ["Scalability", "Single Responsibility", "Separation of Concerns", "Statelessness"], answer: 1, difficulty: "Easy" },
+  { id: 8, type: "descriptive", text: "Describe your experience with system design. How would you design a URL shortener like bit.ly?", difficulty: "Hard" },
+  { id: 9, type: "descriptive", text: "Walk us through a challenging technical problem you solved. What was your approach and what did you learn?", difficulty: "Medium" },
 ];
 
 const DEFAULT_INVITE_EMAIL = `Hi {{candidate_name}},
