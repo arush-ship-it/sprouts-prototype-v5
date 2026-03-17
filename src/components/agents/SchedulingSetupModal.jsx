@@ -293,7 +293,51 @@ function AvailabilityWindowPicker({ config, onChange }) {
       </div>
 
       {/* Slots per day */}
-      
+
+      {/* Date & Time Preview */}
+      {startDate && endDate && (
+        <div>
+          <div className="border-t border-dashed border-gray-100 pt-5" />
+          <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Availability Preview</p>
+          <p className="text-[12px] text-gray-400 mb-4">Finalised date range with available daily hours</p>
+          <div className="grid grid-cols-2 gap-2 max-h-[220px] overflow-y-auto pr-1">
+            {eachDayOfInterval({ start: startDate, end: endDate }).map((day) => {
+              const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+              return (
+                <div key={day.toISOString()} className={`flex items-center gap-3 px-4 py-3 rounded-xl border ${isWeekend ? "bg-gray-50 border-gray-100 opacity-60" : "bg-indigo-50 border-indigo-100"}`}>
+                  <div className={`text-center min-w-[36px] ${isWeekend ? "opacity-50" : ""}`}>
+                    <p className="text-[10px] font-semibold text-gray-400 uppercase">{format(day, "EEE")}</p>
+                    <p className={`text-[18px] font-bold ${isWeekend ? "text-gray-400" : "text-indigo-700"}`}>{format(day, "d")}</p>
+                    <p className="text-[10px] text-gray-400">{format(day, "MMM")}</p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    {isWeekend ? (
+                      <p className="text-[11px] text-gray-400 font-medium">Weekend</p>
+                    ) : (
+                      <>
+                        <p className="text-[12px] font-semibold text-indigo-700">{fromTime} – {toTime}</p>
+                        <p className="text-[10px] text-gray-400 mt-0.5">{format(day, "MMMM d, yyyy")}</p>
+                      </>
+                    )}
+                  </div>
+                  {!isWeekend && (
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-3 flex items-center justify-between">
+            <p className="text-[12px] text-indigo-700 font-medium">
+              {eachDayOfInterval({ start: startDate, end: endDate }).filter(d => d.getDay() !== 0 && d.getDay() !== 6).length} available days · {fromTime} – {toTime} daily
+            </p>
+            <span className="text-[11px] font-semibold text-indigo-500 bg-indigo-100 px-2 py-0.5 rounded-full">
+              {config.timezone || "UTC"}
+            </span>
+          </div>
+        </div>
+      )}
+
 
 
 
