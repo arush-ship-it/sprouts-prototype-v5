@@ -761,15 +761,15 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             {/* Header */}
             <div className="flex items-center justify-between px-8 py-5 border-b border-gray-100 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-indigo-600" />
-                </div>
+                
+
+
                 <div>
                   <h1 className="text-[14px] font-bold text-gray-900">Assessment Agent Setup</h1>
                   <p className="text-[11px] text-gray-400">{transition ? "Stage complete" : `Step ${step} of ${TOTAL_STEPS}`}</p>
                 </div>
               </div>
-              <button onClick={onClose} className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+              <button onClick={onClose} className="bg-[#ffffff] rounded-lg w-8 h-8 hover:bg-gray-200 flex items-center justify-center transition-colors">
                 <X className="w-4 h-4 text-gray-500" />
               </button>
             </div>
