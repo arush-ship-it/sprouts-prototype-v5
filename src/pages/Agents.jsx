@@ -698,7 +698,7 @@ export default function Agents() {
                       </div>
                       <div className="ml-4 flex-shrink-0 flex gap-2">
                         <button
-                          onClick={() => agent.name === "Assessment Agent" ? setAssessmentSetupOpen(true) : undefined}
+                          onClick={() => agent.name === "Assessment Agent" ? setAssessmentSetupOpen(true) : agent.name === "Scheduling Agent" ? setSchedulingSetupOpen(true) : undefined}
                           className="px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                           Setup
                         </button>
