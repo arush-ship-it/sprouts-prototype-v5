@@ -544,9 +544,12 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
 }
 
 // ── Stage Transition Microinteraction ────────────────────────────────────────
-function StageTransition({ config, onContinue, isLast }) {
+function StageTransition({ config, onContinue, isLast, stackStatus }) {
   const [visible, setVisible] = useState(false);
   React.useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+
+  const enabledCount = stackStatus.filter((s) => s.enabled).length;
+  const idleCount = stackStatus.filter((s) => !s.enabled).length;
 
   return (
     <div className={`flex flex-col items-center justify-center h-full px-12 text-center transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
@@ -565,13 +568,37 @@ function StageTransition({ config, onContinue, isLast }) {
 
       {/* Heading */}
       <h2 className="text-[22px] font-bold text-gray-900 mb-2">{config.title}</h2>
-      <p className="text-[13px] text-gray-400 max-w-sm mb-8 leading-relaxed">{config.desc}</p>
+      <p className="text-[13px] text-gray-400 max-w-sm mb-6 leading-relaxed">{config.desc}</p>
 
       {/* Status pill */}
-      <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold mb-8 ${config.enabled ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
+      <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold mb-6 ${config.enabled ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
         <div className={`w-2 h-2 rounded-full ${config.enabled ? "bg-emerald-500" : "bg-gray-400"}`} />
         {config.statusLabel}
       </div>
+
+      {/* Stack Overview */}
+      {stackStatus.some((s) => s.configured) && (
+        <div className="w-full max-w-sm bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 mb-6 text-left">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[11px] font-bold text-gray-700 uppercase tracking-wide">Stack Overview</p>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-semibold text-emerald-600">{enabledCount} active</span>
+              {idleCount > 0 && <span className="text-[11px] font-semibold text-gray-400">{idleCount} idle</span>}
+            </div>
+          </div>
+          <div className="space-y-2">
+            {stackStatus.map((s) => (
+              <div key={s.label} className={`flex items-center gap-2.5 px-3 py-2 rounded-xl ${s.configured ? (s.enabled ? "bg-emerald-50 border border-emerald-100" : "bg-gray-100 border border-gray-100") : "opacity-40 bg-white border border-dashed border-gray-200"}`}>
+                <div className={`w-2 h-2 rounded-full shrink-0 ${s.configured ? (s.enabled ? "bg-emerald-500" : "bg-gray-400") : "bg-gray-300"}`} />
+                <span className={`text-[12px] font-medium flex-1 ${s.configured ? (s.enabled ? "text-emerald-700" : "text-gray-500") : "text-gray-300"}`}>{s.label}</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${s.configured ? (s.enabled ? "bg-emerald-100 text-emerald-600" : "bg-gray-200 text-gray-500") : "bg-gray-100 text-gray-300"}`}>
+                  {s.configured ? (s.enabled ? "Active" : "Idle") : "Pending"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <button
         onClick={onContinue}
