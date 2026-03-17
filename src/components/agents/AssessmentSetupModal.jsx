@@ -688,6 +688,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const handleNext = () => {
     const tc = getTransitionConfig(step, false);
     if (tc) {
+      setCompletedSections(prev => [...prev.filter(s => s.label !== tc.sectionLabel), { label: tc.sectionLabel, enabled: tc.enabled }]);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
       advanceStep(step);
@@ -697,6 +698,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const handleSkip = () => {
     const tc = getTransitionConfig(step, true);
     if (tc) {
+      setCompletedSections(prev => [...prev.filter(s => s.label !== tc.sectionLabel), { label: tc.sectionLabel, enabled: false }]);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
       advanceStep(step);
