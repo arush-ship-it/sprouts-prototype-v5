@@ -576,8 +576,8 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
         {config.statusLabel}
       </div>
 
-      {/* Stack Overview */}
-      {stackStatus.some((s) => s.configured) && (
+      {/* Stack Overview — only on last transition screen */}
+      {isLast && stackStatus.some((s) => s.configured) && (
         <div className="w-full max-w-sm bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 mb-6 text-left">
           <div className="flex items-center justify-between mb-3">
             <p className="text-[11px] font-bold text-gray-700 uppercase tracking-wide">Stack Overview</p>
