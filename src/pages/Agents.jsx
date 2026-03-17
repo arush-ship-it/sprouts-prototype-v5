@@ -331,7 +331,7 @@ export default function Agents() {
                   )}
                     </div>
                 }
-                  <ChevronDown className="text-gray-700 lucide lucide-chevron-down w-4 h-4 transition-transform -rotate-90" />
+                  <ChevronDown className="text-gray-700 lucide lucide-chevron-down w-4 h-4 transition-transform" />
                 </div>
               </button>
 
