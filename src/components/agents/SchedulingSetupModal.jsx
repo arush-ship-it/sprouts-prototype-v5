@@ -1136,7 +1136,7 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
   );
 
   // Transitions fire after completing the last step of each stack
-  // Stack 1 ends at step 2, Stack 2 ends at step 5, Stack 3 ends at step 6
+  // Stack 1 ends at step 2, Stack 2 ends at step 5, Stack 3 ends at step 7, Stack 4 ends at step 8
   const getTransitionConfig = (completedStep, skipped) => {
     if (completedStep === 2) return {
       sectionLabel: "Availability Finder",
@@ -1154,7 +1154,16 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
       desc: `Scheduling criteria, format, and invitation email are all configured and ready to go.`,
       statusLabel: "Interview setup complete"
     };
-    if (completedStep === 6) return {
+    if (completedStep === 7) return {
+      sectionLabel: "Feedback Setup",
+      enabled: !skipped,
+      title: skipped ? "Feedback Setup Skipped" : "Feedback form configured",
+      desc: skipped
+        ? "No feedback form will be sent to interviewers. You can configure this later."
+        : `Interviewers will receive a feedback form with ${(feedbackForm.fields || []).filter((f) => f.enabled).length} sections, due ${feedbackForm.deadline || "24 hours"} after the interview.`,
+      statusLabel: skipped ? "Not configured" : feedbackEmail.reminderEnabled ? "Form + reminder active" : "Form active"
+    };
+    if (completedStep === 8) return {
       sectionLabel: "Filtering Criteria",
       enabled: !skipped && filterCriteria.autoReschedule,
       title: skipped ? "Filtering Criteria Skipped" : filterCriteria.autoReschedule ? "Auto-reschedule is On" : "Manual filtering mode",
@@ -1172,7 +1181,8 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
     const updates = {
       2: { label: "Availability Finder", enabled: !skipped },
       5: { label: "Interview Setup", enabled: true },
-      6: { label: "Filtering Criteria", enabled: !skipped && filterCriteria.autoReschedule }
+      7: { label: "Feedback Setup", enabled: !skipped },
+      8: { label: "Filtering Criteria", enabled: !skipped && filterCriteria.autoReschedule }
     };
     const update = updates[completedStep];
     if (!update) return;
