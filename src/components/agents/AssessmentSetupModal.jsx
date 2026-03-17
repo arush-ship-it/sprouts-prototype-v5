@@ -398,9 +398,17 @@ function StepReviewQuestions({ questions, setQuestions, generating }) {
           <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Review your questions</h2>
           <p className="text-[13px] text-gray-400">Edit or remove questions before saving</p>
         </div>
-        <button className="flex items-center gap-1.5 text-[12px] text-indigo-600 font-medium border border-indigo-200 px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors">
-          <Plus className="w-3.5 h-3.5" /> Add Question
-        </button>
+        <div className="flex items-center gap-2">
+          <button className="flex items-center gap-1.5 text-[12px] text-gray-600 font-medium border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+            <ExternalLink className="w-3.5 h-3.5" /> View Full Assessment
+          </button>
+          <button className="flex items-center gap-1.5 text-[12px] text-gray-600 font-medium border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+            <Share2 className="w-3.5 h-3.5" /> Share
+          </button>
+          <button className="flex items-center gap-1.5 text-[12px] text-indigo-600 font-medium border border-indigo-200 px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors">
+            <Plus className="w-3.5 h-3.5" /> Add Question
+          </button>
+        </div>
       </div>
       <div className="space-y-3">
         {questions.map((q, idx) => {
