@@ -168,7 +168,7 @@ function StepInviteCriteria({ criteria, setCriteria }) {
         <ul className="space-y-1.5">
           <li className="text-[12px] text-indigo-600 flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
-            Candidates scoring <strong>{criteria.minScore}/5</strong> or above are invited
+            Candidates with a <strong className="capitalize">{criteria.matchFit}</strong> match or above are invited
           </li>
           <li className="text-[12px] text-indigo-600 flex items-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
