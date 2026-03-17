@@ -39,6 +39,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddAgentModal from "@/components/console/AddAgentModal";
 import AgentActivityFeed from "@/components/console/AgentActivityFeed";
 import AssessmentSetupModal from "@/components/agents/AssessmentSetupModal";
+import SchedulingSetupModal from "@/components/agents/SchedulingSetupModal";
 
 // All Agents Data
 const allAgents = [
