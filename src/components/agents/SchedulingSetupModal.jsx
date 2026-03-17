@@ -92,6 +92,214 @@ function StackSidebar({ currentStep }) {
   );
 }
 
+// ── Availability Window Picker (Date Range + Time Range) ─────────────────────
+function MiniCalendar({ month, startDate, endDate, onDayClick, onMonthChange }) {
+  const monthStart = startOfMonth(month);
+  const monthEnd = endOfMonth(month);
+  const calStart = startOfWeek(monthStart, { weekStartsOn: 1 });
+  const calEnd = endOfWeek(monthEnd, { weekStartsOn: 1 });
+  const days = eachDayOfInterval({ start: calStart, end: calEnd });
+  const today = new Date();
+
+  return (
+    <div className="select-none">
+      <div className="flex items-center justify-between mb-3">
+        <button onClick={() => onMonthChange(addMonths(month, -1))} className="w-7 h-7 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
+          <ChevronLeft className="w-4 h-4 text-gray-500" />
+        </button>
+        <span className="text-[13px] font-semibold text-gray-800">{format(month, "MMMM yyyy")}</span>
+        <button onClick={() => onMonthChange(addMonths(month, 1))} className="w-7 h-7 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
+          <ChevronRight className="w-4 h-4 text-gray-500" />
+        </button>
+      </div>
+      <div className="grid grid-cols-7 gap-0.5 mb-1">
+        {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((d) => (
+          <div key={d} className="text-[10px] font-semibold text-gray-400 text-center py-1">{d}</div>
+        ))}
+      </div>
+      <div className="grid grid-cols-7 gap-0.5">
+        {days.map((day) => {
+          const isThisMonth = isSameMonth(day, month);
+          const isStart = startDate && isSameDay(day, startDate);
+          const isEnd = endDate && isSameDay(day, endDate);
+          const inRange = startDate && endDate && isWithinInterval(day, { start: startDate, end: endDate });
+          const isToday = isSameDay(day, today);
+          const isPast = isBefore(day, today) && !isToday;
+
+          return (
+            <button
+              key={day.toISOString()}
+              onClick={() => !isPast && isThisMonth && onDayClick(day)}
+              disabled={isPast || !isThisMonth}
+              className={`
+                relative h-8 w-full rounded-lg text-[12px] font-medium transition-all
+                ${!isThisMonth || isPast ? "opacity-25 cursor-not-allowed" : "cursor-pointer"}
+                ${isStart || isEnd ? "bg-indigo-600 text-white z-10" : ""}
+                ${inRange && !isStart && !isEnd ? "bg-indigo-100 text-indigo-700 rounded-none" : ""}
+                ${isStart ? "rounded-r-none" : ""}
+                ${isEnd ? "rounded-l-none" : ""}
+                ${isStart && isEnd ? "rounded-lg" : ""}
+                ${!isStart && !isEnd && !inRange && isThisMonth && !isPast ? "hover:bg-gray-100 text-gray-700" : ""}
+                ${isToday && !isStart && !isEnd ? "ring-1 ring-indigo-300" : ""}
+              `}
+            >
+              {format(day, "d")}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const TIME_SLOTS = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"];
+
+function AvailabilityWindowPicker({ config, onChange }) {
+  const [month, setMonth] = useState(new Date());
+
+  const startDate = config.startDate ? new Date(config.startDate) : null;
+  const endDate = config.endDate ? new Date(config.endDate) : null;
+
+  const handleDayClick = (day) => {
+    if (!startDate || (startDate && endDate)) {
+      onChange({ ...config, startDate: day.toISOString(), endDate: null });
+    } else {
+      if (isAfter(day, startDate)) {
+        onChange({ ...config, endDate: day.toISOString() });
+      } else {
+        onChange({ ...config, startDate: day.toISOString(), endDate: null });
+      }
+    }
+  };
+
+  const dayCount = startDate && endDate
+    ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1
+    : null;
+
+  const fromTime = config.fromTime || "09:00";
+  const toTime = config.toTime || "17:00";
+
+  return (
+    <div className="border border-gray-100 rounded-2xl p-5 bg-white space-y-5">
+      <div>
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Availability window</p>
+        <p className="text-[12px] text-gray-400 mb-4">Select the date range candidates can share their availability within</p>
+
+        <div className="flex gap-6">
+          {/* Calendar */}
+          <div className="flex-1">
+            <MiniCalendar
+              month={month}
+              startDate={startDate}
+              endDate={endDate}
+              onDayClick={handleDayClick}
+              onMonthChange={setMonth}
+            />
+          </div>
+
+          {/* Selected range summary */}
+          <div className="w-[160px] flex flex-col gap-3 justify-center">
+            <div className={`rounded-xl p-3 text-center transition-all ${startDate ? "bg-indigo-50 border border-indigo-100" : "bg-gray-50 border border-dashed border-gray-200"}`}>
+              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">From</p>
+              <p className={`text-[13px] font-bold ${startDate ? "text-indigo-700" : "text-gray-300"}`}>
+                {startDate ? format(startDate, "MMM d, yyyy") : "Select start"}
+              </p>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="w-px h-4 bg-gray-200" />
+            </div>
+            <div className={`rounded-xl p-3 text-center transition-all ${endDate ? "bg-indigo-50 border border-indigo-100" : "bg-gray-50 border border-dashed border-gray-200"}`}>
+              <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1">To</p>
+              <p className={`text-[13px] font-bold ${endDate ? "text-indigo-700" : "text-gray-300"}`}>
+                {endDate ? format(endDate, "MMM d, yyyy") : "Select end"}
+              </p>
+            </div>
+            {dayCount && (
+              <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-2 text-center">
+                <p className="text-[11px] font-bold text-emerald-700">{dayCount} day{dayCount !== 1 ? "s" : ""}</p>
+                <p className="text-[10px] text-emerald-500">window</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-dashed border-gray-100" />
+
+      {/* Time range */}
+      <div>
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Available hours</p>
+        <p className="text-[12px] text-gray-400 mb-4">Set the daily time window candidates can pick slots from</p>
+
+        <div className="flex items-center gap-4">
+          {/* From time */}
+          <div className="flex-1">
+            <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">From</p>
+            <div className="grid grid-cols-4 gap-1.5">
+              {TIME_SLOTS.slice(0, 8).map((t) => (
+                <button key={t} onClick={() => onChange({ ...config, fromTime: t })}
+                  className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-center ${fromTime === t ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50"}`}>
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center gap-1 pt-5">
+            <div className="w-px h-3 bg-gray-200" />
+            <span className="text-[11px] text-gray-400 font-medium">to</span>
+            <div className="w-px h-3 bg-gray-200" />
+          </div>
+
+          {/* To time */}
+          <div className="flex-1">
+            <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">To</p>
+            <div className="grid grid-cols-4 gap-1.5">
+              {TIME_SLOTS.slice(8).map((t) => (
+                <button key={t} onClick={() => onChange({ ...config, toTime: t })}
+                  className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-center ${toTime === t ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50"}`}>
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Visual time bar */}
+        <div className="mt-4 bg-gray-100 rounded-full h-2 relative overflow-hidden">
+          {(() => {
+            const allHours = TIME_SLOTS;
+            const fromIdx = allHours.indexOf(fromTime);
+            const toIdx = allHours.indexOf(toTime);
+            if (fromIdx === -1 || toIdx === -1 || toIdx <= fromIdx) return null;
+            const left = (fromIdx / (allHours.length - 1)) * 100;
+            const width = ((toIdx - fromIdx) / (allHours.length - 1)) * 100;
+            return <div className="absolute top-0 h-full bg-indigo-500 rounded-full transition-all" style={{ left: `${left}%`, width: `${width}%` }} />;
+          })()}
+        </div>
+        <div className="flex justify-between mt-1">
+          <span className="text-[10px] text-gray-400">{fromTime}</span>
+          <span className="text-[11px] font-semibold text-indigo-600">{fromTime} – {toTime}</span>
+          <span className="text-[10px] text-gray-400">{toTime}</span>
+        </div>
+      </div>
+
+      {/* Slots per day */}
+      <div className="border-t border-dashed border-gray-100 pt-4">
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum slots to select</p>
+        <p className="text-[12px] text-gray-400 mb-3">How many time slots should candidates provide?</p>
+        <div className="flex items-center gap-3">
+          <button onClick={() => onChange({ ...config, minSlots: Math.max(1, (config.minSlots || 3) - 1) })} className="w-7 h-7 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold">−</button>
+          <span className="text-[20px] font-bold text-gray-900 w-8 text-center">{config.minSlots || 3}</span>
+          <button onClick={() => onChange({ ...config, minSlots: Math.min(10, (config.minSlots || 3) + 1) })} className="w-7 h-7 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold">+</button>
+          <span className="text-[12px] text-gray-400 ml-2">slots minimum</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Step 1: Share Availability Template ──────────────────────────────────────
 const TIMEZONES = [
   "UTC", "America/New_York", "America/Los_Angeles", "America/Chicago",
