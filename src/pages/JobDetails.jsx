@@ -217,48 +217,54 @@ export default function JobDetails() {
 
         <div className="grid grid-cols-2 gap-6 mb-8">
           {/* Pipeline Funnel */}
-          <div className="p-6 rounded-xl bg-white border border-gray-200">
-            <h3 className="text-[16px] font-semibold text-gray-900 mb-4">
-              Pipeline Overview
-            </h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={pipelineData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis
-                  dataKey="stage"
-                  tick={{ fontSize: 11 }}
-                  stroke="#999" />
-
-                <YAxis tick={{ fontSize: 11 }} stroke="#999" />
-                <Tooltip />
-                <Bar dataKey="count" fill="#6366f1" radius={[8, 8, 0, 0]} />
+          <div className="p-6 rounded-2xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.05)] border border-gray-100">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-[14px] font-semibold text-gray-900">Pipeline Overview</h3>
+              <span className="text-[11px] text-gray-400 font-medium">By stage</span>
+            </div>
+            <p className="text-[11px] text-gray-400 mb-4">Candidate distribution across hiring stages</p>
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={pipelineData} barCategoryGap="35%">
+                <defs>
+                  <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity={0.95} />
+                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.7} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" vertical={false} />
+                <XAxis dataKey="stage" tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 500 }} tickLine={false} axisLine={false} />
+                <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
+                <Tooltip
+                  contentStyle={{ fontSize: 12, borderRadius: 10, border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', padding: '8px 12px' }}
+                  cursor={{ fill: 'rgba(99,102,241,0.06)' }} />
+                <Bar dataKey="count" fill="url(#barGrad)" radius={[8, 8, 3, 3]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
 
           {/* Application Trend */}
-          <div className="p-6 rounded-xl bg-white border border-gray-200">
-            <h3 className="text-[16px] font-semibold text-gray-900 mb-4">
-              Application Trend
-            </h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={applicationTrend}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis
-                  dataKey="date"
-                  tick={{ fontSize: 11 }}
-                  stroke="#999" />
-
-                <YAxis tick={{ fontSize: 11 }} stroke="#999" />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="count"
-                  stroke="#10b981"
-                  strokeWidth={3}
-                  dot={{ r: 4 }} />
-
-              </LineChart>
+          <div className="p-6 rounded-2xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.05)] border border-gray-100">
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-[14px] font-semibold text-gray-900">Application Trend</h3>
+              <span className="text-[11px] text-emerald-500 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full">+{applicationTrend[applicationTrend.length-1].count - applicationTrend[0].count} this week</span>
+            </div>
+            <p className="text-[11px] text-gray-400 mb-4">Daily application volume over time</p>
+            <ResponsiveContainer width="100%" height={220}>
+              <AreaChart data={applicationTrend}>
+                <defs>
+                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity={0.25} />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="0" stroke="#f1f5f9" vertical={false} />
+                <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 500 }} tickLine={false} axisLine={false} />
+                <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} tickLine={false} axisLine={false} />
+                <Tooltip
+                  contentStyle={{ fontSize: 12, borderRadius: 10, border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', padding: '8px 12px' }}
+                  cursor={{ stroke: '#10b981', strokeWidth: 1, strokeDasharray: '4 4' }} />
+                <Area type="monotone" dataKey="count" stroke="#10b981" strokeWidth={2.5} fill="url(#areaGrad)" dot={{ r: 4, fill: '#10b981', stroke: '#fff', strokeWidth: 2 }} activeDot={{ r: 6, fill: '#10b981', stroke: '#fff', strokeWidth: 2 }} />
+              </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
