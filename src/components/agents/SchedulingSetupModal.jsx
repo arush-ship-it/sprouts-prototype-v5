@@ -964,8 +964,8 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
 
 }
 
-// ── Step 7: Review & Confirm ──────────────────────────────────────────────────
-function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewConfig, reminder, filterCriteria, generating }) {
+// ── Step 9: Review & Confirm ──────────────────────────────────────────────────
+function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewConfig, reminder, feedbackForm, feedbackEmail, filterCriteria, generating }) {
   if (generating) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-4">
