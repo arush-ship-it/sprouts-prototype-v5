@@ -1025,6 +1025,16 @@ function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewCo
 
         },
         {
+          label: "Feedback Setup",
+          icon: FileText,
+          iconBg: "bg-violet-100",
+          iconColor: "text-violet-600",
+          items: [
+          `${(feedbackForm.fields || []).filter((f) => f.enabled).length} form sections enabled`,
+          `Deadline: ${feedbackForm.deadline || "24 hours"} after interview`,
+          feedbackEmail.reminderEnabled ? `Reminder: ${feedbackEmail.reminderTiming}` : "No reminder set"]
+        },
+        {
           label: "Filtering Rules",
           icon: Shield,
           iconBg: "bg-red-100",
