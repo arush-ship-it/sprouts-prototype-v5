@@ -816,8 +816,8 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
                 }
                   <Button
                   onClick={handleNext}
-                  disabled={generating}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5">
+                  disabled={generating} className="bg-blue-600 text-[#ffffff] px-6 py-2 text-xs font-semibold rounded-xl justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-indigo-700 h-9 flex items-center gap-1.5">
+
 
                     {generating ?
                   <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Generating…</> :
