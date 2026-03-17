@@ -531,9 +531,54 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
   );
 }
 
+// ── Stage Transition Microinteraction ────────────────────────────────────────
+function StageTransition({ config, onContinue }) {
+  const [visible, setVisible] = useState(false);
+  React.useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+
+  return (
+    <div className={`flex flex-col items-center justify-center h-full px-12 text-center transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+      {/* Icon */}
+      <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-5 ${config.enabled ? "bg-emerald-100" : "bg-gray-100"}`}>
+        {config.enabled
+          ? <Check className="w-9 h-9 text-emerald-500" />
+          : <ChevronRight className="w-9 h-9 text-gray-400" />
+        }
+      </div>
+
+      {/* Label */}
+      <span className={`text-[11px] font-bold uppercase tracking-widest mb-2 ${config.enabled ? "text-emerald-500" : "text-gray-400"}`}>
+        {config.sectionLabel}
+      </span>
+
+      {/* Heading */}
+      <h2 className="text-[22px] font-bold text-gray-900 mb-2">{config.title}</h2>
+      <p className="text-[13px] text-gray-400 max-w-sm mb-8 leading-relaxed">{config.desc}</p>
+
+      {/* Status pill */}
+      <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold mb-8 ${config.enabled ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
+        <div className={`w-2 h-2 rounded-full ${config.enabled ? "bg-emerald-500" : "bg-gray-400"}`} />
+        {config.statusLabel}
+      </div>
+
+      <button
+        onClick={onContinue}
+        className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 h-10 rounded-xl text-[13px] font-semibold flex items-center gap-2 transition-colors"
+      >
+        Continue <ChevronRight className="w-4 h-4" />
+      </button>
+    </div>
+  );
+}
+
 // ── Main Modal ────────────────────────────────────────────────────────────────
+// Steps: 1=InviteCriteria, 2=InviteEmail, 3=CreationMethod, 4=ConfigureAssessment, 5=ReviewQuestions, 6=FilteringCriteria
+// Transition screens are shown via `transition` state (not a separate step number)
+const OPTIONAL_STEPS = new Set([1, 2, 6]);
+
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
+  const [transition, setTransition] = useState(null); // null | { config }
   const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
   const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
@@ -543,21 +588,93 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [generating, setGenerating] = useState(false);
   const [filterCriteria, setFilterCriteria] = useState({ threshold: 3, autoDecide: true, humanReview: true });
 
-  const handleNext = () => {
-    if (step === 4 && creationMethod === "ai") {
+  // Determine transition config after completing certain stages
+  const getTransitionConfig = (completedStep, skipped) => {
+    if (completedStep === 1) return {
+      sectionLabel: "Invite Criteria",
+      enabled: !skipped && inviteCriteria.autoInvite,
+      title: skipped ? "Invite Criteria Skipped" : inviteCriteria.autoInvite ? "Auto-invite is On" : "Manual invite mode",
+      desc: skipped
+        ? "You can configure invite criteria later from the agent settings."
+        : inviteCriteria.autoInvite
+          ? "Candidates with a matching fit will be automatically invited to take the assessment."
+          : "Candidates will be flagged for your manual review before an invite is sent.",
+      statusLabel: skipped ? "Not configured" : inviteCriteria.autoInvite ? "Automation enabled" : "Manual review required",
+    };
+    if (completedStep === 2) return {
+      sectionLabel: "Invite Email",
+      enabled: !skipped,
+      title: skipped ? "Default email will be used" : "Invite email customised",
+      desc: skipped
+        ? "A default system email will be sent to candidates. You can customise it anytime."
+        : reminder.enabled
+          ? `A custom invite email and a deadline reminder (${reminder.timing}) are configured.`
+          : "A custom invite email is configured. No deadline reminder set.",
+      statusLabel: skipped ? "Using default template" : reminder.enabled ? "Email + reminder active" : "Custom email active",
+    };
+    if (completedStep === 6) return {
+      sectionLabel: "Filtering Criteria",
+      enabled: !skipped && filterCriteria.autoDecide,
+      title: skipped ? "Filtering Criteria Skipped" : filterCriteria.autoDecide ? "AI auto-filtering is On" : "Manual filtering mode",
+      desc: skipped
+        ? "All assessment results will require manual review. You can configure auto-filtering later."
+        : filterCriteria.autoDecide
+          ? "The AI will automatically filter candidates based on assessment scores."
+          : "Assessment results will be flagged for your manual approval.",
+      statusLabel: skipped ? "Not configured" : filterCriteria.autoDecide ? "Automation enabled" : "Manual review required",
+    };
+    return null;
+  };
+
+  const advanceStep = (fromStep) => {
+    if (fromStep === 4 && creationMethod === "ai") {
       setGenerating(true);
       setStep(5);
       setTimeout(() => setGenerating(false), 2200);
-    } else if (step < TOTAL_STEPS) {
-      setStep(step + 1);
+    } else if (fromStep < TOTAL_STEPS) {
+      setStep(fromStep + 1);
     } else {
       onClose();
     }
   };
 
-  const handleBack = () => { if (step > 1) setStep(step - 1); };
+  const handleNext = () => {
+    const tc = getTransitionConfig(step, false);
+    if (tc) {
+      setTransition({ config: tc, nextStep: step + 1 });
+    } else {
+      advanceStep(step);
+    }
+  };
+
+  const handleSkip = () => {
+    const tc = getTransitionConfig(step, true);
+    if (tc) {
+      setTransition({ config: tc, nextStep: step + 1 });
+    } else {
+      advanceStep(step);
+    }
+  };
+
+  const handleTransitionContinue = () => {
+    const nextStep = transition.nextStep;
+    setTransition(null);
+    if (nextStep > TOTAL_STEPS) {
+      onClose();
+    } else {
+      setStep(nextStep);
+    }
+  };
+
+  const handleBack = () => {
+    if (transition) { setTransition(null); return; }
+    if (step > 1) setStep(step - 1);
+  };
 
   if (!isOpen) return null;
+
+  const isOptional = OPTIONAL_STEPS.has(step);
+  const isLastStep = step === TOTAL_STEPS;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -565,8 +682,8 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
       <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[75rem] mx-4 flex flex-col overflow-hidden max-h-[90vh]" style={{ height: "700px" }}>
         <div className="flex flex-1 overflow-hidden">
 
-          {/* Left Sidebar */}
-          <StackSidebar currentStep={step} />
+          {/* Left Sidebar — hidden during transition */}
+          {!transition && <StackSidebar currentStep={step} />}
 
           {/* Right Content */}
           <div className="flex-1 flex flex-col overflow-hidden">
@@ -578,7 +695,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
                 </div>
                 <div>
                   <h1 className="text-[14px] font-bold text-gray-900">Assessment Agent Setup</h1>
-                  <p className="text-[11px] text-gray-400">Step {step} of {TOTAL_STEPS}</p>
+                  <p className="text-[11px] text-gray-400">{transition ? "Stage complete" : `Step ${step} of ${TOTAL_STEPS}`}</p>
                 </div>
               </div>
               <button onClick={onClose} className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
@@ -588,42 +705,60 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-8 py-6">
-              {step === 1 && <StepInviteCriteria criteria={inviteCriteria} setCriteria={setInviteCriteria} />}
-              {step === 2 && <StepInviteEmail emailContent={inviteEmail} onChange={setInviteEmail} reminder={reminder} setReminder={setReminder} />}
-              {step === 3 && <StepCreationMethod value={creationMethod} onChange={setCreationMethod} />}
-              {step === 4 && <StepConfigureAssessment config={assessmentConfig} onChange={setAssessmentConfig} />}
-              {step === 5 && <StepReviewQuestions questions={questions} setQuestions={setQuestions} generating={generating} />}
-              {step === 6 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
+              {transition ? (
+                <StageTransition config={transition.config} onContinue={handleTransitionContinue} />
+              ) : (
+                <>
+                  {step === 1 && <StepInviteCriteria criteria={inviteCriteria} setCriteria={setInviteCriteria} />}
+                  {step === 2 && <StepInviteEmail emailContent={inviteEmail} onChange={setInviteEmail} reminder={reminder} setReminder={setReminder} />}
+                  {step === 3 && <StepCreationMethod value={creationMethod} onChange={setCreationMethod} />}
+                  {step === 4 && <StepConfigureAssessment config={assessmentConfig} onChange={setAssessmentConfig} />}
+                  {step === 5 && <StepReviewQuestions questions={questions} setQuestions={setQuestions} generating={generating} />}
+                  {step === 6 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
+                </>
+              )}
             </div>
 
-            {/* Footer */}
-            <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-between bg-white shrink-0">
-              <button
-                onClick={handleBack}
-                disabled={step === 1}
-                className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft className="w-4 h-4" /> Back
-              </button>
-              <div className="flex items-center gap-1.5">
-                {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-                  <div key={i} className={`rounded-full transition-all ${step === i + 1 ? "w-4 h-2.5 bg-indigo-600" : "w-2.5 h-2.5 bg-gray-200"}`} />
-                ))}
+            {/* Footer — hidden during transition (transition has its own CTA) */}
+            {!transition && (
+              <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-between bg-white shrink-0">
+                <button
+                  onClick={handleBack}
+                  disabled={step === 1}
+                  className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4" /> Back
+                </button>
+                <div className="flex items-center gap-1.5">
+                  {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+                    <div key={i} className={`rounded-full transition-all ${step === i + 1 ? "w-4 h-2.5 bg-indigo-600" : "w-2.5 h-2.5 bg-gray-200"}`} />
+                  ))}
+                </div>
+                <div className="flex items-center gap-2">
+                  {isOptional && (
+                    <button
+                      onClick={handleSkip}
+                      className="text-[13px] font-medium text-gray-400 hover:text-gray-600 px-4 h-9 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors"
+                    >
+                      Skip
+                    </button>
+                  )}
+                  <Button
+                    onClick={handleNext}
+                    disabled={generating}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5"
+                  >
+                    {generating ? (
+                      <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Generating…</>
+                    ) : isLastStep ? (
+                      <><Check className="w-3.5 h-3.5" /> Save & Activate</>
+                    ) : (
+                      <>Continue <ChevronRight className="w-3.5 h-3.5" /></>
+                    )}
+                  </Button>
+                </div>
               </div>
-              <Button
-                onClick={handleNext}
-                disabled={generating}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5"
-              >
-                {generating ? (
-                  <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Generating…</>
-                ) : step === TOTAL_STEPS ? (
-                  <><Check className="w-3.5 h-3.5" /> Save & Activate</>
-                ) : (
-                  <>Continue <ChevronRight className="w-3.5 h-3.5" /></>
-                )}
-              </Button>
-            </div>
+            )}
           </div>
         </div>
       </div>
