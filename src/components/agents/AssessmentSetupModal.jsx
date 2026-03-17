@@ -540,7 +540,7 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
 }
 
 // ── Stage Transition Microinteraction ────────────────────────────────────────
-function StageTransition({ config, onContinue }) {
+function StageTransition({ config, onContinue, isLast }) {
   const [visible, setVisible] = useState(false);
   React.useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
 
@@ -721,7 +721,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-8 py-6">
               {transition ? (
-                <StageTransition config={transition.config} onContinue={handleTransitionContinue} />
+                <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} />
               ) : (
                 <>
                   {step === 1 && <StepInviteCriteria criteria={inviteCriteria} setCriteria={setInviteCriteria} />}
