@@ -12,19 +12,19 @@ import { Textarea } from "@/components/ui/textarea";
 // + Review step 7
 
 const STACK_STEPS = [
-  {
-    id: 1, label: "Availability Finder", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
-    desc: "Share an availability template with candidates and collect their preferred time slots",
-  },
-  {
-    id: 2, label: "Interview Setup", tag: "Configuration", badge: "Mandatory", badgeColor: "text-orange-500",
-    desc: "Define scheduling criteria, interview format guidelines, and the invitation email sent to candidates",
-  },
-  {
-    id: 3, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
-    desc: "Define how AI handles no-shows and cancellations",
-  },
-];
+{
+  id: 1, label: "Availability Finder", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
+  desc: "Share an availability template with candidates and collect their preferred time slots"
+},
+{
+  id: 2, label: "Interview Setup", tag: "Configuration", badge: "Mandatory", badgeColor: "text-orange-500",
+  desc: "Define scheduling criteria, interview format guidelines, and the invitation email sent to candidates"
+},
+{
+  id: 3, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
+  desc: "Define how AI handles no-shows and cancellations"
+}];
+
 
 // step → sidebar item
 const STEP_TO_SIDEBAR = { 1: 1, 2: 1, 3: 2, 4: 2, 5: 2, 6: 3, 7: 3 };
@@ -85,11 +85,11 @@ function StackSidebar({ currentStep }) {
               <span className={`text-[10px] font-semibold ml-auto ${s.badgeColor}`}>{s.badge}</span>
             </div>
             <p className="text-[11px] text-gray-400 leading-relaxed">{s.desc}</p>
-          </div>
-        );
+          </div>);
+
       })}
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Availability Window Picker (Date Range + Time Range) ─────────────────────
@@ -113,9 +113,9 @@ function MiniCalendar({ month, startDate, endDate, onDayClick, onMonthChange }) 
         </button>
       </div>
       <div className="grid grid-cols-7 gap-0.5 mb-1">
-        {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((d) => (
-          <div key={d} className="text-[10px] font-semibold text-gray-400 text-center py-1">{d}</div>
-        ))}
+        {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((d) =>
+        <div key={d} className="text-[10px] font-semibold text-gray-400 text-center py-1">{d}</div>
+        )}
       </div>
       <div className="grid grid-cols-7 gap-0.5">
         {days.map((day) => {
@@ -141,15 +141,15 @@ function MiniCalendar({ month, startDate, endDate, onDayClick, onMonthChange }) 
                 ${isStart && isEnd ? "rounded-lg" : ""}
                 ${!isStart && !isEnd && !inRange && isThisMonth && !isPast ? "hover:bg-gray-100 text-gray-700" : ""}
                 ${isToday && !isStart && !isEnd ? "ring-1 ring-indigo-300" : ""}
-              `}
-            >
+              `}>
+
               {format(day, "d")}
-            </button>
-          );
+            </button>);
+
         })}
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 const TIME_SLOTS = ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"];
@@ -161,7 +161,7 @@ function AvailabilityWindowPicker({ config, onChange }) {
   const endDate = config.endDate ? new Date(config.endDate) : null;
 
   const handleDayClick = (day) => {
-    if (!startDate || (startDate && endDate)) {
+    if (!startDate || startDate && endDate) {
       onChange({ ...config, startDate: day.toISOString(), endDate: null });
     } else {
       if (isAfter(day, startDate)) {
@@ -172,9 +172,9 @@ function AvailabilityWindowPicker({ config, onChange }) {
     }
   };
 
-  const dayCount = startDate && endDate
-    ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1
-    : null;
+  const dayCount = startDate && endDate ?
+  Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 :
+  null;
 
   const fromTime = config.fromTime || "09:00";
   const toTime = config.toTime || "17:00";
@@ -193,8 +193,8 @@ function AvailabilityWindowPicker({ config, onChange }) {
               startDate={startDate}
               endDate={endDate}
               onDayClick={handleDayClick}
-              onMonthChange={setMonth}
-            />
+              onMonthChange={setMonth} />
+
           </div>
 
           {/* Selected range summary */}
@@ -214,12 +214,12 @@ function AvailabilityWindowPicker({ config, onChange }) {
                 {endDate ? format(endDate, "MMM d, yyyy") : "Select end"}
               </p>
             </div>
-            {dayCount && (
-              <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-2 text-center">
+            {dayCount &&
+            <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-2 text-center">
                 <p className="text-[11px] font-bold text-emerald-700">{dayCount} day{dayCount !== 1 ? "s" : ""}</p>
                 <p className="text-[10px] text-emerald-500">window</p>
               </div>
-            )}
+            }
           </div>
         </div>
       </div>
@@ -237,12 +237,12 @@ function AvailabilityWindowPicker({ config, onChange }) {
           <div className="flex-1">
             <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">From</p>
             <div className="grid grid-cols-4 gap-1.5">
-              {TIME_SLOTS.slice(0, 8).map((t) => (
-                <button key={t} onClick={() => onChange({ ...config, fromTime: t })}
-                  className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-center ${fromTime === t ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50"}`}>
+              {TIME_SLOTS.slice(0, 8).map((t) =>
+              <button key={t} onClick={() => onChange({ ...config, fromTime: t })}
+              className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-center ${fromTime === t ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50"}`}>
                   {t}
                 </button>
-              ))}
+              )}
             </div>
           </div>
 
@@ -256,12 +256,12 @@ function AvailabilityWindowPicker({ config, onChange }) {
           <div className="flex-1">
             <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-2">To</p>
             <div className="grid grid-cols-4 gap-1.5">
-              {TIME_SLOTS.slice(8).map((t) => (
-                <button key={t} onClick={() => onChange({ ...config, toTime: t })}
-                  className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-center ${toTime === t ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50"}`}>
+              {TIME_SLOTS.slice(8).map((t) =>
+              <button key={t} onClick={() => onChange({ ...config, toTime: t })}
+              className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-all text-center ${toTime === t ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50"}`}>
                   {t}
                 </button>
-              ))}
+              )}
             </div>
           </div>
         </div>
@@ -273,8 +273,8 @@ function AvailabilityWindowPicker({ config, onChange }) {
             const fromIdx = allHours.indexOf(fromTime);
             const toIdx = allHours.indexOf(toTime);
             if (fromIdx === -1 || toIdx === -1 || toIdx <= fromIdx) return null;
-            const left = (fromIdx / (allHours.length - 1)) * 100;
-            const width = ((toIdx - fromIdx) / (allHours.length - 1)) * 100;
+            const left = fromIdx / (allHours.length - 1) * 100;
+            const width = (toIdx - fromIdx) / (allHours.length - 1) * 100;
             return <div className="absolute top-0 h-full bg-indigo-500 rounded-full transition-all" style={{ left: `${left}%`, width: `${width}%` }} />;
           })()}
         </div>
@@ -296,15 +296,15 @@ function AvailabilityWindowPicker({ config, onChange }) {
           <span className="text-[12px] text-gray-400 ml-2">slots minimum</span>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 1: Share Availability Template ──────────────────────────────────────
 const TIMEZONES = [
-  "UTC", "America/New_York", "America/Los_Angeles", "America/Chicago",
-  "Europe/London", "Europe/Paris", "Asia/Calcutta", "Asia/Singapore", "Asia/Tokyo", "Australia/Sydney",
-];
+"UTC", "America/New_York", "America/Los_Angeles", "America/Chicago",
+"Europe/London", "Europe/Paris", "Asia/Calcutta", "Asia/Singapore", "Asia/Tokyo", "Australia/Sydney"];
+
 
 function StepAvailabilityTemplate({ config, onChange }) {
   return (
@@ -330,12 +330,12 @@ function StepAvailabilityTemplate({ config, onChange }) {
         </div>
         <p className="text-[12px] text-gray-400 mb-3">Candidates will see slots in this timezone. They can also adjust to their own.</p>
         <div className="flex flex-wrap gap-2">
-          {TIMEZONES.map((tz) => (
-            <button key={tz} onClick={() => onChange({ ...config, timezone: tz })}
-              className={`px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all ${config.timezone === tz ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+          {TIMEZONES.map((tz) =>
+          <button key={tz} onClick={() => onChange({ ...config, timezone: tz })}
+          className={`px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all ${config.timezone === tz ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
               {tz}
             </button>
-          ))}
+          )}
         </div>
       </div>
 
@@ -352,8 +352,8 @@ function StepAvailabilityTemplate({ config, onChange }) {
           Candidates can select their own local timezone when filling out the availability form.
         </p>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 2: Request Availability Email ───────────────────────────────────────
@@ -382,16 +382,16 @@ function StepAvailabilityEmail({ emailContent, onChange }) {
           <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
           <input
             defaultValue="Share your availability — {{job_title}} Interview at {{company_name}}"
-            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white"
-          />
+            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white" />
+
         </div>
         <div>
           <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Email Body</label>
           <Textarea
             value={emailContent}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full min-h-[220px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono"
-          />
+            className="w-full min-h-[220px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono" />
+
         </div>
       </div>
 
@@ -401,8 +401,8 @@ function StepAvailabilityEmail({ emailContent, onChange }) {
           Once candidates fill in their availability, the AI will cross-reference with interviewer calendars and auto-propose the best matching slot.
         </p>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 3: Scheduling Criteria ───────────────────────────────────────────────
@@ -424,14 +424,14 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
         <p className="text-[12px] text-gray-400 mb-5">Candidates meeting this score or above will be automatically scheduled</p>
         <div className="grid grid-cols-3 gap-3 mb-4">
           {[
-            { id: "any", label: "Any Score", desc: "Schedule all candidates regardless of score", color: "text-red-600", iconBg: "bg-red-100", activeBorder: "border-red-400 bg-red-50/60", activeText: "text-red-700" },
-            { id: "passing", label: "Passing Score", desc: "Schedule candidates who meet the passing mark", color: "text-amber-600", iconBg: "bg-amber-100", activeBorder: "border-amber-400 bg-amber-50/60", activeText: "text-amber-700" },
-            { id: "top", label: "Top Performers", desc: "Only schedule highest scoring candidates", color: "text-emerald-600", iconBg: "bg-emerald-100", activeBorder: "border-emerald-400 bg-emerald-50/60", activeText: "text-emerald-700" },
-          ].map((opt) => {
+          { id: "any", label: "Any Score", desc: "Schedule all candidates regardless of score", color: "text-red-600", iconBg: "bg-red-100", activeBorder: "border-red-400 bg-red-50/60", activeText: "text-red-700" },
+          { id: "passing", label: "Passing Score", desc: "Schedule candidates who meet the passing mark", color: "text-amber-600", iconBg: "bg-amber-100", activeBorder: "border-amber-400 bg-amber-50/60", activeText: "text-amber-700" },
+          { id: "top", label: "Top Performers", desc: "Only schedule highest scoring candidates", color: "text-emerald-600", iconBg: "bg-emerald-100", activeBorder: "border-emerald-400 bg-emerald-50/60", activeText: "text-emerald-700" }].
+          map((opt) => {
             const selected = criteria.scoreThreshold === opt.id;
             return (
               <button key={opt.id} onClick={() => setCriteria({ ...criteria, scoreThreshold: opt.id })}
-                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? opt.activeBorder : "border-gray-100 bg-white hover:border-gray-200"}`}>
+              className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? opt.activeBorder : "border-gray-100 bg-white hover:border-gray-200"}`}>
                 <div className={`w-8 h-8 rounded-xl ${opt.iconBg} flex items-center justify-center`}>
                   <div className={`w-3 h-3 rounded-full ${selected ? opt.color.replace("text-", "bg-") : "bg-gray-300"}`} />
                 </div>
@@ -442,8 +442,8 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
                 <div className={`w-4 h-4 rounded-full border-2 ml-auto flex items-center justify-center transition-all ${selected ? `border-current ${opt.color} bg-current` : "border-gray-300"}`}>
                   {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </div>
-              </button>
-            );
+              </button>);
+
           })}
         </div>
       </div>
@@ -472,12 +472,12 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
         <p className="text-[12px] text-gray-400 leading-relaxed mb-3">
           Even when the AI qualifies a candidate, you'll get a notification to review before the interview invite is sent.
         </p>
-        {criteria.humanReview && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
+        {criteria.humanReview &&
+        <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-500 shrink-0" />
             <p className="text-[12px] text-emerald-700 font-medium">Interviews won't be scheduled until you approve them</p>
           </div>
-        )}
+        }
       </div>
 
       <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
@@ -497,8 +497,8 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
           </li>
         </ul>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 4: Interview Format + Guidelines ─────────────────────────────────────
@@ -522,15 +522,15 @@ function StepInterviewFormat({ config, onChange }) {
         <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Format</p>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { id: "video", label: "Video Call", desc: "Zoom, Meet, or Teams", icon: Video, iconBg: "bg-blue-100", iconColor: "text-blue-600" },
-            { id: "phone", label: "Phone Call", desc: "Standard phone interview", icon: Clock, iconBg: "bg-amber-100", iconColor: "text-amber-600" },
-            { id: "onsite", label: "On-site", desc: "In-person at the office", icon: MapPin, iconBg: "bg-emerald-100", iconColor: "text-emerald-600" },
-          ].map((opt) => {
+          { id: "video", label: "Video Call", desc: "Zoom, Meet, or Teams", icon: Video, iconBg: "bg-blue-100", iconColor: "text-blue-600" },
+          { id: "phone", label: "Phone Call", desc: "Standard phone interview", icon: Clock, iconBg: "bg-amber-100", iconColor: "text-amber-600" },
+          { id: "onsite", label: "On-site", desc: "In-person at the office", icon: MapPin, iconBg: "bg-emerald-100", iconColor: "text-emerald-600" }].
+          map((opt) => {
             const Icon = opt.icon;
             const selected = config.format === opt.id;
             return (
               <button key={opt.id} onClick={() => onChange({ ...config, format: opt.id })}
-                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? "border-indigo-400 bg-indigo-50/60" : "border-gray-100 bg-white hover:border-indigo-200"}`}>
+              className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? "border-indigo-400 bg-indigo-50/60" : "border-gray-100 bg-white hover:border-indigo-200"}`}>
                 <div className={`w-9 h-9 rounded-xl ${opt.iconBg} flex items-center justify-center`}>
                   <Icon className={`w-4 h-4 ${opt.iconColor}`} />
                 </div>
@@ -538,8 +538,8 @@ function StepInterviewFormat({ config, onChange }) {
                   <p className={`text-[13px] font-semibold mb-0.5 ${selected ? "text-indigo-700" : "text-gray-800"}`}>{opt.label}</p>
                   <p className="text-[11px] text-gray-400">{opt.desc}</p>
                 </div>
-              </button>
-            );
+              </button>);
+
           })}
         </div>
       </div>
@@ -549,23 +549,23 @@ function StepInterviewFormat({ config, onChange }) {
         <div>
           <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Duration</p>
           <div className="flex gap-2 flex-wrap">
-            {[30, 45, 60, 90].map((d) => (
-              <button key={d} onClick={() => onChange({ ...config, duration: d })}
-                className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.duration === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+            {[30, 45, 60, 90].map((d) =>
+            <button key={d} onClick={() => onChange({ ...config, duration: d })}
+            className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.duration === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
                 {d} min
               </button>
-            ))}
+            )}
           </div>
         </div>
         <div>
           <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Buffer Between Interviews</p>
           <div className="flex gap-2 flex-wrap">
-            {["None", "15 min", "30 min", "1 hour"].map((b) => (
-              <button key={b} onClick={() => onChange({ ...config, buffer: b })}
-                className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.buffer === b ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+            {["None", "15 min", "30 min", "1 hour"].map((b) =>
+            <button key={b} onClick={() => onChange({ ...config, buffer: b })}
+            className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.buffer === b ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
                 {b}
               </button>
-            ))}
+            )}
           </div>
         </div>
       </div>
@@ -595,11 +595,11 @@ function StepInterviewFormat({ config, onChange }) {
         <Textarea
           value={config.guidelines || DEFAULT_GUIDELINES}
           onChange={(e) => onChange({ ...config, guidelines: e.target.value })}
-          className="w-full min-h-[160px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-700 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-gray-50"
-        />
+          className="w-full min-h-[160px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-700 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-gray-50" />
+
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 5: Interview Invitation Email ───────────────────────────────────────
@@ -627,16 +627,16 @@ function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
             <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
             <input
               defaultValue="Interview Confirmed — {{job_title}} at {{company_name}}"
-              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white"
-            />
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white" />
+
           </div>
           <div>
             <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Email Body</label>
             <Textarea
               value={emailContent}
               onChange={(e) => onChange(e.target.value)}
-              className="w-full min-h-[200px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono"
-            />
+              className="w-full min-h-[200px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono" />
+
           </div>
         </div>
       </div>
@@ -660,32 +660,32 @@ function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
           </div>
           <Switch checked={reminder.enabled} onCheckedChange={(v) => setReminder({ ...reminder, enabled: v })} />
         </div>
-        {reminder.enabled && (
-          <div className="space-y-3">
+        {reminder.enabled &&
+        <div className="space-y-3">
             <div>
               <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Send reminder</p>
               <div className="flex gap-2 flex-wrap">
-                {["1 hour before", "3 hours before", "24 hours before"].map((t) => (
-                  <button key={t} onClick={() => setReminder({ ...reminder, timing: t })}
-                    className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${reminder.timing === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
+                {["1 hour before", "3 hours before", "24 hours before"].map((t) =>
+              <button key={t} onClick={() => setReminder({ ...reminder, timing: t })}
+              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${reminder.timing === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
                     {t}
                   </button>
-                ))}
+              )}
               </div>
             </div>
             <div>
               <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Reminder Email Body</label>
               <Textarea
-                value={reminder.emailContent}
-                onChange={(e) => setReminder({ ...reminder, emailContent: e.target.value })}
-                className="w-full min-h-[160px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono"
-              />
+              value={reminder.emailContent}
+              onChange={(e) => setReminder({ ...reminder, emailContent: e.target.value })}
+              className="w-full min-h-[160px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono" />
+
             </div>
           </div>
-        )}
+        }
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 6: Filtering & No-Show Rules ─────────────────────────────────────────
@@ -741,12 +741,12 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
         <p className="text-[12px] text-gray-400 leading-relaxed mb-3">
           Even when the AI flags a candidate for disqualification, you'll get a notification to review before the action is taken.
         </p>
-        {criteria.humanReview && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
+        {criteria.humanReview &&
+        <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-500 shrink-0" />
             <p className="text-[12px] text-emerald-700 font-medium">Disqualifications won't be sent until you approve them</p>
           </div>
-        )}
+        }
       </div>
 
       <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
@@ -766,8 +766,8 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
           </li>
         </ul>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 7: Review & Confirm ──────────────────────────────────────────────────
@@ -780,8 +780,8 @@ function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewCo
         </div>
         <p className="text-[15px] font-semibold text-gray-800">Configuring Scheduling Agent…</p>
         <p className="text-[12px] text-gray-400">Setting up calendar sync and automation rules</p>
-      </div>
-    );
+      </div>);
+
   }
   return (
     <div>
@@ -796,53 +796,53 @@ function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewCo
       </div>
       <div className="space-y-3">
         {[
-          {
-            label: "Availability Finder",
-            icon: Calendar,
-            iconBg: "bg-blue-100",
-            iconColor: "text-blue-600",
-            items: [
-              `Window: ${availabilityConfig.window || "7 days"}`,
-              `Min slots: ${availabilityConfig.minSlots || 3}`,
-              `Timezone: ${availabilityConfig.timezone || "UTC"}`,
-              `Candidate override: ${availabilityConfig.allowTimezoneOverride ? "Allowed" : "Not allowed"}`,
-            ],
-          },
-          {
-            label: "Interview Setup",
-            icon: Video,
-            iconBg: "bg-indigo-100",
-            iconColor: "text-indigo-600",
-            items: [
-              `Score threshold: ${schedulingCriteria.scoreThreshold || "Passing"}`,
-              `Format: ${interviewConfig.format || "Video"}`,
-              `Duration: ${interviewConfig.duration || 60} min`,
-              `Interviewers: ${interviewConfig.interviewers || 1}`,
-            ],
-          },
-          {
-            label: "Invite Email & Reminder",
-            icon: Mail,
-            iconBg: "bg-amber-100",
-            iconColor: "text-amber-600",
-            items: [
-              "Custom invite email configured",
-              reminder.enabled ? `Reminder: ${reminder.timing}` : "No reminder set",
-            ],
-          },
-          {
-            label: "Filtering Rules",
-            icon: Shield,
-            iconBg: "bg-red-100",
-            iconColor: "text-red-500",
-            items: [
-              `No-show limit: ${filterCriteria.noShowLimit || 1}`,
-              `Auto-reschedule: ${filterCriteria.autoReschedule ? "Enabled" : "Disabled"}`,
-              `Human review: ${filterCriteria.humanReview ? "Required" : "Not required"}`,
-            ],
-          },
-        ].map(({ label, icon: Icon, iconBg, iconColor, items }) => (
-          <div key={label} className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm">
+        {
+          label: "Availability Finder",
+          icon: Calendar,
+          iconBg: "bg-blue-100",
+          iconColor: "text-blue-600",
+          items: [
+          `Window: ${availabilityConfig.window || "7 days"}`,
+          `Min slots: ${availabilityConfig.minSlots || 3}`,
+          `Timezone: ${availabilityConfig.timezone || "UTC"}`,
+          `Candidate override: ${availabilityConfig.allowTimezoneOverride ? "Allowed" : "Not allowed"}`]
+
+        },
+        {
+          label: "Interview Setup",
+          icon: Video,
+          iconBg: "bg-indigo-100",
+          iconColor: "text-indigo-600",
+          items: [
+          `Score threshold: ${schedulingCriteria.scoreThreshold || "Passing"}`,
+          `Format: ${interviewConfig.format || "Video"}`,
+          `Duration: ${interviewConfig.duration || 60} min`,
+          `Interviewers: ${interviewConfig.interviewers || 1}`]
+
+        },
+        {
+          label: "Invite Email & Reminder",
+          icon: Mail,
+          iconBg: "bg-amber-100",
+          iconColor: "text-amber-600",
+          items: [
+          "Custom invite email configured",
+          reminder.enabled ? `Reminder: ${reminder.timing}` : "No reminder set"]
+
+        },
+        {
+          label: "Filtering Rules",
+          icon: Shield,
+          iconBg: "bg-red-100",
+          iconColor: "text-red-500",
+          items: [
+          `No-show limit: ${filterCriteria.noShowLimit || 1}`,
+          `Auto-reschedule: ${filterCriteria.autoReschedule ? "Enabled" : "Disabled"}`,
+          `Human review: ${filterCriteria.humanReview ? "Required" : "Not required"}`]
+
+        }].
+        map(({ label, icon: Icon, iconBg, iconColor, items }) =>
+        <div key={label} className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm">
             <div className="flex items-center gap-3 mb-3">
               <div className={`w-8 h-8 rounded-xl ${iconBg} flex items-center justify-center shrink-0`}>
                 <Icon className={`w-4 h-4 ${iconColor}`} />
@@ -854,23 +854,23 @@ function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewCo
               </div>
             </div>
             <ul className="space-y-1 pl-11">
-              {items.map((item, i) => (
-                <li key={i} className="text-[12px] text-gray-500 flex items-center gap-1.5">
+              {items.map((item, i) =>
+            <li key={i} className="text-[12px] text-gray-500 flex items-center gap-1.5">
                   <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />{item}
                 </li>
-              ))}
+            )}
             </ul>
           </div>
-        ))}
+        )}
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Stage Transition ──────────────────────────────────────────────────────────
 function StageTransition({ config, onContinue, isLast, stackStatus }) {
   const [visible, setVisible] = useState(false);
-  React.useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+  React.useEffect(() => {setTimeout(() => setVisible(true), 50);}, []);
 
   const enabledCount = stackStatus.filter((s) => s.enabled).length;
   const idleCount = stackStatus.filter((s) => !s.enabled).length;
@@ -890,8 +890,8 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
         {config.statusLabel}
       </div>
 
-      {isLast && stackStatus.some((s) => s.configured) && (
-        <div className="w-full max-w-sm bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 mb-6 text-left">
+      {isLast && stackStatus.some((s) => s.configured) &&
+      <div className="w-full max-w-sm bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 mb-6 text-left">
           <div className="flex items-center justify-between mb-3">
             <p className="text-[11px] font-bold text-gray-700 uppercase tracking-wide">Stack Overview</p>
             <div className="flex items-center gap-3">
@@ -900,24 +900,24 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
             </div>
           </div>
           <div className="space-y-2">
-            {stackStatus.map((s) => (
-              <div key={s.label} className={`flex items-center gap-2.5 px-3 py-2 rounded-xl ${s.configured ? (s.enabled ? "bg-emerald-50 border border-emerald-100" : "bg-gray-100 border border-gray-100") : "opacity-40 bg-white border border-dashed border-gray-200"}`}>
-                <div className={`w-2 h-2 rounded-full shrink-0 ${s.configured ? (s.enabled ? "bg-emerald-500" : "bg-gray-400") : "bg-gray-300"}`} />
-                <span className={`text-[12px] font-medium flex-1 ${s.configured ? (s.enabled ? "text-emerald-700" : "text-gray-500") : "text-gray-300"}`}>{s.label}</span>
-                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${s.configured ? (s.enabled ? "bg-emerald-100 text-emerald-600" : "bg-gray-200 text-gray-500") : "bg-gray-100 text-gray-300"}`}>
-                  {s.configured ? (s.enabled ? "Active" : "Idle") : "Pending"}
+            {stackStatus.map((s) =>
+          <div key={s.label} className={`flex items-center gap-2.5 px-3 py-2 rounded-xl ${s.configured ? s.enabled ? "bg-emerald-50 border border-emerald-100" : "bg-gray-100 border border-gray-100" : "opacity-40 bg-white border border-dashed border-gray-200"}`}>
+                <div className={`w-2 h-2 rounded-full shrink-0 ${s.configured ? s.enabled ? "bg-emerald-500" : "bg-gray-400" : "bg-gray-300"}`} />
+                <span className={`text-[12px] font-medium flex-1 ${s.configured ? s.enabled ? "text-emerald-700" : "text-gray-500" : "text-gray-300"}`}>{s.label}</span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${s.configured ? s.enabled ? "bg-emerald-100 text-emerald-600" : "bg-gray-200 text-gray-500" : "bg-gray-100 text-gray-300"}`}>
+                  {s.configured ? s.enabled ? "Active" : "Idle" : "Pending"}
                 </span>
               </div>
-            ))}
+          )}
           </div>
         </div>
-      )}
+      }
 
       <button onClick={onContinue} className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 h-10 rounded-xl text-[13px] font-semibold flex items-center gap-2 transition-colors">
         {isLast ? <><Check className="w-4 h-4" /> Finish Setup</> : <>Continue <ChevronRight className="w-4 h-4" /></>}
       </button>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Main Modal ────────────────────────────────────────────────────────────────
@@ -933,10 +933,10 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
   const [filterCriteria, setFilterCriteria] = useState({ noShowLimit: 1, autoReschedule: true, humanReview: true });
   const [generating, setGenerating] = useState(false);
   const [stackStatus, setStackStatus] = useState([
-    { label: "Availability Finder", configured: false, enabled: false },
-    { label: "Interview Setup", configured: false, enabled: true },
-    { label: "Filtering Criteria", configured: false, enabled: false },
-  ]);
+  { label: "Availability Finder", configured: false, enabled: false },
+  { label: "Interview Setup", configured: false, enabled: true },
+  { label: "Filtering Criteria", configured: false, enabled: false }]
+  );
 
   // Transitions fire after completing the last step of each stack
   // Stack 1 ends at step 2, Stack 2 ends at step 5, Stack 3 ends at step 6
@@ -945,28 +945,28 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
       sectionLabel: "Availability Finder",
       enabled: !skipped,
       title: skipped ? "Availability Finder Skipped" : "Availability Finder configured",
-      desc: skipped
-        ? "Candidates will be scheduled directly. You can add availability collection later."
-        : `Candidates will share ${availabilityConfig.minSlots || 3} slots over a ${availabilityConfig.window || "7 days"} window in ${availabilityConfig.timezone || "UTC"}.`,
-      statusLabel: skipped ? "Not configured" : "Availability collection active",
+      desc: skipped ?
+      "Candidates will be scheduled directly. You can add availability collection later." :
+      `Candidates will share ${availabilityConfig.minSlots || 3} slots over a ${availabilityConfig.window || "7 days"} window in ${availabilityConfig.timezone || "UTC"}.`,
+      statusLabel: skipped ? "Not configured" : "Availability collection active"
     };
     if (completedStep === 5) return {
       sectionLabel: "Interview Setup",
       enabled: true,
       title: `Interview ready — ${interviewConfig.duration || 60} min ${interviewConfig.format || "video"} interview`,
       desc: `Scheduling criteria, format, and invitation email are all configured and ready to go.`,
-      statusLabel: "Interview setup complete",
+      statusLabel: "Interview setup complete"
     };
     if (completedStep === 6) return {
       sectionLabel: "Filtering Criteria",
       enabled: !skipped && filterCriteria.autoReschedule,
       title: skipped ? "Filtering Criteria Skipped" : filterCriteria.autoReschedule ? "Auto-reschedule is On" : "Manual filtering mode",
-      desc: skipped
-        ? "All cancellations and no-shows will require manual review."
-        : filterCriteria.autoReschedule
-          ? "The AI will automatically offer new slots to candidates who cancel."
-          : "Cancellations will be flagged for your manual approval.",
-      statusLabel: skipped ? "Not configured" : filterCriteria.autoReschedule ? "Automation enabled" : "Manual review required",
+      desc: skipped ?
+      "All cancellations and no-shows will require manual review." :
+      filterCriteria.autoReschedule ?
+      "The AI will automatically offer new slots to candidates who cancel." :
+      "Cancellations will be flagged for your manual approval.",
+      statusLabel: skipped ? "Not configured" : filterCriteria.autoReschedule ? "Automation enabled" : "Manual review required"
     };
     return null;
   };
@@ -975,12 +975,12 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
     const updates = {
       2: { label: "Availability Finder", enabled: !skipped },
       5: { label: "Interview Setup", enabled: true },
-      6: { label: "Filtering Criteria", enabled: !skipped && filterCriteria.autoReschedule },
+      6: { label: "Filtering Criteria", enabled: !skipped && filterCriteria.autoReschedule }
     };
     const update = updates[completedStep];
     if (!update) return;
     setStackStatus((prev) => prev.map((s) =>
-      s.label === update.label ? { ...s, configured: true, enabled: update.enabled } : s
+    s.label === update.label ? { ...s, configured: true, enabled: update.enabled } : s
     ));
   };
 
@@ -991,7 +991,7 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
       setTransition({ config: tc, nextStep: step + 1 });
     } else if (step === TOTAL_STEPS) {
       setGenerating(true);
-      setTimeout(() => { setGenerating(false); onClose(); }, 2000);
+      setTimeout(() => {setGenerating(false);onClose();}, 2000);
     } else {
       setStep(step + 1);
     }
@@ -1010,12 +1010,12 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
   const handleTransitionContinue = () => {
     const nextStep = transition.nextStep;
     setTransition(null);
-    if (nextStep > TOTAL_STEPS) onClose();
-    else setStep(nextStep);
+    if (nextStep > TOTAL_STEPS) onClose();else
+    setStep(nextStep);
   };
 
   const handleBack = () => {
-    if (transition) { setTransition(null); return; }
+    if (transition) {setTransition(null);return;}
     if (step > 1) setStep(step - 1);
   };
 
@@ -1039,7 +1039,7 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
                   <Calendar className="w-4 h-4 text-indigo-600" />
                 </div>
                 <div>
-                  <h1 className="text-[14px] font-bold text-gray-900">Scheduling Agent Setup</h1>
+                  <h1 className="text-[14px] font-bold text-gray-900">Interview Agent Setup</h1>
                   <p className="text-[11px] text-gray-400">{transition ? "Stage complete" : `Step ${step} of ${TOTAL_STEPS}`}</p>
                 </div>
               </div>
@@ -1049,10 +1049,10 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
             </div>
 
             <div className="flex-1 overflow-y-auto px-8 py-6">
-              {transition ? (
-                <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} stackStatus={stackStatus} />
-              ) : (
-                <>
+              {transition ?
+              <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} stackStatus={stackStatus} /> :
+
+              <>
                   {step === 1 && <StepAvailabilityTemplate config={availabilityConfig} onChange={setAvailabilityConfig} />}
                   {step === 2 && <StepAvailabilityEmail emailContent={availabilityEmail} onChange={setAvailabilityEmail} />}
                   {step === 3 && <StepSchedulingCriteria criteria={schedulingCriteria} setCriteria={setSchedulingCriteria} />}
@@ -1061,43 +1061,43 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
                   {step === 6 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
                   {step === 7 && <StepReviewConfirm availabilityConfig={availabilityConfig} schedulingCriteria={schedulingCriteria} interviewConfig={interviewConfig} reminder={reminder} filterCriteria={filterCriteria} generating={generating} />}
                 </>
-              )}
+              }
             </div>
 
-            {!transition && (
-              <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-between bg-white shrink-0">
+            {!transition &&
+            <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-between bg-white shrink-0">
                 <button onClick={handleBack} disabled={step === 1}
-                  className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+              className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
                   <ChevronLeft className="w-4 h-4" /> Back
                 </button>
                 <div className="flex items-center gap-1.5">
-                  {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-                    <div key={i} className={`rounded-full transition-all ${step === i + 1 ? "w-4 h-2.5 bg-indigo-600" : "w-2.5 h-2.5 bg-gray-200"}`} />
-                  ))}
+                  {Array.from({ length: TOTAL_STEPS }).map((_, i) =>
+                <div key={i} className={`rounded-full transition-all ${step === i + 1 ? "w-4 h-2.5 bg-indigo-600" : "w-2.5 h-2.5 bg-gray-200"}`} />
+                )}
                 </div>
                 <div className="flex items-center gap-2">
-                  {isOptional && (
-                    <button onClick={handleSkip}
-                      className="text-[13px] font-medium text-gray-400 hover:text-gray-600 px-4 h-9 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors">
+                  {isOptional &&
+                <button onClick={handleSkip}
+                className="text-[13px] font-medium text-gray-400 hover:text-gray-600 px-4 h-9 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors">
                       Skip
                     </button>
-                  )}
+                }
                   <Button onClick={handleNext} disabled={generating}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5">
-                    {generating ? (
-                      <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Activating…</>
-                    ) : isLastStep ? (
-                      <><Check className="w-3.5 h-3.5" /> Save & Activate</>
-                    ) : (
-                      <>Continue <ChevronRight className="w-3.5 h-3.5" /></>
-                    )}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5">
+                    {generating ?
+                  <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Activating…</> :
+                  isLastStep ?
+                  <><Check className="w-3.5 h-3.5" /> Save & Activate</> :
+
+                  <>Continue <ChevronRight className="w-3.5 h-3.5" /></>
+                  }
                   </Button>
                 </div>
               </div>
-            )}
+            }
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
