@@ -331,18 +331,26 @@ export default function TalentPool() {
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto h-full">
         <div className="pt-4 pr-8 pb-4 pl-2">
-          <div className="mb-6">
-            <div className="mb-1 flex items-center gap-2">
-              <Link to={createPageUrl("Home")}>
-                
-              </Link>
-              <h1 className="text-gray-900 text-lg font-semibold">Talent Pool
-
-                </h1>
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <div className="mb-1 flex items-center gap-2">
+                <Link to={createPageUrl("Home")}>
+                  
+                </Link>
+                <h1 className="text-gray-900 text-lg font-semibold">Talent Pool</h1>
+              </div>
+              <p className="text-gray-500 pr-1 pl-2 text-sm">
+                {candidates.length} candidates found
+              </p>
             </div>
-            <p className="text-gray-500 pr-1 pl-2 text-sm">
-              {candidates.length} candidates found
-            </p>
+            <div className="flex items-center gap-2">
+              <button className="px-4 py-2 text-[13px] font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                Select
+              </button>
+              <button className="px-4 py-2 text-[13px] font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                + Candidate
+              </button>
+            </div>
           </div>
 
           {/* Sourced Candidates Section */}
