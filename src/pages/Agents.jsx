@@ -38,6 +38,7 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddAgentModal from "@/components/console/AddAgentModal";
 import AgentActivityFeed from "@/components/console/AgentActivityFeed";
+import AssessmentSetupModal from "@/components/agents/AssessmentSetupModal";
 
 // All Agents Data
 const allAgents = [
