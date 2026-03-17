@@ -618,6 +618,7 @@ const OPTIONAL_STEPS = new Set([1, 2, 6]);
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [transition, setTransition] = useState(null); // null | { config }
+  const [completedSections, setCompletedSections] = useState([]); // array of { label, enabled }
   const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
   const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
