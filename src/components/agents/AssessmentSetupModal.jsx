@@ -620,6 +620,13 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
           : "A custom invite email is configured. No deadline reminder set.",
       statusLabel: skipped ? "Using default template" : reminder.enabled ? "Email + reminder active" : "Custom email active",
     };
+    if (completedStep === 5) return {
+      sectionLabel: "Assessment",
+      enabled: true,
+      title: `Assessment ready — ${questions.length} question${questions.length !== 1 ? "s" : ""} configured`,
+      desc: `A ${assessmentConfig.difficulty.toLowerCase()}-difficulty assessment with ${assessmentConfig.duration} min duration is set up and ready to send to candidates.`,
+      statusLabel: "Assessment configured",
+    };
     if (completedStep === 6) return {
       sectionLabel: "Filtering Criteria",
       enabled: !skipped && filterCriteria.autoDecide,
