@@ -293,16 +293,16 @@ function AvailabilityWindowPicker({ config, onChange }) {
       </div>
 
       {/* Slots per day */}
-      <div className="border-t border-dashed border-gray-100 pt-4">
-        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum slots to select</p>
-        <p className="text-[12px] text-gray-400 mb-3">How many time slots should candidates provide?</p>
-        <div className="flex items-center gap-3">
-          <button onClick={() => onChange({ ...config, minSlots: Math.max(1, (config.minSlots || 3) - 1) })} className="w-7 h-7 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold">−</button>
-          <span className="text-[20px] font-bold text-gray-900 w-8 text-center">{config.minSlots || 3}</span>
-          <button onClick={() => onChange({ ...config, minSlots: Math.min(10, (config.minSlots || 3) + 1) })} className="w-7 h-7 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold">+</button>
-          <span className="text-[12px] text-gray-400 ml-2">slots minimum</span>
-        </div>
-      </div>
+      
+
+
+
+
+
+
+
+
+
     </div>);
 
 }
@@ -697,27 +697,27 @@ function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
 
 // ── Step 6: Feedback Form Builder ────────────────────────────────────────────
 const DEFAULT_FEEDBACK_SECTIONS = [
-  { id: "overall", label: "Overall Impression", type: "rating", required: true },
-  { id: "technical", label: "Technical Skills", type: "rating", required: true },
-  { id: "communication", label: "Communication & Clarity", type: "rating", required: true },
-  { id: "culture", label: "Culture Fit", type: "rating", required: false },
-  { id: "strengths", label: "Key Strengths", type: "text", required: true },
-  { id: "concerns", label: "Concerns / Red Flags", type: "text", required: false },
-  { id: "recommendation", label: "Hire Recommendation", type: "decision", required: true },
-  { id: "notes", label: "Additional Notes", type: "text", required: false },
-];
+{ id: "overall", label: "Overall Impression", type: "rating", required: true },
+{ id: "technical", label: "Technical Skills", type: "rating", required: true },
+{ id: "communication", label: "Communication & Clarity", type: "rating", required: true },
+{ id: "culture", label: "Culture Fit", type: "rating", required: false },
+{ id: "strengths", label: "Key Strengths", type: "text", required: true },
+{ id: "concerns", label: "Concerns / Red Flags", type: "text", required: false },
+{ id: "recommendation", label: "Hire Recommendation", type: "decision", required: true },
+{ id: "notes", label: "Additional Notes", type: "text", required: false }];
+
 
 const FIELD_TYPE_META = {
-  rating:   { label: "Rating (1–5)", color: "text-amber-600",   bg: "bg-amber-50",   border: "border-amber-200" },
-  text:     { label: "Text answer",  color: "text-blue-600",    bg: "bg-blue-50",    border: "border-blue-200" },
-  decision: { label: "Yes / No / Maybe", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-200" },
+  rating: { label: "Rating (1–5)", color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-200" },
+  text: { label: "Text answer", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200" },
+  decision: { label: "Yes / No / Maybe", color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-200" }
 };
 
 function StepFeedbackForm({ feedbackForm, setFeedbackForm }) {
   const toggleField = (id) =>
-    setFeedbackForm((prev) => ({ ...prev, fields: prev.fields.map((f) => f.id === id ? { ...f, enabled: !f.enabled } : f) }));
+  setFeedbackForm((prev) => ({ ...prev, fields: prev.fields.map((f) => f.id === id ? { ...f, enabled: !f.enabled } : f) }));
   const toggleRequired = (id) =>
-    setFeedbackForm((prev) => ({ ...prev, fields: prev.fields.map((f) => f.id === id ? { ...f, required: !f.required } : f) }));
+  setFeedbackForm((prev) => ({ ...prev, fields: prev.fields.map((f) => f.id === id ? { ...f, required: !f.required } : f) }));
 
   const fields = feedbackForm.fields || DEFAULT_FEEDBACK_SECTIONS.map((f) => ({ ...f, enabled: true }));
 
@@ -750,15 +750,15 @@ function StepFeedbackForm({ feedbackForm, setFeedbackForm }) {
                 <p className={`text-[13px] font-semibold ${field.enabled ? "text-gray-900" : "text-gray-400"}`}>{field.label}</p>
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${meta.bg} ${meta.color} ${meta.border}`}>{meta.label}</span>
               </div>
-              {field.enabled && (
-                <button
-                  onClick={() => toggleRequired(field.id)}
-                  className={`text-[11px] font-semibold px-3 py-1 rounded-full border transition-all ${field.required ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-gray-50 text-gray-400 border-gray-200 hover:border-gray-300"}`}>
+              {field.enabled &&
+              <button
+                onClick={() => toggleRequired(field.id)}
+                className={`text-[11px] font-semibold px-3 py-1 rounded-full border transition-all ${field.required ? "bg-orange-50 text-orange-600 border-orange-200" : "bg-gray-50 text-gray-400 border-gray-200 hover:border-gray-300"}`}>
                   {field.required ? "Required" : "Optional"}
                 </button>
-              )}
-            </div>
-          );
+              }
+            </div>);
+
         })}
       </div>
 
@@ -767,16 +767,16 @@ function StepFeedbackForm({ feedbackForm, setFeedbackForm }) {
         <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Submission deadline</p>
         <p className="text-[12px] text-gray-400 mb-3">How long after the interview should feedback be submitted?</p>
         <div className="flex gap-2 flex-wrap">
-          {["Same day", "24 hours", "48 hours", "72 hours"].map((d) => (
-            <button key={d} onClick={() => setFeedbackForm((prev) => ({ ...prev, deadline: d }))}
-              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${feedbackForm.deadline === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+          {["Same day", "24 hours", "48 hours", "72 hours"].map((d) =>
+          <button key={d} onClick={() => setFeedbackForm((prev) => ({ ...prev, deadline: d }))}
+          className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${feedbackForm.deadline === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
               {d}
             </button>
-          ))}
+          )}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 7: Feedback Form Email ───────────────────────────────────────────────
@@ -857,31 +857,31 @@ function StepFeedbackEmail({ feedbackEmail, setFeedbackEmail }) {
           </div>
           <Switch checked={feedbackEmail.reminderEnabled} onCheckedChange={(v) => setFeedbackEmail((prev) => ({ ...prev, reminderEnabled: v }))} />
         </div>
-        {feedbackEmail.reminderEnabled && (
-          <div className="space-y-3">
+        {feedbackEmail.reminderEnabled &&
+        <div className="space-y-3">
             <div>
               <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Send reminder</p>
               <div className="flex gap-2 flex-wrap">
-                {["12 hours before deadline", "24 hours before deadline", "On deadline day"].map((t) => (
-                  <button key={t} onClick={() => setFeedbackEmail((prev) => ({ ...prev, reminderTiming: t }))}
-                    className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${feedbackEmail.reminderTiming === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
+                {["12 hours before deadline", "24 hours before deadline", "On deadline day"].map((t) =>
+              <button key={t} onClick={() => setFeedbackEmail((prev) => ({ ...prev, reminderTiming: t }))}
+              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${feedbackEmail.reminderTiming === t ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-600 hover:border-amber-300"}`}>
                     {t}
                   </button>
-                ))}
+              )}
               </div>
             </div>
             <div>
               <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Reminder Email Body</label>
               <Textarea
-                value={feedbackEmail.reminderBody}
-                onChange={(e) => setFeedbackEmail((prev) => ({ ...prev, reminderBody: e.target.value }))}
-                className="w-full min-h-[140px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono" />
+              value={feedbackEmail.reminderBody}
+              onChange={(e) => setFeedbackEmail((prev) => ({ ...prev, reminderBody: e.target.value }))}
+              className="w-full min-h-[140px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-amber-400 resize-none bg-white font-mono" />
             </div>
           </div>
-        )}
+        }
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ── Step 8: Filtering & No-Show Rules ─────────────────────────────────────────
@@ -1170,9 +1170,9 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
       sectionLabel: "Feedback Setup",
       enabled: !skipped,
       title: skipped ? "Feedback Setup Skipped" : "Feedback form configured",
-      desc: skipped
-        ? "No feedback form will be sent to interviewers. You can configure this later."
-        : `Interviewers will receive a feedback form with ${(feedbackForm.fields || []).filter((f) => f.enabled).length} sections, due ${feedbackForm.deadline || "24 hours"} after the interview.`,
+      desc: skipped ?
+      "No feedback form will be sent to interviewers. You can configure this later." :
+      `Interviewers will receive a feedback form with ${(feedbackForm.fields || []).filter((f) => f.enabled).length} sections, due ${feedbackForm.deadline || "24 hours"} after the interview.`,
       statusLabel: skipped ? "Not configured" : feedbackEmail.reminderEnabled ? "Form + reminder active" : "Form active"
     };
     if (completedStep === 8) return {
