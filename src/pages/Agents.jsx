@@ -213,6 +213,7 @@ export default function Agents() {
   const [showFilters, setShowFilters] = useState(false);
   const [analysisExpanded, setAnalysisExpanded] = useState(true);
   const [assessmentSetupOpen, setAssessmentSetupOpen] = useState(false);
+  const [schedulingSetupOpen, setSchedulingSetupOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setAnalysisExpanded(false), 2000);
