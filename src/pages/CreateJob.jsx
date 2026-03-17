@@ -419,13 +419,21 @@ function ReviewJDScreen({ job, onBack, onNext }) {
   };
 
   const [enhancingSection, setEnhancingSection] = useState(null);
+  const [reqDropdownOpen, setReqDropdownOpen] = useState(false);
 
-  const handleEnhanceSection = async (section) => {
+  const handleEnhanceSection = async (section, mode = "enhance") => {
     setEnhancingSection(section);
+    setReqDropdownOpen(false);
     const { base44 } = await import("@/api/base44Client");
     if (section === "requirements") {
+      const modePrompts = {
+        enhance: `Enhance and improve these job requirements to be more clear, compelling, and professional.`,
+        longer: `Expand these job requirements to be more detailed and comprehensive, adding more specifics.`,
+        detailed: `Make these job requirements more detailed with specific examples and measurable criteria.`,
+        shorter: `Make these job requirements more concise and to the point, keeping only the most important items.`,
+      };
       const result = await base44.integrations.Core.InvokeLLM({
-        prompt: `Enhance and improve these job requirements to be more clear, compelling, and professional. Return a JSON array of strings only, no extra text:\n\n${JSON.stringify(jd.requirements)}`,
+        prompt: `${modePrompts[mode]} Return a JSON array of strings only, no extra text:\n\n${JSON.stringify(jd.requirements)}`,
         response_json_schema: { type: "object", properties: { items: { type: "array", items: { type: "string" } } } }
       });
       if (result?.items) setJd((prev) => ({ ...prev, requirements: result.items }));
