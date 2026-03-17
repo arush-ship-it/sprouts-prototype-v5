@@ -1,20 +1,47 @@
 import React, { useState } from "react";
-import { X, Sparkles, ChevronRight, ChevronLeft, Check, Mail, Clock, Shield, Bot, AlertTriangle, Eye, Loader2, Calendar, Filter, Video, MapPin, Users } from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Check, Mail, Clock, Shield, Bot, AlertTriangle, Eye, Loader2, Calendar, Filter, Video, MapPin, Users, Globe, FileText, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
-// ── Sidebar Stack ─────────────────────────────────────────────────────────────
+// ── Stack Structure ───────────────────────────────────────────────────────────
+// Stack 1: Availability Finder  → wizard steps 1, 2
+// Stack 2: Interview Setup      → wizard steps 3, 4, 5
+// Stack 3: Filtering Criteria   → wizard step 6
+// + Review step 7
+
 const STACK_STEPS = [
-  { id: 1, label: "Scheduling Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500", desc: "Define which candidates should be automatically scheduled for an interview" },
-  { id: 2, label: "Interview Setup", tag: "Configuration", badge: "Mandatory", badgeColor: "text-orange-500", desc: "Configure interview format, duration, and calendar availability" },
-  { id: 3, label: "Invite Email", tag: "Email Template", badge: "Optional", badgeColor: "text-blue-500", desc: "Customize the interview invitation and reminder emails sent to candidates" },
-  { id: 4, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500", desc: "Define how AI handles no-shows and cancellations" },
+  {
+    id: 1, label: "Availability Finder", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
+    desc: "Share an availability template with candidates and collect their preferred time slots",
+  },
+  {
+    id: 2, label: "Interview Setup", tag: "Configuration", badge: "Mandatory", badgeColor: "text-orange-500",
+    desc: "Define scheduling criteria, interview format guidelines, and the invitation email sent to candidates",
+  },
+  {
+    id: 3, label: "Filtering Criteria", tag: "Automation", badge: "Optional", badgeColor: "text-blue-500",
+    desc: "Define how AI handles no-shows and cancellations",
+  },
 ];
 
-const STEP_TO_SIDEBAR = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 4 };
-const TOTAL_STEPS = 5;
-const OPTIONAL_STEPS = new Set([1, 3, 4, 5]);
+// step → sidebar item
+const STEP_TO_SIDEBAR = { 1: 1, 2: 1, 3: 2, 4: 2, 5: 2, 6: 3, 7: 3 };
+const TOTAL_STEPS = 7;
+// Steps with a Skip button
+const OPTIONAL_STEPS = new Set([1, 2, 6]);
+
+// ── Email defaults ────────────────────────────────────────────────────────────
+const DEFAULT_AVAILABILITY_EMAIL = `Hi {{candidate_name}},
+
+Thank you for your interest in the {{job_title}} role at {{company_name}}!
+
+We'd like to schedule an interview with you. Please use the link below to share your availability:
+{{availability_link}}
+
+Please indicate your preferred slots in your timezone ({{candidate_timezone}}). We'll confirm the final time once we've reviewed your availability.
+
+Looking forward to connecting!`;
 
 const DEFAULT_INVITE_EMAIL = `Hi {{candidate_name}},
 
@@ -64,7 +91,135 @@ function StackSidebar({ currentStep }) {
   );
 }
 
-// ── Step 1: Scheduling Criteria ───────────────────────────────────────────────
+// ── Step 1: Share Availability Template ──────────────────────────────────────
+const TIMEZONES = [
+  "UTC", "America/New_York", "America/Los_Angeles", "America/Chicago",
+  "Europe/London", "Europe/Paris", "Asia/Calcutta", "Asia/Singapore", "Asia/Tokyo", "Australia/Sydney",
+];
+
+function StepAvailabilityTemplate({ config, onChange }) {
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+          <Calendar className="w-5 h-5 text-blue-600" />
+        </div>
+        <div>
+          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Share Availability Template</h2>
+          <p className="text-[13px] text-gray-400">Configure how candidates share their available time slots</p>
+        </div>
+      </div>
+
+      {/* Slot window */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-white">
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Availability window</p>
+        <p className="text-[12px] text-gray-400 mb-4">How many days ahead should candidates see open slots?</p>
+        <div className="flex gap-2 flex-wrap">
+          {["3 days", "5 days", "7 days", "14 days"].map((d) => (
+            <button key={d} onClick={() => onChange({ ...config, window: d })}
+              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.window === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+              {d}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Slots per day */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-white">
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum slots to select</p>
+        <p className="text-[12px] text-gray-400 mb-4">How many time slots should candidates provide?</p>
+        <div className="flex items-center gap-3">
+          <button onClick={() => onChange({ ...config, minSlots: Math.max(1, (config.minSlots || 3) - 1) })} className="w-7 h-7 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold">−</button>
+          <span className="text-[20px] font-bold text-gray-900 w-8 text-center">{config.minSlots || 3}</span>
+          <button onClick={() => onChange({ ...config, minSlots: Math.min(10, (config.minSlots || 3) + 1) })} className="w-7 h-7 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold">+</button>
+          <span className="text-[12px] text-gray-400 ml-2">slots minimum</span>
+        </div>
+      </div>
+
+      {/* Timezone */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-white">
+        <div className="flex items-center gap-2 mb-3">
+          <Globe className="w-4 h-4 text-indigo-500" />
+          <p className="text-[14px] font-semibold text-gray-900">Default Timezone</p>
+        </div>
+        <p className="text-[12px] text-gray-400 mb-3">Candidates will see slots in this timezone. They can also adjust to their own.</p>
+        <div className="flex flex-wrap gap-2">
+          {TIMEZONES.map((tz) => (
+            <button key={tz} onClick={() => onChange({ ...config, timezone: tz })}
+              className={`px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all ${config.timezone === tz ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+              {tz}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Allow candidate timezone override */}
+      <div className={`border-2 rounded-2xl p-5 bg-white transition-all ${config.allowTimezoneOverride ? "border-emerald-300" : "border-gray-100"}`}>
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-2">
+            <Globe className="w-4 h-4 text-emerald-600" />
+            <p className="text-[14px] font-semibold text-gray-900">Allow candidate timezone override</p>
+          </div>
+          <Switch checked={config.allowTimezoneOverride} onCheckedChange={(v) => onChange({ ...config, allowTimezoneOverride: v })} />
+        </div>
+        <p className="text-[12px] text-gray-400 leading-relaxed">
+          Candidates can select their own local timezone when filling out the availability form.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── Step 2: Request Availability Email ───────────────────────────────────────
+function StepAvailabilityEmail({ emailContent, onChange }) {
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+          <Mail className="w-5 h-5 text-blue-500" />
+        </div>
+        <div>
+          <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Request Availability Email</h2>
+          <p className="text-[13px] text-gray-400">Finalise the email sent to candidates asking them to share their availability</p>
+        </div>
+      </div>
+
+      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-start gap-2">
+        <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+        <p className="text-[12px] text-amber-700 leading-relaxed">
+          Variables in <span className="font-mono font-bold bg-amber-100 px-1 rounded">{`{{double_braces}}`}</span> are auto-filled — candidate name, job title, availability link, timezone, etc.
+        </p>
+      </div>
+
+      <div className="space-y-3">
+        <div>
+          <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
+          <input
+            defaultValue="Share your availability — {{job_title}} Interview at {{company_name}}"
+            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white"
+          />
+        </div>
+        <div>
+          <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Email Body</label>
+          <Textarea
+            value={emailContent}
+            onChange={(e) => onChange(e.target.value)}
+            className="w-full min-h-[220px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-white font-mono"
+          />
+        </div>
+      </div>
+
+      <div className="bg-blue-50 border border-blue-100 rounded-2xl px-5 py-4 flex items-start gap-3">
+        <Calendar className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+        <p className="text-[12px] text-blue-600 leading-relaxed">
+          Once candidates fill in their availability, the AI will cross-reference with interviewer calendars and auto-propose the best matching slot.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── Step 3: Scheduling Criteria ───────────────────────────────────────────────
 function StepSchedulingCriteria({ criteria, setCriteria }) {
   return (
     <div>
@@ -78,7 +233,6 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* Minimum assessment score */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
         <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum assessment score to schedule</p>
         <p className="text-[12px] text-gray-400 mb-5">Candidates meeting this score or above will be automatically scheduled</p>
@@ -90,11 +244,8 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
           ].map((opt) => {
             const selected = criteria.scoreThreshold === opt.id;
             return (
-              <button
-                key={opt.id}
-                onClick={() => setCriteria({ ...criteria, scoreThreshold: opt.id })}
-                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? opt.activeBorder : "border-gray-100 bg-white hover:border-gray-200"}`}
-              >
+              <button key={opt.id} onClick={() => setCriteria({ ...criteria, scoreThreshold: opt.id })}
+                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? opt.activeBorder : "border-gray-100 bg-white hover:border-gray-200"}`}>
                 <div className={`w-8 h-8 rounded-xl ${opt.iconBg} flex items-center justify-center`}>
                   <div className={`w-3 h-3 rounded-full ${selected ? opt.color.replace("text-", "bg-") : "bg-gray-300"}`} />
                 </div>
@@ -111,7 +262,6 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* Auto-schedule toggle */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
@@ -121,11 +271,10 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
           <Switch checked={criteria.autoSchedule} onCheckedChange={(v) => setCriteria({ ...criteria, autoSchedule: v })} />
         </div>
         <p className="text-[12px] text-gray-400 leading-relaxed">
-          When enabled, the AI will automatically send interview invites to qualifying candidates without manual review. When disabled, candidates are flagged for your approval first.
+          When enabled, the AI will automatically send interview invites to qualifying candidates. When disabled, candidates are flagged for your approval first.
         </p>
       </div>
 
-      {/* Human review */}
       <div className={`border-2 rounded-2xl p-5 mb-4 bg-white transition-all ${criteria.humanReview ? "border-emerald-300" : "border-gray-100"}`}>
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
@@ -135,7 +284,7 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
           <Switch checked={criteria.humanReview} onCheckedChange={(v) => setCriteria({ ...criteria, humanReview: v })} />
         </div>
         <p className="text-[12px] text-gray-400 leading-relaxed mb-3">
-          Even when the AI qualifies a candidate, you'll get a notification to review their profile before the interview invite is sent.
+          Even when the AI qualifies a candidate, you'll get a notification to review before the interview invite is sent.
         </p>
         {criteria.humanReview && (
           <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
@@ -145,7 +294,6 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
         )}
       </div>
 
-      {/* Summary */}
       <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
         <p className="text-[12px] font-bold text-indigo-700 mb-2">Summary</p>
         <ul className="space-y-1.5">
@@ -167,18 +315,25 @@ function StepSchedulingCriteria({ criteria, setCriteria }) {
   );
 }
 
-// ── Step 2: Interview Setup ───────────────────────────────────────────────────
-function StepInterviewSetup({ config, onChange }) {
+// ── Step 4: Interview Format + Guidelines ─────────────────────────────────────
+const DEFAULT_GUIDELINES = `1. Start by introducing yourself and the team.
+2. Give a brief overview of the role and what success looks like.
+3. Ask behavioural questions using the STAR method (Situation, Task, Action, Result).
+4. Allow time for the candidate to ask questions.
+5. Close by explaining next steps and the timeline for a decision.
+6. Keep the conversation structured but conversational — make the candidate feel at ease.`;
+
+function StepInterviewFormat({ config, onChange }) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-[20px] font-bold text-gray-900 mb-1">Interview Setup</h2>
-        <p className="text-[13px] text-gray-400">Configure the interview format and scheduling preferences</p>
+        <h2 className="text-[20px] font-bold text-gray-900 mb-1">Interview Format</h2>
+        <p className="text-[13px] text-gray-400">Set the interview format, duration, and provide interviewers with a guideline to follow</p>
       </div>
 
-      {/* Interview Format */}
+      {/* Format */}
       <div>
-        <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Interview Format</p>
+        <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Format</p>
         <div className="grid grid-cols-3 gap-3">
           {[
             { id: "video", label: "Video Call", desc: "Zoom, Meet, or Teams", icon: Video, iconBg: "bg-blue-100", iconColor: "text-blue-600" },
@@ -188,11 +343,8 @@ function StepInterviewSetup({ config, onChange }) {
             const Icon = opt.icon;
             const selected = config.format === opt.id;
             return (
-              <button
-                key={opt.id}
-                onClick={() => onChange({ ...config, format: opt.id })}
-                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? "border-indigo-400 bg-indigo-50/60" : "border-gray-100 bg-white hover:border-indigo-200"}`}
-              >
+              <button key={opt.id} onClick={() => onChange({ ...config, format: opt.id })}
+                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? "border-indigo-400 bg-indigo-50/60" : "border-gray-100 bg-white hover:border-indigo-200"}`}>
                 <div className={`w-9 h-9 rounded-xl ${opt.iconBg} flex items-center justify-center`}>
                   <Icon className={`w-4 h-4 ${opt.iconColor}`} />
                 </div>
@@ -206,20 +358,32 @@ function StepInterviewSetup({ config, onChange }) {
         </div>
       </div>
 
-      {/* Duration */}
-      <div>
-        <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Interview Duration</p>
-        <div className="flex gap-2 flex-wrap">
-          {[30, 45, 60, 90].map((d) => (
-            <button key={d} onClick={() => onChange({ ...config, duration: d })}
-              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.duration === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
-              {d} min
-            </button>
-          ))}
+      {/* Duration + Interviewers + Buffer */}
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Duration</p>
+          <div className="flex gap-2 flex-wrap">
+            {[30, 45, 60, 90].map((d) => (
+              <button key={d} onClick={() => onChange({ ...config, duration: d })}
+                className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.duration === d ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+                {d} min
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Buffer Between Interviews</p>
+          <div className="flex gap-2 flex-wrap">
+            {["None", "15 min", "30 min", "1 hour"].map((b) => (
+              <button key={b} onClick={() => onChange({ ...config, buffer: b })}
+                className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.buffer === b ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
+                {b}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Interviewers */}
       <div className="border border-gray-100 rounded-2xl p-5 bg-white">
         <div className="flex items-center gap-2 mb-3">
           <Users className="w-4 h-4 text-indigo-500" />
@@ -233,32 +397,26 @@ function StepInterviewSetup({ config, onChange }) {
         </div>
       </div>
 
-      {/* Buffer time */}
-      <div>
-        <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">Buffer Time Between Interviews</p>
-        <div className="flex gap-2 flex-wrap">
-          {["None", "15 min", "30 min", "1 hour"].map((b) => (
-            <button key={b} onClick={() => onChange({ ...config, buffer: b })}
-              className={`px-4 py-2 rounded-full text-[12px] font-medium border transition-all ${config.buffer === b ? "bg-indigo-600 text-white border-indigo-600" : "border-gray-200 text-gray-600 hover:border-indigo-300"}`}>
-              {b}
-            </button>
-          ))}
+      {/* Interviewer Guidelines */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-white">
+        <div className="flex items-center gap-2 mb-1">
+          <ListChecks className="w-4 h-4 text-indigo-500" />
+          <p className="text-[14px] font-semibold text-gray-900">Interviewer Guidelines</p>
         </div>
-      </div>
-
-      {/* Calendar integration notice */}
-      <div className="bg-blue-50 border border-blue-100 rounded-2xl px-5 py-4 flex items-start gap-3">
-        <Calendar className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-        <div>
-          <p className="text-[13px] font-semibold text-blue-800 mb-0.5">Calendar Integration</p>
-          <p className="text-[12px] text-blue-600 leading-relaxed">The scheduling agent will sync with your connected calendar to find available slots automatically based on your team's availability.</p>
-        </div>
+        <p className="text-[12px] text-gray-400 mb-3 leading-relaxed">
+          This basic guideline will be shared with interviewers to help them run a consistent and structured interview.
+        </p>
+        <Textarea
+          value={config.guidelines || DEFAULT_GUIDELINES}
+          onChange={(e) => onChange({ ...config, guidelines: e.target.value })}
+          className="w-full min-h-[160px] border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-700 leading-relaxed focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-none bg-gray-50"
+        />
       </div>
     </div>
   );
 }
 
-// ── Step 3: Invite Email ──────────────────────────────────────────────────────
+// ── Step 5: Interview Invitation Email ───────────────────────────────────────
 function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
   return (
     <div className="space-y-6">
@@ -269,20 +427,20 @@ function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
           </div>
           <div>
             <h2 className="text-[20px] font-bold text-gray-900 mb-0.5">Interview Invitation Email</h2>
-            <p className="text-[13px] text-gray-400">Customize the email candidates receive when invited to interview</p>
+            <p className="text-[13px] text-gray-400">Customize the email candidates receive when their interview is confirmed</p>
           </div>
         </div>
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 flex items-start gap-2">
           <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
           <p className="text-[12px] text-amber-700 leading-relaxed">
-            Variables in <span className="font-mono font-bold bg-amber-100 px-1 rounded">{`{{double_braces}}`}</span> are auto-filled by the system — candidate name, job title, interview link, date/time, etc.
+            Variables in <span className="font-mono font-bold bg-amber-100 px-1 rounded">{`{{double_braces}}`}</span> are auto-filled — candidate name, job title, interview link, date/time, etc.
           </p>
         </div>
         <div className="space-y-3">
           <div>
             <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Subject Line</label>
             <input
-              defaultValue="Interview Invitation — {{job_title}} at {{company_name}}"
+              defaultValue="Interview Confirmed — {{job_title}} at {{company_name}}"
               className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-[13px] text-gray-800 focus:outline-none focus:ring-1 focus:ring-indigo-400 bg-white"
             />
           </div>
@@ -344,7 +502,7 @@ function StepInviteEmail({ emailContent, onChange, reminder, setReminder }) {
   );
 }
 
-// ── Step 4: Filtering & No-Show Rules ─────────────────────────────────────────
+// ── Step 6: Filtering & No-Show Rules ─────────────────────────────────────────
 function StepFilteringCriteria({ criteria, setCriteria }) {
   return (
     <div>
@@ -358,7 +516,6 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* No-show handling */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
         <p className="text-[14px] font-semibold text-gray-900 mb-0.5">No-show threshold</p>
         <p className="text-[12px] text-gray-400 mb-5">Candidates who miss this many interviews will be flagged for disqualification</p>
@@ -374,7 +531,6 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* Auto-reschedule */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
@@ -388,7 +544,6 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
         </p>
       </div>
 
-      {/* Human review */}
       <div className={`border-2 rounded-2xl p-5 mb-4 bg-white transition-all ${criteria.humanReview ? "border-emerald-300" : "border-gray-100"}`}>
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
@@ -429,8 +584,8 @@ function StepFilteringCriteria({ criteria, setCriteria }) {
   );
 }
 
-// ── Step 5: Review & Confirm ──────────────────────────────────────────────────
-function StepReviewConfirm({ schedulingCriteria, interviewConfig, reminder, filterCriteria, generating }) {
+// ── Step 7: Review & Confirm ──────────────────────────────────────────────────
+function StepReviewConfirm({ availabilityConfig, schedulingCriteria, interviewConfig, reminder, filterCriteria, generating }) {
   if (generating) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-4">
@@ -453,34 +608,34 @@ function StepReviewConfirm({ schedulingCriteria, interviewConfig, reminder, filt
           <p className="text-[13px] text-gray-400">Confirm your scheduling agent setup before activating</p>
         </div>
       </div>
-
       <div className="space-y-3">
         {[
           {
-            label: "Scheduling Criteria",
-            icon: Filter,
+            label: "Availability Finder",
+            icon: Calendar,
             iconBg: "bg-blue-100",
             iconColor: "text-blue-600",
             items: [
-              `Score threshold: ${schedulingCriteria.scoreThreshold || "Passing Score"}`,
-              `Auto-schedule: ${schedulingCriteria.autoSchedule ? "Enabled" : "Disabled"}`,
-              `Human review: ${schedulingCriteria.humanReview ? "Required" : "Not required"}`,
+              `Window: ${availabilityConfig.window || "7 days"}`,
+              `Min slots: ${availabilityConfig.minSlots || 3}`,
+              `Timezone: ${availabilityConfig.timezone || "UTC"}`,
+              `Candidate override: ${availabilityConfig.allowTimezoneOverride ? "Allowed" : "Not allowed"}`,
             ],
           },
           {
             label: "Interview Setup",
-            icon: Calendar,
+            icon: Video,
             iconBg: "bg-indigo-100",
             iconColor: "text-indigo-600",
             items: [
-              `Format: ${interviewConfig.format || "Video Call"}`,
-              `Duration: ${interviewConfig.duration || 60} minutes`,
+              `Score threshold: ${schedulingCriteria.scoreThreshold || "Passing"}`,
+              `Format: ${interviewConfig.format || "Video"}`,
+              `Duration: ${interviewConfig.duration || 60} min`,
               `Interviewers: ${interviewConfig.interviewers || 1}`,
-              `Buffer: ${interviewConfig.buffer || "None"}`,
             ],
           },
           {
-            label: "Email & Reminder",
+            label: "Invite Email & Reminder",
             icon: Mail,
             iconBg: "bg-amber-100",
             iconColor: "text-amber-600",
@@ -526,7 +681,7 @@ function StepReviewConfirm({ schedulingCriteria, interviewConfig, reminder, filt
   );
 }
 
-// ── Stage Transition Microinteraction ─────────────────────────────────────────
+// ── Stage Transition ──────────────────────────────────────────────────────────
 function StageTransition({ config, onContinue, isLast, stackStatus }) {
   const [visible, setVisible] = useState(false);
   React.useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
@@ -537,10 +692,7 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
   return (
     <div className={`flex flex-col items-center justify-center h-full px-12 text-center transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
       <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-5 ${config.enabled ? "bg-emerald-100" : "bg-gray-100"}`}>
-        {config.enabled
-          ? <Check className="w-9 h-9 text-emerald-500" />
-          : <ChevronRight className="w-9 h-9 text-gray-400" />
-        }
+        {config.enabled ? <Check className="w-9 h-9 text-emerald-500" /> : <ChevronRight className="w-9 h-9 text-gray-400" />}
       </div>
       <span className={`text-[11px] font-bold uppercase tracking-widest mb-2 ${config.enabled ? "text-emerald-500" : "text-gray-400"}`}>
         {config.sectionLabel}
@@ -552,7 +704,6 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
         {config.statusLabel}
       </div>
 
-      {/* Stack Overview — only on last transition screen */}
       {isLast && stackStatus.some((s) => s.configured) && (
         <div className="w-full max-w-sm bg-gray-50 border border-gray-100 rounded-2xl px-5 py-4 mb-6 text-left">
           <div className="flex items-center justify-between mb-3">
@@ -576,10 +727,7 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
         </div>
       )}
 
-      <button
-        onClick={onContinue}
-        className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 h-10 rounded-xl text-[13px] font-semibold flex items-center gap-2 transition-colors"
-      >
+      <button onClick={onContinue} className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 h-10 rounded-xl text-[13px] font-semibold flex items-center gap-2 transition-colors">
         {isLast ? <><Check className="w-4 h-4" /> Finish Setup</> : <>Continue <ChevronRight className="w-4 h-4" /></>}
       </button>
     </div>
@@ -590,50 +738,40 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
 export default function SchedulingSetupModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [transition, setTransition] = useState(null);
+  const [availabilityConfig, setAvailabilityConfig] = useState({ window: "7 days", minSlots: 3, timezone: "UTC", allowTimezoneOverride: true });
+  const [availabilityEmail, setAvailabilityEmail] = useState(DEFAULT_AVAILABILITY_EMAIL);
   const [schedulingCriteria, setSchedulingCriteria] = useState({ scoreThreshold: "passing", autoSchedule: true, humanReview: true });
-  const [interviewConfig, setInterviewConfig] = useState({ format: "video", duration: 60, interviewers: 1, buffer: "15 min" });
+  const [interviewConfig, setInterviewConfig] = useState({ format: "video", duration: 60, interviewers: 1, buffer: "15 min", guidelines: DEFAULT_GUIDELINES });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
   const [reminder, setReminder] = useState({ enabled: true, timing: "24 hours before", emailContent: DEFAULT_REMINDER_EMAIL });
   const [filterCriteria, setFilterCriteria] = useState({ noShowLimit: 1, autoReschedule: true, humanReview: true });
   const [generating, setGenerating] = useState(false);
   const [stackStatus, setStackStatus] = useState([
-    { label: "Scheduling Criteria", configured: false, enabled: false },
+    { label: "Availability Finder", configured: false, enabled: false },
     { label: "Interview Setup", configured: false, enabled: true },
-    { label: "Invite Email", configured: false, enabled: false },
     { label: "Filtering Criteria", configured: false, enabled: false },
   ]);
 
+  // Transitions fire after completing the last step of each stack
+  // Stack 1 ends at step 2, Stack 2 ends at step 5, Stack 3 ends at step 6
   const getTransitionConfig = (completedStep, skipped) => {
-    if (completedStep === 1) return {
-      sectionLabel: "Scheduling Criteria",
-      enabled: !skipped && schedulingCriteria.autoSchedule,
-      title: skipped ? "Scheduling Criteria Skipped" : schedulingCriteria.autoSchedule ? "Auto-schedule is On" : "Manual scheduling mode",
-      desc: skipped
-        ? "You can configure scheduling criteria later from the agent settings."
-        : schedulingCriteria.autoSchedule
-          ? "Qualifying candidates will be automatically scheduled for an interview."
-          : "Candidates will be flagged for your manual review before an interview is scheduled.",
-      statusLabel: skipped ? "Not configured" : schedulingCriteria.autoSchedule ? "Automation enabled" : "Manual review required",
-    };
     if (completedStep === 2) return {
+      sectionLabel: "Availability Finder",
+      enabled: !skipped,
+      title: skipped ? "Availability Finder Skipped" : "Availability Finder configured",
+      desc: skipped
+        ? "Candidates will be scheduled directly. You can add availability collection later."
+        : `Candidates will share ${availabilityConfig.minSlots || 3} slots over a ${availabilityConfig.window || "7 days"} window in ${availabilityConfig.timezone || "UTC"}.`,
+      statusLabel: skipped ? "Not configured" : "Availability collection active",
+    };
+    if (completedStep === 5) return {
       sectionLabel: "Interview Setup",
       enabled: true,
-      title: `Interview configured — ${interviewConfig.duration || 60} min ${interviewConfig.format || "video"} interview`,
-      desc: `A ${interviewConfig.duration || 60}-minute ${interviewConfig.format || "video"} interview with ${interviewConfig.interviewers || 1} interviewer${(interviewConfig.interviewers || 1) > 1 ? "s" : ""} is set up.`,
-      statusLabel: "Interview configured",
+      title: `Interview ready — ${interviewConfig.duration || 60} min ${interviewConfig.format || "video"} interview`,
+      desc: `Scheduling criteria, format, and invitation email are all configured and ready to go.`,
+      statusLabel: "Interview setup complete",
     };
-    if (completedStep === 3) return {
-      sectionLabel: "Invite Email",
-      enabled: !skipped,
-      title: skipped ? "Default email will be used" : "Interview email customised",
-      desc: skipped
-        ? "A default system email will be sent to candidates. You can customise it anytime."
-        : reminder.enabled
-          ? `A custom invite email and a reminder (${reminder.timing}) are configured.`
-          : "A custom invite email is configured. No reminder set.",
-      statusLabel: skipped ? "Using default template" : reminder.enabled ? "Email + reminder active" : "Custom email active",
-    };
-    if (completedStep === 4) return {
+    if (completedStep === 6) return {
       sectionLabel: "Filtering Criteria",
       enabled: !skipped && filterCriteria.autoReschedule,
       title: skipped ? "Filtering Criteria Skipped" : filterCriteria.autoReschedule ? "Auto-reschedule is On" : "Manual filtering mode",
@@ -648,27 +786,16 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
   };
 
   const updateStackStatus = (completedStep, skipped) => {
-    const labelMap = { 1: "Scheduling Criteria", 2: "Interview Setup", 3: "Invite Email", 4: "Filtering Criteria" };
-    const label = labelMap[completedStep];
-    if (!label) return;
-    const enabledMap = {
-      1: !skipped && schedulingCriteria.autoSchedule,
-      2: true,
-      3: !skipped,
-      4: !skipped && filterCriteria.autoReschedule,
+    const updates = {
+      2: { label: "Availability Finder", enabled: !skipped },
+      5: { label: "Interview Setup", enabled: true },
+      6: { label: "Filtering Criteria", enabled: !skipped && filterCriteria.autoReschedule },
     };
+    const update = updates[completedStep];
+    if (!update) return;
     setStackStatus((prev) => prev.map((s) =>
-      s.label === label ? { ...s, configured: true, enabled: enabledMap[completedStep] } : s
+      s.label === update.label ? { ...s, configured: true, enabled: update.enabled } : s
     ));
-  };
-
-  const advanceStep = (fromStep) => {
-    if (fromStep === TOTAL_STEPS) {
-      setGenerating(true);
-      setTimeout(() => { setGenerating(false); onClose(); }, 2000);
-    } else {
-      setStep(fromStep + 1);
-    }
   };
 
   const handleNext = () => {
@@ -676,8 +803,11 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
     if (tc) {
       updateStackStatus(step, false);
       setTransition({ config: tc, nextStep: step + 1 });
+    } else if (step === TOTAL_STEPS) {
+      setGenerating(true);
+      setTimeout(() => { setGenerating(false); onClose(); }, 2000);
     } else {
-      advanceStep(step);
+      setStep(step + 1);
     }
   };
 
@@ -687,18 +817,15 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
       updateStackStatus(step, true);
       setTransition({ config: tc, nextStep: step + 1 });
     } else {
-      advanceStep(step);
+      setStep(step + 1);
     }
   };
 
   const handleTransitionContinue = () => {
     const nextStep = transition.nextStep;
     setTransition(null);
-    if (nextStep > TOTAL_STEPS) {
-      onClose();
-    } else {
-      setStep(nextStep);
-    }
+    if (nextStep > TOTAL_STEPS) onClose();
+    else setStep(nextStep);
   };
 
   const handleBack = () => {
@@ -720,7 +847,6 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
           {!transition && <StackSidebar currentStep={step} />}
 
           <div className="flex-1 flex flex-col overflow-hidden">
-            {/* Header */}
             <div className="flex items-center justify-between px-8 py-5 border-b border-gray-100 shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center">
@@ -736,29 +862,26 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
               </button>
             </div>
 
-            {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto px-8 py-6">
               {transition ? (
                 <StageTransition config={transition.config} onContinue={handleTransitionContinue} isLast={transition.nextStep > TOTAL_STEPS} stackStatus={stackStatus} />
               ) : (
                 <>
-                  {step === 1 && <StepSchedulingCriteria criteria={schedulingCriteria} setCriteria={setSchedulingCriteria} />}
-                  {step === 2 && <StepInterviewSetup config={interviewConfig} onChange={setInterviewConfig} />}
-                  {step === 3 && <StepInviteEmail emailContent={inviteEmail} onChange={setInviteEmail} reminder={reminder} setReminder={setReminder} />}
-                  {step === 4 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
-                  {step === 5 && <StepReviewConfirm schedulingCriteria={schedulingCriteria} interviewConfig={interviewConfig} reminder={reminder} filterCriteria={filterCriteria} generating={generating} />}
+                  {step === 1 && <StepAvailabilityTemplate config={availabilityConfig} onChange={setAvailabilityConfig} />}
+                  {step === 2 && <StepAvailabilityEmail emailContent={availabilityEmail} onChange={setAvailabilityEmail} />}
+                  {step === 3 && <StepSchedulingCriteria criteria={schedulingCriteria} setCriteria={setSchedulingCriteria} />}
+                  {step === 4 && <StepInterviewFormat config={interviewConfig} onChange={setInterviewConfig} />}
+                  {step === 5 && <StepInviteEmail emailContent={inviteEmail} onChange={setInviteEmail} reminder={reminder} setReminder={setReminder} />}
+                  {step === 6 && <StepFilteringCriteria criteria={filterCriteria} setCriteria={setFilterCriteria} />}
+                  {step === 7 && <StepReviewConfirm availabilityConfig={availabilityConfig} schedulingCriteria={schedulingCriteria} interviewConfig={interviewConfig} reminder={reminder} filterCriteria={filterCriteria} generating={generating} />}
                 </>
               )}
             </div>
 
-            {/* Footer */}
             {!transition && (
               <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-between bg-white shrink-0">
-                <button
-                  onClick={handleBack}
-                  disabled={step === 1}
-                  className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                >
+                <button onClick={handleBack} disabled={step === 1}
+                  className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 hover:text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
                   <ChevronLeft className="w-4 h-4" /> Back
                 </button>
                 <div className="flex items-center gap-1.5">
@@ -768,18 +891,13 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
                 </div>
                 <div className="flex items-center gap-2">
                   {isOptional && (
-                    <button
-                      onClick={handleSkip}
-                      className="text-[13px] font-medium text-gray-400 hover:text-gray-600 px-4 h-9 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors"
-                    >
+                    <button onClick={handleSkip}
+                      className="text-[13px] font-medium text-gray-400 hover:text-gray-600 px-4 h-9 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors">
                       Skip
                     </button>
                   )}
-                  <Button
-                    onClick={handleNext}
-                    disabled={generating}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5"
-                  >
+                  <Button onClick={handleNext} disabled={generating}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 h-9 rounded-xl text-[13px] font-semibold flex items-center gap-1.5">
                     {generating ? (
                       <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Activating…</>
                     ) : isLastStep ? (
