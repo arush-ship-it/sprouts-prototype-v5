@@ -87,30 +87,45 @@ function StepInviteCriteria({ criteria, setCriteria }) {
         </div>
       </div>
 
-      {/* Min score to invite */}
+      {/* Match Fit to invite */}
       <div className="border border-gray-100 rounded-2xl p-5 mb-4 bg-white">
-        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum score to invite</p>
-        <p className="text-[12px] text-gray-400 mb-5">Candidates scoring at or above this threshold will be automatically invited</p>
-        <div className="flex items-center justify-between text-[12px] text-gray-400 mb-1">
-          <span>0</span>
-          <span className="font-bold text-indigo-700 text-[15px]">{criteria.minScore} / 5</span>
-          <span>5</span>
+        <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Minimum match fit to invite</p>
+        <p className="text-[12px] text-gray-400 mb-5">Candidates meeting this match level or above will be automatically invited</p>
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          {[
+            { id: "weak", label: "Weak Match", desc: "Invite all candidates, even partial fits", color: "text-red-600", iconBg: "bg-red-100", activeBorder: "border-red-400 bg-red-50/60", activeText: "text-red-700" },
+            { id: "good", label: "Good Match", desc: "Invite candidates with solid alignment", color: "text-amber-600", iconBg: "bg-amber-100", activeBorder: "border-amber-400 bg-amber-50/60", activeText: "text-amber-700" },
+            { id: "strong", label: "Strong Match", desc: "Only invite best-fit candidates", color: "text-emerald-600", iconBg: "bg-emerald-100", activeBorder: "border-emerald-400 bg-emerald-50/60", activeText: "text-emerald-700" },
+          ].map((opt) => {
+            const selected = criteria.matchFit === opt.id;
+            return (
+              <button
+                key={opt.id}
+                onClick={() => setCriteria({ ...criteria, matchFit: opt.id })}
+                className={`flex flex-col items-start gap-2 px-4 py-4 rounded-2xl border-2 text-left transition-all ${selected ? opt.activeBorder : "border-gray-100 bg-white hover:border-gray-200"}`}
+              >
+                <div className={`w-8 h-8 rounded-xl ${opt.iconBg} flex items-center justify-center`}>
+                  <div className={`w-3 h-3 rounded-full ${selected ? opt.color.replace("text-", "bg-") : "bg-gray-300"}`} />
+                </div>
+                <div>
+                  <p className={`text-[13px] font-semibold mb-0.5 ${selected ? opt.activeText : "text-gray-800"}`}>{opt.label}</p>
+                  <p className="text-[11px] text-gray-400 leading-snug">{opt.desc}</p>
+                </div>
+                <div className={`w-4 h-4 rounded-full border-2 ml-auto flex items-center justify-center transition-all ${selected ? `border-current ${opt.color} bg-current` : "border-gray-300"}`}>
+                  {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                </div>
+              </button>
+            );
+          })}
         </div>
-        <input
-          type="range" min={1} max={5} step={0.5}
-          value={criteria.minScore}
-          onChange={(e) => setCriteria({ ...criteria, minScore: parseFloat(e.target.value) })}
-          className="w-full accent-indigo-600 mb-2"
-        />
-        <div className="flex justify-between mb-4">
-          {[1, 2, 3, 4, 5].map((v) => (
-            <span key={v} className={`text-[11px] font-medium ${criteria.minScore >= v ? "text-indigo-600" : "text-gray-300"}`}>{v}</span>
-          ))}
-        </div>
-        <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 flex items-center gap-2">
-          <Check className="w-4 h-4 text-blue-500 shrink-0" />
-          <p className="text-[12px] text-blue-600">Candidates scoring <strong>{criteria.minScore}/5</strong> or above will be auto-invited</p>
-        </div>
+        {criteria.matchFit && (
+          <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 flex items-center gap-2">
+            <Check className="w-4 h-4 text-blue-500 shrink-0" />
+            <p className="text-[12px] text-blue-600">
+              Candidates with a <strong className="capitalize">{criteria.matchFit}</strong> match or above will be auto-invited
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Auto-invite toggle */}
