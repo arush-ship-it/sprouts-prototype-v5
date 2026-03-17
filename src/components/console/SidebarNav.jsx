@@ -24,7 +24,7 @@ import {
 
 const mainLinks = [
 { label: "Talent", icon: Users, active: false, page: "Console", newCandidates: 12 },
-{ label: "Agents", icon: Activity, active: false, page: "Agents" },
+{ label: "Agents", icon: Activity, active: false, page: "Agents", activeAgents: 2, totalAgents: 4 },
 { label: "Inbox", icon: Inbox, active: false, page: "Inbox", unreadCount: 4 },
 { label: "Job Details", icon: FileText, active: false, page: "JobDetails" }];
 
