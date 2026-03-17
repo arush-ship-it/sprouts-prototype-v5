@@ -277,7 +277,6 @@ export default function CommunicationAnalyticsDashboard() {
             </div>
           </div>
         </div>
-      </div>
       </motion.div>
       }
       </AnimatePresence>
