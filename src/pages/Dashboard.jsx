@@ -1069,6 +1069,13 @@ export default function Dashboard() {
           }
         </AnimatePresence>
       </div>
+
+      {/* Global AI Insight Panel */}
+      <AnimatePresence>
+        {activeInsight && (
+          <AIInsightPanel insightId={activeInsight} onClose={closeInsight} />
+        )}
+      </AnimatePresence>
     </div>);
 
 }
