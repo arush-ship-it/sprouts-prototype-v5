@@ -186,7 +186,7 @@ export default function JobDetails() {
                 <XCircle className="w-3.5 h-3.5" />
                 Close Job
               </button>
-              <button className="bg-[#ffffff] text-slate-700 px-3 py-1.5 text-sm font-medium rounded-lg flex items-center gap-1.5 border border-red-200 hover:bg-red-100 transition-colors">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors">
                 <Trash2 className="w-3.5 h-3.5" />
                 Delete
               </button>
