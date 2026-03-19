@@ -209,7 +209,7 @@ export default function Agents() {
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [viewMode, setViewMode] = useState("list"); // "pipeline" | "list"
-  const [activeTab, setActiveTab] = useState("agents"); // "activity" | "agents"
+  const [activeTab, setActiveTab] = useState("activity"); // "activity" | "agents"
   const [showFilters, setShowFilters] = useState(false);
   const [analysisExpanded, setAnalysisExpanded] = useState(true);
   const [assessmentSetupOpen, setAssessmentSetupOpen] = useState(false);
