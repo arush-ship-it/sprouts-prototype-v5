@@ -499,7 +499,7 @@ export default function AITalentFinderPanel() {
             placeholder="Let SproutsAI assist you"
             className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
 
-          <Button size="icon" className="h-10 w-10 shrink-0 bg-blue-500 hover:bg-blue-600">
+          <Button size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-10 w-10 shrink-0 hover:bg-blue-600">
             <Send className="w-4 h-4" />
           </Button>
         </div>
