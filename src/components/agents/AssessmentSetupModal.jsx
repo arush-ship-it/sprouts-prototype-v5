@@ -620,7 +620,7 @@ const OPTIONAL_STEPS = new Set([1, 2, 6]);
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [initiated, setInitiated] = useState(false);
   const [step, setStep] = useState(1);
-  React.useEffect(() => { if (!isOpen) { setInitiated(false); setStep(1); } }, [isOpen]);
+  React.useEffect(() => {if (!isOpen) {setInitiated(false);setStep(1);}}, [isOpen]);
   const [transition, setTransition] = useState(null); // null | { config }
   const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);
@@ -773,19 +773,19 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             {/* step pills at bottom */}
             <div className="relative z-10 space-y-2.5">
               {[
-                { icon: Filter, label: "Invite Criteria", desc: "Auto-invite qualified candidates" },
-                { icon: Mail, label: "Email Templates", desc: "Customise every touchpoint" },
-                { icon: CheckCircle2, label: "Assessment Builder", desc: "AI-generated questions" },
-                { icon: Shield, label: "Filtering Rules", desc: "Score-based auto-decisions" },
-              ].map(({ icon: Icon, label, desc }, i) => (
-                <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3">
-                  <Icon className="w-4 h-4 text-blue-200 shrink-0" />
-                  <div>
-                    <p className="text-[12px] font-semibold text-white">{label}</p>
-                    <p className="text-[11px] text-blue-200">{desc}</p>
-                  </div>
-                </div>
-              ))}
+              { icon: Filter, label: "Invite Criteria", desc: "Auto-invite qualified candidates" },
+              { icon: Mail, label: "Email Templates", desc: "Customise every touchpoint" },
+              { icon: CheckCircle2, label: "Assessment Builder", desc: "AI-generated questions" },
+              { icon: Shield, label: "Filtering Rules", desc: "Score-based auto-decisions" }].
+              map(({ icon: Icon, label, desc }, i) => null
+
+
+
+
+
+
+
+              )}
             </div>
           </div>
 
@@ -796,29 +796,29 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             </button>
 
             <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-400 mb-3">Get started</p>
-            <h3 className="text-[28px] font-bold text-gray-900 leading-tight mb-3">Set up your<br />Assessment Agent</h3>
-            <p className="text-[14px] text-gray-500 leading-relaxed mb-2">
-              This wizard walks you through {TOTAL_STEPS} quick steps to configure automated assessments for your hiring pipeline.
-            </p>
+            
+            
+
+            
             <p className="text-[12px] text-gray-400 mb-8 flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" /> Takes about 5 minutes
             </p>
 
             <div className="space-y-3 mb-10">
               {[
-                { num: 1, label: "Invite Criteria", desc: "Define who gets auto-invited based on match fit" },
-                { num: 2, label: "Invite Email", desc: "Customise the candidate invitation & reminders" },
-                { num: 3, label: "Assessment Builder", desc: "Configure questions, difficulty & duration" },
-                { num: 4, label: "Filtering Rules", desc: "Set score thresholds & approval logic" },
-              ].map(({ num, label, desc }) => (
-                <div key={num} className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all">
+              { num: 1, label: "Invite Criteria", desc: "Define who gets auto-invited based on match fit" },
+              { num: 2, label: "Invite Email", desc: "Customise the candidate invitation & reminders" },
+              { num: 3, label: "Assessment Builder", desc: "Configure questions, difficulty & duration" },
+              { num: 4, label: "Filtering Rules", desc: "Set score thresholds & approval logic" }].
+              map(({ num, label, desc }) =>
+              <div key={num} className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all">
                   <div className="w-7 h-7 rounded-full bg-indigo-600 text-white text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">{num}</div>
                   <div>
                     <p className="text-[13px] font-semibold text-gray-900">{label}</p>
                     <p className="text-[12px] text-gray-400 mt-0.5">{desc}</p>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
 
             <button
@@ -828,8 +828,8 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             </button>
           </div>
         </div>
-      </div>
-    );
+      </div>);
+
   }
 
   const isOptional = OPTIONAL_STEPS.has(step);
