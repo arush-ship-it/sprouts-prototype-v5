@@ -570,7 +570,7 @@ function FunnelConversion({ onOpenInsight }) {
         </ChartCard>
 
         {/* Drop-off Reasons */}
-        <ChartCard title="Drop-off Reasons" subtitle="Why candidates exit the pipeline" className="col-span-2">
+        <ChartCard title="Drop-off Reasons" subtitle="Why candidates exit the pipeline" className="col-span-2" insightId="chart_dropoff" anomalyId="chart_dropoff" onOpenInsight={onOpenInsight}>
           <div className="space-y-3">
             {dropReasonData.map((d, i) =>
             <div key={i}>
