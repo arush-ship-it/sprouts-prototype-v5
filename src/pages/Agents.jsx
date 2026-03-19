@@ -572,11 +572,11 @@ export default function Agents() {
 
         {/* Pill Tabs + Controls */}
         <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center p-1 rounded-xl bg-gray-100/80 shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
+          <div className="bg-slate-200 p-1 rounded-xl flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
             {[
-              { key: "activity", label: "Activity" },
-              { key: "agents", label: "Agents" },
-            ].map(({ key, label }) =>
+            { key: "activity", label: "Activity" },
+            { key: "agents", label: "Agents" }].
+            map(({ key, label }) =>
             <button
               key={key}
               onClick={() => setActiveTab(key)}
@@ -647,15 +647,15 @@ export default function Agents() {
               </div>
 
               {/* View Toggle */}
-              <div className="flex items-center p-1 rounded-xl bg-gray-100/80 shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
+              <div className="bg-slate-200 p-1 rounded-xl flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
                 <button
-                  onClick={() => setViewMode("list")}
-                  className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "list" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
+                onClick={() => setViewMode("list")}
+                className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "list" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
                   <List className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => setViewMode("pipeline")}
-                  className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "pipeline" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
+                onClick={() => setViewMode("pipeline")}
+                className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "pipeline" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
                   <LayoutGrid className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -701,8 +701,8 @@ export default function Agents() {
                       </div>
                       <div className="ml-4 flex-shrink-0 flex gap-2">
                         <button
-                          onClick={() => agent.name === "Assessment Agent" ? setAssessmentSetupOpen(true) : agent.name === "Scheduling Agent" ? setSchedulingSetupOpen(true) : undefined}
-                          className="px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                        onClick={() => agent.name === "Assessment Agent" ? setAssessmentSetupOpen(true) : agent.name === "Scheduling Agent" ? setSchedulingSetupOpen(true) : undefined}
+                        className="px-4 py-1.5 border border-gray-200 rounded-lg text-[12px] font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                           Setup
                         </button>
                         <button
