@@ -500,7 +500,7 @@ function RecruiterProductivity({ onOpenInsight }) {
 }
 
 // ── Tab: Funnel Conversion ────────────────────────────────────────────────────
-function FunnelConversion() {
+function FunnelConversion({ onOpenInsight }) {
   const [hoveredStage, setHoveredStage] = useState(null);
   const [selectedSource, setSelectedSource] = useState(null);
 
