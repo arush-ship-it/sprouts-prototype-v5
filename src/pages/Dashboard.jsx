@@ -594,7 +594,7 @@ function FunnelConversion({ onOpenInsight }) {
 
       <div className="grid grid-cols-2 gap-4">
         {/* Source Conversion — interactive */}
-        <ChartCard title="Source → Hire Conversion" subtitle="Click a source to highlight">
+        <ChartCard title="Source → Hire Conversion" subtitle="Click a source to highlight" insightId="chart_source" onOpenInsight={onOpenInsight}>
           <div className="space-y-2.5 mb-4">
             {sourceFunnelData.map((s, i) =>
             <motion.div
