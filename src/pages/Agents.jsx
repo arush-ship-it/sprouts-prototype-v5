@@ -647,15 +647,15 @@ export default function Agents() {
               </div>
 
               {/* View Toggle */}
-              <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
+              <div className="flex items-center p-1 rounded-xl bg-gray-100/80 shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
                 <button
-                onClick={() => setViewMode("list")} className="bg-slate-400 text-white p-1.5 rounded-md flex items-center justify-center transition-all">
-
+                  onClick={() => setViewMode("list")}
+                  className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "list" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
                   <List className="w-3.5 h-3.5" />
                 </button>
                 <button
-                onClick={() => setViewMode("pipeline")}
-                className={`flex items-center justify-center p-1.5 rounded-md transition-all ${viewMode === "pipeline" ? "bg-gray-900 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                  onClick={() => setViewMode("pipeline")}
+                  className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "pipeline" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
                   <LayoutGrid className="w-3.5 h-3.5" />
                 </button>
               </div>
