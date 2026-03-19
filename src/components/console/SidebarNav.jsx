@@ -100,7 +100,7 @@ export default function SidebarNav({ activePage = "Console" }) {
                 <link.icon
                 className={`w-[18px] h-[18px] transition-colors ${
                 activePage === link.page ?
-                "text-indigo-600" :
+                "text-gray-700" :
                 "text-gray-500 group-hover:text-gray-700"}`
                 } />
                 
