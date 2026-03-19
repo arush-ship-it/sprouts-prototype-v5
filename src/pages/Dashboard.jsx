@@ -149,23 +149,43 @@ const RichTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, active }) =>
-<motion.div
-  whileHover={{ y: -2, scale: 1.01 }}
-  whileTap={{ scale: 0.98 }}
-  onClick={onClick}
-  className={`bg-white p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex flex-col gap-2 ${active ? "border-indigo-400 shadow-lg shadow-indigo-100" : "border-gray-100 hover:border-indigo-200 hover:shadow-md"}`}>
-    <div className="flex items-start justify-between">
-      <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{label}</p>
-      {Icon && <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${active ? "bg-indigo-100" : "bg-gray-50"}`}><Icon className={`w-3.5 h-3.5 ${active ? "text-indigo-600" : "text-gray-400"}`} /></div>}
-    </div>
-    <p className={`text-[28px] font-bold ${color}`}>{value}</p>
-    <p className="text-[11px] text-gray-400">{sub}</p>
-    <div className={`flex items-center gap-1 text-[11px] font-semibold mt-auto ${up ? "text-emerald-600" : "text-red-500"}`}>
-      {up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-      {trend}
-    </div>
-  </motion.div>;
+const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, active, insightId, anomalyId, onOpenInsight }) => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <motion.div
+      whileHover={{ y: -2, scale: 1.01 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={onClick}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      className={`bg-white p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex flex-col gap-2 relative ${active ? "border-indigo-400 shadow-lg shadow-indigo-100" : "border-gray-100 hover:border-indigo-200 hover:shadow-md"}`}>
+      <div className="flex items-start justify-between">
+        <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{label}</p>
+        <div className="flex items-center gap-1.5">
+          <AnimatePresence>
+            {hovered && insightId && onOpenInsight && (
+              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
+                <AIInsightButton insightId={insightId} onOpen={onOpenInsight} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {Icon && <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${active ? "bg-indigo-100" : "bg-gray-50"}`}><Icon className={`w-3.5 h-3.5 ${active ? "text-indigo-600" : "text-gray-400"}`} /></div>}
+        </div>
+      </div>
+      <p className={`text-[28px] font-bold ${color}`}>{value}</p>
+      <p className="text-[11px] text-gray-400">{sub}</p>
+      <div className="flex items-center justify-between mt-auto">
+        <div className={`flex items-center gap-1 text-[11px] font-semibold ${up ? "text-emerald-600" : "text-red-500"}`}>
+          {up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+          {trend}
+        </div>
+        {anomalyId && onOpenInsight && (
+          <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 
 const ChartCard = ({ title, subtitle, children, className = "", action }) =>
