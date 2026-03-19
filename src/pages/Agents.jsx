@@ -336,7 +336,11 @@ export default function Agents() {
                   )}
                     </div>
                 }
-                  <ChevronDown className="text-gray-700 lucide lucide-chevron-down w-4 h-4 transition-transform" />
+                  <motion.div
+                    animate={{ rotate: analysisExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}>
+                    <ChevronDown className="text-gray-700 w-4 h-4" />
+                  </motion.div>
                 </div>
               </button>
 
