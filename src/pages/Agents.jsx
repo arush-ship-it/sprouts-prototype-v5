@@ -345,7 +345,16 @@ export default function Agents() {
               </button>
 
               {/* Expanded Content */}
-              {analysisExpanded && <div className="space-y-6">
+              <AnimatePresence initial={false}>
+              {analysisExpanded && (
+              <motion.div
+                key="analysis-content"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                style={{ overflow: "hidden" }}>
+              <div className="space-y-6">
               {/* Overall Metrics */}
               <div>
                 
