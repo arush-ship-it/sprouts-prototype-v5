@@ -659,7 +659,7 @@ function FunnelConversion({ onOpenInsight }) {
 }
 
 // ── Tab: Analytics ────────────────────────────────────────────────────────────
-function Analytics() {
+function Analytics({ onOpenInsight }) {
   const [activeSlice, setActiveSlice] = useState(null);
 
   return (
