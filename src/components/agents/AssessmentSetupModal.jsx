@@ -751,39 +751,79 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-        <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[75rem] mx-4 overflow-hidden" style={{ height: "700px" }}>
-          <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors z-10">
-            <X className="w-4 h-4 text-gray-500" />
-          </button>
-          <div className="flex flex-col items-center justify-center text-center px-10 h-full">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center mb-6">
-              <CheckCircle2 className="w-10 h-10 text-indigo-500" />
+        <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[75rem] mx-4 overflow-hidden flex" style={{ height: "700px" }}>
+          {/* Left — gradient hero panel */}
+          <div className="w-[42%] shrink-0 bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700 flex flex-col justify-between px-10 py-10 relative overflow-hidden">
+            {/* subtle bg circles */}
+            <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-white/5" />
+            <div className="absolute -bottom-20 -right-10 w-80 h-80 rounded-full bg-white/5" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-white/5" />
+
+            <div className="relative z-10">
+              <div className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center mb-10">
+                <CheckCircle2 className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-blue-200 mb-3 block">Assessment Agent</span>
+              <h2 className="text-[32px] font-bold text-white leading-tight mb-4">Automate your entire assessment pipeline</h2>
+              <p className="text-[14px] text-blue-100 leading-relaxed">
+                From smart invites to AI-powered scoring — set up once and let the agent handle the rest.
+              </p>
             </div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-indigo-400 mb-3">Assessment Agent</span>
-            <h2 className="text-[26px] font-bold text-gray-900 mb-3 leading-tight">Set up your Assessment Agent</h2>
-            <p className="text-[14px] text-gray-500 leading-relaxed mb-3">
-              This wizard will walk you through configuring automated candidate assessments — from invite criteria and email templates to questions, scoring, and filtering rules.
-            </p>
-            <p className="text-[12px] text-gray-400 mb-8">Takes about 5 minutes · {TOTAL_STEPS} steps to complete</p>
-            <div className="w-full space-y-2.5 mb-8 text-left">
+
+            {/* step pills at bottom */}
+            <div className="relative z-10 space-y-2.5">
               {[
-                { label: "Invite Criteria", desc: "Who gets invited automatically" },
-                { label: "Invite Email", desc: "Customise candidate communication" },
-                { label: "Assessment Builder", desc: "Questions, difficulty & duration" },
-                { label: "Filtering Rules", desc: "Score thresholds & approval logic" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-xl">
-                  <div className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 text-[11px] font-bold flex items-center justify-center shrink-0">{i + 1}</div>
+                { icon: Filter, label: "Invite Criteria", desc: "Auto-invite qualified candidates" },
+                { icon: Mail, label: "Email Templates", desc: "Customise every touchpoint" },
+                { icon: CheckCircle2, label: "Assessment Builder", desc: "AI-generated questions" },
+                { icon: Shield, label: "Filtering Rules", desc: "Score-based auto-decisions" },
+              ].map(({ icon: Icon, label, desc }, i) => (
+                <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3">
+                  <Icon className="w-4 h-4 text-blue-200 shrink-0" />
                   <div>
-                    <p className="text-[13px] font-semibold text-gray-800">{item.label}</p>
-                    <p className="text-[11px] text-gray-400">{item.desc}</p>
+                    <p className="text-[12px] font-semibold text-white">{label}</p>
+                    <p className="text-[11px] text-blue-200">{desc}</p>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Right — content panel */}
+          <div className="flex-1 flex flex-col justify-center px-12 py-10 relative">
+            <button onClick={onClose} className="absolute top-5 right-5 w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+              <X className="w-4 h-4 text-gray-500" />
+            </button>
+
+            <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-400 mb-3">Get started</p>
+            <h3 className="text-[28px] font-bold text-gray-900 leading-tight mb-3">Set up your<br />Assessment Agent</h3>
+            <p className="text-[14px] text-gray-500 leading-relaxed mb-2">
+              This wizard walks you through {TOTAL_STEPS} quick steps to configure automated assessments for your hiring pipeline.
+            </p>
+            <p className="text-[12px] text-gray-400 mb-8 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" /> Takes about 5 minutes
+            </p>
+
+            <div className="space-y-3 mb-10">
+              {[
+                { num: 1, label: "Invite Criteria", desc: "Define who gets auto-invited based on match fit" },
+                { num: 2, label: "Invite Email", desc: "Customise the candidate invitation & reminders" },
+                { num: 3, label: "Assessment Builder", desc: "Configure questions, difficulty & duration" },
+                { num: 4, label: "Filtering Rules", desc: "Set score thresholds & approval logic" },
+              ].map(({ num, label, desc }) => (
+                <div key={num} className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all">
+                  <div className="w-7 h-7 rounded-full bg-indigo-600 text-white text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">{num}</div>
+                  <div>
+                    <p className="text-[13px] font-semibold text-gray-900">{label}</p>
+                    <p className="text-[12px] text-gray-400 mt-0.5">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <button
               onClick={() => setInitiated(true)}
-              className="w-full h-12 bg-blue-600 hover:bg-indigo-700 text-white text-[14px] font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
+              className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white text-[14px] font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-200">
               Setup Agent <ChevronRight className="w-4 h-4" />
             </button>
           </div>
