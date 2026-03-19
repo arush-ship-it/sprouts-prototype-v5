@@ -687,7 +687,7 @@ function Analytics({ onOpenInsight }) {
           </ResponsiveContainer>
         </ChartCard>
 
-        <ChartCard title="Application Inflow" subtitle="Weekly new applications">
+        <ChartCard title="Application Inflow" subtitle="Weekly new applications" insightId="kpi_openroles" onOpenInsight={onOpenInsight}>
           <div className="flex items-baseline gap-2 mb-3">
             <span className="text-[26px] font-bold text-gray-900">28</span>
             <span className="text-[11px] text-gray-400">pending review</span>
