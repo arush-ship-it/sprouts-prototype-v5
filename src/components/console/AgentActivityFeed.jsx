@@ -211,25 +211,25 @@ function ActivityRow({ item }) {
         </div>
 
         {/* Approval Actions */}
-        {item.pendingApproval && approved === null &&
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-            <Button
-            size="sm"
-            onClick={() => setApproved("approved")}
-            className="h-7 px-3 text-[11px] font-medium bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg">
-              <ThumbsUp className="w-3 h-3 mr-1" />
-              Approve
-            </Button>
-            <Button
-            size="sm"
-            variant="outline"
-            onClick={() => setApproved("rejected")}
-            className="h-7 px-3 text-[11px] font-medium border-red-200 text-red-600 hover:bg-red-50 rounded-lg">
-              <ThumbsDown className="w-3 h-3 mr-1" />
-              Reject
-            </Button>
-          </div>
-        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
     </div>);
 
