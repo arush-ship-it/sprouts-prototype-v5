@@ -773,6 +773,41 @@ const TABS = [
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("health");
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [dateRange, setDateRange] = useState({ from: undefined, to: undefined });
+  const [selectedPreset, setSelectedPreset] = useState("Last 90 days");
+  const datePickerRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
+        setIsDatePickerOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const presets = [
+    { label: "Last 7 days", days: 7 },
+    { label: "Last 30 days", days: 30 },
+    { label: "Last 90 days", days: 90 },
+    { label: "Last 6 months", days: 180 },
+    { label: "Last year", days: 365 },
+  ];
+
+  const applyPreset = (preset) => {
+    const to = new Date();
+    const from = new Date();
+    from.setDate(from.getDate() - preset.days);
+    setDateRange({ from, to });
+    setSelectedPreset(preset.label);
+    setIsDatePickerOpen(false);
+  };
+
+  const dateLabel = dateRange.from && dateRange.to && selectedPreset === "Custom"
+    ? `${format(dateRange.from, "MMM d")} – ${format(dateRange.to, "MMM d, yyyy")}`
+    : selectedPreset;
   const [chatMessages, setChatMessages] = useState([
   { role: "assistant", content: "Hi! I'm your analytics assistant. Ask me anything about your recruitment data." }]
   );
