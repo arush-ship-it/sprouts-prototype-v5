@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Bot,
   Clock,
@@ -336,25 +335,12 @@ export default function Agents() {
                   )}
                     </div>
                 }
-                  <motion.div
-                    animate={{ rotate: analysisExpanded ? 180 : 0 }}
-                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}>
-                    <ChevronDown className="text-gray-700 w-4 h-4" />
-                  </motion.div>
+                  <ChevronDown className="text-gray-700 lucide lucide-chevron-down w-4 h-4 transition-transform" />
                 </div>
               </button>
 
               {/* Expanded Content */}
-              <AnimatePresence initial={false}>
-              {analysisExpanded && (
-              <motion.div
-                key="analysis-content"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                style={{ overflow: "hidden" }}>
-              <div className="space-y-6">
+              {analysisExpanded && <div className="space-y-6">
               {/* Overall Metrics */}
               <div>
                 
@@ -526,9 +512,7 @@ export default function Agents() {
 
 
               </div>
-              </motion.div>
-              )}
-              </AnimatePresence>
+              </div>}
             </div>
         </div>
 
