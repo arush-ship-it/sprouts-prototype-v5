@@ -221,27 +221,27 @@ const ChartCard = ({ title, subtitle, children, className = "", action, insightI
 
 
 // ── Tab: Hiring Health ────────────────────────────────────────────────────────
-function HiringHealth() {
+function HiringHealth({ onOpenInsight }) {
   const [activeKPI, setActiveKPI] = useState(null);
   const [hoveredRole, setHoveredRole] = useState(null);
 
   const kpis = [
-  { label: "Open Roles", value: "24", sub: "6 urgent", trend: "+4 this week", up: true, color: "text-blue-600", icon: Briefcase2 },
-  { label: "Avg. Time to Fill", value: "28d", sub: "Industry avg 42d", trend: "-6d vs last month", up: true, color: "text-emerald-600", icon: Clock },
-  { label: "Offer Acceptance", value: "82%", sub: "Target: 85%", trend: "+3% vs last month", up: true, color: "text-violet-600", icon: CheckCircle },
-  { label: "Quality of Hire", value: "4.2/5", sub: "90-day review score", trend: "+0.3 vs Q3", up: true, color: "text-amber-600", icon: Award }];
+  { label: "Open Roles", value: "24", sub: "6 urgent", trend: "+4 this week", up: true, color: "text-blue-600", icon: Briefcase2, insightId: "kpi_openroles", anomalyId: "anomaly_high_risk_roles" },
+  { label: "Avg. Time to Fill", value: "28d", sub: "Industry avg 42d", trend: "-6d vs last month", up: true, color: "text-emerald-600", icon: Clock, insightId: "kpi_ttf" },
+  { label: "Offer Acceptance", value: "82%", sub: "Target: 85%", trend: "+3% vs last month", up: true, color: "text-violet-600", icon: CheckCircle, insightId: "kpi_offer", anomalyId: "anomaly_nov_decline" },
+  { label: "Quality of Hire", value: "4.2/5", sub: "90-day review score", trend: "+0.3 vs Q3", up: true, color: "text-amber-600", icon: Award, insightId: "kpi_quality" }];
 
 
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-4 gap-4">
         {kpis.map((k, i) =>
-        <StatCard key={i} {...k} active={activeKPI === i} onClick={() => setActiveKPI(activeKPI === i ? null : i)} />
+        <StatCard key={i} {...k} active={activeKPI === i} onClick={() => setActiveKPI(activeKPI === i ? null : i)} onOpenInsight={onOpenInsight} />
         )}
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <ChartCard title="Time to Fill" subtitle="Days vs. target (35d)" className="col-span-1">
+        <ChartCard title="Time to Fill" subtitle="Days vs. target (35d)" className="col-span-1" insightId="chart_ttf" onOpenInsight={onOpenInsight}>
           <ResponsiveContainer width="100%" height={190}>
             <AreaChart data={ttfTrendData}>
               <defs>
