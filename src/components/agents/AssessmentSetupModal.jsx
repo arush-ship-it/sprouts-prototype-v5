@@ -618,6 +618,7 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
 const OPTIONAL_STEPS = new Set([1, 2, 6]);
 
 export default function AssessmentSetupModal({ isOpen, onClose }) {
+  const [initiated, setInitiated] = useState(false);
   const [step, setStep] = useState(1);
   const [transition, setTransition] = useState(null); // null | { config }
   const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
