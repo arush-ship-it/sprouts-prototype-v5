@@ -98,40 +98,63 @@ export default function HiringTeam() {
         {teamMembers.map((member) => (
           <div
             key={member.id}
-            className="flex items-center justify-between p-3 rounded-lg bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors"
+            className="p-4 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100/70 transition-colors"
           >
-            <div className="flex-1">
-              <p className="text-[13px] font-semibold text-gray-900">{member.name}</p>
-              <p className="text-[11px] text-gray-500">{member.email}</p>
+            {/* Top row: name + permission/actions */}
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-[13px] font-semibold text-gray-900">{member.name}</p>
+                <p className="text-[11px] text-gray-500">{member.email}</p>
+              </div>
+
+              {isEditMode ? (
+                <div className="flex items-center gap-2">
+                  <Select value={member.permission} onValueChange={(value) => handleUpdatePermission(member.id, value)}>
+                    <SelectTrigger className="w-[140px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {permissionOptions.map((opt) => (
+                        <SelectItem key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleRemoveMember(member.id)}
+                    className="h-8 w-8 text-red-600 hover:bg-red-50"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <span className="text-[12px] font-medium text-gray-600 bg-white px-3 py-1 rounded-full border border-gray-200">
+                  {getPermissionLabel(member.permission)}
+                </span>
+              )}
             </div>
 
-            {isEditMode ? (
-              <div className="flex items-center gap-2">
-                <Select value={member.permission} onValueChange={(value) => handleUpdatePermission(member.id, value)}>
-                  <SelectTrigger className="w-[140px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {permissionOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleRemoveMember(member.id)}
-                  className="h-8 w-8 text-red-600 hover:bg-red-50"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
+            {/* Stats row */}
+            {!isEditMode && member.stats && (
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { icon: Users, label: "Screened", value: member.stats.screened, color: "text-indigo-600", bg: "bg-indigo-50" },
+                  { icon: CheckCircle, label: "Interviews", value: member.stats.interviews, color: "text-emerald-600", bg: "bg-emerald-50" },
+                  { icon: TrendingUp, label: "Placements", value: member.stats.placements, color: "text-violet-600", bg: "bg-violet-50" },
+                  { icon: Clock, label: "Avg TTF", value: `${member.stats.avgTtf}d`, color: "text-amber-600", bg: "bg-amber-50" },
+                ].map((stat) => (
+                  <div key={stat.label} className={`${stat.bg} rounded-lg px-3 py-2 flex flex-col gap-0.5`}>
+                    <div className="flex items-center gap-1">
+                      <stat.icon className={`w-3 h-3 ${stat.color}`} />
+                      <span className="text-[10px] text-gray-500 font-medium">{stat.label}</span>
+                    </div>
+                    <p className={`text-[15px] font-bold ${stat.color}`}>{stat.value}</p>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <span className="text-[12px] font-medium text-gray-600 bg-white px-3 py-1 rounded-full border border-gray-200">
-                {getPermissionLabel(member.permission)}
-              </span>
             )}
           </div>
         ))}
