@@ -517,7 +517,7 @@ function FunnelConversion({ onOpenInsight }) {
 
       <div className="grid grid-cols-5 gap-4">
         {/* Interactive Funnel */}
-        <ChartCard title="Hiring Funnel" subtitle="Hover a stage for details" className="col-span-3">
+        <ChartCard title="Hiring Funnel" subtitle="Hover a stage for details" className="col-span-3" insightId="chart_dropoff" onOpenInsight={onOpenInsight}>
           <div className="space-y-1.5">
             {funnelData.map((s, i) => {
               const dropPct = i > 0 ? 100 - Math.round(s.count / funnelData[i - 1].count * 100) : 0;
