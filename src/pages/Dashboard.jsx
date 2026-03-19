@@ -188,17 +188,36 @@ const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, ac
 };
 
 
-const ChartCard = ({ title, subtitle, children, className = "", action }) =>
-<div className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 ${className}`}>
-    <div className="flex items-start justify-between mb-4">
-      <div>
-        <p className="text-[13px] font-semibold text-gray-900">{title}</p>
-        {subtitle && <p className="text-[11px] text-gray-400 mt-0.5">{subtitle}</p>}
+const ChartCard = ({ title, subtitle, children, className = "", action, insightId, anomalyId, onOpenInsight }) => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 ${className}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <p className="text-[13px] font-semibold text-gray-900">{title}</p>
+          {subtitle && <p className="text-[11px] text-gray-400 mt-0.5">{subtitle}</p>}
+        </div>
+        <div className="flex items-center gap-2">
+          {anomalyId && onOpenInsight && (
+            <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
+          )}
+          <AnimatePresence>
+            {hovered && insightId && onOpenInsight && (
+              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
+                <AIInsightButton insightId={insightId} onOpen={onOpenInsight} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {action}
+        </div>
       </div>
-      {action}
+      {children}
     </div>
-    {children}
-  </div>;
+  );
+};
 
 
 // ── Tab: Hiring Health ────────────────────────────────────────────────────────
