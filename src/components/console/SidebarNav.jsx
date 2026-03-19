@@ -92,7 +92,7 @@ export default function SidebarNav({ activePage = "Console" }) {
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group
                 ${
             activePage === link.page ?
-            "bg-indigo-100 text-indigo-900" :
+            "bg-gray-200/70 text-gray-900" :
             "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`
             }>
 
