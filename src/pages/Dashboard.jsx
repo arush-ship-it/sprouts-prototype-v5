@@ -192,10 +192,10 @@ const ChartCard = ({ title, subtitle, children, className = "", action, insightI
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 ${className}`}
+      className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col ${className}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-4 shrink-0">
         <div>
           <p className="text-[13px] font-semibold text-gray-900">{title}</p>
           {subtitle && <p className="text-[11px] text-gray-400 mt-0.5">{subtitle}</p>}
@@ -214,7 +214,7 @@ const ChartCard = ({ title, subtitle, children, className = "", action, insightI
           {action}
         </div>
       </div>
-      {children}
+      <div className="flex-1 flex flex-col">{children}</div>
     </div>
   );
 };
