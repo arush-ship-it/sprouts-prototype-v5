@@ -369,11 +369,11 @@ function RecruiterProductivity({ onOpenInsight }) {
     <div className="space-y-5">
       <div className="grid grid-cols-4 gap-4">
         {[
-        { label: "Avg Screenings/Recruiter", value: "38.75", sub: "Across 4 recruiters", trend: "+12% vs last month", up: true, color: "text-indigo-600", icon: Users },
-        { label: "Avg Interviews/Recruiter", value: "16.75", sub: "Per recruiter", trend: "+8% vs last month", up: true, color: "text-violet-600", icon: Activity },
-        { label: "Avg Time to Fill", value: "30d", sub: "Team average", trend: "-4d vs last month", up: true, color: "text-emerald-600", icon: Clock },
-        { label: "Placements This Month", value: "17", sub: "Total hires closed", trend: "+3 vs last month", up: true, color: "text-amber-600", icon: CheckCircle }].
-        map((k, i) => <StatCard key={i} {...k} />)}
+        { label: "Avg Screenings/Recruiter", value: "38.75", sub: "Across 4 recruiters", trend: "+12% vs last month", up: true, color: "text-indigo-600", icon: Users, insightId: "recruiter_productivity" },
+        { label: "Avg Interviews/Recruiter", value: "16.75", sub: "Per recruiter", trend: "+8% vs last month", up: true, color: "text-violet-600", icon: Activity, insightId: "recruiter_productivity" },
+        { label: "Avg Time to Fill", value: "30d", sub: "Team average", trend: "-4d vs last month", up: true, color: "text-emerald-600", icon: Clock, insightId: "kpi_ttf" },
+        { label: "Placements This Month", value: "17", sub: "Total hires closed", trend: "+3 vs last month", up: true, color: "text-amber-600", icon: CheckCircle, insightId: "recruiter_productivity" }].
+        map((k, i) => <StatCard key={i} {...k} onOpenInsight={onOpenInsight} />)}
       </div>
 
       <div className="grid grid-cols-5 gap-4">
