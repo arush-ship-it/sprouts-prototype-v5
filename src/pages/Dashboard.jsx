@@ -861,7 +861,8 @@ export default function Dashboard() {
               animate={{ width: 380, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="shrink-0 bg-white border-l border-gray-200 flex flex-col overflow-hidden my-2 mr-2 rounded-2xl shadow-lg">
+              className="shrink-0 bg-white border-l border-gray-200 flex flex-col overflow-hidden my-2 mr-2 rounded-2xl shadow-lg"
+              style={{ height: "calc(100vh - 120px)", position: "sticky", top: 0, alignSelf: "flex-start" }}>
               <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
