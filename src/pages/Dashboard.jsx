@@ -303,7 +303,7 @@ function HiringHealth({ onOpenInsight }) {
         </ChartCard>
       </div>
 
-      <ChartCard title="🚨 Roles Needing Attention" subtitle="Longest open positions with risk signals">
+      <ChartCard title="🚨 Roles Needing Attention" subtitle="Longest open positions with risk signals" insightId="anomaly_high_risk_roles" anomalyId="anomaly_high_risk_roles" onOpenInsight={onOpenInsight}>
         <div className="space-y-2">
           {urgentRoles.map((r, i) =>
           <motion.div
