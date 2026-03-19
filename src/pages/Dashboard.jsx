@@ -713,7 +713,7 @@ function Analytics({ onOpenInsight }) {
         </ChartCard>
 
         {/* Interactive Donut */}
-        <ChartCard title="Source Breakdown" subtitle="Click a segment to focus">
+        <ChartCard title="Source Breakdown" subtitle="Click a segment to focus" insightId="chart_source" onOpenInsight={onOpenInsight}>
           <div className="flex items-center justify-between">
             <ResponsiveContainer width={140} height={140}>
               <RechartsPieChart>
