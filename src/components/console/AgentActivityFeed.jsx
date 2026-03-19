@@ -210,7 +210,10 @@ function ActivityRow({ item }) {
           </div>
         </div>
 
-        {/* Approval Actions */}
+        {/* View Profile Button */}
+        <button className="flex-shrink-0 text-[11px] font-medium text-gray-500 hover:text-indigo-600 border border-gray-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition-all whitespace-nowrap">
+          View Profile
+        </button>
         
 
 
