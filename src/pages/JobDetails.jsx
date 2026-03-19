@@ -182,7 +182,7 @@ export default function JobDetails() {
                 <Share2 className="w-3.5 h-3.5" />
                 Share
               </button>
-              <button className="bg-[#ffffff] text-slate-700 px-3 py-1.5 text-sm font-medium rounded-lg flex items-center gap-1.5 border border-amber-200 hover:bg-amber-100 transition-colors">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors">
                 <XCircle className="w-3.5 h-3.5" />
                 Close Job
               </button>
