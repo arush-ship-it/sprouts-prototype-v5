@@ -285,7 +285,7 @@ function HiringHealth({ onOpenInsight }) {
           </div>
         </ChartCard>
 
-        <ChartCard title="Offer Acceptance" subtitle="Monthly accepted vs. declined" className="col-span-1">
+        <ChartCard title="Offer Acceptance" subtitle="Monthly accepted vs. declined" className="col-span-1" insightId="chart_offer" anomalyId="anomaly_nov_decline" onOpenInsight={onOpenInsight}>
           <ResponsiveContainer width="100%" height={190}>
             <BarChart data={offerData} barCategoryGap="35%" barGap={3}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
