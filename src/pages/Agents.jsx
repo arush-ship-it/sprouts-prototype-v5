@@ -526,7 +526,6 @@ export default function Agents() {
 
 
               </div>
-              </div>
               </motion.div>
               )}
               </AnimatePresence>
