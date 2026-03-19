@@ -474,7 +474,7 @@ function RecruiterProductivity({ onOpenInsight }) {
       </div>
 
       {/* Task Completion */}
-      <ChartCard title="Team Task Completion" subtitle="% completion across all task types this month">
+      <ChartCard title="Team Task Completion" subtitle="% completion across all task types this month" insightId="chart_completion" anomalyId="chart_completion" onOpenInsight={onOpenInsight}>
         <div className="grid grid-cols-4 gap-4">
           {taskCompletionData.map((t, i) =>
           <div key={i} className="relative">
