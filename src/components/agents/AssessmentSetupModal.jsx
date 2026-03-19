@@ -751,11 +751,11 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-        <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[480px] mx-4 overflow-hidden">
+        <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-[75rem] mx-4 overflow-hidden" style={{ height: "700px" }}>
           <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors z-10">
             <X className="w-4 h-4 text-gray-500" />
           </button>
-          <div className="flex flex-col items-center text-center px-10 py-14">
+          <div className="flex flex-col items-center justify-center text-center px-10 h-full">
             <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center mb-6">
               <CheckCircle2 className="w-10 h-10 text-indigo-500" />
             </div>
