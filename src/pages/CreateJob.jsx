@@ -77,7 +77,7 @@ function QuickActionSlideshow({ onStart, onShowDrafts }) {
 
   const handleAction = () => {
     if (card.key === "upload") {
-      onShowDrafts?.(true);
+      document.getElementById("quick-upload-input")?.click();
     } else {
       onShowDrafts?.(true);
     }
