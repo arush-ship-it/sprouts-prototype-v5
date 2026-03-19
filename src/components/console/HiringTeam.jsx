@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Edit2, Trash2, Plus, Save, X } from "lucide-react";
+import { Edit2, Trash2, Plus, Save, CheckCircle, Clock, Users, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
