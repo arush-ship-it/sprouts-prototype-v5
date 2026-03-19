@@ -844,9 +844,60 @@ export default function Dashboard() {
             <p className="text-[13px] text-gray-500 mt-0.5">Hiring overview · Last 90 days</p>
           </div>
           <div className="flex items-center gap-2">
-            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-[12px] font-medium text-gray-600 hover:bg-gray-50 transition-colors">
-              <Calendar className="w-3.5 h-3.5" /> Last 90 days
-            </button>
+            <div className="relative" ref={datePickerRef}>
+              <button
+                onClick={() => setIsDatePickerOpen((v) => !v)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-colors ${isDatePickerOpen ? "border-indigo-400 bg-indigo-50 text-indigo-700" : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"}`}>
+                <Calendar className="w-3.5 h-3.5" /> {dateLabel}
+              </button>
+              <AnimatePresence>
+                {isDatePickerOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 z-50 bg-white rounded-2xl border border-gray-200 shadow-xl flex overflow-hidden">
+                    {/* Presets */}
+                    <div className="w-40 border-r border-gray-100 p-2 flex flex-col gap-0.5">
+                      <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-2 py-1.5">Presets</p>
+                      {presets.map((p) => (
+                        <button
+                          key={p.label}
+                          onClick={() => applyPreset(p)}
+                          className={`text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors ${selectedPreset === p.label ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50"}`}>
+                          {p.label}
+                        </button>
+                      ))}
+                      <div className="border-t border-gray-100 mt-1 pt-1">
+                        <button
+                          onClick={() => setSelectedPreset("Custom")}
+                          className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors ${selectedPreset === "Custom" ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50"}`}>
+                          Custom range
+                        </button>
+                      </div>
+                    </div>
+                    {/* Calendar */}
+                    <div className="p-3">
+                      <CalendarPicker
+                        mode="range"
+                        selected={dateRange}
+                        onSelect={(range) => {
+                          setDateRange(range || { from: undefined, to: undefined });
+                          setSelectedPreset("Custom");
+                        }}
+                        numberOfMonths={2}
+                        className="text-[12px]"
+                      />
+                      <div className="flex justify-end gap-2 mt-2 pt-2 border-t border-gray-100">
+                        <button onClick={() => setIsDatePickerOpen(false)} className="px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 rounded-lg">Cancel</button>
+                        <button onClick={() => setIsDatePickerOpen(false)} className="px-3 py-1.5 text-[12px] font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Apply</button>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-[12px] font-medium text-gray-600 hover:bg-gray-50 transition-colors">
               <Download className="w-3.5 h-3.5" /> Export
             </button>
