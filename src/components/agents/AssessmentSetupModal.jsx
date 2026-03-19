@@ -800,8 +800,8 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             
 
             
-            <p className="text-[12px] text-gray-400 mb-8 flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" /> Takes about 5 minutes
+            <p className="text-[12px] text-gray-400 mb-8 flex items-center gap-1.5">Takes about  2 minutes
+
             </p>
 
             <div className="space-y-3 mb-10">
