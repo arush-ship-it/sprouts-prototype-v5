@@ -268,7 +268,7 @@ function HiringHealth({ onOpenInsight }) {
           </div>
         </ChartCard>
 
-        <ChartCard title="Openings by Department" subtitle="Open vs. filled in last 30d" className="col-span-1">
+        <ChartCard title="Openings by Department" subtitle="Open vs. filled in last 30d" className="col-span-1" insightId="chart_openings" anomalyId="chart_openings" onOpenInsight={onOpenInsight}>
           <ResponsiveContainer width="100%" height={190}>
             <BarChart data={openRolesByDept} barCategoryGap="30%" barGap={3}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
