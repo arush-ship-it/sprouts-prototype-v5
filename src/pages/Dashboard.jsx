@@ -378,7 +378,7 @@ function RecruiterProductivity({ onOpenInsight }) {
 
       <div className="grid grid-cols-5 gap-4">
         {/* Leaderboard */}
-        <ChartCard title="Leaderboard" subtitle="Click a recruiter to explore" className="col-span-2">
+        <ChartCard title="Leaderboard" subtitle="Click a recruiter to explore" className="col-span-2" insightId="recruiter_productivity" onOpenInsight={onOpenInsight}>
           <div className="space-y-3">
             {recruiterData.map((r, i) =>
             <motion.div
