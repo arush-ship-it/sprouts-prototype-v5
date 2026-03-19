@@ -976,10 +976,10 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}>
-              {activeTab === "health" && <HiringHealth />}
-              {activeTab === "productivity" && <RecruiterProductivity />}
-              {activeTab === "funnel" && <FunnelConversion />}
-              {activeTab === "analytics" && <Analytics />}
+              {activeTab === "health" && <HiringHealth onOpenInsight={openInsight} />}
+              {activeTab === "productivity" && <RecruiterProductivity onOpenInsight={openInsight} />}
+              {activeTab === "funnel" && <FunnelConversion onOpenInsight={openInsight} />}
+              {activeTab === "analytics" && <Analytics onOpenInsight={openInsight} />}
             </motion.div>
           </AnimatePresence>
         </div>
