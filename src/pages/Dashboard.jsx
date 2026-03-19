@@ -508,11 +508,11 @@ function FunnelConversion({ onOpenInsight }) {
     <div className="space-y-5">
       <div className="grid grid-cols-4 gap-4">
         {[
-        { label: "Total Applicants", value: "1,240", sub: "Last 90 days", trend: "+18% vs prior", up: true, color: "text-indigo-600", icon: Users },
-        { label: "Screening Rate", value: "39%", sub: "Applied → Screened", trend: "+4% vs prior", up: true, color: "text-violet-600", icon: Filter },
-        { label: "Interview → Offer", value: "35.6%", sub: "Best conversion stage", trend: "+2.1% vs prior", up: true, color: "text-emerald-600", icon: CheckCircle },
-        { label: "Overall Hire Rate", value: "1.9%", sub: "Applied → Hired", trend: "-0.2% vs prior", up: false, color: "text-amber-600", icon: Target }].
-        map((k, i) => <StatCard key={i} {...k} />)}
+        { label: "Total Applicants", value: "1,240", sub: "Last 90 days", trend: "+18% vs prior", up: true, color: "text-indigo-600", icon: Users, insightId: "chart_source" },
+        { label: "Screening Rate", value: "39%", sub: "Applied → Screened", trend: "+4% vs prior", up: true, color: "text-violet-600", icon: Filter, insightId: "chart_dropoff" },
+        { label: "Interview → Offer", value: "35.6%", sub: "Best conversion stage", trend: "+2.1% vs prior", up: true, color: "text-emerald-600", icon: CheckCircle, insightId: "chart_dropoff" },
+        { label: "Overall Hire Rate", value: "1.9%", sub: "Applied → Hired", trend: "-0.2% vs prior", up: false, color: "text-amber-600", icon: Target, insightId: "kpi_hirerate", anomalyId: "kpi_hirerate" }].
+        map((k, i) => <StatCard key={i} {...k} onOpenInsight={onOpenInsight} />)}
       </div>
 
       <div className="grid grid-cols-5 gap-4">
