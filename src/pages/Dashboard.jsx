@@ -11,6 +11,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar as CalendarPicker } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import {
+  AIInsightButton, AIInsightPanel, AnomalyBadge, useAIInsight
+} from "@/components/dashboard/AIInsightPopover";
+import {
   LineChart, Line, BarChart, Bar, PieChart as RechartsPieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   AreaChart, Area, RadarChart, Radar, PolarGrid, PolarAngleAxis } from
