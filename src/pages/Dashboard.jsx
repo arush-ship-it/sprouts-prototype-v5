@@ -813,6 +813,7 @@ const TABS = [
 
 
 export default function Dashboard() {
+  const { activeInsight, openInsight, closeInsight } = useAIInsight();
   const [activeTab, setActiveTab] = useState("health");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
