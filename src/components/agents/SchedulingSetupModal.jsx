@@ -295,48 +295,48 @@ function AvailabilityWindowPicker({ config, onChange }) {
       {/* Slots per day */}
 
       {/* Date & Time Preview */}
-      {startDate && endDate && (
-        <div>
+      {startDate && endDate &&
+      <div>
           <div className="border-t border-dashed border-gray-100 pt-5" />
           <p className="text-[14px] font-semibold text-gray-900 mb-0.5">Availability Preview</p>
           <p className="text-[12px] text-gray-400 mb-4">Finalised date range with available daily hours</p>
           <div className="grid grid-cols-2 gap-2 max-h-[220px] overflow-y-auto pr-1">
             {eachDayOfInterval({ start: startDate, end: endDate }).map((day) => {
-              const isWeekend = day.getDay() === 0 || day.getDay() === 6;
-              return (
-                <div key={day.toISOString()} className={`flex items-center gap-3 px-4 py-3 rounded-xl border ${isWeekend ? "bg-gray-50 border-gray-100 opacity-60" : "bg-indigo-50 border-indigo-100"}`}>
+            const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+            return (
+              <div key={day.toISOString()} className={`flex items-center gap-3 px-4 py-3 rounded-xl border ${isWeekend ? "bg-gray-50 border-gray-100 opacity-60" : "bg-indigo-50 border-indigo-100"}`}>
                   <div className={`text-center min-w-[36px] ${isWeekend ? "opacity-50" : ""}`}>
                     <p className="text-[10px] font-semibold text-gray-400 uppercase">{format(day, "EEE")}</p>
                     <p className={`text-[18px] font-bold ${isWeekend ? "text-gray-400" : "text-indigo-700"}`}>{format(day, "d")}</p>
                     <p className="text-[10px] text-gray-400">{format(day, "MMM")}</p>
                   </div>
                   <div className="flex-1 min-w-0">
-                    {isWeekend ? (
-                      <p className="text-[11px] text-gray-400 font-medium">Weekend</p>
-                    ) : (
-                      <>
+                    {isWeekend ?
+                  <p className="text-[11px] text-gray-400 font-medium">Weekend</p> :
+
+                  <>
                         <p className="text-[12px] font-semibold text-indigo-700">{fromTime} – {toTime}</p>
                         <p className="text-[10px] text-gray-400 mt-0.5">{format(day, "MMMM d, yyyy")}</p>
                       </>
-                    )}
+                  }
                   </div>
-                  {!isWeekend && (
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
-                  )}
-                </div>
-              );
-            })}
+                  {!isWeekend &&
+                <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
+                }
+                </div>);
+
+          })}
           </div>
           <div className="mt-3 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-3 flex items-center justify-between">
             <p className="text-[12px] text-indigo-700 font-medium">
-              {eachDayOfInterval({ start: startDate, end: endDate }).filter(d => d.getDay() !== 0 && d.getDay() !== 6).length} available days · {fromTime} – {toTime} daily
+              {eachDayOfInterval({ start: startDate, end: endDate }).filter((d) => d.getDay() !== 0 && d.getDay() !== 6).length} available days · {fromTime} – {toTime} daily
             </p>
             <span className="text-[11px] font-semibold text-indigo-500 bg-indigo-100 px-2 py-0.5 rounded-full">
               {config.timezone || "UTC"}
             </span>
           </div>
         </div>
-      )}
+      }
 
 
 
@@ -1174,7 +1174,7 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
 export default function SchedulingSetupModal({ isOpen, onClose }) {
   const [initiated, setInitiated] = useState(false);
   const [step, setStep] = useState(1);
-  React.useEffect(() => { if (!isOpen) { setInitiated(false); setStep(1); } }, [isOpen]);
+  React.useEffect(() => {if (!isOpen) {setInitiated(false);setStep(1);}}, [isOpen]);
   const [transition, setTransition] = useState(null);
   const [availabilityConfig, setAvailabilityConfig] = useState({ window: "7 days", minSlots: 3, timezone: "UTC", allowTimezoneOverride: true });
   const [availabilityEmail, setAvailabilityEmail] = useState(DEFAULT_AVAILABILITY_EMAIL);
@@ -1309,22 +1309,22 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
               </p>
             </div>
 
-            <div className="relative z-10 space-y-2.5">
-              {[
-                { icon: Calendar, label: "Availability Finder", desc: "Collect candidate time slots" },
-                { icon: Video, label: "Interview Setup", desc: "Format, duration & invites" },
-                { icon: FileText, label: "Feedback Setup", desc: "Structured interviewer forms" },
-                { icon: Shield, label: "Filtering Criteria", desc: "No-show & reschedule rules" },
-              ].map(({ icon: Icon, label, desc }, i) => (
-                <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3">
-                  <Icon className="w-4 h-4 text-indigo-200 shrink-0" />
-                  <div>
-                    <p className="text-[12px] font-semibold text-white">{label}</p>
-                    <p className="text-[11px] text-indigo-200">{desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
           </div>
 
           {/* Right — content panel */}
@@ -1334,29 +1334,29 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
             </button>
 
             <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-400 mb-3">Get started</p>
-            <h3 className="text-[28px] font-bold text-gray-900 leading-tight mb-3">Set up your<br />Interview Agent</h3>
-            <p className="text-[14px] text-gray-500 leading-relaxed mb-2">
-              This wizard walks you through {TOTAL_STEPS} quick steps to configure end-to-end interview scheduling for your pipeline.
-            </p>
+            
+            
+
+            
             <p className="text-[12px] text-gray-400 mb-8 flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" /> Takes about 8 minutes
             </p>
 
             <div className="space-y-3 mb-10">
               {[
-                { num: 1, label: "Availability Finder", desc: "Set the window & collect candidate time slots" },
-                { num: 2, label: "Interview Setup", desc: "Format, duration, interviewers & invite email" },
-                { num: 3, label: "Feedback Setup", desc: "Feedback form & interviewer reminders" },
-                { num: 4, label: "Filtering Criteria", desc: "No-show limits & auto-reschedule rules" },
-              ].map(({ num, label, desc }) => (
-                <div key={num} className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all">
+              { num: 1, label: "Availability Finder", desc: "Set the window & collect candidate time slots" },
+              { num: 2, label: "Interview Setup", desc: "Format, duration, interviewers & invite email" },
+              { num: 3, label: "Feedback Setup", desc: "Feedback form & interviewer reminders" },
+              { num: 4, label: "Filtering Criteria", desc: "No-show limits & auto-reschedule rules" }].
+              map(({ num, label, desc }) =>
+              <div key={num} className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all">
                   <div className="w-7 h-7 rounded-full bg-indigo-600 text-white text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">{num}</div>
                   <div>
                     <p className="text-[13px] font-semibold text-gray-900">{label}</p>
                     <p className="text-[12px] text-gray-400 mt-0.5">{desc}</p>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
 
             <button
@@ -1366,8 +1366,8 @@ export default function SchedulingSetupModal({ isOpen, onClose }) {
             </button>
           </div>
         </div>
-      </div>
-    );
+      </div>);
+
   }
 
   const isOptional = OPTIONAL_STEPS.has(step);
