@@ -26,9 +26,9 @@ const permissionOptions = [
 
 export default function HiringTeam() {
   const [teamMembers, setTeamMembers] = useState([
-    { id: 1, name: "Sarah Chen", email: "sarah.chen@company.com", permission: "full_access" },
-    { id: 2, name: "Mike Roberts", email: "mike.roberts@company.com", permission: "edit" },
-    { id: 3, name: "Jessica Taylor", email: "jessica.taylor@company.com", permission: "manage_candidates" },
+    { id: 1, name: "Sarah Chen", email: "sarah.chen@company.com", permission: "full_access", stats: { screened: 48, interviews: 22, placements: 6, avgTtf: 24 } },
+    { id: 2, name: "Mike Roberts", email: "mike.roberts@company.com", permission: "edit", stats: { screened: 41, interviews: 18, placements: 5, avgTtf: 27 } },
+    { id: 3, name: "Jessica Taylor", email: "jessica.taylor@company.com", permission: "manage_candidates", stats: { screened: 37, interviews: 15, placements: 4, avgTtf: 31 } },
   ]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
