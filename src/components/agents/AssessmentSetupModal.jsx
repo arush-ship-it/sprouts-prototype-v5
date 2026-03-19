@@ -620,6 +620,7 @@ const OPTIONAL_STEPS = new Set([1, 2, 6]);
 export default function AssessmentSetupModal({ isOpen, onClose }) {
   const [initiated, setInitiated] = useState(false);
   const [step, setStep] = useState(1);
+  React.useEffect(() => { if (!isOpen) { setInitiated(false); setStep(1); } }, [isOpen]);
   const [transition, setTransition] = useState(null); // null | { config }
   const [inviteCriteria, setInviteCriteria] = useState({ matchFit: "good", autoInvite: true, humanReview: true });
   const [inviteEmail, setInviteEmail] = useState(DEFAULT_INVITE_EMAIL);

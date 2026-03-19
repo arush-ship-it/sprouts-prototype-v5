@@ -1174,6 +1174,7 @@ function StageTransition({ config, onContinue, isLast, stackStatus }) {
 export default function SchedulingSetupModal({ isOpen, onClose }) {
   const [initiated, setInitiated] = useState(false);
   const [step, setStep] = useState(1);
+  React.useEffect(() => { if (!isOpen) { setInitiated(false); setStep(1); } }, [isOpen]);
   const [transition, setTransition] = useState(null);
   const [availabilityConfig, setAvailabilityConfig] = useState({ window: "7 days", minSlots: 3, timezone: "UTC", allowTimezoneOverride: true });
   const [availabilityEmail, setAvailabilityEmail] = useState(DEFAULT_AVAILABILITY_EMAIL);
