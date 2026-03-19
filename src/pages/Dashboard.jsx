@@ -665,7 +665,7 @@ function Analytics({ onOpenInsight }) {
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-3 gap-4">
-        <ChartCard title="Pipeline by Stage" subtitle="Active candidates right now">
+        <ChartCard title="Pipeline by Stage" subtitle="Active candidates right now" insightId="chart_dropoff" onOpenInsight={onOpenInsight}>
           <div className="flex items-baseline gap-2 mb-3">
             <span className="text-[26px] font-bold text-gray-900">342</span>
             <span className="text-[11px] text-gray-400">total active</span>
