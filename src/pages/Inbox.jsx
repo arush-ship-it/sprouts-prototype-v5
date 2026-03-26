@@ -229,7 +229,7 @@ export default function Inbox() {
             </Dialog>
             <Dialog open={isComposeOpen} onOpenChange={setIsComposeOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" className="bg-blue-600 text-primary-foreground px-3 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
+                <Button size="sm">
                   <Send className="w-3.5 h-3.5 mr-1.5" />
                   Compose Email
                 </Button>
@@ -264,7 +264,7 @@ export default function Inbox() {
       <div className="px-8 pb-6">
         {/* Tabs */}
         <div className="flex items-center justify-between mb-4">
-          <div className="bg-slate-200 p-1 rounded-full flex items-center gap-1">
+          <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-full">
             {["Inbox", "Sent", "Starred"].map((tab) =>
             <button
               key={tab}
