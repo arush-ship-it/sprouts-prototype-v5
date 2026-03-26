@@ -81,7 +81,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           </Button>
 
           {/* View Mode Toggle */}
-          <div className="bg-slate-300 p-1 rounded-lg flex items-center gap-1">
+          <div className="bg-slate-200 p-1 rounded-lg flex items-center gap-1">
             {currentViews.map((view) =>
             <Button
               key={view.key}
