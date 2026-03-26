@@ -27,17 +27,17 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   return (
     <div className="px-8 py-2">
       <div className="flex items-center justify-between">
-        <div className="bg-slate-200 p-1 rounded-xl flex items-center gap-1 w-fit">
+        <div className="bg-slate-200 p-1 rounded-[10007px] flex items-center gap-1 w-fit">
           {tabs.map((tab) =>
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`relative px-5 py-2 rounded-lg text-[13px] font-semibold transition-all duration-300 flex items-center gap-2
-                ${
-            activeTab === tab.key ?
-            "bg-white text-gray-900 shadow-sm" :
-            "text-gray-400 hover:text-gray-600"}`
-            }>
+            onClick={() => setActiveTab(tab.key)} className="bg-white text-gray-900 px-5 py-2 text-xs font-medium rounded-full relative transition-all duration-300 flex items-center gap-2 shadow-sm">
+
+
+
+
+
+            
 
               {tab.label}
               <span
