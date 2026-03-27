@@ -242,8 +242,8 @@ function DefaultScreen({ onStart }) {
               {attachedFile &&
               <Button
                 onClick={() => onStart(`Upload: ${attachedFile.name}`)}
-                size="sm"
-                className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 rounded-full h-8 px-3 text-[11px] font-semibold gap-1">
+                size="sm" className="bg-blue-50 text-blue-600 px-3 text-xs font-medium rounded-full inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-8 gap-1">
+                
                 <Sparkles className="w-3 h-3" /> Parse
               </Button>
               }
