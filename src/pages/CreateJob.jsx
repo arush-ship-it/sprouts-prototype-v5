@@ -1233,7 +1233,7 @@ function PublishScreen({ onBack, onPublish }) {
   return (
     <div className="flex flex-col h-full bg-[#F7F8FA]">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
+      <div className="bg-white px-8 py-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
           
 
