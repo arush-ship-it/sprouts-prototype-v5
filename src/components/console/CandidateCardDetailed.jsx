@@ -7,31 +7,31 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  SelectValue } from
+"@/components/ui/select";
 
 export default function CandidateCardDetailed({ candidate, isPipeline = false, onClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedStage, setSelectedStage] = useState(candidate.stage || "screening");
-  
+
   const scoreColor =
-    candidate.score >= 75
-      ? "text-emerald-600 bg-emerald-50"
-      : "text-gray-500 bg-gray-50";
+  candidate.score >= 75 ?
+  "text-emerald-600 bg-emerald-50" :
+  "text-gray-500 bg-gray-50";
 
   return (
-    <div 
+    <div
       onClick={onClick}
-      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
-    >
+      className="group flex flex-col gap-4 px-5 py-5 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all duration-300 cursor-pointer">
+      
       {/* Header */}
       <div className="flex items-start justify-between">
         <div className="flex items-start gap-3">
           <img
             src={candidate.avatar}
             alt={candidate.name}
-            className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100"
-          />
+            className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100" />
+          
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-[15px] font-semibold text-gray-900">
@@ -83,7 +83,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
       </div>
 
       {/* Stats */}
-      <div className="flex items-center gap-4 pt-2 border-t border-gray-100">
+      <div className="flex items-center gap-4 pt-2">
         <div className="flex items-center gap-2 text-[12.5px]">
           <span className="text-gray-500">Experience:</span>
           <span className="font-semibold text-gray-900">
@@ -107,7 +107,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
       </div>
 
       {/* Sequence & Actions */}
-      <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+      <div className="flex items-center justify-between pt-2">
         <div className="flex items-center gap-2 text-[12px]">
           <span className="text-gray-500">Sequence:</span>
           <span className="text-blue-600 font-medium">
@@ -116,8 +116,8 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
           <ExternalLink className="w-3 h-3 text-blue-400" />
         </div>
         <div className="flex items-center gap-2">
-          {isPipeline ? (
-            <>
+          {isPipeline ?
+          <>
               <Select value={selectedStage} onValueChange={setSelectedStage}>
                 <SelectTrigger className="h-7 w-[140px] text-[11px]">
                   <SelectValue />
@@ -144,9 +144,9 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
                 <Calendar className="w-3 h-3 mr-1" />
                 Schedule
               </Button>
-            </>
-          ) : (
-            <>
+            </> :
+
+          <>
               <Button size="sm" variant="outline" className="h-7 text-[11px]">
                 <ThumbsUp className="w-3 h-3 mr-1" />
                 Shortlist
@@ -160,21 +160,21 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
                 Note
               </Button>
             </>
-          )}
-          <Button 
-            size="sm" 
-            variant="ghost" 
+          }
+          <Button
+            size="sm"
+            variant="ghost"
             className="h-7 text-[11px]"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
+            onClick={() => setIsExpanded(!isExpanded)}>
+            
             {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </Button>
         </div>
       </div>
 
       {/* Expanded View */}
-      {isExpanded && (
-        <div className="pt-4 border-t border-gray-100 space-y-4">
+      {isExpanded &&
+      <div className="pt-4 border-t border-gray-100 space-y-4">
           {/* AI Fit Analysis */}
           <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100">
             <div className="flex items-center gap-2 mb-3">
@@ -283,7 +283,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
             </div>
           </div>
         </div>
-      )}
-    </div>
-  );
+      }
+    </div>);
+
 }
