@@ -207,7 +207,7 @@ export default function ActivityApprovalModal({ isOpen, onClose }) {
                   <Button
                   variant={viewMode === "review" ? "default" : "ghost"}
                   size="sm"
-                  onClick={() => setViewMode("review")} className="bg-[hsl(var(--background))] text-[12px] px-3 font-medium rounded-[14px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
+                  onClick={() => setViewMode("review")} className="bg-[hsl(var(--background))] text-slate-800 px-3 text-xs font-medium rounded-[14px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-8">
                   
                     Review
                   </Button>
