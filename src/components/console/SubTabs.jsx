@@ -27,7 +27,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   return (
     <div className="px-8 py-2">
       <div className="flex items-center justify-between">
-        <div className="bg-gray-200 p-1 rounded-[28px] flex items-center gap-1 w-fit">
+        <div className="bg-slate-200 p-1 rounded-[28px] flex items-center gap-1 w-fit">
           {tabs.map((tab) =>
           <button
             key={tab.key}
@@ -56,11 +56,11 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
         {/* Filter, Search & View Mode */}
         <div className="flex items-center gap-2">
           {/* Search Bar */}
-          <div className="bg-gray-200 px-3 py-2 rounded-lg flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out"
-
-          style={{ width: isSearchExpanded ? "200px" : "40px" }}
-          onMouseEnter={() => setIsSearchExpanded(true)}
-          onMouseLeave={() => setIsSearchExpanded(false)}>
+          <div
+            className="bg-gray-200 px-3 py-2 rounded-lg flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out"
+            style={{ width: isSearchExpanded ? "200px" : "40px" }}
+            onMouseEnter={() => setIsSearchExpanded(true)}
+            onMouseLeave={() => setIsSearchExpanded(false)}>
             
             <Search className="text-gray-600 w-4 h-4 shrink-0" />
             <input
@@ -81,7 +81,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           </Button>
 
           {/* View Mode Toggle */}
-          <div className="bg-gray-200 p-1 rounded-full flex items-center gap-1">
+          <div className="bg-slate-200 p-1 rounded-full flex items-center gap-1">
             {currentViews.map((view) =>
             <Button
               key={view.key}

@@ -47,7 +47,7 @@ export default function SidebarNav({ activePage = "Console" }) {
   const [selectedJob, setSelectedJob] = useState("1");
 
   return (
-    <aside className="bg-gray-200 mt-3 mr-3 mb-3 ml-3 pr-3 pl-3 rounded-xl w-[221px] flex flex-col fixed left-0 top-12 bottom-0 shrink-0 border-r border-gray-200 overflow-hidden">
+    <aside className="bg-[#E5E7EB] mt-3 mr-3 mb-3 ml-3 pr-3 pl-3 rounded-xl w-[221px] flex flex-col fixed left-0 top-12 bottom-0 shrink-0 border-r border-gray-200 overflow-hidden">
       {/* Top: Brand + Job Selector + Main Links */}
       <div className="flex-1 overflow-y-auto">
         <div className="flex items-center gap-2.5 px-3 mb-6">
@@ -64,7 +64,7 @@ export default function SidebarNav({ activePage = "Console" }) {
         {/* Job Selector */}
         <div className="mb-6">
           <Select value={selectedJob} onValueChange={setSelectedJob}>
-            <SelectTrigger className="bg-white text-[12px] px-3 py-2 rounded-[10px] flex items-center justify-between whitespace-nowrap ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full h-9 border-gray-200 hover:bg-gray-100">
+            <SelectTrigger className="bg-white text-[12px] px-3 py-2 rounded-[10px] flex items-center justify-between whitespace-nowrap border shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full h-9 border-gray-200 hover:bg-gray-100">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -122,7 +122,7 @@ export default function SidebarNav({ activePage = "Console" }) {
                 </span>
             }
               {link.activeAgents != null &&
-            <span className="text-[10px] text-blue-600 font-semibold bg-blue-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+            <span className="text-[10px] text-indigo-600 font-semibold bg-indigo-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                   {link.activeAgents}/{link.totalAgents} active
                 </span>
             }
