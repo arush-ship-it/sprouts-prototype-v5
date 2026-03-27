@@ -11,8 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar as CalendarPicker } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import {
-  AIInsightButton, AIInsightPanel, AnomalyBadge, useAIInsight
-} from "@/components/dashboard/AIInsightPopover";
+  AIInsightButton, AIInsightPanel, AnomalyBadge, useAIInsight } from
+"@/components/dashboard/AIInsightPopover";
 import {
   LineChart, Line, BarChart, Bar, PieChart as RechartsPieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -163,11 +163,11 @@ const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, ac
         <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{label}</p>
         <div className="flex items-center gap-1.5">
           <AnimatePresence>
-            {hovered && insightId && onOpenInsight && (
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
+            {hovered && insightId && onOpenInsight &&
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
                 <AIInsightButton insightId={insightId} onOpen={onOpenInsight} />
               </motion.div>
-            )}
+            }
           </AnimatePresence>
           {Icon && <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${active ? "bg-indigo-100" : "bg-gray-50"}`}><Icon className={`w-3.5 h-3.5 ${active ? "text-indigo-600" : "text-gray-400"}`} /></div>}
         </div>
@@ -179,12 +179,12 @@ const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, ac
           {up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {trend}
         </div>
-        {anomalyId && onOpenInsight && (
-          <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
-        )}
+        {anomalyId && onOpenInsight &&
+        <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
+        }
       </div>
-    </motion.div>
-  );
+    </motion.div>);
+
 };
 
 
@@ -201,22 +201,22 @@ const ChartCard = ({ title, subtitle, children, className = "", action, insightI
           {subtitle && <p className="text-[11px] text-gray-400 mt-0.5">{subtitle}</p>}
         </div>
         <div className="flex items-center gap-2">
-          {anomalyId && onOpenInsight && (
-            <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
-          )}
+          {anomalyId && onOpenInsight &&
+          <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
+          }
           <AnimatePresence>
-            {hovered && insightId && onOpenInsight && (
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
+            {hovered && insightId && onOpenInsight &&
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
                 <AIInsightButton insightId={insightId} onOpen={onOpenInsight} />
               </motion.div>
-            )}
+            }
           </AnimatePresence>
           {action}
         </div>
       </div>
       <div className="flex-1 flex flex-col">{children}</div>
-    </div>
-  );
+    </div>);
+
 };
 
 
@@ -310,8 +310,8 @@ function HiringHealth({ onOpenInsight }) {
             key={i}
             whileHover={{ x: 4 }}
             onHoverStart={() => setHoveredRole(i)}
-            onHoverEnd={() => setHoveredRole(null)}
-            className={`flex items-center gap-4 px-4 py-3.5 rounded-xl border cursor-pointer transition-all duration-200 ${r.risk === "high" ? "bg-red-50 border-red-100 hover:border-red-300" : "bg-amber-50 border-amber-100 hover:border-amber-300"}`}>
+            onHoverEnd={() => setHoveredRole(null)} className="bg-[hsl(var(--background))] px-4 py-3.5 rounded-xl flex items-center gap-4">
+            
               <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${r.risk === "high" ? "bg-red-500 animate-pulse" : "bg-amber-400"}`} />
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] font-semibold text-gray-900">{r.title}</p>
@@ -832,12 +832,12 @@ export default function Dashboard() {
   }, []);
 
   const presets = [
-    { label: "Last 7 days", days: 7 },
-    { label: "Last 30 days", days: 30 },
-    { label: "Last 90 days", days: 90 },
-    { label: "Last 6 months", days: 180 },
-    { label: "Last year", days: 365 },
-  ];
+  { label: "Last 7 days", days: 7 },
+  { label: "Last 30 days", days: 30 },
+  { label: "Last 90 days", days: 90 },
+  { label: "Last 6 months", days: 180 },
+  { label: "Last year", days: 365 }];
+
 
   const applyPreset = (preset) => {
     const to = new Date();
@@ -848,9 +848,9 @@ export default function Dashboard() {
     setIsDatePickerOpen(false);
   };
 
-  const dateLabel = dateRange.from && dateRange.to && selectedPreset === "Custom"
-    ? `${format(dateRange.from, "MMM d")} – ${format(dateRange.to, "MMM d, yyyy")}`
-    : selectedPreset;
+  const dateLabel = dateRange.from && dateRange.to && selectedPreset === "Custom" ?
+  `${format(dateRange.from, "MMM d")} – ${format(dateRange.to, "MMM d, yyyy")}` :
+  selectedPreset;
   const [chatMessages, setChatMessages] = useState([
   { role: "assistant", content: "Hi! I'm your analytics assistant. Ask me anything about your recruitment data." }]
   );
@@ -894,28 +894,28 @@ export default function Dashboard() {
                 <Calendar className="w-3.5 h-3.5" /> {dateLabel}
               </button>
               <AnimatePresence>
-                {isDatePickerOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 z-50 bg-white rounded-2xl border border-gray-200 shadow-xl flex overflow-hidden">
+                {isDatePickerOpen &&
+                <motion.div
+                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 z-50 bg-white rounded-2xl border border-gray-200 shadow-xl flex overflow-hidden">
                     {/* Presets */}
                     <div className="w-40 border-r border-gray-100 p-2 flex flex-col gap-0.5">
                       <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-2 py-1.5">Presets</p>
-                      {presets.map((p) => (
-                        <button
-                          key={p.label}
-                          onClick={() => applyPreset(p)}
-                          className={`text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors ${selectedPreset === p.label ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50"}`}>
+                      {presets.map((p) =>
+                    <button
+                      key={p.label}
+                      onClick={() => applyPreset(p)}
+                      className={`text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors ${selectedPreset === p.label ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50"}`}>
                           {p.label}
                         </button>
-                      ))}
+                    )}
                       <div className="border-t border-gray-100 mt-1 pt-1">
                         <button
-                          onClick={() => setSelectedPreset("Custom")}
-                          className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors ${selectedPreset === "Custom" ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50"}`}>
+                        onClick={() => setSelectedPreset("Custom")}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors ${selectedPreset === "Custom" ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50"}`}>
                           Custom range
                         </button>
                       </div>
@@ -923,22 +923,22 @@ export default function Dashboard() {
                     {/* Calendar */}
                     <div className="p-3">
                       <CalendarPicker
-                        mode="range"
-                        selected={dateRange}
-                        onSelect={(range) => {
-                          setDateRange(range || { from: undefined, to: undefined });
-                          setSelectedPreset("Custom");
-                        }}
-                        numberOfMonths={2}
-                        className="text-[12px]"
-                      />
+                      mode="range"
+                      selected={dateRange}
+                      onSelect={(range) => {
+                        setDateRange(range || { from: undefined, to: undefined });
+                        setSelectedPreset("Custom");
+                      }}
+                      numberOfMonths={2}
+                      className="text-[12px]" />
+                    
                       <div className="flex justify-end gap-2 mt-2 pt-2 border-t border-gray-100">
                         <button onClick={() => setIsDatePickerOpen(false)} className="px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 rounded-lg">Cancel</button>
                         <button onClick={() => setIsDatePickerOpen(false)} className="px-3 py-1.5 text-[12px] font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Apply</button>
                       </div>
                     </div>
                   </motion.div>
-                )}
+                }
               </AnimatePresence>
             </div>
             <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-[12px] font-medium text-gray-600 hover:bg-gray-50 transition-colors">
@@ -1072,9 +1072,9 @@ export default function Dashboard() {
 
       {/* Global AI Insight Panel */}
       <AnimatePresence>
-        {activeInsight && (
-          <AIInsightPanel insightId={activeInsight} onClose={closeInsight} />
-        )}
+        {activeInsight &&
+        <AIInsightPanel insightId={activeInsight} onClose={closeInsight} />
+        }
       </AnimatePresence>
     </div>);
 
