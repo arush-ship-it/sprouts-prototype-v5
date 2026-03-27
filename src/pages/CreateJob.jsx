@@ -205,7 +205,7 @@ function DefaultScreen({ onStart }) {
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();if (prompt.trim()) onStart(prompt);}
               }}
-              placeholder="Describe the role, requirements, or make changes…" className="bg-white text-[13px] px-3 py-6 rounded-2xl flex w-full border shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px] border-gray-200"
+              placeholder="Describe the role, requirements, or make changes…" className="bg-white text-[13px] px-3 py-12 rounded-2xl flex w-full border shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px] border-gray-200"
               rows={2} />
 
             {/* Upload icon */}
