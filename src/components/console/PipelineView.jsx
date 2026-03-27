@@ -111,8 +111,8 @@ export default function PipelineView() {
 
           {/* Stage Header */}
           <button
-            onClick={() => setExpandedStageId(expandedStageId === stage.id ? null : stage.id)}
-            className="w-full bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-blue-200 flex items-center justify-between hover:bg-gray-50 transition-colors">
+            onClick={() => setExpandedStageId(expandedStageId === stage.id ? null : stage.id)} className="w-full bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-grey-200 flex items-center justify-between hover:bg-gray-50 transition-colors">
+            
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4" />
               <span className="text-[13px] font-bold">{stage.name}</span>
@@ -142,8 +142,8 @@ export default function PipelineView() {
                 </div>
               </div>
               <Link
-                to="/Agents"
-                className="flex items-center justify-between w-full px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 transition-colors text-indigo-600 group">
+              to="/Agents"
+              className="flex items-center justify-between w-full px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 transition-colors text-indigo-600 group">
                 <span className="text-[11px] font-semibold">View Agent Activity</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
