@@ -54,7 +54,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
         </div>
 
         {/* Filter, Search & View Mode */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-8">
           {/* Search Bar */}
           <div
             className="bg-gray-200 px-3 py-2 rounded-lg flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out"
