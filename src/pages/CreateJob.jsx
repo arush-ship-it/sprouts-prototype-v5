@@ -1233,7 +1233,7 @@ function PublishScreen({ onBack, onPublish }) {
         </motion.button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-8 py-6">
+      <div className="bg-[hsl(var(--background))] px-8 py-6 flex-1 overflow-y-auto">
         <div className="grid grid-cols-2 gap-5 max-w-5xl">
 
           {/* Left column */}
@@ -1243,8 +1243,8 @@ function PublishScreen({ onBack, onPublish }) {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5">
+              transition={{ duration: 0.3 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+              
               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <Globe className="w-3.5 h-3.5" /> Visibility
               </p>
@@ -1285,8 +1285,8 @@ function PublishScreen({ onBack, onPublish }) {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.05 }}
-              className="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5">
+              transition={{ duration: 0.3, delay: 0.05 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+              
               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5" /> Duration
               </p>
@@ -1327,10 +1327,10 @@ function PublishScreen({ onBack, onPublish }) {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className={`bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 flex flex-col transition-all duration-300 ${
-            visibility !== "public" ? "opacity-40 pointer-events-none saturate-0" : ""}`
-            }>
+            transition={{ duration: 0.3, delay: 0.1 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] flex flex-col transition-all duration-300">
+
+
+            
             <div className="flex items-center justify-between mb-4">
               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
                 <ExternalLink className="w-3.5 h-3.5" /> Post to Job Boards
