@@ -119,6 +119,48 @@ function QuickActionSlideshow({ onStart, onShowDrafts }) {
 
 }
 
+// ─── Drafts Drop-up ──────────────────────────────────────────────────────────
+function DraftsDropup({ onStart }) {
+  const [open, setOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const handler = (e) => setOpen(false);
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
+
+  return (
+    <div className="relative" onMouseDown={(e) => e.stopPropagation()}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${open ? "text-indigo-600 bg-indigo-50" : "text-gray-400 hover:text-indigo-500 hover:bg-indigo-50"}`}
+        title="Previous drafts">
+        <FileText className="w-3.5 h-3.5" />
+      </button>
+      {open && (
+        <div className="absolute bottom-full left-0 mb-2 w-[240px] bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden">
+          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-4 pt-3 pb-2">Previous Drafts</p>
+          <div className="flex flex-col pb-2">
+            {SAVED_DRAFTS.map((draft) => (
+              <button
+                key={draft.id}
+                onClick={() => { onStart(`Continue editing: ${draft.title}`); setOpen(false); }}
+                className="flex items-start gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left">
+                <FileText className="w-3.5 h-3.5 text-gray-400 mt-0.5 shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-[13px] font-medium text-gray-800 truncate">{draft.title}</p>
+                  <p className="text-[11px] text-gray-400">{draft.role} · {draft.created}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
 const SAVED_DRAFTS = [
 { id: 1, title: "Senior Product Manager", role: "Product", status: "Draft", created: "2 days ago" },
@@ -164,14 +206,26 @@ function DefaultScreen({ onStart }) {
                 if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();if (prompt.trim()) onStart(prompt);}
               }}
               placeholder="Describe the role, requirements, or make changes…" className="bg-white text-[13px] px-3 py-6 rounded-2xl flex w-full border shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px] border-gray-200"
-
               rows={2} />
+
+            {/* Upload icon */}
+            <div className="absolute left-2 bottom-2 flex items-center gap-1">
+              <label className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-indigo-500 hover:bg-indigo-50 cursor-pointer transition-colors" title="Upload job description">
+                <Upload className="w-3.5 h-3.5" />
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx,.txt"
+                  className="hidden"
+                  onChange={(e) => { if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`); }} />
+              </label>
+
+              {/* Drafts drop-up */}
+              <DraftsDropup onStart={onStart} />
+            </div>
 
             <Button
               onClick={() => {if (prompt.trim()) onStart(prompt);}}
               size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-full inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow absolute right-2 bottom-2 h-8 w-8 hover:bg-indigo-700">
-
-
               <Send className="w-3.5 h-3.5" />
             </Button>
           </div>
