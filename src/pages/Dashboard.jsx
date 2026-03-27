@@ -984,6 +984,20 @@ export default function Dashboard() {
           </AnimatePresence>
         </div>
 
+        {/* AI Insight Inline Panel */}
+        <AnimatePresence>
+          {activeInsight && (
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 340, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="shrink-0 overflow-hidden my-2 mr-2">
+              <AIInsightPanel insightId={activeInsight} onClose={closeInsight} inline />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* AI Chat Sidebar */}
         <AnimatePresence>
           {isChatOpen &&
@@ -1070,12 +1084,7 @@ export default function Dashboard() {
         </AnimatePresence>
       </div>
 
-      {/* Global AI Insight Panel */}
-      <AnimatePresence>
-        {activeInsight && (
-          <AIInsightPanel insightId={activeInsight} onClose={closeInsight} />
-        )}
-      </AnimatePresence>
+
     </div>);
 
 }

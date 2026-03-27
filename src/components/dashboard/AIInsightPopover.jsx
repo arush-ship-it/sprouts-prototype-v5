@@ -125,7 +125,7 @@ export function AIInsightButton({ insightId, onOpen, className = "" }) {
 }
 
 // The global popover panel — render once at a top level and pass openInsight / closeInsight down
-export function AIInsightPanel({ insightId, onClose }) {
+export function AIInsightPanel({ insightId, onClose, inline = false }) {
   const [loading, setLoading] = useState(true);
   const ref = useRef(null);
 
@@ -164,7 +164,7 @@ export function AIInsightPanel({ insightId, onClose }) {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: 8 }}
       transition={{ duration: 0.18 }}
-      className="fixed z-[200] bottom-6 right-6 w-[340px] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+      className={`${inline ? "relative w-full h-full" : "fixed z-[200] bottom-6 right-6 w-[340px]"} bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden`}>
       {/* Header */}
       <div className={`px-4 py-3 ${s.bg} border-b ${s.border} flex items-start justify-between gap-3`}>
         <div className="flex items-start gap-2.5">
