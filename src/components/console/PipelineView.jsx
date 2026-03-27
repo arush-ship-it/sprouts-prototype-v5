@@ -142,11 +142,11 @@ export default function PipelineView() {
                 </div>
               </div>
               <Link
-              to="/Agents"
-              className="flex items-center justify-between w-full px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 transition-colors text-indigo-600 group">
-                <span className="text-[11px] font-semibold">View Agent Activity</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
+              to="/Agents" className="bg-blue-50 text-blue-600 px-3 py-2 rounded-lg flex items-center justify-between w-full hover:bg-indigo-100 transition-colors group">View Agent Activity
+
+
+
+            </Link>
             </div>
           }
 
