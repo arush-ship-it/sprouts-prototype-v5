@@ -115,8 +115,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             value={sourcingInput}
             onChange={(e) => setSourcingInput(e.target.value)}
             onKeyDown={(e) => {if (e.key === "Enter" && sourcingInput.trim()) setIsSourcingExpanded(true);}}
-            placeholder="Type a sourcing prompt and press Enter..."
-            className="bg-white text-[12px] pr-10 px-4 py-2.5 rounded-xl w-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-indigo-300 focus:border-indigo-300 placeholder:text-gray-400" />
+            placeholder="Type a sourcing prompt and press Enter..." className="bg-white text-[12px] pr-10 px-4 py-2.5 rounded-[28px] w-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-indigo-300 focus:border-indigo-300 placeholder:text-gray-400" />
+          
 
               <button
             onClick={() => {if (sourcingInput.trim()) setIsSourcingExpanded(true);}}
@@ -172,21 +172,21 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       </div>
                       <div className="relative">
                         <Textarea
-                      value={sourcingInput}
-                      onChange={(e) => setSourcingInput(e.target.value)}
-                      onKeyDown={(e) => {
-                      if (e.key === "Enter" && e.ctrlKey && sourcingInput.trim()) {
+                  value={sourcingInput}
+                  onChange={(e) => setSourcingInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && e.ctrlKey && sourcingInput.trim()) {
                       handleSendSourcingPrompt();
-                      }
-                      }}
-                      placeholder="Type your message..."
-                      className="bg-white text-[12px] my-1 px-3 py-2 rounded-2xl min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resize-none"
-                      rows={2} />
+                    }
+                  }}
+                  placeholder="Type your message..."
+                  className="bg-white text-[12px] my-1 px-3 py-2 rounded-2xl min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resize-none"
+                  rows={2} />
 
-                        <Button 
-                          size="icon" 
-                          className="bg-blue-600 hover:bg-blue-700 rounded-full absolute right-2 bottom-2 h-8 w-8"
-                          onClick={handleSendSourcingPrompt}>
+                        <Button
+                  size="icon"
+                  className="bg-blue-600 hover:bg-blue-700 rounded-full absolute right-2 bottom-2 h-8 w-8"
+                  onClick={handleSendSourcingPrompt}>
                           <Send className="w-3.5 h-3.5" />
                         </Button>
                       </div>
@@ -263,19 +263,19 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 </div>
           }
             </div>
-            }
+        }
             </div>
-            }
+      }
 
             {/* Sourced Candidates Section */}
-            {sourcedCandidates.length > 0 && (
-             <div className="bg-white my-5 pt-5 pr-5 pb-5 pl-5 rounded-[20px] border border-gray-200">
+            {sourcedCandidates.length > 0 &&
+      <div className="bg-white my-5 pt-5 pr-5 pb-5 pl-5 rounded-[20px] border border-gray-200">
                <div className="flex items-center justify-between mb-4">
                  <h2 className="text-[16px] font-semibold text-gray-900">Sourced Candidates</h2>
-                 <Button 
-                   variant="outline"
-                   size="sm"
-                   className="text-[12px]">
+                 <Button
+            variant="outline"
+            size="sm"
+            className="text-[12px]">
                    + Apply All Prospects
                  </Button>
                </div>
@@ -290,18 +290,18 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
                {/* Candidate cards */}
                <div className="space-y-4">
-                 {sourcedCandidates.map((candidate) => (
-                   <div key={candidate.id} className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-all">
+                 {sourcedCandidates.map((candidate) =>
+          <div key={candidate.id} className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-all">
                      <div className="flex items-start gap-3 mb-3">
                        <input
-                         type="checkbox"
-                         checked={selectedSourced.has(candidate.id)}
-                         onChange={() => toggleSourcedCandidate(candidate.id)}
-                         className="w-4 h-4 mt-1 accent-indigo-600 cursor-pointer" />
+                type="checkbox"
+                checked={selectedSourced.has(candidate.id)}
+                onChange={() => toggleSourcedCandidate(candidate.id)}
+                className="w-4 h-4 mt-1 accent-indigo-600 cursor-pointer" />
                        <img
-                         src={candidate.avatar}
-                         alt={candidate.name}
-                         className="w-12 h-12 rounded-full object-cover" />
+                src={candidate.avatar}
+                alt={candidate.name}
+                className="w-12 h-12 rounded-full object-cover" />
                        <div className="flex-1">
                          <div className="flex items-center gap-2">
                            <h3 className="text-[14px] font-semibold text-gray-900">{candidate.name}</h3>
@@ -327,36 +327,36 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                      {/* Add as prospect button */}
                      <div className="ml-7 flex justify-end">
                        <button
-                         onClick={() => toggleSourcedCandidate(candidate.id)}
-                         className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${
-                           selectedSourced.has(candidate.id)
-                             ? "bg-indigo-50 border border-indigo-300 text-indigo-700"
-                             : "border border-gray-300 text-gray-700 hover:border-indigo-300"
-                         }`}>
+                onClick={() => toggleSourcedCandidate(candidate.id)}
+                className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${
+                selectedSourced.has(candidate.id) ?
+                "bg-indigo-50 border border-indigo-300 text-indigo-700" :
+                "border border-gray-300 text-gray-700 hover:border-indigo-300"}`
+                }>
                          {selectedSourced.has(candidate.id) ? "✓ Selected" : "Add As Prospect"}
                        </button>
                      </div>
                    </div>
-                 ))}
+          )}
                </div>
 
                {/* Action buttons */}
-               {selectedSourced.size > 0 && (
-                 <div className="mt-4 flex justify-end gap-3">
+               {selectedSourced.size > 0 &&
+        <div className="mt-4 flex justify-end gap-3">
                    <Button
-                     variant="outline"
-                     onClick={() => setSelectedSourced(new Set())}
-                     className="text-[12px]">
+            variant="outline"
+            onClick={() => setSelectedSourced(new Set())}
+            className="text-[12px]">
                      Clear Selection
                    </Button>
                    <Button
-                     className="bg-indigo-600 hover:bg-indigo-700 text-white text-[12px]">
+            className="bg-indigo-600 hover:bg-indigo-700 text-white text-[12px]">
                      Add {selectedSourced.size} to Prospects
                    </Button>
                  </div>
-               )}
+        }
              </div>
-            )}
+      }
 
             {/* Card/List/Table View */}
       {viewMode === "card" &&
