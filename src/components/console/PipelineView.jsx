@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Users, ChevronDown } from "lucide-react";
+import { Users, ChevronDown, Bot, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const stages = [
 {
@@ -126,16 +127,26 @@ export default function PipelineView() {
 
             {/* Agents Section - Expanded */}
             {expandedStageId === stage.id &&
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 space-y-2">
-              <h4 className="text-gray-700 text-xs font-medium capitalize tracking-wider">Intelligence Layer</h4>
-              <div className="space-y-2">
-                {stage.agents.map((agent, idx) =>
-              <div key={idx} className="flex items-center gap-2 p-2 bg-white rounded-md border border-gray-200">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                  <span className="text-[12px] text-gray-700">{agent}</span>
+          <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2.5">
+              <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Agentic Layer</h4>
+              <div className="flex items-center gap-2.5 p-2.5 bg-gray-50 rounded-lg">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+                  <Bot className="w-4 h-4 text-blue-500" />
                 </div>
-              )}
+                <div className="flex-1 min-w-0">
+                  <p className="text-[12px] font-semibold text-gray-800 truncate">{stage.agents[0]}</p>
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span className="text-[10px] text-emerald-600 font-medium">Active</span>
+                  </div>
+                </div>
               </div>
+              <Link
+                to="/Agents"
+                className="flex items-center justify-between w-full px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 transition-colors text-indigo-600 group">
+                <span className="text-[11px] font-semibold">View Agent Activity</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </div>
           }
 
