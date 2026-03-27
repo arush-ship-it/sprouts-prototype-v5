@@ -66,7 +66,7 @@ export default function HiringTeam() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl border border-gray-200">
+    <div className="bg-white p-6 rounded-2xl">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-[16px] font-semibold text-gray-900">Hiring Team</h3>
         <div className="flex gap-2">
