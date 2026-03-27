@@ -537,11 +537,11 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
 
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-gray-900 text-sm font-medium">About the Role</h3>
+            <h3 className="text-[15px] font-bold text-gray-900">About the Role</h3>
             <button
               onClick={() => handleEnhanceSection("description")}
-              disabled={enhancingSection === "description"} className="text-blue-600 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
-              
+              disabled={enhancingSection === "description"}
+              className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
               <Sparkles className="w-3 h-3" /> {enhancingSection === "description" ? "Enhancing…" : "Enhance"}
             </button>
           </div>
@@ -554,13 +554,13 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
 
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-gray-900 text-sm font-medium">Requirements</h3>
+            <h3 className="text-[15px] font-bold text-gray-900">Requirements</h3>
             <div className="flex items-center gap-3">
               <div className="relative">
                 <button
                   onClick={() => setReqDropdownOpen((v) => !v)}
-                  disabled={enhancingSection === "requirements"} className="text-blue-600 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
-                  
+                  disabled={enhancingSection === "requirements"}
+                  className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
                   <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"} <ChevronDown className="w-3 h-3" />
                 </button>
                 {reqDropdownOpen &&
@@ -580,8 +580,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                   </div>
                 }
               </div>
-              <button onClick={addReq} className="text-blue-600 text-xs font-medium hover:text-indigo-700 flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
-              <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-red-600 text-xs font-medium hover:text-red-600 flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
+              <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
+              <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
             </div>
           </div>
           <ul className="mb-5 space-y-1" onMouseUp={() => handleTextSelect("requirements")}>
@@ -591,16 +591,16 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           </ul>
 
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-gray-900 text-sm font-medium">Responsibilities</h3>
+            <h3 className="text-[15px] font-bold text-gray-900">Responsibilities</h3>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => handleEnhanceSection("responsibilities")}
-                disabled={enhancingSection === "responsibilities"} className="text-blue-600 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
-                
+                disabled={enhancingSection === "responsibilities"}
+                className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
                 <Sparkles className="w-3 h-3" /> {enhancingSection === "responsibilities" ? "Enhancing…" : "Enhance"}
               </button>
-              <button onClick={addResp} className="text-blue-600 text-xs font-medium hover:text-indigo-700 flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
-              <button onClick={() => setJd((prev) => ({ ...prev, responsibilities: [] }))} className="text-red-600 text-xs font-medium hover:text-red-600 flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
+              <button onClick={addResp} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
+              <button onClick={() => setJd((prev) => ({ ...prev, responsibilities: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
             </div>
           </div>
           <ul className="space-y-1" onMouseUp={() => handleTextSelect("responsibilities")}>
@@ -1211,14 +1211,14 @@ function PublishScreen({ onBack, onPublish }) {
       {/* Header */}
       <div className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
-          
-
-
-
-
-
-          
-          
+          <motion.button
+            whileHover={{ x: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-[13px] text-gray-400 hover:text-gray-700 transition-colors font-medium">
+            <ChevronDown className="w-4 h-4 rotate-90" /> Back
+          </motion.button>
+          <div className="w-px h-5 bg-gray-200" />
           <div>
             <h2 className="text-[15px] font-semibold text-gray-900">Ready to Publish</h2>
             <p className="text-[12px] text-gray-400 mt-0.5">Configure your posting settings and go live</p>
@@ -1393,17 +1393,17 @@ function PublishScreen({ onBack, onPublish }) {
           className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
           <ChevronDown className="w-4 h-4 rotate-90" /> Back
         </motion.button>
-        
-
-
-
-        
+        <p className="text-[12px] text-gray-400">
+          {selectedBoards.length > 0 ?
+          `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}` :
+          "No job boards selected"}
+        </p>
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
           onClick={handlePublish}
-          disabled={publishing} className="bg-blue-600 text-[#ffffff] px-8 text-xs font-semibold rounded-xl flex items-center gap-2 from-blue-600 to-indigo-600 h-10 shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70">
-          
+          disabled={publishing}
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
           {publishing ?
           <>
               <motion.div

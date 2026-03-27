@@ -122,7 +122,7 @@ export default function SidebarNav({ activePage = "Console" }) {
                 </span>
             }
               {link.activeAgents != null &&
-            <span className="text-[10px] text-blue-600 font-semibold bg-blue-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+            <span className="text-[10px] text-indigo-600 font-semibold bg-indigo-50 px-1.5 py-0.5 rounded-full whitespace-nowrap">
                   {link.activeAgents}/{link.totalAgents} active
                 </span>
             }
