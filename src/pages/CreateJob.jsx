@@ -1209,7 +1209,7 @@ function PublishScreen({ onBack, onPublish }) {
   return (
     <div className="flex flex-col h-full bg-[#F7F8FA]">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
+      <div className="bg-white px-8 py-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
           <motion.button
             whileHover={{ x: -2 }}
@@ -1391,19 +1391,19 @@ function PublishScreen({ onBack, onPublish }) {
           whileTap={{ scale: 0.95 }}
           onClick={onBack}
           className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
-          <ChevronDown className="w-4 h-4 rotate-90" /> Back
+           Back
         </motion.button>
-        <p className="text-[12px] text-gray-400">
-          {selectedBoards.length > 0 ?
-          `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}` :
-          "No job boards selected"}
-        </p>
+        
+
+
+
+        
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
           onClick={handlePublish}
-          disabled={publishing}
-          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
+          disabled={publishing} className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
+          
           {publishing ?
           <>
               <motion.div
