@@ -1393,17 +1393,17 @@ function PublishScreen({ onBack, onPublish }) {
           className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
           <ChevronDown className="w-4 h-4 rotate-90" /> Back
         </motion.button>
-        <p className="text-[12px] text-gray-400">
-          {selectedBoards.length > 0 ?
-          `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}` :
-          "No job boards selected"}
-        </p>
+        
+
+
+
+        
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
           onClick={handlePublish}
-          disabled={publishing}
-          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
+          disabled={publishing} className="bg-blue-600 text-[#ffffff] px-8 text-xs font-semibold rounded-xl flex items-center gap-2 from-blue-600 to-indigo-600 h-10 shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70">
+          
           {publishing ?
           <>
               <motion.div
