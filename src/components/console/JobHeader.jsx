@@ -44,9 +44,9 @@ export default function JobHeader({ onActivityApprovalClick }) {
               2
             </Badge>
           </Button>
-          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-400">
-            <MoreHorizontal className="w-5 h-5" />
-          </button>
+          
+
+          
         </div>
       </div>
     </div>);
