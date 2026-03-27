@@ -1386,6 +1386,13 @@ function PublishScreen({ onBack, onPublish }) {
 
       {/* Bottom CTA */}
       <div className="bg-white border-t border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
+        <motion.button
+          whileHover={{ x: -2 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={onBack}
+          className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+          <ChevronDown className="w-4 h-4 rotate-90" /> Back
+        </motion.button>
         <p className="text-[12px] text-gray-400">
           {selectedBoards.length > 0 ?
           `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}` :
