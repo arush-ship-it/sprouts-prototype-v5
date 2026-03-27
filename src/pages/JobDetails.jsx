@@ -270,7 +270,7 @@ export default function JobDetails() {
         </div>
 
         {/* Posted On Section */}
-        <div className="bg-white mb-6 px-4 py-4 rounded-xl border border-gray-200">
+        <div className="bg-white mb-6 px-4 py-4 rounded-2xl">
           <h3 className="text-[16px] font-semibold text-gray-900 mb-4">Posted On</h3>
           <div className="flex flex-col gap-3">
             {[
@@ -315,7 +315,7 @@ export default function JobDetails() {
         </div>
 
         {/* Job Details */}
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
+        <div className="bg-white mb-6 p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-[16px] font-semibold text-gray-900">
               Job Description
@@ -349,7 +349,7 @@ export default function JobDetails() {
         </div>
 
         {/* Ideal Persona Section */}
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
+        <div className="bg-white mb-6 p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Target className="w-5 h-5 text-indigo-600" />
@@ -415,7 +415,7 @@ export default function JobDetails() {
 
         {/* Activity Log (Collapsible) */}
         <Collapsible open={isActivityOpen} onOpenChange={setIsActivityOpen}>
-          <div className="p-4 rounded-xl bg-white border border-gray-200">
+          <div className="bg-white p-4 rounded-2xl">
             <CollapsibleTrigger className="flex items-center justify-between w-full group">
               <div className="flex items-center gap-2">
                 <Activity className="w-4 h-4 text-gray-400" />
