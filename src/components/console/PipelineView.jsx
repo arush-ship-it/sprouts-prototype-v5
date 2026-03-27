@@ -110,8 +110,8 @@ export default function PipelineView() {
 
           {/* Stage Header */}
           <button
-            onClick={() => setExpandedStageId(expandedStageId === stage.id ? null : stage.id)}
-            className="w-full bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl border-2 border-blue-200 flex items-center justify-between hover:bg-gray-50 transition-colors">
+            onClick={() => setExpandedStageId(expandedStageId === stage.id ? null : stage.id)} className="w-full bg-[#ffffff] text-slate-600 px-4 py-2.5 rounded-xl flex items-center justify-between hover:bg-gray-50 transition-colors">
+            
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4" />
               <span className="text-[13px] font-bold">{stage.name}</span>
