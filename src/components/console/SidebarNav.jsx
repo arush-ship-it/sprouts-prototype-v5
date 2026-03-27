@@ -84,17 +84,17 @@ export default function SidebarNav({ activePage = "Console" }) {
           </Select>
         </div>
 
-        <nav className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-3.5">
           {mainLinks.map((link) =>
           <Link
             key={link.label}
-            to={createPageUrl(link.page)}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group
-                ${
-            activePage === link.page ?
-            "bg-gray-200/70 text-gray-900" :
-            "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`
-            }>
+            to={createPageUrl(link.page)} className="flex items-center gap- px-3 py-2.5 rounded-lg text-[13.5px] font-medium transition-all duration-200 group\n                text-gray-600 hover:text-gray-900 hover:bg-gray-100">
+
+
+
+
+
+            
 
               <div className="relative">
                 <link.icon
