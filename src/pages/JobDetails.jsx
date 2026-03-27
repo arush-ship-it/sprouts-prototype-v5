@@ -243,7 +243,7 @@ export default function JobDetails() {
           </div>
 
           {/* Application Trend */}
-          <div className="p-6 rounded-2xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.05)] border border-gray-100">
+          <div className="p-6 rounded-2xl bg-white">
             <div className="flex items-center justify-between mb-1">
               <h3 className="text-[14px] font-semibold text-gray-900">Application Trend</h3>
               <span className="text-[11px] text-emerald-500 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full">+{applicationTrend[applicationTrend.length - 1].count - applicationTrend[0].count} this week</span>
