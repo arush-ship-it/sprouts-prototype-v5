@@ -1256,12 +1256,12 @@ function PublishScreen({ onBack, onPublish }) {
                       key={value}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.97 }}
-                      onClick={() => setVisibility(value)}
-                      className={`flex flex-col items-start gap-1.5 px-3.5 py-3 rounded-xl border text-left transition-all duration-200 ${
-                      active ?
-                      "border-indigo-300 bg-gradient-to-br from-indigo-50 to-indigo-50/60 shadow-[0_0_0_1px_rgba(99,102,241,0.2)]" :
-                      "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"}`
-                      }>
+                      onClick={() => setVisibility(value)} className="bg-[hsl(var(--background))] px-3.5 py-3 text-left rounded-xl flex flex-col items-start gap-1.5 border transition-all duration-200 border-gray-100 hover:bg-white hover:border-gray-200 hover:shadow-sm">
+
+
+
+
+                      
                       <div className="flex items-center gap-2">
                         <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${active ? "bg-indigo-100" : "bg-gray-100"}`}>
                           <Icon className={`w-3 h-3 ${active ? "text-indigo-600" : "text-gray-400"}`} />
@@ -1353,12 +1353,12 @@ function PublishScreen({ onBack, onPublish }) {
                     whileTap={{ scale: 0.96 }}
                     onHoverStart={() => setHoveredBoard(id)}
                     onHoverEnd={() => setHoveredBoard(null)}
-                    onClick={() => toggleBoard(id)}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all duration-200 ${
-                    selected ?
-                    "border-indigo-300 bg-indigo-50 shadow-[0_0_0_1px_rgba(99,102,241,0.15)]" :
-                    "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"}`
-                    }>
+                    onClick={() => toggleBoard(id)} className="bg-[hsl(var(--background))] px-3 py-2.5 text-left rounded-xl flex items-center gap-2.5 border transition-all duration-200 border-gray-100 hover:bg-white hover:border-gray-200 hover:shadow-sm">
+
+
+
+
+                    
                     
                     <div className="min-w-0 flex-1">
                       <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-700"}`}>{name}</p>
