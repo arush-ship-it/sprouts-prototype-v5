@@ -572,7 +572,7 @@ export default function Agents() {
 
         {/* Pill Tabs + Controls */}
         <div className="flex items-center justify-between mb-5">
-          <div className="bg-slate-200 p-1 rounded-[10003px] flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
+          <div className="bg-gray-200 p-1 rounded-[10003px] flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
             {[
             { key: "activity", label: "Activity" },
             { key: "agents", label: "Agents" }].
@@ -647,10 +647,10 @@ export default function Agents() {
               </div>
 
               {/* View Toggle */}
-              <div className="bg-slate-200 p-1 rounded-xl flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
+              <div className="bg-gray-200 p-1 rounded-[32px] flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
                 <button
-                onClick={() => setViewMode("list")}
-                className={`flex items-center justify-center p-1.5 rounded-lg transition-all duration-200 ${viewMode === "list" ? "bg-white text-gray-800 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-400 hover:text-gray-600"}`}>
+                onClick={() => setViewMode("list")} className="bg-white text-gray-800 p-1.5 rounded-[32px] flex items-center justify-center transition-all duration-200 shadow-[0_1px_4px_rgba(0,0,0,0.12)]">
+                
                   <List className="w-3.5 h-3.5" />
                 </button>
                 <button
