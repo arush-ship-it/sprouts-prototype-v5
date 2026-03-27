@@ -1191,20 +1191,20 @@ function PublishScreen({ onBack, onPublish }) {
   const [publishing, setPublishing] = useState(false);
 
   const toggleBoard = (id) => setSelectedBoards((prev) =>
-    prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
+  prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
   );
 
   const handlePublish = () => {
     setPublishing(true);
-    setTimeout(() => { setPublishing(false); onPublish(); }, 1200);
+    setTimeout(() => {setPublishing(false);onPublish();}, 1200);
   };
 
   const visibilityOptions = [
-    { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards", color: "emerald" },
-    { value: "private", label: "Private", Icon: Lock, desc: "Direct link only", color: "amber" },
-    { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden", color: "violet" },
-    { value: "internal", label: "Internal", Icon: Users, desc: "Employees only", color: "blue" },
-  ];
+  { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards", color: "emerald" },
+  { value: "private", label: "Private", Icon: Lock, desc: "Direct link only", color: "amber" },
+  { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden", color: "violet" },
+  { value: "internal", label: "Internal", Icon: Users, desc: "Employees only", color: "blue" }];
+
 
   return (
     <div className="flex flex-col h-full bg-[#F7F8FA]">
@@ -1258,25 +1258,25 @@ function PublishScreen({ onBack, onPublish }) {
                       whileTap={{ scale: 0.97 }}
                       onClick={() => setVisibility(value)}
                       className={`flex flex-col items-start gap-1.5 px-3.5 py-3 rounded-xl border text-left transition-all duration-200 ${
-                        active
-                          ? "border-indigo-300 bg-gradient-to-br from-indigo-50 to-indigo-50/60 shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
-                          : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"
-                      }`}>
+                      active ?
+                      "border-indigo-300 bg-gradient-to-br from-indigo-50 to-indigo-50/60 shadow-[0_0_0_1px_rgba(99,102,241,0.2)]" :
+                      "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"}`
+                      }>
                       <div className="flex items-center gap-2">
                         <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${active ? "bg-indigo-100" : "bg-gray-100"}`}>
                           <Icon className={`w-3 h-3 ${active ? "text-indigo-600" : "text-gray-400"}`} />
                         </div>
                         <p className={`text-[12px] font-semibold ${active ? "text-indigo-700" : "text-gray-700"}`}>{label}</p>
-                        {active && (
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                        )}
+                        {active &&
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                        }
                       </div>
                       <p className="text-[10px] text-gray-400 leading-tight pl-8">{desc}</p>
-                    </motion.button>
-                  );
+                    </motion.button>);
+
                 })}
               </div>
             </motion.div>
@@ -1292,15 +1292,15 @@ function PublishScreen({ onBack, onPublish }) {
               </p>
               <div className="flex flex-col gap-2">
                 {[
-                  { key: "evergreen", checked: evergreen, onChange: setEvergreen, label: "Evergreen Position", desc: "Keep this job open indefinitely", icon: "∞" },
-                  { key: "expiration", checked: setExpiration, onChange: setSetExpiration, label: "Set Expiration Date", desc: "Automatically close after a date", icon: "⏱" },
-                ].map(({ key, checked, onChange, label, desc, icon }) => (
-                  <motion.label
-                    key={key}
-                    whileHover={{ scale: 1.01 }}
-                    className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border cursor-pointer transition-all duration-200 ${
-                      checked ? "border-indigo-200 bg-indigo-50/70" : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200"
-                    }`}>
+                { key: "evergreen", checked: evergreen, onChange: setEvergreen, label: "Evergreen Position", desc: "Keep this job open indefinitely", icon: "∞" },
+                { key: "expiration", checked: setExpiration, onChange: setSetExpiration, label: "Set Expiration Date", desc: "Automatically close after a date", icon: "⏱" }].
+                map(({ key, checked, onChange, label, desc, icon }) =>
+                <motion.label
+                  key={key}
+                  whileHover={{ scale: 1.01 }}
+                  className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border cursor-pointer transition-all duration-200 ${
+                  checked ? "border-indigo-200 bg-indigo-50/70" : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200"}`
+                  }>
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0 transition-colors ${checked ? "bg-indigo-100" : "bg-gray-100"}`}>
                       {icon}
                     </div>
@@ -1310,15 +1310,15 @@ function PublishScreen({ onBack, onPublish }) {
                     </div>
                     {/* Custom toggle */}
                     <div
-                      onClick={() => onChange(!checked)}
-                      className={`w-9 h-5 rounded-full relative transition-colors duration-200 shrink-0 ${checked ? "bg-indigo-500" : "bg-gray-200"}`}>
+                    onClick={() => onChange(!checked)}
+                    className={`w-9 h-5 rounded-full relative transition-colors duration-200 shrink-0 ${checked ? "bg-indigo-500" : "bg-gray-200"}`}>
                       <motion.div
-                        animate={{ x: checked ? 16 : 2 }}
-                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                        className="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm" />
+                      animate={{ x: checked ? 16 : 2 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      className="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm" />
                     </div>
                   </motion.label>
-                ))}
+                )}
               </div>
             </motion.div>
           </div>
@@ -1329,8 +1329,8 @@ function PublishScreen({ onBack, onPublish }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
             className={`bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 flex flex-col transition-all duration-300 ${
-              visibility !== "public" ? "opacity-40 pointer-events-none saturate-0" : ""
-            }`}>
+            visibility !== "public" ? "opacity-40 pointer-events-none saturate-0" : ""}`
+            }>
             <div className="flex items-center justify-between mb-4">
               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
                 <ExternalLink className="w-3.5 h-3.5" /> Post to Job Boards
@@ -1355,11 +1355,11 @@ function PublishScreen({ onBack, onPublish }) {
                     onHoverEnd={() => setHoveredBoard(null)}
                     onClick={() => toggleBoard(id)}
                     className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all duration-200 ${
-                      selected
-                        ? "border-indigo-300 bg-indigo-50 shadow-[0_0_0_1px_rgba(99,102,241,0.15)]"
-                        : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"
-                    }`}>
-                    <span className="text-base shrink-0">{logo}</span>
+                    selected ?
+                    "border-indigo-300 bg-indigo-50 shadow-[0_0_0_1px_rgba(99,102,241,0.15)]" :
+                    "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"}`
+                    }>
+                    
                     <div className="min-w-0 flex-1">
                       <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-700"}`}>{name}</p>
                       <p className="text-[10px] text-gray-400 truncate mt-0.5">{desc}</p>
@@ -1369,14 +1369,14 @@ function PublishScreen({ onBack, onPublish }) {
                       className="w-4 h-4 rounded-full bg-indigo-500 shrink-0 flex items-center justify-center">
                       <div className="w-1.5 h-1.5 rounded-full bg-white" />
                     </motion.div>
-                  </motion.button>
-                );
+                  </motion.button>);
+
               })}
             </div>
 
             {/* Select all / none */}
             <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
-              <button onClick={() => setSelectedBoards(JOB_BOARDS.map(b => b.id))} className="text-[11px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">Select all</button>
+              <button onClick={() => setSelectedBoards(JOB_BOARDS.map((b) => b.id))} className="text-[11px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">Select all</button>
               <span className="text-gray-200">·</span>
               <button onClick={() => setSelectedBoards([])} className="text-[11px] font-medium text-gray-400 hover:text-gray-600 transition-colors">Clear</button>
             </div>
@@ -1387,9 +1387,9 @@ function PublishScreen({ onBack, onPublish }) {
       {/* Bottom CTA */}
       <div className="bg-white border-t border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
         <p className="text-[12px] text-gray-400">
-          {selectedBoards.length > 0
-            ? `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`
-            : "No job boards selected"}
+          {selectedBoards.length > 0 ?
+          `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}` :
+          "No job boards selected"}
         </p>
         <motion.button
           whileHover={{ scale: 1.02 }}
@@ -1397,24 +1397,24 @@ function PublishScreen({ onBack, onPublish }) {
           onClick={handlePublish}
           disabled={publishing}
           className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
-          {publishing ? (
-            <>
+          {publishing ?
+          <>
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+              className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
               Publishing…
-            </>
-          ) : (
-            <>
+            </> :
+
+          <>
               <CheckCircle2 className="w-4 h-4" />
               Post Job {selectedBoards.length > 0 && `· ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`}
             </>
-          )}
+          }
         </motion.button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 5: Confirmation ─────────────────────────────────────────────────────
