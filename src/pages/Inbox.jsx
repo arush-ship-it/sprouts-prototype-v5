@@ -147,10 +147,10 @@ function ActivityItem({ activity }) {
   };
 
   return (
-    <div
-      className="bg-white px-4 py-4 rounded-xl flex items-center gap-3 border border-gray-200 hover:shadow-sm transition-all cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+    <div className="bg-white px-4 py-4 rounded-xl flex items-center gap-3transition-all cursor-pointer"
+
+    onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}>
 
       <div className="p-2 rounded-lg bg-gray-50">{getIcon()}</div>
       <div className="flex-1 min-w-0 flex items-center gap-4">
