@@ -129,7 +129,7 @@ export default function PipelineView() {
             {expandedStageId === stage.id &&
           <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2.5">
               <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Agentic Layer</h4>
-              <div className="flex items-center gap-2.5 p-2.5 bg-gray-50 rounded-lg">
+              <div className="bg-[hsl(var(--background))] p-2.5 rounded-lg flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
                   <Bot className="w-4 h-4 text-blue-500" />
                 </div>
