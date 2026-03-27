@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, Sparkles, CheckCircle2, ArrowRight, SkipForward, Plus, X, Building2, Pencil, TrendingUp, ChevronUp, ChevronDown, ExternalLink, Globe, Lock, Link as LinkIcon, Users, Upload, FileText, Calendar } from "lucide-react";
+import { Send, Sparkles, CheckCircle2, ArrowRight, SkipForward, Plus, X, Building2, Pencil, TrendingUp, ChevronUp, ChevronDown, ExternalLink, Globe, Lock, Link as LinkIcon, Users, Upload, FileText, Calendar, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -677,6 +677,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 function ConfirmDetailsScreen({ onBack, onNext }) {
   const [salaryExpanded, setSalaryExpanded] = useState(false);
   const [rolesExpanded, setRolesExpanded] = useState(false);
+  const [showSalary, setShowSalary] = useState(true);
   const [jobDetails, setJobDetails] = useState({
     companyName: "Sprouts AI", jobTitle: "Senior Product Designer", department: "Product",
     internalJobTitle: "SPD-2024", jobType: "Full-time", workplaceType: "Hybrid",
@@ -831,7 +832,16 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="space-y-1.5">
-              <Label className="text-[12px] font-medium text-gray-600">Salary Range</Label>
+              <div className="flex items-center justify-between">
+                <Label className="text-[12px] font-medium text-gray-600">Salary Range</Label>
+                <button
+                  onClick={() => setShowSalary((v) => !v)}
+                  className={`flex items-center gap-1 text-[11px] font-medium transition-colors ${showSalary ? "text-indigo-500 hover:text-indigo-700" : "text-gray-400 hover:text-gray-600"}`}
+                  title={showSalary ? "Hide salary from candidates" : "Show salary to candidates"}>
+                  {showSalary ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                  <span>{showSalary ? "Visible to candidates" : "Hidden from candidates"}</span>
+                </button>
+              </div>
               <Input value={jobDetails.salary} onChange={(e) => setJobDetails({ ...jobDetails, salary: e.target.value })} placeholder="e.g. $120k – $180k" className="bg-[#ffffff] text-[13px] px-3 py-1 rounded-[10px] flex w-full border border-input shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-9" />
             </div>
             <div className="space-y-1.5">
