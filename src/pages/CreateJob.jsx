@@ -1436,10 +1436,10 @@ function ConfirmationScreen({ jobTitle, generatedJob, onGoToJobs }) {
         <span className="font-medium text-gray-700">{jobTitle}</span> has been published successfully. Candidates can now apply.
       </p>
       <div className="flex gap-3">
-        <Button variant="outline" size="sm" onClick={() => window.location.href = createPageUrl("Home")}>
+        <Button variant="outline" size="sm" onClick={() => window.location.href = createPageUrl("Home")} className="bg-background px-3 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input shadow-sm hover:bg-accent hover:text-accent-foreground h-8">
           <Building2 className="w-3.5 h-3.5 mr-1.5" /> View All Jobs
         </Button>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5" onClick={() => window.location.href = createPageUrl(`ViewJobSetupPipeline?jobId=${generatedJob.id || 'new'}&jobTitle=${encodeURIComponent(jobTitle)}`)}>View Job & Setup Pipeline</Button>
+        <Button className="bg-blue-600 text-[hsl(var(--background))] px-4 py-2 text-xs font-medium rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8\n hover:bg-indigo-700" onClick={() => window.location.href = createPageUrl(`ViewJobSetupPipeline?jobId=${generatedJob.id || 'new'}&jobTitle=${encodeURIComponent(jobTitle)}`)}>View Job & Setup Pipeline</Button>
       </div>
     </div>);
 
