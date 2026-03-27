@@ -173,6 +173,7 @@ const SAVED_DRAFTS = [
 function DefaultScreen({ onStart }) {
   const [prompt, setPrompt] = useState("");
   const [showDrafts, setShowDrafts] = useState(false);
+  const [attachedFile, setAttachedFile] = useState(null);
 
   const handleSuggestion = (title) => {
     onStart(`Create a job posting for a ${title}`);
@@ -199,12 +200,24 @@ function DefaultScreen({ onStart }) {
            <QuickActionSlideshow onStart={onStart} onShowDrafts={setShowDrafts} />
         </div>
         <div className="p-3 border-t border-gray-100 shrink-0">
+          {/* File attachment chip */}
+          {attachedFile &&
+          <div className="flex items-center gap-2 mb-2 px-1">
+              <div className="flex items-center gap-1.5 bg-indigo-50 border border-indigo-200 text-indigo-700 text-[11px] font-medium px-2.5 py-1 rounded-full">
+                <FileText className="w-3 h-3 shrink-0" />
+                <span className="truncate max-w-[160px]">{attachedFile.name}</span>
+                <button onClick={() => setAttachedFile(null)} className="ml-0.5 text-indigo-400 hover:text-indigo-700">
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            </div>
+          }
           <div className="relative">
             <Textarea
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();if (prompt.trim()) onStart(prompt);}
+                if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();if (prompt.trim() || attachedFile) onStart(attachedFile ? `Upload: ${attachedFile.name}` : prompt);}
               }}
               placeholder="Describe the role, requirements, or make changes…" className="bg-white text-[13px] px-3 py-12 rounded-2xl flex w-full border shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px] border-gray-200"
               rows={2} />
@@ -217,18 +230,29 @@ function DefaultScreen({ onStart }) {
                   type="file"
                   accept=".pdf,.doc,.docx,.txt"
                   className="hidden"
-                  onChange={(e) => {if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`);}} />
+                  onChange={(e) => {if (e.target.files?.[0]) setAttachedFile(e.target.files[0]);}} />
               </label>
 
               {/* Drafts drop-up */}
               <DraftsDropup onStart={onStart} />
             </div>
 
-            <Button
-              onClick={() => {if (prompt.trim()) onStart(prompt);}}
-              size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-full inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow absolute right-2 bottom-2 h-8 w-8 hover:bg-indigo-700">
-              <Send className="w-3.5 h-3.5" />
-            </Button>
+            <div className="absolute right-2 bottom-2 flex items-center gap-1">
+              {/* Parse button — only shown when file is attached */}
+              {attachedFile &&
+              <Button
+                onClick={() => onStart(`Upload: ${attachedFile.name}`)}
+                size="sm"
+                className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 rounded-full h-8 px-3 text-[11px] font-semibold gap-1">
+                <Sparkles className="w-3 h-3" /> Parse
+              </Button>
+              }
+              <Button
+                onClick={() => {if (prompt.trim() || attachedFile) onStart(attachedFile ? `Upload: ${attachedFile.name}` : prompt);}}
+                size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-full inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 hover:bg-indigo-700">
+                <Send className="w-3.5 h-3.5" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
