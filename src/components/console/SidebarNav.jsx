@@ -64,7 +64,7 @@ export default function SidebarNav({ activePage = "Console" }) {
         {/* Job Selector */}
         <div className="mb-6">
           <Select value={selectedJob} onValueChange={setSelectedJob}>
-            <SelectTrigger className="bg-white text-[12px] px-3 py-2 rounded-[10px] flex items-center justify-between whitespace-nowrap border shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full h-9 border-gray-200 hover:bg-gray-100">
+            <SelectTrigger className="bg-white text-[12px] px-3 py-2 rounded-[10px] flex items-center justify-between whitespace-nowrap ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full h-9 border-gray-200 hover:bg-gray-100">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
