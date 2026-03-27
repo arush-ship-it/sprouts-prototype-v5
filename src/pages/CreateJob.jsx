@@ -1116,7 +1116,8 @@ function ScreeningScreen({ onBack, onNext, onSkip }) {
 
         {/* Candidate Application Form Preview */}
         <div>
-          <h2 className="text-gray-800 mb-3 text-xl font-medium">Application Form</h2>
+          <h2 className="text-gray-800 mb-1 text-xl font-medium">Application Form</h2>
+          <p className="text-[13px] text-gray-400 mb-3">This is a preview of what candidates will see when they apply for this role.</p>
           <CandidateApplicationPreview />
         </div>
 
