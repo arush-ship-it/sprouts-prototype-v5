@@ -600,8 +600,8 @@ function FunnelConversion({ onOpenInsight }) {
             <motion.div
               key={i}
               whileHover={{ x: 4 }}
-              onClick={() => setSelectedSource(selectedSource === i ? null : i)}
-              className={`p-3 rounded-xl border-2 cursor-pointer transition-all ${selectedSource === i ? "border-opacity-100 bg-opacity-10" : "border-gray-100 hover:border-gray-200"}`}
+              onClick={() => setSelectedSource(selectedSource === i ? null : i)} className="p-3 rounded-xl"
+
               style={selectedSource === i ? { borderColor: s.color, background: s.color + "11" } : {}}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
