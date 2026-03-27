@@ -278,7 +278,7 @@ export default function Inbox() {
               </button>
             )}
           </div>
-          <button className="bg-[#ffffff] text-gray-800 mb-1 px-3 py-1.5 text-sm font-medium rounded-lg flex items-center gap-1.5 border border-gray-200 hover:bg-gray-50 transition-colors">
+          <button className="bg-[#ffffff] text-gray-800 mb-1 px-3 py-1.5 text-xs font-medium rounded-lg flex items-center gap-1.5 border border-gray-200 hover:bg-gray-50 transition-colors">
             <Filter className="w-3.5 h-3.5" /> Filters
           </button>
         </div>
