@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Users, ChevronDown, Bot, Activity } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Users, ChevronDown } from "lucide-react";
 
 const stages = [
 {
@@ -125,26 +124,20 @@ export default function PipelineView() {
             </div>
           </button>
 
-            {/* Agents Section - always visible, one agent */}
-            <div className="bg-gray-50 rounded-xl p-3 border border-gray-100 flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
-                  <Bot className="w-3.5 h-3.5 text-blue-600" />
+            {/* Agents Section - Expanded */}
+            {expandedStageId === stage.id &&
+          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 space-y-2">
+              <h4 className="text-gray-700 text-xs font-medium capitalize tracking-wider">Intelligence Layer</h4>
+              <div className="space-y-2">
+                {stage.agents.map((agent, idx) =>
+              <div key={idx} className="flex items-center gap-2 p-2 bg-white rounded-md border border-gray-200">
+                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <span className="text-[12px] text-gray-700">{agent}</span>
                 </div>
-                <div>
-                  <p className="text-[12px] font-semibold text-gray-800">{stage.agents[0]}</p>
-                  <div className="flex items-center gap-1 mt-0.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] text-emerald-600 font-medium">Active</span>
-                  </div>
-                </div>
+              )}
               </div>
-              <Link to="/Agents">
-                <button className="flex items-center gap-1 text-[11px] font-medium text-indigo-500 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1.5 rounded-lg transition-colors">
-                  <Activity className="w-3 h-3" /> Activity
-                </button>
-              </Link>
             </div>
+          }
 
             {/* Candidates */}
             <div className="flex flex-col gap-2">
