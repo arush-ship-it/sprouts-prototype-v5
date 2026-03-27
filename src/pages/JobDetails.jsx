@@ -278,7 +278,7 @@ export default function JobDetails() {
             { platform: "Indeed", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Indeed_logo.png", url: "https://indeed.com/job/senior-product-designer" },
             { platform: "Company Website", logo: null, url: "https://company.com/careers/senior-product-designer" }].
             map((posting) =>
-            <div key={posting.platform} className={`flex items-center justify-between p-3 rounded-lg border bg-gray-50 transition-all ${unpublishedPlatforms.includes(posting.platform) ? "border-red-100 bg-red-50 opacity-60" : "border-gray-100"}`}>
+            <div key={posting.platform} className="bg-[hsl(var(--background))] p-3 rounded-lg flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {posting.logo ?
                 <img src={posting.logo} alt={posting.platform} className="w-6 h-6 rounded object-contain" /> :
