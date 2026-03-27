@@ -35,8 +35,8 @@ export default function JobHeader({ onActivityApprovalClick }) {
           <Button
             onClick={onActivityApprovalClick}
             variant="outline"
-            size="sm"
-            className="h-8 text-[12px] border-orange-200 bg-orange-50 hover:bg-orange-100 text-orange-700">
+            size="sm" className="bg-orange-50 text-orange-700 px-2 text-xs font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border shadow-sm hover:text-accent-foreground h-8 border-orange-200 hover:bg-orange-100">
+            
 
             <AlertCircle className="w-3.5 h-3.5 mr-1.5" />
             Activity Approval
