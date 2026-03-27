@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar as CalendarPicker } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import {
-  AIInsightButton, InlineInsightPanel, AnomalyBadge, useAIInsight
+  AIInsightButton, AIInsightPanel, AnomalyBadge, useAIInsight
 } from "@/components/dashboard/AIInsightPopover";
 import {
   LineChart, Line, BarChart, Bar, PieChart as RechartsPieChart, Pie, Cell,
@@ -149,13 +149,8 @@ const RichTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, active, insightId, anomalyId }) => {
+const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, active, insightId, anomalyId, onOpenInsight }) => {
   const [hovered, setHovered] = useState(false);
-  const [openInsightId, setOpenInsightId] = useState(null);
-
-  const handleOpenInsight = (id) => setOpenInsightId(openInsightId === id ? null : id);
-  const handleCloseInsight = () => setOpenInsightId(null);
-
   return (
     <motion.div
       whileHover={{ y: -2, scale: 1.01 }}
@@ -168,9 +163,9 @@ const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, ac
         <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{label}</p>
         <div className="flex items-center gap-1.5">
           <AnimatePresence>
-            {hovered && insightId && (
+            {hovered && insightId && onOpenInsight && (
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
-                <AIInsightButton insightId={insightId} onOpen={handleOpenInsight} />
+                <AIInsightButton insightId={insightId} onOpen={onOpenInsight} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -184,27 +179,17 @@ const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, ac
           {up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {trend}
         </div>
-        {anomalyId && (
-          <AnomalyBadge insightId={anomalyId} onOpen={handleOpenInsight} label="Anomaly" />
+        {anomalyId && onOpenInsight && (
+          <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
         )}
       </div>
-      <AnimatePresence>
-        {openInsightId && (
-          <InlineInsightPanel insightId={openInsightId} onClose={handleCloseInsight} />
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 };
 
 
-const ChartCard = ({ title, subtitle, children, className = "", action, insightId, anomalyId }) => {
+const ChartCard = ({ title, subtitle, children, className = "", action, insightId, anomalyId, onOpenInsight }) => {
   const [hovered, setHovered] = useState(false);
-  const [openInsightId, setOpenInsightId] = useState(null);
-
-  const handleOpenInsight = (id) => setOpenInsightId(openInsightId === id ? null : id);
-  const handleCloseInsight = () => setOpenInsightId(null);
-
   return (
     <div
       className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col ${className}`}
@@ -216,13 +201,13 @@ const ChartCard = ({ title, subtitle, children, className = "", action, insightI
           {subtitle && <p className="text-[11px] text-gray-400 mt-0.5">{subtitle}</p>}
         </div>
         <div className="flex items-center gap-2">
-          {anomalyId && (
-            <AnomalyBadge insightId={anomalyId} onOpen={handleOpenInsight} label="Anomaly" />
+          {anomalyId && onOpenInsight && (
+            <AnomalyBadge insightId={anomalyId} onOpen={onOpenInsight} label="Anomaly" />
           )}
           <AnimatePresence>
-            {hovered && insightId && (
+            {hovered && insightId && onOpenInsight && (
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}>
-                <AIInsightButton insightId={insightId} onOpen={handleOpenInsight} />
+                <AIInsightButton insightId={insightId} onOpen={onOpenInsight} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -230,18 +215,13 @@ const ChartCard = ({ title, subtitle, children, className = "", action, insightI
         </div>
       </div>
       <div className="flex-1 flex flex-col">{children}</div>
-      <AnimatePresence>
-        {openInsightId && (
-          <InlineInsightPanel insightId={openInsightId} onClose={handleCloseInsight} />
-        )}
-      </AnimatePresence>
     </div>
   );
 };
 
 
 // ── Tab: Hiring Health ────────────────────────────────────────────────────────
-function HiringHealth() {
+function HiringHealth({ onOpenInsight }) {
   const [activeKPI, setActiveKPI] = useState(null);
   const [hoveredRole, setHoveredRole] = useState(null);
 
@@ -256,12 +236,12 @@ function HiringHealth() {
     <div className="space-y-5">
       <div className="grid grid-cols-4 gap-4">
         {kpis.map((k, i) =>
-        <StatCard key={i} {...k} active={activeKPI === i} onClick={() => setActiveKPI(activeKPI === i ? null : i)} />
+        <StatCard key={i} {...k} active={activeKPI === i} onClick={() => setActiveKPI(activeKPI === i ? null : i)} onOpenInsight={onOpenInsight} />
         )}
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <ChartCard title="Time to Fill" subtitle="Days vs. target (35d)" className="col-span-1" insightId="chart_ttf">
+        <ChartCard title="Time to Fill" subtitle="Days vs. target (35d)" className="col-span-1" insightId="chart_ttf" onOpenInsight={onOpenInsight}>
           <ResponsiveContainer width="100%" height={190}>
             <AreaChart data={ttfTrendData}>
               <defs>
@@ -288,7 +268,7 @@ function HiringHealth() {
           </div>
         </ChartCard>
 
-        <ChartCard title="Openings by Department" subtitle="Open vs. filled in last 30d" className="col-span-1" insightId="chart_openings" anomalyId="chart_openings">
+        <ChartCard title="Openings by Department" subtitle="Open vs. filled in last 30d" className="col-span-1" insightId="chart_openings" anomalyId="chart_openings" onOpenInsight={onOpenInsight}>
           <ResponsiveContainer width="100%" height={190}>
             <BarChart data={openRolesByDept} barCategoryGap="30%" barGap={3}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -305,7 +285,7 @@ function HiringHealth() {
           </div>
         </ChartCard>
 
-        <ChartCard title="Offer Acceptance" subtitle="Monthly accepted vs. declined" className="col-span-1" insightId="chart_offer" anomalyId="anomaly_nov_decline">
+        <ChartCard title="Offer Acceptance" subtitle="Monthly accepted vs. declined" className="col-span-1" insightId="chart_offer" anomalyId="anomaly_nov_decline" onOpenInsight={onOpenInsight}>
           <ResponsiveContainer width="100%" height={190}>
             <BarChart data={offerData} barCategoryGap="35%" barGap={3}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -323,7 +303,7 @@ function HiringHealth() {
         </ChartCard>
       </div>
 
-      <ChartCard title="🚨 Roles Needing Attention" subtitle="Longest open positions with risk signals" insightId="anomaly_high_risk_roles" anomalyId="anomaly_high_risk_roles">
+      <ChartCard title="🚨 Roles Needing Attention" subtitle="Longest open positions with risk signals" insightId="anomaly_high_risk_roles" anomalyId="anomaly_high_risk_roles" onOpenInsight={onOpenInsight}>
         <div className="space-y-2">
           {urgentRoles.map((r, i) =>
           <motion.div
@@ -366,7 +346,7 @@ function HiringHealth() {
 const Briefcase2 = ({ className }) => <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" /></svg>;
 
 // ── Tab: Recruiter Productivity ───────────────────────────────────────────────
-function RecruiterProductivity() {
+function RecruiterProductivity({ onOpenInsight }) {
   const [selectedRecruiter, setSelectedRecruiter] = useState(null);
   const [metric, setMetric] = useState("screenings");
 
@@ -393,12 +373,12 @@ function RecruiterProductivity() {
         { label: "Avg Interviews/Recruiter", value: "16.75", sub: "Per recruiter", trend: "+8% vs last month", up: true, color: "text-violet-600", icon: Activity, insightId: "recruiter_productivity" },
         { label: "Avg Time to Fill", value: "30d", sub: "Team average", trend: "-4d vs last month", up: true, color: "text-emerald-600", icon: Clock, insightId: "kpi_ttf" },
         { label: "Placements This Month", value: "17", sub: "Total hires closed", trend: "+3 vs last month", up: true, color: "text-amber-600", icon: CheckCircle, insightId: "recruiter_productivity" }].
-        map((k, i) => <StatCard key={i} {...k} />)}
+        map((k, i) => <StatCard key={i} {...k} onOpenInsight={onOpenInsight} />)}
       </div>
 
       <div className="grid grid-cols-5 gap-4">
         {/* Leaderboard */}
-        <ChartCard title="Leaderboard" subtitle="Click a recruiter to explore" className="col-span-2" insightId="recruiter_productivity">
+        <ChartCard title="Leaderboard" subtitle="Click a recruiter to explore" className="col-span-2" insightId="recruiter_productivity" onOpenInsight={onOpenInsight}>
           <div className="space-y-3">
             {recruiterData.map((r, i) =>
             <motion.div
@@ -494,7 +474,7 @@ function RecruiterProductivity() {
       </div>
 
       {/* Task Completion */}
-      <ChartCard title="Team Task Completion" subtitle="% completion across all task types this month" insightId="chart_completion" anomalyId="chart_completion">
+      <ChartCard title="Team Task Completion" subtitle="% completion across all task types this month" insightId="chart_completion" anomalyId="chart_completion" onOpenInsight={onOpenInsight}>
         <div className="grid grid-cols-4 gap-4">
           {taskCompletionData.map((t, i) =>
           <div key={i} className="relative">
@@ -520,7 +500,7 @@ function RecruiterProductivity() {
 }
 
 // ── Tab: Funnel Conversion ────────────────────────────────────────────────────
-function FunnelConversion() {
+function FunnelConversion({ onOpenInsight }) {
   const [hoveredStage, setHoveredStage] = useState(null);
   const [selectedSource, setSelectedSource] = useState(null);
 
@@ -532,12 +512,12 @@ function FunnelConversion() {
         { label: "Screening Rate", value: "39%", sub: "Applied → Screened", trend: "+4% vs prior", up: true, color: "text-violet-600", icon: Filter, insightId: "chart_dropoff" },
         { label: "Interview → Offer", value: "35.6%", sub: "Best conversion stage", trend: "+2.1% vs prior", up: true, color: "text-emerald-600", icon: CheckCircle, insightId: "chart_dropoff" },
         { label: "Overall Hire Rate", value: "1.9%", sub: "Applied → Hired", trend: "-0.2% vs prior", up: false, color: "text-amber-600", icon: Target, insightId: "kpi_hirerate", anomalyId: "kpi_hirerate" }].
-        map((k, i) => <StatCard key={i} {...k} />)}
+        map((k, i) => <StatCard key={i} {...k} onOpenInsight={onOpenInsight} />)}
       </div>
 
       <div className="grid grid-cols-5 gap-4">
         {/* Interactive Funnel */}
-        <ChartCard title="Hiring Funnel" subtitle="Hover a stage for details" className="col-span-3" insightId="chart_dropoff">
+        <ChartCard title="Hiring Funnel" subtitle="Hover a stage for details" className="col-span-3" insightId="chart_dropoff" onOpenInsight={onOpenInsight}>
           <div className="space-y-1.5">
             {funnelData.map((s, i) => {
               const dropPct = i > 0 ? 100 - Math.round(s.count / funnelData[i - 1].count * 100) : 0;
@@ -590,7 +570,7 @@ function FunnelConversion() {
         </ChartCard>
 
         {/* Drop-off Reasons */}
-        <ChartCard title="Drop-off Reasons" subtitle="Why candidates exit the pipeline" className="col-span-2" insightId="chart_dropoff" anomalyId="chart_dropoff">
+        <ChartCard title="Drop-off Reasons" subtitle="Why candidates exit the pipeline" className="col-span-2" insightId="chart_dropoff" anomalyId="chart_dropoff" onOpenInsight={onOpenInsight}>
           <div className="space-y-3">
             {dropReasonData.map((d, i) =>
             <div key={i}>
@@ -614,7 +594,7 @@ function FunnelConversion() {
 
       <div className="grid grid-cols-2 gap-4">
         {/* Source Conversion — interactive */}
-        <ChartCard title="Source → Hire Conversion" subtitle="Click a source to highlight" insightId="chart_source">
+        <ChartCard title="Source → Hire Conversion" subtitle="Click a source to highlight" insightId="chart_source" onOpenInsight={onOpenInsight}>
           <div className="space-y-2.5 mb-4">
             {sourceFunnelData.map((s, i) =>
             <motion.div
@@ -679,13 +659,13 @@ function FunnelConversion() {
 }
 
 // ── Tab: Analytics ────────────────────────────────────────────────────────────
-function Analytics() {
+function Analytics({ onOpenInsight }) {
   const [activeSlice, setActiveSlice] = useState(null);
 
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-3 gap-4">
-        <ChartCard title="Pipeline by Stage" subtitle="Active candidates right now" insightId="chart_dropoff">
+        <ChartCard title="Pipeline by Stage" subtitle="Active candidates right now" insightId="chart_dropoff" onOpenInsight={onOpenInsight}>
           <div className="flex items-baseline gap-2 mb-3">
             <span className="text-[26px] font-bold text-gray-900">342</span>
             <span className="text-[11px] text-gray-400">total active</span>
@@ -707,7 +687,7 @@ function Analytics() {
           </ResponsiveContainer>
         </ChartCard>
 
-        <ChartCard title="Application Inflow" subtitle="Weekly new applications" insightId="kpi_openroles">
+        <ChartCard title="Application Inflow" subtitle="Weekly new applications" insightId="kpi_openroles" onOpenInsight={onOpenInsight}>
           <div className="flex items-baseline gap-2 mb-3">
             <span className="text-[26px] font-bold text-gray-900">28</span>
             <span className="text-[11px] text-gray-400">pending review</span>
@@ -733,7 +713,7 @@ function Analytics() {
         </ChartCard>
 
         {/* Interactive Donut */}
-        <ChartCard title="Source Breakdown" subtitle="Click a segment to focus" insightId="chart_source">
+        <ChartCard title="Source Breakdown" subtitle="Click a segment to focus" insightId="chart_source" onOpenInsight={onOpenInsight}>
           <div className="flex items-center justify-between">
             <ResponsiveContainer width={140} height={140}>
               <RechartsPieChart>
@@ -833,7 +813,7 @@ const TABS = [
 
 
 export default function Dashboard() {
-
+  const { activeInsight, openInsight, closeInsight } = useAIInsight();
   const [activeTab, setActiveTab] = useState("health");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
@@ -996,10 +976,10 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}>
-              {activeTab === "health" && <HiringHealth />}
-              {activeTab === "productivity" && <RecruiterProductivity />}
-              {activeTab === "funnel" && <FunnelConversion />}
-              {activeTab === "analytics" && <Analytics />}
+              {activeTab === "health" && <HiringHealth onOpenInsight={openInsight} />}
+              {activeTab === "productivity" && <RecruiterProductivity onOpenInsight={openInsight} />}
+              {activeTab === "funnel" && <FunnelConversion onOpenInsight={openInsight} />}
+              {activeTab === "analytics" && <Analytics onOpenInsight={openInsight} />}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -1090,7 +1070,12 @@ export default function Dashboard() {
         </AnimatePresence>
       </div>
 
-
+      {/* Global AI Insight Panel */}
+      <AnimatePresence>
+        {activeInsight && (
+          <AIInsightPanel insightId={activeInsight} onClose={closeInsight} />
+        )}
+      </AnimatePresence>
     </div>);
 
 }
