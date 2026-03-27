@@ -1267,7 +1267,7 @@ function PublishScreen({ onBack, onPublish }) {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+              transition={{ duration: 0.3 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100">
               
               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <Globe className="w-3.5 h-3.5" /> Visibility
@@ -1309,7 +1309,7 @@ function PublishScreen({ onBack, onPublish }) {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.05 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+              transition={{ duration: 0.3, delay: 0.05 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100">
               
               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5" /> Duration
@@ -1351,7 +1351,7 @@ function PublishScreen({ onBack, onPublish }) {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] flex flex-col transition-all duration-300">
+            transition={{ duration: 0.3, delay: 0.1 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 flex flex-col transition-all duration-300">
 
 
             
