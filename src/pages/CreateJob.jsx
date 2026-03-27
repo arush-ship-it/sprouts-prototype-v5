@@ -561,7 +561,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
 
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-[15px] font-bold text-gray-900">About the Role</h3>
+            <h3 className="text-gray-900 text-base font-medium">About the Role</h3>
             <button
               onClick={() => handleEnhanceSection("description")}
               disabled={enhancingSection === "description"} className="text-indigo-500 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
@@ -578,7 +578,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
 
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-[15px] font-bold text-gray-900">Requirements</h3>
+            <h3 className="text-gray-900 text-base font-medium">Requirements</h3>
             <div className="flex items-center gap-3">
               <div className="relative">
                 <button
@@ -615,7 +615,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           </ul>
 
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-[15px] font-bold text-gray-900">Responsibilities</h3>
+            <h3 className="text-gray-900 text-base font-medium">Responsibilities</h3>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => handleEnhanceSection("responsibilities")}
