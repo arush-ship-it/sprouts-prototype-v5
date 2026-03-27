@@ -315,7 +315,7 @@ export default function JobDetails() {
         </div>
 
         {/* Job Details */}
-        <div className="p-6 rounded-xl bg-white border border-gray-200 mb-6">
+        <div className="bg-white mb-6 p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-[16px] font-semibold text-gray-900">
               Job Description
