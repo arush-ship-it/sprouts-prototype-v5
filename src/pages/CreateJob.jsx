@@ -397,7 +397,7 @@ function AIEnhanceToolbar({ position, selectedText, onEnhance, onClose }) {
 function EditableListItem({ value, onChange, onDelete, placeholder }) {
   return (
     <li className="flex items-start gap-2 group">
-      <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2.5 shrink-0" />
+      <span className="bg-slate-300 mt-2.5 rounded-full w-1.5 h-1.5 shrink-0" />
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
