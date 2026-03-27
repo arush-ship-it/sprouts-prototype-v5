@@ -27,7 +27,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   return (
     <div className="px-8 py-2">
       <div className="flex items-center justify-between">
-        <div className="bg-slate-200 p-1 rounded-[28px] flex items-center gap-1 w-fit">
+        <div className="bg-gray-200 p-1 rounded-[28px] flex items-center gap-1 w-fit">
           {tabs.map((tab) =>
           <button
             key={tab.key}
@@ -81,7 +81,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           </Button>
 
           {/* View Mode Toggle */}
-          <div className="bg-slate-200 p-1 rounded-full flex items-center gap-1">
+          <div className="bg-gray-200 p-1 rounded-full flex items-center gap-1">
             {currentViews.map((view) =>
             <Button
               key={view.key}
