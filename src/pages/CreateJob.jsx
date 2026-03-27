@@ -856,7 +856,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="space-y-1.5">
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Label className="text-[12px] font-medium text-gray-600">Salary Range</Label>
                 <button
