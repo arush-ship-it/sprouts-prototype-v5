@@ -605,7 +605,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                 }
               </div>
               <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
-              <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
+              <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-600 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
             </div>
           </div>
           <ul className="mb-5 space-y-1" onMouseUp={() => handleTextSelect("requirements")}>
