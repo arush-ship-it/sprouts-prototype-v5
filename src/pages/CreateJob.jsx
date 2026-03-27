@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Send, Sparkles, CheckCircle2, ArrowRight, SkipForward, Plus, X, Building2, Pencil, TrendingUp, ChevronUp, ChevronDown, ExternalLink, Globe, Lock, Link as LinkIcon, Users, Upload, FileText, Calendar, Eye, EyeOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -1186,128 +1187,234 @@ function PublishScreen({ onBack, onPublish }) {
   const [evergreen, setEvergreen] = useState(true);
   const [setExpiration, setSetExpiration] = useState(false);
   const [selectedBoards, setSelectedBoards] = useState(["linkedin", "indeed"]);
+  const [hoveredBoard, setHoveredBoard] = useState(null);
+  const [publishing, setPublishing] = useState(false);
 
   const toggleBoard = (id) => setSelectedBoards((prev) =>
-  prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
+    prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
   );
 
+  const handlePublish = () => {
+    setPublishing(true);
+    setTimeout(() => { setPublishing(false); onPublish(); }, 1200);
+  };
+
+  const visibilityOptions = [
+    { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards", color: "emerald" },
+    { value: "private", label: "Private", Icon: Lock, desc: "Direct link only", color: "amber" },
+    { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden", color: "violet" },
+    { value: "internal", label: "Internal", Icon: Users, desc: "Employees only", color: "blue" },
+  ];
+
   return (
-    <div className="flex flex-col h-full">
-      <div className="bg-[#f2f2f2] flex-1 overflow-y-auto">
-        {/* Header */}
-        <div className="px-8 pt-6 pb-4 flex items-center gap-3">
-          <button onClick={onBack} className="text-[13px] text-gray-400 hover:text-gray-700 transition-colors flex items-center gap-1">← Back</button>
-          <span className="text-gray-300">|</span>
+    <div className="flex flex-col h-full bg-[#F7F8FA]">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-4">
+          <motion.button
+            whileHover={{ x: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-[13px] text-gray-400 hover:text-gray-700 transition-colors font-medium">
+            <ChevronDown className="w-4 h-4 rotate-90" /> Back
+          </motion.button>
+          <div className="w-px h-5 bg-gray-200" />
           <div>
-            <h2 className="text-[16px] font-semibold text-gray-900">Ready to Publish</h2>
-            <p className="text-[12px] text-gray-400">Configure your posting settings and go live</p>
+            <h2 className="text-[15px] font-semibold text-gray-900">Ready to Publish</h2>
+            <p className="text-[12px] text-gray-400 mt-0.5">Configure your posting settings and go live</p>
           </div>
         </div>
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => window.open("https://app.sproutsai.com/job-post/details/69707956bc83600006f4e2ae", "_blank")}
+          className="flex items-center gap-1.5 text-[12px] font-medium text-gray-500 border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+          <ExternalLink className="w-3.5 h-3.5" /> Preview
+        </motion.button>
+      </div>
 
-        {/* Two-column body */}
-        <div className="px-8 pb-8 grid grid-cols-2 gap-5">
+      <div className="flex-1 overflow-y-auto px-8 py-6">
+        <div className="grid grid-cols-2 gap-5 max-w-5xl">
 
           {/* Left column */}
           <div className="flex flex-col gap-4">
-            {/* Visibility card */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-              <p className="text-[13px] font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                <Globe className="w-3.5 h-3.5 text-indigo-400" /> Visibility
+
+            {/* Visibility */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5">
+              <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Globe className="w-3.5 h-3.5" /> Visibility
               </p>
               <div className="grid grid-cols-2 gap-2">
-                {[
-                { value: "public", label: "Public", Icon: Globe, desc: "Visible on all job boards" },
-                { value: "private", label: "Private", Icon: Lock, desc: "Direct link only" },
-                { value: "confidential", label: "Confidential", Icon: LinkIcon, desc: "Company name hidden" },
-                { value: "internal", label: "Internal", Icon: Users, desc: "Employees only" }].
-                map(({ value, label, Icon, desc }) =>
-                <button
-                  key={value}
-                  onClick={() => setVisibility(value)}
-                  className={`flex flex-col items-start gap-1 px-3 py-3 rounded-xl border text-left transition-all ${
-                  visibility === value ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"}`
-                  }>
-                    <div className="flex items-center gap-2">
-                      <Icon className={`w-3.5 h-3.5 ${visibility === value ? "text-indigo-500" : "text-gray-400"}`} />
-                      <p className={`text-[12px] font-semibold ${visibility === value ? "text-indigo-700" : "text-gray-800"}`}>{label}</p>
-                    </div>
-                    <p className="text-[10px] text-gray-400 leading-tight">{desc}</p>
-                  </button>
-                )}
+                {visibilityOptions.map(({ value, label, Icon, desc }, i) => {
+                  const active = visibility === value;
+                  return (
+                    <motion.button
+                      key={value}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setVisibility(value)}
+                      className={`flex flex-col items-start gap-1.5 px-3.5 py-3 rounded-xl border text-left transition-all duration-200 ${
+                        active
+                          ? "border-indigo-300 bg-gradient-to-br from-indigo-50 to-indigo-50/60 shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
+                          : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"
+                      }`}>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${active ? "bg-indigo-100" : "bg-gray-100"}`}>
+                          <Icon className={`w-3 h-3 ${active ? "text-indigo-600" : "text-gray-400"}`} />
+                        </div>
+                        <p className={`text-[12px] font-semibold ${active ? "text-indigo-700" : "text-gray-700"}`}>{label}</p>
+                        {active && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                        )}
+                      </div>
+                      <p className="text-[10px] text-gray-400 leading-tight pl-8">{desc}</p>
+                    </motion.button>
+                  );
+                })}
               </div>
-            </div>
+            </motion.div>
 
-            {/* Duration card */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-              <p className="text-[13px] font-semibold text-gray-700 mb-3 flex items-center gap-2">
-                <Calendar className="w-3.5 h-3.5 text-indigo-400" /> Duration
+            {/* Duration */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.05 }}
+              className="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5">
+              <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5" /> Duration
               </p>
-              <div className="flex flex-col gap-3">
-                <label className={`flex items-start gap-3 px-3 py-3 rounded-xl border cursor-pointer transition-all ${evergreen ? "border-indigo-300 bg-indigo-50" : "border-gray-100 bg-gray-50 hover:border-indigo-200"}`}>
-                  <input type="checkbox" checked={evergreen} onChange={(e) => setEvergreen(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4 shrink-0" />
-                  <div>
-                    <p className="text-[12px] text-gray-800 font-semibold">Evergreen Position</p>
-                    <p className="text-[11px] text-gray-400">Keep this job open indefinitely</p>
-                  </div>
-                </label>
-                <label className={`flex items-start gap-3 px-3 py-3 rounded-xl border cursor-pointer transition-all ${setExpiration ? "border-indigo-300 bg-indigo-50" : "border-gray-100 bg-gray-50 hover:border-indigo-200"}`}>
-                  <input type="checkbox" checked={setExpiration} onChange={(e) => setSetExpiration(e.target.checked)} className="accent-indigo-600 mt-0.5 w-4 h-4 shrink-0" />
-                  <div>
-                    <p className="text-[12px] text-gray-800 font-semibold">Set Expiration Date</p>
-                    <p className="text-[11px] text-gray-400">Automatically close after a date</p>
-                  </div>
-                </label>
+              <div className="flex flex-col gap-2">
+                {[
+                  { key: "evergreen", checked: evergreen, onChange: setEvergreen, label: "Evergreen Position", desc: "Keep this job open indefinitely", icon: "∞" },
+                  { key: "expiration", checked: setExpiration, onChange: setSetExpiration, label: "Set Expiration Date", desc: "Automatically close after a date", icon: "⏱" },
+                ].map(({ key, checked, onChange, label, desc, icon }) => (
+                  <motion.label
+                    key={key}
+                    whileHover={{ scale: 1.01 }}
+                    className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border cursor-pointer transition-all duration-200 ${
+                      checked ? "border-indigo-200 bg-indigo-50/70" : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200"
+                    }`}>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0 transition-colors ${checked ? "bg-indigo-100" : "bg-gray-100"}`}>
+                      {icon}
+                    </div>
+                    <div className="flex-1">
+                      <p className={`text-[13px] font-semibold ${checked ? "text-indigo-800" : "text-gray-700"}`}>{label}</p>
+                      <p className="text-[11px] text-gray-400 mt-0.5">{desc}</p>
+                    </div>
+                    {/* Custom toggle */}
+                    <div
+                      onClick={() => onChange(!checked)}
+                      className={`w-9 h-5 rounded-full relative transition-colors duration-200 shrink-0 ${checked ? "bg-indigo-500" : "bg-gray-200"}`}>
+                      <motion.div
+                        animate={{ x: checked ? 16 : 2 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        className="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm" />
+                    </div>
+                  </motion.label>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right column — Job Boards */}
-          <div className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col transition-all ${visibility !== "public" ? "opacity-40 pointer-events-none" : ""}`}>
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-[13px] font-semibold text-gray-700 flex items-center gap-2">
-                <ExternalLink className="w-3.5 h-3.5 text-indigo-400" /> Post to Job Boards
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className={`bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-5 flex flex-col transition-all duration-300 ${
+              visibility !== "public" ? "opacity-40 pointer-events-none saturate-0" : ""
+            }`}>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                <ExternalLink className="w-3.5 h-3.5" /> Post to Job Boards
               </p>
-              <span className="bg-indigo-100 text-indigo-600 text-[11px] font-semibold px-2 py-0.5 rounded-full">{selectedBoards.length} selected</span>
+              <motion.span
+                key={selectedBoards.length}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                className="bg-indigo-50 text-indigo-600 border border-indigo-100 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                {selectedBoards.length} selected
+              </motion.span>
             </div>
-            <div className="grid grid-cols-2 gap-2 flex-1">
+            <div className="grid grid-cols-2 gap-2 flex-1 content-start">
               {JOB_BOARDS.map(({ id, name, logo, desc }) => {
                 const selected = selectedBoards.includes(id);
                 return (
-                  <button
+                  <motion.button
                     key={id}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.96 }}
+                    onHoverStart={() => setHoveredBoard(id)}
+                    onHoverEnd={() => setHoveredBoard(null)}
                     onClick={() => toggleBoard(id)}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all ${
-                    selected ? "border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-100 bg-gray-50 hover:border-indigo-200 hover:bg-white"}`
-                    }>
-                    
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-left transition-all duration-200 ${
+                      selected
+                        ? "border-indigo-300 bg-indigo-50 shadow-[0_0_0_1px_rgba(99,102,241,0.15)]"
+                        : "border-gray-100 bg-gray-50/80 hover:bg-white hover:border-gray-200 hover:shadow-sm"
+                    }`}>
+                    <span className="text-base shrink-0">{logo}</span>
                     <div className="min-w-0 flex-1">
-                      <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-800"}`}>{name}</p>
-                      <p className="text-[10px] text-gray-400 truncate">{desc}</p>
+                      <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-700"}`}>{name}</p>
+                      <p className="text-[10px] text-gray-400 truncate mt-0.5">{desc}</p>
                     </div>
-                    <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
-                    selected ? "border-indigo-500 bg-indigo-500" : "border-gray-300"}`
-                    }>
-                      {selected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                    </div>
-                  </button>);
-
+                    <motion.div
+                      animate={selected ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0 }}
+                      className="w-4 h-4 rounded-full bg-indigo-500 shrink-0 flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                    </motion.div>
+                  </motion.button>
+                );
               })}
             </div>
-          </div>
-        </div>
 
-        {/* Sticky CTA */}
-        <div className="px-8 pb-8 flex justify-end gap-3">
-          <Button variant="outline" onClick={() => window.open("https://app.sproutsai.com/job-post/details/69707956bc83600006f4e2ae", "_blank")} className="h-10 px-6 gap-2">
-            <ExternalLink className="w-3.5 h-3.5" /> Preview Job
-          </Button>
-          <Button onClick={onPublish} className="bg-blue-600 text-white px-8 h-10 font-medium rounded-lg gap-2 hover:bg-indigo-700 shadow">
-            Post Job {selectedBoards.length > 0 && `to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`}
-          </Button>
+            {/* Select all / none */}
+            <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
+              <button onClick={() => setSelectedBoards(JOB_BOARDS.map(b => b.id))} className="text-[11px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">Select all</button>
+              <span className="text-gray-200">·</span>
+              <button onClick={() => setSelectedBoards([])} className="text-[11px] font-medium text-gray-400 hover:text-gray-600 transition-colors">Clear</button>
+            </div>
+          </motion.div>
         </div>
       </div>
-    </div>);
 
+      {/* Bottom CTA */}
+      <div className="bg-white border-t border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
+        <p className="text-[12px] text-gray-400">
+          {selectedBoards.length > 0
+            ? `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`
+            : "No job boards selected"}
+        </p>
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={handlePublish}
+          disabled={publishing}
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
+          {publishing ? (
+            <>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full" />
+              Publishing…
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="w-4 h-4" />
+              Post Job {selectedBoards.length > 0 && `· ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}`}
+            </>
+          )}
+        </motion.button>
+      </div>
+    </div>
+  );
 }
 
 // ─── Step 5: Confirmation ─────────────────────────────────────────────────────
