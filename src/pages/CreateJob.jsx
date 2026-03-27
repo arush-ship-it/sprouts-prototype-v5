@@ -1211,14 +1211,14 @@ function PublishScreen({ onBack, onPublish }) {
       {/* Header */}
       <div className="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-4">
-          <motion.button
-            whileHover={{ x: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onBack}
-            className="flex items-center gap-1.5 text-[13px] text-gray-400 hover:text-gray-700 transition-colors font-medium">
-            <ChevronDown className="w-4 h-4 rotate-90" /> Back
-          </motion.button>
-          <div className="w-px h-5 bg-gray-200" />
+          
+
+
+
+
+
+          
+          
           <div>
             <h2 className="text-[15px] font-semibold text-gray-900">Ready to Publish</h2>
             <p className="text-[12px] text-gray-400 mt-0.5">Configure your posting settings and go live</p>
