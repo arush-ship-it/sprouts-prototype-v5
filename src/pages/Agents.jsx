@@ -572,15 +572,15 @@ export default function Agents() {
 
         {/* Pill Tabs + Controls */}
         <div className="flex items-center justify-between mb-5">
-          <div className="bg-slate-200 p-1 rounded-xl flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
+          <div className="bg-slate-200 p-1 rounded-[10003px] flex items-center shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
             {[
             { key: "activity", label: "Activity" },
             { key: "agents", label: "Agents" }].
             map(({ key, label }) =>
             <button
               key={key}
-              onClick={() => setActiveTab(key)}
-              className={`px-5 py-1.5 text-[13px] font-medium rounded-lg transition-all duration-200 ${activeTab === key ? "bg-white text-gray-900 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-500 hover:text-gray-700"}`}>
+              onClick={() => setActiveTab(key)} className="bg-white text-gray-900 px-2 py-2 text-xs font-medium rounded-full transition-all duration-200 shadow-[0_1px_4px_rgba(0,0,0,0.12)]">
+              
                 {label}
               </button>
             )}
