@@ -84,7 +84,7 @@ export default function SidebarNav({ activePage = "Console" }) {
           </Select>
         </div>
 
-        <nav className="flex flex-col gap-5">
+        <nav className="flex flex-col gap-4">
           {mainLinks.map((link) =>
           <Link
             key={link.label}
