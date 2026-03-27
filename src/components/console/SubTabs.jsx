@@ -31,7 +31,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           {tabs.map((tab) =>
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)} className={`px-5 py-2 text-xs font-medium rounded-3xl relative transition-all duration-300 flex items-center gap-2 ${activeTab === tab.key ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+            onClick={() => setActiveTab(tab.key)} className="bg-white text-gray-900 px-2 py-2 text-xs font-medium rounded-3xl relative transition-all duration-300 flex items-center gap-2 shadow-sm">
 
 
 
