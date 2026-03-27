@@ -83,39 +83,39 @@ function QuickActionSlideshow({ onStart, onShowDrafts }) {
     }
   };
 
-  return (
-    <div className="pt-3">
-      <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide px-1 mb-2">Or get started with</p>
-      <input
-        id="quick-upload-input"
-        type="file"
-        accept=".pdf,.doc,.docx,.txt"
-        className="hidden"
-        onChange={(e) => {if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`);}} />
-
-      <div
-        onClick={handleAction} className="bg-sky-50 px-5 py-12 text-center rounded-2xl cursor-pointer border border-sky-100 flex flex-col items-center gap-3 transition-all hover:shadow-sm">
+  return null;
 
 
-        <div className={`w-12 h-12 rounded-2xl ${card.iconBg} flex items-center justify-center`}>
-          {card.key === "upload" ? <Upload className="w-5 h-5 text-violet-400" /> : <FileText className="w-5 h-5 text-sky-400" />}
-        </div>
-        <div>
-          <p className="text-[13px] font-semibold text-gray-700">{card.label}</p>
-          <p className="text-[11px] text-gray-400 mt-0.5">{card.desc}</p>
-        </div>
-      </div>
-      {/* Dots */}
-      <div className="flex items-center justify-center gap-2 mt-3">
-        {QUICK_ACTIONS.map((_, i) =>
-        <button
-          key={i}
-          onClick={() => setIndex(i)}
-          className={`rounded-full transition-all ${i === index ? `w-4 h-2 ${i === 0 ? "bg-violet-300" : "bg-sky-300"}` : "w-2 h-2 bg-gray-200 hover:bg-gray-300"}`} />
 
-        )}
-      </div>
-    </div>);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -138,27 +138,27 @@ function DraftsDropup({ onStart }) {
         title="Previous drafts">
         <FileText className="w-3.5 h-3.5" />
       </button>
-      {open && (
-        <div className="absolute bottom-full left-0 mb-2 w-[240px] bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden">
+      {open &&
+      <div className="absolute bottom-full left-0 mb-2 w-[240px] bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden">
           <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-4 pt-3 pb-2">Previous Drafts</p>
           <div className="flex flex-col pb-2">
-            {SAVED_DRAFTS.map((draft) => (
-              <button
-                key={draft.id}
-                onClick={() => { onStart(`Continue editing: ${draft.title}`); setOpen(false); }}
-                className="flex items-start gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left">
+            {SAVED_DRAFTS.map((draft) =>
+          <button
+            key={draft.id}
+            onClick={() => {onStart(`Continue editing: ${draft.title}`);setOpen(false);}}
+            className="flex items-start gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left">
                 <FileText className="w-3.5 h-3.5 text-gray-400 mt-0.5 shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[13px] font-medium text-gray-800 truncate">{draft.title}</p>
                   <p className="text-[11px] text-gray-400">{draft.role} · {draft.created}</p>
                 </div>
               </button>
-            ))}
+          )}
           </div>
         </div>
-      )}
-    </div>
-  );
+      }
+    </div>);
+
 }
 
 // ─── Step 0: Default / Landing ───────────────────────────────────────────────
@@ -216,7 +216,7 @@ function DefaultScreen({ onStart }) {
                   type="file"
                   accept=".pdf,.doc,.docx,.txt"
                   className="hidden"
-                  onChange={(e) => { if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`); }} />
+                  onChange={(e) => {if (e.target.files?.[0]) onStart(`Upload: ${e.target.files[0].name}`);}} />
               </label>
 
               {/* Drafts drop-up */}
@@ -484,7 +484,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
         enhance: `Enhance and improve these job requirements to be more clear, compelling, and professional.`,
         longer: `Expand these job requirements to be more detailed and comprehensive, adding more specifics.`,
         detailed: `Make these job requirements more detailed with specific examples and measurable criteria.`,
-        shorter: `Make these job requirements more concise and to the point, keeping only the most important items.`,
+        shorter: `Make these job requirements more concise and to the point, keeping only the most important items.`
       };
       const result = await base44.integrations.Core.InvokeLLM({
         prompt: `${modePrompts[mode]} Return a JSON array of strings only, no extra text:\n\n${JSON.stringify(jd.requirements)}`,
@@ -516,7 +516,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
   const addResp = () => setJd((prev) => ({ ...prev, responsibilities: [...prev.responsibilities, ""] }));
 
   React.useEffect(() => {
-    const close = () => { setToolbar(null); setReqDropdownOpen(false); };
+    const close = () => {setToolbar(null);setReqDropdownOpen(false);};
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
   }, []);
@@ -562,22 +562,22 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                   className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
                   <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"} <ChevronDown className="w-3 h-3" />
                 </button>
-                {reqDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-gray-200 rounded-xl shadow-lg z-30 py-1 overflow-hidden">
+                {reqDropdownOpen &&
+                <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-gray-200 rounded-xl shadow-lg z-30 py-1 overflow-hidden">
                     {[
-                      { label: "Make it longer", mode: "longer" },
-                      { label: "Make it more detailed", mode: "detailed" },
-                      { label: "Make it shorter", mode: "shorter" },
-                    ].map(({ label, mode }) => (
-                      <button
-                        key={mode}
-                        onMouseDown={(e) => { e.preventDefault(); handleEnhanceSection("requirements", mode); }}
-                        className="w-full text-left px-4 py-2 text-[12px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                  { label: "Make it longer", mode: "longer" },
+                  { label: "Make it more detailed", mode: "detailed" },
+                  { label: "Make it shorter", mode: "shorter" }].
+                  map(({ label, mode }) =>
+                  <button
+                    key={mode}
+                    onMouseDown={(e) => {e.preventDefault();handleEnhanceSection("requirements", mode);}}
+                    className="w-full text-left px-4 py-2 text-[12px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                         {label}
                       </button>
-                    ))}
+                  )}
                   </div>
-                )}
+                }
               </div>
               <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
               <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
