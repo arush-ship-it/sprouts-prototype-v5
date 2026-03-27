@@ -540,8 +540,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             <h3 className="text-[15px] font-bold text-gray-900">About the Role</h3>
             <button
               onClick={() => handleEnhanceSection("description")}
-              disabled={enhancingSection === "description"}
-              className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
+              disabled={enhancingSection === "description"} className="text-indigo-500 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
+              
               <Sparkles className="w-3 h-3" /> {enhancingSection === "description" ? "Enhancing…" : "Enhance"}
             </button>
           </div>
@@ -559,8 +559,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
               <div className="relative">
                 <button
                   onClick={() => setReqDropdownOpen((v) => !v)}
-                  disabled={enhancingSection === "requirements"}
-                  className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
+                  disabled={enhancingSection === "requirements"} className="text-indigo-500 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
+                  
                   <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"} <ChevronDown className="w-3 h-3" />
                 </button>
                 {reqDropdownOpen &&
