@@ -31,7 +31,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           {tabs.map((tab) =>
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)} className={`px-5 py-2 text-xs font-medium rounded-3xl relative transition-all duration-300 flex items-center gap-2 ${activeTab === tab.key ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+            onClick={() => setActiveTab(tab.key)} className="bg-white text-gray-900 px-2 py-2 text-xs font-medium rounded-3xl relative transition-all duration-300 flex items-center gap-2 shadow-sm">
 
 
 
@@ -81,19 +81,19 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           </Button>
 
           {/* View Mode Toggle */}
-          <div className="bg-slate-200 p-1 rounded-lg flex items-center gap-1">
+          <div className="bg-slate-200 p-1 rounded-full flex items-center gap-1">
             {currentViews.map((view) =>
             <Button
               key={view.key}
               variant="ghost"
               size="sm"
               onClick={() => setViewMode(view.key)}
-              title={view.label}
-              className={`h-8 w-8 p-0 text-[12px] ${
-              viewMode === view.key ?
-              "bg-white shadow-sm text-gray-900" :
-              "text-gray-400 hover:text-gray-600"}`
-              }>
+              title={view.label} className="bg-white text-gray-900 p-0 font-medium rounded-full inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 w-8 shadow-sm">
+
+
+
+
+              
 
                 <view.icon className="w-3.5 h-3.5" />
               </Button>
