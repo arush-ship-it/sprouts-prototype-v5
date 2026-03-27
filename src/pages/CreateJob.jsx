@@ -677,8 +677,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
               map(({ label, icon, key, defaultItems }) =>
               <button
                 key={key}
-                onClick={() => setAddedSections((prev) => [...prev, { key, label, icon, items: [...defaultItems] }])}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-dashed border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                onClick={() => setAddedSections((prev) => [...prev, { key, label, icon, items: [...defaultItems] }])} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] border border-border-gray-300 text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                
                   <span>{icon}</span> {label}
                 </button>
               )}
