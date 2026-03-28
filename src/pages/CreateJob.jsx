@@ -610,12 +610,12 @@ function ReviewJDScreen({ job, onBack, onNext }) {
           <div className="flex items-center gap-2 shrink-0 ml-4">
             {/* Format dropdown */}
             <div className="relative" onMouseDown={(e) => e.stopPropagation()}>
-              <button
-                onClick={() => setFormatDropdownOpen((v) => !v)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-colors ${formatDropdownOpen ? "border-indigo-300 bg-indigo-50 text-indigo-700" : "border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-                Format: {currentFormat?.label}
-                <ChevronDown className={`w-3 h-3 transition-transform ${formatDropdownOpen ? "rotate-180" : ""}`} />
-              </button>
+              
+
+
+
+
+              
               {formatDropdownOpen &&
               <div className="absolute right-0 top-full mt-1.5 w-[260px] bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-1">
                 <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-4 pt-3 pb-2">JD Format</p>
