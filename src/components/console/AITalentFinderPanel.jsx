@@ -148,7 +148,7 @@ export default function AITalentFinderPanel() {
                 <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Skills</h4>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {appliedFilters.skills.map((skill, idx) =>
-                  <Badge key={idx} className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]">
+                  <Badge key={idx} className="inline-flex items-center rounded-md px-2 py-2 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-emerald-50 text-emerald-700 text-[11px]">
                       ✓ {skill}
                     </Badge>
                   )}
