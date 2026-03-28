@@ -73,7 +73,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           {/* Filter Button */}
           <Button
             variant="ghost"
-            size="sm" className="bg-[hsl(var(--background))] text-gray-700 px-2 text-xs font-medium rounded-xl inline-flex items-center justify-center gap-0 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-10 hover:bg-gray-200">
+            size="sm" className="bg-[hsl(var(--background))] text-gray-700 px-2 text-xs font-medium rounded-xl inline-flex items-center justify-center gap-0 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-8 hover:bg-gray-200">
 
 
             <Filter className="w-4 h-4 mr-2" />
