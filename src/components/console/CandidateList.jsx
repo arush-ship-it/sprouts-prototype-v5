@@ -70,6 +70,33 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const handleRemoveChip = (stateKey, idx) => {
     setterMap[stateKey](prev => prev.filter((_, i) => i !== idx));
   };
+
+  const [addingField, setAddingField] = useState(null); // stateKey of field being added
+  const [addingInput, setAddingInput] = useState("");
+
+  const allSuggestionPool = {
+    jobTitles: ["Product Designer", "UX Designer", "Visual Designer", "Interaction Designer", "Design Manager", "UI Designer", "Creative Director", "Brand Designer", "Motion Designer", "Design Lead"],
+    companies: ["Google", "Meta", "Apple", "Figma", "Airbnb", "Notion", "Spotify", "Stripe", "Uber", "Netflix", "Dropbox", "Slack"],
+    industries: ["Technology", "SaaS", "FinTech", "EdTech", "HealthTech", "E-Commerce", "Media", "Gaming", "Consulting", "Retail"],
+    skills: ["Figma", "Sketch", "Design Systems", "Prototyping", "User Research", "Wireframing", "Adobe XD", "InVision", "Accessibility", "Motion Design", "HTML/CSS"],
+    degrees: ["Bachelor in Design", "Master in HCI", "MFA in Design", "BA in Fine Arts", "BS in Computer Science", "MA in Communication Design", "BFA in Graphic Design"],
+    universities: ["Stanford", "MIT", "RISD", "Parsons", "Carnegie Mellon", "SVA", "Pratt Institute", "NYU", "UC Berkeley", "Georgia Tech"],
+  };
+
+  const getDropdownOptions = (stateKey, input) => {
+    if (!input.trim()) return [];
+    const current = stateMap[stateKey];
+    return (allSuggestionPool[stateKey] || []).filter(
+      s => s.toLowerCase().includes(input.toLowerCase()) && !current.includes(s)
+    );
+  };
+
+  const handleAddChip = (stateKey, value) => {
+    if (!value.trim()) return;
+    setterMap[stateKey](prev => prev.includes(value) ? prev : [...prev, value]);
+    setAddingField(null);
+    setAddingInput("");
+  };
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [sourcedCandidates, setSourcedCandidates] = useState([]);
@@ -259,7 +286,36 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                         </button>
                       </span>
                       )}
-                            <button className="text-[11px] text-gray-400 hover:text-gray-600 px-2 py-1 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add</button>
+                            {addingField === stateKey ? (
+                              <div className="relative">
+                                <input
+                                  autoFocus
+                                  value={addingInput}
+                                  onChange={(e) => setAddingInput(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") handleAddChip(stateKey, addingInput);
+                                    if (e.key === "Escape") { setAddingField(null); setAddingInput(""); }
+                                  }}
+                                  placeholder="Type to search…"
+                                  className="text-[11px] px-2.5 py-1 rounded-lg border border-indigo-300 bg-white focus:outline-none focus:ring-1 focus:ring-indigo-300 w-36"
+                                />
+                                {getDropdownOptions(stateKey, addingInput).length > 0 && (
+                                  <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 py-1 min-w-[160px]">
+                                    {getDropdownOptions(stateKey, addingInput).map((opt) => (
+                                      <button
+                                        key={opt}
+                                        onMouseDown={() => handleAddChip(stateKey, opt)}
+                                        className="w-full text-left px-3 py-1.5 text-[11px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                                      >
+                                        {opt}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <button onClick={() => { setAddingField(stateKey); setAddingInput(""); }} className="text-[11px] text-gray-400 hover:text-gray-600 px-2 py-1 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add</button>
+                            )}
                             <button onClick={() => handleAISuggest(stateKey)} className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium px-2 py-1 rounded-lg border border-dashed border-indigo-200 hover:border-indigo-300 transition-colors"><Sparkles className="w-3 h-3" /> AI Suggest</button>
                           </div>
                         </div>
