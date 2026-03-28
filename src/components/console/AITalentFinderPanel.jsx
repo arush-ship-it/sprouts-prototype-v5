@@ -212,7 +212,7 @@ export default function AITalentFinderPanel() {
               </p>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary" className="text-[11px] bg-gray-100">Skills</Badge>
-                <Badge variant="secondary" className="text-[11px] bg-gray-100">Education</Badge>
+                <Badge variant="secondary" className="inline-flex items-center rounded-md border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent text--foreground hover:bg-secondary/80 text-[11px] bg-gray-100">Education</Badge>
                 <Badge variant="secondary" className="text-[11px] bg-gray-100">Experience</Badge>
                 <Badge variant="secondary" className="text-[11px] bg-gray-100">Attributes</Badge>
               </div>
@@ -499,7 +499,7 @@ export default function AITalentFinderPanel() {
             placeholder="Let SproutsAI assist you"
             className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
 
-          <Button size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-10 w-10 shrink-0 hover:bg-blue-600">
+          <Button size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 shrink-0 hover:bg-blue-600">
             <Send className="w-4 h-4" />
           </Button>
         </div>
