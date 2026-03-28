@@ -193,8 +193,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
                   rows={2} />
                   <Button
-                  size="icon"
-                  className="bg-indigo-500 hover:bg-indigo-600 rounded-lg absolute right-2 bottom-2 h-7 w-7 shadow-none"
+                  size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-blue-600 absolute right-2 bottom-2 h-9 w-9 shadow-none"
+
                   onClick={handleSendSourcingPrompt}>
                     <Send className="w-3 h-3" />
                   </Button>
