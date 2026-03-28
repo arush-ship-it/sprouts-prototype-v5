@@ -388,15 +388,15 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               <p className="text-[11px] text-gray-500">{candidate.title} · {candidate.company}</p>
               <p className="text-[11px] text-gray-400 mt-0.5">{candidate.experience} · {candidate.skillsMatch}</p>
             </div>
-            <button
-              onClick={() => toggleSourcedCandidate(candidate.id)}
-              className={`shrink-0 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all ${
-              selectedSourced.has(candidate.id) ?
-              "bg-indigo-50 text-indigo-600" :
-              "text-gray-500 border border-gray-200 hover:border-indigo-200 hover:text-indigo-500"}`
-              }>
-              {selectedSourced.has(candidate.id) ? "✓ Added" : "Add"}
-            </button>
+            
+
+
+
+
+
+
+
+            
           </div>
           )}
         </div>
