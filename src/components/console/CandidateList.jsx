@@ -101,6 +101,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [sourcedCandidates, setSourcedCandidates] = useState([]);
   const [selectedSourced, setSelectedSourced] = useState(new Set());
+  const [prospectCandidates, setProspectCandidates] = useState([]);
 
   const isPipeline = activeTab === "pipeline";
 
@@ -130,6 +131,13 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       updated.add(id);
     }
     setSelectedSourced(updated);
+  };
+
+  const handleAddToProspects = () => {
+    const addedCandidates = sourcedCandidates.filter((c) => selectedSourced.has(c.id));
+    setProspectCandidates((prev) => [...prev, ...addedCandidates]);
+    setSourcedCandidates((prev) => prev.filter((c) => !selectedSourced.has(c.id)));
+    setSelectedSourced(new Set());
   };
 
   return (
@@ -397,11 +405,50 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             className="px-3 py-1.5 text-[12px] font-medium text-gray-500 hover:text-gray-700 transition-colors">
             Clear
           </button>
-          <Button className="bg-indigo-500 hover:bg-indigo-600 text-white text-[12px] h-8 rounded-lg shadow-none">
+          <Button onClick={handleAddToProspects} className="bg-indigo-500 hover:bg-indigo-600 text-white text-[12px] h-8 rounded-lg shadow-none">
             Add {selectedSourced.size} to Prospects
           </Button>
         </div>
         }
+      </div>
+      }
+
+            {/* Prospects Section */}
+            {prospectCandidates.length > 0 &&
+      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="px-5 py-4 flex items-center justify-between border-b border-gray-50">
+          <div>
+            <h2 className="text-[13px] font-semibold text-gray-800">Prospects</h2>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+              <p className="text-[11px] text-gray-400">{prospectCandidates.length} candidates</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="divide-y divide-gray-50">
+          {prospectCandidates.map((candidate) =>
+          <div key={candidate.id} className="px-5 py-4 flex items-center gap-4 hover:bg-gray-50/60 transition-colors">
+            <img
+              src={candidate.avatar}
+              alt={candidate.name}
+              className="w-10 h-10 rounded-full object-cover shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <p className="text-[13px] font-semibold text-gray-900">{candidate.name}</p>
+                <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">{candidate.score}%</span>
+              </div>
+              <p className="text-[11px] text-gray-500">{candidate.title} · {candidate.company}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">{candidate.experience} · {candidate.skillsMatch}</p>
+            </div>
+            <button
+              onClick={() => setProspectCandidates((prev) => prev.filter((c) => c.id !== candidate.id))}
+              className="shrink-0 px-3 py-1.5 rounded-lg text-[12px] font-medium text-gray-500 border border-gray-200 hover:border-red-200 hover:text-red-500 transition-all">
+              Remove
+            </button>
+          </div>
+          )}
+        </div>
       </div>
       }
 
