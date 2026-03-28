@@ -148,7 +148,7 @@ function ActivityRow({ item }) {
 
   return (
     <div className={`bg-white rounded-xl border transition-all duration-200 ${item.pendingApproval && approved === null ? "border-orange-200 shadow-sm" : "border-gray-100"}`}>
-      <div className="flex items-start gap-3 px-4 py-3.5">
+      <div className="px-4 py-3.5 rounded-2xl flex items-start gap-3">
         {/* Dot */}
         <div className="flex flex-col items-center pt-1 gap-1 flex-shrink-0">
           <div className={`w-2 h-2 rounded-full ${item.dotColor}`} />
@@ -291,7 +291,7 @@ export default function AgentActivityFeed() {
 
 
       {/* Activity list */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {filtered.map((item) =>
         <ActivityRow key={item.id} item={item} />
         )}
