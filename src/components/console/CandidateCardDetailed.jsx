@@ -176,7 +176,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
       {isExpanded &&
       <div className="pt-4 border-t border-gray-100 space-y-4">
           {/* AI Fit Analysis */}
-          <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100">
+          <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-blue-50 border border-blue-100">
             <div className="flex items-center gap-2 mb-3">
               <Target className="w-4 h-4 text-indigo-600" />
               <h4 className="text-[13px] font-semibold text-gray-900">AI Fit Analysis</h4>
@@ -185,16 +185,16 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
               {candidate.name} is a strong match for this role with {candidate.score}% overall fit. Their experience at {candidate.company} demonstrates expertise in product design and user-centered approaches. Skills alignment is excellent with {candidate.skillsMatch}, particularly in Figma, design systems, and prototyping.
             </p>
             <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary" className="text-[10px]">Design Leadership</Badge>
-              <Badge variant="secondary" className="text-[10px]">User Research</Badge>
-              <Badge variant="secondary" className="text-[10px]">Team Collaboration</Badge>
+              <Badge variant="secondary" className="bg-[hsl(var(--background))] text-[10px] px-2.5 py-0.5 font-semibold rounded-md inline-flex items-center border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-secondary/80">Design Leadership</Badge>
+              <Badge variant="secondary" className="bg-[hsl(var(--background))] text-[10px] px-2.5 py-0.5 font-semibold rounded-md inline-flex items-center border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-secondary/80">User Research</Badge>
+              <Badge variant="secondary" className="bg-[hsl(var(--background))] text-[10px] px-2.5 py-0.5 font-semibold rounded-md inline-flex items-center border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-secondary/80">Team Collaboration</Badge>
             </div>
           </div>
 
           {/* 2x2 Grid */}
           <div className="grid grid-cols-2 gap-4">
             {/* Skills Fit */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white">
               <div className="flex items-center gap-2 mb-3">
                 <Award className="w-4 h-4 text-indigo-600" />
                 <h4 className="text-[13px] font-semibold text-gray-900">Skills Fit</h4>
@@ -224,7 +224,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
             </div>
 
             {/* Work Experience */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white">
               <div className="flex items-center gap-2 mb-3">
                 <Briefcase className="w-4 h-4 text-violet-600" />
                 <h4 className="text-[13px] font-semibold text-gray-900">Work Experience</h4>
@@ -242,7 +242,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
             </div>
 
             {/* Education */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white">
               <div className="flex items-center gap-2 mb-3">
                 <GraduationCap className="w-4 h-4 text-emerald-600" />
                 <h4 className="text-[13px] font-semibold text-gray-900">Education</h4>
@@ -257,7 +257,7 @@ export default function CandidateCardDetailed({ candidate, isPipeline = false, o
             </div>
 
             {/* Attribute Match */}
-            <div className="p-4 rounded-xl bg-white border border-gray-200">
+            <div className="p-4 rounded-xl bg-white">
               <div className="flex items-center gap-2 mb-3">
                 <Target className="w-4 h-4 text-orange-600" />
                 <h4 className="text-[13px] font-semibold text-gray-900">Attribute Match</h4>
