@@ -261,7 +261,7 @@ function DefaultScreen({ onStart }) {
                 <button
                   onClick={() => setFormatDropdownOpen((v) => !v)}
                   className={`h-7 px-2.5 rounded-lg flex items-center gap-1.5 border transition-colors text-[11px] font-medium ${formatDropdownOpen ? "text-indigo-600 bg-indigo-50 border-indigo-200" : "text-gray-500 bg-white border-gray-200 hover:border-indigo-300 hover:text-indigo-500"}`}>
-                  <span>Format</span>
+                  <span>{jdFormat === "classic" ? "Format" : selectedFormat?.label ?? "Format"}</span>
                   <ChevronDown className={`w-3 h-3 transition-transform ${formatDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {formatDropdownOpen &&
