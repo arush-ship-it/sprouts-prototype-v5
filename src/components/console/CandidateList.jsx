@@ -339,7 +339,6 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             }
             </div>
             }
-            }
 
             {/* Sourced Candidates Section */}
             {sourcedCandidates.length > 0 &&
@@ -484,7 +483,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
         candidate={selectedCandidate}
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)} />
-
-    </div>);
+      </div>
+      );
+      }
 
 }
