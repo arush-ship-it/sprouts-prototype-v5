@@ -181,7 +181,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
         <div className="border-t border-gray-50">
             {/* Insights screen */}
             {showInsightsScreen &&
-          <div className="px-5 py-4 h-[510px] overflow-y-auto">
+          <div className="px-5 py-4 h-[560px] overflow-y-auto">
               <CandidateFitInsights
               onViewInsights={() => {}}
               onSkip={() => setShowInsightsScreen(false)} />
