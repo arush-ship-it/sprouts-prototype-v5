@@ -202,15 +202,15 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             {/* Sub Tabs */}
             {!showInsightsScreen &&
           <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[520px] gap-4">
-              <div className="bg-gray-100 mx-auto p-2.5 rounded-xl flex gap-0.5 w-full">
+              <div className="flex gap-6 border-b border-gray-200 w-full">
                 <button
-                onClick={() => setSourcingTab("ai")} className="flex-1 px-4 py-2 text-[12px] font-medium rounded-lg transition-all bg-white text-gray-900 shadow-sm">
+                onClick={() => setSourcingTab("ai")} className={`pb-2.5 text-[12px] font-medium transition-all ${sourcingTab === "ai" ? "text-gray-900 border-b-2 border-gray-900" : "text-gray-500 hover:text-gray-700"}`}>
                 
                   Talk to AI
                 </button>
                 <button
                 onClick={() => setSourcingTab("manual")}
-                className={`flex-1 px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "manual" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+                className={`pb-2.5 text-[12px] font-medium transition-all ${sourcingTab === "manual" ? "text-gray-900 border-b-2 border-gray-900" : "text-gray-500 hover:text-gray-700"}`}>
                   Manual Sourcing
                 </button>
               </div>
