@@ -322,7 +322,7 @@ function DefaultScreen({ onStart }) {
           <div className="bg-gray-300 mb-4 mx-auto rounded-[64px] w-14 h-14 flex items-center justify-center">
             <Sparkles className="text-[hsl(var(--background))] lucide lucide-sparkles w-7 h-7" />
           </div>
-          <h2 className="text-gray-600 mb-1 text-2xl font-medium">Create a Job in Minutes, with SproutsAI</h2>
+          <h2 className="text-gray-500 mb-1 text-2xl font-medium">Create a Job in Minutes, with SproutsAI</h2>
           <p className="text-[12px] text-gray-400">Generate &amp; Post Job Instantly With Ease With SproutsAI Job Builder</p>
         </div>
 
@@ -330,7 +330,7 @@ function DefaultScreen({ onStart }) {
         <div className="grid grid-cols-3 gap-6 w-full max-w-2xl mb-8">
           {Object.entries(JOB_SUGGESTIONS).map(([category, roles]) =>
           <div key={category}>
-              <p className="text-[12px] font-semibold text-gray-700 text-center mb-3">{category}</p>
+              <p className="text-gray-700 mb-3 text-xs font-medium text-center">{category}</p>
               <div className="space-y-2">
                 {roles.map((role) =>
               <button
