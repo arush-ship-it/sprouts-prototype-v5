@@ -622,7 +622,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                 {JD_FORMATS.map((fmt) =>
                 <button
                   key={fmt.value}
-                  onClick={() => {setSelectedJdFormat(fmt.value); setFormatDropdownOpen(false);}}
+                  onClick={() => {setSelectedJdFormat(fmt.value);setFormatDropdownOpen(false);}}
                   className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left ${selectedJdFormat === fmt.value ? "bg-indigo-50" : ""}`}>
                   <div className={`w-2 h-2 rounded-full shrink-0 ${selectedJdFormat === fmt.value ? "bg-indigo-500" : "bg-gray-300"}`} />
                   <div className="min-w-0">
@@ -1492,11 +1492,11 @@ function PublishScreen({ onBack, onPublish }) {
             </div>
 
             {/* Select all / none */}
-            <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
-              <button onClick={() => setSelectedBoards(JOB_BOARDS.map((b) => b.id))} className="text-[11px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">Select all</button>
-              <span className="text-gray-200">·</span>
-              <button onClick={() => setSelectedBoards([])} className="text-[11px] font-medium text-gray-400 hover:text-gray-600 transition-colors">Clear</button>
-            </div>
+            
+
+
+
+            
           </motion.div>
         </div>
       </div>
@@ -1510,11 +1510,11 @@ function PublishScreen({ onBack, onPublish }) {
           className="flex items-center gap-1.5 text-[13px] font-medium text-gray-500 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
           <ChevronDown className="w-4 h-4 rotate-90" /> Back
         </motion.button>
-        <p className="text-[12px] text-gray-400">
-          {selectedBoards.length > 0 ?
-          `Posting to ${selectedBoards.length} board${selectedBoards.length > 1 ? "s" : ""}` :
-          "No job boards selected"}
-        </p>
+        
+
+
+
+        
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
