@@ -700,7 +700,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-gray-900 text-base font-medium">Requirements</h3>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <div className="relative">
                 <button
                   onClick={() => setReqDropdownOpen((v) => !v)}
@@ -737,7 +737,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
 
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-gray-900 text-base font-medium">Responsibilities</h3>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <button
                 onClick={() => handleEnhanceSection("responsibilities")}
                 disabled={enhancingSection === "responsibilities"}
