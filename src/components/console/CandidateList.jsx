@@ -131,7 +131,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           <div className="border-t border-gray-50">
             {/* Insights screen */}
             {showInsightsScreen &&
-            <div className="px-5 py-4">
+            <div className="px-5 py-4 h-[480px] overflow-y-auto">
               <CandidateFitInsights
                 onViewInsights={() => {}}
                 onSkip={() => setShowInsightsScreen(false)} />
@@ -140,7 +140,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
             {/* Sub Tabs */}
             {!showInsightsScreen &&
-            <div className="px-5 py-4 space-y-4 flex flex-col items-center">
+            <div className="px-5 py-4 space-y-4 flex flex-col items-center h-[480px] overflow-y-auto">
               <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit mx-auto">
                 <button
                   onClick={() => setSourcingTab("ai")}
