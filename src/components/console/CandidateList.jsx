@@ -178,9 +178,19 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
           {/* Expanded workspace */}
           {isSourcingExpanded &&
-          <div className="border-t border-gray-50 flex">
-            {/* Left: Sub Tabs */}
-          <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[520px] gap-4 flex-1">
+        <div className="border-t border-gray-50">
+            {/* Insights screen */}
+            {showInsightsScreen &&
+          <div className="px-5 py-4 h-[520px] overflow-y-auto">
+              <CandidateFitInsights
+              onViewInsights={() => {}}
+              onSkip={() => setShowInsightsScreen(false)} />
+            </div>
+          }
+
+            {/* Sub Tabs */}
+            {!showInsightsScreen &&
+          <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[520px] gap-4">
               <div className="bg-gray-100 mx-auto p-2.5 rounded-xl flex gap-0.5 w-full">
                 <button
                 onClick={() => setSourcingTab("ai")} className="flex-1 px-4 py-2 text-[12px] font-medium rounded-lg transition-all bg-white text-gray-900 shadow-sm">
@@ -194,9 +204,9 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 </button>
               </div>
 
-              {/* Content Area */}
+              {/* Talk to AI Tab */}
               {sourcingTab === "ai" &&
-              <div className="flex flex-col w-full flex-1 min-h-0">
+            <div className="flex flex-col w-full flex-1 min-h-0">
                 <div className="flex-1 overflow-y-auto pr-1 space-y-2 mb-3">
                   <div className="flex gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
@@ -320,25 +330,12 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 <Button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 px-4 py-2 w-full bg-blue-600 hover:bg-indigo-600 text-white text-[13px] rounded-xl h-9 shadow-none">Start Sourcing</Button>
               </div>
             }
-
-            {/* Right: Insights Card */}
-            {!showInsightsScreen &&
-            <div className="w-64 pr-5 pb-4 pl-2 border-l border-gray-50">
-              <CandidateFitInsights
-              onViewInsights={() => {}}
-              onSkip={() => setShowInsightsScreen(false)} />
             </div>
-            }
-
-            {showInsightsScreen &&
-            <div className="w-64 pr-5 pb-4 pl-2 border-l border-gray-50">
-              <CandidateFitInsights
-              onViewInsights={() => {}}
-              onSkip={() => setShowInsightsScreen(false)} />
-            </div>
-            }
-            </div>
-            }
+          }
+          </div>
+        }
+        </div>
+      }
 
             {/* Sourced Candidates Section */}
             {sourcedCandidates.length > 0 &&
@@ -483,6 +480,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
         candidate={selectedCandidate}
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)} />
-      </div>
-      );
-      }
+
+    </div>);
+
+}
