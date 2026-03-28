@@ -34,7 +34,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
 
 
   return (
-    <div className="px-64 space-y-4">
+    <div className="px-64 space-y-16">
       {/* Stats Row */}
       <div className="flex gap-3">
         <div className="bg-slate-50 p-4 rounded-xl flex-1 flex items-center gap-3">
@@ -58,7 +58,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
       </div>
 
       {/* Chart */}
-      <div className="bg-white py-20 rounded-xl">
+      <div className="bg-white py-2 rounded-xl">
         <p className="text-[12px] font-semibold text-gray-500 mb-1 text-center">Analysed 301 Candidates</p>
         <ResponsiveContainer width="100%" height={160}>
           <BarChart data={matchData} barSize={36}>
@@ -83,7 +83,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
 
       {/* CTA: View Insights or Skip */}
       {!showRecommendations &&
-      <div className="pl-1 flex gap-2">
+      <div className="pl-1 flex gap-3">
           <Button className="bg-blue-600 text-[#ffffff] px-4 py-2 text-xs font-medium rounded-md inline-flex items-center justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 flex-1 hover:bg-indigo-700 gap-1.5"
 
         onClick={() => {setShowRecommendations(true);onViewInsights?.();}}>
