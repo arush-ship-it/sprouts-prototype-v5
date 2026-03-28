@@ -260,12 +260,9 @@ function DefaultScreen({ onStart }) {
               <div className="relative" onMouseDown={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => setFormatDropdownOpen((v) => !v)}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${formatDropdownOpen ? "text-indigo-600 bg-indigo-50" : "text-gray-400 hover:text-indigo-500 hover:bg-indigo-50"}`}
-                  title={selectedFormat?.label}>
-                  <div className="flex items-center gap-0.5">
-                    <div className={`w-1.5 h-1.5 rounded-full ${jdFormat !== "classic" ? "bg-indigo-500" : "bg-gray-400"}`} />
-                    <ChevronDown className="w-3 h-3" />
-                  </div>
+                  className={`h-7 px-2.5 rounded-lg flex items-center gap-1.5 border transition-colors text-[11px] font-medium ${formatDropdownOpen ? "text-indigo-600 bg-indigo-50 border-indigo-200" : "text-gray-500 bg-white border-gray-200 hover:border-indigo-300 hover:text-indigo-500"}`}>
+                  <span>Format</span>
+                  <ChevronDown className={`w-3 h-3 transition-transform ${formatDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {formatDropdownOpen &&
                 <div className="absolute bottom-full left-0 mb-2 w-[260px] bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-1">
