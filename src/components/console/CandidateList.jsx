@@ -368,35 +368,20 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           </div>
         </div>
 
-        <div className="divide-y divide-gray-50">
+        <div className="space-y-3 px-5 pb-4">
           {sourcedCandidates.map((candidate) =>
-          <div key={candidate.id} className="px-5 py-4 flex items-center gap-4 hover:bg-gray-50/60 transition-colors">
-            <input
-              type="checkbox"
-              checked={selectedSourced.has(candidate.id)}
-              onChange={() => toggleSourcedCandidate(candidate.id)}
-              className="w-4 h-4 accent-indigo-500 cursor-pointer shrink-0" />
-            <img
-              src={candidate.avatar}
-              alt={candidate.name}
-              className="w-10 h-10 rounded-full object-cover shrink-0" />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <p className="text-[13px] font-semibold text-gray-900">{candidate.name}</p>
-                <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">{candidate.score}%</span>
-              </div>
-              <p className="text-[11px] text-gray-500">{candidate.title} · {candidate.company}</p>
-              <p className="text-[11px] text-gray-400 mt-0.5">{candidate.experience} · {candidate.skillsMatch}</p>
+          <div key={candidate.id} className="relative">
+            <div className="absolute left-3 top-3 z-20">
+              <input
+                type="checkbox"
+                checked={selectedSourced.has(candidate.id)}
+                onChange={() => toggleSourcedCandidate(candidate.id)}
+                className="w-4 h-4 accent-indigo-500 cursor-pointer" />
             </div>
-            
-
-
-
-
-
-
-
-            
+            <CandidateCardDetailed
+              candidate={candidate}
+              isPipeline={isPipeline}
+              onClick={() => handleCandidateClick(candidate)} />
           </div>
           )}
         </div>
