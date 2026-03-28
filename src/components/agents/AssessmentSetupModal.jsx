@@ -812,7 +812,7 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
               { num: 4, label: "Filtering Rules", desc: "Set score thresholds & approval logic" }].
               map(({ num, label, desc }) =>
               <div key={num} className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all">
-                  <div className="w-7 h-7 rounded-full bg-indigo-600 text-white text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">{num}</div>
+                  <div className="bg-slate-200 text-[12px] mt-0.5 font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">{num}</div>
                   <div>
                     <p className="text-[13px] font-semibold text-gray-900">{label}</p>
                     <p className="text-[12px] text-gray-400 mt-0.5">{desc}</p>
