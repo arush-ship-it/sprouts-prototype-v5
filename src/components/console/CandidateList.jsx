@@ -191,7 +191,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             {/* Sub Tabs */}
             {!showInsightsScreen &&
           <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[480px] gap-4">
-              <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit mx-auto">
+              <div className="bg-gray-100 mx-auto p-1 rounded-xl flex gap-1 w-fit">
                 <button
                 onClick={() => setSourcingTab("ai")}
                 className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "ai" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
@@ -217,7 +217,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     </div>
                   </div>
                   <div className="flex gap-2.5 justify-end">
-                    <div className="bg-indigo-500 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
+                    <div className="bg-blue-600 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
                       <p className="text-[12px] text-white leading-relaxed">Find me 10 senior product designers in San Francisco</p>
                     </div>
                   </div>
