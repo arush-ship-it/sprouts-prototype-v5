@@ -40,7 +40,13 @@ const jobs = [
 { id: 1, title: "Senior Product Designer", status: "Active" },
 { id: 2, title: "Frontend Engineer", status: "Active" },
 { id: 3, title: "Product Manager", status: "Active" },
-{ id: 4, title: "Data Scientist", status: "Draft" }];
+{ id: 4, title: "Data Scientist", status: "Draft" },
+{ id: 5, title: "UX Researcher", status: "Active" },
+{ id: 6, title: "Full Stack Developer", status: "Active" },
+{ id: 7, title: "Design Lead", status: "Active" },
+{ id: 8, title: "Backend Engineer", status: "Draft" },
+{ id: 9, title: "DevOps Engineer", status: "Active" },
+{ id: 10, title: "QA Engineer", status: "Active" }];
 
 
 export default function SidebarNav({ activePage = "Console" }) {
