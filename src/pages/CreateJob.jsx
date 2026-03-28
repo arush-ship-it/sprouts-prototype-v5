@@ -707,7 +707,7 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                   onClick={() => setReqDropdownOpen((v) => !v)}
                   disabled={enhancingSection === "requirements"} className="text-indigo-500 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
                   
-                  <Sparkles className="w-3 h-3" /> {enhancingSection === "requirements" ? "Enhancing…" : "Enhance"} <ChevronDown className="w-3 h-3" />
+                  <Sparkles className="w-3.5 h-3.5" /> <ChevronDown className="w-3 h-3" />
                 </button>
                 {reqDropdownOpen &&
                 <div className="absolute right-0 top-full mt-1 w-44 bg-white border border-gray-200 rounded-xl shadow-lg z-30 py-1 overflow-hidden">
@@ -726,8 +726,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                   </div>
                 }
               </div>
-              <button onClick={addReq} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
-              <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} className="text-[11px] text-red-600 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
+              <button onClick={addReq} title="Add requirement" className="text-indigo-500 hover:text-indigo-700 flex items-center"><Plus className="w-3.5 h-3.5" /></button>
+              <button onClick={() => setJd((prev) => ({ ...prev, requirements: [] }))} title="Remove section" className="text-red-400 hover:text-red-600 flex items-center"><X className="w-3.5 h-3.5" /></button>
             </div>
           </div>
           <ul className="mb-5 space-y-1" onMouseUp={() => handleTextSelect("requirements")}>
@@ -743,10 +743,10 @@ function ReviewJDScreen({ job, onBack, onNext }) {
                 onClick={() => handleEnhanceSection("responsibilities")}
                 disabled={enhancingSection === "responsibilities"}
                 className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1 disabled:opacity-50">
-                <Sparkles className="w-3 h-3" /> {enhancingSection === "responsibilities" ? "Enhancing…" : "Enhance"}
+                <Sparkles className="w-3.5 h-3.5" />
               </button>
-              <button onClick={addResp} className="text-[11px] text-indigo-500 hover:text-indigo-700 font-medium flex items-center gap-1"><Plus className="w-3 h-3" /> Add</button>
-              <button onClick={() => setJd((prev) => ({ ...prev, responsibilities: [] }))} className="text-[11px] text-red-400 hover:text-red-600 font-medium flex items-center gap-1"><X className="w-3 h-3" /> Remove section</button>
+              <button onClick={addResp} title="Add responsibility" className="text-indigo-500 hover:text-indigo-700 flex items-center"><Plus className="w-3.5 h-3.5" /></button>
+              <button onClick={() => setJd((prev) => ({ ...prev, responsibilities: [] }))} title="Remove section" className="text-red-400 hover:text-red-600 flex items-center"><X className="w-3.5 h-3.5" /></button>
             </div>
           </div>
           <ul className="space-y-1" onMouseUp={() => handleTextSelect("responsibilities")}>
