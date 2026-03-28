@@ -219,7 +219,7 @@ function DefaultScreen({ onStart }) {
           {/* Quick action cards - slideshow */}
            <QuickActionSlideshow onStart={onStart} onShowDrafts={setShowDrafts} />
         </div>
-        <div className="p-3 border-t border-gray-100 shrink-0">
+        <div className="p-3 shrink-0">
           {/* File attachment chip */}
           {attachedFile &&
           <div className="flex items-center gap-2 mb-2 px-1">
