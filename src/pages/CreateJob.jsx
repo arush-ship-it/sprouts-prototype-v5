@@ -1547,8 +1547,8 @@ function PublishScreen({ onBack, onPublish }) {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
           onClick={handlePublish}
-          disabled={publishing}
-          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 h-10 font-semibold rounded-xl shadow-[0_4px_16px_rgba(99,102,241,0.35)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
+          disabled={publishing} className="flex items-center gap-2 bg-blue-600 text-white px-8 h-10 font-semibold rounded-xl hover:shadow-[0_6px_20px_rgba(99,102,241,0.45)] transition-all duration-200 disabled:opacity-70 text-[13px]">
+          
           {publishing ?
           <>
               <motion.div
