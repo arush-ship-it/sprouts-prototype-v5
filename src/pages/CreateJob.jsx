@@ -171,10 +171,18 @@ const SAVED_DRAFTS = [
 { id: 4, title: "Sales Executive", role: "Sales", status: "Draft", created: "5 days ago" }];
 
 
-function DefaultScreen({ onStart }) {
+function DefaultScreen({ onStart, selectedFormat, onSelectFormat }) {
   const [prompt, setPrompt] = useState("");
   const [showDrafts, setShowDrafts] = useState(false);
   const [attachedFile, setAttachedFile] = useState(null);
+  const [formatDropdownOpen, setFormatDropdownOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (!formatDropdownOpen) return;
+    const handler = () => setFormatDropdownOpen(false);
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [formatDropdownOpen]);
 
   const handleSuggestion = (title) => {
     onStart(`Create a job posting for a ${title}`);
@@ -213,6 +221,25 @@ function DefaultScreen({ onStart }) {
               </div>
             </div>
           }
+          {/* Format selector row */}
+          <div className="flex items-center gap-1.5 mb-2 px-1 flex-wrap" onMouseDown={(e) => e.stopPropagation()}>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide shrink-0">Format:</span>
+            {JD_FORMATS.map((fmt) => (
+              <button
+                key={fmt.id}
+                onClick={() => onSelectFormat(fmt.id)}
+                className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] border transition-all ${
+                  selectedFormat === fmt.id
+                    ? "bg-indigo-50 border-indigo-400 text-indigo-700 font-semibold"
+                    : "border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600"
+                }`}
+              >
+                <fmt.Icon className={`w-2.5 h-2.5 ${selectedFormat === fmt.id ? fmt.iconColor : "text-gray-400"}`} />
+                {fmt.label.split(" / ")[0]}
+              </button>
+            ))}
+          </div>
+
           <div className="relative">
             <Textarea
               value={prompt}
@@ -1604,7 +1631,10 @@ export default function CreateJob() {
             onStart={(p) => {
               setPrompt(p);
               setStep(0.5);
-            }} />
+            }}
+            selectedFormat={selectedFormat}
+            onSelectFormat={setSelectedFormat}
+          />
           }
           {step === 0.5 &&
           <FormatSelectionScreen
