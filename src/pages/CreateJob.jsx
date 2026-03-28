@@ -323,20 +323,20 @@ function DefaultScreen({ onStart }) {
             <Sparkles className="text-[hsl(var(--background))] lucide lucide-sparkles w-7 h-7" />
           </div>
           <h2 className="text-slate-700 mb-1 text-2xl font-medium">SproutsAI Job Generation</h2>
-          <p className="text-[12px] text-gray-400">Generate &amp; Post Job Instantly With Ease With SproutsAI Job Builder</p>
+          <p className="text-gray-500 text-xs">Generate & Post Job Instantly With Ease With SproutsAI Job Builder</p>
         </div>
 
         {/* Job suggestion grid */}
         <div className="grid grid-cols-3 gap-6 w-full max-w-2xl mb-8">
           {Object.entries(JOB_SUGGESTIONS).map(([category, roles]) =>
           <div key={category}>
-              <p className="text-[12px] font-semibold text-gray-700 text-center mb-3">{category}</p>
-              <div className="space-y-2">
+              <p className="text-gray-700 mb-3 text-xs font-normal text-center">{category}</p>
+              <div className="space-y-3">
                 {roles.map((role) =>
               <button
                 key={role}
-                onClick={() => handleSuggestion(role)}
-                className="w-full px-3 py-2.5 rounded-lg bg-white text-[12px] text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all text-center">
+                onClick={() => handleSuggestion(role)} className="bg-white text-gray-500 px-3 py-2.5 text-xs text-center rounded-lg w-full hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                
 
                     {role}
                   </button>
