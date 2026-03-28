@@ -42,8 +42,8 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
             <Users className="w-4 h-4 text-indigo-600" />
           </div>
           <div>
-            <p className="text-indigo-700 text-base font-bold">182</p>
-            <p className="text-[11px] text-indigo-500 font-medium">Candidates Applied</p>
+            <p className="text-blue-700 text-base font-bold">182</p>
+            <p className="text-[11px] text-blue-600 font-medium">Candidates Applied</p>
           </div>
         </div>
         <div className="bg-slate-50 p-4 rounded-xl flex-1 flex items-center gap-3">
@@ -51,8 +51,8 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
             <TrendingUp className="w-4 h-4 text-violet-600" />
           </div>
           <div>
-            <p className="text-violet-700 text-base font-bold">119</p>
-            <p className="text-[11px] text-violet-500 font-medium">Prospects Sourced</p>
+            <p className="text-blue-600 text-base font-bold">119</p>
+            <p className="text-blue-600 text-xs font-medium">Prospects Sourced</p>
           </div>
         </div>
       </div>
