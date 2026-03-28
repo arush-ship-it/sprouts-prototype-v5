@@ -235,6 +235,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       <span key={idx} className={`text-[11px] font-medium px-2.5 py-1 rounded-lg ${color}`}>{item}</span>
                       )}
                             <button className="text-[11px] text-gray-400 hover:text-gray-600 px-2 py-1 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add</button>
+                            <button className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium px-2 py-1 rounded-lg border border-dashed border-indigo-200 hover:border-indigo-300 transition-colors"><Sparkles className="w-3 h-3" /> AI Suggest</button>
                           </div>
                         </div>
                   )}
