@@ -350,7 +350,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
             {/* Sourced Candidates Section */}
             {sourcedCandidates.length > 0 &&
-      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white my-5 rounded-2xl border border-blue-300 shadow-sm overflow-hidden">
         <div className="px-5 py-4 flex items-center justify-between border-b border-gray-50">
           <div>
             <h2 className="text-[13px] font-semibold text-gray-800">Sourced Candidates</h2>
