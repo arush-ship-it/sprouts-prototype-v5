@@ -486,5 +486,3 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       </div>
       );
       }
-
-}
