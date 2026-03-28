@@ -136,7 +136,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           {/* Header */}
           <div className="px-5 pt-4 pb-7 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+              <div className="bg-blue-50 rounded-[28px] w-7 h-7 flex items-center justify-center shrink-0">
                 <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
               </div>
               <div>
