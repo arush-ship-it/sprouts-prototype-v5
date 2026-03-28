@@ -8,7 +8,11 @@ const initialStages = [
   {
     id: "1",
     name: "In Review",
-    agents: [{ name: "Outreach Agent", active: true }, { name: "Screening Bot", active: true }, { name: "Resume Parser", active: false }],
+    agents: [
+      { name: "Outreach Agent", active: true, stack: { processing: 5, queued: 4, done: 3 } },
+      { name: "Screening Bot", active: true, stack: { processing: 3, queued: 6, done: 3 } },
+      { name: "Resume Parser", active: false, stack: { processing: 0, queued: 12, done: 0 } },
+    ],
     candidates: [
       { id: "c1", name: "Alex Chen", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face", score: 91, source: "LinkedIn", fit: "Strong" },
       { id: "c2", name: "Priya Sharma", title: "UX Designer", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face", score: 78, source: "Referral", fit: "Good" },
@@ -27,7 +31,10 @@ const initialStages = [
   {
     id: "2",
     name: "Assessment",
-    agents: [{ name: "Assessment Engine", active: true }, { name: "Skills Evaluator", active: true }],
+    agents: [
+      { name: "Assessment Engine", active: true, stack: { processing: 1, queued: 0, done: 0 } },
+      { name: "Skills Evaluator", active: true, stack: { processing: 1, queued: 0, done: 0 } },
+    ],
     candidates: [
       { id: "c13", name: "James Park", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face", score: 82, source: "LinkedIn", fit: "Good" },
     ],
@@ -35,7 +42,10 @@ const initialStages = [
   {
     id: "3",
     name: "Interview",
-    agents: [{ name: "Interview Scheduler", active: true }, { name: "Feedback Collector", active: false }],
+    agents: [
+      { name: "Interview Scheduler", active: true, stack: { processing: 2, queued: 1, done: 0 } },
+      { name: "Feedback Collector", active: false, stack: { processing: 0, queued: 3, done: 0 } },
+    ],
     candidates: [
       { id: "c14", name: "Maya Johnson", title: "Lead Product Designer", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face", score: 94, source: "Referral", fit: "Strong" },
       { id: "c15", name: "Sarah Mitchell", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face", score: 87, source: "LinkedIn", fit: "Strong" },
@@ -45,7 +55,10 @@ const initialStages = [
   {
     id: "4",
     name: "Technical",
-    agents: [{ name: "Code Challenge", active: false }, { name: "Technical Interviewer", active: true }],
+    agents: [
+      { name: "Code Challenge", active: false, stack: { processing: 0, queued: 1, done: 0 } },
+      { name: "Technical Interviewer", active: true, stack: { processing: 1, queued: 0, done: 0 } },
+    ],
     candidates: [
       { id: "c17", name: "Marcus Rivera", title: "Sr. Designer", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face", score: 89, source: "Indeed", fit: "Strong" },
     ],
@@ -53,7 +66,7 @@ const initialStages = [
   {
     id: "5",
     name: "Final Round",
-    agents: [{ name: "Executive Interviewer", active: true }],
+    agents: [{ name: "Executive Interviewer", active: true, stack: { processing: 1, queued: 0, done: 0 } }],
     candidates: [
       { id: "c18", name: "Lena Kim", title: "Product Designer II", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face", score: 92, source: "Referral", fit: "Strong" },
     ],
@@ -61,7 +74,7 @@ const initialStages = [
   {
     id: "6",
     name: "Offer",
-    agents: [{ name: "Offer Manager", active: true }],
+    agents: [{ name: "Offer Manager", active: true, stack: { processing: 1, queued: 0, done: 0 } }],
     candidates: [
       { id: "c19", name: "Daniel Wright", title: "UX Lead", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face", score: 96, source: "LinkedIn", fit: "Strong" },
     ],
@@ -187,19 +200,32 @@ export default function PipelineView() {
               {/* Agents Section - Expanded */}
               {expandedStageId === stage.id && (
                 <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2">
-                  <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Agentic Layer</h4>
+                  <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Agent Progress</h4>
                   {stage.agents.map((agent) => (
-                    <div key={agent.name} className="bg-[hsl(var(--background))] px-2.5 py-2 rounded-lg flex items-center gap-2.5">
-                      <div className={`rounded-full w-7 h-7 flex items-center justify-center shrink-0 ${agent.active ? "bg-blue-50" : "bg-gray-100"}`}>
-                        <Bot className={`w-3.5 h-3.5 ${agent.active ? "text-blue-500" : "text-gray-400"}`} />
+                    <div key={agent.name} className="bg-[hsl(var(--background))] px-2.5 py-2.5 rounded-lg space-y-2">
+                      {/* Agent header */}
+                      <div className="flex items-center gap-2">
+                        <div className={`rounded-full w-6 h-6 flex items-center justify-center shrink-0 ${agent.active ? "bg-blue-50" : "bg-gray-100"}`}>
+                          <Bot className={`w-3 h-3 ${agent.active ? "text-blue-500" : "text-gray-400"}`} />
+                        </div>
+                        <p className="text-[11px] font-semibold text-gray-800 flex-1 truncate">{agent.name}</p>
+                        <div className="flex items-center gap-1 shrink-0">
+                          <div className={`w-1.5 h-1.5 rounded-full ${agent.active ? "bg-emerald-400 animate-pulse" : "bg-gray-300"}`} />
+                          <span className={`text-[10px] font-medium ${agent.active ? "text-emerald-600" : "text-gray-400"}`}>
+                            {agent.active ? "Active" : "Idle"}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-semibold text-gray-800 truncate">{agent.name}</p>
-                      </div>
-                      <div className="flex items-center gap-1 shrink-0">
-                        <div className={`w-1.5 h-1.5 rounded-full ${agent.active ? "bg-emerald-500" : "bg-gray-300"}`} />
-                        <span className={`text-[10px] font-medium ${agent.active ? "text-emerald-600" : "text-gray-400"}`}>
-                          {agent.active ? "Active" : "Idle"}
+                      {/* Stack breakdown */}
+                      <div className="flex items-center gap-1.5 pl-8">
+                        <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
+                          <span className="font-bold">{agent.stack.processing}</span> processing
+                        </span>
+                        <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
+                          <span className="font-bold">{agent.stack.queued}</span> queued
+                        </span>
+                        <span className="flex items-center gap-1 text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md">
+                          <span className="font-bold">{agent.stack.done}</span> done
                         </span>
                       </div>
                     </div>
