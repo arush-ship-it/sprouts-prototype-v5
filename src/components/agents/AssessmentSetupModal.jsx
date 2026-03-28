@@ -822,8 +822,8 @@ export default function AssessmentSetupModal({ isOpen, onClose }) {
             </div>
 
             <button
-              onClick={() => setInitiated(true)}
-              className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white text-[14px] font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-200">
+              onClick={() => setInitiated(true)} className="bg-blue-600 text-[hsl(var(--background))] text-xs font-semibold rounded-xl w-full h-12 hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+              
               Setup Agent <ChevronRight className="w-4 h-4" />
             </button>
           </div>
