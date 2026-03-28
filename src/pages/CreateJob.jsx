@@ -224,20 +224,20 @@ function DefaultScreen({ onStart, selectedFormat, onSelectFormat }) {
           {/* Format selector row */}
           <div className="flex items-center gap-1.5 mb-2 px-1 flex-wrap" onMouseDown={(e) => e.stopPropagation()}>
             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide shrink-0">Format:</span>
-            {JD_FORMATS.map((fmt) => (
-              <button
-                key={fmt.id}
-                onClick={() => onSelectFormat(fmt.id)}
-                className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] border transition-all ${
-                  selectedFormat === fmt.id
-                    ? "bg-indigo-50 border-indigo-400 text-indigo-700 font-semibold"
-                    : "border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600"
-                }`}
-              >
+            {JD_FORMATS.map((fmt) =>
+            <button
+              key={fmt.id}
+              onClick={() => onSelectFormat(fmt.id)}
+              className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] border transition-all ${
+              selectedFormat === fmt.id ?
+              "bg-indigo-50 border-indigo-400 text-indigo-700 font-semibold" :
+              "border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600"}`
+              }>
+              
                 <fmt.Icon className={`w-2.5 h-2.5 ${selectedFormat === fmt.id ? fmt.iconColor : "text-gray-400"}`} />
                 {fmt.label.split(" / ")[0]}
               </button>
-            ))}
+            )}
           </div>
 
           <div className="relative">
@@ -369,13 +369,13 @@ function FormatSelectionScreen({ selectedFormat, onSelect, onBack, onNext }) {
         <Button
           onClick={onNext}
           disabled={!selectedFormat}
-          className="bg-blue-600 text-white px-5 h-9 text-xs font-medium rounded-lg hover:bg-indigo-700 gap-1.5 disabled:opacity-50"
-        >
+          className="bg-blue-600 text-white px-5 h-9 text-xs font-medium rounded-lg hover:bg-indigo-700 gap-1.5 disabled:opacity-50">
+          
           Generate with this Format <ArrowRight className="w-3.5 h-3.5" />
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 // ─── Step 1: Generating (animated) ────────────────────────────────────────────
@@ -1592,7 +1592,7 @@ export default function CreateJob() {
               {step >= 2 &&
             <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
-                    ✅ Job description generated using the <span className="font-semibold text-indigo-600">{JD_FORMATS.find(f => f.id === selectedFormat)?.label}</span> format! Review it on the right and make any edits.
+                    ✅ Job description generated using the <span className="font-semibold text-indigo-600">{JD_FORMATS.find((f) => f.id === selectedFormat)?.label}</span> format! Review it on the right and make any edits.
                   </div>
                 </div>
             }
@@ -1625,68 +1625,68 @@ export default function CreateJob() {
         }
 
         {/* Right Panel — Main Content */}
-        <div className={`${step === 0 ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"} overflow-hidden flex flex-col flex-1`} style={step === 0.5 ? { maxWidth: "860px", margin: "0 auto", width: "100%" } : {}}>
-          {step === 0 &&
-          <DefaultScreen
-            onStart={(p) => {
-              setPrompt(p);
-              setStep(0.5);
-            }}
-            selectedFormat={selectedFormat}
-            onSelectFormat={setSelectedFormat}
-          />
-          }
-          {step === 0.5 &&
-          <FormatSelectionScreen
-            selectedFormat={selectedFormat}
-            onSelect={setSelectedFormat}
-            onBack={() => setStep(0)}
-            onNext={() => setStep(1)}
-          />
-          }
-          {step === 1 &&
-          <GeneratingScreen
-            prompt={`${prompt}${selectedFormat ? `\n\n[FORMAT INSTRUCTION]: ${JD_FORMAT_PROMPTS[selectedFormat]}` : ""}`}
-            onDone={() => setStep(2)} />
+        
 
-          }
-          {step === 2 &&
-          <ReviewJDScreen
-            job={generatedJob}
-            onBack={() => setStep(1)}
-            onNext={(updatedJd) => {
-              setGeneratedJob(updatedJd);
-              setStep(3);
-            }} />
 
-          }
-          {step === 3 &&
-          <ConfirmDetailsScreen
-            onBack={() => setStep(2)}
-            onNext={() => setStep(4)} />
 
-          }
-          {step === 4 &&
-          <ScreeningScreen
-            onBack={() => setStep(3)}
-            onNext={() => setStep(5)}
-            onSkip={() => setStep(5)} />
 
-          }
-          {step === 5 &&
-          <PublishScreen
-            onBack={() => setStep(4)}
-            onPublish={() => setStep(6)} />
 
-          }
-          {step === 6 &&
-          <ConfirmationScreen
-            jobTitle={generatedJob.title}
-            generatedJob={generatedJob}
-            onGoToJobs={() => window.location.href = createPageUrl("Dashboard")} />
 
-          }
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
     </div>);
 
