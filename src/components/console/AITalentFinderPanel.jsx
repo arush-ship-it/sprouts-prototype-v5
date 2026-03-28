@@ -49,10 +49,10 @@ export default function AITalentFinderPanel() {
     <div className="bg-white mt-5 mr-2 ml-2 rounded-xl w-[440px] border-r border-gray-200 flex flex-col overflow-hidden" style={{ height: "calc(100vh - 80px)" }}>
       {/* Top Tabs */}
       <div className="px-4 py-4">
-        <div className="mb-4 pl-24 flex items-center justify-between">
-          <div className="bg-slate-100 px- py-1 rounded-[10px] flex gap-1">
+        <div className="mb-4 flex items-center">
+          <div className="bg-slate-100 px-1 py-1 w-full rounded-[10px] flex gap-1">
             <button
-              onClick={() => setActiveMode("ai")} className="bg-[#ffffff] text-gray-900 px-4 py-2 text-xs font-medium rounded-lg transition-colors">
+              onClick={() => setActiveMode("ai")} className="flex-1 bg-[#ffffff] text-gray-900 px-4 py-2 text-xs font-medium rounded-lg transition-colors">
 
 
 
@@ -62,7 +62,7 @@ export default function AITalentFinderPanel() {
               Explore with Ai
             </button>
             <button
-              onClick={() => setActiveMode("manual")} className="text-gray-400 px-4 py-2 text-xs font-normal transition-colors hover:text-gray-600">
+              onClick={() => setActiveMode("manual")} className="flex-1 text-gray-400 px-4 py-2 text-xs font-normal transition-colors hover:text-gray-600">
 
 
 
