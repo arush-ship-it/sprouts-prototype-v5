@@ -82,7 +82,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     <div className="px-8 py-2">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" &&
-      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300">
+      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col" style={{ height: "120px", overflow: "hidden" }}>
           {/* Header */}
           <div className="px-5 pt-4 pb-3 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -128,7 +128,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
           {/* Expanded workspace */}
           {isSourcingExpanded &&
-          <div className="border-t border-gray-50">
+          <div className="border-t border-gray-50 flex-1 overflow-y-auto">
             {/* Insights screen */}
             {showInsightsScreen &&
             <div className="px-5 py-4">
