@@ -366,7 +366,7 @@ export default function Agents() {
               </div>
 
               {/* Comparative Agent Analysis Chart */}
-              <div className="bg-white p-5 rounded-2xl shadow-[0_2px_16px_rgba(0,0,0,0.05)] border border-gray-100">
+              <div className="bg-white p-5 rounded-2xl">
                 <div className="flex items-center justify-between mb-1">
                   <p className="text-[13px] font-semibold text-gray-900">Agent Comparative Analysis</p>
                   <div className="flex items-center gap-3">
