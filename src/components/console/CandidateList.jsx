@@ -156,7 +156,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" &&
-            <div className="space-y-3 w-full">
+            <div className="space-y-3 w-full h-full">
                 <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
                   <div className="flex gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
