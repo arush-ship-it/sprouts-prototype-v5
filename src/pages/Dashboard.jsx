@@ -1004,7 +1004,7 @@ export default function Dashboard() {
                     <p className="text-[10px] text-gray-400">Ask about your data</p>
                   </div>
                 </div>
-                <button onClick={() => setIsChatOpen(false)} className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                <button onClick={() => setIsChatOpen(false)} className="bg-[hsl(var(--background))] rounded-lg w-7 h-7 hover:bg-gray-200 flex items-center justify-center transition-colors">
                   <Minimize2 className="w-3.5 h-3.5 text-gray-500" />
                 </button>
               </div>
