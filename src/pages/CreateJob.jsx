@@ -335,7 +335,7 @@ function DefaultScreen({ onStart }) {
                 {roles.map((role) =>
               <button
                 key={role}
-                onClick={() => handleSuggestion(role)} className="bg-white text-gray-500 px-3 py-2.5 text-xs text-center rounded-lg w-full hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                onClick={() => handleSuggestion(role)} className="bg-white text-gray-500 px-3 py-2.5 text-xs font-medium text-center rounded-lg w-full hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                 
 
                     {role}
