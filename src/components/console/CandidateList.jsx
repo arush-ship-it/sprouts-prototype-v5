@@ -223,7 +223,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
                       <Sparkles className="w-3 h-3 text-indigo-400" />
                     </div>
-                    <div className="bg-gray-50 rounded-xl rounded-tl-none px-3.5 py-2.5 max-w-[85%]">
+                    <div className="bg-[hsl(var(--background))] px-1 py-2.5 rounded-tl-none max-w-[85%]">
                       <p className="text-[12px] text-gray-600 leading-relaxed">I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?</p>
                     </div>
                   </div>
@@ -236,7 +236,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
                       <Sparkles className="w-3 h-3 text-indigo-400" />
                     </div>
-                    <div className="bg-gray-50 rounded-xl rounded-tl-none px-3.5 py-2.5 max-w-[85%]">
+                    <div className="bg-[hsl(var(--background))] px-1 py-3.5 rounded-tl-none max-w-[85%]">
                       <p className="text-[12px] text-gray-600 leading-relaxed">I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?</p>
                     </div>
                   </div>
