@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Users, ChevronDown, Bot, Linkedin, Globe, UserCheck, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import CandidateDetailPanel from "./CandidateDetailPanel";
 
 const initialStages = [
   {
@@ -86,12 +87,13 @@ const scoreColor = (score) => {
   return "text-amber-600 bg-amber-50";
 };
 
-function CandidatePipelineCard({ candidate, stageName, provided, snapshot }) {
+function CandidatePipelineCard({ candidate, stageName, provided, snapshot, onClick }) {
   return (
     <div
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
+      onClick={onClick}
       className={`p-3 rounded-xl bg-white border transition-all cursor-grab active:cursor-grabbing select-none ${
         snapshot.isDragging
           ? "border-blue-300 shadow-lg ring-2 ring-blue-100 rotate-1 scale-105"
@@ -132,6 +134,8 @@ function CandidatePipelineCard({ candidate, stageName, provided, snapshot }) {
 export default function PipelineView() {
   const [stages, setStages] = useState(initialStages);
   const [expandedStageId, setExpandedStageId] = useState(null);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [selectedStage, setSelectedStage] = useState(null);
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -150,6 +154,14 @@ export default function PipelineView() {
 
   return (
     <div className="px-8 pt-5 pb-8">
+      {selectedCandidate && (
+        <CandidateDetailPanel
+          candidate={selectedCandidate}
+          stageName={selectedStage?.name}
+          stageAgents={selectedStage?.agents}
+          onClose={() => { setSelectedCandidate(null); setSelectedStage(null); }}
+        />
+      )}
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex gap-4 overflow-x-auto pb-4">
           {stages.map((stage) => (
@@ -219,6 +231,7 @@ export default function PipelineView() {
                             stageName={stage.name}
                             provided={provided}
                             snapshot={snapshot}
+                            onClick={() => { setSelectedCandidate(candidate); setSelectedStage(stage); }}
                           />
                         )}
                       </Draggable>
