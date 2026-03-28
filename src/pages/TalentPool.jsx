@@ -178,7 +178,7 @@ const candidates = [
 
 function CandidatePoolCard({ candidate }) {
   return (
-    <div className="p-5 rounded-xl bg-white hover:shadow-md transition-all cursor-pointer group">
+    <div className="bg-white p-5 rounded-2xl hover:shadow-md transition-all cursor-pointer group">
       <div className="flex items-start gap-4 mb-4">
         <img
           src={candidate.avatar}
