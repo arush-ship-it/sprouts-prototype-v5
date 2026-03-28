@@ -189,8 +189,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       handleSendSourcingPrompt();
                     }
                   }}
-                  placeholder="Type your message…"
-                  className="bg-gray-50 border-gray-100 text-[12px] rounded-xl min-h-[60px] w-full resize-none pr-12 focus-visible:ring-indigo-200"
+                  placeholder="Type your message…" className="flex border px-3 py-6 shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-gray-50 border-gray-100 text-[12px] rounded-xl min-h-[60px] w-full resize-none pr-12 focus-visible:ring-indigo-200"
+
                   rows={2} />
                   <Button
                   size="icon"
