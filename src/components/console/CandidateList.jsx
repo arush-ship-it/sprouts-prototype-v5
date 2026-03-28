@@ -204,13 +204,13 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[520px] gap-4">
               <div className="flex gap-6 border-b border-gray-200 w-full">
                 <button
-                onClick={() => setSourcingTab("ai")} className={`pb-2.5 text-[12px] font-medium transition-all ${sourcingTab === "ai" ? "text-gray-900 border-b-2 border-gray-900" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setSourcingTab("ai")} className="pb-2.5 text-[12px] font-medium transition-all text-blue-600 border-b-2 border-blue-600 w-full">
                 
                   Talk to AI
                 </button>
                 <button
-                onClick={() => setSourcingTab("manual")}
-                className={`pb-2.5 text-[12px] font-medium transition-all ${sourcingTab === "manual" ? "text-gray-900 border-b-2 border-gray-900" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setSourcingTab("manual")} className="pb-2.5 text-[12px] font-medium transition-all text-gray-500 hover:text-gray-700 w-full">
+                
                   Manual Sourcing
                 </button>
               </div>
@@ -366,8 +366,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 Sourcing History
                 <ChevronDown className={`w-3 h-3 transition-transform ${sourcingHistoryOpen ? "rotate-180" : ""}`} />
               </button>
-              {sourcingHistoryOpen && (
-                <div className="absolute right-0 top-full mt-1 w-[280px] bg-white border border-gray-200 rounded-xl shadow-lg z-50 py-1 overflow-hidden">
+              {sourcingHistoryOpen &&
+              <div className="absolute right-0 top-full mt-1 w-[280px] bg-white border border-gray-200 rounded-xl shadow-lg z-50 py-1 overflow-hidden">
                   <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-3 pt-2 pb-1">Recent Sourcing</p>
                   <div className="space-y-1 max-h-[300px] overflow-y-auto">
                     <button className="w-full text-left px-3 py-2 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors">
@@ -384,7 +384,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     </button>
                   </div>
                 </div>
-              )}
+              }
             </div>
             <button onClick={() => setSourcedCandidates([])} className="text-[12px] font-medium text-red-500 hover:text-red-700 transition-colors">
               Remove All
