@@ -140,8 +140,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
             {/* Sub Tabs */}
             {!showInsightsScreen &&
-            <div className="px-5 py-4 space-y-4">
-              <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit">
+            <div className="px-5 py-4 space-y-4 flex flex-col items-center">
+              <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit mx-auto">
                 <button
                   onClick={() => setSourcingTab("ai")}
                   className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "ai" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
@@ -156,7 +156,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" &&
-              <div className="space-y-3">
+              <div className="space-y-3 w-full">
                 <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
                   <div className="flex gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
@@ -204,7 +204,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
               {/* Manual Sourcing Tab */}
               {sourcingTab === "manual" &&
-              <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
+              <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1 w-full">
                 {[
                   { title: "Experience", sections: [
                     { label: "Similar Job Titles", items: jobTitles, color: "bg-indigo-50 text-indigo-600" },
