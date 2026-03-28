@@ -686,9 +686,8 @@ function ReviewJDScreen({ job, onBack, onNext }) {
             <h3 className="text-gray-900 text-base font-medium">About the Role</h3>
             <button
               onClick={() => handleEnhanceSection("description")}
-              disabled={enhancingSection === "description"} className="text-indigo-500 text-xs font-medium hover:text-indigo-700 flex items-center gap-1 disabled:opacity-50">
-              
-              <Sparkles className="w-3 h-3" /> {enhancingSection === "description" ? "Enhancing…" : "Enhance"}
+              disabled={enhancingSection === "description"} title="Enhance with AI" className="text-indigo-500 hover:text-indigo-700 flex items-center disabled:opacity-50">
+              <Sparkles className={`w-3.5 h-3.5 ${enhancingSection === "description" ? "animate-pulse" : ""}`} />
             </button>
           </div>
           <textarea
