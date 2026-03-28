@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
 import CandidateDetailsDrawer from "./CandidateDetailsDrawer";
 import CandidateFitInsights from "./CandidateFitInsights";
-import { Search, SlidersHorizontal, Sparkles, ChevronDown, ChevronUp, Send, X } from "lucide-react";
+import { Search, SlidersHorizontal, Sparkles, ChevronDown, ChevronUp, Send, X, History } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
@@ -103,6 +103,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [selectedSourced, setSelectedSourced] = useState(new Set());
   const [prospectCandidates, setProspectCandidates] = useState([]);
   const [sourcedAt, setSourcedAt] = useState(null);
+  const [sourcingHistoryOpen, setSourcingHistoryOpen] = useState(false);
 
   const isPipeline = activeTab === "pipeline";
 
@@ -359,6 +360,32 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             </div>
           </div>
           <div className="flex items-center gap-6">
+            <div className="relative">
+              <button onClick={() => setSourcingHistoryOpen(!sourcingHistoryOpen)} className="flex items-center gap-1.5 text-[12px] font-medium text-gray-500 hover:text-gray-700 transition-colors px-3 py-1.5 rounded-lg hover:bg-gray-50">
+                <History className="w-3.5 h-3.5" />
+                Sourcing History
+                <ChevronDown className={`w-3 h-3 transition-transform ${sourcingHistoryOpen ? "rotate-180" : ""}`} />
+              </button>
+              {sourcingHistoryOpen && (
+                <div className="absolute right-0 top-full mt-1 w-[280px] bg-white border border-gray-200 rounded-xl shadow-lg z-50 py-1 overflow-hidden">
+                  <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide px-3 pt-2 pb-1">Recent Sourcing</p>
+                  <div className="space-y-1 max-h-[300px] overflow-y-auto">
+                    <button className="w-full text-left px-3 py-2 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors">
+                      <p className="font-medium">Senior Product Designers in SF</p>
+                      <p className="text-[10px] text-gray-400 mt-0.5">15 candidates · 2 hours ago</p>
+                    </button>
+                    <button className="w-full text-left px-3 py-2 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors">
+                      <p className="font-medium">Figma experience + Design Systems</p>
+                      <p className="text-[10px] text-gray-400 mt-0.5">8 candidates · 1 day ago</p>
+                    </button>
+                    <button className="w-full text-left px-3 py-2 text-[12px] text-gray-700 hover:bg-gray-50 transition-colors">
+                      <p className="font-medium">UX Researchers - Remote</p>
+                      <p className="text-[10px] text-gray-400 mt-0.5">12 candidates · 3 days ago</p>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
             <button onClick={() => setSourcedCandidates([])} className="text-[12px] font-medium text-red-500 hover:text-red-700 transition-colors">
               Remove All
             </button>
