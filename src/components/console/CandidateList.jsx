@@ -82,280 +82,241 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     <div className="px-8 py-2">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" &&
-      <div className="bg-white my-5 pt-5 pr-5 pb-5 pl-5 rounded-[20px] border border-grey-200 transition-all duration-300">
+      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300">
           {/* Header */}
-          <div className="pb-2 flex items-start justify-between">
-            <div className="py-2 flex items-center gap-2.5 flex-1">
-              <div className="bg-slate-400 rounded-[32px] w-8 h-8 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-white" />
+          <div className="px-5 pt-4 pb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
               </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-[13px] font-semibold text-gray-900">AI Sourcing</h3>
+              <div>
+                <h3 className="text-[13px] font-semibold text-gray-800">AI Sourcing</h3>
+                <p className="text-[11px] text-gray-400">Find candidates with AI assistance</p>
               </div>
             </div>
-            <Button
-            variant="ghost"
-            size="sm"
-            className="h-7"
-            onClick={() => {
-              const next = !isSourcingExpanded;
-              setIsSourcingExpanded(next);
-              if (next) setShowInsightsScreen(true);
-            }}>
-
+            <button
+              className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors"
+              onClick={() => {
+                const next = !isSourcingExpanded;
+                setIsSourcingExpanded(next);
+                if (next) setShowInsightsScreen(true);
+              }}>
               {isSourcingExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-            </Button>
+            </button>
           </div>
 
           {/* Inline chatbox - shown when collapsed */}
           {!isSourcingExpanded &&
-        <div className="relative mt-3">
+          <div className="px-5 pb-4">
+            <div className="relative">
               <input
-            type="text"
-            value={sourcingInput}
-            onChange={(e) => setSourcingInput(e.target.value)}
-            onKeyDown={(e) => {if (e.key === "Enter" && sourcingInput.trim()) setIsSourcingExpanded(true);}}
-            placeholder="Type a sourcing prompt and press Enter..." className="bg-white text-[12px] pr-10 px-4 py-2.5 rounded-[28px] w-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-indigo-300 focus:border-indigo-300 placeholder:text-gray-400" />
-          
-
+                type="text"
+                value={sourcingInput}
+                onChange={(e) => setSourcingInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter" && sourcingInput.trim()) setIsSourcingExpanded(true); }}
+                placeholder="e.g. Senior product designers in San Francisco with Figma experience…"
+                className="w-full text-[12px] bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 pr-10 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-200 focus:border-indigo-200 transition-colors"
+              />
               <button
-            onClick={() => {if (sourcingInput.trim()) setIsSourcingExpanded(true);}}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition-colors">
-
+                onClick={() => { if (sourcingInput.trim()) setIsSourcingExpanded(true); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-500 transition-colors">
                 <Send className="w-3.5 h-3.5" />
               </button>
             </div>
-        }
+          </div>
+          }
 
           {/* Expanded workspace */}
           {isSourcingExpanded &&
-        <div className="mt-4 space-y-4">
-              {/* Insights screen - shown by default */}
-              {showInsightsScreen &&
-          <CandidateFitInsights
-            onViewInsights={() => {}}
-            onSkip={() => setShowInsightsScreen(false)} />
+          <div className="border-t border-gray-50">
+            {/* Insights screen */}
+            {showInsightsScreen &&
+            <div className="px-5 py-4">
+              <CandidateFitInsights
+                onViewInsights={() => {}}
+                onSkip={() => setShowInsightsScreen(false)} />
+            </div>
+            }
 
-          }
+            {/* Sub Tabs */}
+            {!showInsightsScreen &&
+            <div className="px-5 py-4 space-y-4">
+              <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit">
+                <button
+                  onClick={() => setSourcingTab("ai")}
+                  className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "ai" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+                  Talk to AI
+                </button>
+                <button
+                  onClick={() => setSourcingTab("manual")}
+                  className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "manual" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+                  Manual Sourcing
+                </button>
+              </div>
 
-              {/* Sub Tabs - shown after insights dismissed */}
-              {!showInsightsScreen &&
-          <div className="space-y-4">
-                  <div className="bg-gray-100 px-2 py-2 rounded-xl inline-flex">
-                    <button
-                onClick={() => setSourcingTab("ai")}
-                className={`px-4 py-2 text-xs font-semibold rounded-[10px] transition-all ${sourcingTab === "ai" ? "bg-white text-gray-900 shadow-sm" : "text-gray-600 hover:text-gray-900"}`}>
-
-                      Talk to AI
-                    </button>
-                    <button
-                onClick={() => setSourcingTab("manual")}
-                className={`px-4 py-2 text-[12px] font-semibold rounded-full transition-all ${sourcingTab === "manual" ? "bg-white text-gray-900 shadow-sm" : "text-gray-600 hover:text-gray-900"}`}>
-
-                      Manual Sourcing
-                    </button>
+              {/* Talk to AI Tab */}
+              {sourcingTab === "ai" &&
+              <div className="space-y-3">
+                <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
+                  <div className="flex gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
+                      <Sparkles className="w-3 h-3 text-indigo-400" />
+                    </div>
+                    <div className="bg-gray-50 rounded-xl rounded-tl-none px-3.5 py-2.5 max-w-[85%]">
+                      <p className="text-[12px] text-gray-600 leading-relaxed">I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?</p>
+                    </div>
                   </div>
-
-                  {/* Talk to AI Tab */}
-                  {sourcingTab === "ai" &&
-            <div className="space-y-3">
-                      <div className="my-6 space-y-2 max-h-[400px] overflow-y-auto">
-                        <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
-                          <p className="text-[11px] text-gray-700"><strong>AI:</strong> I can help you source candidates from LinkedIn, GitHub, or your talent pool. What would you like me to do?</p>
-                        </div>
-                        <div className="bg-indigo-100/60 mx-12 my-5 p-3 rounded-lg border border-indigo-200">
-                          <p className="text-[11px] text-gray-700"><strong>You:</strong> Find me 10 senior product designers in San Francisco</p>
-                        </div>
-                        <div className="p-3 rounded-lg bg-white/60 border border-indigo-100">
-                          <p className="text-[11px] text-gray-700"><strong>AI:</strong> I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?</p>
-                        </div>
-                      </div>
-                      <div className="relative">
-                        <Textarea
-                  value={sourcingInput}
-                  onChange={(e) => setSourcingInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && e.ctrlKey && sourcingInput.trim()) {
-                      handleSendSourcingPrompt();
-                    }
-                  }}
-                  placeholder="Type your message..."
-                  className="bg-white text-[12px] my-1 px-3 py-2 rounded-2xl min-h-[60px] w-full border border-input shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resize-none"
-                  rows={2} />
-
-                        <Button
-                  size="icon"
-                  className="bg-blue-600 hover:bg-blue-700 rounded-full absolute right-2 bottom-2 h-8 w-8"
-                  onClick={handleSendSourcingPrompt}>
-                          <Send className="w-3.5 h-3.5" />
-                        </Button>
-                      </div>
+                  <div className="flex gap-2.5 justify-end">
+                    <div className="bg-indigo-500 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
+                      <p className="text-[12px] text-white leading-relaxed">Find me 10 senior product designers in San Francisco</p>
                     </div>
-            }
-
-                  {/* Manual Sourcing Tab */}
-                  {sourcingTab === "manual" &&
-            <div className="space-y-4 max-h-[400px] overflow-y-auto">
-                      <div className="p-4 rounded-lg bg-white border border-indigo-100">
-                        <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Experience</h4>
-                        <div className="space-y-3">
-                          <div>
-                            <div className="flex items-center justify-between mb-2">
-                              <label className="text-[11px] font-medium text-gray-700">Similar Job Titles</label>
-                              <Button variant="ghost" size="sm" className="h-6 text-[10px] text-indigo-600">
-                                <Sparkles className="w-3 h-3 mr-1" /> AI Generate
-                              </Button>
-                            </div>
-                            <div className="flex flex-wrap gap-1.5">
-                              {jobTitles.map((title, idx) => <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">{title}</Badge>)}
-                              <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
-                            </div>
-                          </div>
-                          <div>
-                            <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Companies</label>
-                            <div className="flex flex-wrap gap-1.5">
-                              {companies.map((company, idx) => <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">{company}</Badge>)}
-                              <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
-                            </div>
-                          </div>
-                          <div>
-                            <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Industries</label>
-                            <div className="flex flex-wrap gap-1.5">
-                              {industries.map((industry, idx) => <Badge key={idx} variant="secondary" className="text-[10px] bg-indigo-50 text-indigo-700">{industry}</Badge>)}
-                              <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-4 rounded-lg bg-white border border-indigo-100">
-                        <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Similar Skills</h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {skills.map((skill, idx) => <Badge key={idx} variant="secondary" className="text-[10px] bg-emerald-50 text-emerald-700">{skill}</Badge>)}
-                          <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
-                        </div>
-                      </div>
-                      <div className="p-4 rounded-lg bg-white border border-indigo-100">
-                        <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Education</h4>
-                        <div className="space-y-3">
-                          <div>
-                            <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Degrees</label>
-                            <div className="flex flex-wrap gap-1.5">
-                              {degrees.map((degree, idx) => <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">{degree}</Badge>)}
-                              <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
-                            </div>
-                          </div>
-                          <div>
-                            <label className="text-[11px] font-medium text-gray-700 block mb-2">Similar Universities</label>
-                            <div className="flex flex-wrap gap-1.5">
-                              {universities.map((uni, idx) => <Badge key={idx} variant="secondary" className="text-[10px] bg-blue-50 text-blue-700">{uni}</Badge>)}
-                              <Button variant="outline" size="sm" className="h-5 px-2 text-[10px]">+ Add</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-4 rounded-lg bg-white border border-indigo-100">
-                        <h4 className="text-[13px] font-semibold text-gray-900 mb-3">Other Attributes</h4>
-                        <Button variant="outline" size="sm" className="h-7 text-[11px]">+ Add Custom Attribute</Button>
-                      </div>
-                      <Button className="w-full">Start Sourcing</Button>
+                  </div>
+                  <div className="flex gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
+                      <Sparkles className="w-3 h-3 text-indigo-400" />
                     </div>
-            }
+                    <div className="bg-gray-50 rounded-xl rounded-tl-none px-3.5 py-2.5 max-w-[85%]">
+                      <p className="text-[12px] text-gray-600 leading-relaxed">I found 15 candidates matching your criteria. Would you like me to screen them for Figma experience and portfolio quality?</p>
+                    </div>
+                  </div>
                 </div>
+                <div className="relative">
+                  <Textarea
+                    value={sourcingInput}
+                    onChange={(e) => setSourcingInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && e.ctrlKey && sourcingInput.trim()) {
+                        handleSendSourcingPrompt();
+                      }
+                    }}
+                    placeholder="Type your message…"
+                    className="bg-gray-50 border-gray-100 text-[12px] rounded-xl min-h-[60px] w-full resize-none pr-12 focus-visible:ring-indigo-200"
+                    rows={2} />
+                  <Button
+                    size="icon"
+                    className="bg-indigo-500 hover:bg-indigo-600 rounded-lg absolute right-2 bottom-2 h-7 w-7 shadow-none"
+                    onClick={handleSendSourcingPrompt}>
+                    <Send className="w-3 h-3" />
+                  </Button>
+                </div>
+              </div>
+              }
+
+              {/* Manual Sourcing Tab */}
+              {sourcingTab === "manual" &&
+              <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
+                {[
+                  { title: "Experience", sections: [
+                    { label: "Similar Job Titles", items: jobTitles, color: "bg-indigo-50 text-indigo-600" },
+                    { label: "Similar Companies", items: companies, color: "bg-indigo-50 text-indigo-600" },
+                    { label: "Similar Industries", items: industries, color: "bg-indigo-50 text-indigo-600" },
+                  ]},
+                  { title: "Skills", sections: [
+                    { label: null, items: skills, color: "bg-emerald-50 text-emerald-600" },
+                  ]},
+                  { title: "Education", sections: [
+                    { label: "Similar Degrees", items: degrees, color: "bg-blue-50 text-blue-600" },
+                    { label: "Similar Universities", items: universities, color: "bg-blue-50 text-blue-600" },
+                  ]},
+                ].map(({ title, sections }) => (
+                  <div key={title} className="bg-gray-50 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-[12px] font-semibold text-gray-700">{title}</p>
+                      <button className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium transition-colors">
+                        <Sparkles className="w-3 h-3" /> AI Suggest
+                      </button>
+                    </div>
+                    <div className="space-y-2.5">
+                      {sections.map(({ label, items, color }) => (
+                        <div key={label}>
+                          {label && <p className="text-[11px] text-gray-400 mb-1.5">{label}</p>}
+                          <div className="flex flex-wrap gap-1.5">
+                            {items.map((item, idx) => (
+                              <span key={idx} className={`text-[11px] font-medium px-2.5 py-1 rounded-lg ${color}`}>{item}</span>
+                            ))}
+                            <button className="text-[11px] text-gray-400 hover:text-gray-600 px-2 py-1 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add</button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <p className="text-[12px] font-semibold text-gray-700 mb-3">Other Attributes</p>
+                  <button className="text-[11px] text-gray-400 hover:text-gray-600 px-3 py-1.5 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add Custom Attribute</button>
+                </div>
+                <Button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white text-[13px] rounded-xl h-9 shadow-none">Start Sourcing</Button>
+              </div>
+              }
+            </div>
+            }
+          </div>
           }
-            </div>
-        }
-            </div>
+        </div>
       }
 
             {/* Sourced Candidates Section */}
             {sourcedCandidates.length > 0 &&
-      <div className="bg-white my-5 pt-5 pr-5 pb-5 pl-5 rounded-[20px] border border-gray-200">
-               <div className="flex items-center justify-between mb-4">
-                 <h2 className="text-[16px] font-semibold text-gray-900">Sourced Candidates</h2>
-                 <Button
-            variant="outline"
-            size="sm"
-            className="text-[12px]">
-                   + Apply All Prospects
-                 </Button>
-               </div>
+      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="px-5 py-4 flex items-center justify-between border-b border-gray-50">
+          <div>
+            <h2 className="text-[13px] font-semibold text-gray-800">Sourced Candidates</h2>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <p className="text-[11px] text-gray-400">{sourcedCandidates.length * 100} matches found</p>
+            </div>
+          </div>
+          <button className="text-[12px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">
+            Apply All
+          </button>
+        </div>
 
-               {/* Match indicator */}
-               <div className="mb-4 p-3 bg-emerald-50 border border-emerald-100 rounded-lg flex items-center gap-2">
-                 <div className="w-5 h-5 rounded-full border-2 border-emerald-500 flex items-center justify-center">
-                   <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                 </div>
-                 <p className="text-[13px] text-emerald-700 font-medium">Sourcing match : {sourcedCandidates.length}00</p>
-               </div>
-
-               {/* Candidate cards */}
-               <div className="space-y-4">
-                 {sourcedCandidates.map((candidate) =>
-          <div key={candidate.id} className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-all">
-                     <div className="flex items-start gap-3 mb-3">
-                       <input
-                type="checkbox"
-                checked={selectedSourced.has(candidate.id)}
-                onChange={() => toggleSourcedCandidate(candidate.id)}
-                className="w-4 h-4 mt-1 accent-indigo-600 cursor-pointer" />
-                       <img
-                src={candidate.avatar}
-                alt={candidate.name}
-                className="w-12 h-12 rounded-full object-cover" />
-                       <div className="flex-1">
-                         <div className="flex items-center gap-2">
-                           <h3 className="text-[14px] font-semibold text-gray-900">{candidate.name}</h3>
-                           <span className="text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Strong {candidate.score}%</span>
-                         </div>
-                         <p className="text-[12px] text-gray-600">{candidate.title}</p>
-                       </div>
-                     </div>
-
-                     {/* Info row */}
-                     <div className="ml-7 mb-3 space-y-1">
-                       <p className="text-[12px] text-gray-600">
-                         {candidate.degree} @ {candidate.location}
-                       </p>
-                       <p className="text-[12px] text-gray-500">
-                         <span className="font-medium">Experience:</span> {candidate.experience} | <span className="font-medium">Skills:</span> {candidate.skillsMatch}
-                       </p>
-                       <p className="text-[12px] text-blue-600">
-                         {candidate.sequence}
-                       </p>
-                     </div>
-
-                     {/* Add as prospect button */}
-                     <div className="ml-7 flex justify-end">
-                       <button
-                onClick={() => toggleSourcedCandidate(candidate.id)}
-                className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${
-                selectedSourced.has(candidate.id) ?
-                "bg-indigo-50 border border-indigo-300 text-indigo-700" :
-                "border border-gray-300 text-gray-700 hover:border-indigo-300"}`
-                }>
-                         {selectedSourced.has(candidate.id) ? "✓ Selected" : "Add As Prospect"}
-                       </button>
-                     </div>
-                   </div>
+        <div className="divide-y divide-gray-50">
+          {sourcedCandidates.map((candidate) =>
+          <div key={candidate.id} className="px-5 py-4 flex items-center gap-4 hover:bg-gray-50/60 transition-colors">
+            <input
+              type="checkbox"
+              checked={selectedSourced.has(candidate.id)}
+              onChange={() => toggleSourcedCandidate(candidate.id)}
+              className="w-4 h-4 accent-indigo-500 cursor-pointer shrink-0" />
+            <img
+              src={candidate.avatar}
+              alt={candidate.name}
+              className="w-10 h-10 rounded-full object-cover shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <p className="text-[13px] font-semibold text-gray-900">{candidate.name}</p>
+                <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">{candidate.score}%</span>
+              </div>
+              <p className="text-[11px] text-gray-500">{candidate.title} · {candidate.company}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">{candidate.experience} · {candidate.skillsMatch}</p>
+            </div>
+            <button
+              onClick={() => toggleSourcedCandidate(candidate.id)}
+              className={`shrink-0 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all ${
+                selectedSourced.has(candidate.id)
+                  ? "bg-indigo-50 text-indigo-600"
+                  : "text-gray-500 border border-gray-200 hover:border-indigo-200 hover:text-indigo-500"
+              }`}>
+              {selectedSourced.has(candidate.id) ? "✓ Added" : "Add"}
+            </button>
+          </div>
           )}
-               </div>
+        </div>
 
-               {/* Action buttons */}
-               {selectedSourced.size > 0 &&
-        <div className="mt-4 flex justify-end gap-3">
-                   <Button
-            variant="outline"
+        {selectedSourced.size > 0 &&
+        <div className="px-5 py-3 border-t border-gray-50 flex justify-end gap-2">
+          <button
             onClick={() => setSelectedSourced(new Set())}
-            className="text-[12px]">
-                     Clear Selection
-                   </Button>
-                   <Button
-            className="bg-indigo-600 hover:bg-indigo-700 text-white text-[12px]">
-                     Add {selectedSourced.size} to Prospects
-                   </Button>
-                 </div>
+            className="px-3 py-1.5 text-[12px] font-medium text-gray-500 hover:text-gray-700 transition-colors">
+            Clear
+          </button>
+          <Button className="bg-indigo-500 hover:bg-indigo-600 text-white text-[12px] h-8 rounded-lg shadow-none">
+            Add {selectedSourced.size} to Prospects
+          </Button>
+        </div>
         }
-             </div>
+      </div>
       }
 
             {/* Card/List/Table View */}
