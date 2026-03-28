@@ -550,6 +550,11 @@ function ReviewJDScreen({ job, onBack, onNext }) {
     <div className="flex flex-col h-full" onClick={() => setToolbar(null)}>
       <AIEnhanceToolbar position={toolbar} selectedText={toolbar?.text} onEnhance={handleEnhance} onClose={() => setToolbar(null)} />
       <div className="bg-[#ffffff] flex-1 overflow-y-auto">
+        {/* Header */}
+        <div className="px-6 pt-6 pb-2">
+          <h2 className="text-[18px] font-semibold text-gray-900">Job Description</h2>
+          <p className="text-[12px] text-gray-400 mt-1">Enhance a section with AI, edit it directly, add new sections, or remove ones you don't need.</p>
+        </div>
         {/* JD Preview Card */}
         <div className="bg-white mx-6 py-6 rounded-2xl shadow-sm" onClick={(e) => e.stopPropagation()}>
           {/* Title */}
