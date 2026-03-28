@@ -996,7 +996,7 @@ export default function Dashboard() {
             style={{ height: "calc(100vh - 120px)", position: "sticky", top: 0, alignSelf: "flex-start" }}>
               <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                  <div className="bg-slate-300 rounded-full w-8 h-8 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
                   <div>
