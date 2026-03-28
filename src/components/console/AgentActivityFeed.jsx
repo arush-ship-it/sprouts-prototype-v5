@@ -163,11 +163,11 @@ function ActivityRow({ item }) {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-0.5">
             <span className="text-[12px] font-semibold text-gray-900">{item.agentName}</span>
-            <Badge variant="outline" className={`text-[10px] font-medium px-1.5 py-0 ${item.typeColor}`}>
+            <Badge variant="outline" className="inline-flex items-center rounded-md border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-[10px] font-medium px-1.5 py-0 bg-blue-50 text-blue-700">
               {item.typeLabel}
             </Badge>
             {item.pendingApproval && approved === null &&
-            <Badge className="text-[10px] font-semibold bg-orange-50 text-orange-600 border border-orange-200 px-1.5 py-0">
+            <Badge className="inline-flex items-center rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 shadow hover:bg-primary/80 text-[10px] font-semibold bg-orange-50 text-orange-600 px-1.5 py-0">
                 <AlertCircle className="w-2.5 h-2.5 mr-1" />
                 Pending Approval
               </Badge>
