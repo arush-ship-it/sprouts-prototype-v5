@@ -167,7 +167,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
           {/* Inline chatbox - shown when collapsed */}
           {!isSourcingExpanded &&
-          <div className="px-5 pb-4">
+        <div className="px-5 pb-4">
             <div className="relative">
               <input
               type="text"
@@ -184,7 +184,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               </button>
             </div>
           </div>
-          }
+        }
 
           {/* Expanded workspace */}
           {isSourcingExpanded &&
@@ -358,11 +358,11 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               <p className="text-[11px] text-gray-400">{sourcedCandidates.length * 100} matches found{sourcedAt && ` · Sourced ${sourcedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-6">
             <button onClick={() => setSourcedCandidates([])} className="text-[12px] font-medium text-red-500 hover:text-red-700 transition-colors">
               Remove All
             </button>
-            <button onClick={() => setSelectedSourced(new Set(sourcedCandidates.map(c => c.id)))} className="text-[12px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">
+            <button onClick={() => setSelectedSourced(new Set(sourcedCandidates.map((c) => c.id)))} className="text-[12px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">
               Apply All
             </button>
           </div>
