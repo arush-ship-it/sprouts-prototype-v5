@@ -363,7 +363,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               Remove All
             </button>
             <button onClick={() => setSelectedSourced(new Set(sourcedCandidates.map((c) => c.id)))} className="text-[12px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">
-              Apply All
+              Select All
             </button>
           </div>
         </div>
