@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Users, ChevronDown, Bot, Linkedin, Globe, UserCheck, Zap } from "lucide-react";
+import { Users, ChevronDown, Bot, Linkedin, Globe, UserCheck, Zap, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { Button } from "@/components/ui/button";
 import CandidateDetailPanel from "./CandidateDetailPanel";
 
 const initialStages = [
@@ -149,6 +150,7 @@ export default function PipelineView() {
   const [expandedStageId, setExpandedStageId] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [selectedStage, setSelectedStage] = useState(null);
+  const [vetoModal, setVetoModal] = useState(null); // { candidate, fromStage, toStage }
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -158,11 +160,25 @@ export default function PipelineView() {
     const sourceStageIdx = stages.findIndex((s) => s.id === source.droppableId);
     const destStageIdx = stages.findIndex((s) => s.id === destination.droppableId);
 
-    const newStages = stages.map((s) => ({ ...s, candidates: [...s.candidates] }));
-    const [movedCandidate] = newStages[sourceStageIdx].candidates.splice(source.index, 1);
-    newStages[destStageIdx].candidates.splice(destination.index, 0, movedCandidate);
+    const movedCandidate = stages[sourceStageIdx].candidates[source.index];
+    const fromStageName = stages[sourceStageIdx].name;
+    const toStageName = stages[destStageIdx].name;
 
+    // Show veto modal
+    setVetoModal({ candidate: movedCandidate, fromStage: fromStageName, toStage: toStageName, sourceIdx: sourceStageIdx, destIdx: destStageIdx, sourceIdx: source.index, destIdx: destination.index });
+  };
+
+  const handleVetoConfirm = () => {
+    if (!vetoModal) return;
+    const newStages = stages.map((s) => ({ ...s, candidates: [...s.candidates] }));
+    const [movedCandidate] = newStages[vetoModal.sourceIdx].candidates.splice(vetoModal.sourceIdx, 1);
+    newStages[vetoModal.destIdx].candidates.splice(vetoModal.destIdx, 0, movedCandidate);
     setStages(newStages);
+    setVetoModal(null);
+  };
+
+  const handleVetoCancel = () => {
+    setVetoModal(null);
   };
 
   return (
@@ -175,6 +191,48 @@ export default function PipelineView() {
           onClose={() => { setSelectedCandidate(null); setSelectedStage(null); }}
         />
       )}
+
+      {/* Veto Modal */}
+      {vetoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-2xl shadow-lg p-6 max-w-sm">
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
+                <AlertCircle className="w-5 h-5 text-amber-600" />
+              </div>
+              <div>
+                <h2 className="text-[15px] font-semibold text-gray-900">Override Agent Action?</h2>
+                <p className="text-[12px] text-gray-500 mt-1">This will veto the agents' workflow and override their decision.</p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 rounded-xl p-3 mb-4 space-y-2">
+              <div className="flex items-center justify-between text-[12px]">
+                <span className="text-gray-500">Candidate:</span>
+                <span className="font-semibold text-gray-900">{vetoModal.candidate.name}</span>
+              </div>
+              <div className="flex items-center justify-between text-[12px]">
+                <span className="text-gray-500">Moving from:</span>
+                <span className="font-semibold text-gray-900">{vetoModal.fromStage}</span>
+              </div>
+              <div className="flex items-center justify-between text-[12px]">
+                <span className="text-gray-500">Moving to:</span>
+                <span className="font-semibold text-amber-600">{vetoModal.toStage}</span>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={handleVetoCancel} className="flex-1">
+                Cancel
+              </Button>
+              <Button onClick={handleVetoConfirm} className="flex-1 bg-amber-600 hover:bg-amber-700 text-white">
+                Confirm Override
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="flex gap-4 overflow-x-auto pb-4">
           {stages.map((stage) => (
