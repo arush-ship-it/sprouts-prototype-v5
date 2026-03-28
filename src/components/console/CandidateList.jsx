@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CandidateCardDetailed from "./CandidateCardDetailed";
 import CandidateDetailsDrawer from "./CandidateDetailsDrawer";
 import CandidateFitInsights from "./CandidateFitInsights";
-import { Search, SlidersHorizontal, Sparkles, ChevronDown, ChevronUp, Send } from "lucide-react";
+import { Search, SlidersHorizontal, Sparkles, ChevronDown, ChevronUp, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
@@ -47,6 +47,29 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [skills, setSkills] = useState(["Figma", "Sketch", "Design Systems"]);
   const [degrees, setDegrees] = useState(["Bachelor in Design", "Master in HCI"]);
   const [universities, setUniversities] = useState(["Stanford", "MIT"]);
+
+  const aiSuggestions = {
+    jobTitles: ["Visual Designer", "Interaction Designer", "Design Manager", "UI Designer", "Creative Director"],
+    companies: ["Apple", "Figma", "Airbnb", "Notion", "Spotify", "Stripe"],
+    industries: ["FinTech", "EdTech", "HealthTech", "E-Commerce", "Media"],
+    skills: ["Prototyping", "User Research", "Wireframing", "Adobe XD", "InVision", "Accessibility"],
+    degrees: ["MFA in Design", "BA in Fine Arts", "BS in Computer Science", "MA in Communication Design"],
+    universities: ["RISD", "Parsons", "Carnegie Mellon", "SVA", "Pratt Institute"],
+  };
+
+  const setterMap = { jobTitles: setJobTitles, companies: setCompanies, industries: setIndustries, skills: setSkills, degrees: setDegrees, universities: setUniversities };
+  const stateMap = { jobTitles, companies, industries, skills, degrees, universities };
+
+  const handleAISuggest = (stateKey) => {
+    const suggestions = aiSuggestions[stateKey] || [];
+    const current = stateMap[stateKey];
+    const newItems = suggestions.filter(s => !current.includes(s)).slice(0, 3);
+    setterMap[stateKey](prev => [...prev, ...newItems]);
+  };
+
+  const handleRemoveChip = (stateKey, idx) => {
+    setterMap[stateKey](prev => prev.filter((_, i) => i !== idx));
+  };
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [sourcedCandidates, setSourcedCandidates] = useState([]);
@@ -207,35 +230,37 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1 w-full">
                 {[
               { title: "Experience", sections: [
-                { label: "Similar Job Titles", items: jobTitles, color: "bg-indigo-50 text-indigo-600" },
-                { label: "Similar Companies", items: companies, color: "bg-indigo-50 text-indigo-600" },
-                { label: "Similar Industries", items: industries, color: "bg-indigo-50 text-indigo-600" }]
+                { label: "Similar Job Titles", stateKey: "jobTitles", items: jobTitles, color: "bg-indigo-50 text-indigo-600" },
+                { label: "Similar Companies", stateKey: "companies", items: companies, color: "bg-indigo-50 text-indigo-600" },
+                { label: "Similar Industries", stateKey: "industries", items: industries, color: "bg-indigo-50 text-indigo-600" }]
               },
               { title: "Skills", sections: [
-                { label: null, items: skills, color: "bg-emerald-50 text-emerald-600" }]
+                { label: null, stateKey: "skills", items: skills, color: "bg-emerald-50 text-emerald-600" }]
               },
               { title: "Education", sections: [
-                { label: "Similar Degrees", items: degrees, color: "bg-blue-50 text-blue-600" },
-                { label: "Similar Universities", items: universities, color: "bg-blue-50 text-blue-600" }]
+                { label: "Similar Degrees", stateKey: "degrees", items: degrees, color: "bg-blue-50 text-blue-600" },
+                { label: "Similar Universities", stateKey: "universities", items: universities, color: "bg-blue-50 text-blue-600" }]
               }].
               map(({ title, sections }) =>
               <div key={title} className="bg-gray-50 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-[12px] font-semibold text-gray-700">{title}</p>
-                      
-
-                  
                     </div>
                     <div className="space-y-2.5">
-                      {sections.map(({ label, items, color }) =>
-                  <div key={label}>
+                      {sections.map(({ label, stateKey, items, color }) =>
+                  <div key={stateKey}>
                           {label && <p className="text-[11px] text-gray-400 mb-1.5">{label}</p>}
                           <div className="flex flex-wrap gap-1.5">
                             {items.map((item, idx) =>
-                      <span key={idx} className={`text-[11px] font-medium px-2.5 py-1 rounded-lg ${color}`}>{item}</span>
+                      <span key={idx} className={`flex items-center gap-1 text-[11px] font-medium pl-2.5 pr-1.5 py-1 rounded-lg ${color}`}>
+                        {item}
+                        <button onClick={() => handleRemoveChip(stateKey, idx)} className="opacity-60 hover:opacity-100 transition-opacity ml-0.5">
+                          <X className="w-2.5 h-2.5" />
+                        </button>
+                      </span>
                       )}
                             <button className="text-[11px] text-gray-400 hover:text-gray-600 px-2 py-1 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add</button>
-                            <button className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium px-2 py-1 rounded-lg border border-dashed border-indigo-200 hover:border-indigo-300 transition-colors"><Sparkles className="w-3 h-3" /> AI Suggest</button>
+                            <button onClick={() => handleAISuggest(stateKey)} className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium px-2 py-1 rounded-lg border border-dashed border-indigo-200 hover:border-indigo-300 transition-colors"><Sparkles className="w-3 h-3" /> AI Suggest</button>
                           </div>
                         </div>
                   )}
