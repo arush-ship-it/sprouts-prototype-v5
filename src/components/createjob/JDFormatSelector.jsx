@@ -1,11 +1,13 @@
 import React from "react";
-import { Check } from "lucide-react";
+import { Check, FileText, Brain, Rocket, Code2, Scale, Building2 } from "lucide-react";
 
 export const JD_FORMATS = [
   {
     id: "classic",
     label: "Classic / Standard",
-    emoji: "📋",
+    Icon: FileText,
+    iconColor: "text-blue-500",
+    iconBg: "bg-blue-50",
     badge: "Most Popular",
     badgeColor: "bg-blue-100 text-blue-700",
     desc: "The universally understood format used by LinkedIn, Amazon, and most enterprise companies.",
@@ -14,7 +16,9 @@ export const JD_FORMATS = [
   {
     id: "competency",
     label: "Competency-Based",
-    emoji: "🧠",
+    Icon: Brain,
+    iconColor: "text-violet-500",
+    iconBg: "bg-violet-50",
     badge: "Corporate / HR",
     badgeColor: "bg-violet-100 text-violet-700",
     desc: "Focuses on skills, behaviors, and measurable abilities. Common in consulting and leadership roles.",
@@ -23,7 +27,9 @@ export const JD_FORMATS = [
   {
     id: "outcome",
     label: "Outcome-Based",
-    emoji: "🚀",
+    Icon: Rocket,
+    iconColor: "text-emerald-500",
+    iconBg: "bg-emerald-50",
     badge: "Startup / Tech",
     badgeColor: "bg-emerald-100 text-emerald-700",
     desc: "Defines what the person will achieve. Popular at startups like Stripe. More engaging and performance-oriented.",
@@ -32,7 +38,9 @@ export const JD_FORMATS = [
   {
     id: "technical",
     label: "Technical / Engineering",
-    emoji: "⚙️",
+    Icon: Code2,
+    iconColor: "text-amber-500",
+    iconBg: "bg-amber-50",
     badge: "Engineering",
     badgeColor: "bg-amber-100 text-amber-700",
     desc: "Highly skills and tools focused. Used by Google, Meta, and engineering-heavy orgs.",
@@ -41,7 +49,9 @@ export const JD_FORMATS = [
   {
     id: "legal",
     label: "Legal / Compliance",
-    emoji: "⚖️",
+    Icon: Scale,
+    iconColor: "text-red-500",
+    iconBg: "bg-red-50",
     badge: "Regulated Industries",
     badgeColor: "bg-red-100 text-red-700",
     desc: "Formal and detailed. Used in finance, healthcare, and regulated industries requiring certifications.",
@@ -50,7 +60,9 @@ export const JD_FORMATS = [
   {
     id: "internal",
     label: "Internal / HR Format",
-    emoji: "🏢",
+    Icon: Building2,
+    iconColor: "text-gray-500",
+    iconBg: "bg-gray-100",
     badge: "Internal",
     badgeColor: "bg-gray-100 text-gray-600",
     desc: "Used for internal promotions and transfers. Focuses on performance metrics rather than marketing.",
@@ -99,7 +111,9 @@ export default function JDFormatSelector({ selectedFormat, onSelect }) {
                 )}
 
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xl">{fmt.emoji}</span>
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${fmt.iconBg}`}>
+                    <fmt.Icon className={`w-3.5 h-3.5 ${fmt.iconColor}`} />
+                  </div>
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${fmt.badgeColor}`}>
                     {fmt.badge}
                   </span>
