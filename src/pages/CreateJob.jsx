@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import StepIndicator from "@/components/createjob/StepIndicator";
 import CandidateApplicationPreview from "@/components/createjob/CandidateApplicationPreview";
-import JDFormatSelector, { JD_FORMAT_PROMPTS, JD_FORMATS } from "@/components/createjob/JDFormatSelector";
 
 // Mock existing jobs for the default screen
 const existingJobs = [
@@ -171,18 +170,10 @@ const SAVED_DRAFTS = [
 { id: 4, title: "Sales Executive", role: "Sales", status: "Draft", created: "5 days ago" }];
 
 
-function DefaultScreen({ onStart, selectedFormat, onSelectFormat }) {
+function DefaultScreen({ onStart }) {
   const [prompt, setPrompt] = useState("");
   const [showDrafts, setShowDrafts] = useState(false);
   const [attachedFile, setAttachedFile] = useState(null);
-  const [formatDropdownOpen, setFormatDropdownOpen] = useState(false);
-
-  React.useEffect(() => {
-    if (!formatDropdownOpen) return;
-    const handler = () => setFormatDropdownOpen(false);
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [formatDropdownOpen]);
 
   const handleSuggestion = (title) => {
     onStart(`Create a job posting for a ${title}`);
@@ -221,25 +212,6 @@ function DefaultScreen({ onStart, selectedFormat, onSelectFormat }) {
               </div>
             </div>
           }
-          {/* Format selector row */}
-          <div className="flex items-center gap-1.5 mb-2 px-1 flex-wrap" onMouseDown={(e) => e.stopPropagation()}>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide shrink-0">Format:</span>
-            {JD_FORMATS.map((fmt) => (
-              <button
-                key={fmt.id}
-                onClick={() => onSelectFormat(fmt.id)}
-                className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] border transition-all ${
-                  selectedFormat === fmt.id
-                    ? "bg-indigo-50 border-indigo-400 text-indigo-700 font-semibold"
-                    : "border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600"
-                }`}
-              >
-                <fmt.Icon className={`w-2.5 h-2.5 ${selectedFormat === fmt.id ? fmt.iconColor : "text-gray-400"}`} />
-                {fmt.label.split(" / ")[0]}
-              </button>
-            ))}
-          </div>
-
           <div className="relative">
             <Textarea
               value={prompt}
@@ -355,27 +327,6 @@ function DefaultScreen({ onStart, selectedFormat, onSelectFormat }) {
       </div>
     </div>);
 
-}
-
-// ─── Step 1.5: Format Selection ───────────────────────────────────────────────
-function FormatSelectionScreen({ selectedFormat, onSelect, onBack, onNext }) {
-  return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-hidden">
-        <JDFormatSelector selectedFormat={selectedFormat} onSelect={onSelect} />
-      </div>
-      <div className="bg-white pt-4 pr-6 pb-4 pl-6 border-t border-gray-100 shrink-0 flex justify-between">
-        <Button variant="outline" size="sm" onClick={onBack}>Back</Button>
-        <Button
-          onClick={onNext}
-          disabled={!selectedFormat}
-          className="bg-blue-600 text-white px-5 h-9 text-xs font-medium rounded-lg hover:bg-indigo-700 gap-1.5 disabled:opacity-50"
-        >
-          Generate with this Format <ArrowRight className="w-3.5 h-3.5" />
-        </Button>
-      </div>
-    </div>
-  );
 }
 
 // ─── Step 1: Generating (animated) ────────────────────────────────────────────
@@ -1558,10 +1509,9 @@ function AIChatBox() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function CreateJob() {
-  // step 0 = default landing, 0.5 = format selection, 1 = generating, 2 = review JD, 3 = confirm details, 4 = screening, 5 = publish, 6 = confirmation
+  // step 0 = default landing, 1 = generating, 2 = review JD, 3 = confirm details, 4 = screening, 5 = publish, 6 = confirmation
   const [step, setStep] = useState(0);
   const [prompt, setPrompt] = useState("");
-  const [selectedFormat, setSelectedFormat] = useState("classic");
   const [generatedJob, setGeneratedJob] = useState(DEFAULT_JD);
 
   return (
@@ -1569,7 +1519,7 @@ export default function CreateJob() {
       <div className="px-4 py-4 flex flex-1 overflow-hidden gap-4 min-h-0">
 
         {/* Left Panel — AI Assistant (hidden on landing & confirmation) */}
-        {step > 0 && step !== 0.5 && step < 6 &&
+        {step > 0 && step < 6 &&
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-[400px] shrink-0 flex flex-col overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-200 shrink-0">
               <div className="flex items-center gap-2.5">
@@ -1592,7 +1542,7 @@ export default function CreateJob() {
               {step >= 2 &&
             <div className="flex justify-start">
                   <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
-                    ✅ Job description generated using the <span className="font-semibold text-indigo-600">{JD_FORMATS.find(f => f.id === selectedFormat)?.label}</span> format! Review it on the right and make any edits.
+                    ✅ Job description generated! Review it on the right and make any edits.
                   </div>
                 </div>
             }
@@ -1625,28 +1575,18 @@ export default function CreateJob() {
         }
 
         {/* Right Panel — Main Content */}
-        <div className={`${step === 0 ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"} overflow-hidden flex flex-col flex-1`} style={step === 0.5 ? { maxWidth: "860px", margin: "0 auto", width: "100%" } : {}}>
+        <div className={`${step === 0 ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"} overflow-hidden flex flex-col flex-1`}>
           {step === 0 &&
           <DefaultScreen
             onStart={(p) => {
               setPrompt(p);
-              setStep(0.5);
-            }}
-            selectedFormat={selectedFormat}
-            onSelectFormat={setSelectedFormat}
-          />
-          }
-          {step === 0.5 &&
-          <FormatSelectionScreen
-            selectedFormat={selectedFormat}
-            onSelect={setSelectedFormat}
-            onBack={() => setStep(0)}
-            onNext={() => setStep(1)}
-          />
+              setStep(1);
+            }} />
+
           }
           {step === 1 &&
           <GeneratingScreen
-            prompt={`${prompt}${selectedFormat ? `\n\n[FORMAT INSTRUCTION]: ${JD_FORMAT_PROMPTS[selectedFormat]}` : ""}`}
+            prompt={prompt}
             onDone={() => setStep(2)} />
 
           }
