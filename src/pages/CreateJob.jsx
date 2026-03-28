@@ -551,9 +551,19 @@ function ReviewJDScreen({ job, onBack, onNext }) {
       <AIEnhanceToolbar position={toolbar} selectedText={toolbar?.text} onEnhance={handleEnhance} onClose={() => setToolbar(null)} />
       <div className="bg-[#ffffff] flex-1 overflow-y-auto">
         {/* Header */}
-        <div className="px-6 pt-6 pb-4">
-          <h2 className="text-[18px] font-semibold text-gray-900">Job Description</h2>
-          <p className="text-[12px] text-gray-400 mt-1">Enhance a section with AI, edit it directly, add new sections, or remove ones you don't need.</p>
+        <div className="px-6 pt-6 pb-4 flex items-start justify-between">
+          <div>
+            <h2 className="text-[18px] font-semibold text-gray-900">Job Description</h2>
+            <p className="text-[12px] text-gray-400 mt-1">Enhance a section with AI, edit it directly, add new sections, or remove ones you don't need.</p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0 ml-4">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-[12px] font-medium text-gray-500 hover:bg-gray-50 hover:text-red-500 hover:border-red-200 transition-colors">
+              <X className="w-3.5 h-3.5" /> Delete
+            </button>
+            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-[12px] font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+              Save as Draft
+            </button>
+          </div>
         </div>
         {/* JD Preview Card */}
         <div className="bg-gray-50 mx-6 px-5 py-5 rounded-2xl shadow-sm" onClick={(e) => e.stopPropagation()}>
