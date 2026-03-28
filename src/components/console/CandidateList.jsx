@@ -140,7 +140,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
             {/* Sub Tabs */}
             {!showInsightsScreen &&
-          <div className="px-5 py-4 space-y-4 flex flex-col items-center h-[480px] overflow-y-auto">
+          <div className="px-5 py-4 flex flex-col items-center h-[480px] gap-4">
               <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit mx-auto">
                 <button
                 onClick={() => setSourcingTab("ai")}
@@ -156,8 +156,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" &&
-            <div className="space-y-3 w-full h-full">
-                <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
+            <div className="flex flex-col w-full flex-1 min-h-0">
+                <div className="flex-1 overflow-y-auto pr-1 space-y-2 mb-3">
                   <div className="flex gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
                       <Sparkles className="w-3 h-3 text-indigo-400" />
@@ -180,7 +180,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     </div>
                   </div>
                 </div>
-                <div className="relative">
+                <div className="relative shrink-0">
                   <Textarea
                   value={sourcingInput}
                   onChange={(e) => setSourcingInput(e.target.value)}
