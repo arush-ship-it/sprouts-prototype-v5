@@ -846,7 +846,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         {/* Role Information */}
         <div className="bg-slate-50 mb-0 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+            <div className="bg-indigo-50 rounded-[48px] w-8 h-8 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
@@ -872,7 +872,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         {/* Work Arrangement */}
         <div className="bg-slate-50 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+            <div className="bg-indigo-50 rounded-[28px] w-8 h-8 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
@@ -968,7 +968,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         {/* Compensation */}
         <div className="bg-slate-50 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+            <div className="bg-indigo-50 rounded-[28px] w-8 h-8 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
@@ -1128,7 +1128,7 @@ function ConfirmDetailsScreen({ onBack, onNext }) {
         {/* Benefits */}
         <div className="bg-slate-50 mb-0 mx-6 px-6 py-6 rounded-2xl shadow-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+            <div className="bg-indigo-50 rounded-[32px] w-8 h-8 flex items-center justify-center shrink-0">
               <ArrowRight className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
