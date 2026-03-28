@@ -83,7 +83,7 @@ export default function AITalentFinderPanel() {
         </div>
 
         {/* Active Filters Section */}
-        <div className="bg-[#ffffff] px-4 py-3 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors"
+        <div className="bg-[#ffffff] px-3 py-2 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors"
 
         onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
 
