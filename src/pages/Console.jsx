@@ -49,7 +49,7 @@ export default function Console() {
   };
 
   return (
-    <div className="bg-[#f2f3f5] pl-2 flex-1 min-h-screen overflow-auto">
+    <div className="bg-gray-100 pl-2 flex-1 min-h-screen overflow-auto">
         <JobHeader onActivityApprovalClick={() => setIsActivityApprovalOpen(true)} jobData={currentJobData} />
         <SubTabs
         activeTab={activeTab}
