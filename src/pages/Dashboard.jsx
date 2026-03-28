@@ -941,7 +941,7 @@ export default function Dashboard() {
                 }
               </AnimatePresence>
             </div>
-            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-[12px] font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium text-gray-600 hover:bg-gray-50 transition-colors">
               <Download className="w-3.5 h-3.5" /> Export
             </button>
             <button
