@@ -203,7 +203,7 @@ function DefaultScreen({ onStart }) {
     <div className="flex h-full">
       {/* Left: AI Chat Panel */}
       <div className="bg-white m-0 rounded-3xl w-[400px] shrink-0 shadow-sm flex flex-col overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-100 shrink-0">
+        <div className="bg-gray-50 px-4 py-3 border-b border-gray-100 shrink-0">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-gray-600" />
@@ -211,7 +211,7 @@ function DefaultScreen({ onStart }) {
             <span className="text-[14px] font-semibold text-gray-900">Sprouts Generate</span>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto px-4 py-5 space-y-3">
+        <div className="bg-gray-50 px-4 py-5 flex-1 overflow-y-auto space-y-3">
           <div className="bg-white rounded-2xl px-4 py-3 text-[13px] text-gray-700 max-w-[90%]">
             Hi! I'll help you create a job posting.<br />What position are you hiring for?
           </div>
@@ -219,7 +219,7 @@ function DefaultScreen({ onStart }) {
           {/* Quick action cards - slideshow */}
            <QuickActionSlideshow onStart={onStart} onShowDrafts={setShowDrafts} />
         </div>
-        <div className="px-4 py-4 shrink-0">
+        <div className="bg-gray-50 px-4 py-4 shrink-0">
           {/* File attachment chip */}
           {attachedFile &&
           <div className="flex items-center gap-2 mb-2 px-1">
@@ -335,8 +335,8 @@ function DefaultScreen({ onStart }) {
                 {roles.map((role) =>
               <button
                 key={role}
-                onClick={() => handleSuggestion(role)}
-                className="w-full px-3 py-2.5 rounded-lg bg-white text-[12px] text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-all text-center">
+                onClick={() => handleSuggestion(role)} className="bg-gray-100 text-gray-600 px-3 py-2.5 text-xs text-center rounded-lg w-full hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                
 
                     {role}
                   </button>
@@ -1622,7 +1622,7 @@ export default function CreateJob() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-48px)] bg-[#F2F3F5] overflow-hidden">
-      <div className="px-4 py-4 flex flex-1 overflow-hidden gap-4 min-h-0">
+      <div className="bg-[hsl(var(--background))] px-4 py-4 flex flex-1 overflow-hidden gap-4 min-h-0">
 
         {/* Left Panel — AI Assistant (hidden on landing & confirmation) */}
         {step > 0 && step < 6 &&
