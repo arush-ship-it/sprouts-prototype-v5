@@ -84,7 +84,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       {activeTab === "review" &&
       <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300">
           {/* Header */}
-          <div className="px-5 pt-4 pb-3 flex items-center justify-between">
+          <div className="px-5 pt-4 pb-7 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
                 <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
@@ -95,68 +95,68 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               </div>
             </div>
             <button
-              className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors"
-              onClick={() => {
-                const next = !isSourcingExpanded;
-                setIsSourcingExpanded(next);
-                if (next) setShowInsightsScreen(true);
-              }}>
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors"
+            onClick={() => {
+              const next = !isSourcingExpanded;
+              setIsSourcingExpanded(next);
+              if (next) setShowInsightsScreen(true);
+            }}>
               {isSourcingExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
           </div>
 
           {/* Inline chatbox - shown when collapsed */}
           {!isSourcingExpanded &&
-          <div className="px-5 pb-4">
+        <div className="px-5 pb-4">
             <div className="relative">
               <input
-                type="text"
-                value={sourcingInput}
-                onChange={(e) => setSourcingInput(e.target.value)}
-                onKeyDown={(e) => { if (e.key === "Enter" && sourcingInput.trim()) setIsSourcingExpanded(true); }}
-                placeholder="e.g. Senior product designers in San Francisco with Figma experience…"
-                className="w-full text-[12px] bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 pr-10 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-200 focus:border-indigo-200 transition-colors"
-              />
+              type="text"
+              value={sourcingInput}
+              onChange={(e) => setSourcingInput(e.target.value)}
+              onKeyDown={(e) => {if (e.key === "Enter" && sourcingInput.trim()) setIsSourcingExpanded(true);}}
+              placeholder="e.g. Senior product designers in San Francisco with Figma experience…"
+              className="w-full text-[12px] bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 pr-10 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-200 focus:border-indigo-200 transition-colors" />
+            
               <button
-                onClick={() => { if (sourcingInput.trim()) setIsSourcingExpanded(true); }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-500 transition-colors">
+              onClick={() => {if (sourcingInput.trim()) setIsSourcingExpanded(true);}}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-500 transition-colors">
                 <Send className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
-          }
+        }
 
           {/* Expanded workspace */}
           {isSourcingExpanded &&
-          <div className="border-t border-gray-50">
+        <div className="border-t border-gray-50">
             {/* Insights screen */}
             {showInsightsScreen &&
-            <div className="px-5 py-4 h-[480px] overflow-y-auto">
+          <div className="px-5 py-4 h-[480px] overflow-y-auto">
               <CandidateFitInsights
-                onViewInsights={() => {}}
-                onSkip={() => setShowInsightsScreen(false)} />
+              onViewInsights={() => {}}
+              onSkip={() => setShowInsightsScreen(false)} />
             </div>
-            }
+          }
 
             {/* Sub Tabs */}
             {!showInsightsScreen &&
-            <div className="px-5 py-4 space-y-4 flex flex-col items-center h-[480px] overflow-y-auto">
+          <div className="px-5 py-4 space-y-4 flex flex-col items-center h-[480px] overflow-y-auto">
               <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit mx-auto">
                 <button
-                  onClick={() => setSourcingTab("ai")}
-                  className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "ai" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setSourcingTab("ai")}
+                className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "ai" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
                   Talk to AI
                 </button>
                 <button
-                  onClick={() => setSourcingTab("manual")}
-                  className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "manual" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
+                onClick={() => setSourcingTab("manual")}
+                className={`px-4 py-1.5 text-[12px] font-medium rounded-lg transition-all ${sourcingTab === "manual" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
                   Manual Sourcing
                 </button>
               </div>
 
               {/* Talk to AI Tab */}
               {sourcingTab === "ai" &&
-              <div className="space-y-3 w-full">
+            <div className="space-y-3 w-full">
                 <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
                   <div className="flex gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 mt-0.5">
@@ -182,44 +182,44 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                 </div>
                 <div className="relative">
                   <Textarea
-                    value={sourcingInput}
-                    onChange={(e) => setSourcingInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && e.ctrlKey && sourcingInput.trim()) {
-                        handleSendSourcingPrompt();
-                      }
-                    }}
-                    placeholder="Type your message…"
-                    className="bg-gray-50 border-gray-100 text-[12px] rounded-xl min-h-[60px] w-full resize-none pr-12 focus-visible:ring-indigo-200"
-                    rows={2} />
+                  value={sourcingInput}
+                  onChange={(e) => setSourcingInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && e.ctrlKey && sourcingInput.trim()) {
+                      handleSendSourcingPrompt();
+                    }
+                  }}
+                  placeholder="Type your message…"
+                  className="bg-gray-50 border-gray-100 text-[12px] rounded-xl min-h-[60px] w-full resize-none pr-12 focus-visible:ring-indigo-200"
+                  rows={2} />
                   <Button
-                    size="icon"
-                    className="bg-indigo-500 hover:bg-indigo-600 rounded-lg absolute right-2 bottom-2 h-7 w-7 shadow-none"
-                    onClick={handleSendSourcingPrompt}>
+                  size="icon"
+                  className="bg-indigo-500 hover:bg-indigo-600 rounded-lg absolute right-2 bottom-2 h-7 w-7 shadow-none"
+                  onClick={handleSendSourcingPrompt}>
                     <Send className="w-3 h-3" />
                   </Button>
                 </div>
               </div>
-              }
+            }
 
               {/* Manual Sourcing Tab */}
               {sourcingTab === "manual" &&
-              <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1 w-full">
+            <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1 w-full">
                 {[
-                  { title: "Experience", sections: [
-                    { label: "Similar Job Titles", items: jobTitles, color: "bg-indigo-50 text-indigo-600" },
-                    { label: "Similar Companies", items: companies, color: "bg-indigo-50 text-indigo-600" },
-                    { label: "Similar Industries", items: industries, color: "bg-indigo-50 text-indigo-600" },
-                  ]},
-                  { title: "Skills", sections: [
-                    { label: null, items: skills, color: "bg-emerald-50 text-emerald-600" },
-                  ]},
-                  { title: "Education", sections: [
-                    { label: "Similar Degrees", items: degrees, color: "bg-blue-50 text-blue-600" },
-                    { label: "Similar Universities", items: universities, color: "bg-blue-50 text-blue-600" },
-                  ]},
-                ].map(({ title, sections }) => (
-                  <div key={title} className="bg-gray-50 rounded-xl p-4">
+              { title: "Experience", sections: [
+                { label: "Similar Job Titles", items: jobTitles, color: "bg-indigo-50 text-indigo-600" },
+                { label: "Similar Companies", items: companies, color: "bg-indigo-50 text-indigo-600" },
+                { label: "Similar Industries", items: industries, color: "bg-indigo-50 text-indigo-600" }]
+              },
+              { title: "Skills", sections: [
+                { label: null, items: skills, color: "bg-emerald-50 text-emerald-600" }]
+              },
+              { title: "Education", sections: [
+                { label: "Similar Degrees", items: degrees, color: "bg-blue-50 text-blue-600" },
+                { label: "Similar Universities", items: universities, color: "bg-blue-50 text-blue-600" }]
+              }].
+              map(({ title, sections }) =>
+              <div key={title} className="bg-gray-50 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-[12px] font-semibold text-gray-700">{title}</p>
                       <button className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium transition-colors">
@@ -227,31 +227,31 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                       </button>
                     </div>
                     <div className="space-y-2.5">
-                      {sections.map(({ label, items, color }) => (
-                        <div key={label}>
+                      {sections.map(({ label, items, color }) =>
+                  <div key={label}>
                           {label && <p className="text-[11px] text-gray-400 mb-1.5">{label}</p>}
                           <div className="flex flex-wrap gap-1.5">
-                            {items.map((item, idx) => (
-                              <span key={idx} className={`text-[11px] font-medium px-2.5 py-1 rounded-lg ${color}`}>{item}</span>
-                            ))}
+                            {items.map((item, idx) =>
+                      <span key={idx} className={`text-[11px] font-medium px-2.5 py-1 rounded-lg ${color}`}>{item}</span>
+                      )}
                             <button className="text-[11px] text-gray-400 hover:text-gray-600 px-2 py-1 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add</button>
                           </div>
                         </div>
-                      ))}
+                  )}
                     </div>
                   </div>
-                ))}
+              )}
                 <div className="bg-gray-50 rounded-xl p-4">
                   <p className="text-[12px] font-semibold text-gray-700 mb-3">Other Attributes</p>
                   <button className="text-[11px] text-gray-400 hover:text-gray-600 px-3 py-1.5 rounded-lg border border-dashed border-gray-200 hover:border-gray-300 transition-colors">+ Add Custom Attribute</button>
                 </div>
                 <Button className="w-full bg-indigo-500 hover:bg-indigo-600 text-white text-[13px] rounded-xl h-9 shadow-none">Start Sourcing</Button>
               </div>
-              }
-            </div>
             }
-          </div>
+            </div>
           }
+          </div>
+        }
         </div>
       }
 
@@ -294,10 +294,10 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             <button
               onClick={() => toggleSourcedCandidate(candidate.id)}
               className={`shrink-0 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all ${
-                selectedSourced.has(candidate.id)
-                  ? "bg-indigo-50 text-indigo-600"
-                  : "text-gray-500 border border-gray-200 hover:border-indigo-200 hover:text-indigo-500"
-              }`}>
+              selectedSourced.has(candidate.id) ?
+              "bg-indigo-50 text-indigo-600" :
+              "text-gray-500 border border-gray-200 hover:border-indigo-200 hover:text-indigo-500"}`
+              }>
               {selectedSourced.has(candidate.id) ? "✓ Added" : "Add"}
             </button>
           </div>
