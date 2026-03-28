@@ -128,16 +128,16 @@ export default function AITalentFinderPanel() {
                 Should have Java, python, in a lead position, with at computer science degree
               </p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* AI Response with Skills */}
           <div className="flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Ok so the following filters have been added.
@@ -196,16 +196,16 @@ export default function AITalentFinderPanel() {
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
               <p className="text-[13px] text-gray-900">Apply filters</p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* Category Pills Response */}
           <div className="flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Perfect ! all the filters have been applied, and are visible in the above panel. What other filters can SproutsAI help you with?
@@ -224,16 +224,16 @@ export default function AITalentFinderPanel() {
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
               <p className="text-[13px] text-gray-900">Attributes</p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* Attributes Response */}
           <div className="flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="mr-10 flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Alright are there any specific attributes you would like to choose?
@@ -272,16 +272,16 @@ export default function AITalentFinderPanel() {
                 ok add only candidates with Phd qualifications, from top universities
               </p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* PhD Response with Options */}
           <div className="flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="mr-10 flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 No one from the candidate pool has a Phd. What would you like to do next
@@ -308,16 +308,16 @@ export default function AITalentFinderPanel() {
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
               <p className="text-[13px] text-gray-900">Search Candidates With A Masters</p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* Masters Details Response */}
           <div className="bg-[#ffffff] flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="mr-10 flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Adding Masters as a chip, and with regards to top universities, we've identified 2 presets.
@@ -364,16 +364,16 @@ export default function AITalentFinderPanel() {
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
               <p className="text-[13px] text-gray-900">Apply</p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* Final Options */}
           <div className="flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Perfect ! all the filters have been applied, and are visible in the above panel. What other filters can SproutsAI help you with?
@@ -402,16 +402,16 @@ export default function AITalentFinderPanel() {
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
               <p className="text-[13px] text-gray-900">View templates for experience</p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* Experience Templates */}
           <div className="flex gap-2">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="mr-10 flex-1">
               <p className="text-[13px] text-gray-700 mb-3">
                 Perfect ! all the filters have been applied, and are visible in the above panel. What other filters can SproutsAI help you with?
@@ -442,16 +442,16 @@ export default function AITalentFinderPanel() {
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
               <p className="text-[13px] text-gray-900">optimised for job title</p>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <User className="w-4 h-4 text-gray-600" />
-            </div>
+            
+
+            
           </div>
 
           {/* Job Title Details */}
           <div className="flex gap-2 mb-20">
-            <div className="bg-slate-300 rounded-full w-7 h-7 from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
+            
+
+            
             <div className="mr-10 flex-1">
               <p className="text-[13px] text-gray-700 mb-3">Here are the job title</p>
               
