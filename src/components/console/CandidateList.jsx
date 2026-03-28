@@ -424,7 +424,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
           <span className="text-[11px] font-normal text-gray-400">{prospectCandidates.length} candidates</span>
         </h2>
-        <div className="flex flex-col gap-3">
+        <div className="mb-1 flex flex-col gap-3">
           {prospectCandidates.map((candidate) =>
           <div key={candidate.id} className="relative">
             <CandidateCardDetailed
