@@ -222,9 +222,9 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               <div key={title} className="bg-gray-50 rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-[12px] font-semibold text-gray-700">{title}</p>
-                      <button className="flex items-center gap-1 text-[11px] text-indigo-500 hover:text-indigo-700 font-medium transition-colors">
-                        <Sparkles className="w-3 h-3" /> AI Suggest
-                      </button>
+                      
+
+                  
                     </div>
                     <div className="space-y-2.5">
                       {sections.map(({ label, items, color }) =>
