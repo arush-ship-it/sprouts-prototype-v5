@@ -119,10 +119,6 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     setSelectedSourced(new Set());
     setSourcingInput("");
     setSourcedAt(new Date());
-    // If collapsed, expand to show results
-    if (!isSourcingExpanded) {
-      setIsSourcingExpanded(true);
-    }
   };
 
   const toggleSourcedCandidate = (id) => {
