@@ -102,6 +102,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   const [sourcedCandidates, setSourcedCandidates] = useState([]);
   const [selectedSourced, setSelectedSourced] = useState(new Set());
   const [prospectCandidates, setProspectCandidates] = useState([]);
+  const [sourcedAt, setSourcedAt] = useState(null);
 
   const isPipeline = activeTab === "pipeline";
 
@@ -117,6 +118,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
     setSourcedCandidates(sampled);
     setSelectedSourced(new Set());
     setSourcingInput("");
+    setSourcedAt(new Date());
     // If collapsed, expand to show results
     if (!isSourcingExpanded) {
       setIsSourcingExpanded(true);
@@ -357,7 +359,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
             <h2 className="text-[13px] font-semibold text-gray-800">Sourced Candidates</h2>
             <div className="flex items-center gap-1.5 mt-0.5">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <p className="text-[11px] text-gray-400">{sourcedCandidates.length * 100} matches found</p>
+              <p className="text-[11px] text-gray-400">{sourcedCandidates.length * 100} matches found{sourcedAt && ` · Sourced ${sourcedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}</p>
             </div>
           </div>
           <button className="text-[12px] font-medium text-indigo-500 hover:text-indigo-700 transition-colors">
