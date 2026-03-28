@@ -129,7 +129,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
   };
 
   return (
-    <div className="px-8 py-2">
+    <div className="px-8 py-0">
       {/* Sourcing Card - Only show in Review tab */}
       {activeTab === "review" &&
       <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300">
