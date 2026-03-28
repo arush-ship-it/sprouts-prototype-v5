@@ -228,8 +228,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     </div>
                   </div>
                   <div className="flex gap-2.5 justify-end">
-                    <div className="bg-gray-200 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
-                      <p className="text-slate-700 text-xs leading-relaxed">Find me 10 senior product designers in San Francisco</p>
+                    <div className="bg-blue-600 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
+                      <p className="text-[12px] text-white leading-relaxed">Find me 10 senior product designers in San Francisco</p>
                     </div>
                   </div>
                   <div className="flex gap-2.5">
@@ -350,7 +350,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
             {/* Sourced Candidates Section */}
             {sourcedCandidates.length > 0 &&
-      <div className="bg-white my-5 rounded-2xl border border-blue-300 shadow-sm overflow-hidden">
+      <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="px-5 py-4 flex items-center justify-between border-b border-gray-50">
           <div>
             <h2 className="text-[13px] font-semibold text-gray-800">Sourced Candidates</h2>
