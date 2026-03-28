@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import {
   Users,
@@ -51,6 +51,15 @@ const jobs = [
 
 export default function SidebarNav({ activePage = "Console" }) {
   const [selectedJob, setSelectedJob] = useState("1");
+  const navigate = useNavigate();
+
+  const handleJobChange = (jobId) => {
+    setSelectedJob(jobId);
+    // Store the selected job in sessionStorage so Console can load its dummy data
+    sessionStorage.setItem("selectedJobId", jobId);
+    // Navigate to Console with the job ID
+    navigate(createPageUrl("Console") + `?jobId=${jobId}`);
+  };
 
   return (
     <aside className="bg-[#E5E7EB] mt-3 mr-3 mb-3 ml-3 pr-3 pl-3 rounded-xl w-[221px] flex flex-col fixed left-0 top-12 bottom-0 shrink-0 border-r border-gray-200 overflow-hidden">
@@ -68,8 +77,8 @@ export default function SidebarNav({ activePage = "Console" }) {
         </div>
 
         {/* Job Selector */}
-        <div className="mb-6">
-          <Select value={selectedJob} onValueChange={setSelectedJob}>
+         <div className="mb-6">
+           <Select value={selectedJob} onValueChange={handleJobChange}>
             <SelectTrigger className="bg-white text-[12px] px-3 py-2 rounded-[10px] flex items-center justify-between whitespace-nowrap border shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full h-9 border-gray-200 hover:bg-gray-100">
               <SelectValue />
             </SelectTrigger>
