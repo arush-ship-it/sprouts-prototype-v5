@@ -324,7 +324,7 @@ export default function TalentPool() {
 
 
       
-      <div className="bg-[#f2f3f5] flex flex-1 overflow-hidden">
+      <div className="bg-gray-100 flex flex-1 overflow-hidden">
       {/* Left Panel - AI Talent Finder */}
       <AITalentFinderPanel />
 
