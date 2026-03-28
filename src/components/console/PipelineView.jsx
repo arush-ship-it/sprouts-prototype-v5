@@ -174,23 +174,27 @@ export default function PipelineView() {
 
               {/* Agents Section - Expanded */}
               {expandedStageId === stage.id && (
-                <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2.5">
-                  <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Agentic Layer</h4>
-                  <div className="bg-[hsl(var(--background))] p-2.5 rounded-lg flex items-center gap-2.5">
-                    <div className="bg-blue-50 rounded-[28px] w-8 h-8 flex items-center justify-center shrink-0">
-                      <Bot className="w-4 h-4 text-blue-500" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[12px] font-semibold text-gray-800 truncate">{stage.agents[0]}</p>
-                      <div className="flex items-center gap-1 mt-0.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        <span className="text-[10px] text-emerald-600 font-medium">Active</span>
+                <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2">
+                  <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Agentic Layer</h4>
+                  {stage.agents.map((agent) => (
+                    <div key={agent.name} className="bg-[hsl(var(--background))] px-2.5 py-2 rounded-lg flex items-center gap-2.5">
+                      <div className={`rounded-full w-7 h-7 flex items-center justify-center shrink-0 ${agent.active ? "bg-blue-50" : "bg-gray-100"}`}>
+                        <Bot className={`w-3.5 h-3.5 ${agent.active ? "text-blue-500" : "text-gray-400"}`} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[11px] font-semibold text-gray-800 truncate">{agent.name}</p>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <div className={`w-1.5 h-1.5 rounded-full ${agent.active ? "bg-emerald-500" : "bg-gray-300"}`} />
+                        <span className={`text-[10px] font-medium ${agent.active ? "text-emerald-600" : "text-gray-400"}`}>
+                          {agent.active ? "Active" : "Idle"}
+                        </span>
                       </div>
                     </div>
-                  </div>
+                  ))}
                   <Link
                     to="/Agents"
-                    className="bg-blue-50 text-blue-600 px-3 py-2 text-xs font-medium rounded-lg flex items-center justify-between w-full hover:bg-indigo-100 transition-colors group"
+                    className="bg-blue-50 text-blue-600 px-3 py-2 text-xs font-medium rounded-lg flex items-center justify-between w-full hover:bg-blue-100 transition-colors mt-1"
                   >
                     View Agent Activity
                   </Link>
@@ -212,6 +216,7 @@ export default function PipelineView() {
                         {(provided, snapshot) => (
                           <CandidatePipelineCard
                             candidate={candidate}
+                            stageName={stage.name}
                             provided={provided}
                             snapshot={snapshot}
                           />
