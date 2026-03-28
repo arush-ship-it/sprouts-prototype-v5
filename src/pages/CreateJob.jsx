@@ -239,7 +239,7 @@ function DefaultScreen({ onStart }) {
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {e.preventDefault();if (prompt.trim() || attachedFile) onStart(attachedFile ? `Upload: ${attachedFile.name}` : prompt, jdFormat);}
               }}
-              placeholder="Describe the role, requirements, or make changes…" className="px-3 py-2 bg-gray-100 text-[13px] pt-12 pr-3 pb-12 pl-3 rounded-2xl flex w-full shadow-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px]"
+              placeholder="Describe the role, requirements, or make changes…" className="px-3 py-2 bg-gray-100 text-[13px] pt-12 pr-3 pb-12 pl-3 rounded-2xl flex w-full shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none min-h-[60px]"
               rows={2} />
 
             {/* Upload icon */}
