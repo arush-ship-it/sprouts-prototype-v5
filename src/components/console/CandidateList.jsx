@@ -228,8 +228,8 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
                     </div>
                   </div>
                   <div className="flex gap-2.5 justify-end">
-                    <div className="bg-blue-600 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
-                      <p className="text-[12px] text-white leading-relaxed">Find me 10 senior product designers in San Francisco</p>
+                    <div className="bg-gray-200 rounded-xl rounded-tr-none px-3.5 py-2.5 max-w-[75%]">
+                      <p className="text-slate-700 text-xs leading-relaxed">Find me 10 senior product designers in San Francisco</p>
                     </div>
                   </div>
                   <div className="flex gap-2.5">
