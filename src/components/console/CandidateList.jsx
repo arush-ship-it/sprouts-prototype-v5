@@ -140,7 +140,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
             {/* Sub Tabs */}
             {!showInsightsScreen &&
-          <div className="px-5 py-4 flex flex-col items-center h-[480px] gap-4">
+          <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[480px] gap-4">
               <div className="flex gap-1 bg-gray-50 p-1 rounded-xl w-fit mx-auto">
                 <button
                 onClick={() => setSourcingTab("ai")}
