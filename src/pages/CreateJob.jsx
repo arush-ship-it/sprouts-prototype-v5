@@ -43,13 +43,13 @@ const DEFAULT_JD = {
 };
 
 const JD_FORMATS = [
-  { value: "classic", label: "Classic / Standard", emoji: "·", desc: "LinkedIn/Amazon style — works for almost every role" },
-  { value: "competency", label: "Competency-Based", emoji: "·", desc: "Skills, behaviors & measurable abilities (Deloitte style)" },
-  { value: "outcome", label: "Outcome-Based", emoji: "·", desc: "30/60/90 day goals & success metrics (Startup/Stripe style)" },
-  { value: "technical", label: "Technical / Engineering", emoji: "·", desc: "Tech stack, tools & skills focused (Google style)" },
-  { value: "legal", label: "Legal / Compliance", emoji: "·", desc: "Formal, detailed with certifications & compliance" },
-  { value: "internal", label: "Internal / HR Format", emoji: "·", desc: "KRAs, KPIs & reporting relationships for promotions/transfers" },
-];
+{ value: "classic", label: "Classic / Standard", emoji: "·", desc: "LinkedIn/Amazon style — works for almost every role" },
+{ value: "competency", label: "Competency-Based", emoji: "·", desc: "Skills, behaviors & measurable abilities (Deloitte style)" },
+{ value: "outcome", label: "Outcome-Based", emoji: "·", desc: "30/60/90 day goals & success metrics (Startup/Stripe style)" },
+{ value: "technical", label: "Technical / Engineering", emoji: "·", desc: "Tech stack, tools & skills focused (Google style)" },
+{ value: "legal", label: "Legal / Compliance", emoji: "·", desc: "Formal, detailed with certifications & compliance" },
+{ value: "internal", label: "Internal / HR Format", emoji: "·", desc: "KRAs, KPIs & reporting relationships for promotions/transfers" }];
+
 
 const JOB_SUGGESTIONS = {
   Software: ["Senior Software Engineer", "Senior Automation Engineer", "Backend Engineer"],
@@ -186,7 +186,7 @@ function DefaultScreen({ onStart }) {
   const [jdFormat, setJdFormat] = useState("classic");
   const [formatDropdownOpen, setFormatDropdownOpen] = useState(false);
 
-  const selectedFormat = JD_FORMATS.find(f => f.value === jdFormat);
+  const selectedFormat = JD_FORMATS.find((f) => f.value === jdFormat);
 
   React.useEffect(() => {
     if (!formatDropdownOpen) return;
@@ -223,9 +223,9 @@ function DefaultScreen({ onStart }) {
           {/* JD Format Selector */}
           <div className="relative mb-2" onMouseDown={(e) => e.stopPropagation()}>
             <button
-              onClick={() => setFormatDropdownOpen(v => !v)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
-            >
+              onClick={() => setFormatDropdownOpen((v) => !v)} className="bg-[hsl(var(--background))] px-3 py-2 text-left rounded-xl w-full flex items-center justify-between border border-gray-200 hover:bg-gray-100 transition-colors">
+
+              
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full shrink-0 ${jdFormat === selectedFormat?.value ? "bg-indigo-500" : "bg-gray-300"}`} />
                 <div>
@@ -235,14 +235,14 @@ function DefaultScreen({ onStart }) {
               </div>
               <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${formatDropdownOpen ? "rotate-180" : ""}`} />
             </button>
-            {formatDropdownOpen && (
-              <div className="absolute bottom-full left-0 mb-1.5 w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-1">
-                {JD_FORMATS.map(fmt => (
-                  <button
-                    key={fmt.value}
-                    onClick={() => { setJdFormat(fmt.value); setFormatDropdownOpen(false); }}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left ${jdFormat === fmt.value ? "bg-indigo-50" : ""}`}
-                  >
+            {formatDropdownOpen &&
+            <div className="absolute bottom-full left-0 mb-1.5 w-full bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-1">
+                {JD_FORMATS.map((fmt) =>
+              <button
+                key={fmt.value}
+                onClick={() => {setJdFormat(fmt.value);setFormatDropdownOpen(false);}}
+                className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left ${jdFormat === fmt.value ? "bg-indigo-50" : ""}`}>
+                
                     <div className={`w-2 h-2 rounded-full shrink-0 ${jdFormat === fmt.value ? "bg-indigo-500" : "bg-gray-300"}`} />
                     <div className="min-w-0">
                       <p className={`text-[12px] font-semibold ${jdFormat === fmt.value ? "text-indigo-700" : "text-gray-800"}`}>{fmt.label}</p>
@@ -250,9 +250,9 @@ function DefaultScreen({ onStart }) {
                     </div>
                     {jdFormat === fmt.value && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />}
                   </button>
-                ))}
+              )}
               </div>
-            )}
+            }
           </div>
           {/* File attachment chip */}
           {attachedFile &&
