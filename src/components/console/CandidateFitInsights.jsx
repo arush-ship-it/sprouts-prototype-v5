@@ -102,7 +102,7 @@ export default function CandidateFitInsights({ onViewInsights, onSkip }) {
 
       {/* AI Recommendations Panel */}
       {showRecommendations &&
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden w-full">
           {/* Header */}
           <div className="bg-gray-50 px-4 py-3 flex items-center gap-3 border-b border-gray-100">
             <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
