@@ -204,12 +204,12 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
           <div className="pr-5 pb-4 pl-5 flex flex-col items-center h-[520px] gap-4">
               <div className="flex gap-6 border-b border-gray-200 w-full">
                 <button
-                onClick={() => setSourcingTab("ai")} className="pb-2.5 text-[12px] font-medium transition-all text-blue-600 border-b-2 border-blue-600 w-full">
+                onClick={() => setSourcingTab("ai")} className={`pb-2.5 text-[12px] font-medium transition-all w-full ${sourcingTab === "ai" ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-500 hover:text-gray-700"}`}>
                 
                   Talk to AI
                 </button>
                 <button
-                onClick={() => setSourcingTab("manual")} className="pb-2.5 text-[12px] font-medium transition-all text-gray-500 hover:text-gray-700 w-full">
+                onClick={() => setSourcingTab("manual")} className={`pb-2.5 text-[12px] font-medium transition-all w-full ${sourcingTab === "manual" ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-500 hover:text-gray-700"}`}>
                 
                   Manual Sourcing
                 </button>
