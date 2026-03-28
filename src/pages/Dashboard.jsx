@@ -880,7 +880,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col min-h-screen bg-[#F2F3F5]">
       {/* Header */}
-      <div className="px-8 pt-6 pb-0 shrink-0">
+      <div className="bg-gray-100 pt-6 pb-0 px-8 shrink-0">
         <div className="flex items-center justify-between mb-5">
           <div>
             <h1 className="text-[22px] font-semibold text-gray-900">Analytics Dashboard</h1>
@@ -968,7 +968,7 @@ export default function Dashboard() {
 
       {/* Content */}
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 overflow-y-auto px-8 py-6">
+        <div className="bg-gray-100 px-8 py-6 flex-1 overflow-y-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
