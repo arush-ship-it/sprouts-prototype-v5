@@ -111,11 +111,15 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
   const handleSendSourcingPrompt = () => {
     if (!sourcingInput.trim()) return;
-    // Simulate AI sourcing - sample 5 random candidates
+    // Simulate AI sourcing - sample 5 random candidates based on input
     const sampled = reviewCandidates.sort(() => Math.random() - 0.5).slice(0, 5);
     setSourcedCandidates(sampled);
     setSelectedSourced(new Set());
     setSourcingInput("");
+    // If collapsed, expand to show results
+    if (!isSourcingExpanded) {
+      setIsSourcingExpanded(true);
+    }
   };
 
   const toggleSourcedCandidate = (id) => {
@@ -157,24 +161,24 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
           {/* Inline chatbox - shown when collapsed */}
           {!isSourcingExpanded &&
-        <div className="px-5 pb-4">
+          <div className="px-5 pb-4">
             <div className="relative">
               <input
               type="text"
               value={sourcingInput}
               onChange={(e) => setSourcingInput(e.target.value)}
-              onKeyDown={(e) => {if (e.key === "Enter" && sourcingInput.trim()) setIsSourcingExpanded(true);}}
+              onKeyDown={(e) => {if (e.key === "Enter" && sourcingInput.trim()) handleSendSourcingPrompt();}}
               placeholder="e.g. Senior product designers in San Francisco with Figma experience…"
               className="w-full text-[12px] bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 pr-10 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-200 focus:border-indigo-200 transition-colors" />
-            
+
               <button
-              onClick={() => {if (sourcingInput.trim()) setIsSourcingExpanded(true);}}
+              onClick={() => {if (sourcingInput.trim()) handleSendSourcingPrompt();}}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-500 transition-colors">
                 <Send className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
-        }
+          }
 
           {/* Expanded workspace */}
           {isSourcingExpanded &&
