@@ -43,12 +43,12 @@ const DEFAULT_JD = {
 };
 
 const JD_FORMATS = [
-  { value: "classic", label: "Classic / Standard", emoji: "📄", desc: "LinkedIn/Amazon style — works for almost every role" },
-  { value: "competency", label: "Competency-Based", emoji: "🧠", desc: "Skills, behaviors & measurable abilities (Deloitte style)" },
-  { value: "outcome", label: "Outcome-Based", emoji: "🚀", desc: "30/60/90 day goals & success metrics (Startup/Stripe style)" },
-  { value: "technical", label: "Technical / Engineering", emoji: "⚙️", desc: "Tech stack, tools & skills focused (Google style)" },
-  { value: "legal", label: "Legal / Compliance", emoji: "⚖️", desc: "Formal, detailed with certifications & compliance" },
-  { value: "internal", label: "Internal / HR Format", emoji: "🏢", desc: "KRAs, KPIs & reporting relationships for promotions/transfers" },
+  { value: "classic", label: "Classic / Standard", emoji: "·", desc: "LinkedIn/Amazon style — works for almost every role" },
+  { value: "competency", label: "Competency-Based", emoji: "·", desc: "Skills, behaviors & measurable abilities (Deloitte style)" },
+  { value: "outcome", label: "Outcome-Based", emoji: "·", desc: "30/60/90 day goals & success metrics (Startup/Stripe style)" },
+  { value: "technical", label: "Technical / Engineering", emoji: "·", desc: "Tech stack, tools & skills focused (Google style)" },
+  { value: "legal", label: "Legal / Compliance", emoji: "·", desc: "Formal, detailed with certifications & compliance" },
+  { value: "internal", label: "Internal / HR Format", emoji: "·", desc: "KRAs, KPIs & reporting relationships for promotions/transfers" },
 ];
 
 const JOB_SUGGESTIONS = {
@@ -227,7 +227,7 @@ function DefaultScreen({ onStart }) {
               className="w-full flex items-center justify-between px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
             >
               <div className="flex items-center gap-2">
-                <span className="text-base leading-none">{selectedFormat?.emoji}</span>
+                <div className={`w-2 h-2 rounded-full shrink-0 ${jdFormat === selectedFormat?.value ? "bg-indigo-500" : "bg-gray-300"}`} />
                 <div>
                   <p className="text-[12px] font-semibold text-gray-700">{selectedFormat?.label}</p>
                   <p className="text-[10px] text-gray-400 truncate max-w-[200px]">{selectedFormat?.desc}</p>
@@ -243,7 +243,7 @@ function DefaultScreen({ onStart }) {
                     onClick={() => { setJdFormat(fmt.value); setFormatDropdownOpen(false); }}
                     className={`w-full flex items-center gap-3 px-4 py-2.5 hover:bg-indigo-50 transition-colors text-left ${jdFormat === fmt.value ? "bg-indigo-50" : ""}`}
                   >
-                    <span className="text-base shrink-0">{fmt.emoji}</span>
+                    <div className={`w-2 h-2 rounded-full shrink-0 ${jdFormat === fmt.value ? "bg-indigo-500" : "bg-gray-300"}`} />
                     <div className="min-w-0">
                       <p className={`text-[12px] font-semibold ${jdFormat === fmt.value ? "text-indigo-700" : "text-gray-800"}`}>{fmt.label}</p>
                       <p className="text-[10px] text-gray-400 truncate">{fmt.desc}</p>
