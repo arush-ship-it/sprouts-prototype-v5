@@ -296,15 +296,15 @@ export default function JobDetails() {
                 </div>
                 <div className="flex items-center gap-10">
                   {!unpublishedPlatforms.includes(posting.platform) &&
-                <a href={posting.url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-[12px] font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                <a href={posting.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[12px] font-medium text-blue-600 hover:text-blue-800 transition-colors">
+                  
                       View Posting
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                 }
                   <button
-                  onClick={() => toggleUnpublish(posting.platform)}
-                  className={`flex items-center gap-1.5 text-[12px] font-medium transition-colors ${unpublishedPlatforms.includes(posting.platform) ? "text-emerald-600 hover:text-emerald-800" : "text-red-400 hover:text-red-600"}`}>
+                  onClick={() => toggleUnpublish(posting.platform)} className="flex items-center gap-1.5 text-[12px] font-medium transition-colors text-gray-600 hover:text-red-700">
+                  
                     <EyeOff className="w-3.5 h-3.5" />
                     {unpublishedPlatforms.includes(posting.platform) ? "Republish" : "Unpublish"}
                   </button>
