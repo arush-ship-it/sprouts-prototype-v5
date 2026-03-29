@@ -1629,8 +1629,8 @@ export default function CreateJob() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm w-[400px] shrink-0 flex flex-col overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-200 shrink-0">
               <div className="flex items-center gap-2.5">
-                <div className="bg-slate-400 rounded-[20px] w-8 h-8 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
+                <div className="bg-gray-100 rounded-[20px] w-8 h-8 flex items-center justify-center">
+                  <Sparkles className="lucide lucide-sparkles w-4 h-4 text-gray-500" />
                 </div>
                 <div>
                   <h2 className="text-[14px] font-semibold text-gray-900">AI Job Builder</h2>
