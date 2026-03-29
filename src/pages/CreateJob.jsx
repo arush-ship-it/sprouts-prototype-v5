@@ -1638,7 +1638,7 @@ export default function CreateJob() {
                 </div>
               </div>
             </div>
-            <StepIndicator currentStep={step} />
+            <StepIndicator currentStep={step} onStepClick={(s) => setStep(s)} />
             <div className="flex-1 overflow-y-auto p-5 space-y-3">
               <div className="flex justify-start">
                 <div className="max-w-[90%] px-4 py-3 rounded-2xl text-[13px] bg-gray-100 text-gray-900">
