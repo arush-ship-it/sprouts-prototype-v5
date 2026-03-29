@@ -281,7 +281,7 @@ export default function PipelineView() {
                       {/* Stack breakdown */}
                       <div className="mt-1 space-y-3">
                         {agent.stack.map((item) =>
-                  <div key={item.key} className="bg-white rounded-lg px-3 py-2 border border-gray-100">
+                  <div key={item.key} className="bg-gray-50 rounded-lg px-3 py-2">
                             <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">{item.label}</p>
                             <div className="flex items-center gap-1.5 flex-wrap">
                               <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
