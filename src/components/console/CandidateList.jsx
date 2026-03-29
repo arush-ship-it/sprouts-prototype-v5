@@ -168,7 +168,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
 
           {/* Inline chatbox - shown when collapsed */}
           {!isSourcingExpanded &&
-        <div className="px-5 pb-4">
+        <div className="pt-4 pr-5 pb-4 pl-5">
             <div className="relative">
               <input
               type="text"
