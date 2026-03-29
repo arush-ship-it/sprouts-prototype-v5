@@ -160,22 +160,83 @@ export default function PipelineView() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [vetoStep, setVetoStep] = useState(1); // 1 = reason, 2 = email draft
 
-  const VETO_REASONS = [
-    { value: "skill_gap", label: "Skill Gap", desc: "Candidate lacks required technical or domain skills" },
-    { value: "salary", label: "Salary Expectation", desc: "Candidate's expectations exceed budget" },
-    { value: "culture", label: "Cultural Fit", desc: "Misalignment with team values or working style" },
-    { value: "experience", label: "Insufficient Experience", desc: "Below minimum years or seniority required" },
-    { value: "location", label: "Location / Relocation", desc: "Unable to meet location or travel requirements" },
-    { value: "other", label: "Other", desc: "Reason not listed above" },
-  ];
+  // Stage-specific reasons keyed by destination stage name
+  const STAGE_REASONS = {
+    "Assessment": [
+      { value: "strong_resume", label: "Strong Resume Match", desc: "Profile closely aligns with JD requirements" },
+      { value: "skills_verified", label: "Skills Verified", desc: "Key skills confirmed through screening" },
+      { value: "culture_positive", label: "Culture Alignment", desc: "Initial signals of strong cultural fit" },
+      { value: "fast_track", label: "Fast-Track Candidate", desc: "Exceptional profile warrants expedited review" },
+      { value: "other", label: "Other", desc: "Reason not listed above" },
+    ],
+    "Interview": [
+      { value: "assessment_passed", label: "Assessment Passed", desc: "Scored above threshold in assessment" },
+      { value: "strong_answers", label: "Strong Responses", desc: "Demonstrated clear domain knowledge" },
+      { value: "portfolio_impressive", label: "Impressive Portfolio", desc: "Work samples exceeded expectations" },
+      { value: "referral_override", label: "Referral / Endorsement", desc: "Internal referral or strong endorsement" },
+      { value: "other", label: "Other", desc: "Reason not listed above" },
+    ],
+    "Technical": [
+      { value: "interview_strong", label: "Strong Interview", desc: "Performed well in behavioral and role interviews" },
+      { value: "communication_fit", label: "Communication & Fit", desc: "Excellent clarity and interpersonal skills" },
+      { value: "domain_depth", label: "Deep Domain Knowledge", desc: "Demonstrated strong subject matter expertise" },
+      { value: "other", label: "Other", desc: "Reason not listed above" },
+    ],
+    "Final Round": [
+      { value: "tech_passed", label: "Technical Bar Met", desc: "Passed coding or technical evaluation" },
+      { value: "problem_solving", label: "Strong Problem Solving", desc: "Exceptional analytical thinking demonstrated" },
+      { value: "system_design", label: "System Design Skills", desc: "Solid architecture and design instincts" },
+      { value: "other", label: "Other", desc: "Reason not listed above" },
+    ],
+    "Offer": [
+      { value: "top_candidate", label: "Top Candidate", desc: "Ranked highest across all evaluation criteria" },
+      { value: "exec_approved", label: "Executive Approval", desc: "Endorsed by hiring manager or leadership" },
+      { value: "competitive_offer", label: "Competitive Offer Needed", desc: "Strong candidate requiring fast-tracked offer" },
+      { value: "other", label: "Other", desc: "Reason not listed above" },
+    ],
+    // Default fallback — also used for moves to "In Review" or unknown stages
+    "default": [
+      { value: "reconsider", label: "Reconsider Profile", desc: "Re-evaluating candidate for this stage" },
+      { value: "pipeline_reorder", label: "Pipeline Reorder", desc: "Restructuring the hiring flow" },
+      { value: "skill_gap", label: "Skill Gap", desc: "Candidate lacks key skills for current stage" },
+      { value: "salary", label: "Salary Expectation", desc: "Compensation expectations don't align" },
+      { value: "culture", label: "Cultural Fit", desc: "Misalignment with team values or working style" },
+      { value: "experience", label: "Insufficient Experience", desc: "Below minimum seniority required" },
+      { value: "location", label: "Location / Relocation", desc: "Unable to meet location requirements" },
+      { value: "other", label: "Other", desc: "Reason not listed above" },
+    ],
+  };
+
+  const getVetoReasons = (toStage) => STAGE_REASONS[toStage] || STAGE_REASONS["default"];
 
   const EMAIL_TEMPLATES = {
-    skill_gap: (name) => `Hi ${name},\n\nThank you for taking the time to apply and for your interest in joining our team. After careful consideration, we've decided not to move forward at this stage as we're looking for a stronger match in a few key technical areas that are critical to this role.\n\nWe appreciate the effort you put into the process and encourage you to apply for future opportunities that align more closely with your background.\n\nWarm regards,\nThe Recruiting Team`,
-    salary: (name) => `Hi ${name},\n\nThank you for your interest in this position and for going through our interview process. Unfortunately, after reviewing your compensation expectations alongside our current budget, we're unable to proceed at this time as we aren't able to meet your requirements.\n\nWe truly appreciate your time and hope to stay in touch for future opportunities.\n\nWarm regards,\nThe Recruiting Team`,
-    culture: (name) => `Hi ${name},\n\nThank you for the time you invested in our interview process. After thoughtful consideration, we've concluded that this particular role may not be the ideal fit given our current team dynamics and working style.\n\nThis reflects on the role fit rather than your abilities, and we encourage you to explore other opportunities with us in the future.\n\nWarm regards,\nThe Recruiting Team`,
-    experience: (name) => `Hi ${name},\n\nThank you for applying and for the conversations we've had throughout the process. While your profile is impressive, we've decided to move forward with candidates whose experience level more closely aligns with the seniority requirements for this role.\n\nWe'd love to reconnect as your career continues to grow.\n\nWarm regards,\nThe Recruiting Team`,
-    location: (name) => `Hi ${name},\n\nThank you for your interest and participation in our hiring process. Unfortunately, we are unable to move forward as we require candidates who are able to meet our location or travel requirements for this position.\n\nWe appreciate your understanding and wish you the very best in your search.\n\nWarm regards,\nThe Recruiting Team`,
-    other: (name) => `Hi ${name},\n\nThank you for applying and for the time you've invested in our interview process. After careful consideration, we've decided not to move forward with your application at this time.\n\nWe truly appreciate your interest in our team and wish you all the best in your job search.\n\nWarm regards,\nThe Recruiting Team`,
+    // Advancing reasons
+    strong_resume: (name, to) => `Hi ${name},\n\nGreat news — after reviewing your application, we're excited to move you forward to the ${to} stage. Your profile is a strong match for what we're looking for, and we'd love to keep the momentum going.\n\nWe'll be in touch shortly with next steps.\n\nWarm regards,\nThe Recruiting Team`,
+    skills_verified: (name, to) => `Hi ${name},\n\nWe've reviewed your screening and are pleased to move you to the ${to} stage. Your skills align well with our requirements and we're excited to learn more.\n\nExpect to hear from us soon.\n\nWarm regards,\nThe Recruiting Team`,
+    culture_positive: (name, to) => `Hi ${name},\n\nBased on our initial conversations, we're moving you forward to the ${to} stage. We see a strong potential for cultural alignment and look forward to exploring this further.\n\nWarm regards,\nThe Recruiting Team`,
+    fast_track: (name, to) => `Hi ${name},\n\nYour profile has impressed us and we'd like to fast-track your application to the ${to} stage. We're eager to continue the process.\n\nWe'll reach out with details shortly.\n\nWarm regards,\nThe Recruiting Team`,
+    assessment_passed: (name, to) => `Hi ${name},\n\nCongratulations — you've successfully passed the assessment stage! We're pleased to invite you to the ${to} stage of our process.\n\nOur team will be reaching out soon to schedule.\n\nWarm regards,\nThe Recruiting Team`,
+    strong_answers: (name, to) => `Hi ${name},\n\nYour responses during the assessment demonstrated strong domain knowledge. We're excited to move you forward to the ${to} stage.\n\nLook out for a scheduling invite shortly.\n\nWarm regards,\nThe Recruiting Team`,
+    portfolio_impressive: (name, to) => `Hi ${name},\n\nWe were really impressed by your portfolio and work samples. We'd love to move you to the ${to} stage to continue the conversation.\n\nWarm regards,\nThe Recruiting Team`,
+    referral_override: (name, to) => `Hi ${name},\n\nBased on a strong internal endorsement, we'd like to move your application to the ${to} stage. We're looking forward to connecting with you.\n\nWarm regards,\nThe Recruiting Team`,
+    interview_strong: (name, to) => `Hi ${name},\n\nYou did great in your interview! We're excited to progress your application to the ${to} stage.\n\nWe'll follow up shortly with next steps.\n\nWarm regards,\nThe Recruiting Team`,
+    communication_fit: (name, to) => `Hi ${name},\n\nYour communication style and overall fit came through clearly in our conversations. We'd like to move you forward to the ${to} stage.\n\nWarm regards,\nThe Recruiting Team`,
+    domain_depth: (name, to) => `Hi ${name},\n\nYour depth of expertise really stood out. We're happy to advance your application to the ${to} stage.\n\nWarm regards,\nThe Recruiting Team`,
+    tech_passed: (name, to) => `Hi ${name},\n\nYou met our technical bar — well done! We're excited to move you to the ${to} stage of the process.\n\nWarm regards,\nThe Recruiting Team`,
+    problem_solving: (name, to) => `Hi ${name},\n\nYour analytical thinking and problem-solving approach impressed the team. We're moving you forward to the ${to} stage.\n\nWarm regards,\nThe Recruiting Team`,
+    system_design: (name, to) => `Hi ${name},\n\nYour system design skills were a highlight of our evaluation. We're pleased to advance you to the ${to} stage.\n\nWarm regards,\nThe Recruiting Team`,
+    top_candidate: (name, to) => `Hi ${name},\n\nWe're thrilled to let you know that you've been selected as a top candidate. We're moving you to the ${to} stage and look forward to making this official.\n\nWarm regards,\nThe Recruiting Team`,
+    exec_approved: (name, to) => `Hi ${name},\n\nFollowing leadership review, we're excited to move your application to the ${to} stage. We're looking forward to next steps.\n\nWarm regards,\nThe Recruiting Team`,
+    competitive_offer: (name, to) => `Hi ${name},\n\nWe'd like to move quickly and bring you to the ${to} stage. You've been a standout throughout this process and we're committed to making this work.\n\nWarm regards,\nThe Recruiting Team`,
+    // Downward / reject reasons
+    reconsider: (name, to) => `Hi ${name},\n\nThank you for your patience. We're revisiting the structure of our hiring process and have moved your application back to the ${to} stage for reconsideration. This is not a reflection on your performance.\n\nWe'll be in touch soon.\n\nWarm regards,\nThe Recruiting Team`,
+    pipeline_reorder: (name, to) => `Hi ${name},\n\nWe're making some internal adjustments to our hiring pipeline. Your application has been moved to the ${to} stage. This does not impact your standing as a candidate.\n\nWarm regards,\nThe Recruiting Team`,
+    skill_gap: (name) => `Hi ${name},\n\nThank you for going through our process. After careful consideration, we've decided not to move forward as we're looking for a stronger match in some key technical areas critical to this role.\n\nWe appreciate your effort and encourage you to apply for future opportunities.\n\nWarm regards,\nThe Recruiting Team`,
+    salary: (name) => `Hi ${name},\n\nThank you for your time throughout the process. Unfortunately, we're unable to proceed as there's a gap between your compensation expectations and our current budget.\n\nWe hope to stay in touch for future opportunities.\n\nWarm regards,\nThe Recruiting Team`,
+    culture: (name) => `Hi ${name},\n\nThank you for the time you invested in our process. After thoughtful consideration, we feel this role may not be the ideal fit given our current team dynamics — this is a reflection of role fit, not your abilities.\n\nWe encourage you to explore other opportunities with us.\n\nWarm regards,\nThe Recruiting Team`,
+    experience: (name) => `Hi ${name},\n\nThank you for applying. While your profile is impressive, we've decided to move forward with candidates whose experience level more closely aligns with the seniority required for this role.\n\nWe'd love to reconnect as your career grows.\n\nWarm regards,\nThe Recruiting Team`,
+    location: (name) => `Hi ${name},\n\nThank you for your interest. Unfortunately, we require candidates who can meet our location or travel requirements for this position and are unable to move forward.\n\nWe wish you the very best.\n\nWarm regards,\nThe Recruiting Team`,
+    other: (name) => `Hi ${name},\n\nThank you for the time you've invested in our process. After careful consideration, we've decided not to move forward at this time.\n\nWe truly appreciate your interest and wish you all the best.\n\nWarm regards,\nThe Recruiting Team`,
   };
 
   const onDragEnd = (result) => {
@@ -217,7 +278,8 @@ export default function PipelineView() {
   const handleReasonNext = () => {
     if (!vetoReason) return;
     const template = EMAIL_TEMPLATES[vetoReason];
-    setEmailDraft(template ? template(vetoModal.candidate.name.split(" ")[0]) : "");
+    const firstName = vetoModal.candidate.name.split(" ")[0];
+    setEmailDraft(template ? template(firstName, vetoModal.toStage) : "");
     setVetoStep(2);
   };
 
@@ -264,7 +326,7 @@ export default function PipelineView() {
               <div className="p-5">
                 <p className="text-[12px] font-semibold text-gray-700 mb-3">Select a reason for the override <span className="text-red-500">*</span></p>
                 <div className="space-y-2">
-                  {VETO_REASONS.map((r) => (
+                  {getVetoReasons(vetoModal.toStage).map((r) => (
                     <button
                       key={r.value}
                       onClick={() => setVetoReason(r.value)}
@@ -300,7 +362,7 @@ export default function PipelineView() {
               <div className="p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <Mail className="w-4 h-4 text-blue-500" />
-                  <p className="text-[12px] font-semibold text-gray-700">Rejection Email Draft</p>
+                  <p className="text-[12px] font-semibold text-gray-700">Candidate Email Draft</p>
                   <span className="ml-auto text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium border border-blue-100">Auto-generated</span>
                 </div>
                 <div className="relative">
