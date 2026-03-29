@@ -264,7 +264,7 @@ export default function PipelineView() {
             <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2">
                   <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Agent Progress</h4>
                   {stage.agents.map((agent) =>
-              <div key={agent.name} className="bg-[hsl(var(--background))] px-2.5 py-2.5 rounded-lg space-y-2">
+              <div key={agent.name} className="bg-[hsl(var(--background))] px- py-2.5 rounded-lg space-y-2">
                       {/* Agent header */}
                       <div className="flex items-center gap-2">
                         <div className={`rounded-full w-6 h-6 flex items-center justify-center shrink-0 ${agent.active ? "bg-blue-50" : "bg-gray-100"}`}>
@@ -279,9 +279,9 @@ export default function PipelineView() {
                         </div>
                       </div>
                       {/* Stack breakdown */}
-                      <div className="mt-1 space-y-1.5">
+                      <div className="mt-1 space-y-3">
                         {agent.stack.map((item) =>
-                  <div key={item.key} className="bg-white rounded-lg px-2.5 py-2 border border-gray-100">
+                  <div key={item.key} className="bg-white rounded-lg px-3 py-2 border border-gray-100">
                             <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">{item.label}</p>
                             <div className="flex items-center gap-1.5 flex-wrap">
                               <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
