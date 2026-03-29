@@ -415,7 +415,7 @@ export default function JobDetails() {
 
         {/* Activity Log (Collapsible) */}
         <Collapsible open={isActivityOpen} onOpenChange={setIsActivityOpen}>
-          <div className="p-4 rounded-xl bg-white border border-gray-200">
+          <div className="p-4 rounded-xl bg-white">
             <CollapsibleTrigger className="flex items-center justify-between w-full group">
               <div className="flex items-center gap-2">
                 <Activity className="w-4 h-4 text-gray-400" />
