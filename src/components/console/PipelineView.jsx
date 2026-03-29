@@ -33,8 +33,7 @@ const initialStages = [
     id: "2",
     name: "Assessment",
     agents: [
-      { name: "Assessment Engine", active: true, stack: { processing: 1, queued: 0, done: 0 } },
-      { name: "Skills Evaluator", active: true, stack: { processing: 1, queued: 0, done: 0 } },
+      { name: "Assessment Agent", active: true, stack: { invite_criteria: 1, invite_email: 2, assessment: 3, filter_criteria: 1 } },
     ],
     candidates: [
       { id: "c13", name: "James Park", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face", score: 82, source: "LinkedIn", fit: "Good" },
@@ -275,16 +274,42 @@ export default function PipelineView() {
                         </div>
                       </div>
                       {/* Stack breakdown */}
-                      <div className="flex items-center gap-1.5 pl-8">
-                        <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
-                          <span className="font-bold">{agent.stack.processing}</span> processing
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
-                          <span className="font-bold">{agent.stack.queued}</span> queued
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md">
-                          <span className="font-bold">{agent.stack.done}</span> done
-                        </span>
+                      <div className="flex items-center gap-1.5 pl-8 flex-wrap">
+                        {'processing' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.processing}</span> processing
+                          </span>
+                        )}
+                        {'queued' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.queued}</span> queued
+                          </span>
+                        )}
+                        {'done' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.done}</span> done
+                          </span>
+                        )}
+                        {'invite_criteria' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-violet-50 text-violet-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.invite_criteria}</span> invite criteria
+                          </span>
+                        )}
+                        {'invite_email' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-sky-50 text-sky-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.invite_email}</span> invite email
+                          </span>
+                        )}
+                        {'assessment' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.assessment}</span> assessment
+                          </span>
+                        )}
+                        {'filter_criteria' in agent.stack && (
+                          <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
+                            <span className="font-bold">{agent.stack.filter_criteria}</span> filter criteria
+                          </span>
+                        )}
                       </div>
                     </div>
                   ))}
