@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Users, ChevronDown, Bot, Linkedin, Globe, UserCheck, Zap, AlertCircle } from "lucide-react";
+import { Users, ChevronDown, Bot, Linkedin, Globe, UserCheck, Zap, AlertCircle, Mail, ChevronRight, Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Button } from "@/components/ui/button";
@@ -155,6 +155,28 @@ export default function PipelineView() {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [selectedStage, setSelectedStage] = useState(null);
   const [vetoModal, setVetoModal] = useState(null); // { candidate, fromStage, toStage }
+  const [vetoReason, setVetoReason] = useState("");
+  const [emailDraft, setEmailDraft] = useState("");
+  const [emailCopied, setEmailCopied] = useState(false);
+  const [vetoStep, setVetoStep] = useState(1); // 1 = reason, 2 = email draft
+
+  const VETO_REASONS = [
+    { value: "skill_gap", label: "Skill Gap", desc: "Candidate lacks required technical or domain skills" },
+    { value: "salary", label: "Salary Expectation", desc: "Candidate's expectations exceed budget" },
+    { value: "culture", label: "Cultural Fit", desc: "Misalignment with team values or working style" },
+    { value: "experience", label: "Insufficient Experience", desc: "Below minimum years or seniority required" },
+    { value: "location", label: "Location / Relocation", desc: "Unable to meet location or travel requirements" },
+    { value: "other", label: "Other", desc: "Reason not listed above" },
+  ];
+
+  const EMAIL_TEMPLATES = {
+    skill_gap: (name) => `Hi ${name},\n\nThank you for taking the time to apply and for your interest in joining our team. After careful consideration, we've decided not to move forward at this stage as we're looking for a stronger match in a few key technical areas that are critical to this role.\n\nWe appreciate the effort you put into the process and encourage you to apply for future opportunities that align more closely with your background.\n\nWarm regards,\nThe Recruiting Team`,
+    salary: (name) => `Hi ${name},\n\nThank you for your interest in this position and for going through our interview process. Unfortunately, after reviewing your compensation expectations alongside our current budget, we're unable to proceed at this time as we aren't able to meet your requirements.\n\nWe truly appreciate your time and hope to stay in touch for future opportunities.\n\nWarm regards,\nThe Recruiting Team`,
+    culture: (name) => `Hi ${name},\n\nThank you for the time you invested in our interview process. After thoughtful consideration, we've concluded that this particular role may not be the ideal fit given our current team dynamics and working style.\n\nThis reflects on the role fit rather than your abilities, and we encourage you to explore other opportunities with us in the future.\n\nWarm regards,\nThe Recruiting Team`,
+    experience: (name) => `Hi ${name},\n\nThank you for applying and for the conversations we've had throughout the process. While your profile is impressive, we've decided to move forward with candidates whose experience level more closely aligns with the seniority requirements for this role.\n\nWe'd love to reconnect as your career continues to grow.\n\nWarm regards,\nThe Recruiting Team`,
+    location: (name) => `Hi ${name},\n\nThank you for your interest and participation in our hiring process. Unfortunately, we are unable to move forward as we require candidates who are able to meet our location or travel requirements for this position.\n\nWe appreciate your understanding and wish you the very best in your search.\n\nWarm regards,\nThe Recruiting Team`,
+    other: (name) => `Hi ${name},\n\nThank you for applying and for the time you've invested in our interview process. After careful consideration, we've decided not to move forward with your application at this time.\n\nWe truly appreciate your interest in our team and wish you all the best in your job search.\n\nWarm regards,\nThe Recruiting Team`,
+  };
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -170,6 +192,10 @@ export default function PipelineView() {
 
     // Show veto modal
     setVetoModal({ candidate: movedCandidate, fromStage: fromStageName, toStage: toStageName, sourceIdx: sourceStageIdx, destIdx: destStageIdx, sourceIdx: source.index, destIdx: destination.index });
+    setVetoReason("");
+    setEmailDraft("");
+    setEmailCopied(false);
+    setVetoStep(1);
   };
 
   const handleVetoConfirm = () => {
@@ -183,6 +209,22 @@ export default function PipelineView() {
 
   const handleVetoCancel = () => {
     setVetoModal(null);
+    setVetoReason("");
+    setEmailDraft("");
+    setVetoStep(1);
+  };
+
+  const handleReasonNext = () => {
+    if (!vetoReason) return;
+    const template = EMAIL_TEMPLATES[vetoReason];
+    setEmailDraft(template ? template(vetoModal.candidate.name.split(" ")[0]) : "");
+    setVetoStep(2);
+  };
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(emailDraft);
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2000);
   };
 
   return (
@@ -198,41 +240,92 @@ export default function PipelineView() {
 
       {/* Veto Modal */}
       {vetoModal &&
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-2xl shadow-lg p-6 max-w-sm">
-            <div className="flex items-start gap-3 mb-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md">
+            {/* Header */}
+            <div className="flex items-start gap-3 p-5 border-b border-gray-100">
               <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
                 <AlertCircle className="w-5 h-5 text-amber-600" />
               </div>
-              <div>
+              <div className="flex-1">
                 <h2 className="text-[15px] font-semibold text-gray-900">Override Agent Action?</h2>
-                <p className="text-[12px] text-gray-500 mt-1">This will veto the agents' workflow and override their decision.</p>
+                <p className="text-[12px] text-gray-500 mt-0.5">Moving <span className="font-medium text-gray-700">{vetoModal.candidate.name}</span> from <span className="font-medium">{vetoModal.fromStage}</span> → <span className="font-medium text-amber-600">{vetoModal.toStage}</span></p>
+              </div>
+              {/* Step indicator */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${vetoStep >= 1 ? "bg-amber-500 text-white" : "bg-gray-200 text-gray-400"}`}>1</div>
+                <div className={`w-4 h-px ${vetoStep >= 2 ? "bg-amber-400" : "bg-gray-200"}`} />
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${vetoStep >= 2 ? "bg-amber-500 text-white" : "bg-gray-200 text-gray-400"}`}>2</div>
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-3 mb-4 space-y-2">
-              <div className="flex items-center justify-between text-[12px]">
-                <span className="text-gray-500">Candidate:</span>
-                <span className="font-semibold text-gray-900">{vetoModal.candidate.name}</span>
+            {/* Step 1: Reason */}
+            {vetoStep === 1 && (
+              <div className="p-5">
+                <p className="text-[12px] font-semibold text-gray-700 mb-3">Select a reason for the override <span className="text-red-500">*</span></p>
+                <div className="space-y-2">
+                  {VETO_REASONS.map((r) => (
+                    <button
+                      key={r.value}
+                      onClick={() => setVetoReason(r.value)}
+                      className={`w-full text-left px-3.5 py-2.5 rounded-xl border transition-all ${
+                        vetoReason === r.value
+                          ? "border-amber-400 bg-amber-50"
+                          : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className={`w-3 h-3 rounded-full border-2 shrink-0 ${vetoReason === r.value ? "border-amber-500 bg-amber-500" : "border-gray-300"}`} />
+                        <p className={`text-[12px] font-semibold ${vetoReason === r.value ? "text-amber-700" : "text-gray-800"}`}>{r.label}</p>
+                      </div>
+                      <p className="text-[11px] text-gray-400 mt-0.5 pl-5">{r.desc}</p>
+                    </button>
+                  ))}
+                </div>
+                <div className="flex gap-3 mt-4">
+                  <Button variant="outline" onClick={handleVetoCancel} className="flex-1 text-[13px]">Cancel</Button>
+                  <Button
+                    onClick={handleReasonNext}
+                    disabled={!vetoReason}
+                    className="flex-1 bg-amber-600 hover:bg-amber-700 text-white text-[13px] disabled:opacity-40"
+                  >
+                    Next <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-[12px]">
-                <span className="text-gray-500">Moving from:</span>
-                <span className="font-semibold text-gray-900">{vetoModal.fromStage}</span>
-              </div>
-              <div className="flex items-center justify-between text-[12px]">
-                <span className="text-gray-500">Moving to:</span>
-                <span className="font-semibold text-amber-600">{vetoModal.toStage}</span>
-              </div>
-            </div>
+            )}
 
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={handleVetoCancel} className="flex-1">
-                Cancel
-              </Button>
-              <Button onClick={handleVetoConfirm} className="flex-1 bg-amber-600 hover:bg-amber-700 text-white">
-                Confirm Override
-              </Button>
-            </div>
+            {/* Step 2: Email Draft */}
+            {vetoStep === 2 && (
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  <p className="text-[12px] font-semibold text-gray-700">Rejection Email Draft</p>
+                  <span className="ml-auto text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium border border-blue-100">Auto-generated</span>
+                </div>
+                <div className="relative">
+                  <textarea
+                    value={emailDraft}
+                    onChange={(e) => setEmailDraft(e.target.value)}
+                    rows={9}
+                    className="w-full text-[12px] text-gray-700 leading-relaxed bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-3 resize-none focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300"
+                  />
+                  <button
+                    onClick={handleCopyEmail}
+                    className="absolute top-2 right-2 flex items-center gap-1 text-[10px] font-medium text-gray-400 hover:text-blue-600 bg-white border border-gray-200 px-2 py-1 rounded-lg transition-colors"
+                  >
+                    {emailCopied ? <><Check className="w-3 h-3 text-emerald-500" /> Copied</> : <><Copy className="w-3 h-3" /> Copy</>}
+                  </button>
+                </div>
+                <p className="text-[11px] text-gray-400 mt-2">You can edit the draft above before confirming.</p>
+                <div className="flex gap-3 mt-4">
+                  <Button variant="outline" onClick={() => setVetoStep(1)} className="flex-1 text-[13px]">Back</Button>
+                  <Button onClick={handleVetoConfirm} className="flex-1 bg-amber-600 hover:bg-amber-700 text-white text-[13px]">
+                    Confirm Override
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       }
