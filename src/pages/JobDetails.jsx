@@ -323,8 +323,8 @@ export default function JobDetails() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsEditDialogOpen(true)}
-              className="h-8">
+              onClick={() => setIsEditDialogOpen(true)} className="inline-flex items-center justify-center gap-1 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs h-8">
+              
               <Edit2 className="w-3.5 h-3.5 mr-1.5" />
               Edit
             </Button>
@@ -352,7 +352,7 @@ export default function JobDetails() {
         <div className="bg-white mb-6 p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Target className="w-5 h-5 text-indigo-600" />
+              
               <h3 className="text-[16px] font-semibold text-gray-900">
                 Ideal Persona
               </h3>
@@ -360,8 +360,8 @@ export default function JobDetails() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsEditPersonaOpen(true)}
-              className="h-8">
+              onClick={() => setIsEditPersonaOpen(true)} className="inline-flex items-center justify-center gap-1 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs h-8">
+              
               <Edit2 className="w-3.5 h-3.5 mr-1.5" />
               Edit
             </Button>
