@@ -40,9 +40,9 @@ export default function StepIndicator({ currentStep, onStepClick }) {
                   isClickable ? "cursor-pointer" : "cursor-default"
                 } ${
                   isCompleted
-                    ? "bg-gray-900 text-white"
+                    ? "bg-emerald-500 text-white"
                     : isActive
-                    ? "bg-gray-900 text-white ring-4 ring-gray-200"
+                    ? "bg-blue-500 text-white ring-4 ring-blue-100"
                     : "bg-gray-100 text-gray-400"
                 }`}
               >
@@ -53,7 +53,7 @@ export default function StepIndicator({ currentStep, onStepClick }) {
             {idx < STEPS.length - 1 && (
               <div
                 className={`flex-1 h-px mx-1.5 transition-colors duration-300 ${
-                  currentStep > step.number ? "bg-gray-900" : "bg-gray-200"
+                  currentStep > step.number ? "bg-emerald-400" : "bg-gray-200"
                 }`}
               />
             )}
