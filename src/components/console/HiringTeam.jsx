@@ -84,8 +84,8 @@ export default function HiringTeam() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setIsEditMode(true)}
-            className="h-8">
+            onClick={() => setIsEditMode(true)} className="inline-flex items-center justify-center gap-1 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs h-8">
+            
             
               <Edit2 className="w-3.5 h-3.5 mr-1.5" />
               Edit
