@@ -10,9 +10,9 @@ const initialStages = [
     id: "1",
     name: "In Review",
     agents: [
-      { name: "Outreach Agent", active: true, stack: { processing: 5, queued: 4, done: 3 } },
-      { name: "Screening Bot", active: true, stack: { processing: 3, queued: 6, done: 3 } },
-      { name: "Resume Parser", active: false, stack: { processing: 0, queued: 12, done: 0 } },
+      { name: "Outreach Agent", active: true, stack: [{ key: "outreach", label: "Outreach", processing: 5, queued: 4, done: 3 }] },
+      { name: "Screening Bot", active: true, stack: [{ key: "screening", label: "Screening", processing: 3, queued: 6, done: 3 }] },
+      { name: "Resume Parser", active: false, stack: [{ key: "resume", label: "Resume Parse", processing: 0, queued: 12, done: 0 }] },
     ],
     candidates: [
       { id: "c1", name: "Alex Chen", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face", score: 91, source: "LinkedIn", fit: "Strong" },
@@ -33,7 +33,12 @@ const initialStages = [
     id: "2",
     name: "Assessment",
     agents: [
-      { name: "Assessment Agent", active: true, stack: { invite_criteria: 1, invite_email: 2, assessment: 3, filter_criteria: 1 } },
+      { name: "Assessment Agent", active: true, stack: [
+        { key: "invite_criteria", label: "Invite Criteria", processing: 3, queued: 5, done: 8 },
+        { key: "invite_email", label: "Invite Email", processing: 2, queued: 3, done: 6 },
+        { key: "assessment", label: "Assessment", processing: 1, queued: 4, done: 4 },
+        { key: "filter_criteria", label: "Filter Criteria", processing: 1, queued: 2, done: 3 },
+      ]},
     ],
     candidates: [
       { id: "c13", name: "James Park", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face", score: 82, source: "LinkedIn", fit: "Good" },
@@ -43,8 +48,8 @@ const initialStages = [
     id: "3",
     name: "Interview",
     agents: [
-      { name: "Interview Scheduler", active: true, stack: { processing: 2, queued: 1, done: 0 } },
-      { name: "Feedback Collector", active: false, stack: { processing: 0, queued: 3, done: 0 } },
+      { name: "Interview Scheduler", active: true, stack: [{ key: "scheduling", label: "Scheduling", processing: 2, queued: 1, done: 0 }] },
+      { name: "Feedback Collector", active: false, stack: [{ key: "feedback", label: "Feedback", processing: 0, queued: 3, done: 0 }] },
     ],
     candidates: [
       { id: "c14", name: "Maya Johnson", title: "Lead Product Designer", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face", score: 94, source: "Referral", fit: "Strong" },
@@ -56,8 +61,8 @@ const initialStages = [
     id: "4",
     name: "Technical",
     agents: [
-      { name: "Code Challenge", active: false, stack: { processing: 0, queued: 1, done: 0 } },
-      { name: "Technical Interviewer", active: true, stack: { processing: 1, queued: 0, done: 0 } },
+      { name: "Code Challenge", active: false, stack: [{ key: "challenge", label: "Challenge", processing: 0, queued: 1, done: 0 }] },
+      { name: "Technical Interviewer", active: true, stack: [{ key: "tech_interview", label: "Tech Interview", processing: 1, queued: 0, done: 0 }] },
     ],
     candidates: [
       { id: "c17", name: "Marcus Rivera", title: "Sr. Designer", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face", score: 89, source: "Indeed", fit: "Strong" },
@@ -66,7 +71,7 @@ const initialStages = [
   {
     id: "5",
     name: "Final Round",
-    agents: [{ name: "Executive Interviewer", active: true, stack: { processing: 1, queued: 0, done: 0 } }],
+    agents: [{ name: "Executive Interviewer", active: true, stack: [{ key: "exec", label: "Exec Interview", processing: 1, queued: 0, done: 0 }] }],
     candidates: [
       { id: "c18", name: "Lena Kim", title: "Product Designer II", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face", score: 92, source: "Referral", fit: "Strong" },
     ],
@@ -74,7 +79,7 @@ const initialStages = [
   {
     id: "6",
     name: "Offer",
-    agents: [{ name: "Offer Manager", active: true, stack: { processing: 1, queued: 0, done: 0 } }],
+    agents: [{ name: "Offer Manager", active: true, stack: [{ key: "offer", label: "Offer", processing: 1, queued: 0, done: 0 }] }],
     candidates: [
       { id: "c19", name: "Daniel Wright", title: "UX Lead", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face", score: 96, source: "LinkedIn", fit: "Strong" },
     ],
@@ -274,42 +279,23 @@ export default function PipelineView() {
                         </div>
                       </div>
                       {/* Stack breakdown */}
-                      <div className="flex items-center gap-1.5 pl-8 flex-wrap">
-                        {'processing' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.processing}</span> processing
-                          </span>
-                        )}
-                        {'queued' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.queued}</span> queued
-                          </span>
-                        )}
-                        {'done' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.done}</span> done
-                          </span>
-                        )}
-                        {'invite_criteria' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-violet-50 text-violet-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.invite_criteria}</span> invite criteria
-                          </span>
-                        )}
-                        {'invite_email' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-sky-50 text-sky-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.invite_email}</span> invite email
-                          </span>
-                        )}
-                        {'assessment' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.assessment}</span> assessment
-                          </span>
-                        )}
-                        {'filter_criteria' in agent.stack && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
-                            <span className="font-bold">{agent.stack.filter_criteria}</span> filter criteria
-                          </span>
-                        )}
+                      <div className="pl-8 mt-1 space-y-1.5">
+                        {agent.stack.map((item) => (
+                          <div key={item.key} className="bg-white rounded-lg px-2.5 py-2 border border-gray-100">
+                            <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">{item.label}</p>
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
+                                <span className="font-bold">{item.processing}</span> processing
+                              </span>
+                              <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
+                                <span className="font-bold">{item.queued}</span> queued
+                              </span>
+                              <span className="flex items-center gap-1 text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md">
+                                <span className="font-bold">{item.done}</span> done
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}
