@@ -262,7 +262,7 @@ export default function PipelineView() {
               {/* Agents Section - Expanded */}
               {expandedStageId === stage.id &&
             <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2">
-                  <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Agent Progress</h4>
+                  
                   {stage.agents.map((agent) =>
               <div key={agent.name} className="bg-[hsl(var(--background))] px- py-2.5 rounded-lg space-y-2">
                       {/* Agent header */}
