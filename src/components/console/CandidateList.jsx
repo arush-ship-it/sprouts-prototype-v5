@@ -145,7 +145,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
       {activeTab === "review" &&
       <div className="bg-white my-5 rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300">
           {/* Header */}
-          <div className="px-5 pt-4 pb-7 flex items-center justify-between">
+          <div className="px-6 py-5 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="bg-blue-50 rounded-[28px] w-7 h-7 flex items-center justify-center shrink-0">
                 <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
