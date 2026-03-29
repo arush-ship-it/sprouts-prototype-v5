@@ -300,11 +300,11 @@ export default function PipelineView() {
                     </div>
               )}
                   <Link
-                to="/Agents"
-                className="bg-blue-50 text-blue-600 px-3 py-2 text-xs font-medium rounded-lg flex items-center justify-between w-full hover:bg-blue-100 transition-colors mt-1">
-                
-                    View Agent Activity
-                  </Link>
+                to="/Agents" className="bg-blue-50 text-blue-600 mt-1 px-16 py-2 text-xs font-medium rounded-lg flex items-center justify-between w-full hover:bg-blue-100 transition-colors">View Full Activity
+
+
+
+              </Link>
                 </div>
             }
 
