@@ -41,7 +41,7 @@ const initialStages = [
   }],
 
   candidates: [
-  { id: "c13", name: "James Park", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face", score: 82, source: "LinkedIn", fit: "Good" }]
+  { id: "c13", name: "James Park", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face", score: 82, source: "LinkedIn", fit: "Good", agentStatus: "in_progress" }]
 
 },
 {
@@ -52,9 +52,9 @@ const initialStages = [
   { name: "Feedback Collector", active: false, stack: [{ key: "feedback", label: "Feedback", processing: 0, queued: 3, done: 0 }] }],
 
   candidates: [
-  { id: "c14", name: "Maya Johnson", title: "Lead Product Designer", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face", score: 94, source: "Referral", fit: "Strong" },
-  { id: "c15", name: "Sarah Mitchell", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face", score: 87, source: "LinkedIn", fit: "Strong" },
-  { id: "c16", name: "Emma Collins", title: "Design Manager", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face", score: 85, source: "Direct", fit: "Good" }]
+  { id: "c14", name: "Maya Johnson", title: "Lead Product Designer", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face", score: 94, source: "Referral", fit: "Strong", agentStatus: "needs_approval" },
+  { id: "c15", name: "Sarah Mitchell", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face", score: 87, source: "LinkedIn", fit: "Strong", agentStatus: "done" },
+  { id: "c16", name: "Emma Collins", title: "Design Manager", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face", score: 85, source: "Direct", fit: "Good", agentStatus: "in_progress" }]
 
 },
 {
@@ -65,7 +65,7 @@ const initialStages = [
   { name: "Technical Interviewer", active: true, stack: [{ key: "tech_interview", label: "Tech Interview", processing: 1, queued: 0, done: 0 }] }],
 
   candidates: [
-  { id: "c17", name: "Marcus Rivera", title: "Sr. Designer", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face", score: 89, source: "Indeed", fit: "Strong" }]
+  { id: "c17", name: "Marcus Rivera", title: "Sr. Designer", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face", score: 89, source: "Indeed", fit: "Strong", agentStatus: "no_agent" }]
 
 },
 {
@@ -73,7 +73,7 @@ const initialStages = [
   name: "Final Round",
   agents: [{ name: "Executive Interviewer", active: true, stack: [{ key: "exec", label: "Exec Interview", processing: 1, queued: 0, done: 0 }] }],
   candidates: [
-  { id: "c18", name: "Lena Kim", title: "Product Designer II", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face", score: 92, source: "Referral", fit: "Strong" }]
+  { id: "c18", name: "Lena Kim", title: "Product Designer II", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face", score: 92, source: "Referral", fit: "Strong", agentStatus: "needs_approval" }]
 
 },
 {
@@ -81,7 +81,7 @@ const initialStages = [
   name: "Offer",
   agents: [{ name: "Offer Manager", active: true, stack: [{ key: "offer", label: "Offer", processing: 1, queued: 0, done: 0 }] }],
   candidates: [
-  { id: "c19", name: "Daniel Wright", title: "UX Lead", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face", score: 96, source: "LinkedIn", fit: "Strong" }]
+  { id: "c19", name: "Daniel Wright", title: "UX Lead", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face", score: 96, source: "LinkedIn", fit: "Strong", agentStatus: "done" }]
 
 }];
 
