@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Sparkles, User, RefreshCw, ChevronDown, ChevronUp, Send } from "lucide-react";
+import { Sparkles, User, RefreshCw, ChevronDown, ChevronUp, Send, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -9,6 +9,7 @@ export default function AITalentFinderPanel() {
   const [isFiltersExpanded, setIsFiltersExpanded] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
   const [hasConversation, setHasConversation] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(false);
 
   const [conversation, setConversation] = useState([
   {
@@ -47,7 +48,7 @@ export default function AITalentFinderPanel() {
   });
 
   return (
-    <div className="bg-white mt-5 mr-2 ml-2 rounded-3xl w-[400px] border-r border-gray-200 flex flex-col overflow-hidden" style={{ height: "calc(100vh - 80px)" }}>
+    <div className={`bg-white mt-5 mr-2 ml-2 rounded-3xl border-r border-gray-200 flex flex-col overflow-hidden transition-all duration-300 ${isMaximized ? "w-[700px]" : "w-[400px]"}`} style={{ height: "calc(100vh - 80px)" }}>
       {/* Top Tabs */}
       <div className="px-4 py-4">
         <div className="mb-4 flex items-center">
@@ -73,7 +74,16 @@ export default function AITalentFinderPanel() {
               Manual Edit
             </button>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ml-2 shrink-0">
+            <button
+              onClick={() => setIsMaximized(!isMaximized)}
+              className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+              title={isMaximized ? "Restore" : "Maximize"}
+            >
+              {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            </button>
+          </div>
+          <div className="hidden">
             
 
 
