@@ -619,8 +619,8 @@ export default function AITalentFinderPanel() {
         </div>}
       </div>}
 
-      {/* Input Area at Bottom - AI mode only */}
-      {activeMode === "ai" && <div className="p-4 bg-white">
+      {/* Input Area at Bottom */}
+      {<div className="p-4 bg-white">
         <div className="flex gap-2 items-center">
           <input
             type="text"
@@ -635,15 +635,6 @@ export default function AITalentFinderPanel() {
           </Button>
         </div>
       </div>}
-
-      {/* Manual mode save bar */}
-      {activeMode === "manual" && (
-        <div className="p-4 bg-white border-t border-gray-100">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-[13px] h-9">
-            Apply Filters
-          </Button>
-        </div>
-      )}
     </div>);
 
 }
