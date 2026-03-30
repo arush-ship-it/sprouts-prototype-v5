@@ -6,20 +6,20 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   const tabs = [
-  { key: "review", label: "Prospects", count: 12, icon: Users },
-  { key: "pipeline", label: "Pipeline", count: 34, icon: GitBranch }];
-
+    { key: "review", label: "Prospects", count: 12, icon: Users },
+    { key: "pipeline", label: "Pipeline", count: 34, icon: GitBranch },
+  ];
 
   const reviewViews = [
-  { key: "card", label: "Card", icon: LayoutGrid },
-  { key: "list", label: "List", icon: List }];
-
+    { key: "card", label: "Card", icon: LayoutGrid },
+    { key: "list", label: "List", icon: List },
+  ];
 
   const pipelineViews = [
-  { key: "card", label: "Card", icon: LayoutGrid },
-  { key: "table", label: "Table", icon: Table },
-  { key: "pipeline", label: "Pipeline", icon: Workflow }];
-
+    { key: "card", label: "Card", icon: LayoutGrid },
+    { key: "table", label: "Table", icon: Table },
+    { key: "pipeline", label: "Pipeline", icon: Workflow },
+  ];
 
   const currentViews = activeTab === "review" ? reviewViews : pipelineViews;
 
@@ -34,20 +34,20 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
             return (
               <button
                 key={tab.key}
-                onClick={() => setActiveTab(tab.key)} className="bg-white text-gray-900 px-3 py-3 text-xs font-medium rounded-[10px] flex items-center gap-2 transition-all duration-200 shadow-sm">
-
-
-
-                
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 ${
+                  isActive ? "bg-white text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-600"
+                }`}
+              >
                 <Icon className="w-3.5 h-3.5" />
                 {tab.label}
                 <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full transition-colors ${
-                isActive ? "bg-blue-50 text-blue-600" : "bg-gray-200 text-gray-400"}`
-                }>
+                  isActive ? "bg-blue-50 text-blue-600" : "bg-gray-200 text-gray-400"
+                }`}>
                   {tab.count}
                 </span>
-              </button>);
-
+              </button>
+            );
           })}
         </div>
 
@@ -74,20 +74,20 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
 
           {/* View Mode Toggle */}
           <div className="bg-gray-100 p-1 rounded-lg flex items-center gap-0.5">
-            {currentViews.map((view) =>
-            <button
-              key={view.key}
-              onClick={() => setViewMode(view.key)}
-              title={view.label}
-              className={`p-1.5 rounded-md transition-colors ${
-              viewMode === view.key ? "bg-white text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-600"}`
-              }>
+            {currentViews.map((view) => (
+              <button
+                key={view.key}
+                onClick={() => setViewMode(view.key)}
+                title={view.label}
+                className={`p-1.5 rounded-md transition-colors ${
+                  viewMode === view.key ? "bg-white text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-600"
+                }`}>
                 <view.icon className="w-3.5 h-3.5" />
               </button>
-            )}
+            ))}
           </div>
         </div>
       </div>
-    </div>);
-
+    </div>
+  );
 }

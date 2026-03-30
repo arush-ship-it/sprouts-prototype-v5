@@ -191,10 +191,10 @@ const StatCard = ({ label, value, sub, trend, up, color, icon: Icon, onClick, ac
 const ChartCard = ({ title, subtitle, children, className = "", action, insightId, anomalyId, onOpenInsight }) => {
   const [hovered, setHovered] = useState(false);
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col "
-
-    onMouseEnter={() => setHovered(true)}
-    onMouseLeave={() => setHovered(false)}>
+    <div
+      className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col ${className}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
       <div className="flex items-start justify-between mb-4 shrink-0">
         <div>
           <p className="text-[13px] font-semibold text-gray-900">{title}</p>

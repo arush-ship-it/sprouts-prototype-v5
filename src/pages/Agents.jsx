@@ -572,14 +572,14 @@ export default function Agents() {
 
         {/* Pill Tabs + Controls */}
         <div className="flex items-center justify-between mb-5">
-          <div className="bg-gray-100 p-1 rounded-[10003px] flex items-center">
+          <div className="bg-gray-200 p-1 rounded-[10003px] flex items-center">
             {[
             { key: "activity", label: "Activity" },
             { key: "agents", label: "Agents" }].
             map(({ key, label }) =>
             <button
               key={key}
-              onClick={() => setActiveTab(key)} className="bg-white text-gray-900 gap-1 px-3 py-3 text-xs font-medium rounded-[10px] transition-all duration-200">
+              onClick={() => setActiveTab(key)} className={`px-5 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${activeTab === key ? "bg-white text-gray-900 shadow-[0_1px_4px_rgba(0,0,0,0.12)]" : "text-gray-500 hover:text-gray-700"}`}>
               
                 {label}
               </button>
@@ -647,9 +647,9 @@ export default function Agents() {
               </div>
 
               {/* View Toggle */}
-              <div className="p-1 rounded-[32px] flex items-center">
+              <div className="bg-gray-200 p-1 rounded-[32px] flex items-center">
                 <button
-                onClick={() => setViewMode("list")} className="bg-white text-gray-800 p-1.5 rounded-lg flex items-center justify-center transition-all duration-200">
+                onClick={() => setViewMode("list")} className="bg-white text-gray-800 p-1.5 rounded-[32px] flex items-center justify-center transition-all duration-200 shadow-[0_1px_4px_rgba(0,0,0,0.12)]">
                 
                   <List className="w-3.5 h-3.5" />
                 </button>

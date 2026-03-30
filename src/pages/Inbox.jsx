@@ -208,7 +208,7 @@ export default function Inbox() {
 
             <Dialog open={isSequenceOpen} onOpenChange={setIsSequenceOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" size="sm" className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 rounded-md px-3 text-xs">
+                <Button variant="outline" size="sm">
                   <Plus className="w-3.5 h-3.5 mr-1.5" />
                   New Sequence
                 </Button>
@@ -264,16 +264,16 @@ export default function Inbox() {
       <div className="px-8 pb-6">
         {/* Tabs */}
         <div className="flex items-center justify-between mb-4">
-          <div className="bg-gray-100 p-1 rounded-full flex items-center gap-1">
+          <div className="bg-gray-200 p-1 rounded-full flex items-center gap-1">
             {["Inbox", "Sent", "Starred"].map((tab) =>
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)} className="bg-white text-gray-900 px-3 py-3 text-xs font-medium rounded-[10px] transition-all shadow-sm">
-
-
-
-
-              
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-all ${
+              activeTab === tab ?
+              "bg-white text-gray-900 shadow-sm" :
+              "text-gray-500 hover:text-gray-700"}`
+              }>
                 {tab}
               </button>
             )}

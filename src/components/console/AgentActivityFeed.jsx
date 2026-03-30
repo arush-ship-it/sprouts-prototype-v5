@@ -151,7 +151,7 @@ function ActivityRow({ item }) {
       <div className="px-4 py-3.5 rounded-2xl flex items-start gap-3">
         {/* Dot */}
         <div className="flex flex-col items-center pt-1 gap-1 flex-shrink-0">
-          
+          <div className={`w-2 h-2 rounded-full ${item.dotColor}`} />
         </div>
 
         {/* Icon */}
@@ -160,7 +160,7 @@ function ActivityRow({ item }) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 gap-3 min-w-0">
+        <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-0.5">
             <span className="text-[12px] font-semibold text-gray-900">{item.agentName}</span>
             <Badge variant="outline" className="inline-flex items-center rounded-md border transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-[10px] font-medium px-1.5 py-0 bg-blue-50 text-blue-700">
@@ -180,7 +180,7 @@ function ActivityRow({ item }) {
             }
           </div>
 
-          <p className="text-gray-600 mb-1 text-xs">{item.description}</p>
+          <p className="text-[12px] text-gray-600 mb-1">{item.description}</p>
 
           {item.fromStage && item.toStage &&
           <div className="flex items-center gap-1.5 mb-2">
