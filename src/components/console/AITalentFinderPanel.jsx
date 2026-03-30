@@ -226,8 +226,12 @@ export default function AITalentFinderPanel() {
               </div>);
 
         })}
+        <div className="px-4 pb-4">
+          <button className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold rounded-xl transition-colors">
+            Source Now
+          </button>
         </div>
-      }
+      </div>}
 
       {/* AI Powered Filters Section */}
       {activeMode === "ai" && <div className="flex-1 overflow-y-auto">
