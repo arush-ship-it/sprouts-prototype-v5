@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, Maximize2, Minimize2, Bell, Settings, User, ChevronLeft } from "lucide-react";
+import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, CheckCircle, XCircle, Clock, MessageSquare, UserPlus, ChevronUp, ThumbsUp, ThumbsDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TabSwitcher from "@/components/shared/TabSwitcher";
 import AITalentFinderPanel from "@/components/console/AITalentFinderPanel";
+import ManagerMetricsDashboard from "@/components/talent/ManagerMetricsDashboard";
+import FeedbackModal from "@/components/talent/FeedbackModal";
+import MessageModal from "@/components/talent/MessageModal";
+import AssignModal from "@/components/talent/AssignModal";
 
 const candidates = [
 {
@@ -176,75 +178,127 @@ const candidates = [
 }];
 
 
-function CandidatePoolCard({ candidate }) {
+const DECISION_LABELS = {
+  yes: { label: "Approved", color: "text-emerald-600 bg-emerald-50 border-emerald-200" },
+  maybe: { label: "On Hold", color: "text-amber-600 bg-amber-50 border-amber-200" },
+  no: { label: "Rejected", color: "text-red-500 bg-red-50 border-red-200" },
+};
+
+function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
+  const [decision, setDecision] = useState(null);
+  const [starred, setStarred] = useState(false);
+
+  const decisionInfo = decision ? DECISION_LABELS[decision] : null;
+
   return (
-    <div className="bg-white p-5 rounded-2xl hover:shadow-md transition-all cursor-pointer group">
-      <div className="flex items-start gap-4 mb-4">
-        <img
-          src={candidate.avatar}
-          alt={candidate.name}
-          className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-100" />
+    <div className={`bg-white p-5 rounded-2xl transition-all group border ${
+      decision === "yes" ? "border-emerald-200" :
+      decision === "no" ? "border-red-200" :
+      decision === "maybe" ? "border-amber-200" :
+      "border-transparent hover:shadow-md"
+    }`}>
+      <div className="flex items-start gap-4 mb-3">
+        <div className="relative">
+          <img
+            src={candidate.avatar}
+            alt={candidate.name}
+            className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-100"
+          />
+          {/* Availability dot */}
+          <span className={`absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full border-2 border-white ${
+            candidate.availability === "Available" ? "bg-emerald-400" : "bg-amber-400"
+          }`} />
+        </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-[15px] font-semibold text-gray-900 truncate">
-              {candidate.name}
-            </h3>
-            <Star className="w-3.5 h-3.5 text-gray-300 group-hover:text-amber-400 transition-colors cursor-pointer" />
+          <div className="flex items-center gap-2 mb-0.5">
+            <h3 className="text-[15px] font-semibold text-gray-900 truncate">{candidate.name}</h3>
+            <button onClick={() => setStarred(!starred)}>
+              <Star className={`w-3.5 h-3.5 transition-colors ${starred ? "fill-amber-400 text-amber-400" : "text-gray-300 group-hover:text-amber-300"}`} />
+            </button>
+            {decisionInfo && (
+              <span className={`ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-md border ${decisionInfo.color}`}>
+                {decisionInfo.label}
+              </span>
+            )}
           </div>
           <p className="text-[13px] text-gray-600 mb-1">{candidate.title}</p>
           <div className="flex items-center gap-3 text-[12px] text-gray-400">
-            <span className="flex items-center gap-1">
-              <MapPin className="w-3 h-3" />
-              {candidate.location}
-            </span>
-            <span className="flex items-center gap-1">
-              <Briefcase className="w-3 h-3" />
-              {candidate.experience}
-            </span>
+            <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{candidate.location}</span>
+            <span className="flex items-center gap-1"><Briefcase className="w-3 h-3" />{candidate.experience}</span>
           </div>
         </div>
       </div>
 
-      <div className="mb-3">
-        <div className="flex items-center gap-1.5 mb-2 text-[12px] text-gray-500">
-          <GraduationCap className="w-3.5 h-3.5" />
-          {candidate.education}
-        </div>
+      <div className="flex items-center gap-1.5 mb-2.5 text-[12px] text-gray-500">
+        <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+        {candidate.education}
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {candidate.skills.slice(0, 4).map((skill, idx) =>
-        <span
-          key={idx} className="px-2 py-1 text-[11px] font-medium rounded-md bg-blue-50 text-blue-700">
-          
-
-            {skill}
-          </span>
+        {candidate.skills.slice(0, 4).map((skill, idx) => (
+          <span key={idx} className="px-2 py-1 text-[11px] font-medium rounded-md bg-blue-50 text-blue-700">{skill}</span>
+        ))}
+        {candidate.skills.length > 4 && (
+          <span className="px-2 py-1 text-[11px] font-medium rounded-md bg-gray-50 text-gray-500">+{candidate.skills.length - 4}</span>
         )}
-        {candidate.skills.length > 4 &&
-        <span className="px-2 py-1 text-[11px] font-medium rounded-md bg-gray-50 text-gray-500">
-            +{candidate.skills.length - 4}
-          </span>
-        }
       </div>
 
-      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-        <span
-          className={`text-[11px] font-semibold ${
-          candidate.availability === "Available" ?
-          "text-emerald-600" :
-          "text-amber-600"}`
-          }>
+      {/* Yes / Maybe / No + Actions */}
+      <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+        {/* Decision buttons */}
+        <button
+          onClick={() => setDecision(decision === "yes" ? null : "yes")}
+          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
+            decision === "yes" ? "bg-emerald-500 text-white border-emerald-500" : "border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600"
+          }`}
+        >
+          <CheckCircle className="w-3.5 h-3.5" /> Yes
+        </button>
+        <button
+          onClick={() => setDecision(decision === "maybe" ? null : "maybe")}
+          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
+            decision === "maybe" ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-500 hover:border-amber-300 hover:text-amber-600"
+          }`}
+        >
+          <Clock className="w-3.5 h-3.5" /> Hold
+        </button>
+        <button
+          onClick={() => setDecision(decision === "no" ? null : "no")}
+          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
+            decision === "no" ? "bg-red-500 text-white border-red-500" : "border-gray-200 text-gray-500 hover:border-red-300 hover:text-red-500"
+          }`}
+        >
+          <XCircle className="w-3.5 h-3.5" /> No
+        </button>
 
-          {candidate.availability}
-        </span>
-        <Button size="sm" variant="outline" className="h-7 text-[11px]">
-          View Profile
-        </Button>
+        {/* Action buttons */}
+        <div className="ml-auto flex items-center gap-1.5">
+          <button
+            onClick={() => onFeedback(candidate)}
+            title="Quick Feedback"
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-blue-600 hover:border-blue-300 transition-colors"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={() => onMessage(candidate)}
+            title="Send Message"
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
+          >
+            <Send className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={() => onAssign(candidate)}
+            title="Assign to Recruiter / Job"
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-emerald-600 hover:border-emerald-300 transition-colors"
+          >
+            <UserPlus className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
-    </div>);
-
+    </div>
+  );
 }
 
 export default function TalentPool() {
@@ -256,9 +310,13 @@ export default function TalentPool() {
   }]
   );
   const [input, setInput] = useState("");
-  const [isMaximized, setIsMaximized] = useState(false);
   const [sourcedCandidates, setSourcedCandidates] = useState([]);
   const [selectedSourced, setSelectedSourced] = useState(new Set());
+
+  // Manager action modals
+  const [feedbackTarget, setFeedbackTarget] = useState(null);
+  const [messageTarget, setMessageTarget] = useState(null);
+  const [assignTarget, setAssignTarget] = useState(null);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -305,6 +363,29 @@ export default function TalentPool() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-48px)] bg-[#FAFAFA] overflow-hidden">
+
+      {/* Manager Action Modals */}
+      {feedbackTarget && (
+        <FeedbackModal
+          candidate={feedbackTarget}
+          onClose={() => setFeedbackTarget(null)}
+          onSubmit={(data) => console.log("Feedback submitted:", feedbackTarget.name, data)}
+        />
+      )}
+      {messageTarget && (
+        <MessageModal
+          candidate={messageTarget}
+          onClose={() => setMessageTarget(null)}
+        />
+      )}
+      {assignTarget && (
+        <AssignModal
+          candidate={assignTarget}
+          onClose={() => setAssignTarget(null)}
+          onSubmit={(data) => console.log("Assignment:", assignTarget.name, data)}
+        />
+      )}
+
       {/* Top Navigation */}
       
 
@@ -331,17 +412,10 @@ export default function TalentPool() {
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto h-full">
         <div className="pt-4 pr-8 pb-4 pl-2">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-4 flex items-center justify-between">
             <div>
-              <div className="mb-1 flex items-center gap-2">
-                <Link to={createPageUrl("Home")}>
-                  
-                </Link>
-                <h1 className="text-gray-900 text-lg font-semibold">Talent Pool</h1>
-              </div>
-              <p className="text-gray-500 pr-1 pl-2 text-sm">
-                {candidates.length} candidates found
-              </p>
+              <h1 className="text-gray-900 text-lg font-semibold">Talent Pool</h1>
+              <p className="text-gray-500 text-sm">{candidates.length} candidates found</p>
             </div>
             <div className="flex items-center gap-2">
               <button className="bg-white text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
@@ -352,6 +426,9 @@ export default function TalentPool() {
               </button>
             </div>
           </div>
+
+          {/* Manager Metrics Dashboard */}
+          <ManagerMetricsDashboard />
 
           {/* Sourced Candidates Section */}
           {sourcedCandidates.length > 0 &&
@@ -458,7 +535,13 @@ export default function TalentPool() {
 
           <div className="grid grid-cols-1 gap-4">
             {candidates.map((candidate) =>
-              <CandidatePoolCard key={candidate.id} candidate={candidate} />
+              <CandidatePoolCard
+                key={candidate.id}
+                candidate={candidate}
+                onFeedback={setFeedbackTarget}
+                onMessage={setMessageTarget}
+                onAssign={setAssignTarget}
+              />
               )}
           </div>
         </div>
