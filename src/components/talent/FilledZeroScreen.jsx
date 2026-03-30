@@ -8,8 +8,8 @@ export default function FilledZeroScreen() {
         <Globe className="lucide lucide-globe w-8 h-8 text-white" />
       </div>
       <h2 className="text-gray-800 mb-2 text-2xl font-medium">More than 500 Million+ Profiles to Choose From</h2>
-      <p className="text-[13px] text-gray-400 max-w-xs leading-relaxed">
-        No active sourcing or candidate activity. This position has been marked as filled and is no longer accepting candidates.
+      <p className="text-[13px] text-gray-400 max-w-m leading-relaxed">Find the right talent faster with powerful search, advanced filtering, and intelligent matching so you can quickly identify, evaluate, and connect with candidates who truly fit your roles.
+
       </p>
     </div>);
 
