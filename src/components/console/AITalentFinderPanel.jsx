@@ -5,43 +5,43 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const MANUAL_FILTER_SECTIONS = [
-  {
-    key: "skills",
-    label: "Skills",
-    options: ["Java", "Python", "React", "Node.js", "TypeScript", "AWS", "Docker", "Kubernetes", "SQL", "GraphQL", "Go", "Rust"],
-  },
-  {
-    key: "jobTitles",
-    label: "Job Title",
-    options: ["Software Engineer", "Lead Engineer", "Full Stack Engineer", "Principal Engineer", "Staff Engineer", "Engineering Manager", "Tech Lead"],
-  },
-  {
-    key: "experience",
-    label: "Years of Experience",
-    options: ["0–2 years", "3–5 years", "6–9 years", "10+ years"],
-    single: true,
-  },
-  {
-    key: "education",
-    label: "Education",
-    options: ["Bachelors", "Masters", "PhD", "Computer Science", "Engineering", "Mathematics"],
-  },
-  {
-    key: "institutions",
-    label: "Institutions",
-    options: ["Harvard", "MIT", "Stanford University", "Caltech", "Brown University", "Cornell University", "UCLA", "USC"],
-  },
-  {
-    key: "attributes",
-    label: "Attributes",
-    options: ["Stability", "Career Growth", "Startup Experience", "Open To A New Role", "Seniority Filter", "Remote Preferred", "Fast Learner"],
-  },
-  {
-    key: "location",
-    label: "Location",
-    options: ["San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "Remote", "Boston, MA", "Chicago, IL"],
-  },
-];
+{
+  key: "skills",
+  label: "Skills",
+  options: ["Java", "Python", "React", "Node.js", "TypeScript", "AWS", "Docker", "Kubernetes", "SQL", "GraphQL", "Go", "Rust"]
+},
+{
+  key: "jobTitles",
+  label: "Job Title",
+  options: ["Software Engineer", "Lead Engineer", "Full Stack Engineer", "Principal Engineer", "Staff Engineer", "Engineering Manager", "Tech Lead"]
+},
+{
+  key: "experience",
+  label: "Years of Experience",
+  options: ["0–2 years", "3–5 years", "6–9 years", "10+ years"],
+  single: true
+},
+{
+  key: "education",
+  label: "Education",
+  options: ["Bachelors", "Masters", "PhD", "Computer Science", "Engineering", "Mathematics"]
+},
+{
+  key: "institutions",
+  label: "Institutions",
+  options: ["Harvard", "MIT", "Stanford University", "Caltech", "Brown University", "Cornell University", "UCLA", "USC"]
+},
+{
+  key: "attributes",
+  label: "Attributes",
+  options: ["Stability", "Career Growth", "Startup Experience", "Open To A New Role", "Seniority Filter", "Remote Preferred", "Fast Learner"]
+},
+{
+  key: "location",
+  label: "Location",
+  options: ["San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "Remote", "Boston, MA", "Chicago, IL"]
+}];
+
 
 export default function AITalentFinderPanel() {
   const [activeMode, setActiveMode] = useState("ai"); // 'ai' or 'manual'
@@ -50,7 +50,7 @@ export default function AITalentFinderPanel() {
   const [hasConversation, setHasConversation] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [expandedSections, setExpandedSections] = useState(
-    Object.fromEntries(MANUAL_FILTER_SECTIONS.map(s => [s.key, true]))
+    Object.fromEntries(MANUAL_FILTER_SECTIONS.map((s) => [s.key, true]))
   );
   const [manualFilters, setManualFilters] = useState({
     skills: ["Java", "Python"],
@@ -59,14 +59,14 @@ export default function AITalentFinderPanel() {
     education: ["Masters"],
     institutions: ["Harvard", "MIT", "Stanford University", "Caltech"],
     attributes: ["Stability", "Career Growth", "Startup Experience"],
-    location: [],
+    location: []
   });
 
   const toggleManualFilter = (sectionKey, option, single) => {
-    setManualFilters(prev => {
+    setManualFilters((prev) => {
       const current = prev[sectionKey] || [];
       if (current.includes(option)) {
-        return { ...prev, [sectionKey]: current.filter(v => v !== option) };
+        return { ...prev, [sectionKey]: current.filter((v) => v !== option) };
       }
       if (single) {
         return { ...prev, [sectionKey]: [option] };
@@ -76,7 +76,7 @@ export default function AITalentFinderPanel() {
   };
 
   const toggleSection = (key) => {
-    setExpandedSections(prev => ({ ...prev, [key]: !prev[key] }));
+    setExpandedSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const [conversation, setConversation] = useState([
@@ -138,8 +138,8 @@ export default function AITalentFinderPanel() {
             <button
               onClick={() => setIsMaximized(!isMaximized)}
               className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-              title={isMaximized ? "Restore" : "Maximize"}
-            >
+              title={isMaximized ? "Restore" : "Maximize"}>
+              
               {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </button>
           </div>
@@ -177,57 +177,57 @@ export default function AITalentFinderPanel() {
       </div>
 
       {/* Manual Edit View */}
-      {activeMode === "manual" && (
-        <div className="flex-1 overflow-y-auto px-4 py-3 space-y-2">
+      {activeMode === "manual" &&
+      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-2">
           {MANUAL_FILTER_SECTIONS.map((section) => {
-            const selected = manualFilters[section.key] || [];
-            const isOpen = expandedSections[section.key];
-            return (
-              <div key={section.key} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          const selected = manualFilters[section.key] || [];
+          const isOpen = expandedSections[section.key];
+          return (
+            <div key={section.key} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div className="px-4 pt-3 pb-1 flex items-center gap-2">
                   <span className="text-[13px] font-semibold text-gray-900">{section.label}</span>
-                  {selected.length > 0 && (
-                    <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                  {selected.length > 0 &&
+                <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
                       {selected.length}
                     </span>
-                  )}
+                }
                 </div>
 
                 <div className="px-4 pb-4">
                     {/* Selected chips */}
-                    {selected.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {selected.map((val) => (
-                          <button
-                            key={val}
-                            onClick={() => toggleManualFilter(section.key, val, section.single)}
-                            className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-600 text-white text-[11px] font-medium hover:bg-blue-700 transition-colors"
-                          >
+                    {selected.length > 0 &&
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                        {selected.map((val) =>
+                  <button
+                    key={val}
+                    onClick={() => toggleManualFilter(section.key, val, section.single)}
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-600 text-white text-[11px] font-medium hover:bg-blue-700 transition-colors">
+                    
                             {val}
                             <X className="w-3 h-3" />
                           </button>
-                        ))}
+                  )}
                       </div>
-                    )}
+                }
                     {/* All options */}
                     <div className="flex flex-wrap gap-1.5">
-                      {section.options.filter(o => !selected.includes(o)).map((opt) => (
-                        <button
-                          key={opt}
-                          onClick={() => toggleManualFilter(section.key, opt, section.single)}
-                          className="flex items-center gap-1 px-2.5 py-1 rounded-lg border border-gray-200 text-gray-600 text-[11px] font-medium hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-                        >
+                      {section.options.filter((o) => !selected.includes(o)).map((opt) =>
+                  <button
+                    key={opt}
+                    onClick={() => toggleManualFilter(section.key, opt, section.single)}
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg border border-gray-200 text-gray-600 text-[11px] font-medium hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+                    
                           <Plus className="w-3 h-3" />
                           {opt}
                         </button>
-                      ))}
+                  )}
                     </div>
                   </div>
-              </div>
-            );
-          })}
+              </div>);
+
+        })}
         </div>
-      )}
+      }
 
       {/* AI Powered Filters Section */}
       {activeMode === "ai" && <div className="flex-1 overflow-y-auto">
@@ -621,8 +621,8 @@ export default function AITalentFinderPanel() {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyDown={(e) => {if (e.key === "Enter" && inputMessage.trim()) {setHasConversation(true);setInputMessage("");}}}
-            placeholder="Let SproutsAI assist you"
-            className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
+            placeholder="Let SproutsAI assist you" className="bg-gray-50 text-[13px] px-4 py-2.5 rounded-[28px] flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
+          
 
           <Button size="icon" onClick={() => {if (inputMessage.trim()) {setHasConversation(true);setInputMessage("");}}} className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 shrink-0 hover:bg-blue-600">
             <Send className="w-4 h-4" />
