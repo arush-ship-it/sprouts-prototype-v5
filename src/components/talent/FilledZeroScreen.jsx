@@ -3,7 +3,7 @@ import { Globe } from "lucide-react";
 
 export default function FilledZeroScreen() {
   return (
-    <div className="pt-48 pr-8 pb-48 pl-8 text-center flex flex-col items-center justify-center h-full w-full">
+    <div className="pt-48 pr-8 pb-64 pl-8 text-center flex flex-col items-center justify-center h-full w-full">
       <div className="bg-gray-300 mb-5 rounded-full w-16 h-16 flex items-center justify-center">
         <Globe className="lucide lucide-globe w-8 h-8 text-white" />
       </div>
