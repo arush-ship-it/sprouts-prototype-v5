@@ -268,7 +268,7 @@ export default function Inbox() {
             {["Inbox", "Sent", "Starred"].map((tab) =>
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)} className="bg-white text-gray-900 px-2 py-2 text-xs font-medium rounded-[10px] transition-all shadow-sm">
+              onClick={() => setActiveTab(tab)} className={`px-2 py-2 text-xs font-medium rounded-[10px] transition-all ${activeTab === tab ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
 
 
 
