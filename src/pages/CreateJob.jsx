@@ -1622,7 +1622,7 @@ export default function CreateJob() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-48px)] bg-[#F2F3F5] overflow-hidden">
-      <div className="bg-gray-100 px-4 py-4 flex flex-1 overflow-hidden gap-4 min-h-0">
+      <div className="bg-gray-100 px-5 py-4 flex flex-1 overflow-hidden gap-4 min-h-0">
 
         {/* Left Panel — AI Assistant (hidden on landing & confirmation) */}
         {step > 0 && step < 6 &&
