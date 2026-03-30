@@ -49,7 +49,9 @@ export default function AITalentFinderPanel() {
   const [inputMessage, setInputMessage] = useState("");
   const [hasConversation, setHasConversation] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
-  const [expandedSections, setExpandedSections] = useState({ skills: true });
+  const [expandedSections, setExpandedSections] = useState(
+    Object.fromEntries(MANUAL_FILTER_SECTIONS.map(s => [s.key, true]))
+  );
   const [manualFilters, setManualFilters] = useState({
     skills: ["Java", "Python"],
     jobTitles: ["Lead Engineer", "Full Stack Engineer", "Principal Engineer"],
@@ -182,23 +184,16 @@ export default function AITalentFinderPanel() {
             const isOpen = expandedSections[section.key];
             return (
               <div key={section.key} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-                <button
-                  onClick={() => toggleSection(section.key)}
-                  className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-[13px] font-semibold text-gray-900">{section.label}</span>
-                    {selected.length > 0 && (
-                      <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
-                        {selected.length}
-                      </span>
-                    )}
-                  </div>
-                  {isOpen ? <ChevronUp className="w-3.5 h-3.5 text-gray-400" /> : <ChevronDown className="w-3.5 h-3.5 text-gray-400" />}
-                </button>
+                <div className="px-4 pt-3 pb-1 flex items-center gap-2">
+                  <span className="text-[13px] font-semibold text-gray-900">{section.label}</span>
+                  {selected.length > 0 && (
+                    <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                      {selected.length}
+                    </span>
+                  )}
+                </div>
 
-                {isOpen && (
-                  <div className="px-4 pb-4">
+                <div className="px-4 pb-4">
                     {/* Selected chips */}
                     {selected.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -228,7 +223,6 @@ export default function AITalentFinderPanel() {
                       ))}
                     </div>
                   </div>
-                )}
               </div>
             );
           })}
