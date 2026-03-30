@@ -647,7 +647,7 @@ export default function Agents() {
               </div>
 
               {/* View Toggle */}
-              <div className="bg-gray-200 p-1 rounded-[32px] flex items-center">
+              <div className="bg-gray-100 p-1 rounded-lg flex items-center">
                 <button
                 onClick={() => setViewMode("list")} className="bg-white text-gray-800 p-1.5 rounded-lg flex items-center justify-center transition-all duration-200">
                 
