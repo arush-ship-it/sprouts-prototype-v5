@@ -889,8 +889,8 @@ export default function Dashboard() {
           <div className="flex items-center gap-2">
             <div className="relative" ref={datePickerRef}>
               <button
-                onClick={() => setIsDatePickerOpen((v) => !v)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-colors ${isDatePickerOpen ? "border-indigo-400 bg-indigo-50 text-indigo-700" : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"}`}>
+                onClick={() => setIsDatePickerOpen((v) => !v)} className="text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg flex items-center gap-1.5 transition-colors hover:bg-gray-50">
+                
                 <Calendar className="w-3.5 h-3.5" /> {dateLabel}
               </button>
               <AnimatePresence>
