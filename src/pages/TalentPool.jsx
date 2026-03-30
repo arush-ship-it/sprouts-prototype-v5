@@ -413,7 +413,7 @@ export default function TalentPool() {
 
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto h-full">
-        <div className="pt-4 pr-8 pb-4 pl-2">
+        <div className="pt-4 pr-8 pb-4 pl-2 gap-3">
 
           <div className="mb-4 flex items-center justify-between">
             <div>
