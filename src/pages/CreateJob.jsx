@@ -200,7 +200,7 @@ function DefaultScreen({ onStart }) {
   };
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full gap-2">
       {/* Left: AI Chat Panel */}
       <div className="bg-white m-0 rounded-3xl w-[400px] shrink-0 shadow-sm flex flex-col overflow-hidden">
         <div className="px-4 py-3 border-b border-gray-100 shrink-0">
