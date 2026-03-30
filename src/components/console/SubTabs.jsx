@@ -25,9 +25,9 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
 
   return (
     <div className="px-8 py-0">
-      <div className="flex items-center justify-between border-b border-gray-200">
+      <div className="flex items-center justify-between py-3">
         {/* Tab Bar */}
-        <div className="flex items-center">
+        <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-full">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.key;
@@ -35,28 +35,24 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`relative flex items-center gap-2 px-5 py-3 text-[13px] font-medium transition-colors duration-200 ${
-                  isActive ? "text-gray-900" : "text-gray-400 hover:text-gray-700"
+                className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 ${
+                  isActive ? "bg-white text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
                 {tab.label}
-                <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md transition-colors ${
-                  isActive ? "bg-blue-50 text-blue-600" : "bg-gray-100 text-gray-400"
+                <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full transition-colors ${
+                  isActive ? "bg-blue-50 text-blue-600" : "bg-gray-200 text-gray-400"
                 }`}>
                   {tab.count}
                 </span>
-                {/* Active underline */}
-                <span className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-t-full transition-all duration-200 ${
-                  isActive ? "bg-blue-500" : "bg-transparent"
-                }`} />
               </button>
             );
           })}
         </div>
 
         {/* Filter, Search & View Mode */}
-        <div className="flex items-center gap-6 pb-1">
+        <div className="flex items-center gap-6">
           {/* Search Bar */}
           <div
             className="bg-gray-100 px-3 py-1.5 rounded-lg flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out"
