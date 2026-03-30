@@ -424,6 +424,9 @@ export default function TalentPool() {
               <button className="bg-white text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
                 + Candidate
               </button>
+              <button className="bg-white text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+                Filled
+              </button>
             </div>
           </div>
 
