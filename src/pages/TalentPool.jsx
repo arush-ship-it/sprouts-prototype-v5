@@ -318,7 +318,7 @@ export default function TalentPool() {
   const [feedbackTarget, setFeedbackTarget] = useState(null);
   const [messageTarget, setMessageTarget] = useState(null);
   const [assignTarget, setAssignTarget] = useState(null);
-  const [isFilled, setIsFilled] = useState(false);
+  const [isFilled, setIsFilled] = useState(true);
 
   const handleSend = () => {
     if (!input.trim()) return;
