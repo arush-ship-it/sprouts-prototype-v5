@@ -9,6 +9,7 @@ import ManagerMetricsDashboard from "@/components/talent/ManagerMetricsDashboard
 import FeedbackModal from "@/components/talent/FeedbackModal";
 import MessageModal from "@/components/talent/MessageModal";
 import AssignModal from "@/components/talent/AssignModal";
+import FilledZeroScreen from "@/components/talent/FilledZeroScreen";
 
 const candidates = [
 {
@@ -317,6 +318,7 @@ export default function TalentPool() {
   const [feedbackTarget, setFeedbackTarget] = useState(null);
   const [messageTarget, setMessageTarget] = useState(null);
   const [assignTarget, setAssignTarget] = useState(null);
+  const [isFilled, setIsFilled] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -406,12 +408,13 @@ export default function TalentPool() {
 
       
       <div className="bg-gray-100 flex flex-1 overflow-hidden">
-      {/* Left Panel - AI Talent Finder */}
-      <AITalentFinderPanel />
+      {/* Left Panel - AI Talent Finder (hidden when filled) */}
+      {!isFilled && <AITalentFinderPanel />}
 
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto h-full">
         <div className="pt-4 pr-8 pb-4 pl-2">
+
           <div className="mb-4 flex items-center justify-between">
             <div>
               <h1 className="text-gray-900 text-lg font-semibold">Talent Pool</h1>
@@ -424,11 +427,20 @@ export default function TalentPool() {
               <button className="bg-white text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
                 + Candidate
               </button>
-              <button className="bg-white text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
-                Filled
+              <button
+                onClick={() => setIsFilled(!isFilled)}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
+                  isFilled
+                    ? "bg-emerald-500 text-white border-emerald-500"
+                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                }`}
+              >
+                {isFilled ? "✓ Filled" : "Filled"}
               </button>
             </div>
           </div>
+
+          {isFilled ? <FilledZeroScreen /> : <>
 
           {/* Manager Metrics Dashboard */}
           <ManagerMetricsDashboard />
@@ -547,6 +559,7 @@ export default function TalentPool() {
               />
               )}
           </div>
+          </>}
         </div>
       </div>
       </div>
