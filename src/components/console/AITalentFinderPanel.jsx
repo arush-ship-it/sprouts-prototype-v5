@@ -47,7 +47,7 @@ export default function AITalentFinderPanel() {
   });
 
   return (
-    <div className="bg-white mt-5 mr-2 ml-2 rounded-xl w-[440px] border-r border-gray-200 flex flex-col overflow-hidden" style={{ height: "calc(100vh - 80px)" }}>
+    <div className="bg-white mt-5 mr-2 ml-2 rounded-xl w-[400px] border-r border-gray-200 flex flex-col overflow-hidden" style={{ height: "calc(100vh - 80px)" }}>
       {/* Top Tabs */}
       <div className="px-4 py-4">
         <div className="mb-4 flex items-center">
@@ -491,17 +491,17 @@ export default function AITalentFinderPanel() {
       </div>
 
       {/* Input Area at Bottom */}
-      <div className="border-t border-gray-200 p-4 bg-white">
+      <div className="p-4 bg-white">
         <div className="flex gap-2 items-center">
           <input
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter" && inputMessage.trim()) { setHasConversation(true); setInputMessage(""); } }}
+            onKeyDown={(e) => {if (e.key === "Enter" && inputMessage.trim()) {setHasConversation(true);setInputMessage("");}}}
             placeholder="Let SproutsAI assist you"
             className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
 
-          <Button size="icon" onClick={() => { if (inputMessage.trim()) { setHasConversation(true); setInputMessage(""); } }} className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 shrink-0 hover:bg-blue-600">
+          <Button size="icon" onClick={() => {if (inputMessage.trim()) {setHasConversation(true);setInputMessage("");}}} className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 shrink-0 hover:bg-blue-600">
             <Send className="w-4 h-4" />
           </Button>
         </div>
