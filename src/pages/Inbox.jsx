@@ -264,16 +264,16 @@ export default function Inbox() {
       <div className="px-8 pb-6">
         {/* Tabs */}
         <div className="flex items-center justify-between mb-4">
-          <div className="bg-gray-200 p-1 rounded-full flex items-center gap-1">
+          <div className="p-1 rounded-full flex items-center gap-1">
             {["Inbox", "Sent", "Starred"].map((tab) =>
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-1.5 text-[13px] font-medium rounded-full transition-all ${
-              activeTab === tab ?
-              "bg-white text-gray-900 shadow-sm" :
-              "text-gray-500 hover:text-gray-700"}`
-              }>
+              onClick={() => setActiveTab(tab)} className="bg-white text-gray-900 px-2 py-2 text-xs font-medium rounded-[10px] transition-all shadow-sm">
+
+
+
+
+              
                 {tab}
               </button>
             )}
