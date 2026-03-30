@@ -322,7 +322,7 @@ function DefaultScreen({ onStart }) {
           <div className="bg-gray-300 mb-4 mx-auto rounded-[64px] w-14 h-14 flex items-center justify-center">
             <Sparkles className="text-[hsl(var(--background))] lucide lucide-sparkles w-7 h-7" />
           </div>
-          <h2 className="text-blue-600 mb-1 text-2xl font-medium">Roles that align, attract, and convert, with SproutsAI</h2>
+          <h2 className="text-blue-600 mb-1 text-2xl font-medium">Create roles that convert, with SproutsAI</h2>
           <p className="text-gray-400 text-xs">Generate & Post Job Instantly With Ease With SproutsAI Job Builder</p>
         </div>
 
