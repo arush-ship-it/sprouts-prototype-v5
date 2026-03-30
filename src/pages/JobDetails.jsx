@@ -151,7 +151,7 @@ export default function JobDetails() {
           <div className="flex items-start justify-between mb-3">
             <div>
               <div className="flex items-center gap-3">
-                <h1 className="text-[24px] font-semibold text-gray-900 tracking-tight">
+                <h1 className="text-gray-900 text-xl font-semibold tracking-tight">
                   {jobData.title}
                 </h1>
                 <span className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
