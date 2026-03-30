@@ -200,7 +200,7 @@ export default function AITalentFinderPanel() {
                         {selected.map((val) =>
                   <button
                     key={val}
-                    onClick={() => toggleManualFilter(section.key, val, section.single)} className="bg-blue-400 text-[#ffffff] px-2.5 py-1 text-xs font-normal rounded-lg flex items-center gap-1 hover:bg-blue-700 transition-colors">
+                    onClick={() => toggleManualFilter(section.key, val, section.single)} className="bg-blue-100 text-slate-950 px-2.5 py-1 text-xs font-normal rounded-lg flex items-center gap-1 hover:bg-blue-700 transition-colors">
                     
                     
                             {val}
