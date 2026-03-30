@@ -106,17 +106,17 @@ const scoreColor = (score) => {
 };
 
 const agentStatusStyle = (status) => {
-  if (status === "no_agent")      return { border: "border-red-300",    bg: "bg-white" };
-  if (status === "in_progress")   return { border: "border-blue-300",   bg: "bg-white" };
-  if (status === "done")          return { border: "border-emerald-300", bg: "bg-white" };
-  if (status === "needs_approval") return { border: "border-rose-200",  bg: "bg-rose-50/60" };
+  if (status === "no_agent") return { border: "border-red-300", bg: "bg-white" };
+  if (status === "in_progress") return { border: "border-blue-300", bg: "bg-white" };
+  if (status === "done") return { border: "border-emerald-300", bg: "bg-white" };
+  if (status === "needs_approval") return { border: "border-rose-200", bg: "bg-rose-50/60" };
   return { border: "border-gray-100", bg: "bg-white" };
 };
 
 const agentStatusBadge = (status) => {
-  if (status === "no_agent")       return { label: "No agent", color: "text-red-500 bg-red-50" };
-  if (status === "in_progress")    return { label: "In progress", color: "text-blue-500 bg-blue-50" };
-  if (status === "done")           return { label: "Done", color: "text-emerald-600 bg-emerald-50" };
+  if (status === "no_agent") return { label: "No agent", color: "text-red-500 bg-red-50" };
+  if (status === "in_progress") return { label: "In progress", color: "text-blue-500 bg-blue-50" };
+  if (status === "done") return { label: "Done", color: "text-emerald-600 bg-emerald-50" };
   if (status === "needs_approval") return { label: "Needs approval", color: "text-rose-600 bg-rose-50" };
   return null;
 };
@@ -152,9 +152,9 @@ function CandidatePipelineCard({ candidate, stageName, provided, snapshot, onCli
       {/* Tags row */}
       <div className="flex items-center gap-1.5 flex-wrap">
         {/* Stage */}
-        <span className="flex items-center gap-1 text-[10px] font-medium text-violet-600 bg-violet-50 px-2 py-0.5 rounded-md">
-          {stageName}
-        </span>
+        
+
+        
         {/* Fit */}
         <span className={`text-[10px] font-medium px-2 py-0.5 rounded-md ${fitColor(candidate.fit)}`}>
           {candidate.fit} fit
@@ -164,11 +164,11 @@ function CandidatePipelineCard({ candidate, stageName, provided, snapshot, onCli
           {sourceIcon(candidate.source)} {candidate.source}
         </span>
         {/* Agent status badge */}
-        {badge && (
-          <span className={`ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-md ${badge.color}`}>
+        {badge &&
+        <span className={`ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-md ${badge.color}`}>
             {badge.label}
           </span>
-        )}
+        }
       </div>
     </div>);
 
@@ -217,48 +217,48 @@ export default function PipelineView() {
   // Stage-specific reasons keyed by destination stage name
   const STAGE_REASONS = {
     "Assessment": [
-      { value: "strong_resume", label: "Strong Resume Match", desc: "Profile closely aligns with JD requirements" },
-      { value: "skills_verified", label: "Skills Verified", desc: "Key skills confirmed through screening" },
-      { value: "culture_positive", label: "Culture Alignment", desc: "Initial signals of strong cultural fit" },
-      { value: "fast_track", label: "Fast-Track Candidate", desc: "Exceptional profile warrants expedited review" },
-      { value: "other", label: "Other", desc: "Reason not listed above" },
-    ],
+    { value: "strong_resume", label: "Strong Resume Match", desc: "Profile closely aligns with JD requirements" },
+    { value: "skills_verified", label: "Skills Verified", desc: "Key skills confirmed through screening" },
+    { value: "culture_positive", label: "Culture Alignment", desc: "Initial signals of strong cultural fit" },
+    { value: "fast_track", label: "Fast-Track Candidate", desc: "Exceptional profile warrants expedited review" },
+    { value: "other", label: "Other", desc: "Reason not listed above" }],
+
     "Interview": [
-      { value: "assessment_passed", label: "Assessment Passed", desc: "Scored above threshold in assessment" },
-      { value: "strong_answers", label: "Strong Responses", desc: "Demonstrated clear domain knowledge" },
-      { value: "portfolio_impressive", label: "Impressive Portfolio", desc: "Work samples exceeded expectations" },
-      { value: "referral_override", label: "Referral / Endorsement", desc: "Internal referral or strong endorsement" },
-      { value: "other", label: "Other", desc: "Reason not listed above" },
-    ],
+    { value: "assessment_passed", label: "Assessment Passed", desc: "Scored above threshold in assessment" },
+    { value: "strong_answers", label: "Strong Responses", desc: "Demonstrated clear domain knowledge" },
+    { value: "portfolio_impressive", label: "Impressive Portfolio", desc: "Work samples exceeded expectations" },
+    { value: "referral_override", label: "Referral / Endorsement", desc: "Internal referral or strong endorsement" },
+    { value: "other", label: "Other", desc: "Reason not listed above" }],
+
     "Technical": [
-      { value: "interview_strong", label: "Strong Interview", desc: "Performed well in behavioral and role interviews" },
-      { value: "communication_fit", label: "Communication & Fit", desc: "Excellent clarity and interpersonal skills" },
-      { value: "domain_depth", label: "Deep Domain Knowledge", desc: "Demonstrated strong subject matter expertise" },
-      { value: "other", label: "Other", desc: "Reason not listed above" },
-    ],
+    { value: "interview_strong", label: "Strong Interview", desc: "Performed well in behavioral and role interviews" },
+    { value: "communication_fit", label: "Communication & Fit", desc: "Excellent clarity and interpersonal skills" },
+    { value: "domain_depth", label: "Deep Domain Knowledge", desc: "Demonstrated strong subject matter expertise" },
+    { value: "other", label: "Other", desc: "Reason not listed above" }],
+
     "Final Round": [
-      { value: "tech_passed", label: "Technical Bar Met", desc: "Passed coding or technical evaluation" },
-      { value: "problem_solving", label: "Strong Problem Solving", desc: "Exceptional analytical thinking demonstrated" },
-      { value: "system_design", label: "System Design Skills", desc: "Solid architecture and design instincts" },
-      { value: "other", label: "Other", desc: "Reason not listed above" },
-    ],
+    { value: "tech_passed", label: "Technical Bar Met", desc: "Passed coding or technical evaluation" },
+    { value: "problem_solving", label: "Strong Problem Solving", desc: "Exceptional analytical thinking demonstrated" },
+    { value: "system_design", label: "System Design Skills", desc: "Solid architecture and design instincts" },
+    { value: "other", label: "Other", desc: "Reason not listed above" }],
+
     "Offer": [
-      { value: "top_candidate", label: "Top Candidate", desc: "Ranked highest across all evaluation criteria" },
-      { value: "exec_approved", label: "Executive Approval", desc: "Endorsed by hiring manager or leadership" },
-      { value: "competitive_offer", label: "Competitive Offer Needed", desc: "Strong candidate requiring fast-tracked offer" },
-      { value: "other", label: "Other", desc: "Reason not listed above" },
-    ],
+    { value: "top_candidate", label: "Top Candidate", desc: "Ranked highest across all evaluation criteria" },
+    { value: "exec_approved", label: "Executive Approval", desc: "Endorsed by hiring manager or leadership" },
+    { value: "competitive_offer", label: "Competitive Offer Needed", desc: "Strong candidate requiring fast-tracked offer" },
+    { value: "other", label: "Other", desc: "Reason not listed above" }],
+
     // Default fallback — also used for moves to "In Review" or unknown stages
     "default": [
-      { value: "reconsider", label: "Reconsider Profile", desc: "Re-evaluating candidate for this stage" },
-      { value: "pipeline_reorder", label: "Pipeline Reorder", desc: "Restructuring the hiring flow" },
-      { value: "skill_gap", label: "Skill Gap", desc: "Candidate lacks key skills for current stage" },
-      { value: "salary", label: "Salary Expectation", desc: "Compensation expectations don't align" },
-      { value: "culture", label: "Cultural Fit", desc: "Misalignment with team values or working style" },
-      { value: "experience", label: "Insufficient Experience", desc: "Below minimum seniority required" },
-      { value: "location", label: "Location / Relocation", desc: "Unable to meet location requirements" },
-      { value: "other", label: "Other", desc: "Reason not listed above" },
-    ],
+    { value: "reconsider", label: "Reconsider Profile", desc: "Re-evaluating candidate for this stage" },
+    { value: "pipeline_reorder", label: "Pipeline Reorder", desc: "Restructuring the hiring flow" },
+    { value: "skill_gap", label: "Skill Gap", desc: "Candidate lacks key skills for current stage" },
+    { value: "salary", label: "Salary Expectation", desc: "Compensation expectations don't align" },
+    { value: "culture", label: "Cultural Fit", desc: "Misalignment with team values or working style" },
+    { value: "experience", label: "Insufficient Experience", desc: "Below minimum seniority required" },
+    { value: "location", label: "Location / Relocation", desc: "Unable to meet location requirements" },
+    { value: "other", label: "Other", desc: "Reason not listed above" }]
+
   };
 
   const getVetoReasons = (toStage) => STAGE_REASONS[toStage] || STAGE_REASONS["default"];
@@ -290,7 +290,7 @@ export default function PipelineView() {
     culture: (name) => `Hi ${name},\n\nThank you for the time you invested in our process. After thoughtful consideration, we feel this role may not be the ideal fit given our current team dynamics — this is a reflection of role fit, not your abilities.\n\nWe encourage you to explore other opportunities with us.\n\nWarm regards,\nThe Recruiting Team`,
     experience: (name) => `Hi ${name},\n\nThank you for applying. While your profile is impressive, we've decided to move forward with candidates whose experience level more closely aligns with the seniority required for this role.\n\nWe'd love to reconnect as your career grows.\n\nWarm regards,\nThe Recruiting Team`,
     location: (name) => `Hi ${name},\n\nThank you for your interest. Unfortunately, we require candidates who can meet our location or travel requirements for this position and are unable to move forward.\n\nWe wish you the very best.\n\nWarm regards,\nThe Recruiting Team`,
-    other: (name) => `Hi ${name},\n\nThank you for the time you've invested in our process. After careful consideration, we've decided not to move forward at this time.\n\nWe truly appreciate your interest and wish you all the best.\n\nWarm regards,\nThe Recruiting Team`,
+    other: (name) => `Hi ${name},\n\nThank you for the time you've invested in our process. After careful consideration, we've decided not to move forward at this time.\n\nWe truly appreciate your interest and wish you all the best.\n\nWarm regards,\nThe Recruiting Team`
   };
 
   const onDragEnd = (result) => {
@@ -378,44 +378,44 @@ export default function PipelineView() {
             </div>
 
             {/* Step 1: Reason */}
-            {vetoStep === 1 && (
-              <div className="p-5">
+            {vetoStep === 1 &&
+          <div className="p-5">
                 <p className="text-[12px] font-semibold text-gray-700 mb-3">Select a reason for the override <span className="text-red-500">*</span></p>
                 <div className="space-y-2">
-                  {getVetoReasons(vetoModal.toStage).map((r) => (
-                    <button
-                      key={r.value}
-                      onClick={() => setVetoReason(r.value)}
-                      className={`w-full text-left px-3.5 py-2.5 rounded-xl border transition-all ${
-                        vetoReason === r.value
-                          ? "border-amber-400 bg-amber-50"
-                          : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-                      }`}
-                    >
+                  {getVetoReasons(vetoModal.toStage).map((r) =>
+              <button
+                key={r.value}
+                onClick={() => setVetoReason(r.value)}
+                className={`w-full text-left px-3.5 py-2.5 rounded-xl border transition-all ${
+                vetoReason === r.value ?
+                "border-amber-400 bg-amber-50" :
+                "border-gray-200 hover:border-gray-300 hover:bg-gray-50"}`
+                }>
+                
                       <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full border-2 shrink-0 ${vetoReason === r.value ? "border-amber-500 bg-amber-500" : "border-gray-300"}`} />
                         <p className={`text-[12px] font-semibold ${vetoReason === r.value ? "text-amber-700" : "text-gray-800"}`}>{r.label}</p>
                       </div>
                       <p className="text-[11px] text-gray-400 mt-0.5 pl-5">{r.desc}</p>
                     </button>
-                  ))}
+              )}
                 </div>
                 <div className="flex gap-3 mt-4">
                   <Button variant="outline" onClick={handleVetoCancel} className="flex-1 text-[13px]">Cancel</Button>
                   <Button
-                    onClick={handleReasonNext}
-                    disabled={!vetoReason}
-                    className="flex-1 bg-amber-600 hover:bg-amber-700 text-white text-[13px] disabled:opacity-40"
-                  >
+                onClick={handleReasonNext}
+                disabled={!vetoReason}
+                className="flex-1 bg-amber-600 hover:bg-amber-700 text-white text-[13px] disabled:opacity-40">
+                
                     Next <ChevronRight className="w-3.5 h-3.5 ml-1" />
                   </Button>
                 </div>
               </div>
-            )}
+          }
 
             {/* Step 2: Email Draft */}
-            {vetoStep === 2 && (
-              <div className="p-5">
+            {vetoStep === 2 &&
+          <div className="p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <Mail className="w-4 h-4 text-blue-500" />
                   <p className="text-[12px] font-semibold text-gray-700">Candidate Email Draft</p>
@@ -423,15 +423,15 @@ export default function PipelineView() {
                 </div>
                 <div className="relative">
                   <textarea
-                    value={emailDraft}
-                    onChange={(e) => setEmailDraft(e.target.value)}
-                    rows={9}
-                    className="w-full text-[12px] text-gray-700 leading-relaxed bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-3 resize-none focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300"
-                  />
+                value={emailDraft}
+                onChange={(e) => setEmailDraft(e.target.value)}
+                rows={9}
+                className="w-full text-[12px] text-gray-700 leading-relaxed bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-3 resize-none focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300" />
+              
                   <button
-                    onClick={handleCopyEmail}
-                    className="absolute top-2 right-2 flex items-center gap-1 text-[10px] font-medium text-gray-400 hover:text-blue-600 bg-white border border-gray-200 px-2 py-1 rounded-lg transition-colors"
-                  >
+                onClick={handleCopyEmail}
+                className="absolute top-2 right-2 flex items-center gap-1 text-[10px] font-medium text-gray-400 hover:text-blue-600 bg-white border border-gray-200 px-2 py-1 rounded-lg transition-colors">
+                
                     {emailCopied ? <><Check className="w-3 h-3 text-emerald-500" /> Copied</> : <><Copy className="w-3 h-3" /> Copy</>}
                   </button>
                 </div>
@@ -443,7 +443,7 @@ export default function PipelineView() {
                   </Button>
                 </div>
               </div>
-            )}
+          }
           </div>
         </div>
       }
