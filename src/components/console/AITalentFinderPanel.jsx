@@ -151,8 +151,8 @@ export default function AITalentFinderPanel() {
           </div>
         </div>
 
-        {/* Active Filters Section */}
-        <div className="bg-[#ffffff] px-3 py-2 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors"
+        {/* Active Filters Section - AI mode only */}
+        {activeMode === "ai" && <div className="bg-[#ffffff] px-3 py-2 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors"
 
         onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
 
@@ -171,7 +171,7 @@ export default function AITalentFinderPanel() {
             <ChevronDown className="w-4 h-4 text-gray-400" />
             }
           </div>
-        </div>
+        </div>}
       </div>
 
       {/* Manual Edit View */}
