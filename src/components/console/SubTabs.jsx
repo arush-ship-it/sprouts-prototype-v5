@@ -25,7 +25,7 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
 
   return (
     <div className="px-8 py-0">
-      <div className="flex items-center justify-between py-0">
+      <div className="flex items-center justify-between py-1">
         {/* Tab Bar */}
         <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-full">
           {tabs.map((tab) => {
