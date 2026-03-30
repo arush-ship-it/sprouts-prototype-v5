@@ -8,6 +8,7 @@ export default function AITalentFinderPanel() {
   const [activeMode, setActiveMode] = useState("ai"); // 'ai' or 'manual'
   const [isFiltersExpanded, setIsFiltersExpanded] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
+  const [hasConversation, setHasConversation] = useState(false);
 
   const [conversation, setConversation] = useState([
   {
@@ -120,7 +121,7 @@ export default function AITalentFinderPanel() {
 
 
         {/* Conversation Area */}
-        <div className="px-4 py-4 space-y-4">
+        {hasConversation && <div className="px-4 py-4 space-y-4">
           {/* Example User Message */}
           <div className="flex justify-end gap-2">
             <div className="bg-gray-100 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
@@ -486,7 +487,7 @@ export default function AITalentFinderPanel() {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
 
       {/* Input Area at Bottom */}
@@ -496,10 +497,11 @@ export default function AITalentFinderPanel() {
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter" && inputMessage.trim()) { setHasConversation(true); setInputMessage(""); } }}
             placeholder="Let SproutsAI assist you"
             className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400" />
 
-          <Button size="icon" className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 shrink-0 hover:bg-blue-600">
+          <Button size="icon" onClick={() => { if (inputMessage.trim()) { setHasConversation(true); setInputMessage(""); } }} className="bg-blue-600 text-primary-foreground text-sm font-medium rounded-[32px] inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-8 w-8 shrink-0 hover:bg-blue-600">
             <Send className="w-4 h-4" />
           </Button>
         </div>
