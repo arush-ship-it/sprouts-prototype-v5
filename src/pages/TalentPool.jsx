@@ -428,12 +428,12 @@ export default function TalentPool() {
                 + Candidate
               </button>
               <button
-                  onClick={() => setIsFilled(!isFilled)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
-                  isFilled ?
-                  "bg-emerald-500 text-white border-emerald-500" :
-                  "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"}`
-                  }>
+                  onClick={() => setIsFilled(!isFilled)} className="bg-slate-100 text-white px-3 py-1.5 text-xs font-medium rounded-lg">
+
+
+
+
+                  
                   
                 {isFilled ? "✓ Filled" : "Filled"}
               </button>
