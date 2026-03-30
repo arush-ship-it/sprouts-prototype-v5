@@ -590,8 +590,8 @@ export default function Agents() {
               {/* Filter Button */}
               <div className="relative">
                 <button
-                onClick={() => setShowFilters(!showFilters)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-all ${showFilters || filterStage !== "all" || filterType !== "all" || filterStatus !== "all" ? "bg-gray-900 text-white border-gray-900" : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
+                onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all border-gray-200 text-gray-600">
+                
                   <Filter className="w-3.5 h-3.5" />
                   Filter
                   {(filterStage !== "all" || filterType !== "all" || filterStatus !== "all") &&
