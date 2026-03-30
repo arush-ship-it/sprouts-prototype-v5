@@ -319,7 +319,7 @@ function DefaultScreen({ onStart }) {
 
         {/* Hero */}
         <div className="text-center mb-10">
-          <div className="bg-blue-200 mb-4 mx-auto rounded-[64px] w-20 h-20 flex items-center justify-center">
+          <div className="bg-slate-300 mb-4 mx-auto rounded-[64px] w-20 h-20 flex items-center justify-center">
             <Sparkles className="lucide lucide-sparkles text-[hsl(var(--background))] lucide lucide-sparkles w-8 h-8" />
           </div>
           <h2 className="text-gray-500 mb-1 text-3xl font-medium">Create roles that convert, with SproutsAI</h2>
