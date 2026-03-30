@@ -1584,7 +1584,7 @@ function ConfirmationScreen({ jobTitle, generatedJob, onGoToJobs }) {
         <Button variant="outline" size="sm" onClick={() => window.location.href = createPageUrl("Home")}>
           <Building2 className="w-3.5 h-3.5 mr-1.5" /> View All Jobs
         </Button>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 text-[13px] px-5" onClick={() => window.location.href = createPageUrl(`ViewJobSetupPipeline?jobId=${generatedJob.id || 'new'}&jobTitle=${encodeURIComponent(jobTitle)}`)}>View Job & Setup Pipeline</Button>
+        <Button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary-foreground shadow h-8 py-2 bg-blue-600 hover:bg-blue-700 text-[13px] px-4" onClick={() => window.location.href = createPageUrl(`ViewJobSetupPipeline?jobId=${generatedJob.id || 'new'}&jobTitle=${encodeURIComponent(jobTitle)}`)}>View Job & Setup Pipeline</Button>
       </div>
     </div>);
 
