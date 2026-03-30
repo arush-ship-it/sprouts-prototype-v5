@@ -425,7 +425,7 @@ export default function TalentPool() {
       <div ref={scrollRef} className="flex-1 overflow-y-auto h-full">
         <div className="pt-4 pr-8 pb-4 pl-2">
 
-          <div className={`mb-4 flex items-center justify-between sticky top-0 z-10 bg-gray-100 py-2 transition-opacity duration-300 ${hasScrolled ? "opacity-100" : "opacity-20"}`}>
+          <div className={`mb-4 flex items-center justify-between sticky top-0 z-10 bg-gray-100 py-2 transition-opacity duration-300 ${hasScrolled ? "opacity-100" : "opacity-0"}`}>
             <div>
               
               
