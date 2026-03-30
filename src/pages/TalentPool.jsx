@@ -440,7 +440,7 @@ export default function TalentPool() {
             </div>
           </div>
 
-          {isFilled ? <FilledZeroScreen /> : <>
+          {isFilled && <FilledZeroScreen />}
 
           {/* Manager Metrics Dashboard */}
           <ManagerMetricsDashboard />
@@ -559,7 +559,6 @@ export default function TalentPool() {
 
                 )}
           </div>
-          </>}
         </div>
       </div>
       </div>
