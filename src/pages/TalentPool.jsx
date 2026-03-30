@@ -408,8 +408,8 @@ export default function TalentPool() {
 
       
       <div className="bg-gray-100 flex flex-1 overflow-hidden">
-      {/* Left Panel - AI Talent Finder (hidden when filled) */}
-      {!isFilled && <AITalentFinderPanel />}
+      {/* Left Panel - AI Talent Finder (always visible) */}
+      <AITalentFinderPanel />
 
       {/* Right Panel - Candidate List */}
       <div className="flex-1 overflow-y-auto h-full">
