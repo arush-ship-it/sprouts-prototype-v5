@@ -182,7 +182,7 @@ const candidates = [
 const DECISION_LABELS = {
   yes: { label: "Approved", color: "text-emerald-600 bg-emerald-50 border-emerald-200" },
   maybe: { label: "On Hold", color: "text-amber-600 bg-amber-50 border-amber-200" },
-  no: { label: "Rejected", color: "text-red-500 bg-red-50 border-red-200" },
+  no: { label: "Rejected", color: "text-red-500 bg-red-50 border-red-200" }
 };
 
 function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
@@ -193,22 +193,22 @@ function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
 
   return (
     <div className={`bg-white p-5 rounded-2xl transition-all group border ${
-      decision === "yes" ? "border-emerald-200" :
-      decision === "no" ? "border-red-200" :
-      decision === "maybe" ? "border-amber-200" :
-      "border-transparent hover:shadow-md"
-    }`}>
+    decision === "yes" ? "border-emerald-200" :
+    decision === "no" ? "border-red-200" :
+    decision === "maybe" ? "border-amber-200" :
+    "border-transparent hover:shadow-md"}`
+    }>
       <div className="flex items-start gap-4 mb-3">
         <div className="relative">
           <img
             src={candidate.avatar}
             alt={candidate.name}
-            className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-100"
-          />
+            className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-100" />
+          
           {/* Availability dot */}
           <span className={`absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full border-2 border-white ${
-            candidate.availability === "Available" ? "bg-emerald-400" : "bg-amber-400"
-          }`} />
+          candidate.availability === "Available" ? "bg-emerald-400" : "bg-amber-400"}`
+          } />
         </div>
 
         <div className="flex-1 min-w-0">
@@ -217,11 +217,11 @@ function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
             <button onClick={() => setStarred(!starred)}>
               <Star className={`w-3.5 h-3.5 transition-colors ${starred ? "fill-amber-400 text-amber-400" : "text-gray-300 group-hover:text-amber-300"}`} />
             </button>
-            {decisionInfo && (
-              <span className={`ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-md border ${decisionInfo.color}`}>
+            {decisionInfo &&
+            <span className={`ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-md border ${decisionInfo.color}`}>
                 {decisionInfo.label}
               </span>
-            )}
+            }
           </div>
           <p className="text-[13px] text-gray-600 mb-1">{candidate.title}</p>
           <div className="flex items-center gap-3 text-[12px] text-gray-400">
@@ -237,12 +237,12 @@ function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {candidate.skills.slice(0, 4).map((skill, idx) => (
-          <span key={idx} className="px-2 py-1 text-[11px] font-medium rounded-md bg-blue-50 text-blue-700">{skill}</span>
-        ))}
-        {candidate.skills.length > 4 && (
-          <span className="px-2 py-1 text-[11px] font-medium rounded-md bg-gray-50 text-gray-500">+{candidate.skills.length - 4}</span>
+        {candidate.skills.slice(0, 4).map((skill, idx) =>
+        <span key={idx} className="px-2 py-1 text-[11px] font-medium rounded-md bg-blue-50 text-blue-700">{skill}</span>
         )}
+        {candidate.skills.length > 4 &&
+        <span className="px-2 py-1 text-[11px] font-medium rounded-md bg-gray-50 text-gray-500">+{candidate.skills.length - 4}</span>
+        }
       </div>
 
       {/* Yes / Maybe / No + Actions */}
@@ -251,25 +251,25 @@ function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
         <button
           onClick={() => setDecision(decision === "yes" ? null : "yes")}
           className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
-            decision === "yes" ? "bg-emerald-500 text-white border-emerald-500" : "border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600"
-          }`}
-        >
+          decision === "yes" ? "bg-emerald-500 text-white border-emerald-500" : "border-gray-200 text-gray-500 hover:border-emerald-300 hover:text-emerald-600"}`
+          }>
+          
           <CheckCircle className="w-3.5 h-3.5" /> Yes
         </button>
         <button
           onClick={() => setDecision(decision === "maybe" ? null : "maybe")}
           className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
-            decision === "maybe" ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-500 hover:border-amber-300 hover:text-amber-600"
-          }`}
-        >
+          decision === "maybe" ? "bg-amber-500 text-white border-amber-500" : "border-gray-200 text-gray-500 hover:border-amber-300 hover:text-amber-600"}`
+          }>
+          
           <Clock className="w-3.5 h-3.5" /> Hold
         </button>
         <button
           onClick={() => setDecision(decision === "no" ? null : "no")}
           className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
-            decision === "no" ? "bg-red-500 text-white border-red-500" : "border-gray-200 text-gray-500 hover:border-red-300 hover:text-red-500"
-          }`}
-        >
+          decision === "no" ? "bg-red-500 text-white border-red-500" : "border-gray-200 text-gray-500 hover:border-red-300 hover:text-red-500"}`
+          }>
+          
           <XCircle className="w-3.5 h-3.5" /> No
         </button>
 
@@ -278,28 +278,28 @@ function CandidatePoolCard({ candidate, onFeedback, onMessage, onAssign }) {
           <button
             onClick={() => onFeedback(candidate)}
             title="Quick Feedback"
-            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-blue-600 hover:border-blue-300 transition-colors"
-          >
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-blue-600 hover:border-blue-300 transition-colors">
+            
             <MessageSquare className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => onMessage(candidate)}
             title="Send Message"
-            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
-          >
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-indigo-600 hover:border-indigo-300 transition-colors">
+            
             <Send className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => onAssign(candidate)}
             title="Assign to Recruiter / Job"
-            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-emerald-600 hover:border-emerald-300 transition-colors"
-          >
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-400 hover:text-emerald-600 hover:border-emerald-300 transition-colors">
+            
             <UserPlus className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 export default function TalentPool() {
@@ -367,26 +367,26 @@ export default function TalentPool() {
     <div className="flex flex-col h-[calc(100vh-48px)] bg-[#FAFAFA] overflow-hidden">
 
       {/* Manager Action Modals */}
-      {feedbackTarget && (
-        <FeedbackModal
-          candidate={feedbackTarget}
-          onClose={() => setFeedbackTarget(null)}
-          onSubmit={(data) => console.log("Feedback submitted:", feedbackTarget.name, data)}
-        />
-      )}
-      {messageTarget && (
-        <MessageModal
-          candidate={messageTarget}
-          onClose={() => setMessageTarget(null)}
-        />
-      )}
-      {assignTarget && (
-        <AssignModal
-          candidate={assignTarget}
-          onClose={() => setAssignTarget(null)}
-          onSubmit={(data) => console.log("Assignment:", assignTarget.name, data)}
-        />
-      )}
+      {feedbackTarget &&
+      <FeedbackModal
+        candidate={feedbackTarget}
+        onClose={() => setFeedbackTarget(null)}
+        onSubmit={(data) => console.log("Feedback submitted:", feedbackTarget.name, data)} />
+
+      }
+      {messageTarget &&
+      <MessageModal
+        candidate={messageTarget}
+        onClose={() => setMessageTarget(null)} />
+
+      }
+      {assignTarget &&
+      <AssignModal
+        candidate={assignTarget}
+        onClose={() => setAssignTarget(null)}
+        onSubmit={(data) => console.log("Assignment:", assignTarget.name, data)} />
+
+      }
 
       {/* Top Navigation */}
       
@@ -417,8 +417,8 @@ export default function TalentPool() {
 
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h1 className="text-gray-900 text-lg font-semibold">Talent Pool</h1>
-              <p className="text-gray-500 text-sm">{candidates.length} candidates found</p>
+              
+              
             </div>
             <div className="flex items-center gap-2">
               <button className="bg-white text-gray-700 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
@@ -428,13 +428,13 @@ export default function TalentPool() {
                 + Candidate
               </button>
               <button
-                onClick={() => setIsFilled(!isFilled)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
-                  isFilled
-                    ? "bg-emerald-500 text-white border-emerald-500"
-                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
-                }`}
-              >
+                  onClick={() => setIsFilled(!isFilled)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
+                  isFilled ?
+                  "bg-emerald-500 text-white border-emerald-500" :
+                  "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"}`
+                  }>
+                  
                 {isFilled ? "✓ Filled" : "Filled"}
               </button>
             </div>
@@ -447,14 +447,14 @@ export default function TalentPool() {
 
           {/* Sourced Candidates Section */}
           {sourcedCandidates.length > 0 &&
-            <div className="mb-8 bg-white rounded-xl border border-gray-200 p-6">
+              <div className="mb-8 bg-white rounded-xl border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-[16px] font-semibold text-gray-900">Sourced Candidates</h2>
                 <Button
-                  onClick={handleApplyAll}
-                  variant="outline"
-                  size="sm"
-                  className="text-[12px]">
+                    onClick={handleApplyAll}
+                    variant="outline"
+                    size="sm"
+                    className="text-[12px]">
                   + Apply All Prospects
                 </Button>
               </div>
@@ -470,17 +470,17 @@ export default function TalentPool() {
               {/* Candidate cards */}
               <div className="space-y-4">
                 {sourcedCandidates.map((candidate) =>
-                <div key={candidate.id} className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-all">
+                  <div key={candidate.id} className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-all">
                     <div className="flex items-start gap-3 mb-3">
                       <input
-                      type="checkbox"
-                      checked={selectedSourced.has(candidate.id)}
-                      onChange={() => toggleSourcedCandidate(candidate.id)}
-                      className="w-4 h-4 mt-1 accent-indigo-600 cursor-pointer" />
+                        type="checkbox"
+                        checked={selectedSourced.has(candidate.id)}
+                        onChange={() => toggleSourcedCandidate(candidate.id)}
+                        className="w-4 h-4 mt-1 accent-indigo-600 cursor-pointer" />
                       <img
-                      src={candidate.avatar}
-                      alt={candidate.name}
-                      className="w-12 h-12 rounded-full object-cover" />
+                        src={candidate.avatar}
+                        alt={candidate.name}
+                        className="w-12 h-12 rounded-full object-cover" />
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="text-[14px] font-semibold text-gray-900">{candidate.name}</h3>
@@ -514,50 +514,50 @@ export default function TalentPool() {
                     {/* Add as prospect button */}
                     <div className="ml-7 flex justify-end">
                       <button
-                      onClick={() => {
-                        toggleSourcedCandidate(candidate.id);
-                      }}
-                      className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${
-                      selectedSourced.has(candidate.id) ?
-                      "bg-indigo-50 border border-indigo-300 text-indigo-700" :
-                      "border border-gray-300 text-gray-700 hover:border-indigo-300"}`
-                      }>
+                        onClick={() => {
+                          toggleSourcedCandidate(candidate.id);
+                        }}
+                        className={`px-4 py-2 rounded-lg text-[13px] font-medium transition-all ${
+                        selectedSourced.has(candidate.id) ?
+                        "bg-indigo-50 border border-indigo-300 text-indigo-700" :
+                        "border border-gray-300 text-gray-700 hover:border-indigo-300"}`
+                        }>
                         {selectedSourced.has(candidate.id) ? "✓ Selected" : "Add As Prospect"}
                       </button>
                     </div>
                   </div>
-                )}
+                  )}
               </div>
 
               {/* Action buttons */}
               {selectedSourced.size > 0 &&
-              <div className="mt-4 flex justify-end gap-3">
+                <div className="mt-4 flex justify-end gap-3">
                   <Button
-                  variant="outline"
-                  onClick={() => setSelectedSourced(new Set())}
-                  className="text-[12px]">
+                    variant="outline"
+                    onClick={() => setSelectedSourced(new Set())}
+                    className="text-[12px]">
                     Clear Selection
                   </Button>
                   <Button
-                  onClick={handleAddAsProspect}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white text-[12px]">
+                    onClick={handleAddAsProspect}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white text-[12px]">
                     Add {selectedSourced.size} to Prospects
                   </Button>
                 </div>
-              }
+                }
             </div>
-            }
+              }
 
           <div className="grid grid-cols-1 gap-4">
             {candidates.map((candidate) =>
-              <CandidatePoolCard
-                key={candidate.id}
-                candidate={candidate}
-                onFeedback={setFeedbackTarget}
-                onMessage={setMessageTarget}
-                onAssign={setAssignTarget}
-              />
-              )}
+                <CandidatePoolCard
+                  key={candidate.id}
+                  candidate={candidate}
+                  onFeedback={setFeedbackTarget}
+                  onMessage={setMessageTarget}
+                  onAssign={setAssignTarget} />
+
+                )}
           </div>
           </>}
         </div>
