@@ -178,19 +178,19 @@ export default function JobDetails() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors">
+              <button className="bg-white text-gray-600 px-3 py-1.5 text-xs font-medium rounded-lg flex items-center gap-1.5 border border-gray-200 hover:bg-gray-50 transition-colors">
                 <Share2 className="w-3.5 h-3.5" />
                 Share
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors">
+              <button className="bg-white text-gray-600 px-3 py-1.5 text-xs font-medium rounded-lg flex items-center gap-1.5 border border-gray-200 hover:bg-gray-50 transition-colors">
                 <XCircle className="w-3.5 h-3.5" />
                 Close Job
               </button>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-600 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors">
+              <button className="bg-white text-gray-600 px-3 py-1.5 text-xs font-medium rounded-lg flex items-center gap-1.5 border border-gray-200 hover:bg-gray-50 transition-colors">
                 <Trash2 className="w-3.5 h-3.5" />
                 Delete
               </button>
-              <button className="bg-blue-600 text-[#ffffff] px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-200 hover:bg-blue-700 transition-colors">
+              <button className="bg-blue-600 text-[#ffffff] px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 hover:bg-blue-700 transition-colors">
                 Job Health Report
               </button>
             </div>
