@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Send, Sparkles, MapPin, Briefcase, GraduationCap, Star, CheckCircle, XCircle, Clock, MessageSquare, UserPlus, ChevronUp, ThumbsUp, ThumbsDown } from "lucide-react";
@@ -319,6 +319,16 @@ export default function TalentPool() {
   const [messageTarget, setMessageTarget] = useState(null);
   const [assignTarget, setAssignTarget] = useState(null);
   const [isFilled, setIsFilled] = useState(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const handleScroll = () => setHasScrolled(el.scrollTop > 0);
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -412,10 +422,10 @@ export default function TalentPool() {
       <AITalentFinderPanel />
 
       {/* Right Panel - Candidate List */}
-      <div className="flex-1 overflow-y-auto h-full">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto h-full">
         <div className="pt-4 pr-8 pb-4 pl-2">
 
-          <div className="mb-4 flex items-center justify-between sticky top-0 z-10 bg-gray-100 py-2">
+          <div className={`mb-4 flex items-center justify-between sticky top-0 z-10 bg-gray-100 py-2 transition-opacity duration-300 ${hasScrolled ? "opacity-100" : "opacity-0"}`}>
             <div>
               
               
