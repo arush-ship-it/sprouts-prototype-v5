@@ -184,10 +184,10 @@ export default function AITalentFinderPanel() {
           const isOpen = expandedSections[section.key];
           return (
             <div key={section.key} className="bg-gray-50 rounded-xl overflow-hidden">
-                <div className="px-4 pt-3 pb-1 flex items-center gap-2">
-                  <span className="text-[13px] font-semibold text-gray-900">{section.label}</span>
+                <div className="pt-2 pr-4 pb-2 pl-4 flex items-center gap-3">
+                  <span className="text-gray-900 text-xs font-medium">{section.label}</span>
                   {selected.length > 0 &&
-                <span className="text-[10px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                <span className="bg-gray-100 text-blue-700 px-1.5 py-0.5 text-xs font-medium rounded-full">
                       {selected.length}
                     </span>
                 }
