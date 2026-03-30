@@ -179,6 +179,35 @@ export default function PipelineView() {
   const [expandedStageId, setExpandedStageId] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [selectedStage, setSelectedStage] = useState(null);
+
+  const handleMoveNext = () => {
+    if (!selectedCandidate || !selectedStage) return;
+    const currentIdx = stages.findIndex((s) => s.id === selectedStage.id);
+    const nextStage = stages[currentIdx + 1];
+    if (!nextStage) return;
+    setStages((prev) => prev.map((s) => {
+      if (s.id === selectedStage.id) return { ...s, candidates: s.candidates.filter((c) => c.id !== selectedCandidate.id) };
+      if (s.id === nextStage.id) return { ...s, candidates: [...s.candidates, selectedCandidate] };
+      return s;
+    }));
+  };
+
+  const handleReject = () => {
+    if (!selectedCandidate || !selectedStage) return;
+    // Remove from current stage and add to a "Rejected" stage (or just remove if none)
+    setStages((prev) => {
+      const hasRejected = prev.some((s) => s.id === "rejected");
+      const filtered = prev.map((s) => {
+        if (s.id === selectedStage.id) return { ...s, candidates: s.candidates.filter((c) => c.id !== selectedCandidate.id) };
+        if (s.id === "rejected") return { ...s, candidates: [...s.candidates, selectedCandidate] };
+        return s;
+      });
+      if (!hasRejected) {
+        return [...filtered, { id: "rejected", name: "Rejected", agents: [], candidates: [selectedCandidate] }];
+      }
+      return filtered;
+    });
+  };
   const [vetoModal, setVetoModal] = useState(null); // { candidate, fromStage, toStage }
   const [vetoReason, setVetoReason] = useState("");
   const [emailDraft, setEmailDraft] = useState("");
@@ -321,7 +350,9 @@ export default function PipelineView() {
         candidate={selectedCandidate}
         stageName={selectedStage?.name}
         stageAgents={selectedStage?.agents}
-        onClose={() => {setSelectedCandidate(null);setSelectedStage(null);}} />
+        onClose={() => {setSelectedCandidate(null);setSelectedStage(null);}}
+        onMoveNext={handleMoveNext}
+        onReject={handleReject} />
 
       }
 

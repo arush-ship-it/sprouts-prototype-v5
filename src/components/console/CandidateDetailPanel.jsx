@@ -85,7 +85,7 @@ const statusColor = (status) => {
   return "text-gray-400";
 };
 
-export default function CandidateDetailPanel({ candidate, stageName, stageAgents, onClose }) {
+export default function CandidateDetailPanel({ candidate, stageName, stageAgents, onClose, onMoveNext, onReject }) {
   if (!candidate) return null;
   const details = getDetails(candidate.id);
 
@@ -207,10 +207,14 @@ export default function CandidateDetailPanel({ candidate, stageName, stageAgents
 
         {/* Footer */}
         <div className="px-5 py-3 border-t border-gray-100 shrink-0 flex gap-2">
-          <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-[12px] font-semibold rounded-xl py-2 transition-colors">
+          <button
+            onClick={() => { onMoveNext?.(); onClose(); }}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-[12px] font-semibold rounded-xl py-2 transition-colors">
             Move to Next Stage
           </button>
-          <button className="px-4 py-2 text-[12px] font-medium text-gray-500 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+          <button
+            onClick={() => { onReject?.(); onClose(); }}
+            className="px-4 py-2 text-[12px] font-medium text-red-500 border border-red-200 rounded-xl hover:bg-red-50 transition-colors">
             Reject
           </button>
         </div>
