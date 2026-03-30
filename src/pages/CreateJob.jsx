@@ -323,7 +323,7 @@ function DefaultScreen({ onStart }) {
             <Sparkles className="text-[hsl(var(--background))] lucide lucide-sparkles w-7 h-7" />
           </div>
           <h2 className="text-slate-700 mb-1 text-2xl font-medium">SproutsAI Job Generation</h2>
-          <p className="text-gray-500 text-xs">Generate & Post Job Instantly With Ease With SproutsAI Job Builder</p>
+          <p className="text-gray-400 text-xs">Generate & Post Job Instantly With Ease With SproutsAI Job Builder</p>
         </div>
 
         {/* Job suggestion grid */}
