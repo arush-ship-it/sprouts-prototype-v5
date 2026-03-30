@@ -203,8 +203,8 @@ function DefaultScreen({ onStart }) {
     <div className="flex h-full gap-2">
       {/* Left: AI Chat Panel */}
       <div className="bg-white m-0 rounded-3xl w-[400px] shrink-0 shadow-sm flex flex-col overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-100 shrink-0">
-          <div className="flex items-center gap-2.5">
+        <div className="px-4 py-3 shrink-0">
+          <div className="opacity-0 flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-gray-600" />
             </div>
