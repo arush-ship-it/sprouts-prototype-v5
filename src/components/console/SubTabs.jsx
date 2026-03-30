@@ -34,12 +34,12 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
             return (
               <button
                 key={tab.key}
-                onClick={() => setActiveTab(tab.key)} className="bg-white text-gray-900 px-3 py-3 text-xs font-medium rounded-[10px] flex items-center gap-1 transition-all duration-200">
+                onClick={() => setActiveTab(tab.key)} className="bg-white text-gray-900 px-2 py-2 text-xs font-medium rounded-[10px] flex items-center gap-1 transition-all duration-200">
 
 
 
                 
-                <Icon className="w-3.5 h-3.5" />
+                
                 {tab.label}
                 <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full transition-colors ${
                 isActive ? "bg-blue-50 text-blue-600" : "bg-gray-200 text-gray-400"}`
