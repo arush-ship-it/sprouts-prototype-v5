@@ -15,18 +15,18 @@ const initialStages = [
   { name: "Resume Parser", active: false, stack: [{ key: "resume", label: "Resume Parse", processing: 0, queued: 12, done: 0 }] }],
 
   candidates: [
-  { id: "c1", name: "Alex Chen", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face", score: 91, source: "LinkedIn", fit: "Strong" },
-  { id: "c2", name: "Priya Sharma", title: "UX Designer", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face", score: 78, source: "Referral", fit: "Good" },
-  { id: "c3", name: "David Wilson", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop&crop=face", score: 85, source: "Direct", fit: "Strong" },
-  { id: "c4", name: "Sophie Martinez", title: "UI Designer", avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face", score: 79, source: "LinkedIn", fit: "Good" },
-  { id: "c5", name: "Ryan Thompson", title: "Lead Designer", avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=face", score: 88, source: "Indeed", fit: "Strong" },
-  { id: "c6", name: "Olivia Brown", title: "Visual Designer", avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face", score: 82, source: "Referral", fit: "Good" },
-  { id: "c7", name: "Lucas Garcia", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop&crop=face", score: 90, source: "LinkedIn", fit: "Strong" },
-  { id: "c8", name: "Isabella Lopez", title: "UX Researcher", avatar: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=100&h=100&fit=crop&crop=face", score: 76, source: "Direct", fit: "Moderate" },
-  { id: "c9", name: "Noah Anderson", title: "Senior Designer", avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop&crop=face", score: 84, source: "Indeed", fit: "Good" },
-  { id: "c10", name: "Ava Taylor", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=face", score: 81, source: "LinkedIn", fit: "Good" },
-  { id: "c11", name: "Ethan Davis", title: "Design Lead", avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100&h=100&fit=crop&crop=face", score: 87, source: "Referral", fit: "Strong" },
-  { id: "c12", name: "Mia Robinson", title: "UX Designer", avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face", score: 83, source: "Direct", fit: "Good" }]
+  { id: "c1", name: "Alex Chen", title: "Senior Product Designer", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face", score: 91, source: "LinkedIn", fit: "Strong", agentStatus: "in_progress" },
+  { id: "c2", name: "Priya Sharma", title: "UX Designer", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face", score: 78, source: "Referral", fit: "Good", agentStatus: "no_agent" },
+  { id: "c3", name: "David Wilson", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop&crop=face", score: 85, source: "Direct", fit: "Strong", agentStatus: "done" },
+  { id: "c4", name: "Sophie Martinez", title: "UI Designer", avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face", score: 79, source: "LinkedIn", fit: "Good", agentStatus: "needs_approval" },
+  { id: "c5", name: "Ryan Thompson", title: "Lead Designer", avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=face", score: 88, source: "Indeed", fit: "Strong", agentStatus: "in_progress" },
+  { id: "c6", name: "Olivia Brown", title: "Visual Designer", avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face", score: 82, source: "Referral", fit: "Good", agentStatus: "needs_approval" },
+  { id: "c7", name: "Lucas Garcia", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop&crop=face", score: 90, source: "LinkedIn", fit: "Strong", agentStatus: "done" },
+  { id: "c8", name: "Isabella Lopez", title: "UX Researcher", avatar: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=100&h=100&fit=crop&crop=face", score: 76, source: "Direct", fit: "Moderate", agentStatus: "no_agent" },
+  { id: "c9", name: "Noah Anderson", title: "Senior Designer", avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop&crop=face", score: 84, source: "Indeed", fit: "Good", agentStatus: "in_progress" },
+  { id: "c10", name: "Ava Taylor", title: "Product Designer", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=face", score: 81, source: "LinkedIn", fit: "Good", agentStatus: "done" },
+  { id: "c11", name: "Ethan Davis", title: "Design Lead", avatar: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100&h=100&fit=crop&crop=face", score: 87, source: "Referral", fit: "Strong", agentStatus: "needs_approval" },
+  { id: "c12", name: "Mia Robinson", title: "UX Designer", avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face", score: 83, source: "Direct", fit: "Good", agentStatus: "no_agent" }]
 
 },
 {
@@ -105,17 +105,36 @@ const scoreColor = (score) => {
   return "text-amber-600 bg-amber-50";
 };
 
+const agentStatusStyle = (status) => {
+  if (status === "no_agent")      return { border: "border-red-300",    bg: "bg-white" };
+  if (status === "in_progress")   return { border: "border-blue-300",   bg: "bg-white" };
+  if (status === "done")          return { border: "border-emerald-300", bg: "bg-white" };
+  if (status === "needs_approval") return { border: "border-rose-200",  bg: "bg-rose-50/60" };
+  return { border: "border-gray-100", bg: "bg-white" };
+};
+
+const agentStatusBadge = (status) => {
+  if (status === "no_agent")       return { label: "No agent", color: "text-red-500 bg-red-50" };
+  if (status === "in_progress")    return { label: "In progress", color: "text-blue-500 bg-blue-50" };
+  if (status === "done")           return { label: "Done", color: "text-emerald-600 bg-emerald-50" };
+  if (status === "needs_approval") return { label: "Needs approval", color: "text-rose-600 bg-rose-50" };
+  return null;
+};
+
 function CandidatePipelineCard({ candidate, stageName, provided, snapshot, onClick }) {
+  const { border, bg } = agentStatusStyle(candidate.agentStatus);
+  const badge = agentStatusBadge(candidate.agentStatus);
+
   return (
     <div
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
       onClick={onClick}
-      className={`p-3 rounded-xl bg-white border transition-all cursor-grab active:cursor-grabbing select-none ${
+      className={`p-3 rounded-xl border transition-all cursor-grab active:cursor-grabbing select-none ${bg} ${
       snapshot.isDragging ?
       "border-blue-300 shadow-lg ring-2 ring-blue-100 rotate-1 scale-105" :
-      "border-gray-100 hover:shadow-sm hover:border-gray-200"}`
+      `${border} hover:shadow-sm`}`
       }>
       
       {/* Top row */}
@@ -144,6 +163,12 @@ function CandidatePipelineCard({ candidate, stageName, provided, snapshot, onCli
         <span className="flex items-center gap-1 text-[10px] font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-md">
           {sourceIcon(candidate.source)} {candidate.source}
         </span>
+        {/* Agent status badge */}
+        {badge && (
+          <span className={`ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-md ${badge.color}`}>
+            {badge.label}
+          </span>
+        )}
       </div>
     </div>);
 
