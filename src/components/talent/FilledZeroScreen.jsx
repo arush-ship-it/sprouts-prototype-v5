@@ -8,7 +8,7 @@ export default function FilledZeroScreen() {
         <Globe className="lucide lucide-globe w-8 h-8 text-white" />
       </div>
       <h2 className="text-blue-600 mb-2 text-xl font-medium">Search less, Discover more with SproutsAI</h2>
-      <p className="text-gray-500 mx-40 pr-1 pb-5 pl-1 text-xs leading-relaxed max-w-l">Find the right talent faster with powerful search, advanced filtering, and intelligent matching so you can quickly identify, evaluate, and connect with candidates who truly fit your roles.
+      <p className="text-gray-500 mx-48 pr-1 pb-5 pl-1 text-xs leading-relaxed max-w-l">Find the right talent faster with powerful search, advanced filtering, and intelligent matching so you can quickly identify, evaluate, and connect with candidates who truly fit your roles.
 
       </p>
     </div>);
