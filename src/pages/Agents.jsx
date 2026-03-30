@@ -579,7 +579,7 @@ export default function Agents() {
             map(({ key, label }) =>
             <button
               key={key}
-              onClick={() => setActiveTab(key)} className="bg-white text-gray-900 gap-1 px-3 py-3 text-xs font-medium rounded-[10px] transition-all duration-200 shadow-[0_1px_4px_rgba(0,0,0,0.12)]">
+              onClick={() => setActiveTab(key)} className="bg-white text-gray-900 gap-1 px-3 py-3 text-xs font-medium rounded-[10px] transition-all duration-200">
               
                 {label}
               </button>
