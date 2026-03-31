@@ -1469,63 +1469,63 @@ function PublishScreen({ onBack, onPublish }) {
           </div>
 
           {/* Right column — Job Boards */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }} className="bg-slate-50 p-5 rounded-2xl border border-gray-100 flex flex-col transition-all duration-300">
-
-
-            
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <ExternalLink className="w-3.5 h-3.5" /> Post to Job Boards
-              </p>
-              <motion.span
-                key={selectedBoards.length}
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                className="bg-indigo-50 text-indigo-600 border border-indigo-100 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                {selectedBoards.length} selected
-              </motion.span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 flex-1 content-start">
-              {JOB_BOARDS.map(({ id, name, logo, desc }) => {
-                const selected = selectedBoards.includes(id);
-                return (
-                  <motion.button
-                    key={id}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.96 }}
-                    onHoverStart={() => setHoveredBoard(id)}
-                    onHoverEnd={() => setHoveredBoard(null)}
-                    onClick={() => toggleBoard(id)} className="bg-[hsl(var(--background))] px-3 py-2.5 text-left rounded-xl flex items-center gap-2.5 border transition-all duration-200 border-gray-100 hover:bg-white hover:border-gray-200 hover:shadow-sm">
+          
 
 
 
 
-                    
-                    
-                    <div className="min-w-0 flex-1">
-                      <p className={`text-[12px] font-semibold leading-tight ${selected ? "text-indigo-700" : "text-gray-700"}`}>{name}</p>
-                      <p className="text-[10px] text-gray-400 truncate mt-0.5">{desc}</p>
-                    </div>
-                    <motion.div
-                      animate={selected ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0 }}
-                      className="w-4 h-4 rounded-full bg-indigo-500 shrink-0 flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                    </motion.div>
-                  </motion.button>);
-
-              })}
-            </div>
-
-            {/* Select all / none */}
-            
 
 
 
-            
-          </motion.div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </div>
       </div>
 
