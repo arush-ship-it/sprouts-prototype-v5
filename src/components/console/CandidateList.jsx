@@ -162,7 +162,7 @@ export default function CandidateList({ activeTab, viewMode = "card" }) {
               setIsSourcingExpanded(next);
               if (next) setShowInsightsScreen(true);
             }}>
-              {isSourcingExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+              {isSourcingExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : null}
             </button>
           </div>
 
