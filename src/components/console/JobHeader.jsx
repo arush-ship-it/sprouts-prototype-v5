@@ -33,18 +33,18 @@ export default function JobHeader({ onActivityApprovalClick, jobData = {} }) {
 
         </div>
         <div className="flex items-center gap-2">
-          <Button
-            onClick={onActivityApprovalClick}
-            variant="outline"
-            size="sm" className="bg-orange-50 text-orange-700 px-2 text-xs font-medium rounded-lg inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border shadow-sm hover:text-accent-foreground h-8 border-orange-200 hover:bg-orange-100">
-            
+          
 
-            <AlertCircle className="w-3.5 h-3.5 mr-1.5" />
-            Activity Approval
-            <Badge className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-[10px] bg-orange-600">
-              2
-            </Badge>
-          </Button>
+
+
+
+
+
+
+
+
+
+          
           
 
           
