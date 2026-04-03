@@ -474,48 +474,48 @@ export default function PipelineView() {
               {expandedStageId === stage.id &&
             <div className="bg-white rounded-xl p-3 border border-gray-100 space-y-2">
                   
-                  {stage.agents.map((agent) =>
-              <div key={agent.name} className="bg-[hsl(var(--background))] px- py-2.5 rounded-lg space-y-2">
-                      {/* Agent header */}
-                      <div className="flex items-center gap-2">
-                        <div className={`rounded-full w-6 h-6 flex items-center justify-center shrink-0 ${agent.active ? "bg-blue-50" : "bg-gray-100"}`}>
-                          <Bot className={`w-3 h-3 ${agent.active ? "text-blue-500" : "text-gray-400"}`} />
-                        </div>
-                        <p className="text-[11px] font-semibold text-gray-800 flex-1 truncate">{agent.name}</p>
-                        <div className="flex items-center gap-1 shrink-0">
-                          <div className={`w-1.5 h-1.5 rounded-full ${agent.active ? "bg-emerald-400 animate-pulse" : "bg-gray-300"}`} />
-                          <span className={`text-[10px] font-medium ${agent.active ? "text-emerald-600" : "text-gray-400"}`}>
-                            {agent.active ? "Active" : "Idle"}
-                          </span>
-                        </div>
-                      </div>
-                      {/* Stack breakdown */}
-                      <div className="mt-1 space-y-3">
-                        {agent.stack.map((item) =>
-                  <div key={item.key} className="bg-gray-50 rounded-lg px-3 py-2">
-                            <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-1.5">{item.label}</p>
-                            <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="flex items-center gap-1 text-[10px] font-medium bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">
-                                <span className="font-bold">{item.processing}</span> processing
-                              </span>
-                              <span className="flex items-center gap-1 text-[10px] font-medium bg-amber-50 text-amber-600 px-2 py-0.5 rounded-md">
-                                <span className="font-bold">{item.queued}</span> queued
-                              </span>
-                              <span className="flex items-center gap-1 text-[10px] font-medium bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md">
-                                <span className="font-bold">{item.done}</span> done
-                              </span>
-                            </div>
-                          </div>
-                  )}
-                      </div>
-                    </div>
+                  {stage.agents.map((agent) => null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               )}
-                  <Link
-                to="/Agents" className="bg-blue-50 text-blue-600 mt-1 px-16 py-2 text-xs font-medium rounded-lg flex items-center justify-between w-full hover:bg-blue-100 transition-colors">View Full Activity
+                  
 
 
 
-              </Link>
+
+              
                 </div>
             }
 
