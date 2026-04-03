@@ -262,12 +262,12 @@ export default function AgentActivityFeed() {
     <div className="pb-6">
       {/* Summary bar */}
       <div className="flex items-center gap-3 mb-4">
-        {pendingCount > 0 &&
-        <div className="flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-lg px-3 py-2">
-            <AlertCircle className="w-4 h-4 text-orange-500" />
-            <span className="text-[12px] font-semibold text-orange-700">{pendingCount} action{pendingCount > 1 ? "s" : ""} pending approval</span>
-          </div>
-        }
+        
+
+
+
+
+        
         <span className="text-[12px] text-gray-400 ml-auto">{activityFeed.length} events today</span>
       </div>
 
