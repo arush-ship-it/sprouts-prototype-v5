@@ -149,24 +149,24 @@ function StepInviteCriteria({ criteria, setCriteria }) {
 
 
       {/* Human review before invite */}
-      <div className={`border-2 rounded-2xl p-5 mb-4 bg-white transition-all ${criteria.humanReview ? "border-emerald-300" : "border-gray-100"}`}>
-        <div className="flex items-center justify-between mb-1">
-          <div className="flex items-center gap-2">
-            <Eye className="w-4 h-4 text-emerald-600" />
-            <p className="text-[14px] font-semibold text-gray-900">Human review before invite</p>
-          </div>
-          <Switch checked={criteria.humanReview} onCheckedChange={(v) => setCriteria({ ...criteria, humanReview: v })} />
-        </div>
-        <p className="text-[12px] text-gray-400 leading-relaxed mb-3">
-          Even when the AI qualifies a candidate, you'll get a notification to review their profile before the invite is sent.
-        </p>
-        {criteria.humanReview &&
-        <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-2">
-            <Check className="w-4 h-4 text-emerald-500 shrink-0" />
-            <p className="text-[12px] text-emerald-700 font-medium">Invites won't be sent until you approve them</p>
-          </div>
-        }
-      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
       {/* Summary */}
       <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
