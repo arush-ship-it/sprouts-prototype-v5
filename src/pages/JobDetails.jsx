@@ -415,41 +415,41 @@ export default function JobDetails() {
 
         {/* Activity Log (Collapsible) */}
         <Collapsible open={isActivityOpen} onOpenChange={setIsActivityOpen}>
-          <div className="p-4 rounded-xl bg-white">
-            <CollapsibleTrigger className="flex items-center justify-between w-full group">
-              <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-gray-400" />
-                <h3 className="text-[14px] font-semibold text-gray-900">
-                  System Activity Log
-                </h3>
-                <span className="text-[11px] text-gray-400">
-                  ({activityLog.length} events)
-                </span>
-              </div>
-              {isActivityOpen ?
-              <ChevronUp className="w-4 h-4 text-gray-400 group-hover:text-gray-600" /> :
+          
 
-              <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
-              }
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-4">
-              <div className="space-y-2">
-                {activityLog.map((log, idx) =>
-                <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 border border-gray-100">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
-                    <div className="flex-1">
-                      <p className="text-[12px] text-gray-900">{log.action}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-[10px] text-gray-400">{log.time}</span>
-                        <span className="text-[10px] text-gray-400">•</span>
-                        <span className="text-[10px] text-gray-500">{log.user}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </CollapsibleContent>
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </Collapsible>
       </div>
 
