@@ -67,10 +67,10 @@ export default function SubTabs({ activeTab, setActiveTab, viewMode, setViewMode
           </div>
 
           {/* Filter Button */}
-          <button className="flex items-center gap-1.5 text-[12px] font-medium text-gray-500 hover:text-gray-700 transition-colors">
-            <Filter className="w-3.5 h-3.5" />
-            Filters
-          </button>
+          
+
+
+          
 
           {/* View Mode Toggle */}
           <div className="bg-gray-100 p-1 rounded-lg flex items-center gap-0.5">
