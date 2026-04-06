@@ -140,7 +140,7 @@ export default function AITalentFinderPanel() {
               className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
               title={isMaximized ? "Restore" : "Maximize"}>
               
-              {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              {isMaximized ? <Minimize2 className="w-4 h-4" /> : null}
             </button>
           </div>
           <div className="hidden">
@@ -154,26 +154,26 @@ export default function AITalentFinderPanel() {
         </div>
 
         {/* Active Filters Section - AI mode only */}
-        {activeMode === "ai" && <div className="bg-[#ffffff] px-3 py-2 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors"
+        
 
-        onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
 
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-[14px] font-semibold text-gray-900">
-                Active Filters (+7)
-              </h3>
-              <p className="text-[11px] text-gray-500 mt-0.5">
-                Last Updated 14:08 12/08/25
-              </p>
-            </div>
-            {isFiltersExpanded ?
-            <ChevronUp className="w-4 h-4 text-gray-400" /> :
 
-            <ChevronDown className="w-4 h-4 text-gray-400" />
-            }
-          </div>
-        </div>}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
 
       {/* Manual Edit View */}
