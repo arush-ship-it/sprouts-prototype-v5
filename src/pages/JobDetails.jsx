@@ -270,49 +270,49 @@ export default function JobDetails() {
         </div>
 
         {/* Posted On Section */}
-        <div className="bg-white mb-6 px-4 py-4 rounded-2xl">
-          <h3 className="text-[16px] font-semibold text-gray-900 mb-4">Posted On</h3>
-          <div className="flex flex-col gap-3">
-            {[
-            { platform: "LinkedIn", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png", url: "https://linkedin.com/jobs/view/senior-product-designer" },
-            { platform: "Indeed", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Indeed_logo.png", url: "https://indeed.com/job/senior-product-designer" },
-            { platform: "Company Website", logo: null, url: "https://company.com/careers/senior-product-designer" }].
-            map((posting) =>
-            <div key={posting.platform} className="bg-[hsl(var(--background))] p-3 rounded-lg flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {posting.logo ?
-                <img src={posting.logo} alt={posting.platform} className="w-6 h-6 rounded object-contain" /> :
+        
 
-                <div className="w-6 h-6 rounded bg-indigo-100 flex items-center justify-center">
-                      <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
-                    </div>
-                }
-                  <div>
-                    <span className="text-[13px] font-medium text-gray-900">{posting.platform}</span>
-                    {unpublishedPlatforms.includes(posting.platform) &&
-                  <span className="ml-2 text-[11px] text-red-500 font-medium">Unpublished</span>
-                  }
-                  </div>
-                </div>
-                <div className="flex items-center gap-10">
-                  {!unpublishedPlatforms.includes(posting.platform) &&
-                <a href={posting.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[12px] font-medium text-blue-600 hover:text-blue-800 transition-colors">
-                  
-                      View Posting
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                }
-                  <button
-                  onClick={() => toggleUnpublish(posting.platform)} className="flex items-center gap-1.5 text-[12px] font-medium transition-colors text-gray-600 hover:text-red-700">
-                  
-                    <EyeOff className="w-3.5 h-3.5" />
-                    {unpublishedPlatforms.includes(posting.platform) ? "Republish" : "Unpublish"}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         {/* Job Details */}
         <div className="bg-white mb-6 p-6 rounded-2xl">
